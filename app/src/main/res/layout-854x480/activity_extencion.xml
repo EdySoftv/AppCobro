@@ -1,0 +1,87 @@
+<android.support.constraint.ConstraintLayout xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_height="match_parent">
+
+    <include
+        android:id="@+id/include4"
+        layout="@layout/toolbar"
+        tools:layout_editor_absoluteX="16dp"
+        tools:layout_editor_absoluteY="84dp"></include>
+
+    <TextView
+        android:id="@+id/qwe"
+        android:layout_width="246dp"
+        android:layout_height="30dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="16dp"
+        android:text="@string/extensiones_Adicionales"
+        android:textSize="@dimen/grande"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/include4" />
+
+    <TextView
+        android:id="@+id/asd"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/qwe"
+
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="24dp"
+        android:text="@string/numero_de_Extensiones"
+        android:textSize="@dimen/mediano"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/qwe" />
+
+    <TextView
+        android:id="@+id/txtExtencion"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/asd"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/contorno"
+        android:gravity="center"
+        android:text="---"
+        android:textSize="@dimen/chico"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/asd" />
+
+    <Button
+        android:id="@+id/extencionAceptar"
+        android:layout_width="@dimen/botonChicoL"
+        android:layout_height="@dimen/botonChicoA"
+        android:layout_below="@+id/txtExtencion"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="56dp"
+        android:layout_marginTop="32dp"
+        android:textColor="#000"
+        android:background="@drawable/boton"
+        android:backgroundTint="@color/colorPrimary"
+        android:text="@string/aceptar"
+        android:textSize="10dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtExtencion" />
+
+    <Button
+        android:id="@+id/extencionSalir"
+        android:layout_width="@dimen/botonChicoL"
+        android:layout_height="@dimen/botonChicoA"
+        android:layout_below="@+id/txtExtencion"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="48dp"
+        android:layout_toEndOf="@+id/extencionAceptar"
+        android:textColor="#000"
+        android:background="@drawable/boton"
+        android:backgroundTint="@color/colorPrimary"
+        android:text="@string/salir"
+        android:textSize="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtExtencion" />
+</android.support.constraint.ConstraintLayout>

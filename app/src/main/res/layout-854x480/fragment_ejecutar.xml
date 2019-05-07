@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Fragments.EjecutarFragment">
+
+  <ScrollView
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:layout_marginTop="80dp">
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+      <RelativeLayout
+          android:id="@+id/animado9"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:layout_marginTop="15dp">
+
+
+        <Button
+            android:id="@+id/ejec"
+            android:layout_width="@dimen/botonChicoL"
+            android:layout_height="@dimen/botonChicoA"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="0dp"
+            android:layout_marginBottom="0dp"
+            android:background="@drawable/boton"
+            android:backgroundTint="@color/colorPrimary"
+            android:enabled="true"
+            android:text="@string/ejecutar"
+            android:textColor="#000"
+            android:textSize="10dp" />
+
+
+      </RelativeLayout>
+
+
+      <RelativeLayout
+          android:id="@+id/ejecutarLay"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:layout_centerHorizontal="true"
+          android:layout_marginTop="150dp"
+          android:visibility="visible">
+
+      <!--  <TextView
+            android:id="@+id/eqwe"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="44dp"
+            android:layout_marginTop="40dp"
+            android:text="@string/estatus_Comando"
+            android:textSize="15dp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/status"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="40dp"
+            android:layout_toEndOf="@+id/eqwe"
+            android:hint="@string/espera"
+            android:textSize="15dp" />
+
+        <TextView
+            android:id="@+id/zas"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/eqwe"
+            android:layout_centerHorizontal="true"
+            android:layout_marginStart="125dp"
+            android:layout_marginTop="30dp"
+            android:text="@string/resultadoDos"
+            android:textSize="15dp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/msgEjecutarOrd"
+            android:layout_width="247dp"
+            android:layout_height="122dp"
+            android:layout_below="@+id/zas"
+            android:layout_centerHorizontal="true"
+            android:layout_marginStart="70dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="82dp"
+            android:background="#2598" />
+
+        <Button
+            android:id="@+id/restart"
+            android:layout_width="@dimen/botonChicoL"
+            android:layout_height="@dimen/botonChicoA"
+            android:layout_below="@+id/msgEjecutarOrd"
+            android:layout_centerHorizontal="true"
+            android:layout_gravity="center"
+            android:layout_marginTop="0dp"
+            android:background="@drawable/boton"
+            android:backgroundTint="@color/colorPrimary"
+            android:text="@string/reiniciar"
+            android:textColor="#000"
+            android:textSize="10dp" />-->
+
+      </RelativeLayout>
+
+
+      <Button
+          android:id="@+id/salirEjecutarOrd"
+          android:layout_width="@dimen/botonChicoL"
+          android:layout_height="@dimen/botonChicoA"
+          android:layout_below="@+id/animado9"
+          android:layout_centerHorizontal="true"
+          android:layout_marginTop="20dp"
+          android:background="@drawable/boton"
+          android:backgroundTint="@color/colorPrimary"
+          android:text="@string/salir"
+          android:textColor="#000"
+          android:textSize="10dp" />
+
+      <Button
+          android:id="@+id/firmarOrd"
+          android:layout_width="@dimen/botonChicoL"
+          android:layout_height="@dimen/botonChicoA"
+          android:layout_below="@+id/salirEjecutarOrd"
+          android:layout_centerHorizontal="true"
+          android:layout_marginTop="20dp"
+          android:background="@drawable/boton"
+          android:backgroundTint="@color/colorPrimary"
+          android:text="@string/firmar"
+          android:textColor="#000"
+          android:textSize="10dp"
+          android:visibility="gone" />
+
+
+    </RelativeLayout>
+  </ScrollView>
+</FrameLayout>

@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:background="#ffff"
+    >
+        <CheckBox
+            android:id="@+id/chek"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/textservicio"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="16dp"
+            android:text="---"
+            android:textSize="@dimen/grande"
+            android:textStyle="bold"
+            app:layout_constraintStart_toEndOf="@+id/chek"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+        <Button
+            android:id="@+id/medio"
+            android:layout_width="@dimen/botonChicoL"
+            android:layout_height="@dimen/botonChicoA"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="24dp"
+            android:checked="false"
+            android:clickable="false"
+            android:focusable="false"
+            android:text="@string/medio"
+            android:textColor="#000"
+            android:background="@drawable/boton"
+            android:backgroundTint="@color/colorPrimary"
+            android:textSize="@dimen/mediano"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ListView
+            android:id="@+id/ListaAparatos"
+            android:layout_width="match_parent"
+            android:layout_height="130dp"
+            android:layout_below="@+id/textservicio"
+            android:layout_marginTop="16dp"
+            android:nestedScrollingEnabled="true"
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textservicio" />
+</android.support.constraint.ConstraintLayout>

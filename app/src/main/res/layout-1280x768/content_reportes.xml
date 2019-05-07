@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context=".Activitys.Reportes"
+    tools:showIn="@layout/app_bar_reportes">
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        xmlns:app="http://schemas.android.com/apk/res-auto">
+        <ListView
+            android:id="@+id/listreporte"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignParentTop="true"
+            android:paddingRight="8dp"
+            android:paddingLeft="8dp"
+            android:layout_marginTop="110dp"
+            android:dividerHeight="10dp"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/reporte"
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="60dp"
+            android:textStyle="bold"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/n_Contrato"
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="190dp"
+            android:textStyle="bold"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_marginTop="75dp"
+            android:layout_marginStart="10dp"
+            android:text="@string/contrato"
+            android:textSize="18dp"
+            android:textStyle="bold" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_marginStart="160dp"
+            android:layout_marginTop="75dp"
+            android:text="@string/n_Reporte"
+            android:textSize="18dp"
+            android:textStyle="bold" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_marginTop="75dp"
+            android:layout_marginStart="300dp"
+            android:text="@string/estatus"
+            android:textSize="18dp"
+            android:textStyle="bold" />
+        <EditText
+            android:id="@+id/reportesearch"
+            android:layout_width="130dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="25dp"
+            android:inputType="number" />
+        <Button
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:gravity="center_vertical"
+            android:layout_marginTop="45dp"
+            android:background="@android:drawable/ic_search_category_default"
+            android:id="@+id/breporte"
+            android:layout_marginStart="155dp"
+            android:layout_marginLeft="30dp" />
+        <EditText
+            android:id="@+id/contsearch"
+            android:layout_width="130dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="200dp"
+            android:layout_marginTop="25dp"
+            android:inputType="text|number" />
+        <Button
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:gravity="center_vertical"
+            android:background="@android:drawable/ic_search_category_default"
+            android:id="@+id/bcontrato"
+            android:layout_marginStart="325dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginTop="45dp" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/textview"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="250dp"
+            />
+    </RelativeLayout>
+</android.support.constraint.ConstraintLayout>

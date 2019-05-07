@@ -1,0 +1,356 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_height="match_parent">
+    <!--Primeros datos-->
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="1000dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="30dp"
+                android:text="@string/cambio_Domicilio"
+                android:textSize="25dp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_marginTop="85dp"
+                android:text="@string/ciudadDos"
+                android:textSize="20dp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/CiudadCAMDO"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginStart="160dp"
+                android:layout_marginTop="90dp"
+                android:textSize="15dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_marginTop="115dp"
+                android:text="@string/localidadDos"
+                android:textSize="20dp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/localidad"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginStart="160dp"
+                android:layout_marginTop="120dp"
+                android:textSize="15dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_marginTop="145dp"
+                android:text="@string/coloniaDos"
+                android:textSize="20dp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/colonia"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginStart="160dp"
+                android:layout_marginTop="150dp"
+                android:textSize="15dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_marginTop="175dp"
+                android:text="@string/calleDos"
+                android:textSize="20dp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/Calledom"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginStart="160dp"
+                android:layout_marginTop="180dp"
+                android:textSize="15dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_marginTop="205dp"
+                android:text="@string/numeroDos"
+                android:textSize="20dp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/numero"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginStart="160dp"
+                android:layout_marginTop="210dp"
+                android:textSize="15dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_marginTop="235dp"
+                android:text="@string/numeroIDos"
+                android:textSize="20dp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/numeroi"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginStart="160dp"
+                android:layout_marginTop="240dp"
+                android:textSize="15dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_marginTop="265dp"
+                android:text="@string/telefonoDos"
+                android:textSize="20dp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/telefono"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginStart="160dp"
+                android:layout_marginTop="270dp"
+                android:textSize="15dp" />
+
+            <RelativeLayout
+                android:id="@+id/map"
+                android:layout_width="match_parent"
+                android:layout_height="350dp"
+                android:layout_alignTop="@id/telefono"
+                android:layout_marginTop="50dp"
+                android:orientation="horizontal">
+
+                <RelativeLayout
+                    android:id="@+id/uno"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:background="@drawable/contorno"></RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/dos"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:layout_below="@id/uno"
+                    android:layout_marginTop="50dp"
+                    android:background="@drawable/contorno"></RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:layout_below="@id/dos"
+                    android:layout_marginTop="50dp"
+                    android:background="@drawable/contorno"></RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/center"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="110dp"
+                    android:layout_marginEnd="110dp">
+
+                    <RelativeLayout
+                        android:id="@+id/cuatro"
+                        android:layout_width="match_parent"
+                        android:layout_height="80dp"
+                        android:layout_centerHorizontal="true"
+                        android:background="@drawable/contorno"></RelativeLayout>
+
+                    <RelativeLayout
+                        android:id="@+id/cinco"
+                        android:layout_width="match_parent"
+                        android:layout_height="80dp"
+                        android:layout_below="@id/cuatro"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginTop="50dp"
+                        android:background="@drawable/contorno">
+
+                        <ImageView
+                            android:id="@+id/casanorte"
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:layout_centerHorizontal="true"
+                            android:src="@drawable/casa"
+                            android:visibility="invisible" />
+
+                        <ImageView
+                            android:id="@+id/casasur"
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:layout_alignParentBottom="true"
+                            android:layout_centerHorizontal="true"
+                            android:src="@drawable/casa"
+                            android:visibility="invisible" />
+
+                        <ImageView
+                            android:id="@+id/casaoeste"
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:layout_centerVertical="true"
+                            android:src="@drawable/casa"
+                            android:visibility="invisible" />
+
+                        <ImageView
+                            android:id="@+id/casaeste"
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:layout_alignParentEnd="true"
+                            android:layout_centerVertical="true"
+                            android:src="@drawable/casa"
+                            android:visibility="invisible" />
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="80dp"
+                        android:layout_below="@id/cinco"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginTop="50dp"
+                        android:background="@drawable/contorno"></RelativeLayout>
+
+                    <TextView
+                        android:id="@+id/callenorte"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentTop="true"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginTop="100dp"
+                        android:text="@string/calle_Norte"
+                        android:textSize="14dp" />
+
+                    <TextView
+                        android:id="@+id/callesur"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentTop="true"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginTop="220dp"
+                        android:text="@string/calle_Sur"
+                        android:textSize="14dp" />
+                </RelativeLayout>
+
+                <TextView
+                    android:id="@+id/calleeste"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginEnd="70dp"
+                    android:rotation="90"
+                    android:text="@string/calle_Este"
+                    android:textSize="14dp" />
+
+                <TextView
+                    android:id="@+id/calleoeste"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_marginStart="55dp"
+                    android:layout_marginTop="150dp"
+                    android:rotation="90"
+                    android:text="@string/calle_Oeste"
+                    android:textSize="14dp" />
+
+                <RelativeLayout
+                    android:id="@+id/siete"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:layout_alignParentEnd="true"
+                    android:background="@drawable/contorno"></RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/ocho"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:layout_below="@id/siete"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginTop="50dp"
+                    android:background="@drawable/contorno"></RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:layout_below="@id/ocho"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginTop="50dp"
+                    android:background="@drawable/contorno">
+
+                    <ImageView
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:layout_centerHorizontal="true"
+                        android:layout_centerVertical="true"
+                        android:src="@drawable/flecha" />
+                </RelativeLayout>
+            </RelativeLayout>
+
+            <Button
+                android:id="@+id/aceptar"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/map"
+                android:layout_alignParentStart="true"
+                android:layout_marginStart="60dp"
+                android:layout_marginTop="2dp"
+                android:background="@drawable/boton"
+                android:backgroundTint="@color/colorPrimary"
+                android:text="@string/aceptar"
+                android:textColor="#000" />
+
+
+            <Button
+                android:id="@+id/regresa"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/map"
+                android:layout_alignParentEnd="true"
+                android:layout_marginTop="2dp"
+                android:layout_marginEnd="60dp"
+                android:background="@drawable/boton"
+                android:backgroundTint="@color/colorPrimary"
+                android:text="@string/Regresar"
+                android:textColor="#000" />
+        </RelativeLayout>
+    </ScrollView>
+</RelativeLayout>

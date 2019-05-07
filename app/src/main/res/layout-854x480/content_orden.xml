@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context=".Activitys.Orden"
+    android:background="@color/fondoBlanco"
+
+    tools:showIn="@layout/app_bar_orden">
+
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="16dp">
+        <ProgressBar
+            android:id="@+id/barlogodenes"
+            style="?android:attr/progressBarStyleLarge"
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:visibility="invisible"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            />
+
+        <ListView
+            android:id="@+id/listorden"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="106dp"
+            android:textSize="@dimen/chico"
+            android:dividerHeight="10dp"
+            android:paddingLeft="8dp"
+            android:paddingRight="8dp"
+          />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="60dp"
+            android:layout_marginTop="10dp"
+            android:text="@string/orden"
+            android:textSize="15dp"
+            android:textStyle="bold" />
+
+        <EditText
+            android:id="@+id/ordsearch"
+            android:layout_width="123dp"
+            android:layout_height="28dp"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="10dp"
+            android:textSize="15dp"
+            android:layout_marginTop="40dp"
+            android:inputType="number" />
+
+        <Button
+            android:id="@+id/borden"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_marginStart="135dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginTop="42dp"
+            android:background="@android:drawable/ic_search_category_default"
+            android:gravity="center_vertical" />
+
+
+        <EditText
+            android:id="@+id/contsearch"
+            android:layout_width="123dp"
+            android:layout_height="28dp"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginStart="170dp"
+            android:layout_marginTop="40dp"
+            android:textSize="15dp"
+            android:layout_marginEnd="32dp"
+            android:inputType="text|number" />
+
+        <Button
+            android:id="@+id/bcontrato"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_marginStart="290dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginTop="42dp"
+            android:background="@android:drawable/ic_search_category_default"
+            android:gravity="center_vertical" />
+
+        <TextView
+            android:textSize="@dimen/mediano"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="180dp"
+            android:text="@string/n_Contrato"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="75dp"
+            android:text="@string/contrato"
+            android:textSize="@dimen/mediano"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_marginStart="130dp"
+            android:layout_marginTop="75dp"
+            android:text="@string/n_Orden"
+            android:textSize="@dimen/mediano"
+            android:textStyle="bold" />
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="75dp"
+            android:layout_marginEnd="24dp"
+            android:text="@string/estatus"
+            android:textSize="15dp"
+            android:textStyle="bold" />
+
+
+    </RelativeLayout>
+
+</android.support.constraint.ConstraintLayout>

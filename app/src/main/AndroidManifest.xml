@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.pablo.prueba7">
+
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:largeHeap="true"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <activity android:name=".Dibujo.Firma"
+            android:screenOrientation="landscape"
+            ></activity>
+        <activity
+            android:name=".Activitys.Inicio"
+            android:configChanges="orientation|keyboardHidden|screenSize|screenLayout"
+            android:label="Inicio"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity
+            android:name=".Activitys.Orden"
+            android:configChanges="orientation|keyboardHidden|screenSize|screenLayout"
+            android:label="@string/title_activity_orden"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".Activitys.Reportes"
+            android:label="@string/title_activity_reportes"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".Activitys.Configuracion"
+            android:configChanges="orientation|keyboardHidden|screenSize|screenLayout"
+            android:label="@string/title_activity_configuracion"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".Activitys.MainActivity"
+            android:configChanges="screenSize|orientation|keyboardHidden|screenLayout"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Activitys.asignacion"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".Activitys.asignado"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar"
+
+            />
+        <activity
+            android:name=".Activitys.ExtensionesAdi"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".Activitys.MainReportes"
+            android:configChanges="screenSize|orientation"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Activitys.Login"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar"
+
+            ></activity>
+        <activity
+            android:name=".Activitys.CambioDom"
+            android:configChanges="screenSize|orientation"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".Activitys.CambioAparato"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity
+            android:name=".sampledata.SplashActivity"
+            android:theme="@style/SplashScreen">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+    </application>
+
+</manifest>
