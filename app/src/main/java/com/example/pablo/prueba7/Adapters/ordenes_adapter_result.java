@@ -21,6 +21,7 @@ import java.util.ArrayList;
 public class ordenes_adapter_result extends BaseAdapter implements AdapterView.OnItemClickListener {
 
     public static Integer clvor;
+    public static String noOrden;
     private LayoutInflater inflater;
     private Context mContext;
     private ArrayList<String> ordensrc;
@@ -93,6 +94,7 @@ public class ordenes_adapter_result extends BaseAdapter implements AdapterView.O
             @Override
             public void onClick(View v) {
                 clvor = Integer.valueOf(ordensrc.get(position));
+                noOrden = Integer.toString(clvor);
                 request.getDeepCons(mContext);
                 request.getValidaFirma(mContext);
             }

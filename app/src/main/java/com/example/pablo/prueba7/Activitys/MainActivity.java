@@ -29,6 +29,8 @@ import com.example.pablo.prueba7.sampledata.Util;
 
 import androidx.annotation.RequiresApi;
 
+import static com.example.pablo.prueba7.Adapters.ordenes_adapter_result.clvor;
+import static com.example.pablo.prueba7.Adapters.ordenes_adapter_result.noOrden;
 import static com.example.pablo.prueba7.Fragments.InstalacionFragment.TecSec;
 import static com.example.pablo.prueba7.Fragments.InstalacionFragment.posTec;
 import static com.example.pablo.prueba7.Fragments.MaterialesFragment.clasificacionMatR;
@@ -61,7 +63,7 @@ public class MainActivity extends AppCompatActivity implements ActionBar.TabList
         Nombre= findViewById(R.id.infonombre);
         Direccion= findViewById(R.id.infodireccion);
         InfoServicios= findViewById(R.id.infoservicios);
-        setTitle(null);
+        setTitle("No. de Orden: " + noOrden);
 
        // NombreTec.setText(nombre_tecnico);
         Contrato.setText(request.contraroMA);
