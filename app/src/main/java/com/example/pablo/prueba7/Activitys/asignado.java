@@ -240,11 +240,11 @@ public class asignado extends AppCompatActivity {
         Iterator<List<GetMuestraArbolServiciosAparatosPorinstalarListResult>> itData4 = Array.dataArbSer.iterator();
         List<GetMuestraArbolServiciosAparatosPorinstalarListResult> dat4 = itData4.next();
         for (int c = 0; c < dat4.size(); c++) {
-            int asd;
+            int asd=dat4.get(c).getClv_UnicaNet();
             for (int d = 0; d <= selectedStrings.size(); d++ ) {
                 int abc ;
                 try{
-                    if (selectedStrings.get(d) == dat4.get(c).getClv_UnicaNet()) {
+                    if (selectedStrings.get(d) == asd) {
                         children dataChild = new children();
                         dataChild.setBaseIdUser(0);
                         dataChild.setBaseRemoteIp(null);
