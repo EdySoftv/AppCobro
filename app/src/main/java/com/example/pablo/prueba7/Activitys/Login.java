@@ -15,6 +15,7 @@ import android.support.v4.app.NotificationCompat;
 import android.support.v4.app.NotificationManagerCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -25,6 +26,7 @@ import com.example.pablo.prueba7.R;
 import com.example.pablo.prueba7.Request.Request;
 import com.example.pablo.prueba7.sampledata.BarraCargar;
 import com.example.pablo.prueba7.sampledata.Util;
+import com.google.firebase.iid.FirebaseInstanceId;
 
 
 public class Login extends AppCompatActivity {
@@ -50,6 +52,9 @@ BarraCargar barraCargar = new BarraCargar();
         progressBar = findViewById(R.id.barlog);
         setTitle(null);
         dialogLogin= new BarraCargar().showDialog(this);
+
+        Log.d("asd", FirebaseInstanceId.getInstance().getToken());
+
         entrar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -67,6 +72,7 @@ if(!isOnline()){
     guardarPre(usurio.getText().toString(),enco);
     request.getReviews(Login.this);
     /////////////
+
 dialogLogin.show();
     /////////////
 }
@@ -127,4 +133,5 @@ dialogLogin.show();
     public void onBackPressed() {
 
     }
+
 }
