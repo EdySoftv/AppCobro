@@ -55,6 +55,8 @@ public class Constants {
     public static final String URL_GET_CAPAT="MuestraAparatosDisponibles/GetSetCambioAparato";
     public static final String URL_GET_DEEP_CAPAT="MuestraAparatosDisponibles/GetCambioAparatoDeep";
     public static final String URL_SEND_NOENTREGADOS="SP_InsertaTbl_NoEntregados/GetSP_InsertaTbl_NoEntregados";
+    public static final String URL_ENVIO_TOKENFIREBASE="AplicacionMovil/AnadirToken";
+
     ////////////
     public static final String URL_GET_MUESTRABIT="Muestra_Detalle_Bitacora_2/GetMuestra_Detalle_Bitacora_2List";
     public static final String URL_GET_DETALLEBIT="Muestra_Descripcion_Articulo_2/GetMuestra_Descripcion_Articulo_2List";

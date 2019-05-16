@@ -2153,6 +2153,30 @@ public class Request extends AppCompatActivity {
         });
     }
 
+    public void envioTokenTecnicoRequest(final Context context) {
+
+        Service service = null;
+        try {
+            service = services.enviocClvTecnicoToken(context);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        Call<JsonObject> call = service.envtokenfire();
+        call.enqueue(new Callback<JsonObject>() {
+            @Override
+            public void onResponse(Call<JsonObject> call, Response<JsonObject> response1) {
+              
+            }
+
+            @Override
+            public void onFailure(Call<JsonObject> call, Throwable t) {
+
+            }
+
+        });
+    }
+
+
     public void getChecaExt(final Context context) {
         Service service = null;
         service = services.getChecaExtService(context);

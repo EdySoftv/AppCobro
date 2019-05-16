@@ -17,6 +17,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -34,20 +35,39 @@ import com.github.mikephil.charting.data.PieData;
 import com.github.mikephil.charting.data.PieDataSet;
 import com.github.mikephil.charting.data.PieEntry;
 import com.github.mikephil.charting.utils.ColorTemplate;
+import com.google.firebase.iid.FirebaseInstanceId;
 
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 
+import static com.example.pablo.prueba7.Adapters.ordenes_adapter_result.clvor;
 import static com.example.pablo.prueba7.Services.Services.clavequeja;
 import static com.example.pablo.prueba7.Services.Services.clvorden;
+import static com.example.pablo.prueba7.Services.Services.jsonArrayap;
+import static com.example.pablo.prueba7.Services.Services.jsonObject;
+import static com.example.pablo.prueba7.Services.Services.jsonTokenFirebase;
 import static com.example.pablo.prueba7.Services.Services.opcion;
 
 
 public class Inicio extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
-    public static int OE, OP, OV, OEP, OO, RE, RP, REP, RV, RO;
-    public static String tipodeDescarga;
+    public static int OE;
+    public static int OP;
+    public static int OV;
+    public static int OEP;
+    public static int OO;
+    public static int RE;
+    public static int RP;
+    public static int REP;
+    public static int RV;
+    public static int RO;
+    public static int clvTec;
+
+    public static String tipodeDescarga, tokenFireBase;
     NavigationView barra;
     public static DrawerLayout drawer;
     public static PieChart pieChart;
@@ -56,6 +76,7 @@ public class Inicio extends AppCompatActivity
     public static TextView tipoTrabajo, contratoTrabajo, horaTrabajo, calleDireccion, numeroDireccion, coloniaDireccion, nombreTec;
     public static ProgressDialog dialogInicio;
     BarraCargar barraCargar = new BarraCargar();
+    Request rqs = new Request();
 
     @Override
     protected void onCreate(Bundle onSaveInstanceState) {
@@ -100,6 +121,35 @@ public class Inicio extends AppCompatActivity
         calleDireccion.setText(request.siguenteCalle);
         numeroDireccion.setText(request.sigueinteNumero);
         coloniaDireccion.setText(request.siguenteColonia);
+        Log.d("asd", FirebaseInstanceId.getInstance().getToken());
+        tokenFireBase= FirebaseInstanceId.getInstance().getToken();
+        clvTec = (Util.getClvTec(Util.preferences));
+
+        try{
+            jsonTokenFirebase = new JSONObject();
+            jsonTokenFirebase.put("clv_tecnico",clvTec);
+            jsonTokenFirebase.put("token",tokenFireBase);
+
+
+
+
+            //jsonTokenFirebase.put(jsonObject);
+            //System.out.println(jsonTokenFirebase);
+/*
+            jsonObject = new JSONObject();
+            jsonObject.put("Clave", Clave);
+            jsonObject.put("Clv_Orden", clvor);
+            jsonObject.put("Clv_Trabajo", clvTra);
+            jsonObject.put("Descripcion", descr);
+            jsonObject.put("Obs", JSONObject.NULL);
+            jsonObject.put("SeRealiza", true);
+            jsonObject.put("recibi", stat);
+            jsonArrayap.put(jsonObject);*/
+        }
+        catch (JSONException e) {
+            e.printStackTrace();
+        }
+        rqs.envioTokenTecnicoRequest(this);
 
     }
 

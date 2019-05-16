@@ -24,7 +24,6 @@
             android:text="---"
             android:textSize="@dimen/grande"
             android:textStyle="bold"
-            app:layout_constraintStart_toEndOf="@+id/chek"
             app:layout_constraintTop_toTopOf="parent" />
 
 

@@ -53,7 +53,7 @@ BarraCargar barraCargar = new BarraCargar();
         setTitle(null);
         dialogLogin= new BarraCargar().showDialog(this);
 
-        Log.d("asd", FirebaseInstanceId.getInstance().getToken());
+        //Log.d("asd", FirebaseInstanceId.getInstance().getToken());
 
         entrar.setOnClickListener(new View.OnClickListener() {
             @Override

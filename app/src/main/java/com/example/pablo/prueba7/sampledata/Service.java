@@ -149,6 +149,8 @@ public interface Service {
     Call<JsonObject> getDeepCAPAT();
     @POST(Constants.URL_SEND_NOENTREGADOS)
     Call<JsonObject>noent();
+    @POST(Constants.URL_ENVIO_TOKENFIREBASE)
+    Call<JsonObject>envtokenfire();
     /////////////////
     @POST(Constants.URL_GET_MUESTRABIT)
     Call<JSONDetalleBitacora> getMuestraBit();

@@ -90,7 +90,10 @@ public class Services {
     public static String cont;
     public static JSONObject jsonObject = new JSONObject();
     JSONObject jsonObject20 = new JSONObject();
+
     public static JSONArray jsonArrayap = new JSONArray();
+   // public static JSONArray jsonTokenFirebase = new JSONArray();
+    public static JSONObject jsonTokenFirebase = new JSONObject();
 
     /////////TOKEN///C////
     public Service getClientService(final Context context) {
@@ -1538,6 +1541,34 @@ public class Services {
             e.printStackTrace();
         }
         final RequestBody body = RequestBody.create(JSON, jsonObject20.toString());
+        final OkHttpClient client = new OkHttpClient.Builder().addInterceptor(new Interceptor() {
+
+            @Override
+            public okhttp3.Response intercept(Interceptor.Chain chain) throws IOException {
+
+                //Modificacion del Header
+                okhttp3.Request newRequest = chain.request().newBuilder()
+                        .addHeader("Authorization", getToken(context))
+                        .addHeader("Content-Type", "application/json")
+                        .post(body).build();
+                return chain.proceed(newRequest);
+            }
+        }).connectTimeout(15, TimeUnit.MINUTES)
+                .readTimeout(15, TimeUnit.MINUTES)
+                .writeTimeout(15, TimeUnit.MINUTES)
+                .build();
+        Retrofit retrofit = new Retrofit.Builder().baseUrl(Constants.NEW_URL)
+                .client(client).addConverterFactory(GsonConverterFactory.create())
+                .build();
+
+        return retrofit.create(Service.class);
+    }
+
+    public Service enviocClvTecnicoToken(final Context context) throws JSONException {
+        MediaType JSON = MediaType.parse("application/json; charset=utf-8");
+
+
+        final RequestBody body = RequestBody.create(JSON, jsonTokenFirebase.toString());
         final OkHttpClient client = new OkHttpClient.Builder().addInterceptor(new Interceptor() {
 
             @Override

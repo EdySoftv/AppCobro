@@ -142,6 +142,8 @@ public class Orden extends AppCompatActivity implements NavigationView.OnNavigat
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
         setTitle("Ordenes");
+
+
     }
     @Override
     public void onBackPressed() {
