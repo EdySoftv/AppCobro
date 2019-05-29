@@ -121,7 +121,7 @@ public class Inicio extends AppCompatActivity
         calleDireccion.setText(request.siguenteCalle);
         numeroDireccion.setText(request.sigueinteNumero);
         coloniaDireccion.setText(request.siguenteColonia);
-        Log.d("asd", FirebaseInstanceId.getInstance().getToken());
+
         tokenFireBase= FirebaseInstanceId.getInstance().getToken();
         clvTec = (Util.getClvTec(Util.preferences));
 
