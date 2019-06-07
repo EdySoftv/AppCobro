@@ -1,5 +1,6 @@
 package com.example.pablo.prueba7.Activitys;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -45,6 +46,8 @@ public class ReporteAsignacion extends AppCompatActivity {
     public static ProgressDialog dialogReporteAsignacion;
     public static boolean guardarAparatosProgresBar=false;
 
+    public static ArbolAdapter adapterReporte;
+
     @Override
     protected void onCreate(Bundle onSaveInstanceState) {
         super.onCreate(onSaveInstanceState);
@@ -63,6 +66,8 @@ public class ReporteAsignacion extends AppCompatActivity {
             public void onClick(View v) {
                 /*Intent intento = new Intent(getApplicationContext(), ServiciosAInstalar.class);
                 startActivity(intento);*/
+                GuardarAparatos(getApplicationContext());
+                ServiciosAInstalar.Asignacion.refreshDrawableState();
                 finish();
                 guardarAparatosProgresBar=false;
             }
@@ -190,66 +195,7 @@ public class ReporteAsignacion extends AppCompatActivity {
         guardarAparatos.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                dialogReporteAsignacion.show();
-                JSONObject jsonObject3;
-                JSONArray jsonArray3;
-                JSONObject jsonObject4 ;
-                JSONArray jsonArray2 = new JSONArray();
-                for (int a = 0; a < Array.dataArbSer.get(0).size(); a++) {
-                    Array.dataArbSer.get(0).get(a).setClv_orden(OrdenesAdapter.clvor);
-                }
-                Iterator<List<GetMuestraArbolServiciosAparatosPorinstalarListResult>> itData = Array.dataArbSer.iterator();
-                List<GetMuestraArbolServiciosAparatosPorinstalarListResult> dat = (List<GetMuestraArbolServiciosAparatosPorinstalarListResult>) itData.next();
-                for (int c = 0; c < dat.size(); c++) {
-                    jsonObject3 = new JSONObject();
-                    jsonArray3 = new JSONArray();
-                    try {
-                        jsonObject3.put("BaseIdUser", dat.get(c).BaseIdUser);
-                        jsonObject3.put("BaseRepoteIp", JSONObject.NULL);
-                        jsonObject3.put("Clv_TipSer", dat.get(c).Clv_TipSer);
-                        jsonObject3.put("Clv_UnicaNet", dat.get(c).Clv_UnicaNet);
-                        jsonObject3.put("Contrato", JSONObject.NULL);
-                        jsonObject3.put("Detalle", dat.get(c).Detalle);
-                        jsonObject3.put("Expanded", dat.get(c).Expanded);
-                        jsonObject3.put("IdMedio", dat.get(c).IdMedio);
-                        jsonObject3.put("Nombre", dat.get(c).Nombre);
-                        jsonObject3.put("Tipo", dat.get(c).Tipo);
-                        jsonObject3.put("Type", dat.get(c).Type);
-                        int hijo = dat.get(c).children.size();
-                        for (int b = 0; b < hijo; b++) {
-                            jsonObject4 = new JSONObject();
-                            jsonObject4.put("BaseIdUser", dat.get(c).children.get(b).baseIdUser);
-                            jsonObject4.put("BaseRemoteIp", JSONObject.NULL);
-                            jsonObject4.put("Clv_Aparato", dat.get(c).children.get(b).Clv_Aparato);
-                            //jsonObject4.put("Clv_UnicaNet", JSONObject.NULL);
-                            jsonObject4.put("ContratoNet", dat.get(c).children.get(b).ContratoNet);
-                            jsonObject4.put("Detalle", dat.get(c).children.get(b).Detalle);
-                            jsonObject4.put("Nombre", dat.get(c).children.get(b).Nombre);
-                            jsonObject4.put("Tipo", dat.get(c).children.get(b).Tipo);
-                            jsonObject4.put("Type", dat.get(c).children.get(b).Type);
-                            jsonArray3.put(jsonObject4);
-                        }
-                        jsonObject3.put("children", jsonArray3);
-                        jsonObject3.put("clv_orden", dat.get(c).clv_orden);
-                        jsonArray2.put(c, jsonObject3);
-
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                        Toast.makeText(ReporteAsignacion.this, "Error", Toast.LENGTH_LONG);
-                        dialogReporteAsignacion.dismiss();
-                    }
-                }
-
-                JSONObject jsonObject = new JSONObject();
-                JSONObject jsonObject1 = new JSONObject();
-                try {
-                    jsonObject.put("id", 0);
-                    jsonObject1.put("obj",jsonObject);
-                    jsonObject1.put("Lst",jsonArray2);
-                    request.getAceptatAsignacino(getApplicationContext(),jsonObject1);
-                }catch (Exception e){}
-                ServiciosAInstalar.Asignacion.setAdapter(ServiciosAInstalar.adapter);
-                guardarAparatosProgresBar=true;
+                GuardarAparatos(getApplicationContext());
                 finish();
             }
         });
@@ -296,10 +242,79 @@ public class ReporteAsignacion extends AppCompatActivity {
                 /*Intent intento = new Intent(ReporteAsignacion.this, ServiciosAInstalar.class);
                 startActivity(intento);*/
                 guardarAparatosProgresBar=false;
+                GuardarAparatos(getApplicationContext());
+                ServiciosAInstalar.Asignacion.refreshDrawableState();
                 finish();
 
                 break;
         }
         return true;
+    }
+    public void GuardarAparatos(final Context context){
+        dialogReporteAsignacion.show();
+        Request request = new Request();
+        JSONObject jsonObject3;
+        JSONArray jsonArray3;
+        JSONObject jsonObject4 ;
+        JSONArray jsonArray2 = new JSONArray();
+        for (int a = 0; a < Array.dataArbSer.get(0).size(); a++) {
+            Array.dataArbSer.get(0).get(a).setClv_orden(OrdenesAdapter.clvor);
+        }
+        Iterator<List<GetMuestraArbolServiciosAparatosPorinstalarListResult>> itData = Array.dataArbSer.iterator();
+        List<GetMuestraArbolServiciosAparatosPorinstalarListResult> dat = (List<GetMuestraArbolServiciosAparatosPorinstalarListResult>) itData.next();
+        for (int c = 0; c < dat.size(); c++) {
+            jsonObject3 = new JSONObject();
+            jsonArray3 = new JSONArray();
+            try {
+                jsonObject3.put("BaseIdUser", dat.get(c).BaseIdUser);
+                jsonObject3.put("BaseRepoteIp", JSONObject.NULL);
+                jsonObject3.put("Clv_TipSer", dat.get(c).Clv_TipSer);
+                jsonObject3.put("Clv_UnicaNet", dat.get(c).Clv_UnicaNet);
+                jsonObject3.put("Contrato", JSONObject.NULL);
+                jsonObject3.put("Detalle", dat.get(c).Detalle);
+                jsonObject3.put("Expanded", dat.get(c).Expanded);
+                jsonObject3.put("IdMedio", dat.get(c).IdMedio);
+                jsonObject3.put("Nombre", dat.get(c).Nombre);
+                jsonObject3.put("Tipo", dat.get(c).Tipo);
+                jsonObject3.put("Type", dat.get(c).Type);
+                int hijo = dat.get(c).children.size();
+                for (int b = 0; b < hijo; b++) {
+                    jsonObject4 = new JSONObject();
+                    jsonObject4.put("BaseIdUser", dat.get(c).children.get(b).baseIdUser);
+                    jsonObject4.put("BaseRemoteIp", JSONObject.NULL);
+                    jsonObject4.put("Clv_Aparato", dat.get(c).children.get(b).Clv_Aparato);
+                    //jsonObject4.put("Clv_UnicaNet", JSONObject.NULL);
+                    jsonObject4.put("ContratoNet", dat.get(c).children.get(b).ContratoNet);
+                    jsonObject4.put("Detalle", dat.get(c).children.get(b).Detalle);
+                    jsonObject4.put("Nombre", dat.get(c).children.get(b).Nombre);
+                    jsonObject4.put("Tipo", dat.get(c).children.get(b).Tipo);
+                    jsonObject4.put("Type", dat.get(c).children.get(b).Type);
+                    jsonArray3.put(jsonObject4);
+                }
+                jsonObject3.put("children", jsonArray3);
+                jsonObject3.put("clv_orden", dat.get(c).clv_orden);
+                jsonArray2.put(c, jsonObject3);
+
+            } catch (JSONException e) {
+                e.printStackTrace();
+                Toast.makeText(context, "Error", Toast.LENGTH_LONG);
+                dialogReporteAsignacion.dismiss();
+            }
+        }
+
+        JSONObject jsonObject = new JSONObject();
+        JSONObject jsonObject1 = new JSONObject();
+        try {
+            jsonObject.put("id", 0);
+            jsonObject1.put("obj",jsonObject);
+            jsonObject1.put("Lst",jsonArray2);
+            request.getAceptatAsignacino(context,jsonObject1);
+        }catch (Exception e){}
+        /*ServiciosAInstalar.Asignacion.setAdapter(ServiciosAInstalar.adapter);*/
+        adapterReporte = new ArbolAdapter(dat,context);
+        ServiciosAInstalar.Asignacion.setAdapter(adapterReporte);
+        ServiciosAInstalar.Asignacion.refreshDrawableState();
+        guardarAparatosProgresBar=true;
+
     }
     }

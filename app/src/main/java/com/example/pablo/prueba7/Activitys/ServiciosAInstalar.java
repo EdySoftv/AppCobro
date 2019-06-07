@@ -6,6 +6,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
@@ -42,7 +45,7 @@ public class ServiciosAInstalar extends AppCompatActivity {
 
     public static Button siguiente, aceptarAsignacion, eliminarAparato, cancelarAsigancion;
     public static Button aceptarmedio, cancelarmedio;
-    public static ListView Asignacion;
+    public static RecyclerView Asignacion;
     public static Spinner spinnerMedio;
     public static ConstraintLayout layoutMedio;
     int c, e;
@@ -83,6 +86,12 @@ public class ServiciosAInstalar extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 //regresar...
+                final Iterator<List<GetMuestraArbolServiciosAparatosPorinstalarListResult>> itData4 = array.dataArbSer.iterator();
+                final List<GetMuestraArbolServiciosAparatosPorinstalarListResult> dat4 = (List<GetMuestraArbolServiciosAparatosPorinstalarListResult>) itData4.next();
+                for(int a=0; a<dat4.size(); a++){
+                    dat4.get(a).setIdMedio(0);
+                    dat4.get(a).setDetalle("");
+                }
                 Intent intento = new Intent(ServiciosAInstalar.this, MainActivity.class);
                 intento.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(intento);
@@ -101,10 +110,18 @@ public class ServiciosAInstalar extends AppCompatActivity {
         }catch (Exception e){}
 
 
+        final Iterator<List<GetMuestraArbolServiciosAparatosPorinstalarListResult>> itData4 = array.dataArbSer.iterator();
+        final List<GetMuestraArbolServiciosAparatosPorinstalarListResult> dat4 = (List<GetMuestraArbolServiciosAparatosPorinstalarListResult>) itData4.next();
 
 
         //Llenar lista
-        adapter = new ArbolAdapter(getApplicationContext());
+
+        //Asignacion.setHasFixedSize(true);
+        //LinearLayoutManager linearLayoutManager = new LinearLayoutManager(ServiciosAInstalar.this);
+        RecyclerView.LayoutManager layoutManager = new GridLayoutManager(this,2);
+        Asignacion.setLayoutManager(layoutManager);
+        //Asignacion.setLayoutManager(linearLayoutManager);
+        adapter = new ArbolAdapter(dat4,getApplicationContext());
         Asignacion.setAdapter(adapter);
         if (Asignacion.getAdapter() != null) {
             dialogAsignacion.dismiss();
@@ -113,8 +130,6 @@ public class ServiciosAInstalar extends AppCompatActivity {
         Revisar si los servicios tiene minimo un medio
  */
         c = 0;
-        final Iterator<List<GetMuestraArbolServiciosAparatosPorinstalarListResult>> itData4 = array.dataArbSer.iterator();
-        final List<GetMuestraArbolServiciosAparatosPorinstalarListResult> dat4 = (List<GetMuestraArbolServiciosAparatosPorinstalarListResult>) itData4.next();
         for (int a = 0; a < dat4.size(); a++) {
             if (dat4.get(a).IdMedio == 0 || dat4.get(a).IdMedio == null) {
                 c = c + 1;
@@ -145,6 +160,22 @@ public class ServiciosAInstalar extends AppCompatActivity {
                 }
             }
         }
+
+        if(todosLosMedios==1){
+            checkBoxNo.setChecked(false);
+            checkBoxSi.setChecked(true);
+
+        }
+        if(todosLosMedios==0){
+            checkBoxSi.setChecked(false);
+            checkBoxNo.setChecked(true);
+
+        }
+
+        //verificar si la respuesta no esta contestada
+
+
+
         //Pregunta si todos los servicios van por el mismo medio 1=si 0=no
 
         checkBoxSi.setOnClickListener(new View.OnClickListener() {
@@ -160,6 +191,10 @@ public class ServiciosAInstalar extends AppCompatActivity {
         checkBoxNo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                for(int a=0; a<dat4.size(); a++){
+                    dat4.get(a).setIdMedio(0);
+                    dat4.get(a).setDetalle("");
+                }
                 checkBoxSi.setChecked(false);
                 todosLosMedios=0;
                 spinnerMedio.setVisibility(View.GONE);
@@ -167,6 +202,29 @@ public class ServiciosAInstalar extends AppCompatActivity {
 
             }
         });
+            int c=0;
+        for(int a=0; a<dat4.size(); a++){
+           if(dat4.get(a).children.size()==0){
+               c=c+1;
+           }
+        }
+        if(c==dat4.size()){
+            spinnerMedio.setEnabled(true);
+        }else{
+            spinnerMedio.setEnabled(false);
+        }
+
+
+        aceptarAsignacion.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intento = new Intent(ServiciosAInstalar.this, MainActivity.class);
+                intento.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                startActivity(intento);
+                finish();
+            }
+        });
+
 try{
     ArrayAdapter<String> adapter = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_spinner_dropdown_item, Array.medioPregunta);
     spinnerMedio.setAdapter(adapter);
@@ -206,6 +264,12 @@ try{
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.siguiente:
+                final Iterator<List<GetMuestraArbolServiciosAparatosPorinstalarListResult>> itData4 = array.dataArbSer.iterator();
+                final List<GetMuestraArbolServiciosAparatosPorinstalarListResult> dat4 = (List<GetMuestraArbolServiciosAparatosPorinstalarListResult>) itData4.next();
+                for(int a=0; a<dat4.size(); a++){
+                    dat4.get(a).setIdMedio(0);
+                    dat4.get(a).setDetalle("");
+                }
                 Intent intento = new Intent(ServiciosAInstalar.this, MainActivity.class);
                 intento.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(intento);
