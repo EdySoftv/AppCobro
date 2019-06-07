@@ -29,13 +29,8 @@ import com.example.pablo.prueba7.sampledata.Util;
 
 import androidx.annotation.RequiresApi;
 
-import static com.example.pablo.prueba7.Adapters.ordenes_adapter_result.clvor;
-import static com.example.pablo.prueba7.Adapters.ordenes_adapter_result.noOrden;
+import static com.example.pablo.prueba7.Adapters.OrdenesAdapter.noOrden;
 import static com.example.pablo.prueba7.Fragments.InstalacionFragment.TecSec;
-import static com.example.pablo.prueba7.Fragments.InstalacionFragment.posTec;
-import static com.example.pablo.prueba7.Fragments.MaterialesFragment.clasificacionMatR;
-import static com.example.pablo.prueba7.Fragments.MaterialesFragment.descripcionMatR;
-import static com.example.pablo.prueba7.Fragments.MaterialesFragment.spinnerExtMatR;
 
 
 public class MainActivity extends AppCompatActivity implements ActionBar.TabListener, ViewPager.OnPageChangeListener {

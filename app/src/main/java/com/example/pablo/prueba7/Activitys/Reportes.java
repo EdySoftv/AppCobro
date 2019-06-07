@@ -9,25 +9,22 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
 
-import com.example.pablo.prueba7.Adapters.quejas_adapter_result;
+import com.example.pablo.prueba7.Adapters.QuejasAdapter;
 import com.example.pablo.prueba7.Listas.Array;
 import com.example.pablo.prueba7.R;
 import com.example.pablo.prueba7.Request.Request;
 import com.example.pablo.prueba7.sampledata.BarraCargar;
 import com.example.pablo.prueba7.sampledata.Util;
 
-import static com.example.pablo.prueba7.Activitys.Inicio.pieChart;
 import static com.example.pablo.prueba7.Services.Services.clavequeja;
 import static com.example.pablo.prueba7.Services.Services.clvorden;
 import static com.example.pablo.prueba7.Services.Services.cont;
@@ -40,7 +37,7 @@ public class Reportes extends AppCompatActivity
    private Button breporte,bcontrato;
    private EditText reportesearch,contratosearch;
 
-   private quejas_adapter_result adapterqueja;
+   private QuejasAdapter adapterqueja;
     NavigationView barra;
     TextView nombreTec;
     public static ProgressDialog dialogReportes;
@@ -66,7 +63,7 @@ public class Reportes extends AppCompatActivity
         toggle.syncState();
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
-        adapterqueja=new quejas_adapter_result(Reportes.this,Array.Queja,Array.nombreQ,Array.statusQ,Array.contratoQ,Array.Direccion);
+        adapterqueja=new QuejasAdapter(Reportes.this,Array.Queja,Array.nombreQ,Array.statusQ,Array.contratoQ,Array.Direccion);
         reportes.setAdapter(adapterqueja);    //Asignacion del adapatador a la listView
         dialogReportes= new BarraCargar().showDialog(this);
         barraCargar.terminarBarra();

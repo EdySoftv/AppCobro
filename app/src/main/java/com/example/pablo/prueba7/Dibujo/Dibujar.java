@@ -54,7 +54,7 @@ public class Dibujar extends View{
 
     }
 
-    //Tamaño asignado a la vista
+    //Tamaño AsignarAparato a la vista
     @Override
     protected void onSizeChanged(int w, int h, int oldw, int oldh) {
         super.onSizeChanged(w, h, oldw, oldh);

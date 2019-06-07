@@ -18,6 +18,7 @@ import com.example.pablo.prueba7.Listas.JSONLlenaExtenciones;
 import com.example.pablo.prueba7.Listas.JSONMediosSer;
 import com.example.pablo.prueba7.Listas.JSONNombreTecnico;
 import com.example.pablo.prueba7.Listas.JSONPreDescarga;
+import com.example.pablo.prueba7.Listas.JSONPregunta;
 import com.example.pablo.prueba7.Listas.JSONPrioridad;
 import com.example.pablo.prueba7.Listas.JSONReporteCliente;
 import com.example.pablo.prueba7.Listas.JSONReportes;
@@ -182,6 +183,10 @@ public interface Service {
     Call<JsonObject> getMACWAM();
     @POST(Constants.URL_ASIGNA_MACWAM)
     Call<JsonObject> asignaMACWAM();
+
+    //Pregunta
+    @POST(Constants.URL_GET_PREGUNTA)
+    Call<JSONPregunta> getPregunta();
 
 }
 

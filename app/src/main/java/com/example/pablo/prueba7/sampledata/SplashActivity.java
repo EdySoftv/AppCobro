@@ -7,6 +7,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
+import android.util.Log;
 
 import com.example.pablo.prueba7.Activitys.Inicio;
 import com.example.pablo.prueba7.Activitys.Login;
@@ -28,6 +29,7 @@ public class SplashActivity extends AppCompatActivity {
         if (!TextUtils.isEmpty(Util.getTokenPreference(preferences))) {
             LoginShare=true;
             startActivity(intentinicio);
+            Log.d("token",Util.getTokenPreference(preferences));
             /*startActivity(intentLogin);
             LoginShare=false;*/
 

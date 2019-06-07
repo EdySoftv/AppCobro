@@ -51,11 +51,11 @@
             android:configChanges="screenSize|orientation|keyboardHidden|screenLayout"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".Activitys.asignacion"
+            android:name=".Activitys.ServiciosAInstalar"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".Activitys.asignado"
+            android:name=".Activitys.AsignarAparato"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
@@ -78,6 +78,9 @@
             android:name=".Activitys.CambioAparato"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".Activitys.ReporteAsignacion"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar"/>
         <activity
             android:name=".sampledata.SplashActivity"
             android:theme="@style/SplashScreen">

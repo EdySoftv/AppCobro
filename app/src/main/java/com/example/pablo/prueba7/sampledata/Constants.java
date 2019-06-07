@@ -1,8 +1,9 @@
 package com.example.pablo.prueba7.sampledata;
 
 public class Constants {
-    //public static final String NEW_URL="http://192.168.50.116:5600/SoftvWCFService.svc/";
-    public static final String NEW_URL="http://45.226.32.2:5600/SoftvWCFService.svc/";
+    //public static final String NEW_URL="http://187.163.207.252:5600/SoftvWCFService.svc/";
+    //public static final String NEW_URL="http://45.226.32.2:5600/SoftvWCFService.svc/";
+    public static final String NEW_URL="http://192.168.0.6:10000/SoftvWCFService.svc/";
     public static final String URL_GET_USER = "Usuario/LogOn";
     public static final String URL_GET_TECNICO = "AplicacionMovil/Get_ClvTecnico";
     public static final String URL_GET_PROX = "AplicacionMovil/GetDameSiguienteCita";
@@ -72,4 +73,6 @@ public class Constants {
     public static final String URL_VALIDA_MACWAM = "AsignaAparatosAlServicio/GetValidaRequiereMacWan";
     public static final String URL_GET_MACWAM = "AsignaAparatosAlServicio/ConMacWanbyClv_Aparato";
     public static final String URL_ASIGNA_MACWAM = "AsignaAparatosAlServicio/GetSaveRelMacsTemp";
+
+    public static final String URL_GET_PREGUNTA = "AplicacionMovil/GetDamePreguntaMedioPorOrden";
 }

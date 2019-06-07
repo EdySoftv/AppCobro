@@ -17,11 +17,8 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -43,11 +40,8 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-import static com.example.pablo.prueba7.Adapters.ordenes_adapter_result.clvor;
 import static com.example.pablo.prueba7.Services.Services.clavequeja;
 import static com.example.pablo.prueba7.Services.Services.clvorden;
-import static com.example.pablo.prueba7.Services.Services.jsonArrayap;
-import static com.example.pablo.prueba7.Services.Services.jsonObject;
 import static com.example.pablo.prueba7.Services.Services.jsonTokenFirebase;
 import static com.example.pablo.prueba7.Services.Services.opcion;
 

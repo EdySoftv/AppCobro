@@ -1,7 +1,7 @@
 package com.example.pablo.prueba7.Adapters;
 
 import android.content.Context;
-import android.util.Log;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,14 +13,16 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.pablo.prueba7.Activitys.asignacion;
+import com.example.pablo.prueba7.Activitys.ReporteAsignacion;
+import com.example.pablo.prueba7.Activitys.ServiciosAInstalar;
 import com.example.pablo.prueba7.Listas.Array;
 import com.example.pablo.prueba7.Modelos.GetMuestraArbolServiciosAparatosPorinstalarListResult;
 import com.example.pablo.prueba7.Modelos.GetMuestraMedioPorServicoContratadoListResult;
-import com.example.pablo.prueba7.Modelos.children;
+import com.example.pablo.prueba7.Modelos.mediosPregunta;
 import com.example.pablo.prueba7.R;
 import com.example.pablo.prueba7.Request.Request;
 
@@ -29,36 +31,37 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-import static com.example.pablo.prueba7.Activitys.asignacion.Asignacion;
-import static com.example.pablo.prueba7.Activitys.asignacion.aceptarAsignacion;
-import static com.example.pablo.prueba7.Activitys.asignacion.aceptarmedio;
-import static com.example.pablo.prueba7.Activitys.asignacion.layoutMedio;
-import static com.example.pablo.prueba7.Activitys.asignacion.siguiente;
-import static com.example.pablo.prueba7.Adapters.Arbol_Adapter.viewHolder.medio;
+import static com.example.pablo.prueba7.Activitys.ServiciosAInstalar.Asignacion;
+import static com.example.pablo.prueba7.Activitys.ServiciosAInstalar.aceptarAsignacion;
+import static com.example.pablo.prueba7.Activitys.ServiciosAInstalar.aceptarmedio;
+import static com.example.pablo.prueba7.Activitys.ServiciosAInstalar.layoutMedio;
+import static com.example.pablo.prueba7.Activitys.ServiciosAInstalar.siguiente;
+//import static com.example.pablo.prueba7.Adapters.ArbolAdapter.viewHolder.medio;
 
 
-public class Arbol_Adapter extends BaseAdapter {
+public class ArbolAdapter extends BaseAdapter {
     private Request request = new Request();
     private LayoutInflater inflater;
     private Context mcontext;
-    public static int clv_unicaNet, clv_Medio, posi, d, f,h;
+    public static int clv_unicaNet, clv_Medio, posicionArbol, d, f,h;
     public static int c=0;
-    public static String dato;
+    public static String nombreToolBar;
     private Array array = new Array();
     public static int a=0;
     public static boolean validacionSiguiente;
     public static ArrayList<Integer> DeletChildren = new ArrayList<Integer>();
     public static ArrayList<String> DeletMedio = new ArrayList<String>();
-    public Arbol_Adapter(Context context){
+
+
+
+    public ArbolAdapter(Context context){
         mcontext=context;
         inflater = LayoutInflater.from(mcontext);
+
     }
     public static class viewHolder{
-        public static TextView nombre;
-        public static Button medio;
-        private ListView listaAparatos;
-        private CheckBox checkBox;
-
+        public static Button Asignar;
+        ProgressBar progressBar;
 
     }
     @Override
@@ -79,17 +82,60 @@ public class Arbol_Adapter extends BaseAdapter {
         Iterator<List<GetMuestraArbolServiciosAparatosPorinstalarListResult>> itData = array.dataArbSer.iterator();
         final List<GetMuestraArbolServiciosAparatosPorinstalarListResult> dat4 = itData.next();
         convertView=inflater.inflate(R.layout.activity_aparato_asignado_medio_list,null);
-        holder.listaAparatos = convertView.findViewById(R.id.ListaAparatos);
-        holder.nombre=convertView.findViewById(R.id.textservicio);
+        holder.Asignar = convertView.findViewById(R.id.servicioAAsignar);
+        holder.progressBar = convertView.findViewById(R.id.progressBarServicio);
+       /* holder.nombre=convertView.findViewById(R.id.textservicio);
         holder.medio=convertView.findViewById(R.id.medio);
-        holder.checkBox=convertView.findViewById(R.id.chek);
+        holder.checkBox=convertView.findViewById(R.id.chek);*/
         convertView.setTag(holder);
 
-        /////////////////////
-        Validar(dat4);
-        //////////////Llenar nombres///////////////////////////
-        a=0;
-        if(dat4.get(position).getIdMedio()==0){
+
+        holder.Asignar.setText(dat4.get(position).Nombre);
+
+
+        if(dat4.get(position).IdMedio!=0){
+            holder.progressBar.setProgress(50);
+
+            if(dat4.get(position).children.size()!=0){
+                holder.progressBar.setProgress(100);
+            }
+        }
+
+        holder.Asignar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //Crear intento
+                Intent intento = new Intent(mcontext, ReporteAsignacion.class);
+                //Valida que la pregunta haya sido contestada
+
+                if(ServiciosAInstalar.todosLosMedios==2){
+                    Toast.makeText(mcontext,"No se ha responido la pregunta",Toast.LENGTH_LONG).show();
+                }else{
+                    //Verificar si van para todos los medios 1=si 0=no 2=no se ha respondido la pregunta
+                    if(ServiciosAInstalar.todosLosMedios==1){
+                        dat4.get(ArbolAdapter.posicionArbol).setIdMedio(ServiciosAInstalar.idMedioSI);
+                        dat4.get(ArbolAdapter.posicionArbol).setDetalle(ServiciosAInstalar.detalleSI);
+
+                    }
+                    if(ServiciosAInstalar.todosLosMedios==0){
+                        //Mandar en intent la clvunicanet para consultar los medios
+                        clv_unicaNet=dat4.get(position).getClv_UnicaNet();
+                    }
+                    //Mandar el nombre del servicio para colocarlo en la toolbar, mandar posicion de servicio
+                    nombreToolBar=dat4.get(position).Nombre;
+                    posicionArbol=position;
+                    mcontext.startActivity(intento);
+                }
+
+
+
+            }
+        });
+
+
+
+
+        /*if(dat4.get(position).getIdMedio()==0){
             holder.nombre.setText(array.nombreArbol.get(position));
             holder.checkBox.setVisibility(View.GONE);
 
@@ -103,7 +149,7 @@ public class Arbol_Adapter extends BaseAdapter {
             holder.listaAparatos.setVisibility(View.VISIBLE);
             array.children = new ArrayList<>();
             holder.checkBox.setVisibility(View.GONE);
-            Arbol_Adapter.DeletChildren.clear();
+            ArbolAdapter.DeletChildren.clear();
             for(d = 0; d<dat4.get(position).children.size(); d++){
                 c=0;
                 String hijo="";
@@ -140,15 +186,15 @@ public class Arbol_Adapter extends BaseAdapter {
             }
         }
         /////////////////////////////////////////////
-            Validar(dat4);
+            Validar(dat4);*/
         /////////////
      final int[] m = {1};
-     holder.medio.setOnClickListener(new View.OnClickListener() {
+     /*holder.medio.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                asignacion.eliminarAparato.setVisibility(View.GONE);
-                asignacion.aceptarAsignacion.setVisibility(View.GONE);
-                asignacion.cancelarAsigancion.setVisibility(View.GONE);
+                ServiciosAInstalar.eliminarAparato.setVisibility(View.GONE);
+                ServiciosAInstalar.aceptarAsignacion.setVisibility(View.GONE);
+                ServiciosAInstalar.cancelarAsigancion.setVisibility(View.GONE);
                 siguiente.setVisibility(View.GONE);
                 Iterator<List<GetMuestraArbolServiciosAparatosPorinstalarListResult>> itData1 = array.dataArbSer.iterator();
                 List<GetMuestraArbolServiciosAparatosPorinstalarListResult> dat1 =  itData1.next();
@@ -171,31 +217,21 @@ public class Arbol_Adapter extends BaseAdapter {
                 if (m[0] == 1) {
                     Toast.makeText(mcontext, "Debe de llenar el campo 'Medio'", Toast.LENGTH_LONG).show();
                 } else {
-                    asignacion.eliminarAparato.setVisibility(View.VISIBLE);
-                    asignacion.aceptarAsignacion.setVisibility(View.VISIBLE);
-                    asignacion.cancelarAsigancion.setVisibility(View.VISIBLE);
+                    ServiciosAInstalar.eliminarAparato.setVisibility(View.VISIBLE);
+                    ServiciosAInstalar.aceptarAsignacion.setVisibility(View.VISIBLE);
+                    ServiciosAInstalar.cancelarAsigancion.setVisibility(View.VISIBLE);
                     siguiente.setVisibility(View.VISIBLE);
                     layoutMedio.setVisibility(View.GONE);
                     Asignacion.setVisibility(View.VISIBLE);
                     medio.setVisibility(View.GONE);
                     a=0;
-                    Asignacion.setAdapter(Arbol_Adapter.this);
+                    Asignacion.setAdapter(ArbolAdapter.this);
                     Validar(dat4);
                 }
             }
-        });
-        asignacion.cancelarmedio.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                asignacion.eliminarAparato.setVisibility(View.VISIBLE);
-                asignacion.aceptarAsignacion.setVisibility(View.VISIBLE);
-                asignacion.cancelarAsigancion.setVisibility(View.VISIBLE);
-                siguiente.setVisibility(View.VISIBLE);
-                layoutMedio.setVisibility(View.GONE);
-                Asignacion.setVisibility(View.VISIBLE);
-            }
-        });
-        asignacion.spinnerMedio.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        });*/
+        /*
+        ServiciosAInstalar.spinnerMedio.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position1, long id) {
                 if (position1 != 0) {
@@ -220,19 +256,7 @@ public class Arbol_Adapter extends BaseAdapter {
             }
         });
 
-        holder.checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-
-               if(holder.checkBox.isChecked()==true){
-                       DeletMedio.add(dat4.get(position).IdMedio+dat4.get(position).Detalle);
-                }if(holder.checkBox.isChecked()==false){
-                  Arbol_Adapter.DeletMedio.remove(dat4.get(position).IdMedio+dat4.get(position).Detalle);
-
-               }
-
-            }
-        });
+        */
 
         return convertView;
     }

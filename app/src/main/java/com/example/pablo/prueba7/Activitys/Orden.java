@@ -10,23 +10,20 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.pablo.prueba7.Adapters.ordenes_adapter_result;
+import com.example.pablo.prueba7.Adapters.OrdenesAdapter;
 import com.example.pablo.prueba7.Listas.Array;
 import com.example.pablo.prueba7.R;
 import com.example.pablo.prueba7.Request.Request;
 import com.example.pablo.prueba7.sampledata.BarraCargar;
 import com.example.pablo.prueba7.sampledata.Util;
 
-import static com.example.pablo.prueba7.Activitys.Inicio.pieChart;
 import static com.example.pablo.prueba7.Services.Services.clavequeja;
 import static com.example.pablo.prueba7.Services.Services.clvorden;
 import static com.example.pablo.prueba7.Services.Services.cont;
@@ -34,7 +31,7 @@ import static com.example.pablo.prueba7.Services.Services.opcion;
 
 public class Orden extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     private Request request = new Request();
-    private ordenes_adapter_result adapterord;
+    private OrdenesAdapter adapterord;
     private Button ordenb,contratob;
     public static   ListView ordenes;
     private EditText ordsearch,contsearch;
@@ -66,7 +63,7 @@ public class Orden extends AppCompatActivity implements NavigationView.OnNavigat
         barraCargar.terminarBarra();
         ////////////////
         //////////////////
-        adapterord=new ordenes_adapter_result(Orden.this,Array.ordensrc,Array.nombresrc,Array.statusrc,Array.contratosrc,Array.direccionsrc);
+        adapterord=new OrdenesAdapter(Orden.this,Array.ordensrc,Array.nombresrc,Array.statusrc,Array.contratosrc,Array.direccionsrc);
         ordenes.setAdapter(adapterord);    //Asignacion del adapatador a la listView
         ordenes.refreshDrawableState();
         //if(ordenes.getAdapter()!=null){

@@ -26,8 +26,10 @@ import com.example.pablo.prueba7.Modelos.GetuspBuscaContratoSeparado2ListResult;
 import com.example.pablo.prueba7.Modelos.ListadoQuejasAgendadas;
 import com.example.pablo.prueba7.Modelos.LlenaExtencionesModel;
 import com.example.pablo.prueba7.Modelos.OrdSer;
+import com.example.pablo.prueba7.Modelos.RequierePregunta;
 import com.example.pablo.prueba7.Modelos.dameTblPreDescargaMaterialResultModel;
 import com.example.pablo.prueba7.Modelos.Queja;
+import com.example.pablo.prueba7.Modelos.mediosPregunta;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -60,6 +62,7 @@ public class Array {
     //////////////////////////////////////////////////////
     public static ArrayList <String>nombreArbol=new ArrayList<>();
     public static ArrayList <String>children=new ArrayList<>();
+    public static ArrayList <ArrayList<String>>children1=new ArrayList<ArrayList<String>>();
     public static ArrayList<String>medio=new ArrayList<>();
     public static ArrayList<String>tipoAparato=new ArrayList<>();
     public static ArrayList<String>aparatoAsignacion=new ArrayList<>();
@@ -105,6 +108,11 @@ public class Array {
     public static ArrayList <List<dameTblPreDescargaMaterialResultModel>>dataPreDescarga;
     public static ArrayList<String> descripcionExt= new ArrayList<String>();
     public static ArrayList<String> listaTabla= new ArrayList<String>();
+
+    /////////////////
+    public static ArrayList<List<mediosPregunta>> dataMediosPregunta;
+    public static  ArrayList<List<RequierePregunta>> dataPregunta;
+    public static ArrayList<String>medioPregunta=new ArrayList<>();
 
 
 

@@ -1,0 +1,283 @@
+package com.example.pablo.prueba7.Activitys;
+import android.app.ProgressDialog;
+import android.content.Intent;
+import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.View;
+import android.widget.AbsListView;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.ListView;
+import android.widget.Spinner;
+import android.widget.Toast;
+
+import com.example.pablo.prueba7.Adapters.ArbolAdapter;
+import com.example.pablo.prueba7.Adapters.EliminarAparatosAdapter;
+import com.example.pablo.prueba7.Adapters.OrdenesAdapter;
+import com.example.pablo.prueba7.Listas.Array;
+import com.example.pablo.prueba7.Modelos.GetMuestraArbolServiciosAparatosPorinstalarListResult;
+import com.example.pablo.prueba7.Modelos.GetMuestraMedioPorServicoContratadoListResult;
+import com.example.pablo.prueba7.Modelos.mediosPregunta;
+import com.example.pablo.prueba7.R;
+import com.example.pablo.prueba7.Request.Request;
+import com.example.pablo.prueba7.sampledata.BarraCargar;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.Iterator;
+import java.util.List;
+
+public class ReporteAsignacion extends AppCompatActivity {
+
+    Request request = new Request();
+    Spinner spinerMedio;
+    Button agregarAparato, guardarAparatos;
+    public static ListView reporteAsignacion;
+    public static EliminarAparatosAdapter adapter;
+    int posicionSpinnerSelect;
+    public static ProgressDialog dialogReporteAsignacion;
+
+    @Override
+    protected void onCreate(Bundle onSaveInstanceState) {
+        super.onCreate(onSaveInstanceState);
+        setContentView(R.layout.activity_reporteasignacion);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.include4);
+        spinerMedio = findViewById(R.id.spinnerMedioFinal);
+        agregarAparato = findViewById(R.id.agregarAparato);
+        guardarAparatos = findViewById(R.id.guardarAparato);
+        reporteAsignacion = findViewById(R.id.eliminarAparatosList);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        toolbar.setNavigationIcon(getResources().getDrawable(R.drawable.ic_arrow_back_white_24dp));
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                /*Intent intento = new Intent(getApplicationContext(), ServiciosAInstalar.class);
+                startActivity(intento);*/
+                finish();
+            }
+        });
+        setTitle(ArbolAdapter.nombreToolBar);
+        //
+
+        //Barra de cargando
+        dialogReporteAsignacion = new BarraCargar().showDialog(this);
+
+        //Arbol
+        Iterator<List<GetMuestraArbolServiciosAparatosPorinstalarListResult>> itData = Array.dataArbSer.iterator();
+        final List<GetMuestraArbolServiciosAparatosPorinstalarListResult> dat4 = itData.next();
+
+        //Llenamos la lista de los hijos
+        try {
+            Array.children.clear();
+        } catch (Exception e) {
+        }
+        for (int a = 0; a < dat4.get(ArbolAdapter.posicionArbol).children.size(); a++) {
+            Array.children.add(a, dat4.get(ArbolAdapter.posicionArbol).children.get(a).Nombre + "-" + dat4.get(ArbolAdapter.posicionArbol).children.get(a).getDetalle());
+        }
+
+        //Revisamos si tiene hijos
+
+        if (dat4.get(ArbolAdapter.posicionArbol).children.size() == 0) {
+            //si no tiene hijos habilitamos el spinner
+            spinerMedio.setEnabled(true);
+            //si no tiene hijos deshabilitamos el boton de guarda
+            guardarAparatos.setEnabled(false);
+        } else {
+            //si tiene hijos habilitamos el boton de guarda
+            guardarAparatos.setEnabled(true);
+            //si tiene hijos bloqueamos el spinner porque no se puede cambiar el medio con hijos ya asignados
+            spinerMedio.setEnabled(false);
+            //si tiene hijos, llenamos lista
+            adapter = new EliminarAparatosAdapter(getApplicationContext(), ReporteAsignacion.this,
+                    ArbolAdapter.posicionArbol, spinerMedio, guardarAparatos);
+            reporteAsignacion.setAdapter(adapter);
+            reporteAsignacion.setChoiceMode(AbsListView.CHOICE_MODE_SINGLE);
+            reporteAsignacion.refreshDrawableState();
+        }
+
+
+        //verificar si todos los servicios llevan el mismo medio 1=si 0=no
+        if (ServiciosAInstalar.todosLosMedios == 1) {
+            ArrayAdapter<String> adapter = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_spinner_dropdown_item, Array.medioPregunta);
+            spinerMedio.setAdapter(adapter);
+           spinerMedio.setSelection(obtenerPosicionSpinnerMedioSI(dat4.get(ArbolAdapter.posicionArbol).IdMedio));
+           spinerMedio.setEnabled(false);
+        }
+        if (ServiciosAInstalar.todosLosMedios == 0) {
+            try {
+                JSONObject jsonObject = new JSONObject();
+                jsonObject.put("ClvUnicaNet", ArbolAdapter.clv_unicaNet);
+                request.getMedSer(getApplicationContext(), jsonObject, spinerMedio, ArbolAdapter.posicionArbol);
+            } catch (Exception e) {
+            }
+        }
+        //Seleccionar medio en el spinner
+        spinerMedio.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int positionSpinner, long id) {
+                if(ServiciosAInstalar.todosLosMedios==1){
+
+                }else{
+                    if (positionSpinner != 0) {
+                        //seleccionar medio
+                        Iterator<List<GetMuestraMedioPorServicoContratadoListResult>> itdata3 = Array.dataMedSer.iterator();
+                        List<GetMuestraMedioPorServicoContratadoListResult> dat3 = itdata3.next();
+                        dat4.get(ArbolAdapter.posicionArbol).setIdMedio(dat3.get(positionSpinner - 1).getIdMedio());
+                        dat4.get(ArbolAdapter.posicionArbol).setDetalle(dat3.get(positionSpinner - 1).getDescripcion());
+                        posicionSpinnerSelect = positionSpinner;
+
+                    } else {
+                        //no se ha seleccionado ningun medio.
+                    }
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
+
+        //Mandar a la pantalla de agregar nuevo aparato
+        agregarAparato.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //Validar que se haya seleccionado un medio
+                if (spinerMedio.getSelectedItemPosition() == 0) {
+                    Toast.makeText(getApplicationContext(), "No se ha seleccionado ningun medio", Toast.LENGTH_LONG).show();
+                } else {
+                    Intent intento = new Intent(ReporteAsignacion.this, AsignarAparato.class);
+                    intento.putExtra("posicionDelSpinner", posicionSpinnerSelect);
+                    intento.putExtra("Clv_UnicaNet", dat4.get(ArbolAdapter.posicionArbol).Clv_UnicaNet);
+                    intento.putExtra("idMedio", dat4.get(ArbolAdapter.posicionArbol).IdMedio);
+                    startActivity(intento);
+                    finish();
+
+                }
+
+            }
+        });
+        //Guardamos aparato
+        guardarAparatos.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialogReporteAsignacion.show();
+                JSONObject jsonObject3;
+                JSONArray jsonArray3;
+                JSONObject jsonObject4 ;
+                JSONArray jsonArray2 = new JSONArray();
+                for (int a = 0; a < Array.dataArbSer.get(0).size(); a++) {
+                    Array.dataArbSer.get(0).get(a).setClv_orden(OrdenesAdapter.clvor);
+                }
+                Iterator<List<GetMuestraArbolServiciosAparatosPorinstalarListResult>> itData = Array.dataArbSer.iterator();
+                List<GetMuestraArbolServiciosAparatosPorinstalarListResult> dat = (List<GetMuestraArbolServiciosAparatosPorinstalarListResult>) itData.next();
+                for (int c = 0; c < dat.size(); c++) {
+                    jsonObject3 = new JSONObject();
+                    jsonArray3 = new JSONArray();
+                    try {
+                        jsonObject3.put("BaseIdUser", dat.get(c).BaseIdUser);
+                        jsonObject3.put("BaseRepoteIp", JSONObject.NULL);
+                        jsonObject3.put("Clv_TipSer", dat.get(c).Clv_TipSer);
+                        jsonObject3.put("Clv_UnicaNet", dat.get(c).Clv_UnicaNet);
+                        jsonObject3.put("Contrato", JSONObject.NULL);
+                        jsonObject3.put("Detalle", dat.get(c).Detalle);
+                        jsonObject3.put("Expanded", dat.get(c).Expanded);
+                        jsonObject3.put("IdMedio", dat.get(c).IdMedio);
+                        jsonObject3.put("Nombre", dat.get(c).Nombre);
+                        jsonObject3.put("Tipo", dat.get(c).Tipo);
+                        jsonObject3.put("Type", dat.get(c).Type);
+                        int hijo = dat.get(c).children.size();
+                        for (int b = 0; b < hijo; b++) {
+                            jsonObject4 = new JSONObject();
+                            jsonObject4.put("BaseIdUser", dat.get(c).children.get(b).baseIdUser);
+                            jsonObject4.put("BaseRemoteIp", JSONObject.NULL);
+                            jsonObject4.put("Clv_Aparato", dat.get(c).children.get(b).Clv_Aparato);
+                            //jsonObject4.put("Clv_UnicaNet", JSONObject.NULL);
+                            jsonObject4.put("ContratoNet", dat.get(c).children.get(b).ContratoNet);
+                            jsonObject4.put("Detalle", dat.get(c).children.get(b).Detalle);
+                            jsonObject4.put("Nombre", dat.get(c).children.get(b).Nombre);
+                            jsonObject4.put("Tipo", dat.get(c).children.get(b).Tipo);
+                            jsonObject4.put("Type", dat.get(c).children.get(b).Type);
+                            jsonArray3.put(jsonObject4);
+                        }
+                        jsonObject3.put("children", jsonArray3);
+                        jsonObject3.put("clv_orden", dat.get(c).clv_orden);
+                        jsonArray2.put(c, jsonObject3);
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                        Toast.makeText(ReporteAsignacion.this, "Error", Toast.LENGTH_LONG);
+                        dialogReporteAsignacion.dismiss();
+                    }
+                }
+
+                JSONObject jsonObject = new JSONObject();
+                JSONObject jsonObject1 = new JSONObject();
+                try {
+                    jsonObject.put("id", 0);
+                    jsonObject1.put("obj",jsonObject);
+                    jsonObject1.put("Lst",jsonArray2);
+                    request.getAceptatAsignacino(getApplicationContext(),jsonObject1);
+                }catch (Exception e){}
+
+                finish();
+            }
+        });
+
+
+    }
+
+
+        public static int obtenerPosicionSpinnerMedio ( int idMedio){
+            int position = 0;
+            //Arbol
+            Iterator<List<GetMuestraMedioPorServicoContratadoListResult>> itdata3 = Array.dataMedSer.iterator();
+            List<GetMuestraMedioPorServicoContratadoListResult> dat3 = itdata3.next();
+            for (int i = 0; i < dat3.size(); i++) {
+                if (dat3.get(i).idMedio == idMedio) {
+                    position = i + 1;
+                }
+            }
+            return position;
+        }
+    public static int obtenerPosicionSpinnerMedioSI ( int idMedio){
+        int position = 0;
+        //Arbol
+        Iterator<List<mediosPregunta>> itdata3 = Array.dataMediosPregunta.iterator();
+        List<mediosPregunta> dat3 = itdata3.next();
+        for (int i = 0; i < dat3.size(); i++) {
+            if (dat3.get(i).getIdMedio() == idMedio) {
+                position = i + 1;
+            }
+        }
+        return position;
+    }
+    @Override
+    public boolean onCreateOptionsMenu (Menu menu){
+        getMenuInflater().inflate(R.menu.menu_asignacion, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected (MenuItem item){
+        switch (item.getItemId()) {
+            case R.id.siguiente:
+
+                /*Intent intento = new Intent(ReporteAsignacion.this, ServiciosAInstalar.class);
+                startActivity(intento);*/
+                finish();
+
+                break;
+        }
+        return true;
+    }
+    }

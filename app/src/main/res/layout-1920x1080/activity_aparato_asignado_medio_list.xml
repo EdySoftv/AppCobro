@@ -6,54 +6,24 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:background="#ffff"
     >
-        <CheckBox
-            android:id="@+id/chek"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+
+        <Button
+            android:id="@+id/servicioAAsignar"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
-            android:id="@+id/textservicio"
-            android:layout_width="wrap_content"
+        <ProgressBar
+            android:id="@+id/progressBarServicio"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="150dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="16dp"
-            android:text="---"
-            android:textSize="@dimen/grande"
-            android:textStyle="bold"
-            app:layout_constraintStart_toEndOf="@+id/chek"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:layout_marginTop="8dp"
+            app:layout_constraintEnd_toEndOf="@+id/servicioAAsignar"
+            app:layout_constraintStart_toStartOf="@+id/servicioAAsignar"
+            app:layout_constraintTop_toBottomOf="@+id/servicioAAsignar" />
 
-
-        <Button
-            android:id="@+id/medio"
-            android:layout_width="@dimen/botonChicoL"
-            android:layout_height="@dimen/botonChicoA"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="24dp"
-            android:checked="false"
-            android:clickable="false"
-            android:focusable="false"
-            android:text="@string/medio"
-            android:textColor="#000"
-            android:background="@drawable/boton"
-            android:backgroundTint="@color/colorPrimary"
-            android:textSize="@dimen/mediano"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <ListView
-            android:id="@+id/ListaAparatos"
-            android:layout_width="match_parent"
-            android:layout_height="130dp"
-            android:layout_below="@+id/textservicio"
-            android:layout_marginTop="16dp"
-            android:nestedScrollingEnabled="true"
-            android:visibility="gone"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textservicio" />
 </android.support.constraint.ConstraintLayout>

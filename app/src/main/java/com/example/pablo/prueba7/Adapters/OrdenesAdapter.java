@@ -18,7 +18,7 @@ import java.util.ArrayList;
 
 
 
-public class ordenes_adapter_result extends BaseAdapter implements AdapterView.OnItemClickListener {
+public class OrdenesAdapter extends BaseAdapter implements AdapterView.OnItemClickListener {
 
     public static Integer clvor;
     public static String noOrden;
@@ -31,7 +31,7 @@ public class ordenes_adapter_result extends BaseAdapter implements AdapterView.O
     private ArrayList<String>direccionsrc;
     private Request request=new Request();
 
-    public ordenes_adapter_result(Context context, ArrayList<String>ordensrc,ArrayList<String>nombrex,ArrayList<String>contratosrc,ArrayList<String>statusrc,ArrayList<String>direccionsrc){
+    public OrdenesAdapter(Context context, ArrayList<String>ordensrc, ArrayList<String>nombrex, ArrayList<String>contratosrc, ArrayList<String>statusrc, ArrayList<String>direccionsrc){
 
         this.ordensrc=ordensrc;
         this.contratosrc=contratosrc;

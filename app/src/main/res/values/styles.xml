@@ -25,4 +25,11 @@
     <style name="SplashScreen" parent="Theme.AppCompat.NoActionBar">
         <item name="android:windowBackground">@drawable/splash</item>
     </style>
+    <style name="InvitationDialog"
+        parent="Theme.AppCompat.Light.Dialog.Alert">
+        <item name="colorAccent">@color/azul</item>
+        <item name="android:textColorPrimary">@color/gris</item>
+        <item name="android:editTextColor">@color/gris</item>
+        <item name="android:background">@color/fondoBlanco</item>
+    </style>
 </resources>

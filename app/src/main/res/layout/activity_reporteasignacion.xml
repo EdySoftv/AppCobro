@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <include
+            android:id="@+id/include4"
+            layout="@layout/toolbar"></include>
+
+        <TextView
+            android:id="@+id/textView4"
+            android:layout_width="73dp"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="239dp"
+            android:text="@string/medio"
+            android:textSize="@dimen/xl"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/include4" />
+
+        <Spinner
+            android:id="@+id/spinnerMedioFinal"
+            android:layout_width="300dp"
+            android:layout_height="@dimen/spinnerA"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/disenio_spinner"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView4" />
+
+        <TextView
+            android:id="@+id/textView35"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="239dp"
+            android:text="@string/aparatoDos"
+            android:textSize="@dimen/xl"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/spinnerMedioFinal" />
+
+        <ListView
+            android:id="@+id/eliminarAparatosList"
+            android:layout_width="match_parent"
+            android:layout_height="250dp"
+            android:layout_below="@+id/eliminarAparatos"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView35" />
+
+        <Button
+            android:id="@+id/agregarAparato"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/boton"
+            android:backgroundTint="@color/colorPrimary"
+            android:text="@string/agregarnuevo"
+            android:textColor="#000"
+            android:textSize="@dimen/mediano"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/eliminarAparatosList" />
+
+        <Button
+            android:id="@+id/guardarAparato"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:background="@drawable/boton"
+            android:backgroundTint="@color/colorPrimary"
+            android:text="@string/guardar"
+            android:textColor="#000"
+            android:textSize="@dimen/mediano"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/eliminarAparatosList" />
+
+    </android.support.constraint.ConstraintLayout>
+</ScrollView>

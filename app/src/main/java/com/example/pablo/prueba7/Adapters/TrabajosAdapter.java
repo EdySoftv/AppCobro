@@ -26,14 +26,14 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-import static com.example.pablo.prueba7.Adapters.ordenes_adapter_result.clvor;
+import static com.example.pablo.prueba7.Adapters.OrdenesAdapter.clvor;
 import static com.example.pablo.prueba7.Listas.Array.clavex;
 import static com.example.pablo.prueba7.Listas.Array.recibixnew;
 
 import static com.example.pablo.prueba7.Services.Services.jsonArrayap;
 import static com.example.pablo.prueba7.Services.Services.jsonObject;
 
-public class trabajos_adapter_result extends BaseAdapter {
+public class TrabajosAdapter extends BaseAdapter {
     private LayoutInflater inflatertrab;
     private Context Cmcontext;
     private ArrayList<String>trabajox;
@@ -50,7 +50,7 @@ public class trabajos_adapter_result extends BaseAdapter {
     BarraCargar barraCargar = new BarraCargar();
 
 
-    public trabajos_adapter_result(Context context, ArrayList<String>trabajox, ArrayList<String>accionx, ArrayList<Boolean>recibix){
+    public TrabajosAdapter(Context context, ArrayList<String>trabajox, ArrayList<String>accionx, ArrayList<Boolean>recibix){
         this.trabajox=trabajox;
         this.accionx=accionx;
         this.recibix=recibix;

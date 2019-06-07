@@ -11,7 +11,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.Spinner;
-import com.example.pablo.prueba7.Adapters.trabajos_adapter_result;
+import com.example.pablo.prueba7.Adapters.TrabajosAdapter;
 import com.example.pablo.prueba7.Listas.Array;
 import com.example.pablo.prueba7.Modelos.GetListAparatosDisponiblesByIdArticuloResult;
 import com.example.pablo.prueba7.Modelos.GetListClienteAparatosResult;
@@ -49,7 +49,7 @@ public class CambioAparato extends AppCompatActivity {
         dialogCAPAT= new BarraCargar().showDialog(this);
 
         request.getDeepCAPAT(getApplicationContext());
-        if(trabajos_adapter_result.ftth==0){
+        if(TrabajosAdapter.ftth==0){
             aa.setVisibility(View.VISIBLE);
         }else{
             aa.setVisibility(View.GONE);
@@ -104,7 +104,7 @@ public class CambioAparato extends AppCompatActivity {
                         if(position!=0){
                             Iterator<List<GetListClienteAparatosResult>> itdata = array.dataCliApa.iterator();
                             List<GetListClienteAparatosResult> dat = itdata.next();
-                            if(trabajos_adapter_result.ftth==1){
+                            if(TrabajosAdapter.ftth==1){
                                 idArticulo2 = dat.get(position-1).getIdArticulo();
                             contrato = dat.get(position-1).getControNet();
                                 request.getApaTipDis(getApplicationContext());

@@ -1,24 +1,24 @@
 package com.example.pablo.prueba7.Request;
 
 import android.app.Activity;
-import android.app.ProgressDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Build;
 import android.support.annotation.RequiresApi;
 import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.ListView;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.example.pablo.prueba7.Activitys.Orden;
 import com.example.pablo.prueba7.Activitys.CambioDom;
 
 import com.example.pablo.prueba7.Activitys.CambioAparato;
+import com.example.pablo.prueba7.Activitys.ReporteAsignacion;
 import com.example.pablo.prueba7.Activitys.Reportes;
 import com.example.pablo.prueba7.Adapters.TablaAdapter;
 import com.example.pablo.prueba7.Fragments.EjecutarFragment;
@@ -47,6 +47,7 @@ import com.example.pablo.prueba7.Listas.JSONLlenaExtenciones;
 import com.example.pablo.prueba7.Listas.JSONMediosSer;
 import com.example.pablo.prueba7.Listas.JSONNombreTecnico;
 import com.example.pablo.prueba7.Listas.JSONPreDescarga;
+import com.example.pablo.prueba7.Listas.JSONPregunta;
 import com.example.pablo.prueba7.Listas.JSONReporteCliente;
 import com.example.pablo.prueba7.Listas.JSONReportes;
 import com.example.pablo.prueba7.Listas.JSONResponseTecnico;
@@ -63,7 +64,6 @@ import com.example.pablo.prueba7.Activitys.MainActivity;
 import com.example.pablo.prueba7.Activitys.MainReportes;
 import com.example.pablo.prueba7.Modelos.CambioAparatoDeepModel;
 import com.example.pablo.prueba7.Modelos.ChecaSiExtencionesModel;
-import com.example.pablo.prueba7.Modelos.ConsultaIpModel;
 import com.example.pablo.prueba7.Modelos.DeepConsModel;
 import com.example.pablo.prueba7.Modelos.DescripcionArticuloModel;
 import com.example.pablo.prueba7.Modelos.DetalleBitacoraModel;
@@ -95,6 +95,7 @@ import com.example.pablo.prueba7.Modelos.InfoClienteModelo;
 import com.example.pablo.prueba7.Modelos.ListadoQuejasAgendadas;
 import com.example.pablo.prueba7.Modelos.LlenaExtencionesModel;
 import com.example.pablo.prueba7.Modelos.OrdSer;
+import com.example.pablo.prueba7.Modelos.RequierePregunta;
 import com.example.pablo.prueba7.Modelos.ValidaMACWAMMODEL;
 import com.example.pablo.prueba7.Modelos.ValidacionFirma;
 import com.example.pablo.prueba7.Modelos.dameTblPreDescargaMaterialResultModel;
@@ -102,10 +103,10 @@ import com.example.pablo.prueba7.Modelos.ProximaCitaModel;
 import com.example.pablo.prueba7.Modelos.Queja;
 import com.example.pablo.prueba7.Modelos.TipoMaterialModel;
 import com.example.pablo.prueba7.Modelos.UserModel;
+import com.example.pablo.prueba7.Modelos.mediosPregunta;
 import com.example.pablo.prueba7.Services.Services;
 import com.example.pablo.prueba7.Fragments.TrabajosFragment;
-import com.example.pablo.prueba7.Activitys.asignacion;
-import com.example.pablo.prueba7.Activitys.asignado;
+import com.example.pablo.prueba7.Activitys.ServiciosAInstalar;
 import com.example.pablo.prueba7.sampledata.BarraCargar;
 import com.example.pablo.prueba7.sampledata.Service;
 import com.example.pablo.prueba7.sampledata.SplashActivity;
@@ -129,15 +130,13 @@ import static com.example.pablo.prueba7.Activitys.Inicio.dialogInicio;
 import static com.example.pablo.prueba7.Activitys.Login.contraseña;
 import static com.example.pablo.prueba7.Activitys.Login.entrar;
 import static com.example.pablo.prueba7.Activitys.Login.usurio;
-import static com.example.pablo.prueba7.Activitys.asignacion.dialogAsignacion;
-import static com.example.pablo.prueba7.Activitys.asignado.MACWAMText;
-import static com.example.pablo.prueba7.Activitys.asignado.constraintLayoutMACWAM;
-import static com.example.pablo.prueba7.Activitys.asignado.idArticuloasignado;
-import static com.example.pablo.prueba7.Activitys.asignado.jsonArrayMAC;
-import static com.example.pablo.prueba7.Adapters.trabajos_adapter_result.dialogTrabajos;
+import static com.example.pablo.prueba7.Activitys.ServiciosAInstalar.dialogAsignacion;
+import static com.example.pablo.prueba7.Activitys.AsignarAparato.MACWAMText;
+import static com.example.pablo.prueba7.Activitys.AsignarAparato.constraintLayoutMACWAM;
+import static com.example.pablo.prueba7.Activitys.AsignarAparato.idArticuloasignado;
+import static com.example.pablo.prueba7.Activitys.AsignarAparato.jsonArrayMAC;
+import static com.example.pablo.prueba7.Adapters.TrabajosAdapter.dialogTrabajos;
 import static com.example.pablo.prueba7.Fragments.EjecutarFragment.dialogEjecutar;
-import static com.example.pablo.prueba7.Fragments.EjecutarFragment.msgEjecutarOrd;
-import static com.example.pablo.prueba7.Fragments.EjecutarFragment.reiniciar;
 import static com.example.pablo.prueba7.Fragments.HorasFragment.TecSec1;
 import static com.example.pablo.prueba7.Fragments.HorasFragment.tecPosRepo;
 import static com.example.pablo.prueba7.Fragments.InstalacionFragment.TecSec;
@@ -173,6 +172,7 @@ public class Request extends AppCompatActivity {
     String f = "Seleccione tipo de solución";
     public static String datos[];
     BarraCargar barraCargar = new BarraCargar();
+    public static boolean requierePregunta=false;
 
     public void ErrorInicioDeSesion(final Context context) {
         try {
@@ -1199,7 +1199,7 @@ public class Request extends AppCompatActivity {
                             array.nombreArbol.add(dat4.get(i).getNombre());
                         }
                     }
-                    Intent intento25 = new Intent(context, asignacion.class);
+                    Intent intento25 = new Intent(context, ServiciosAInstalar.class);
                     context.startActivity(intento25);
                     dialogTrabajos.dismiss();
                 } else {
@@ -1214,14 +1214,8 @@ public class Request extends AppCompatActivity {
     }
 
     //Medios Servicios//
-    public void getMedSer(final Context context) {
-        Service service = null;
-        try {
-            service = services.getMediosSerService(context);
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-        Call<JSONMediosSer> call = service.getDataMedSer();
+    public void getMedSer(final Context context, JSONObject jsonObject, final Spinner spinnerMedio,final int posicionArbol) {
+        Call<JSONMediosSer> call = services.RequestPost(context, jsonObject).getDataMedSer();
         call.enqueue(new Callback<JSONMediosSer>() {
             @Override
             public void onResponse(Call<JSONMediosSer> call, Response<JSONMediosSer> response) {
@@ -1236,9 +1230,22 @@ public class Request extends AppCompatActivity {
                         for (int i = 0; i < dat.size(); i++) {
                             array.medio.add(dat.get(i).getDescripcion());
                         }
+
                     }
-                    ArrayAdapter<String> adapter1 = new ArrayAdapter<String>(context, android.R.layout.simple_spinner_dropdown_item, array.medio);
-                    asignacion.spinnerMedio.setAdapter(adapter1);
+                    //Llenamos spinnerMedio
+                    ArrayAdapter<String> adapter1 = new ArrayAdapter<String>(context, android.R.layout.simple_spinner_dropdown_item, Array.medio);
+                    spinnerMedio.setAdapter(adapter1);
+
+                    //Verificamos que tenga medio para llenar el spinner
+                    //Arbol
+                    Iterator<List<GetMuestraArbolServiciosAparatosPorinstalarListResult>> itData1 = Array.dataArbSer.iterator();
+                    final List<GetMuestraArbolServiciosAparatosPorinstalarListResult> dat4 = itData1.next();
+                    if(dat4.get(posicionArbol).IdMedio!=0){
+                        //selecciono la posicion del spinner
+                        spinnerMedio.setSelection(ReporteAsignacion.obtenerPosicionSpinnerMedio(dat4.get(posicionArbol).IdMedio));
+                    }
+
+
                 } else {
                     Toast.makeText(context, "Error al conseguir datos", Toast.LENGTH_LONG).show();
                 }
@@ -1251,14 +1258,8 @@ public class Request extends AppCompatActivity {
     }
 
     //Tipo de Aparatos//
-    public void getTipoAparatos(final Context context) {
-        Service service = null;
-        try {
-            service = services.getTipoAparatosService(context);
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-        Call<JSONTipoAparatos> call = service.getDataTipoAparatos();
+    public void getTipoAparatos(final Context context, final JSONObject jsonObject, final Spinner spinner) {
+        Call<JSONTipoAparatos> call = services.RequestPost(context, jsonObject).getDataTipoAparatos();
         call.enqueue(new Callback<JSONTipoAparatos>() {
             @Override
             public void onResponse(Call<JSONTipoAparatos> call, Response<JSONTipoAparatos> response) {
@@ -1275,7 +1276,7 @@ public class Request extends AppCompatActivity {
                         }
                     }
                     ArrayAdapter<String> adapter1 = new ArrayAdapter<String>(context, android.R.layout.simple_spinner_dropdown_item, array.tipoAparato);
-                    asignado.spinnerAparato.setAdapter(adapter1);
+                    spinner.setAdapter(adapter1);
                 } else {
                     Toast.makeText(context, "Error al conseguir tipos de aparatos", Toast.LENGTH_LONG).show();
                 }
@@ -1288,14 +1289,8 @@ public class Request extends AppCompatActivity {
     }
 
     //Aparatos Disponibles///
-    public void getAparatosDisponibles(final Context context) {
-        Service service = null;
-        try {
-            service = services.getAparatosDisponiblesService(context);
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-        Call<JSONAparatosDisponibles> call = service.getDataAparatosDisponibles();
+    public void getAparatosDisponibles(final Context context,final JSONObject jsonObject, final Spinner spinner) {
+        Call<JSONAparatosDisponibles> call = services.RequestPost(context, jsonObject).getDataAparatosDisponibles();
         call.enqueue(new Callback<JSONAparatosDisponibles>() {
             @Override
             public void onResponse(Call<JSONAparatosDisponibles> call, Response<JSONAparatosDisponibles> response) {
@@ -1316,7 +1311,7 @@ public class Request extends AppCompatActivity {
                     }
 
                     ArrayAdapter<String> adapter1 = new ArrayAdapter<String>(context, android.R.layout.simple_spinner_dropdown_item, array.aparatoAsignacion);
-                    asignado.spinneraparatoDisponible.setAdapter(adapter1);
+                    spinner.setAdapter(adapter1);
                 } else {
                     Toast.makeText(context, "Error al conseguir aparatos disponibles", Toast.LENGTH_LONG).show();
                 }
@@ -1329,14 +1324,8 @@ public class Request extends AppCompatActivity {
     }
 
     //Servicios Aparatos//
-    public void getServiciosAparatos(final Context context) {
-        Service service = null;
-        try {
-            service = services.getServiciosAparatosService(context);
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-        Call<JSONServiciosAparatos> call = service.getDataServiciosAparatos();
+    public void getServiciosAparatos(final Context context, final JSONObject jsonObject, final ListView lista) {
+        Call<JSONServiciosAparatos> call = services.RequestPost(context, jsonObject).getDataServiciosAparatos();
         call.enqueue(new Callback<JSONServiciosAparatos>() {
             @Override
             public void onResponse(Call<JSONServiciosAparatos> call, Response<JSONServiciosAparatos> response) {
@@ -1352,7 +1341,7 @@ public class Request extends AppCompatActivity {
                         }
                     }
                     ArrayAdapter arrayAdapter = new ArrayAdapter(context, android.R.layout.simple_list_item_checked, array.serviciosAparatos);
-                    asignado.serviciosAparato.setAdapter(arrayAdapter);
+                    lista.setAdapter(arrayAdapter);
                 } else {
                     Toast.makeText(context, "Error al conseguir servicios de aparatos", Toast.LENGTH_LONG).show();
                 }
@@ -1364,15 +1353,8 @@ public class Request extends AppCompatActivity {
         });
     }
 
-    public void getAceptatAsignacino(final Context context) {
-        Services getAceptarAsigService = new Services();
-        Service service = null;
-        try {
-            service = getAceptarAsigService.getAceptarAsigService(context);
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-        Call<JsonObject> call = service.getDataAceptarAsig();
+    public void getAceptatAsignacino(final Context context, final JSONObject jsonObject) {
+        Call<JsonObject> call = services.RequestPost(context, jsonObject).getDataAceptarAsig();
         call.enqueue(new Callback<JsonObject>() {
             @Override
             public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
@@ -1386,13 +1368,13 @@ public class Request extends AppCompatActivity {
                     }else{
                     Toast.makeText(context, "Aparatos agregados", Toast.LENGTH_LONG).show();
                     try{
-                        dialogAsignacion.dismiss();
+                        ReporteAsignacion.dialogReporteAsignacion.dismiss();
                     }catch (Exception e){}
                     finish();
                     }
                 } else {
                     Toast.makeText(context, "Error al aceptar asignación", Toast.LENGTH_LONG).show();
-                    dialogAsignacion.dismiss();
+                    ReporteAsignacion.dialogReporteAsignacion.dismiss();
                 }
             }
 
@@ -2815,4 +2797,62 @@ public class Request extends AppCompatActivity {
             }
         });
     }
+
+    public void PreguntaMedios(final Context context, final JSONObject jsonObject) {
+        Call<JSONPregunta> call = services.RequestPost(context, jsonObject).getPregunta();
+        call.enqueue(new Callback<JSONPregunta>() {
+            @Override
+            public void onResponse(Call<JSONPregunta> call, Response<JSONPregunta> response) {
+                Log.d("asd","asd");
+                if (response.code() == 200) {
+                    JSONPregunta jsonResponse = response.body();
+                    try {
+                        array.dataPregunta.clear();
+                    }catch (Exception e){}
+                    array.dataPregunta = new ArrayList<List<RequierePregunta>>(asList(jsonResponse.getDamePreguntaMedioPorOrdenResult.getRequierePregunta()));
+                    Iterator<List<RequierePregunta>> itData = array.dataPregunta.iterator();
+                    while (itData.hasNext()) {
+                        List<RequierePregunta> dat = (List<RequierePregunta>) itData.next();
+                        for (int i = 0; i < dat.size(); i++) {
+                            requierePregunta= dat.get(i).RequierePregunta;
+                        }
+                    }
+
+                    if(requierePregunta==true){
+                        try {
+                            array.dataMediosPregunta.clear();
+                            array.medioPregunta.clear();
+                        }catch (Exception e){}
+
+
+                        array.dataMediosPregunta = new ArrayList<List<mediosPregunta>>(asList(response.body().getDamePreguntaMedioPorOrdenResult.getmediosPregunta()));
+                        Iterator<List<mediosPregunta>> itData1 = array.dataMediosPregunta.iterator();
+                        array.medioPregunta.add("Seleccionar medio");
+                        while (itData1.hasNext()) {
+                            List<mediosPregunta> dat1 = (List<mediosPregunta>) itData1.next();
+                            for (int i = 0; i < dat1.size(); i++) {
+                                array.medioPregunta.add(dat1.get(i).getDescripcion());
+                            }
+                        }
+                        ArrayAdapter<String> adapter = new ArrayAdapter<String>(context, android.R.layout.simple_spinner_dropdown_item, array.medioPregunta);
+                        ServiciosAInstalar.spinnerMedio.setAdapter(adapter);
+                        ServiciosAInstalar.spinnerMedio.setEnabled(false);
+                    }else{
+
+                    }
+                }else {
+                }
+
+
+
+
+
+            }
+
+            @Override
+            public void onFailure(Call<JSONPregunta> call, Throwable t) {
+                }
+        });
+    }
+
 }

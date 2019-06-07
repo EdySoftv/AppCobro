@@ -14,7 +14,7 @@ import com.example.pablo.prueba7.R;
 
 import java.util.ArrayList;
 
-public class quejas_adapter_result extends BaseAdapter {
+public class QuejasAdapter extends BaseAdapter {
     private LayoutInflater inflater;
     private Context mContext;
     private ArrayList<String> Queja;
@@ -25,7 +25,7 @@ public class quejas_adapter_result extends BaseAdapter {
     public static Integer clvReport;
     public static String contratoReport;
 
-    public quejas_adapter_result(Context context, ArrayList<String>Queja,ArrayList<String>nombreQ,ArrayList<String>contratoQ,ArrayList<String>statusQ,ArrayList<String>Direccion){
+    public QuejasAdapter(Context context, ArrayList<String>Queja, ArrayList<String>nombreQ, ArrayList<String>contratoQ, ArrayList<String>statusQ, ArrayList<String>Direccion){
 
         this.Queja=Queja;
         this.contratoQ=contratoQ;
@@ -56,9 +56,9 @@ public class quejas_adapter_result extends BaseAdapter {
     }
     @Override
     public View getView(final int position, View convertView, ViewGroup parent) {
-        final quejas_adapter_result.viewHolder holder;
+        final QuejasAdapter.viewHolder holder;
         if (convertView == null) {
-            holder = new quejas_adapter_result.viewHolder();
+            holder = new QuejasAdapter.viewHolder();
             convertView=inflater.inflate(R.layout.recycler_oq,null);
             holder.statusq=(TextView)convertView.findViewById(R.id.tv_estatus);
             holder.quejaq=(TextView) convertView.findViewById(R.id.tv_NOrden);
@@ -68,7 +68,7 @@ public class quejas_adapter_result extends BaseAdapter {
             holder.control=(TextView)convertView.findViewById(R.id.controla);
             convertView.setTag(holder); }
         else {
-            holder=(quejas_adapter_result.viewHolder)convertView.getTag();
+            holder=(QuejasAdapter.viewHolder)convertView.getTag();
         }
         holder.nombreq.setText(Array.nombreQ.get(position));
         holder.quejaq.setText(Array.Queja.get(position));
