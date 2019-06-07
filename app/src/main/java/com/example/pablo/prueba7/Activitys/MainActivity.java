@@ -1,6 +1,7 @@
 package com.example.pablo.prueba7.Activitys;
 
 import android.Manifest;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
@@ -192,6 +193,9 @@ public class MainActivity extends AppCompatActivity implements ActionBar.TabList
                     hzScrollView.setVisibility(View.GONE);
                     info.setText("Info");
                 }else{
+                    Intent intento = new Intent(MainActivity.this, Orden.class);
+                    intento.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                    startActivity(intento);
                     finish();
                     TecSec.setSelection(0);
                 }

@@ -36,6 +36,7 @@ import static com.example.pablo.prueba7.Activitys.ServiciosAInstalar.aceptarAsig
 import static com.example.pablo.prueba7.Activitys.ServiciosAInstalar.aceptarmedio;
 import static com.example.pablo.prueba7.Activitys.ServiciosAInstalar.layoutMedio;
 import static com.example.pablo.prueba7.Activitys.ServiciosAInstalar.siguiente;
+import static com.example.pablo.prueba7.Activitys.ServiciosAInstalar.todosLosMediosValidacion;
 //import static com.example.pablo.prueba7.Adapters.ArbolAdapter.viewHolder.medio;
 
 
@@ -99,6 +100,11 @@ public class ArbolAdapter extends BaseAdapter {
             if(dat4.get(position).children.size()!=0){
                 holder.progressBar.setProgress(100);
             }
+            try{
+                if(ReporteAsignacion.guardarAparatosProgresBar==true){
+                    holder.progressBar.setProgress(100);
+                }
+            }catch (Exception e){}
         }
 
         holder.Asignar.setOnClickListener(new View.OnClickListener() {
@@ -113,8 +119,16 @@ public class ArbolAdapter extends BaseAdapter {
                 }else{
                     //Verificar si van para todos los medios 1=si 0=no 2=no se ha respondido la pregunta
                     if(ServiciosAInstalar.todosLosMedios==1){
-                        dat4.get(ArbolAdapter.posicionArbol).setIdMedio(ServiciosAInstalar.idMedioSI);
-                        dat4.get(ArbolAdapter.posicionArbol).setDetalle(ServiciosAInstalar.detalleSI);
+                        if(ServiciosAInstalar.todosLosMediosValidacion==true){
+
+                        }else{
+                            for(int a=0; a<dat4.size(); a++){
+                                dat4.get(a).setIdMedio(ServiciosAInstalar.idMedioSI);
+                                dat4.get(a).setDetalle(ServiciosAInstalar.detalleSI);
+                            }
+                        }
+
+
 
                     }
                     if(ServiciosAInstalar.todosLosMedios==0){

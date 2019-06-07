@@ -30,6 +30,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
@@ -42,6 +43,7 @@ public class ReporteAsignacion extends AppCompatActivity {
     public static EliminarAparatosAdapter adapter;
     int posicionSpinnerSelect;
     public static ProgressDialog dialogReporteAsignacion;
+    public static boolean guardarAparatosProgresBar=false;
 
     @Override
     protected void onCreate(Bundle onSaveInstanceState) {
@@ -62,6 +64,7 @@ public class ReporteAsignacion extends AppCompatActivity {
                 /*Intent intento = new Intent(getApplicationContext(), ServiciosAInstalar.class);
                 startActivity(intento);*/
                 finish();
+                guardarAparatosProgresBar=false;
             }
         });
         setTitle(ArbolAdapter.nombreToolBar);
@@ -106,10 +109,18 @@ public class ReporteAsignacion extends AppCompatActivity {
 
         //verificar si todos los servicios llevan el mismo medio 1=si 0=no
         if (ServiciosAInstalar.todosLosMedios == 1) {
-            ArrayAdapter<String> adapter = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_spinner_dropdown_item, Array.medioPregunta);
-            spinerMedio.setAdapter(adapter);
-           spinerMedio.setSelection(obtenerPosicionSpinnerMedioSI(dat4.get(ArbolAdapter.posicionArbol).IdMedio));
-           spinerMedio.setEnabled(false);
+            try {
+                ArrayAdapter<String> adapter = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_spinner_dropdown_item, Array.medioPregunta);
+                spinerMedio.setAdapter(adapter);
+                spinerMedio.setSelection(obtenerPosicionSpinnerMedioSI(dat4.get(ArbolAdapter.posicionArbol).IdMedio));
+
+            }catch (Exception e){
+                ArrayList<String> mediolista=new ArrayList<>();
+                mediolista.add(dat4.get(ArbolAdapter.posicionArbol).getDetalle());
+                ArrayAdapter<String> adapter = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_spinner_dropdown_item, mediolista);
+                spinerMedio.setAdapter(adapter);
+            }
+            spinerMedio.setEnabled(false);
         }
         if (ServiciosAInstalar.todosLosMedios == 0) {
             try {
@@ -153,7 +164,16 @@ public class ReporteAsignacion extends AppCompatActivity {
             public void onClick(View v) {
                 //Validar que se haya seleccionado un medio
                 if (spinerMedio.getSelectedItemPosition() == 0) {
-                    Toast.makeText(getApplicationContext(), "No se ha seleccionado ningun medio", Toast.LENGTH_LONG).show();
+                    if(ServiciosAInstalar.todosLosMediosValidacion==true){
+                        Intent intento = new Intent(ReporteAsignacion.this, AsignarAparato.class);
+                        intento.putExtra("posicionDelSpinner", posicionSpinnerSelect);
+                        intento.putExtra("Clv_UnicaNet", dat4.get(ArbolAdapter.posicionArbol).Clv_UnicaNet);
+                        intento.putExtra("idMedio", dat4.get(ArbolAdapter.posicionArbol).IdMedio);
+                        startActivity(intento);
+                        finish();
+                    }else{
+                        Toast.makeText(getApplicationContext(), "No se ha seleccionado ningun medio", Toast.LENGTH_LONG).show();
+                    }
                 } else {
                     Intent intento = new Intent(ReporteAsignacion.this, AsignarAparato.class);
                     intento.putExtra("posicionDelSpinner", posicionSpinnerSelect);
@@ -228,7 +248,8 @@ public class ReporteAsignacion extends AppCompatActivity {
                     jsonObject1.put("Lst",jsonArray2);
                     request.getAceptatAsignacino(getApplicationContext(),jsonObject1);
                 }catch (Exception e){}
-
+                ServiciosAInstalar.Asignacion.setAdapter(ServiciosAInstalar.adapter);
+                guardarAparatosProgresBar=true;
                 finish();
             }
         });
@@ -274,6 +295,7 @@ public class ReporteAsignacion extends AppCompatActivity {
 
                 /*Intent intento = new Intent(ReporteAsignacion.this, ServiciosAInstalar.class);
                 startActivity(intento);*/
+                guardarAparatosProgresBar=false;
                 finish();
 
                 break;

@@ -2,6 +2,7 @@ package com.example.pablo.prueba7.Activitys;
 
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AppCompatActivity;
@@ -58,6 +59,7 @@ public class ServiciosAInstalar extends AppCompatActivity {
     TextView txtMedio;
     public static int idMedioSI,todosLosMedios=2; //2 es no haber responidido la pregunta
     public static String detalleSI;
+    public static boolean todosLosMediosValidacion=false;
     protected void onCreate(Bundle onSaveInstanceState) {
         super.onCreate(onSaveInstanceState);
         setContentView(R.layout.activity_serviciosinstalar);
@@ -81,6 +83,9 @@ public class ServiciosAInstalar extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 //regresar...
+                Intent intento = new Intent(ServiciosAInstalar.this, MainActivity.class);
+                intento.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                startActivity(intento);
                 finish();
             }
         });
@@ -129,7 +134,12 @@ public class ServiciosAInstalar extends AppCompatActivity {
                     }catch (Exception e){}
                 }
                 if(contador==(dat4.size()-1)){
-                    todosLosMedios=1;
+                    if(dat4.size()==1){
+                        todosLosMedios=0;
+                    }else{
+                        todosLosMediosValidacion=true;
+                        todosLosMedios=1;
+                    }
                 }else{
                     todosLosMedios=0;
                 }
@@ -173,7 +183,7 @@ try{
                     List<mediosPregunta> dat3 = itdata3.next();
                     idMedioSI=dat3.get(positionSpinnerSi-1).getIdMedio();
                     detalleSI=dat3.get(positionSpinnerSi-1).getDescripcion();
-
+                    todosLosMediosValidacion=false;
                 } else {
                     //no se ha seleccionado ningun medio.
                 }
@@ -196,9 +206,12 @@ try{
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.siguiente:
-
-                //regresar...
+                Intent intento = new Intent(ServiciosAInstalar.this, MainActivity.class);
+                intento.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                startActivity(intento);
                 finish();
+                //regresar...
+
 
                 break;
         }

@@ -1336,7 +1336,7 @@ public class Request extends AppCompatActivity {
                     Iterator<List<GetMuestraServiciosRelTipoAparatoListResult>> itData = array.dataserviciosAparatos.iterator();
                     while (itData.hasNext()) {
                         List<GetMuestraServiciosRelTipoAparatoListResult> dat = (List<GetMuestraServiciosRelTipoAparatoListResult>) itData.next();
-                        for (int i = 0; i < dat.size(); i++) {
+                        for (int i = 0; i < 1; i++) {
                             array.serviciosAparatos.add(dat.get(i).getNombre());
                         }
                     }
