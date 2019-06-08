@@ -233,12 +233,13 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/RV1"
-                android:layout_marginStart="10dp"
-                android:layout_marginTop="50dp"
+                android:layout_marginStart="80dp"
+                android:layout_marginTop="47dp"
                 android:text="@string/tecnico_Sec"
                 android:textSize="20dp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
+
 
             <Spinner
                 android:id="@+id/tecnicosec1"
