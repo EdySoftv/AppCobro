@@ -1,35 +1,48 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:tools="http://schemas.android.com/tools"
+<android.support.constraint.ConstraintLayout xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_height="match_parent">
     <!--Primeros datos-->
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="1000dp">
+        android:layout_height="match_parent">
 
-        <RelativeLayout
+        <android.support.constraint.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
+            <include
+                android:id="@+id/includeCambioDom"
+                layout="@layout/toolbar"></include>
 
             <TextView
+                android:id="@+id/textView37"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
-                android:layout_marginTop="30dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"
                 android:text="@string/cambio_Domicilio"
                 android:textSize="25dp"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/includeCambioDom" />
 
             <TextView
+                android:id="@+id/textView36"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentTop="true"
-                android:layout_marginTop="85dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="16dp"
                 android:text="@string/ciudadDos"
                 android:textSize="20dp"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView37" />
 
             <TextView
                 android:id="@+id/CiudadCAMDO"
@@ -37,18 +50,24 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentTop="true"
-                android:layout_marginStart="160dp"
-                android:layout_marginTop="90dp"
-                android:textSize="15dp" />
+                android:layout_marginStart="150dp"
+                android:textSize="15dp"
+                app:layout_constraintBottom_toBottomOf="@+id/textView36"
+                app:layout_constraintStart_toEndOf="@+id/textView36"
+                app:layout_constraintTop_toTopOf="@+id/textView36" />
 
             <TextView
+                android:id="@+id/textView48"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentTop="true"
-                android:layout_marginTop="115dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
                 android:text="@string/localidadDos"
                 android:textSize="20dp"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView36" />
 
             <TextView
                 android:id="@+id/localidad"
@@ -56,18 +75,24 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentTop="true"
-                android:layout_marginStart="160dp"
-                android:layout_marginTop="120dp"
-                android:textSize="15dp" />
+                android:layout_marginStart="150dp"
+                android:textSize="15dp"
+                app:layout_constraintBottom_toBottomOf="@+id/textView48"
+                app:layout_constraintStart_toEndOf="@+id/textView48"
+                app:layout_constraintTop_toTopOf="@+id/textView48" />
 
             <TextView
+                android:id="@+id/textView34"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentTop="true"
-                android:layout_marginTop="145dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
                 android:text="@string/coloniaDos"
                 android:textSize="20dp"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView48" />
 
             <TextView
                 android:id="@+id/colonia"
@@ -75,18 +100,25 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentTop="true"
-                android:layout_marginStart="160dp"
-                android:layout_marginTop="150dp"
-                android:textSize="15dp" />
+                android:layout_marginStart="150dp"
+                android:layout_marginBottom="8dp"
+                android:textSize="15dp"
+                app:layout_constraintBottom_toBottomOf="@+id/textView34"
+                app:layout_constraintStart_toEndOf="@+id/textView34"
+                app:layout_constraintTop_toTopOf="@+id/textView34" />
 
             <TextView
+                android:id="@+id/textView49"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentTop="true"
-                android:layout_marginTop="175dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
                 android:text="@string/calleDos"
                 android:textSize="20dp"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView34" />
 
             <TextView
                 android:id="@+id/Calledom"
@@ -94,18 +126,24 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentTop="true"
-                android:layout_marginStart="160dp"
-                android:layout_marginTop="180dp"
-                android:textSize="15dp" />
+                android:layout_marginStart="150dp"
+                android:textSize="15dp"
+                app:layout_constraintBottom_toBottomOf="@+id/textView49"
+                app:layout_constraintStart_toEndOf="@+id/textView49"
+                app:layout_constraintTop_toTopOf="@+id/textView49" />
 
             <TextView
+                android:id="@+id/textView50"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentTop="true"
-                android:layout_marginTop="205dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
                 android:text="@string/numeroDos"
                 android:textSize="20dp"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView49" />
 
             <TextView
                 android:id="@+id/numero"
@@ -113,18 +151,24 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentTop="true"
-                android:layout_marginStart="160dp"
-                android:layout_marginTop="210dp"
-                android:textSize="15dp" />
+                android:layout_marginStart="150dp"
+                android:textSize="15dp"
+                app:layout_constraintBottom_toBottomOf="@+id/textView50"
+                app:layout_constraintStart_toEndOf="@+id/textView50"
+                app:layout_constraintTop_toTopOf="@+id/textView50" />
 
             <TextView
+                android:id="@+id/textView51"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentTop="true"
-                android:layout_marginTop="235dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
                 android:text="@string/numeroIDos"
-                android:textSize="20dp"
-                android:textStyle="bold" />
+                android:textSize="15dp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView50" />
 
             <TextView
                 android:id="@+id/numeroi"
@@ -132,18 +176,24 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentTop="true"
-                android:layout_marginStart="160dp"
-                android:layout_marginTop="240dp"
-                android:textSize="15dp" />
+                android:layout_marginStart="150dp"
+                android:textSize="15dp"
+                app:layout_constraintBottom_toBottomOf="@+id/textView51"
+                app:layout_constraintStart_toEndOf="@+id/textView51"
+                app:layout_constraintTop_toTopOf="@+id/textView51" />
 
             <TextView
+                android:id="@+id/textView52"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentTop="true"
-                android:layout_marginTop="265dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
                 android:text="@string/telefonoDos"
                 android:textSize="20dp"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView51" />
 
             <TextView
                 android:id="@+id/telefono"
@@ -151,17 +201,23 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentTop="true"
-                android:layout_marginStart="160dp"
-                android:layout_marginTop="270dp"
-                android:textSize="15dp" />
+                android:layout_marginStart="150dp"
+                android:layout_marginBottom="8dp"
+                android:textSize="15dp"
+                app:layout_constraintBottom_toBottomOf="@+id/textView52"
+                app:layout_constraintStart_toEndOf="@+id/textView52"
+                app:layout_constraintTop_toTopOf="@+id/textView52" />
 
             <RelativeLayout
                 android:id="@+id/map"
                 android:layout_width="match_parent"
                 android:layout_height="350dp"
                 android:layout_alignTop="@id/telefono"
-                android:layout_marginTop="50dp"
-                android:orientation="horizontal">
+                android:layout_marginTop="8dp"
+                android:orientation="horizontal"
+                android:visibility="visible"
+                app:layout_constraintTop_toBottomOf="@+id/textView52"
+                tools:layout_editor_absoluteX="0dp">
 
                 <RelativeLayout
                     android:id="@+id/uno"
@@ -331,12 +387,14 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/map"
                 android:layout_alignParentStart="true"
-                android:layout_marginStart="60dp"
-                android:layout_marginTop="2dp"
-                android:textColor="#000"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="16dp"
                 android:background="@drawable/boton"
                 android:backgroundTint="@color/colorPrimary"
-                android:text="@string/aceptar" />
+                android:text="@string/aceptar"
+                android:textColor="#000"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/map" />
 
 
             <Button
@@ -345,12 +403,14 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/map"
                 android:layout_alignParentEnd="true"
-                android:layout_marginTop="2dp"
-                android:layout_marginEnd="60dp"
+                android:layout_marginEnd="24dp"
                 android:background="@drawable/boton"
                 android:backgroundTint="@color/colorPrimary"
                 android:text="@string/Regresar"
-                android:textColor="#000" />
-        </RelativeLayout>
+                android:textColor="#000"
+                app:layout_constraintBottom_toBottomOf="@+id/aceptar"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/aceptar" />
+        </android.support.constraint.ConstraintLayout>
     </ScrollView>
-</RelativeLayout>
+</android.support.constraint.ConstraintLayout>

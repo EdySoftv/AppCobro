@@ -6,11 +6,14 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.Spinner;
+
+import com.example.pablo.prueba7.Adapters.OrdenesAdapter;
 import com.example.pablo.prueba7.Adapters.TrabajosAdapter;
 import com.example.pablo.prueba7.Listas.Array;
 import com.example.pablo.prueba7.Modelos.GetListAparatosDisponiblesByIdArticuloResult;
@@ -40,6 +43,7 @@ public class CambioAparato extends AppCompatActivity {
         super.onCreate(onSaveInstanceState);
         setContentView(R.layout.activity_cambio_aparato);
         aceptarCambioAparato =  findViewById(R.id.uno);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.includeCambioAparato);
         aparato = findViewById(R.id.aparato);
         estado = findViewById(R.id.estadoaparato);
         tipoAparato = findViewById(R.id.tipo_aparato1);
@@ -47,6 +51,10 @@ public class CambioAparato extends AppCompatActivity {
         aa=findViewById(R.id.aa);
         Finish= findViewById(R.id.dos);
         dialogCAPAT= new BarraCargar().showDialog(this);
+
+        setTitle("No. de Orden: " + OrdenesAdapter.noOrden);
+
+
 
         request.getDeepCAPAT(getApplicationContext());
         if(TrabajosAdapter.ftth==0){

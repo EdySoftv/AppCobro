@@ -66,7 +66,7 @@ public class AsignarAparato extends AppCompatActivity {
     protected void onCreate(Bundle onSaveInstanceState) {
         super.onCreate(onSaveInstanceState);
         setContentView(R.layout.activity_asignar_aparato);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.include2);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.includeAsignarAparatos);
         spinnerAparato = findViewById(R.id.tipo_aparato);
         spinneraparatoDisponible = findViewById(R.id.aparatoDisponible);
         serviciosAparato = findViewById(R.id.Servicios123);

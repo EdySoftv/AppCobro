@@ -7,131 +7,145 @@
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context=".Activitys.Reportes"
     tools:showIn="@layout/app_bar_reportes">
-    <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+    <ListView
+        android:id="@+id/listreporte"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        xmlns:app="http://schemas.android.com/apk/res-auto">
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="125dp"
+        android:dividerHeight="10dp"
+        android:paddingLeft="8dp"
+        android:paddingRight="8dp"
+        android:textSize="@dimen/chico"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textView41"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="@string/reporte"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@+id/reportesearch"
+        app:layout_constraintStart_toStartOf="@+id/reportesearch"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/reportesearch"
+        android:layout_width="123dp"
+        android:layout_height="28dp"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="3dp"
+        android:inputType="number"
+        android:textSize="15dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView41" />
+
+    <Button
+        android:id="@+id/breporte"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:layout_marginStart="8dp"
+        android:background="@android:drawable/ic_search_category_default"
+        android:gravity="center_vertical"
+        app:layout_constraintBottom_toBottomOf="@+id/reportesearch"
+        app:layout_constraintStart_toEndOf="@+id/reportesearch"
+        app:layout_constraintTop_toTopOf="@+id/reportesearch" />
 
 
-        <ListView
-            android:id="@+id/listreporte"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_alignParentTop="true"
-            android:layout_marginTop="200dp"
-            android:dividerHeight="5dp"
-            android:paddingLeft="8dp"
-            android:paddingRight="8dp"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:layout_editor_absoluteX="16dp" />
+    <EditText
+        android:id="@+id/contsearch"
+        android:layout_width="123dp"
+        android:layout_height="28dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="3dp"
+        android:inputType="text|number"
+        android:textSize="15dp"
+        app:layout_constraintStart_toEndOf="@+id/breporte"
+        app:layout_constraintTop_toBottomOf="@+id/textView44" />
 
-        <TextView
-            android:id="@+id/textView34"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:text="@string/reporte"
-            android:textStyle="bold"
-            android:textSize="20dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.2"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+    <Button
+        android:id="@+id/bcontrato"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:background="@android:drawable/ic_search_category_default"
+        android:gravity="center_vertical"
+        app:layout_constraintBottom_toBottomOf="@+id/contsearch"
+        app:layout_constraintStart_toEndOf="@+id/contsearch"
+        app:layout_constraintTop_toTopOf="@+id/contsearch" />
 
-        <EditText
-            android:id="@+id/reportesearch"
-            android:layout_width="130dp"
-            android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:layout_marginTop="24dp"
-            android:inputType="number"
-            app:layout_constraintEnd_toEndOf="@+id/textView34"
-            app:layout_constraintStart_toStartOf="@+id/textView34"
-            app:layout_constraintTop_toBottomOf="@+id/textView34" />
+    <TextView
+        android:id="@+id/textView44"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:text="@string/n_Contrato"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toStartOf="@+id/bcontrato"
+        app:layout_constraintStart_toStartOf="@+id/contsearch"
+        app:layout_constraintTop_toTopOf="parent" />
 
-        <Button
-            android:id="@+id/breporte"
-            android:layout_width="25dp"
-            android:layout_height="25dp"
-            android:background="@android:drawable/ic_search_category_default"
-            android:gravity="center_vertical"
-            app:layout_constraintBottom_toBottomOf="@+id/reportesearch"
-            app:layout_constraintStart_toEndOf="@+id/reportesearch"
-            app:layout_constraintTop_toTopOf="@+id/reportesearch" />
+    <TextView
+        android:id="@+id/textView47"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="5dp"
+        android:layout_marginEnd="16dp"
+        android:text="@string/contrato"
+        android:textSize="25dp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/listreporte"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/contsearch" />
 
-
-        <EditText
-            android:id="@+id/contsearch"
-            android:layout_width="130dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
-            android:inputType="text|number"
-            app:layout_constraintEnd_toEndOf="@+id/textView35"
-            app:layout_constraintStart_toStartOf="@+id/textView35"
-            app:layout_constraintTop_toBottomOf="@+id/textView35" />
-
-        <Button
-            android:id="@+id/bcontrato"
-            android:layout_width="25dp"
-            android:layout_height="25dp"
-            android:background="@android:drawable/ic_search_category_default"
-            android:gravity="center_vertical"
-            app:layout_constraintBottom_toBottomOf="@+id/contsearch"
-            app:layout_constraintStart_toEndOf="@+id/contsearch"
-            app:layout_constraintTop_toTopOf="@+id/contsearch" />
-
-        <TextView
-            android:id="@+id/textView35"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/n_Reporte"
-            android:textStyle="bold"
-            android:textSize="20dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.8"
-            app:layout_constraintStart_toStartOf="parent"
-            tools:layout_editor_absoluteY="16dp" />
-
-        <TextView
-            android:id="@+id/textView36"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="32dp"
-            android:text="@string/contrato"
-            android:textSize="20dp"
-            android:textStyle="bold"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/reportesearch" />
-
-        <TextView
-            android:id="@+id/textView37"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:layout_marginStart="70dp"
-            android:text="@string/n_Reporte"
-            android:textSize="20dp"
-            android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="@+id/textView36"
-            app:layout_constraintStart_toEndOf="@+id/textView36"
-            app:layout_constraintTop_toTopOf="@+id/textView36" />
+    <TextView
+        android:id="@+id/textView46"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:text="@string/n_Reporte"
+        android:textSize="25dp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/listreporte"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.46"
+        app:layout_constraintStart_toStartOf="@+id/textView47"
+        app:layout_constraintTop_toBottomOf="@+id/reportesearch" />
 
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:layout_marginEnd="24dp"
-            android:text="@string/estatus"
-            android:textSize="20dp"
-            android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="@+id/textView37"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/textView37" />
-
-
-    </android.support.constraint.ConstraintLayout>
+    <TextView
+        android:id="@+id/textView45"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:text="@string/estatus"
+        android:textSize="25dp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/listreporte"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.96"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/contsearch" />
 
 </android.support.constraint.ConstraintLayout>

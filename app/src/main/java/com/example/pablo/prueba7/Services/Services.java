@@ -5,12 +5,12 @@ import android.content.Context;
 
 import com.example.pablo.prueba7.Activitys.CambioAparato;
 import com.example.pablo.prueba7.Dibujo.Firma;
-import com.example.pablo.prueba7.Fragments.EjecutarFragment;
-import com.example.pablo.prueba7.Fragments.HorasFragment;
-import com.example.pablo.prueba7.Fragments.InstalacionFragment;
+import com.example.pablo.prueba7.Fragments.EjecutarOrdenes;
+import com.example.pablo.prueba7.Fragments.HorasReportes;
+import com.example.pablo.prueba7.Fragments.HorasOrdenes;
 
-import com.example.pablo.prueba7.Fragments.Materiales;
-import com.example.pablo.prueba7.Fragments.MaterialesFragment;
+import com.example.pablo.prueba7.Fragments.MaterialesOrdenes;
+import com.example.pablo.prueba7.Fragments.MaterialesReportes;
 import com.example.pablo.prueba7.Listas.Array;
 import com.example.pablo.prueba7.Modelos.ChecaSiExtencionesModel;
 import com.example.pablo.prueba7.Modelos.DeepConsModel;
@@ -46,31 +46,31 @@ import static com.example.pablo.prueba7.Adapters.QuejasAdapter.clvReport;
 import static com.example.pablo.prueba7.Adapters.QuejasAdapter.contratoReport;
 import static com.example.pablo.prueba7.Adapters.TrabajosAdapter.ClaveTrabajo;
 
-import static com.example.pablo.prueba7.Fragments.Ejecutar1Fragment.horas12;
+import static com.example.pablo.prueba7.Fragments.EjecutarReportes.horas12;
 
-import static com.example.pablo.prueba7.Fragments.Ejecutar1Fragment.solution;
-import static com.example.pablo.prueba7.Fragments.Ejecutar1Fragment.year;
-import static com.example.pablo.prueba7.Fragments.EjecutarFragment.añoE;
-import static com.example.pablo.prueba7.Fragments.EjecutarFragment.diaE;
-import static com.example.pablo.prueba7.Fragments.EjecutarFragment.mesE;
-import static com.example.pablo.prueba7.Fragments.HorasFragment.TecSecSelecc1;
-import static com.example.pablo.prueba7.Fragments.Materiales.EFDM;
-import static com.example.pablo.prueba7.Fragments.Materiales.EIMD;
-import static com.example.pablo.prueba7.Fragments.Materiales.IFDM;
-import static com.example.pablo.prueba7.Fragments.Materiales.IIDM;
-import static com.example.pablo.prueba7.Fragments.Materiales.clvTipoDescMat;
-import static com.example.pablo.prueba7.Fragments.Materiales.extSer;
-import static com.example.pablo.prueba7.Fragments.Materiales.idInventarioMD;
-import static com.example.pablo.prueba7.Fragments.Materiales.totalDM;
-import static com.example.pablo.prueba7.Fragments.MaterialesFragment.EFDMR;
-import static com.example.pablo.prueba7.Fragments.MaterialesFragment.EIMDR;
-import static com.example.pablo.prueba7.Fragments.MaterialesFragment.IFDMR;
-import static com.example.pablo.prueba7.Fragments.MaterialesFragment.IIDMR;
-import static com.example.pablo.prueba7.Fragments.MaterialesFragment.clvTipoDescMatR;
-import static com.example.pablo.prueba7.Fragments.MaterialesFragment.extSerR;
-import static com.example.pablo.prueba7.Fragments.MaterialesFragment.idInventarioMDR;
-import static com.example.pablo.prueba7.Fragments.MaterialesFragment.totalDMR;
-import static com.example.pablo.prueba7.Fragments.TrabajosFragment.Clv_Sol;
+import static com.example.pablo.prueba7.Fragments.EjecutarReportes.solution;
+import static com.example.pablo.prueba7.Fragments.EjecutarReportes.year;
+import static com.example.pablo.prueba7.Fragments.EjecutarOrdenes.añoE;
+import static com.example.pablo.prueba7.Fragments.EjecutarOrdenes.diaE;
+import static com.example.pablo.prueba7.Fragments.EjecutarOrdenes.mesE;
+import static com.example.pablo.prueba7.Fragments.HorasReportes.TecSecSelecc1;
+import static com.example.pablo.prueba7.Fragments.MaterialesOrdenes.EFDM;
+import static com.example.pablo.prueba7.Fragments.MaterialesOrdenes.EIMD;
+import static com.example.pablo.prueba7.Fragments.MaterialesOrdenes.IFDM;
+import static com.example.pablo.prueba7.Fragments.MaterialesOrdenes.IIDM;
+import static com.example.pablo.prueba7.Fragments.MaterialesOrdenes.clvTipoDescMat;
+import static com.example.pablo.prueba7.Fragments.MaterialesOrdenes.extSer;
+import static com.example.pablo.prueba7.Fragments.MaterialesOrdenes.idInventarioMD;
+import static com.example.pablo.prueba7.Fragments.MaterialesOrdenes.totalDM;
+import static com.example.pablo.prueba7.Fragments.MaterialesReportes.EFDMR;
+import static com.example.pablo.prueba7.Fragments.MaterialesReportes.EIMDR;
+import static com.example.pablo.prueba7.Fragments.MaterialesReportes.IFDMR;
+import static com.example.pablo.prueba7.Fragments.MaterialesReportes.IIDMR;
+import static com.example.pablo.prueba7.Fragments.MaterialesReportes.clvTipoDescMatR;
+import static com.example.pablo.prueba7.Fragments.MaterialesReportes.extSerR;
+import static com.example.pablo.prueba7.Fragments.MaterialesReportes.idInventarioMDR;
+import static com.example.pablo.prueba7.Fragments.MaterialesReportes.totalDMR;
+import static com.example.pablo.prueba7.Fragments.TrabajosReportes.Clv_Sol;
 import static com.example.pablo.prueba7.Request.Request.Obs;
 import static com.example.pablo.prueba7.Request.Request.clvP;
 
@@ -385,7 +385,7 @@ public class Services {
         return retrofit.create(Service.class);
     }
 
-    //Lista de Trabajos//
+    //Lista de TrabajosOrdenes//
     public Service getTrabajoService(final Context context) throws JSONException {
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("Clv_Orden", clvor);
@@ -860,7 +860,7 @@ public class Services {
         jsonObject.put("Clv_Tecnico", Util.getClvTec(Util.preferences));
         jsonObject.put("OP2", 0);
         jsonObject.put("OPCION", "M");
-        jsonObject.put("STATUS", HorasFragment.statusHora);
+        jsonObject.put("STATUS", HorasReportes.statusHora);
         MediaType JSON = MediaType.parse("application/json; charset=utf-8");
         final RequestBody body = RequestBody.create(JSON, jsonObject.toString());
         final OkHttpClient client = new OkHttpClient.Builder().addInterceptor(new Interceptor() {
@@ -923,7 +923,7 @@ public class Services {
         JSONObject jsonObject1 = new JSONObject();
         jsonObject.put("ClvOrden", clvor);
         jsonObject.put("ClvUsuario", UserModel.Id_Usuario);
-        jsonObject.put("Status", HorasFragment.statusHora);
+        jsonObject.put("Status", HorasReportes.statusHora);
         jsonObject1.put("objNueRelOrdenUsuario", jsonObject);
         MediaType JSON = MediaType.parse("application/json; charset=utf-8");
         final RequestBody body = RequestBody.create(JSON, jsonObject1.toString());
@@ -971,8 +971,8 @@ public class Services {
         jsonObject.put("Impresa", 1);
         jsonObject.put("ListadeArticulos", "");
         jsonObject.put("Obs", DeepConsModel.Obs);
-        jsonObject.put("Status", HorasFragment.statusHora);
-        jsonObject.put("TecnicoCuadrilla", InstalacionFragment.TecSecSelecc);
+        jsonObject.put("Status", HorasReportes.statusHora);
+        jsonObject.put("TecnicoCuadrilla", HorasOrdenes.TecSecSelecc);
         jsonObject.put("Visita1", "");
         jsonObject.put("Visita2", "");
 
@@ -1007,7 +1007,7 @@ public class Services {
         //POST Body Json
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("Clv_orden", clvor);
-        jsonObject.put("horaFin", EjecutarFragment.horaHoy);
+        jsonObject.put("horaFin", EjecutarOrdenes.horaHoy);
         jsonObject.put("horaInicio", "08:00");
         jsonObject.put("opcion", 1);
         MediaType JSON = MediaType.parse("application/json; charset=utf-8");
@@ -1041,7 +1041,7 @@ public class Services {
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("ClvOrden", clvor);
         jsonObject.put("Op", "M");
-        jsonObject.put("Status", HorasFragment.statusHora);
+        jsonObject.put("Status", HorasReportes.statusHora);
         jsonObject.put("Op2", 0);
         MediaType JSON = MediaType.parse("application/json; charset=utf-8");
         final RequestBody body = RequestBody.create(JSON, jsonObject.toString());
@@ -1156,12 +1156,12 @@ public class Services {
         objQuejas.put("IdUsuario", 1);
         objQuejas.put("Observaciones", Obs);
         objQuejas.put("Solucion", solution);
-        objQuejas.put("Status", HorasFragment.statusHora);
+        objQuejas.put("Status", HorasReportes.statusHora);
         objQuejas.put("TecnicoCuadrilla", TecSecSelecc1);
         objQuejas.put("Visita", false);
-        objQuejas.put("Visita1", HorasFragment.reportesselectDate1.getText());
-        objQuejas.put("Visita2", HorasFragment.reportesselectDate2.getText());
-        objQuejas.put("Visita3", HorasFragment.reportesselectDate3.getText());
+        objQuejas.put("Visita1", HorasReportes.reportesselectDate1.getText());
+        objQuejas.put("Visita2", HorasReportes.reportesselectDate2.getText());
+        objQuejas.put("Visita3", HorasReportes.reportesselectDate3.getText());
         objQuejas.put("clvPrioridadQueja", clvP);
         objQuejas.put("clvProblema", Clv_Sol);
         jsonObject.put("objQuejas", objQuejas);
@@ -1228,8 +1228,8 @@ public class Services {
         JSONObject jsonObject = new JSONObject();
         JSONObject jsonObject1 = new JSONObject();
         jsonObject.put("Contrato", DeepConsModel.Contrato);
-        jsonObject.put("Latitud", InstalacionFragment.cordLat.getText());
-        jsonObject.put("Longitud", InstalacionFragment.cordLong.getText());
+        jsonObject.put("Latitud", HorasOrdenes.cordLat.getText());
+        jsonObject.put("Longitud", HorasOrdenes.cordLong.getText());
         jsonObject1.put("ObjCoorCli", jsonObject);
         MediaType JSON = MediaType.parse("application/json; charset=utf-8");
         final RequestBody body = RequestBody.create(JSON, jsonObject1.toString());
@@ -1626,7 +1626,7 @@ public class Services {
             jsonObject.put("catUnidadClave", 0);
             jsonObject.put("Tipo", "");
             jsonObject.put("Articulo", "");
-            jsonObject.put("IdArticulo", Materiales.idArticuloDM);
+            jsonObject.put("IdArticulo", MaterialesOrdenes.idArticuloDM);
             jsonObject1.put("Softv_ObtenTipoMaterialEntity", jsonObject);
         } catch (JSONException e) {
             e.printStackTrace();
@@ -1847,7 +1847,7 @@ public class Services {
             jsonObject.put("catUnidadClave", 0);
             jsonObject.put("Tipo", "");
             jsonObject.put("Articulo", "");
-            jsonObject.put("IdArticulo", MaterialesFragment.idArticuloDMR);
+            jsonObject.put("IdArticulo", MaterialesReportes.idArticuloDMR);
             jsonObject1.put("Softv_ObtenTipoMaterialEntity", jsonObject);
         } catch (JSONException e) {
             e.printStackTrace();

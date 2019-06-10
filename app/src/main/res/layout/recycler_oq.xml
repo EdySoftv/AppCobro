@@ -16,10 +16,11 @@
 
         <TextView
             android:id="@+id/controla"
-            android:layout_width="418dp"
+            android:layout_width="0dp"
             android:layout_height="111dp"
-            tools:layout_editor_absoluteX="-10dp"
-            tools:layout_editor_absoluteY="2dp" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/tv_NContrato"
@@ -57,8 +58,9 @@
             android:text="1025"
             android:textSize="22sp"
             android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@+id/tv_NContrato"
             app:layout_constraintStart_toStartOf="parent"
-            tools:layout_editor_absoluteY="16dp" />
+            app:layout_constraintTop_toTopOf="@+id/tv_NContrato" />
 
         <TextView
             android:id="@+id/tv_estatus"
@@ -85,10 +87,14 @@
 
         <TextView
             android:id="@+id/id_direccion"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="15dp"
             android:layout_marginStart="16dp"
+            android:layout_marginEnd="8dp"
+            android:ellipsize="end"
+            android:maxLines="1"
             app:layout_constraintBottom_toBottomOf="@+id/txt"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/txt"
             app:layout_constraintTop_toTopOf="@+id/txt" />
 

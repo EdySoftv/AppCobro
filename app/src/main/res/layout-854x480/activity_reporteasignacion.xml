@@ -67,7 +67,7 @@
 
         <Button
             android:id="@+id/agregarAparato"
-            android:layout_width="150dp"
+            android:layout_width="130dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
@@ -81,7 +81,7 @@
 
         <Button
             android:id="@+id/guardarAparato"
-            android:layout_width="150dp"
+            android:layout_width="130dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"

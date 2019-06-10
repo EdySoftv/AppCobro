@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Fragments.EjecutarOrdenes">
+
+  <ScrollView
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:layout_marginTop="80dp">
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+      <!--  <android.support.constraint.ConstraintLayout
+           android:id="@+id/ejecutarLay"
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:layout_centerHorizontal="true"
+           android:layout_marginTop="210dp"
+           android:visibility="visible">
+
+           <TextView
+               android:id="@+id/eqwe"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:layout_alignParentStart="true"
+               android:layout_alignParentTop="true"
+               android:layout_marginStart="44dp"
+               android:layout_marginTop="40dp"
+               android:text="@string/estatus_Comando"
+               android:textSize="20dp"
+               android:textStyle="bold" />
+
+           <TextView
+               android:id="@+id/status"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:layout_marginStart="20dp"
+               android:layout_marginTop="40dp"
+               android:layout_toEndOf="@+id/eqwe"
+               android:hint="@string/espera"
+               android:textSize="20dp" />
+
+           <TextView
+               android:id="@+id/zas"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:layout_below="@+id/eqwe"
+               android:layout_centerHorizontal="true"
+               android:layout_marginStart="125dp"
+               android:layout_marginTop="30dp"
+               android:text="@string/resultadoDos"
+               android:textSize="20dp"
+               android:textStyle="bold" />
+
+           <TextView
+               android:id="@+id/msgEjecutarOrd"
+               android:layout_centerHorizontal="true"
+               android:layout_width="247dp"
+               android:layout_height="122dp"
+               android:layout_below="@+id/zas"
+               android:layout_marginStart="70dp"
+               android:layout_marginTop="30dp"
+               android:layout_marginBottom="82dp"
+               android:background="#2598" />
+
+           <Button
+               android:id="@+id/restart"
+               android:layout_width="100dp"
+               android:layout_height="50dp"
+               android:layout_below="@+id/msgEjecutarOrd"
+               android:layout_centerHorizontal="true"
+               android:layout_gravity="center"
+               android:layout_marginTop="0dp"
+               android:background="@drawable/boton"
+               android:backgroundTint="@color/colorPrimary"
+               android:enabled="false"
+               android:text="@string/reiniciar"
+               android:textColor="#000" />
+
+      </android.support.constraint.ConstraintLayout>-->
+
+      <Button
+          android:id="@+id/ejec"
+          android:layout_width="101dp"
+          android:layout_height="wrap_content"
+          android:layout_centerHorizontal="true"
+          android:layout_marginTop="16dp"
+          android:background="@drawable/boton"
+          android:backgroundTint="@color/colorPrimary"
+          android:enabled="true"
+          android:text="@string/ejecutar"
+          android:textColor="#000"
+          app:layout_constraintEnd_toEndOf="@+id/salirEjecutarOrd"
+          app:layout_constraintHorizontal_bias="0.502"
+          app:layout_constraintStart_toStartOf="@+id/salirEjecutarOrd"
+          app:layout_constraintTop_toBottomOf="@+id/firmarOrd" />
+
+      <Button
+          android:id="@+id/salirEjecutarOrd"
+          android:layout_width="101dp"
+          android:layout_height="wrap_content"
+          android:layout_below="@+id/animado9"
+          android:layout_centerHorizontal="true"
+          android:layout_marginStart="8dp"
+          android:layout_marginTop="8dp"
+          android:layout_marginEnd="8dp"
+          android:background="@drawable/boton"
+          android:backgroundTint="@color/colorPrimary"
+          android:text="@string/salir"
+          android:textColor="#000"
+          app:layout_constraintEnd_toEndOf="parent"
+          app:layout_constraintStart_toStartOf="parent"
+          app:layout_constraintTop_toTopOf="parent" />
+      <!--app:layout_constraintTop_toBottomOf="@+id/ejecutarLay" -->
+
+      <Button
+          android:id="@+id/firmarOrd"
+          android:layout_width="101dp"
+          android:layout_height="wrap_content"
+          android:layout_below="@+id/salirEjecutarOrd"
+          android:layout_centerHorizontal="true"
+          android:layout_marginTop="16dp"
+          android:background="@drawable/boton"
+          android:backgroundTint="@color/colorPrimary"
+          android:text="@string/firmar"
+          android:textColor="#000"
+          android:visibility="gone"
+          app:layout_constraintEnd_toEndOf="@+id/salirEjecutarOrd"
+          app:layout_constraintStart_toStartOf="@+id/salirEjecutarOrd"
+          app:layout_constraintTop_toBottomOf="@+id/salirEjecutarOrd" />
+
+    </android.support.constraint.ConstraintLayout>
+  </ScrollView>
+</FrameLayout>

@@ -9,117 +9,139 @@
     tools:context=".Activitys.Orden"
 
     tools:showIn="@layout/app_bar_orden">
-    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+    <ListView
+        android:id="@+id/listorden"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        xmlns:app="http://schemas.android.com/apk/res-auto">
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="100dp"
+        android:backgroundTint="@color/colorPrimary"
+        android:dividerHeight="10dp"
+        android:elevation="80dp"
+        android:paddingLeft="8dp"
+        android:paddingRight="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-        <ProgressBar
-            android:id="@+id/barlogodenes"
-            style="?android:attr/progressBarStyleLarge"
-            android:layout_width="200dp"
-            android:layout_height="200dp"
-            android:visibility="invisible"
-           android:layout_centerHorizontal="true"
-            android:layout_centerVertical="true"
-            />
-        <ListView
-            android:id="@+id/listorden"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_alignParentTop="true"
-            android:layout_marginTop="110dp"
-            android:backgroundTint="@color/colorPrimary"
-            android:dividerHeight="10dp"
-            android:paddingLeft="8dp"
-            android:paddingRight="8dp"
-            android:elevation="80dp"/>
+    <TextView
+        android:id="@+id/textView39"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:text="@string/orden"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@+id/ordsearch"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/orden"
-            android:layout_marginTop="10dp"
-            android:layout_marginStart="60dp"
-            android:textStyle="bold"
-            />
-        <EditText
-            android:id="@+id/ordsearch"
-            android:layout_width="130dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="30dp"
-            android:layout_marginTop="25dp"
-            android:inputType="number" />
+    <EditText
+        android:id="@+id/ordsearch"
+        android:layout_width="130dp"
+        android:layout_height="45dp"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="8dp"
+        android:inputType="number"
+        app:layout_constraintEnd_toStartOf="@+id/borden"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-        <Button
-            android:layout_width="25dp"
-            android:layout_height="25dp"
-            android:gravity="center_vertical"
-            android:layout_marginTop="45dp"
-            android:background="@android:drawable/ic_search_category_default"
-            android:id="@+id/borden"
-            android:layout_marginStart="155dp"
-            android:layout_marginLeft="30dp" />
+    <Button
+        android:id="@+id/borden"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:layout_marginTop="24dp"
+        android:background="@android:drawable/ic_search_category_default"
+        android:gravity="center_vertical"
+        app:layout_constraintStart_toEndOf="@+id/ordsearch"
+        app:layout_constraintTop_toTopOf="parent" />
 
 
-        <EditText
-            android:id="@+id/contsearch"
-            android:layout_width="130dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="200dp"
-            android:layout_marginTop="25dp"
-            android:inputType="text|number" />
+    <EditText
+        android:id="@+id/contsearch"
+        android:layout_width="130dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:inputType="text|number"
+        app:layout_constraintStart_toEndOf="@+id/borden"
+        app:layout_constraintTop_toTopOf="parent" />
 
-        <Button
-            android:id="@+id/bcontrato"
-            android:layout_width="25dp"
-            android:layout_height="25dp"
-            android:layout_marginStart="325dp"
-            android:layout_marginLeft="30dp"
-            android:layout_marginTop="45dp"
-            android:background="@android:drawable/ic_search_category_default"
-            android:gravity="center_vertical" />
+    <Button
+        android:id="@+id/bcontrato"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:layout_marginTop="24dp"
+        android:background="@android:drawable/ic_search_category_default"
+        android:gravity="center_vertical"
+        app:layout_constraintStart_toEndOf="@+id/contsearch"
+        app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/n_Contrato"
-            android:layout_marginTop="10dp"
-            android:layout_marginStart="190dp"
-            android:textStyle="bold"
-            />
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:layout_marginTop="75dp"
-            android:layout_marginStart="10dp"
-            android:text="@string/contrato"
-            android:textSize="18dp"
-            android:textStyle="bold" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:text="@string/n_Contrato"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toStartOf="@+id/bcontrato"
+        app:layout_constraintStart_toEndOf="@+id/borden"
+        app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:layout_marginStart="160dp"
-            android:layout_marginTop="75dp"
-            android:text="@string/n_Orden"
-            android:textSize="18dp"
-            android:textStyle="bold" />
+    <TextView
+        android:id="@+id/textView38"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        android:text="@string/contrato"
+        android:textSize="18dp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/listorden"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.05"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ordsearch" />
+
+    <TextView
+        android:id="@+id/textView40"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:text="@string/n_Orden"
+        android:textSize="18dp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/listorden"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/contsearch" />
 
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_marginTop="75dp"
-            android:layout_marginEnd="24dp"
-            android:text="@string/estatus"
-            android:textSize="18dp"
-            android:textStyle="bold" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:text="@string/estatus"
+        android:textSize="18dp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/listorden"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.94"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/contsearch" />
 
 
-    </RelativeLayout>
 
 </android.support.constraint.ConstraintLayout>

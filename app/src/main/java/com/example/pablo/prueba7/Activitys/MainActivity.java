@@ -20,18 +20,18 @@ import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.pablo.prueba7.Fragments.TrabajosOrdenes;
 import com.example.pablo.prueba7.R;
 import com.example.pablo.prueba7.Request.Request;
-import com.example.pablo.prueba7.Fragments.EjecutarFragment;
-import com.example.pablo.prueba7.Fragments.InstalacionFragment;
-import com.example.pablo.prueba7.Fragments.Materiales;
-import com.example.pablo.prueba7.Fragments.Trabajos;
+import com.example.pablo.prueba7.Fragments.EjecutarOrdenes;
+import com.example.pablo.prueba7.Fragments.HorasOrdenes;
+import com.example.pablo.prueba7.Fragments.MaterialesOrdenes;
 import com.example.pablo.prueba7.sampledata.Util;
 
 import androidx.annotation.RequiresApi;
 
 import static com.example.pablo.prueba7.Adapters.OrdenesAdapter.noOrden;
-import static com.example.pablo.prueba7.Fragments.InstalacionFragment.TecSec;
+import static com.example.pablo.prueba7.Fragments.HorasOrdenes.TecSec;
 
 
 public class MainActivity extends AppCompatActivity implements ActionBar.TabListener, ViewPager.OnPageChangeListener {
@@ -49,7 +49,7 @@ public class MainActivity extends AppCompatActivity implements ActionBar.TabList
         super.onCreate(onSaveInstanceState);
         setRetainInstance(true);
         validar_Permiso();
-        setContentView(R.layout.activity_swipe);
+        setContentView(R.layout.activity_swipe_ordenes);
         info= findViewById(R.id.info);
         layoutAnimado= findViewById(R.id.animado);
         hzScrollView= findViewById(R.id.scv);
@@ -80,7 +80,7 @@ public class MainActivity extends AppCompatActivity implements ActionBar.TabList
                 else{
                     layoutAnimado.setVisibility(View.GONE);
                     hzScrollView.setVisibility(View.GONE);
-                    info.setText("Info");
+                    info.setText("Datos Cliente");
                 }
             }
         });
@@ -130,13 +130,13 @@ public class MainActivity extends AppCompatActivity implements ActionBar.TabList
         public Fragment getItem(int arg0) {
             switch (arg0) {
                 case 0:
-                    return new Trabajos();
+                    return new TrabajosOrdenes();
                 case 1:
-                    return new InstalacionFragment();
+                    return new HorasOrdenes();
                 case 2:
-                    return new Materiales();
+                    return new MaterialesOrdenes();
                 case 3:
-                    return new EjecutarFragment();
+                    return new EjecutarOrdenes();
                 default:
                     return null;
             }
@@ -191,7 +191,7 @@ public class MainActivity extends AppCompatActivity implements ActionBar.TabList
                 if(layoutAnimado.getVisibility()==View.VISIBLE){
                     layoutAnimado.setVisibility(View.GONE);
                     hzScrollView.setVisibility(View.GONE);
-                    info.setText("Info");
+                    info.setText("Datos Cliente");
                 }else{
                     Intent intento = new Intent(MainActivity.this, Orden.class);
                     intento.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);

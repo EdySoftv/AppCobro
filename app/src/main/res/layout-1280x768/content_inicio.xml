@@ -38,18 +38,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/graficaPastel" />
 
-        <ProgressBar
-            android:id="@+id/barloginicio"
-            style="?android:attr/progressBarStyleLarge"
-            android:layout_width="200dp"
-            android:layout_height="200dp"
-            android:visibility="invisible"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.531"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.38" />
 
         <TextView
             android:id="@+id/textView2"
@@ -78,11 +66,12 @@
 
         <TextView
             android:id="@+id/tipoDeTrabajo"
-            android:layout_width="220sp"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
-            android:layout_marginLeft="16dp"
+            android:layout_marginEnd="24dp"
             app:layout_constraintBottom_toBottomOf="@+id/textView16"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/textView16"
             app:layout_constraintTop_toTopOf="@+id/textView16" />
 
@@ -99,10 +88,11 @@
 
         <TextView
             android:id="@+id/contrato"
-            android:layout_width="220sp"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            app:layout_constraintEnd_toEndOf="@+id/tipoDeTrabajo"
+            android:layout_marginEnd="24dp"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@+id/tipoDeTrabajo"
             app:layout_constraintTop_toBottomOf="@+id/tipoDeTrabajo" />
 
@@ -119,10 +109,11 @@
 
         <TextView
             android:id="@+id/hora"
-            android:layout_width="220sp"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            app:layout_constraintEnd_toEndOf="@+id/contrato"
+            android:layout_marginEnd="24dp"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@+id/contrato"
             app:layout_constraintTop_toBottomOf="@+id/contrato" />
 
@@ -161,30 +152,33 @@
 
         <TextView
             android:id="@+id/calle"
-            android:layout_width="220sp"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginEnd="24dp"
             app:layout_constraintBottom_toBottomOf="@+id/textView27"
-            app:layout_constraintEnd_toEndOf="@+id/hora"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@+id/hora"
             app:layout_constraintTop_toTopOf="@+id/textView27" />
 
         <TextView
             android:id="@+id/numero"
-            android:layout_width="220sp"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
+            android:layout_marginEnd="24dp"
             android:layout_marginBottom="8dp"
             app:layout_constraintBottom_toBottomOf="@+id/textView28"
-            app:layout_constraintEnd_toEndOf="@+id/calle"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@+id/calle"
             app:layout_constraintTop_toTopOf="@+id/textView28" />
 
         <TextView
             android:id="@+id/colonia"
-            android:layout_width="220sp"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginEnd="24dp"
             app:layout_constraintBottom_toBottomOf="@+id/textView29"
-            app:layout_constraintEnd_toEndOf="@+id/numero"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@+id/numero"
             app:layout_constraintTop_toTopOf="@+id/textView29" />
 

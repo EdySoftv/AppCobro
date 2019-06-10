@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Fragments.EjecutarReportes">
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <Button
+            android:id="@+id/ejecutarR"
+            android:layout_width="150dp"
+            android:layout_height="59dp"
+            android:layout_alignParentStart="true"
+            android:layout_marginStart="50dp"
+            android:layout_marginTop="200dp"
+            android:background="@drawable/boton"
+            android:backgroundTint="@color/colorPrimary"
+            android:text="@string/ejecutar"
+            android:textColor="#000"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/firmarRep"
+            android:layout_width="150dp"
+            android:layout_height="59dp"
+            android:layout_marginTop="30dp"
+            android:layout_toEndOf="@+id/ejecutarR"
+            android:background="@drawable/boton"
+            android:backgroundTint="@color/colorPrimary"
+            android:enabled="true"
+            android:text="@string/firmar"
+            android:textColor="#000"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/ejecutarR" />
+
+        <Button
+            android:id="@+id/SalirR"
+            android:layout_width="150dp"
+            android:layout_height="59dp"
+            android:layout_below="@+id/ejecutarR"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="200dp"
+            android:layout_marginEnd="50dp"
+            android:background="@drawable/boton"
+            android:backgroundTint="@color/colorPrimary"
+            android:text="@string/salir"
+            android:textColor="#000"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </android.support.constraint.ConstraintLayout>
+    </FrameLayout>

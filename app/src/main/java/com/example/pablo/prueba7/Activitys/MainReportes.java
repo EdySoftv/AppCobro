@@ -16,13 +16,13 @@ import android.widget.TextView;
 
 import com.example.pablo.prueba7.R;
 import com.example.pablo.prueba7.Request.Request;
-import com.example.pablo.prueba7.Fragments.Ejecutar1Fragment;
-import com.example.pablo.prueba7.Fragments.HorasFragment;
-import com.example.pablo.prueba7.Fragments.MaterialesFragment;
-import com.example.pablo.prueba7.Fragments.TrabajosFragment;
+import com.example.pablo.prueba7.Fragments.EjecutarReportes;
+import com.example.pablo.prueba7.Fragments.HorasReportes;
+import com.example.pablo.prueba7.Fragments.MaterialesReportes;
+import com.example.pablo.prueba7.Fragments.TrabajosReportes;
 
-import static com.example.pablo.prueba7.Fragments.HorasFragment.TecSec1;
-import static com.example.pablo.prueba7.Fragments.HorasFragment.tecPosRepo;
+import static com.example.pablo.prueba7.Fragments.HorasReportes.TecSec1;
+import static com.example.pablo.prueba7.Fragments.HorasReportes.tecPosRepo;
 
 public class MainReportes extends AppCompatActivity implements ActionBar.TabListener, ViewPager.OnPageChangeListener {
     private ViewPager mViewPager;
@@ -36,7 +36,7 @@ public class MainReportes extends AppCompatActivity implements ActionBar.TabList
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_reportess);
+        setContentView(R.layout.activity_swipe_reporte);
         info=findViewById(R.id.info);
         layoutAnimado = (RelativeLayout) findViewById(R.id.animado);
         hzScrollView=(ScrollView)findViewById(R.id.scv);
@@ -88,13 +88,13 @@ public class MainReportes extends AppCompatActivity implements ActionBar.TabList
         public Fragment getItem(int arg0) {
             switch (arg0) {
                 case 0:
-                    return new TrabajosFragment();
+                    return new TrabajosReportes();
                 case 1:
-                    return new HorasFragment();
+                    return new HorasReportes();
                 case 2:
-                    return new MaterialesFragment();
+                    return new MaterialesReportes();
                 case 3:
-                    return new Ejecutar1Fragment();
+                    return new EjecutarReportes();
                 default:
                     return null;
             }

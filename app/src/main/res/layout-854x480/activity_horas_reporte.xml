@@ -1,0 +1,260 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".Fragments.HorasReportes">
+    <RelativeLayout
+        android:id="@+id/rb"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="89dp">
+
+        <RadioGroup
+            android:id="@+id/grupo_dias"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:checkedButton="@+id/ejutada1"
+            android:orientation="horizontal">
+
+            <RadioButton
+                android:id="@+id/ejutada1"
+                android:layout_width="82dp"
+                android:layout_height="20dp"
+                android:textSize="@dimen/chico"
+                android:layout_marginStart="80dp"
+                android:text="@string/visita"
+                 />
+
+            <RadioButton
+                android:id="@+id/visitada1"
+                android:layout_width="82dp"
+                android:checked="true"
+                android:textSize="@dimen/chico"
+                android:layout_height="20dp"
+                android:text="@string/ejecutada"
+                 />
+        </RadioGroup>
+    </RelativeLayout>
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="120dp"
+        android:verticalScrollbarPosition="defaultPosition"
+        android:visibility="visible">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="375dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentBottom="true">
+
+            <RelativeLayout
+                android:id="@+id/RE1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_marginStart="0dp"
+                android:visibility="visible"
+                tools:ignore="NotSibling">
+
+             <!--   <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="18dp"
+                    android:text="@string/ejecucion"
+                    android:textSize="20dp" />
+
+                <EditText
+                    android:id="@+id/ejecureal1"
+                    android:layout_width="224dp"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginStart="136dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginEnd="1dp"
+                    android:focusable="false"
+                    android:hint="@string/fechaformato"
+                    android:inputType="date"
+                    android:textSize="20dp" />-->
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/RV1"
+                android:layout_width="match_parent"
+                android:layout_height="193dp"
+                android:layout_below="@+id/RE1"
+                android:visibility="gone">
+
+                <TextView
+                    android:id="@+id/qwe"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginTop="18dp"
+                    android:text="@string/visita1"
+                    android:textSize="22sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/visit2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/qwe"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginTop="27dp"
+                    android:text="@string/visita2"
+                    android:textSize="22sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/asd"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/visit2"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginTop="27dp"
+                    android:text="@string/visita3"
+                    android:textSize="22sp"
+                    android:textStyle="bold" />
+
+                <EditText
+                    android:id="@+id/visita11"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginStart="65dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="10dp"
+                    android:layout_toEndOf="@+id/qwe"
+                    android:focusable="false"
+                    android:hint="@string/fechaformato"
+                    android:textSize="20dp" />
+
+                <EditText
+                    android:id="@+id/visita21"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/visita11"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginStart="65dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="10dp"
+                    android:layout_toEndOf="@+id/visit2"
+                    android:enabled="false"
+                    android:focusable="false"
+                    android:hint="@string/fechaformato"
+                    android:textSize="20dp" />
+
+                <EditText
+                    android:id="@+id/visita31"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/visita21"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginStart="65dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="10dp"
+                    android:layout_toEndOf="@+id/asd"
+                    android:enabled="false"
+                    android:focusable="false"
+                    android:hint="@string/fechaformato"
+                    android:textSize="20dp" />
+            </RelativeLayout>
+
+
+                <!-- <TextView
+                     android:id="@+id/horabi"
+                     android:layout_width="wrap_content"
+                     android:layout_height="wrap_content"
+                     android:layout_alignParentStart="true"
+                     android:layout_marginStart="10dp"
+                     android:hint="@string/formatoHora"
+
+                     android:text="@string/horai"
+                     android:textSize="20dp" />
+                 <TextView
+                     android:id="@+id/horabf"
+                     android:layout_width="wrap_content"
+                     android:layout_height="wrap_content"
+                     android:layout_alignParentStart="true"
+                     android:layout_alignParentBottom="true"
+                     android:layout_marginStart="10dp"
+                     android:layout_marginTop="50dp"
+                     android:layout_marginBottom="20dp"
+                     android:text="@string/horaf"
+                     android:hint="@string/formatoHora"
+                     android:textSize="20dp" />
+
+                 <EditText
+                     android:id="@+id/horaf11"
+                     android:layout_width="150dp"
+                     android:layout_height="44dp"
+                     android:layout_alignParentStart="true"
+                     android:layout_alignParentTop="true"
+                     android:layout_alignParentEnd="true"
+                     android:layout_alignParentBottom="true"
+                     android:layout_marginStart="135dp"
+                     android:layout_marginTop="52dp"
+                     android:layout_marginEnd="91dp"
+                     android:layout_marginBottom="9dp"
+                     android:focusable="false"
+                     android:hint="00:00"
+                     android:textSize="20dp" />
+
+                 <EditText
+                     android:id="@+id/horai11"
+                     android:layout_width="118dp"
+                     android:layout_height="44dp"
+                     android:layout_alignParentStart="true"
+                     android:layout_alignParentTop="true"
+                     android:layout_alignParentBottom="true"
+                     android:layout_marginStart="136dp"
+                     android:layout_marginTop="0dp"
+                     android:layout_marginBottom="61dp"
+                     android:focusable="false"
+                     android:hint="00:00"
+                     android:textSize="20dp" />-->
+
+
+            <TextView
+                android:id="@+id/textView3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/RV1"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="50dp"
+                android:text="@string/tecnico_Sec"
+                android:textSize="@dimen/mediano"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <Spinner
+                android:id="@+id/tecnicosec1"
+                android:layout_width="@dimen/spinnerS"
+                android:layout_height="@dimen/spinnerA"
+                android:layout_below="@+id/textView3"
+                android:layout_alignParentStart="true"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="7dp"
+                android:background="@drawable/disenio_spinner"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView3"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </RelativeLayout>
+    </ScrollView>
+</FrameLayout>

@@ -38,17 +38,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/graficaPastel" />
 
-        <ProgressBar
-            android:id="@+id/barloginicio"
-            style="?android:attr/progressBarStyleLarge"
-            android:layout_width="150dp"
-            android:layout_height="150dp"
-            android:visibility="invisible"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.308" />
 
         <TextView
             android:id="@+id/textView2"
@@ -84,7 +73,6 @@
             android:layout_marginStart="16dp"
             android:layout_marginLeft="16dp"
             android:textSize="@dimen/chico"
-
             app:layout_constraintBottom_toBottomOf="@+id/textView16"
             app:layout_constraintStart_toEndOf="@+id/textView16"
             app:layout_constraintTop_toTopOf="@+id/textView16" />

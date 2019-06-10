@@ -21,15 +21,15 @@ import com.example.pablo.prueba7.Activitys.CambioAparato;
 import com.example.pablo.prueba7.Activitys.ReporteAsignacion;
 import com.example.pablo.prueba7.Activitys.Reportes;
 import com.example.pablo.prueba7.Adapters.TablaAdapter;
-import com.example.pablo.prueba7.Fragments.EjecutarFragment;
+import com.example.pablo.prueba7.Fragments.EjecutarOrdenes;
 import com.example.pablo.prueba7.Activitys.ExtensionesAdi;
-import com.example.pablo.prueba7.Fragments.HorasFragment;
+import com.example.pablo.prueba7.Fragments.HorasReportes;
 
 
 import com.example.pablo.prueba7.Activitys.Inicio;
-import com.example.pablo.prueba7.Fragments.InstalacionFragment;
-import com.example.pablo.prueba7.Fragments.Materiales;
-import com.example.pablo.prueba7.Fragments.MaterialesFragment;
+import com.example.pablo.prueba7.Fragments.HorasOrdenes;
+import com.example.pablo.prueba7.Fragments.MaterialesOrdenes;
+import com.example.pablo.prueba7.Fragments.MaterialesReportes;
 import com.example.pablo.prueba7.Listas.Array;
 import com.example.pablo.prueba7.Listas.Example;
 import com.example.pablo.prueba7.Listas.Example1;
@@ -105,7 +105,7 @@ import com.example.pablo.prueba7.Modelos.TipoMaterialModel;
 import com.example.pablo.prueba7.Modelos.UserModel;
 import com.example.pablo.prueba7.Modelos.mediosPregunta;
 import com.example.pablo.prueba7.Services.Services;
-import com.example.pablo.prueba7.Fragments.TrabajosFragment;
+import com.example.pablo.prueba7.Fragments.TrabajosReportes;
 import com.example.pablo.prueba7.Activitys.ServiciosAInstalar;
 import com.example.pablo.prueba7.sampledata.BarraCargar;
 import com.example.pablo.prueba7.sampledata.Service;
@@ -136,23 +136,23 @@ import static com.example.pablo.prueba7.Activitys.AsignarAparato.constraintLayou
 import static com.example.pablo.prueba7.Activitys.AsignarAparato.idArticuloasignado;
 import static com.example.pablo.prueba7.Activitys.AsignarAparato.jsonArrayMAC;
 import static com.example.pablo.prueba7.Adapters.TrabajosAdapter.dialogTrabajos;
-import static com.example.pablo.prueba7.Fragments.EjecutarFragment.dialogEjecutar;
-import static com.example.pablo.prueba7.Fragments.HorasFragment.TecSec1;
-import static com.example.pablo.prueba7.Fragments.HorasFragment.tecPosRepo;
-import static com.example.pablo.prueba7.Fragments.InstalacionFragment.TecSec;
-import static com.example.pablo.prueba7.Fragments.InstalacionFragment.posTec;
-import static com.example.pablo.prueba7.Fragments.Materiales.clasificacionMat;
-import static com.example.pablo.prueba7.Fragments.Materiales.descripcionMat;
-import static com.example.pablo.prueba7.Fragments.Materiales.posClasMat;
-import static com.example.pablo.prueba7.Fragments.Materiales.posDescMat;
-import static com.example.pablo.prueba7.Fragments.Materiales.posExtMat;
-import static com.example.pablo.prueba7.Fragments.Materiales.spinnerExtMat;
-import static com.example.pablo.prueba7.Fragments.Trabajos.adaptertrabajos;
-import static com.example.pablo.prueba7.Fragments.Trabajos.trabajos;
-import static com.example.pablo.prueba7.Fragments.TrabajosFragment.posSolucionRepo;
+import static com.example.pablo.prueba7.Fragments.EjecutarOrdenes.dialogEjecutar;
+import static com.example.pablo.prueba7.Fragments.HorasReportes.TecSec1;
+import static com.example.pablo.prueba7.Fragments.HorasReportes.tecPosRepo;
+import static com.example.pablo.prueba7.Fragments.HorasOrdenes.TecSec;
+import static com.example.pablo.prueba7.Fragments.HorasOrdenes.posTec;
+import static com.example.pablo.prueba7.Fragments.MaterialesOrdenes.clasificacionMat;
+import static com.example.pablo.prueba7.Fragments.MaterialesOrdenes.descripcionMat;
+import static com.example.pablo.prueba7.Fragments.MaterialesOrdenes.posClasMat;
+import static com.example.pablo.prueba7.Fragments.MaterialesOrdenes.posDescMat;
+import static com.example.pablo.prueba7.Fragments.MaterialesOrdenes.posExtMat;
+import static com.example.pablo.prueba7.Fragments.MaterialesOrdenes.spinnerExtMat;
+import static com.example.pablo.prueba7.Fragments.TrabajosOrdenes.adaptertrabajos;
+import static com.example.pablo.prueba7.Fragments.TrabajosOrdenes.trabajos;
+import static com.example.pablo.prueba7.Fragments.TrabajosReportes.posSolucionRepo;
 import static com.example.pablo.prueba7.Listas.Array.Asigna;
 import static com.example.pablo.prueba7.Listas.Array.Asigna1;
-import static com.example.pablo.prueba7.Fragments.TrabajosFragment.solucion;
+import static com.example.pablo.prueba7.Fragments.TrabajosReportes.solucion;
 import static java.util.Arrays.asList;
 
 public class Request extends AppCompatActivity {
@@ -838,7 +838,7 @@ public class Request extends AppCompatActivity {
                         TecSec.setAdapter(adapterTecSec);
                         TecSec.setSelection(posTec);
 
-                        InstalacionFragment.Obs.setText(String.valueOf(DeepConsModel.Obs));
+                        HorasOrdenes.Obs.setText(String.valueOf(DeepConsModel.Obs));
                     }
                 } else {
                     Toast.makeText(context, "Error al conseguir lista de técnicos secundarios", Toast.LENGTH_LONG).show();
@@ -1454,10 +1454,10 @@ public class Request extends AppCompatActivity {
                             Obs = dat.get(i).observaciones;
                             clvP = dat.get(i).clvPrioridadQueja;
                             tecC = dat.get(i).tecnicoCuadrilla;
-                            TrabajosFragment.prioridad.setText(String.valueOf(dat.get(i).getPrioridad()));
-                            TrabajosFragment.clasific.setText(String.valueOf(dat.get(i).getClasificacionProblema()));
-                            TrabajosFragment.desc.setText(String.valueOf(dat.get(i).getObservaciones()));
-                            TrabajosFragment.problm.setText(String.valueOf(dat.get(i).getProblema()));
+                            TrabajosReportes.prioridad.setText(String.valueOf(dat.get(i).getPrioridad()));
+                            TrabajosReportes.clasific.setText(String.valueOf(dat.get(i).getClasificacionProblema()));
+                            TrabajosReportes.desc.setText(String.valueOf(dat.get(i).getObservaciones()));
+                            TrabajosReportes.problm.setText(String.valueOf(dat.get(i).getProblema()));
                         }
                     }
                 }
@@ -1634,7 +1634,7 @@ public class Request extends AppCompatActivity {
 
                         dialogEjecutar.dismiss();
                         Toast.makeText(context, "Error" + string1, Toast.LENGTH_LONG).show();
-                        EjecutarFragment.eject.setEnabled(true);
+                        EjecutarOrdenes.eject.setEnabled(true);
                     }
                 }
             }
@@ -1666,7 +1666,7 @@ public class Request extends AppCompatActivity {
                         getAddRelOrdUsu(context, jsonObject1);
                     } else {
                         dialogEjecutar.dismiss();
-                        EjecutarFragment.eject.setEnabled(true);
+                        EjecutarOrdenes.eject.setEnabled(true);
                         Toast.makeText(context, "Error" + checa.Error, Toast.LENGTH_LONG).show();
                     }
                 }
@@ -1691,18 +1691,18 @@ public class Request extends AppCompatActivity {
             @Override
             public void onResponse(Call<JsonObject> call, Response<JsonObject> response1) {
                 if (response1.code() == 200) {
-                    if (HorasFragment.statusHora.equals("E")) {
+                    if (HorasReportes.statusHora.equals("E")) {
                         System.out.println("ENTRAAAAAAA  E");
                         getDeepMODORDSER(context);
                     }
-                    if (HorasFragment.statusHora.equals("V")) {
+                    if (HorasReportes.statusHora.equals("V")) {
                         System.out.println("ENTRAAAAAAA  V");
                         getDeepMODORDSERV(context, jsonObject);
                     }
                 } else {
                     Toast.makeText(context, "Error, aparatos no enviados", Toast.LENGTH_SHORT);
                     dialogEjecutar.dismiss();
-                    EjecutarFragment.eject.setEnabled(true);
+                    EjecutarOrdenes.eject.setEnabled(true);
                 }
             }
 
@@ -1730,7 +1730,7 @@ public class Request extends AppCompatActivity {
                 } else {
                     Toast.makeText(context, "Error, aparatos no enviados", Toast.LENGTH_SHORT);
                     dialogEjecutar.dismiss();
-                    EjecutarFragment.eject.setEnabled(true);
+                    EjecutarOrdenes.eject.setEnabled(true);
                 }
             }
 
@@ -1752,7 +1752,7 @@ public class Request extends AppCompatActivity {
                 } else {
                     Toast.makeText(context, "Error, aparatos no enviados", Toast.LENGTH_SHORT);
                     dialogEjecutar.dismiss();
-                    EjecutarFragment.eject.setEnabled(true);
+                    EjecutarOrdenes.eject.setEnabled(true);
                 }
             }
 
@@ -1779,7 +1779,7 @@ public class Request extends AppCompatActivity {
                 } else {
                     dialogEjecutar.dismiss();
                     Toast.makeText(context, "Error, aparatos no enviados", Toast.LENGTH_SHORT);
-                    EjecutarFragment.eject.setEnabled(true);
+                    EjecutarOrdenes.eject.setEnabled(true);
                 }
             }
 
@@ -1807,7 +1807,7 @@ public class Request extends AppCompatActivity {
                 } else {
                     dialogEjecutar.dismiss();
                     Toast.makeText(context, "Error, aparatos no enviados", Toast.LENGTH_SHORT);
-                    EjecutarFragment.eject.setEnabled(true);
+                    EjecutarOrdenes.eject.setEnabled(true);
                 }
             }
 
@@ -1835,7 +1835,7 @@ public class Request extends AppCompatActivity {
                         Iterator<List<GetBUSCADetOrdSerListResult>> itData = Array.dataTrabajos.iterator();
                         List<GetBUSCADetOrdSerListResult> dat = itData.next();
 
-                        if (HorasFragment.statusHora.equals("E")) {
+                        if (HorasReportes.statusHora.equals("E")) {
                             for (int a = 0; a < dat.size(); a++) {
                                 if (dat.get(a).getClvTrabajo() == 1270 || dat.get(a).getClvTrabajo() == 1271 || dat.get(a).getClvTrabajo() == 1272) {
                                     IS = 1;
@@ -1852,7 +1852,7 @@ public class Request extends AppCompatActivity {
                                 context.startActivity(intent);
                             }
                         }
-                        if (HorasFragment.statusHora.equals("V")) {
+                        if (HorasReportes.statusHora.equals("V")) {
                             dialogEjecutar.dismiss();
                             Toast.makeText(context, "Se ha ejecutado correctamente", Toast.LENGTH_LONG).show();
                             Intent intent = new Intent(context, Orden.class);
@@ -1864,7 +1864,7 @@ public class Request extends AppCompatActivity {
                     }
                 } else {
                     Toast.makeText(context, "Error, aparatos no enviados", Toast.LENGTH_SHORT);
-                    EjecutarFragment.eject.setEnabled(true);
+                    EjecutarOrdenes.eject.setEnabled(true);
                     dialogEjecutar.dismiss();
                 }
             }
@@ -1989,7 +1989,7 @@ public class Request extends AppCompatActivity {
                 } else {
                     Toast.makeText(context, "Error, aparatos no enviados", Toast.LENGTH_SHORT);
                     dialogEjecutar.dismiss();
-                    EjecutarFragment.eject.setEnabled(true);
+                    EjecutarOrdenes.eject.setEnabled(true);
                 }
             }
 
@@ -2252,7 +2252,7 @@ public class Request extends AppCompatActivity {
 
                     }
                     ArrayAdapter arrayAdapter = new ArrayAdapter(context, android.R.layout.simple_list_item_1, array.descripcionArtBit);
-                    Materiales.clasificacionMat.setAdapter(arrayAdapter);
+                    MaterialesOrdenes.clasificacionMat.setAdapter(arrayAdapter);
                     clasificacionMat.setSelection(posClasMat);
 
                 }
@@ -2274,7 +2274,7 @@ public class Request extends AppCompatActivity {
             @Override
             public void onResponse(Call<JSONLlenaExtenciones> call, Response<JSONLlenaExtenciones> response1) {
                 if (response1.code() == 200) {
-                    Materiales.extMat.setVisibility(View.VISIBLE);
+                    MaterialesOrdenes.extMat.setVisibility(View.VISIBLE);
                     array.descripcionExt.clear();
                     array.descripcionExt.add(0, "---Seleccionar---");
                     int j = 1;
@@ -2290,7 +2290,7 @@ public class Request extends AppCompatActivity {
                     }
                     try {
                         ArrayAdapter arrayAdapter = new ArrayAdapter(context, android.R.layout.simple_list_item_1, array.descripcionExt);
-                        Materiales.spinnerExtMat.setAdapter(arrayAdapter);
+                        MaterialesOrdenes.spinnerExtMat.setAdapter(arrayAdapter);
                         extencionesMat = true;
                         spinnerExtMat.setSelection(posExtMat);
                     } catch (Exception e) {
@@ -2320,10 +2320,10 @@ public class Request extends AppCompatActivity {
                             userJson.get("Tipo").getAsString()
                     );
                     if (user.Tipo.equals("Piezas")) {
-                        Materiales.piezasMat.setVisibility(View.VISIBLE);
+                        MaterialesOrdenes.piezasMat.setVisibility(View.VISIBLE);
                         pieza = true;
                     } else {
-                        Materiales.metrosMat.setVisibility(View.VISIBLE);
+                        MaterialesOrdenes.metrosMat.setVisibility(View.VISIBLE);
                         pieza = false;
                     }
                 }
@@ -2392,7 +2392,7 @@ public class Request extends AppCompatActivity {
         call.enqueue(new Callback<JSONPreDescarga>() {
             @Override
             public void onResponse(Call<JSONPreDescarga> call, Response<JSONPreDescarga> response) {
-                final TablaAdapter tablaAdapter = new TablaAdapter(activity, Materiales.tabla);
+                final TablaAdapter tablaAdapter = new TablaAdapter(activity, MaterialesOrdenes.tabla);
                 try {
                     tablaAdapter.eliminarFila(1);
                 } catch (Exception e) {
@@ -2416,8 +2416,8 @@ public class Request extends AppCompatActivity {
                         }
                     }
                     Log.d("asd",Array.listaTabla.toString());
-                    Materiales.scrollViewM.setVisibility(View.VISIBLE);
-                    Materiales.tabla.setVisibility(View.VISIBLE);
+                    MaterialesOrdenes.scrollViewM.setVisibility(View.VISIBLE);
+                    MaterialesOrdenes.tabla.setVisibility(View.VISIBLE);
                     tablaAdapter.agregarFilaTabla(Array.listaTabla);
                 }
             }
@@ -2457,7 +2457,7 @@ public class Request extends AppCompatActivity {
 
                     }
                     ArrayAdapter arrayAdapter = new ArrayAdapter(context, android.R.layout.simple_list_item_1, array.descripcionArtBit);
-                    MaterialesFragment.clasificacionMatR.setAdapter(arrayAdapter);
+                    MaterialesReportes.clasificacionMatR.setAdapter(arrayAdapter);
                 }
             }
 
@@ -2482,10 +2482,10 @@ public class Request extends AppCompatActivity {
                             userJson.get("Tipo").getAsString()
                     );
                     if (user.Tipo.equals("Piezas")) {
-                        MaterialesFragment.piezasMatR.setVisibility(View.VISIBLE);
+                        MaterialesReportes.piezasMatR.setVisibility(View.VISIBLE);
                         pieza = true;
                     } else {
-                        MaterialesFragment.metrosMatR.setVisibility(View.VISIBLE);
+                        MaterialesReportes.metrosMatR.setVisibility(View.VISIBLE);
                         pieza = false;
                     }
                 }
@@ -2554,7 +2554,7 @@ public class Request extends AppCompatActivity {
         call.enqueue(new Callback<JSONPreDescarga>() {
             @Override
             public void onResponse(Call<JSONPreDescarga> call, Response<JSONPreDescarga> response) {
-                final TablaAdapter tablaAdapter = new TablaAdapter(activity, Materiales.tabla);
+                final TablaAdapter tablaAdapter = new TablaAdapter(activity, MaterialesOrdenes.tabla);
                 try {
                     tablaAdapter.eliminarFila(1);
                 } catch (Exception e) {
@@ -2578,8 +2578,8 @@ public class Request extends AppCompatActivity {
 
                         }
                     }
-                    MaterialesFragment.horizontalScrollViewR.setVisibility(View.VISIBLE);
-                    MaterialesFragment.tablaR.setVisibility(View.VISIBLE);
+                    MaterialesReportes.horizontalScrollViewR.setVisibility(View.VISIBLE);
+                    MaterialesReportes.tablaR.setVisibility(View.VISIBLE);
                     tablaAdapter.agregarFilaTabla(Array.listaTabla);
                 }
             }

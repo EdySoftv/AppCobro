@@ -1,0 +1,253 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:visibility="visible">
+    <android.support.v4.view.ViewPager xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/pager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="0dp"></android.support.v4.view.ViewPager>
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/constraintLayout7"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/textView53"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="8dp"
+            android:text="@string/tecnicoDos"
+            android:textColor="#000"
+            app:layout_constraintStart_toEndOf="@+id/info"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tecnico1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="32dp"
+            android:layout_marginEnd="8dp"
+            android:text="---"
+            app:layout_constraintBottom_toBottomOf="@+id/textView53"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/textView53"
+            app:layout_constraintTop_toTopOf="@+id/textView53" />
+
+        <Button
+            android:id="@+id/info"
+            android:layout_width="80dp"
+            android:layout_height="35dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/boton"
+            android:text="@string/datos_Cliente"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/textView54"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="16dp"
+            android:text="@string/contratoDos"
+            android:textColor="#000"
+            app:layout_constraintEnd_toEndOf="@+id/textView53"
+            app:layout_constraintStart_toStartOf="@+id/textView53"
+            app:layout_constraintTop_toBottomOf="@+id/textView53" />
+
+        <TextView
+            android:id="@+id/contrato1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="32dp"
+            android:layout_marginEnd="8dp"
+            android:hint="---"
+            app:layout_constraintBottom_toBottomOf="@+id/textView54"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/textView53"
+            app:layout_constraintTop_toTopOf="@+id/textView54" />
+    </android.support.constraint.ConstraintLayout>
+
+    <ScrollView
+        android:id="@+id/scv"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
+        android:background="@drawable/contorno"
+        android:verticalScrollbarPosition="defaultPosition"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="@+id/pager"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout7">
+
+        <android.support.constraint.ConstraintLayout
+            android:id="@+id/animado"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignParentTop="true"
+            android:background="@drawable/contorno"
+            android:backgroundTint="@color/colorPrimary"
+            android:visibility="gone">
+
+            <TextView
+                android:id="@+id/textView55"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginTop="8dp"
+                android:text="@string/info_Usuario"
+                android:textSize="20dp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/textView56"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:text="@string/ciudadDos"
+                android:textSize="20dp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView55" />
+
+            <TextView
+                android:id="@+id/infoempresa1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="10dp"
+                android:textSize="20dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView56" />
+
+            <TextView
+                android:id="@+id/textView57"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginTop="8dp"
+                android:text="@string/nombreDos"
+                android:textSize="20dp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="@+id/textView55"
+                app:layout_constraintStart_toStartOf="@+id/textView55"
+                app:layout_constraintTop_toBottomOf="@+id/infoempresa1" />
+
+            <TextView
+                android:id="@+id/infonombre1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="10dp"
+                android:hint="---"
+                android:textSize="20dp"
+                app:layout_constraintEnd_toEndOf="@+id/textView55"
+                app:layout_constraintStart_toStartOf="@+id/textView55"
+                app:layout_constraintTop_toBottomOf="@+id/textView57" />
+
+            <TextView
+                android:id="@+id/textView58"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginTop="8dp"
+                android:text="@string/direccionDos"
+                android:textSize="20dp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="@+id/textView55"
+                app:layout_constraintStart_toStartOf="@+id/textView55"
+                app:layout_constraintTop_toBottomOf="@+id/infonombre1" />
+
+            <TextView
+                android:id="@+id/infodireccion1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="10dp"
+                android:text="---"
+                android:textSize="20dp"
+                app:layout_constraintEnd_toEndOf="@+id/textView55"
+                app:layout_constraintStart_toStartOf="@+id/textView55"
+                app:layout_constraintTop_toBottomOf="@+id/textView58" />
+
+            <TextView
+                android:id="@+id/textView59"
+                android:layout_width="wrap_content"
+                android:layout_height="36dp"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginTop="8dp"
+                android:text="@string/servicios_Asignados"
+                android:textSize="20dp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="@+id/textView55"
+                app:layout_constraintStart_toStartOf="@+id/textView55"
+                app:layout_constraintTop_toBottomOf="@+id/infodireccion1" />
+
+            <TextView
+                android:id="@+id/infoservicios1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="10dp"
+                android:text="---"
+                android:textSize="20dp"
+                app:layout_constraintEnd_toEndOf="@+id/textView55"
+                app:layout_constraintStart_toStartOf="@+id/textView55"
+                app:layout_constraintTop_toBottomOf="@+id/textView59" />
+        </android.support.constraint.ConstraintLayout>
+    </ScrollView>
+</android.support.constraint.ConstraintLayout>

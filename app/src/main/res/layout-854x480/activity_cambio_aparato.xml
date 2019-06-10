@@ -18,7 +18,7 @@
             android:layout_height="match_parent">
 
             <include
-                android:id="@+id/include3"
+                android:id="@+id/includeCambioAparato"
                 layout="@layout/toolbar"></include>
 
             <android.support.constraint.ConstraintLayout
@@ -28,7 +28,7 @@
                 android:layout_marginTop="8dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/include3">
+                app:layout_constraintTop_toBottomOf="@+id/includeCambioAparato">
 
                 <TextView
                     android:id="@+id/qwe"
@@ -191,32 +191,32 @@
 
                 <Button
                     android:id="@+id/uno"
-                    android:layout_width="@dimen/botonChicoL"
-                    android:layout_height="@dimen/botonChicoA"
+                    android:layout_width="100dp"
+                    android:layout_height="50dp"
                     android:layout_below="@+id/aa"
                     android:layout_alignParentStart="true"
-                    android:layout_marginStart="24dp"
+                    android:layout_marginStart="32dp"
                     android:layout_marginTop="24dp"
-                    android:textColor="#000"
                     android:background="@drawable/boton"
                     android:backgroundTint="@color/colorPrimary"
                     android:text="@string/aceptar"
+                    android:textColor="#000"
                     android:textSize="@dimen/mediano"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/constraintLayout" />
 
                 <Button
                     android:id="@+id/dos"
-                    android:layout_width="@dimen/botonChicoL"
-                    android:layout_height="@dimen/botonChicoA"
+                    android:layout_width="100dp"
+                    android:layout_height="50dp"
                     android:layout_below="@+id/aa"
                     android:layout_marginTop="24dp"
-                    android:layout_marginEnd="24dp"
+                    android:layout_marginEnd="32dp"
                     android:layout_toEndOf="@+id/uno"
-                    android:textColor="#000"
                     android:background="@drawable/boton"
                     android:backgroundTint="@color/colorPrimary"
                     android:text="@string/Regresar"
+                    android:textColor="#000"
                     android:textSize="@dimen/mediano"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/constraintLayout" />

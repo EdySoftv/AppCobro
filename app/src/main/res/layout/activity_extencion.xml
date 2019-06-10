@@ -5,14 +5,14 @@
     android:layout_height="match_parent">
 
     <include
-        android:id="@+id/include4"
+        android:id="@+id/includeExtencion"
         layout="@layout/toolbar"
         tools:layout_editor_absoluteX="16dp"
         tools:layout_editor_absoluteY="84dp"></include>
 
     <TextView
         android:id="@+id/qwe"
-        android:layout_width="246dp"
+        android:layout_width="wrap_content"
         android:layout_height="30dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
@@ -22,7 +22,7 @@
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/include4" />
+        app:layout_constraintTop_toBottomOf="@+id/includeExtencion" />
 
     <TextView
         android:id="@+id/asd"
@@ -55,7 +55,7 @@
 
     <Button
         android:id="@+id/extencionAceptar"
-        android:layout_width="@dimen/botonMedianoL"
+        android:layout_width="125dp"
         android:layout_height="@dimen/botonMedianoA"
         android:layout_below="@+id/txtExtencion"
         android:layout_alignParentStart="true"
@@ -71,7 +71,7 @@
 
     <Button
         android:id="@+id/extencionSalir"
-        android:layout_width="@dimen/botonMedianoL"
+        android:layout_width="125dp"
         android:layout_height="@dimen/botonMedianoA"
         android:layout_below="@+id/txtExtencion"
         android:layout_marginTop="32dp"
