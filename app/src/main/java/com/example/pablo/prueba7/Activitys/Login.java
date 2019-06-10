@@ -15,10 +15,13 @@ import android.support.v4.app.NotificationCompat;
 import android.support.v4.app.NotificationManagerCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
+import android.text.InputType;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -41,6 +44,7 @@ public class Login extends AppCompatActivity {
     public final static int NOTIFICACION_ID = 0;
     public static TextView clave;
     public static ProgressDialog dialogLogin;
+    public static ImageButton viewPassword;
 BarraCargar barraCargar = new BarraCargar();
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -50,10 +54,26 @@ BarraCargar barraCargar = new BarraCargar();
         contraseña = (EditText) findViewById(R.id.contrasenia);
         entrar = (Button)findViewById(R.id.btnLogin);
         progressBar = findViewById(R.id.barlog);
+        viewPassword = (ImageButton) findViewById(R.id.viewPassword);
         setTitle(null);
         dialogLogin= new BarraCargar().showDialog(this);
 
         //Log.d("asd", FirebaseInstanceId.getInstance().getToken());
+
+        viewPassword.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                switch (event.getAction()){
+                    case MotionEvent.ACTION_DOWN:
+                        contraseña.setInputType(InputType.TYPE_CLASS_TEXT);
+                        break;
+                    case MotionEvent.ACTION_UP:
+                        contraseña.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
+                }
+                return false;
+            }
+        });
+
 
         entrar.setOnClickListener(new View.OnClickListener() {
             @Override
