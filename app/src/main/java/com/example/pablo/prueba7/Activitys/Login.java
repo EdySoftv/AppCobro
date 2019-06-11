@@ -38,7 +38,6 @@ public class Login extends AppCompatActivity {
     public static Button entrar;
     private String user;
     public static String enco;
-    public static ProgressBar progressBar;
     private Request request = new Request();
     public final static String CHANNEL_ID = "NOTIFICACION";
     public final static int NOTIFICACION_ID = 0;
@@ -53,7 +52,7 @@ BarraCargar barraCargar = new BarraCargar();
         usurio = (EditText) findViewById(R.id.usuario);
         contraseña = (EditText) findViewById(R.id.contrasenia);
         entrar = (Button)findViewById(R.id.btnLogin);
-        progressBar = findViewById(R.id.barlog);
+
         viewPassword = (ImageButton) findViewById(R.id.viewPassword);
         setTitle(null);
         dialogLogin= new BarraCargar().showDialog(this);
@@ -111,29 +110,7 @@ dialogLogin.show();
     Util.editor.commit();
 }
     //Notificaciones
-    public void noti(){
-        createNotificationChannel();
-        createNotification();
-    }
-    public void createNotificationChannel(){
-        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
-            CharSequence name = "Noticacion";
-            NotificationChannel notificationChannel = new NotificationChannel(CHANNEL_ID, name, NotificationManager.IMPORTANCE_DEFAULT);
-            NotificationManager notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
-            notificationManager.createNotificationChannel(notificationChannel);
-        }
-    }
-    public void createNotification(){
-        NotificationCompat.Builder builder = new NotificationCompat.Builder(getApplicationContext(), CHANNEL_ID);
-        builder.setSmallIcon(R.drawable.ic_menu_send);
-        builder.setContentTitle("SofTv");
-        builder.setContentText("Nueva Ordenn de Servicio");
-        builder.setPriority(NotificationCompat.PRIORITY_HIGH);
-        builder.setDefaults(Notification.DEFAULT_SOUND);
-        NotificationManagerCompat notificationManagerCompat = NotificationManagerCompat.from(getApplicationContext());
-        notificationManagerCompat.notify(NOTIFICACION_ID, builder.build());
 
-    }
     //Metodo para hacer detener el codigo
     public static void esperar(int segundos){
         try {

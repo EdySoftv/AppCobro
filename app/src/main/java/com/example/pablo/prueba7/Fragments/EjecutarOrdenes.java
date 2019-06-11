@@ -63,7 +63,7 @@ public class EjecutarOrdenes extends Fragment {
         //reiniciar = view.findViewById(R.id.restart);
         eject = view.findViewById(R.id.ejec);
        // msgEjecutarOrd = view.findViewById(R.id.msgEjecutarOrd);
-        ejecutar = view.findViewById(R.id.ejecutarLay);
+        //ejecutar = view.findViewById(R.id.ejecutarLay);
         firmar = view.findViewById(R.id.firmarOrd);
 //        reiniciar.setEnabled(false);
         salir = view.findViewById(R.id.salirEjecutarOrd);
@@ -77,11 +77,11 @@ public class EjecutarOrdenes extends Fragment {
             firmar.setVisibility(View.GONE);
 
         }
-        if(request.isnet==true){
+       /* if(request.isnet==true){
             ejecutar.setVisibility(View.VISIBLE);
         }else{
             ejecutar.setVisibility(View.GONE);
-        }
+        }*/
         eject.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
