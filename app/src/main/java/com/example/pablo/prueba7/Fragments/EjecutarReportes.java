@@ -98,7 +98,7 @@ public class EjecutarReportes extends Fragment {
     private void dialogSalir() {
         new AlertDialog.Builder(getContext())
                 .setTitle("SALIR")
-                .setMessage("¿Desea salir de el reporte?")
+                .setMessage("¿Desea salir del reporte?")
                 .setPositiveButton("CANCELAR",
                         new DialogInterface.OnClickListener() {
                             @Override
@@ -111,6 +111,7 @@ public class EjecutarReportes extends Fragment {
                             public void onClick(DialogInterface dialog, int which) {
                                 Intent intento = new Intent(getActivity(), Reportes.class);
                                 startActivity(intento);
+                                Toast.makeText(getActivity(), "Reporte no ejecutado", Toast.LENGTH_LONG).show();
                             }
                         }).show();
 

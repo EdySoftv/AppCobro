@@ -2,6 +2,7 @@ package com.example.pablo.prueba7.Adapters;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -92,9 +93,12 @@ public class ArbolAdapter extends RecyclerView.Adapter<ArbolAdapter.ArbolViewHol
 
             if(dat4.get(i).children.size()!=0){
                 viewHolder.progressBar.setProgress(100);
+                viewHolder.Asignar.setBackgroundColor(Color.parseColor("#48C9B0"));
             }
 
         }
+
+
 
         viewHolder.Asignar.setOnClickListener(new View.OnClickListener() {
             @Override

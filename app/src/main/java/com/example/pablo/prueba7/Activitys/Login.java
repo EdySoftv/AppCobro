@@ -36,6 +36,7 @@ public class Login extends AppCompatActivity {
 
     public static EditText usurio, contraseña;
     public static Button entrar;
+    public static ImageButton viewPassword;
     private String user;
     public static String enco;
     private Request request = new Request();
@@ -102,6 +103,9 @@ dialogLogin.show();
         });
 
     }
+
+
+
     public void guardarPre(String usario,String encode){
     Util.preferences = getSharedPreferences("credenciales", Context.MODE_PRIVATE);
     Util.editor = Util.preferences.edit();

@@ -163,6 +163,7 @@ public class EjecutarOrdenes extends Fragment {
                             public void onClick(DialogInterface dialog, int which) {
                                 Intent intento = new Intent(getActivity(), Orden.class);
                                 startActivity(intento);
+                                Toast.makeText(getActivity(), "Orden no ejecutada", Toast.LENGTH_LONG).show();
                             }
                         }).show();
 

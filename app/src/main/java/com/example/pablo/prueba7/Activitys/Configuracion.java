@@ -110,8 +110,10 @@ public class Configuracion extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.Inicio) {
-            //Actualizar la siguente cita y la grafica
-           request.getOrdenes(getApplicationContext());
+            Intent intent1 = new Intent(Configuracion.this, Inicio.class);
+            startActivity(intent1);
+            //DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+            request.getOrdenes(getBaseContext());
 
         } else if (id == R.id.Ordenes_menu) {
             Intent intent1 = new Intent(Configuracion.this, Orden.class);

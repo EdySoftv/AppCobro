@@ -160,7 +160,9 @@ public class Orden extends AppCompatActivity implements NavigationView.OnNavigat
         // Handle navigation view item clicks here.
         int id = item.getItemId();
         if (id == R.id.Inicio) {
-            dialogOrdenes.show();
+            Intent intent1 = new Intent(Orden.this, Inicio.class);
+            startActivity(intent1);
+            //DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
             request.getOrdenes(getBaseContext());
         } else if (id == R.id.Ordenes_menu) {
             DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
