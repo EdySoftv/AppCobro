@@ -2405,20 +2405,24 @@ public class Request extends AppCompatActivity {
                     while (itdata.hasNext()) {
                         List<dameTblPreDescargaMaterialResultModel> dat = itdata.next();
                         for (int i = 0; i < dat.size(); i++) {
-                            array.listaTabla.add(String.valueOf(dat.get(i).clvOrden));
-                            array.listaTabla.add(String.valueOf(dat.get(i).getNombre()));
-                            array.listaTabla.add(String.valueOf(dat.get(i).cantidadUtilizada));
-                            array.listaTabla.add(String.valueOf(dat.get(i).metrajeInicio));
-                            array.listaTabla.add(String.valueOf(dat.get(i).metrajeFin));
-                            array.listaTabla.add(String.valueOf(dat.get(i).metrajeInicioExterior));
-                            array.listaTabla.add(String.valueOf(dat.get(i).metrajeFinExterior));
-                            array.listaTabla.add(String.valueOf(dat.get(i).getNoExt()));
+                            array.listaTabla.add(new ArrayList<String>());
+                            array.listaTabla.get(i).add(String.valueOf(dat.get(i).clvOrden));
+                            array.listaTabla.get(i).add(String.valueOf(dat.get(i).getNombre()));
+                            array.listaTabla.get(i).add(String.valueOf(dat.get(i).cantidadUtilizada));
+                            array.listaTabla.get(i).add(String.valueOf(dat.get(i).metrajeInicio));
+                            array.listaTabla.get(i).add(String.valueOf(dat.get(i).metrajeFin));
+                            array.listaTabla.get(i).add(String.valueOf(dat.get(i).metrajeInicioExterior));
+                            array.listaTabla.get(i).add(String.valueOf(dat.get(i).metrajeFinExterior));
+                            array.listaTabla.get(i).add(String.valueOf(dat.get(i).getNoExt()));
                         }
                     }
                     Log.d("asd",Array.listaTabla.toString());
                     MaterialesOrdenes.scrollViewM.setVisibility(View.VISIBLE);
                     MaterialesOrdenes.tabla.setVisibility(View.VISIBLE);
-                    tablaAdapter.agregarFilaTabla(Array.listaTabla);
+                    for(int a=0; a<array.listaTabla.size(); a++){
+                        tablaAdapter.agregarFilaTabla(Array.listaTabla.get(a));
+                    }
+
                 }
             }
 
@@ -2567,20 +2571,23 @@ public class Request extends AppCompatActivity {
                     while (itdata.hasNext()) {
                         List<dameTblPreDescargaMaterialResultModel> dat = itdata.next();
                         for (int i = 0; i < dat.size(); i++) {
-                            array.listaTabla.add(String.valueOf(dat.get(i).clvOrden));
-                            array.listaTabla.add(String.valueOf(dat.get(i).getNombre()));
-                            array.listaTabla.add(String.valueOf(dat.get(i).cantidadUtilizada));
-                            array.listaTabla.add(String.valueOf(dat.get(i).metrajeInicio));
-                            array.listaTabla.add(String.valueOf(dat.get(i).metrajeFin));
-                            array.listaTabla.add(String.valueOf(dat.get(i).metrajeInicioExterior));
-                            array.listaTabla.add(String.valueOf(dat.get(i).metrajeFinExterior));
-                            array.listaTabla.add(String.valueOf(dat.get(i).getNoExt()));
+                            array.listaTabla.add(new ArrayList<String>());
+                            array.listaTabla.get(i).add(String.valueOf(dat.get(i).clvOrden));
+                            array.listaTabla.get(i).add(String.valueOf(dat.get(i).getNombre()));
+                            array.listaTabla.get(i).add(String.valueOf(dat.get(i).cantidadUtilizada));
+                            array.listaTabla.get(i).add(String.valueOf(dat.get(i).metrajeInicio));
+                            array.listaTabla.get(i).add(String.valueOf(dat.get(i).metrajeFin));
+                            array.listaTabla.get(i).add(String.valueOf(dat.get(i).metrajeInicioExterior));
+                            array.listaTabla.get(i).add(String.valueOf(dat.get(i).metrajeFinExterior));
+                            array.listaTabla.get(i).add(String.valueOf(dat.get(i).getNoExt()));
 
                         }
                     }
                     MaterialesReportes.horizontalScrollViewR.setVisibility(View.VISIBLE);
                     MaterialesReportes.tablaR.setVisibility(View.VISIBLE);
-                    tablaAdapter.agregarFilaTabla(Array.listaTabla);
+                    for(int a=0; a<array.listaTabla.size(); a++){
+                        tablaAdapter.agregarFilaTabla(Array.listaTabla.get(a));
+                    }
                 }
             }
 
