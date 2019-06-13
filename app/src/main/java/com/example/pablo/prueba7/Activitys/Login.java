@@ -44,7 +44,6 @@ public class Login extends AppCompatActivity {
     public final static int NOTIFICACION_ID = 0;
     public static TextView clave;
     public static ProgressDialog dialogLogin;
-    public static ImageButton viewPassword;
 BarraCargar barraCargar = new BarraCargar();
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {

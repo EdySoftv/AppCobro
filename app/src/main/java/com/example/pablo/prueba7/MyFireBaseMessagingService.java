@@ -49,27 +49,9 @@ public class MyFireBaseMessagingService extends FirebaseMessagingService {
         if (remoteMessage.getNotification() != null) {
             String titulo = remoteMessage.getNotification().getTitle();
             String texto = remoteMessage.getNotification().getBody();
-            //showNotification(titulo, texto);
             noti(titulo,texto);
 
-
         }
-
-        // Also if you intend on generating your own notifications as a result of a received FCM
-        // message, here is where that should be initiated. See sendNotification method below.
-    }
-    private void showNotification(String title, String text) {
-
-        NotificationCompat.Builder notificationBuilder =
-                new NotificationCompat.Builder(this)
-                        .setSmallIcon(android.R.drawable.stat_sys_warning)
-                        .setContentTitle(title)
-                        .setContentText(text);
-
-        NotificationManager notificationManager =
-                (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-
-        notificationManager.notify(0, notificationBuilder.build());
     }
 
     public void noti(String titulo,String body){

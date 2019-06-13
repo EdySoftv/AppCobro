@@ -1,6 +1,8 @@
 package com.example.pablo.prueba7.Activitys;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.constraint.ConstraintLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
@@ -21,6 +23,7 @@ import com.example.pablo.prueba7.Fragments.HorasReportes;
 import com.example.pablo.prueba7.Fragments.MaterialesReportes;
 import com.example.pablo.prueba7.Fragments.TrabajosReportes;
 
+import static com.example.pablo.prueba7.Fragments.HorasOrdenes.TecSec;
 import static com.example.pablo.prueba7.Fragments.HorasReportes.TecSec1;
 import static com.example.pablo.prueba7.Fragments.HorasReportes.tecPosRepo;
 
@@ -28,7 +31,7 @@ public class MainReportes extends AppCompatActivity implements ActionBar.TabList
     private ViewPager mViewPager;
     private ScrollView hzScrollView;
     private Button info;
-    private RelativeLayout layoutAnimado;
+    private ConstraintLayout layoutAnimado;
     int position;
     public static TextView Nombre1, Direccion1,NombreTec1,infoA,contrato1,ciudad1;
     Request request = new Request();
@@ -38,7 +41,7 @@ public class MainReportes extends AppCompatActivity implements ActionBar.TabList
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_swipe_reporte);
         info=findViewById(R.id.info);
-        layoutAnimado = (RelativeLayout) findViewById(R.id.animado);
+        layoutAnimado = findViewById(R.id.animado);
         hzScrollView=(ScrollView)findViewById(R.id.scv);
         Nombre1= findViewById(R.id.infonombre1);
         Direccion1= findViewById(R.id.infodireccion1);
@@ -137,8 +140,17 @@ public class MainReportes extends AppCompatActivity implements ActionBar.TabList
         if((position-1)>=0){
             mViewPager.setCurrentItem(position-1);}
         else{
-            TecSec1.setSelection(tecPosRepo);
-            finish();
+
+            if(layoutAnimado.getVisibility()==View.VISIBLE){
+                layoutAnimado.setVisibility(View.GONE);
+                hzScrollView.setVisibility(View.GONE);
+                info.setText("Datos Cliente");
+            }else{
+                TecSec1.setSelection(tecPosRepo);
+                finish();
+            }
+
+
         }
     }
 }

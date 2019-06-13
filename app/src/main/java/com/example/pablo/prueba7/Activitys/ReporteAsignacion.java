@@ -115,11 +115,13 @@ public class ReporteAsignacion extends AppCompatActivity {
         //verificar si todos los servicios llevan el mismo medio 1=si 0=no
         if (ServiciosAInstalar.todosLosMedios == 1) {
             try {
+                //Intentamos llenar el spinner con el request que nos mandaba la pregunta
                 ArrayAdapter<String> adapter = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_spinner_dropdown_item, Array.medioPregunta);
                 spinerMedio.setAdapter(adapter);
                 spinerMedio.setSelection(obtenerPosicionSpinnerMedioSI(dat4.get(ArbolAdapter.posicionArbol).IdMedio));
 
             }catch (Exception e){
+                //Si no se mando el request porque los medios ya venian definidos llenamos el spinner con el medio definido
                 ArrayList<String> mediolista=new ArrayList<>();
                 mediolista.add(dat4.get(ArbolAdapter.posicionArbol).getDetalle());
                 ArrayAdapter<String> adapter = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_spinner_dropdown_item, mediolista);
@@ -129,6 +131,7 @@ public class ReporteAsignacion extends AppCompatActivity {
         }
         if (ServiciosAInstalar.todosLosMedios == 0) {
             try {
+                //Si la respuesta fue no, llenamos el spinner con los medios disponibles para ese servicio
                 JSONObject jsonObject = new JSONObject();
                 jsonObject.put("ClvUnicaNet", ArbolAdapter.clv_unicaNet);
                 request.getMedSer(getApplicationContext(), jsonObject, spinerMedio, ArbolAdapter.posicionArbol);
@@ -148,7 +151,6 @@ public class ReporteAsignacion extends AppCompatActivity {
                         List<GetMuestraMedioPorServicoContratadoListResult> dat3 = itdata3.next();
                         dat4.get(ArbolAdapter.posicionArbol).setIdMedio(dat3.get(positionSpinner - 1).getIdMedio());
                         dat4.get(ArbolAdapter.posicionArbol).setDetalle(dat3.get(positionSpinner - 1).getDescripcion());
-                        posicionSpinnerSelect = positionSpinner;
 
                     } else {
                         //no se ha seleccionado ningun medio.
@@ -171,7 +173,6 @@ public class ReporteAsignacion extends AppCompatActivity {
                 if (spinerMedio.getSelectedItemPosition() == 0) {
                     if(ServiciosAInstalar.todosLosMediosValidacion==true){
                         Intent intento = new Intent(ReporteAsignacion.this, AsignarAparato.class);
-                        intento.putExtra("posicionDelSpinner", posicionSpinnerSelect);
                         intento.putExtra("Clv_UnicaNet", dat4.get(ArbolAdapter.posicionArbol).Clv_UnicaNet);
                         intento.putExtra("idMedio", dat4.get(ArbolAdapter.posicionArbol).IdMedio);
                         startActivity(intento);
@@ -181,7 +182,6 @@ public class ReporteAsignacion extends AppCompatActivity {
                     }
                 } else {
                     Intent intento = new Intent(ReporteAsignacion.this, AsignarAparato.class);
-                    intento.putExtra("posicionDelSpinner", posicionSpinnerSelect);
                     intento.putExtra("Clv_UnicaNet", dat4.get(ArbolAdapter.posicionArbol).Clv_UnicaNet);
                     intento.putExtra("idMedio", dat4.get(ArbolAdapter.posicionArbol).IdMedio);
                     startActivity(intento);

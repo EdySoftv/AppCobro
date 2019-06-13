@@ -6,6 +6,7 @@ import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.constraint.ConstraintLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
@@ -39,7 +40,7 @@ public class MainActivity extends AppCompatActivity implements ActionBar.TabList
     ScrollView hzScrollView;
     Button info;
     int position;
-    RelativeLayout layoutAnimado;
+    ConstraintLayout layoutAnimado;
     public static TextView NombreTec, Contrato, Status, Nombre, Direccion, InfoServicios;
 
     Request request = new Request();

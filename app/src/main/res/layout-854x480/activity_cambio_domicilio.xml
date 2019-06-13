@@ -7,12 +7,15 @@
     <!--Primeros datos-->
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        tools:layout_editor_absoluteX="168dp"
+        tools:layout_editor_absoluteY="94dp">
 
         <android.support.constraint.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
+
             <include
                 android:id="@+id/includeCambioDom"
                 layout="@layout/toolbar"></include>
@@ -51,8 +54,10 @@
                 android:layout_alignParentStart="true"
                 android:layout_alignParentTop="true"
                 android:layout_marginStart="150dp"
+                android:layout_marginEnd="8dp"
                 android:textSize="15dp"
                 app:layout_constraintBottom_toBottomOf="@+id/textView36"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/textView36"
                 app:layout_constraintTop_toTopOf="@+id/textView36" />
 
@@ -76,8 +81,10 @@
                 android:layout_alignParentStart="true"
                 android:layout_alignParentTop="true"
                 android:layout_marginStart="150dp"
+                android:layout_marginEnd="8dp"
                 android:textSize="15dp"
                 app:layout_constraintBottom_toBottomOf="@+id/textView48"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/textView48"
                 app:layout_constraintTop_toTopOf="@+id/textView48" />
 
@@ -101,9 +108,11 @@
                 android:layout_alignParentStart="true"
                 android:layout_alignParentTop="true"
                 android:layout_marginStart="150dp"
+                android:layout_marginEnd="8dp"
                 android:layout_marginBottom="8dp"
                 android:textSize="15dp"
                 app:layout_constraintBottom_toBottomOf="@+id/textView34"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/textView34"
                 app:layout_constraintTop_toTopOf="@+id/textView34" />
 
@@ -127,8 +136,10 @@
                 android:layout_alignParentStart="true"
                 android:layout_alignParentTop="true"
                 android:layout_marginStart="150dp"
+                android:layout_marginEnd="8dp"
                 android:textSize="15dp"
                 app:layout_constraintBottom_toBottomOf="@+id/textView49"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/textView49"
                 app:layout_constraintTop_toTopOf="@+id/textView49" />
 
@@ -152,8 +163,10 @@
                 android:layout_alignParentStart="true"
                 android:layout_alignParentTop="true"
                 android:layout_marginStart="150dp"
+                android:layout_marginEnd="8dp"
                 android:textSize="15dp"
                 app:layout_constraintBottom_toBottomOf="@+id/textView50"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/textView50"
                 app:layout_constraintTop_toTopOf="@+id/textView50" />
 
@@ -177,8 +190,10 @@
                 android:layout_alignParentStart="true"
                 android:layout_alignParentTop="true"
                 android:layout_marginStart="150dp"
+                android:layout_marginEnd="8dp"
                 android:textSize="15dp"
                 app:layout_constraintBottom_toBottomOf="@+id/textView51"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/textView51"
                 app:layout_constraintTop_toTopOf="@+id/textView51" />
 
@@ -202,16 +217,18 @@
                 android:layout_alignParentStart="true"
                 android:layout_alignParentTop="true"
                 android:layout_marginStart="150dp"
+                android:layout_marginEnd="8dp"
                 android:layout_marginBottom="8dp"
                 android:textSize="15dp"
                 app:layout_constraintBottom_toBottomOf="@+id/textView52"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/textView52"
                 app:layout_constraintTop_toTopOf="@+id/textView52" />
 
-            <RelativeLayout
+            <android.support.constraint.ConstraintLayout
                 android:id="@+id/map"
                 android:layout_width="match_parent"
-                android:layout_height="350dp"
+                android:layout_height="360dp"
                 android:layout_alignTop="@id/telefono"
                 android:layout_marginTop="8dp"
                 android:orientation="horizontal"
@@ -219,49 +236,81 @@
                 app:layout_constraintTop_toBottomOf="@+id/textView52"
                 tools:layout_editor_absoluteX="0dp">
 
-                <RelativeLayout
+                <android.support.constraint.ConstraintLayout
                     android:id="@+id/uno"
                     android:layout_width="80dp"
                     android:layout_height="80dp"
-                    android:background="@drawable/contorno"></RelativeLayout>
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="8dp"
+                    android:background="@drawable/contorno"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"></android.support.constraint.ConstraintLayout>
 
-                <RelativeLayout
+                <android.support.constraint.ConstraintLayout
                     android:id="@+id/dos"
-                    android:layout_width="80dp"
+                    android:layout_width="0dp"
                     android:layout_height="80dp"
                     android:layout_below="@id/uno"
-                    android:layout_marginTop="50dp"
-                    android:background="@drawable/contorno"></RelativeLayout>
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginBottom="8dp"
+                    android:background="@drawable/contorno"
+                    app:layout_constraintBottom_toTopOf="@+id/center"
+                    app:layout_constraintEnd_toStartOf="@+id/constraintLayout9"
+                    app:layout_constraintStart_toEndOf="@+id/uno"
+                    app:layout_constraintTop_toTopOf="parent"></android.support.constraint.ConstraintLayout>
 
-                <RelativeLayout
+                <android.support.constraint.ConstraintLayout
+                    android:id="@+id/constraintLayout9"
                     android:layout_width="80dp"
                     android:layout_height="80dp"
                     android:layout_below="@id/dos"
-                    android:layout_marginTop="50dp"
-                    android:background="@drawable/contorno"></RelativeLayout>
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="16dp"
+                    android:background="@drawable/contorno"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"></android.support.constraint.ConstraintLayout>
 
-                <RelativeLayout
+                <android.support.constraint.ConstraintLayout
                     android:id="@+id/center"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginStart="110dp"
-                    android:layout_marginEnd="110dp">
+                    android:layout_height="150dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="8dp"
+                    android:visibility="visible"
+                    app:layout_constraintBottom_toTopOf="@+id/siete"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/dos">
 
-                    <RelativeLayout
+                    <android.support.constraint.ConstraintLayout
                         android:id="@+id/cuatro"
-                        android:layout_width="match_parent"
+                        android:layout_width="80dp"
                         android:layout_height="80dp"
                         android:layout_centerHorizontal="true"
-                        android:background="@drawable/contorno"></RelativeLayout>
+                        android:layout_marginStart="16dp"
+                        android:background="@drawable/contorno"
+                        android:visibility="visible"
+                        app:layout_constraintBottom_toBottomOf="@+id/cinco"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="@+id/cinco"></android.support.constraint.ConstraintLayout>
 
-                    <RelativeLayout
+                    <android.support.constraint.ConstraintLayout
                         android:id="@+id/cinco"
-                        android:layout_width="match_parent"
+                        android:layout_width="0dp"
                         android:layout_height="80dp"
                         android:layout_below="@id/cuatro"
                         android:layout_centerHorizontal="true"
-                        android:layout_marginTop="50dp"
-                        android:background="@drawable/contorno">
+                        android:layout_marginStart="16dp"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginEnd="16dp"
+                        android:background="@drawable/contorno"
+                        android:visibility="visible"
+                        app:layout_constraintEnd_toStartOf="@+id/constraintLayout10"
+                        app:layout_constraintStart_toEndOf="@+id/cuatro"
+                        app:layout_constraintTop_toBottomOf="@+id/callenorte">
 
                         <ImageView
                             android:id="@+id/casanorte"
@@ -269,7 +318,12 @@
                             android:layout_height="30dp"
                             android:layout_centerHorizontal="true"
                             android:src="@drawable/casa"
-                            android:visibility="invisible" />
+                            android:visibility="invisible"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintVertical_bias="0.0" />
 
                         <ImageView
                             android:id="@+id/casasur"
@@ -278,15 +332,27 @@
                             android:layout_alignParentBottom="true"
                             android:layout_centerHorizontal="true"
                             android:src="@drawable/casa"
-                            android:visibility="invisible" />
+                            android:visibility="invisible"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintVertical_bias="1.0" />
 
                         <ImageView
                             android:id="@+id/casaoeste"
                             android:layout_width="30dp"
                             android:layout_height="30dp"
                             android:layout_centerVertical="true"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginEnd="8dp"
                             android:src="@drawable/casa"
-                            android:visibility="invisible" />
+                            android:visibility="invisible"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="0.0"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
 
                         <ImageView
                             android:id="@+id/casaeste"
@@ -294,92 +360,159 @@
                             android:layout_height="30dp"
                             android:layout_alignParentEnd="true"
                             android:layout_centerVertical="true"
+                            android:layout_marginStart="8dp"
                             android:src="@drawable/casa"
-                            android:visibility="invisible" />
-                    </RelativeLayout>
+                            android:visibility="invisible"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="1.0"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+                    </android.support.constraint.ConstraintLayout>
 
-                    <RelativeLayout
-                        android:layout_width="match_parent"
+                    <android.support.constraint.ConstraintLayout
+                        android:id="@+id/constraintLayout10"
+                        android:layout_width="80dp"
                         android:layout_height="80dp"
                         android:layout_below="@id/cinco"
                         android:layout_centerHorizontal="true"
-                        android:layout_marginTop="50dp"
-                        android:background="@drawable/contorno"></RelativeLayout>
+                        android:layout_marginEnd="16dp"
+                        android:background="@drawable/contorno"
+                        android:visibility="visible"
+                        app:layout_constraintBottom_toBottomOf="@+id/cinco"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="@+id/cinco"></android.support.constraint.ConstraintLayout>
 
                     <TextView
                         android:id="@+id/callenorte"
-                        android:layout_width="wrap_content"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_alignParentTop="true"
                         android:layout_centerHorizontal="true"
-                        android:layout_marginTop="100dp"
-                        android:text="@string/calle_Norte"
-                        android:textSize="14dp" />
+                        android:layout_marginTop="16dp"
+                        android:ellipsize="end"
+                        android:maxLines="1"
+                        android:text="asdasdasdasdasdasdasdasdasdasdasd"
+                        android:textAlignment="center"
+                        android:textSize="14dp"
+                        android:visibility="visible"
+                        app:layout_constraintEnd_toEndOf="@+id/cinco"
+                        app:layout_constraintHorizontal_bias="0.0"
+                        app:layout_constraintStart_toStartOf="@+id/cinco"
+                        app:layout_constraintTop_toTopOf="parent" />
 
                     <TextView
                         android:id="@+id/callesur"
-                        android:layout_width="wrap_content"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_alignParentTop="true"
                         android:layout_centerHorizontal="true"
-                        android:layout_marginTop="220dp"
+                        android:layout_marginTop="8dp"
+                        android:ellipsize="end"
+                        android:maxLines="1"
                         android:text="@string/calle_Sur"
-                        android:textSize="14dp" />
-                </RelativeLayout>
+                        android:textAlignment="center"
+                        android:textSize="14dp"
+                        android:visibility="visible"
+                        app:layout_constraintEnd_toEndOf="@+id/cinco"
+                        app:layout_constraintStart_toStartOf="@+id/cinco"
+                        app:layout_constraintTop_toBottomOf="@+id/cinco" />
 
-                <TextView
-                    android:id="@+id/calleeste"
-                    android:layout_width="wrap_content"
-                    android:layout_height="30dp"
-                    android:layout_alignParentEnd="true"
-                    android:layout_centerVertical="true"
-                    android:layout_marginEnd="70dp"
-                    android:rotation="90"
-                    android:text="@string/calle_Este"
-                    android:textSize="14dp" />
+                    <TextView
+                        android:id="@+id/calleeste"
+                        android:layout_width="80dp"
+                        android:layout_height="23dp"
+                        android:layout_alignParentEnd="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginBottom="8dp"
+                        android:ellipsize="end"
+                        android:maxLines="1"
+                        android:orientation="vertical"
+                        android:rotation="90"
+                        android:text="asdasdasdasdasdasd"
+                        android:textAlignment="center"
+                        android:textSize="14dp"
+                        android:visibility="visible"
+                        app:layout_constraintBottom_toBottomOf="@+id/cinco"
+                        app:layout_constraintEnd_toStartOf="@+id/constraintLayout10"
+                        app:layout_constraintStart_toEndOf="@+id/cinco"
+                        app:layout_constraintTop_toBottomOf="@+id/callenorte" />
 
-                <TextView
-                    android:id="@+id/calleoeste"
-                    android:layout_width="wrap_content"
-                    android:layout_height="30dp"
-                    android:layout_marginStart="55dp"
-                    android:layout_marginTop="150dp"
-                    android:rotation="90"
-                    android:text="@string/calle_Oeste"
-                    android:textSize="14dp" />
+                    <TextView
+                        android:id="@+id/calleoeste"
+                        android:layout_width="80dp"
+                        android:layout_height="30dp"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginEnd="8dp"
+                        android:ellipsize="end"
+                        android:maxLines="1"
+                        android:rotation="90"
+                        android:text="asdasdasdasdasdasd"
+                        android:textAlignment="center"
+                        android:textSize="14dp"
+                        android:visibility="visible"
+                        app:layout_constraintBottom_toBottomOf="@+id/cinco"
+                        app:layout_constraintEnd_toStartOf="@+id/cinco"
+                        app:layout_constraintHorizontal_bias="0.54"
+                        app:layout_constraintStart_toEndOf="@+id/cuatro"
+                        app:layout_constraintTop_toTopOf="@+id/cinco"
+                        app:layout_constraintVertical_bias="0.48" />
+                </android.support.constraint.ConstraintLayout>
 
-                <RelativeLayout
+
+                <android.support.constraint.ConstraintLayout
                     android:id="@+id/siete"
                     android:layout_width="80dp"
                     android:layout_height="80dp"
                     android:layout_alignParentEnd="true"
-                    android:background="@drawable/contorno"></RelativeLayout>
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="16dp"
+                    android:background="@drawable/contorno"
+                    android:visibility="visible"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/center"></android.support.constraint.ConstraintLayout>
 
-                <RelativeLayout
+                <android.support.constraint.ConstraintLayout
                     android:id="@+id/ocho"
-                    android:layout_width="80dp"
+                    android:layout_width="0dp"
                     android:layout_height="80dp"
                     android:layout_below="@id/siete"
                     android:layout_alignParentEnd="true"
-                    android:layout_marginTop="50dp"
-                    android:background="@drawable/contorno"></RelativeLayout>
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:background="@drawable/contorno"
+                    android:visibility="visible"
+                    app:layout_constraintEnd_toStartOf="@+id/constraintLayout8"
+                    app:layout_constraintStart_toEndOf="@+id/siete"
+                    app:layout_constraintTop_toBottomOf="@+id/center"></android.support.constraint.ConstraintLayout>
 
-                <RelativeLayout
+                <android.support.constraint.ConstraintLayout
+                    android:id="@+id/constraintLayout8"
                     android:layout_width="80dp"
                     android:layout_height="80dp"
                     android:layout_below="@id/ocho"
                     android:layout_alignParentEnd="true"
-                    android:layout_marginTop="50dp"
-                    android:background="@drawable/contorno">
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:background="@drawable/contorno"
+                    android:visibility="visible"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/center">
 
                     <ImageView
                         android:layout_width="50dp"
                         android:layout_height="50dp"
                         android:layout_centerHorizontal="true"
                         android:layout_centerVertical="true"
-                        android:src="@drawable/flecha" />
-                </RelativeLayout>
-            </RelativeLayout>
+                        android:src="@drawable/flecha"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+                </android.support.constraint.ConstraintLayout>
+            </android.support.constraint.ConstraintLayout>
 
             <Button
                 android:id="@+id/aceptar"
