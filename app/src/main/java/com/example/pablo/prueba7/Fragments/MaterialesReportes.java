@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.HorizontalScrollView;
@@ -25,6 +26,8 @@ import com.example.pablo.prueba7.Request.Request;
 import java.util.Iterator;
 import java.util.List;
 
+import static com.example.pablo.prueba7.Request.Request.extencionesMat;
+
 
 /**
  * A simple {@link Fragment} subclass.
@@ -41,6 +44,7 @@ public class MaterialesReportes extends Fragment {
     public static Spinner descripcionMatR,clasificacionMatR,spinnerExtMatR;
     public static ConstraintLayout extMatR, piezasMatR,metrosMatR;
     Button agragarDMR;
+    public static int posDescMatR,posClasMatR,posExtMatR;
     int seleccionR,seleccionExteR;
 
 
@@ -73,13 +77,22 @@ public class MaterialesReportes extends Fragment {
         horizontalScrollViewR = view.findViewById(R.id.scrollhorizontalR);
         final TablaAdapter tablaAdapter = new TablaAdapter(getActivity(), MaterialesReportes.tablaR);
         tablaAdapter.agregarCabecera(R.array.cabecera_tabla);
-        if(request.extencionesMat==true){
+        if(extencionesMat==true){
             spinnerExtMatR.setVisibility(View.VISIBLE);
+        }else{
+
+            Array.detalleBit.clear();
+            Array.detalleBit.add(0, "---Seleccionar---");
+            Array.detalleBit.add(1, "1");
+            ArrayAdapter arrayAdapter = new ArrayAdapter(getContext(), android.R.layout.simple_list_item_1, Array.detalleBit);
+            descripcionMatR.setAdapter(arrayAdapter);
         }
+
 
         descripcionMatR.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                posDescMatR=position;
                 if(position!=0){
                     Iterator<List<DetalleBitacoraModel>> itData = Array.dataDetBit.iterator();
                     List<DetalleBitacoraModel> dat = itData.next();
@@ -104,10 +117,10 @@ public class MaterialesReportes extends Fragment {
                     idInventarioMDR=dat.get(position-1).IdInventario;
                     request.getTipoMatR(getContext());
                     seleccionR=position;
-                    if(request.extencionesMat==false){
+                    posClasMatR=position;
+                    if(extencionesMat==false){
                         request.getPredescargaR(getActivity(),getContext());
                     }
-
                 }
             }
 
@@ -119,6 +132,7 @@ public class MaterialesReportes extends Fragment {
         spinnerExtMatR.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                posExtMatR=position;
                 if(position!=0){
                     extSerR=(position-1);
                     seleccionExteR=position;
@@ -139,9 +153,9 @@ public class MaterialesReportes extends Fragment {
                 if(seleccionR==0){
                     Toast.makeText(getContext(),"Seleccione un articulo",Toast.LENGTH_SHORT).show();
                 }else {
-                    if(request.extencionesMat==true){
+                    if(extencionesMat==true){
                         if(seleccionExteR==0){
-                            Toast.makeText(getContext(),"Seleccione una extención",Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getContext(),"Seleccione una extensión",Toast.LENGTH_SHORT).show();
                         }else{
                             EjecutarDescargaMaterial();
                         }

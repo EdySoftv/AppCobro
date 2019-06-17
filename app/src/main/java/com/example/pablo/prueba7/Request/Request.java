@@ -147,6 +147,11 @@ import static com.example.pablo.prueba7.Fragments.MaterialesOrdenes.posClasMat;
 import static com.example.pablo.prueba7.Fragments.MaterialesOrdenes.posDescMat;
 import static com.example.pablo.prueba7.Fragments.MaterialesOrdenes.posExtMat;
 import static com.example.pablo.prueba7.Fragments.MaterialesOrdenes.spinnerExtMat;
+import static com.example.pablo.prueba7.Fragments.MaterialesReportes.clasificacionMatR;
+import static com.example.pablo.prueba7.Fragments.MaterialesReportes.descripcionMatR;
+import static com.example.pablo.prueba7.Fragments.MaterialesReportes.posClasMatR;
+import static com.example.pablo.prueba7.Fragments.MaterialesReportes.posExtMatR;
+import static com.example.pablo.prueba7.Fragments.MaterialesReportes.spinnerExtMatR;
 import static com.example.pablo.prueba7.Fragments.TrabajosOrdenes.adaptertrabajos;
 import static com.example.pablo.prueba7.Fragments.TrabajosOrdenes.trabajos;
 import static com.example.pablo.prueba7.Fragments.TrabajosReportes.posSolucionRepo;
@@ -2222,9 +2227,16 @@ public class Request extends AppCompatActivity {
                         }
 
                     }
-                    ArrayAdapter arrayAdapter = new ArrayAdapter(context, android.R.layout.simple_list_item_1, array.detalleBit);
-                       descripcionMat.setAdapter(arrayAdapter);
-                       descripcionMat.setSelection(posDescMat);
+                    try {
+                        ArrayAdapter arrayAdapter = new ArrayAdapter(context, android.R.layout.simple_list_item_1, array.detalleBit);
+                        descripcionMat.setAdapter(arrayAdapter);
+                        descripcionMat.setSelection(posDescMat);
+                    }catch (Exception e){
+                        ArrayAdapter arrayAdapter = new ArrayAdapter(context, android.R.layout.simple_list_item_1, array.detalleBit);
+                        descripcionMatR.setAdapter(arrayAdapter);
+                        descripcionMatR.setSelection(MaterialesReportes.posDescMatR);
+                    }
+
                 }
             }
 
@@ -2259,9 +2271,15 @@ public class Request extends AppCompatActivity {
                         }
 
                     }
-                    ArrayAdapter arrayAdapter = new ArrayAdapter(context, android.R.layout.simple_list_item_1, array.descripcionArtBit);
-                    MaterialesOrdenes.clasificacionMat.setAdapter(arrayAdapter);
-                    clasificacionMat.setSelection(posClasMat);
+                    try {
+                        ArrayAdapter arrayAdapter = new ArrayAdapter(context, android.R.layout.simple_list_item_1, array.descripcionArtBit);
+                        MaterialesOrdenes.clasificacionMat.setAdapter(arrayAdapter);
+                        clasificacionMat.setSelection(posClasMat);
+                    }catch (Exception e){
+                        ArrayAdapter arrayAdapter = new ArrayAdapter(context, android.R.layout.simple_list_item_1, array.descripcionArtBit);
+                        clasificacionMatR.setAdapter(arrayAdapter);
+                        clasificacionMatR.setSelection(posClasMatR);
+                    }
 
                 }
             }
@@ -2296,13 +2314,15 @@ public class Request extends AppCompatActivity {
                             j = j + 1;
                         }
                     }
+                    extencionesMat = true;
                     try {
                         ArrayAdapter arrayAdapter = new ArrayAdapter(context, android.R.layout.simple_list_item_1, array.descripcionExt);
                         MaterialesOrdenes.spinnerExtMat.setAdapter(arrayAdapter);
-                        extencionesMat = true;
                         spinnerExtMat.setSelection(posExtMat);
                     } catch (Exception e) {
-
+                        ArrayAdapter arrayAdapter = new ArrayAdapter(context, android.R.layout.simple_list_item_1, array.descripcionExt);
+                        spinnerExtMatR.setAdapter(arrayAdapter);
+                        spinnerExtMatR.setSelection(posExtMatR);
                     }
                 }
             }
@@ -2424,13 +2444,19 @@ public class Request extends AppCompatActivity {
                             array.listaTabla.get(i).add(String.valueOf(dat.get(i).getNoExt()));
                         }
                     }
-                    Log.d("asd",Array.listaTabla.toString());
-                    MaterialesOrdenes.scrollViewM.setVisibility(View.VISIBLE);
-                    MaterialesOrdenes.tabla.setVisibility(View.VISIBLE);
-                    for(int a=0; a<array.listaTabla.size(); a++){
-                        tablaAdapter.agregarFilaTabla(Array.listaTabla.get(a));
+                    try {
+                        MaterialesOrdenes.scrollViewM.setVisibility(View.VISIBLE);
+                        MaterialesOrdenes.tabla.setVisibility(View.VISIBLE);
+                        for (int a = 0; a < array.listaTabla.size(); a++) {
+                            tablaAdapter.agregarFilaTabla(Array.listaTabla.get(a));
+                        }
+                    }catch (Exception e){
+                        MaterialesReportes.horizontalScrollViewR.setVisibility(View.VISIBLE);
+                        MaterialesReportes.tablaR.setVisibility(View.VISIBLE);
+                        for (int a = 0; a < array.listaTabla.size(); a++) {
+                            tablaAdapter.agregarFilaTabla(Array.listaTabla.get(a));
+                        }
                     }
-
                 }
             }
 
@@ -2469,7 +2495,7 @@ public class Request extends AppCompatActivity {
 
                     }
                     ArrayAdapter arrayAdapter = new ArrayAdapter(context, android.R.layout.simple_list_item_1, array.descripcionArtBit);
-                    MaterialesReportes.clasificacionMatR.setAdapter(arrayAdapter);
+                    clasificacionMatR.setAdapter(arrayAdapter);
                 }
             }
 
