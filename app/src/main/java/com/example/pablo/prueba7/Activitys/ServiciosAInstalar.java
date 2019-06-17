@@ -21,6 +21,7 @@ import android.widget.CheckBox;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.pablo.prueba7.Adapters.ArbolAdapter;
 import com.example.pablo.prueba7.Adapters.OrdenesAdapter;
@@ -218,10 +219,23 @@ public class ServiciosAInstalar extends AppCompatActivity {
         aceptarAsignacion.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intento = new Intent(ServiciosAInstalar.this, MainActivity.class);
-                intento.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                startActivity(intento);
-                finish();
+                int valida=0;
+                for(int c=0;c<dat4.size(); c++){
+                    if(dat4.get(c).children.size()!=0){
+                        valida=valida+1;
+                    }
+                }
+                if(dat4.size()==valida){
+                    request.Ejecutar=true;
+                    Intent intento = new Intent(ServiciosAInstalar.this, MainActivity.class);
+                    intento.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                    startActivity(intento);
+                    finish();
+                }else{
+                    Toast.makeText(getApplicationContext(),"Seleccione el aparato a asignar",Toast.LENGTH_LONG).show();
+                }
+
+
             }
         });
 

@@ -171,6 +171,7 @@ public class Request extends AppCompatActivity {
     String a = "Seleccione técnico secundario";
     String f = "Seleccione tipo de solución";
     public static String datos[];
+    public static boolean Ejecutar;
     BarraCargar barraCargar = new BarraCargar();
     public static boolean requierePregunta=false;
 
@@ -2080,22 +2081,20 @@ public class Request extends AppCompatActivity {
         });
     }*/
 
-    public void SetCambioAparato(final Context context) {
-        Service service = null;
-        try {
-            service = services.getCAPATService(context);
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-        Call<JsonObject> call = service.getCAPAT();
+    public void SetCambioAparato(final Context context, final JSONObject jsonObject) {
+        Call<JsonObject> call = services.RequestPost(context, jsonObject).getCAPAT();
         call.enqueue(new Callback<JsonObject>() {
             @Override
-            public void onResponse(Call<JsonObject> call, Response<JsonObject> response1) {
-                if (response1.code() == 200) {
+            public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
+                if (response.code() == 200) {
                     Toast.makeText(context, "Se ha guardado el aparato correctamente", Toast.LENGTH_SHORT).show();
-                    dialogCAPAT.dismiss();
-                    dialogTrabajos.dismiss();
-
+                    Ejecutar=true;
+                    try {
+                        dialogCAPAT.dismiss();
+                    }catch (Exception e){}
+                    try {
+                        dialogTrabajos.dismiss();
+                    }catch (Exception r){}
                 } else {
                     Toast.makeText(context, "Error al agregar el aparato", Toast.LENGTH_SHORT).show();
                     dialogCAPAT.dismiss();

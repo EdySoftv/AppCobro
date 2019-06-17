@@ -95,7 +95,12 @@ public class EjecutarOrdenes extends Fragment {
                         try {
                             request.send_aparat(getContext());
                             //**************************************
-                            Ejecutar();
+                            if(request.Ejecutar==true){
+                                Ejecutar();
+                            }else{
+                                Toast.makeText(getContext(), "No se puede ejecutar la orden", Toast.LENGTH_SHORT);
+                            }
+
                             ////////*************************
 
                         } catch (Exception e) {
@@ -104,9 +109,11 @@ public class EjecutarOrdenes extends Fragment {
                         }
                     }
                 }else {
-                    dialogoEjecutar1();
-
-                    ////////*************************
+                    if(request.Ejecutar==true){
+                        Ejecutar();
+                    }else{
+                        Toast.makeText(getContext(), "No se puede ejecutar la orden", Toast.LENGTH_SHORT);
+                    }
                 }
             }
 

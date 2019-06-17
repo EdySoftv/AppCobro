@@ -16,6 +16,7 @@ public class CambioDom extends AppCompatActivity {
     private Button aceptar,  regresar;
     public static TextView Ciudad, Localidad, Colonia, Calle, Numero, Numero_i, Telefono, CalleN, CalleS, CallleE, CalleO;
     public static ImageView CasaNorte, CasaSur, CasaEste, CasaOeste;
+    Request request = new Request();
 
 
     @Override
@@ -65,12 +66,14 @@ public class CambioDom extends AppCompatActivity {
         regresar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                request.Ejecutar=true;
                 finish();
             }
         });
         aceptar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                request.Ejecutar=true;
                 Intent intento1 = new Intent(CambioDom.this, Orden.class);
                 startActivity(intento1);
                 finish();
