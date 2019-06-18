@@ -334,8 +334,8 @@ public class AsignarAparato extends AppCompatActivity {
                 JSONObject jsonObject2;
                 for(int a=0; a< dat.size(); a++){
                     jsonObject2 = new JSONObject();
-                    jsonObject2.put("Clv_UnicaNet",clvUnicaNet);
-                    jsonObject2.put("idMedio",idMedio);
+                    jsonObject2.put("Clv_UnicaNet",dat.get(a).Clv_UnicaNet);
+                    jsonObject2.put("idMedio",dat.get(a).IdMedio);
                     jsonArray.put(a,jsonObject2);
                 }
                 //llenar lista para mandar request
