@@ -909,6 +909,13 @@ public class Request extends AppCompatActivity {
                         CambioAparato.aparato.setAdapter(adapter);
                         try {
                             CambioAparato.aparato.setSelection(CambioAparato.obtenerPosicionAC(CambioAparatoDeepModel.AparatoCliente));
+                            try{
+                                JSONObject jsonObject = new JSONObject();
+                                JSONObject jsonObject1 = new JSONObject();
+                                jsonObject.put("Letra", dat.get(CambioAparato.obtenerPosicionAC(CambioAparatoDeepModel.AparatoCliente)).Letra);
+                                jsonObject1.put("ObjRelMacwan", jsonObject);
+                                ValidaMACWAM(getApplicationContext(), jsonObject1);
+                            }catch (Exception e){}
                             getStatusApa(context);
                         } catch (Exception e) {
                             dialogTrabajos.dismiss();
@@ -996,8 +1003,7 @@ public class Request extends AppCompatActivity {
                         datos[0] = "Seleccione tipo de aparato";
                         int j = 1;
                         for (int i = 0; i < dat.size(); i++) {
-                            datos[j] = dat.get(i).getNombre();
-                            j = j + 1;
+                            datos[j] = dat.get(i).getNombre();j = j + 1;
                         }
                         ArrayAdapter<String> adapter = new ArrayAdapter<String>(context, android.R.layout.simple_spinner_dropdown_item, datos);
                         CambioAparato.tipoAparato.setAdapter(adapter);
@@ -1086,6 +1092,9 @@ public class Request extends AppCompatActivity {
                 //Peticion de datos sobre el Json "LogOnResult"
                 if (response.code() == 200) {
                     CambioAparatoDeepModel.StatusEntrega = "";
+                    CambioAparatoDeepModel.AparatoAsignar=0;
+                    CambioAparatoDeepModel.AparatoCliente=0;
+                    CambioAparatoDeepModel.TipoAparatoAsignar=0;
                     JsonObject userJson = response.body().getAsJsonObject("GetCambioAparatoDeepResult");
                     try {
                         CambioAparatoDeepModel user = new CambioAparatoDeepModel(
@@ -2720,14 +2729,19 @@ public class Request extends AppCompatActivity {
                     );
                     if(user.isResultado()==true){
                         MACWAM = true;
-                        constraintLayoutMACWAM.setVisibility(View.VISIBLE);
-                        JSONObject jsonObject1 = new JSONObject();
-                        JSONObject jsonObject2 = new JSONObject();
                         try{
-                            jsonObject1.put("Clv_Aparato",idArticuloasignado);
-                            jsonObject2.put("ObjRelMacwan",jsonObject1);
-                        }catch (Exception e){}
-                        GetMACWAM(context,jsonObject2);
+                            constraintLayoutMACWAM.setVisibility(View.VISIBLE);
+                            try{
+                                JSONObject jsonObject1 = new JSONObject();
+                                JSONObject jsonObject2 = new JSONObject();
+                                jsonObject1.put("Clv_Aparato",idArticuloasignado);
+                                jsonObject2.put("ObjRelMacwan",jsonObject1);
+                                GetMACWAM(context,jsonObject2);
+                            }catch (Exception e){}
+                        }catch (Exception e){
+                            CambioAparato.textView35.setVisibility(View.VISIBLE);
+                            CambioAparato.MACWAMTextCambioAparato.setVisibility(View.VISIBLE);
+                        }
                     }else {
                         MACWAM=false;
                         constraintLayoutMACWAM.setVisibility(View.GONE);
@@ -2758,9 +2772,14 @@ public class Request extends AppCompatActivity {
                         GetMACWAMModel user = new GetMACWAMModel(
                                 userJson.get("MacWan").getAsString()
                         );
-                        MACWAMText.setText(user.getMACWAM());
+                        try {
+                            MACWAMText.setText(user.getMACWAM());
+                        }catch (Exception e){}
+                        try{
+                            CambioAparato.MACWAMTextCambioAparato.setText(user.getMACWAM());
+                        }catch (Exception q){}
                     }catch (Exception e){
-                        GetMACWAMModel user = new GetMACWAMModel(
+                        GetMACWAMModel usernull = new GetMACWAMModel(
                                 userJson.get("MacWan").getAsJsonNull().toString()
                         );
 
@@ -2825,6 +2844,7 @@ public class Request extends AppCompatActivity {
                     }
 
                     if(requierePregunta==true){
+                        ServiciosAInstalar.layoutMedio.setVisibility(View.VISIBLE);
                         try {
                             array.dataMediosPregunta.clear();
                             array.medioPregunta.clear();

@@ -17,9 +17,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <include
-                android:id="@+id/includeCambioAparato"
-                layout="@layout/toolbar"></include>
+
 
             <android.support.constraint.ConstraintLayout
                 android:id="@+id/ads"
@@ -28,7 +26,7 @@
                 android:layout_marginTop="8dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/includeCambioAparato">
+                >
 
                 <TextView
                     android:id="@+id/qwe"
@@ -187,6 +185,31 @@
                         android:background="@drawable/disenio_spinner"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/textView33" />
+
+                    <TextView
+                        android:id="@+id/textView35"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentTop="true"
+                        android:layout_marginStart="4dp"
+                        android:layout_marginTop="8dp"
+                        android:text="@string/MACWAM"
+                        android:visibility="gone"
+                        android:textSize="@dimen/grande"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/aparatoAsignar" />
+
+                    <EditText
+                        android:id="@+id/cambioaparatMacwan"
+                        android:layout_width="300dp"
+                        android:layout_height="@dimen/spinnerA"
+                        android:layout_alignParentTop="true"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginTop="8dp"
+                        android:visibility="gone"
+                        android:background="@drawable/disenio_spinner"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/textView35" />
                 </android.support.constraint.ConstraintLayout>
 
                 <Button

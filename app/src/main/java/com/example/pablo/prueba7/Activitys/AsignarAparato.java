@@ -143,14 +143,15 @@ public class AsignarAparato extends AppCompatActivity {
                                     dat.get(position-1).getIdArticulo()),serviciosAparato);
 
 
-                    JSONObject jsonObject = new JSONObject();
-                    JSONObject jsonObject1 = new JSONObject();
+
                     try {
+                        JSONObject jsonObject = new JSONObject();
+                        JSONObject jsonObject1 = new JSONObject();
                         jsonObject.put("Letra", dat.get(position - 1).letra);
                         jsonObject1.put("ObjRelMacwan", jsonObject);
+                        request.ValidaMACWAM(getApplicationContext(), jsonObject1);
                     } catch (Exception e) {
                     }
-                    request.ValidaMACWAM(getApplicationContext(), jsonObject1);
                     serviciosAparato.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
                     serviciosAparato.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                         @Override
