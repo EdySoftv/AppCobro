@@ -168,6 +168,10 @@ public class GetQuejasListResult {
     @Expose
     private Object clvLlamada;
 
+    public Long getClvTrabajo() {
+        return clvTrabajo;
+    }
+
     public Long getBaseIdUser() {
         return baseIdUser;
     }

@@ -1,6 +1,7 @@
 package com.example.pablo.prueba7.Request;
 
 import android.app.Activity;
+import android.arch.lifecycle.ReportFragment;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
@@ -23,6 +24,7 @@ import com.example.pablo.prueba7.Activitys.Reportes;
 import com.example.pablo.prueba7.Adapters.TablaAdapter;
 import com.example.pablo.prueba7.Fragments.EjecutarOrdenes;
 import com.example.pablo.prueba7.Activitys.ExtensionesAdi;
+import com.example.pablo.prueba7.Fragments.EjecutarReportes;
 import com.example.pablo.prueba7.Fragments.HorasReportes;
 
 
@@ -158,6 +160,8 @@ import static com.example.pablo.prueba7.Fragments.TrabajosReportes.posSolucionRe
 import static com.example.pablo.prueba7.Listas.Array.Asigna;
 import static com.example.pablo.prueba7.Listas.Array.Asigna1;
 import static com.example.pablo.prueba7.Fragments.TrabajosReportes.solucion;
+import static com.example.pablo.prueba7.Services.Services.clavequeja;
+import static com.example.pablo.prueba7.Services.Services.opcion;
 import static java.util.Arrays.asList;
 
 public class Request extends AppCompatActivity {
@@ -179,6 +183,7 @@ public class Request extends AppCompatActivity {
     public static boolean Ejecutar;
     BarraCargar barraCargar = new BarraCargar();
     public static boolean requierePregunta=false;
+
 
     public void ErrorInicioDeSesion(final Context context) {
         try {
@@ -1475,6 +1480,9 @@ public class Request extends AppCompatActivity {
                             TrabajosReportes.clasific.setText(String.valueOf(dat.get(i).getClasificacionProblema()));
                             TrabajosReportes.desc.setText(String.valueOf(dat.get(i).getObservaciones()));
                             TrabajosReportes.problm.setText(String.valueOf(dat.get(i).getProblema()));
+                            String a="";
+
+                            services.ClvTrabajoRequest=dat.get(i).getClvTrabajo();
                         }
                     }
                 }
@@ -1917,16 +1925,20 @@ public class Request extends AppCompatActivity {
                             jsonObject.get("BaseIdUser").getAsInt()
                     );
                     if (checa.getBaseIdUser() == 0) {
-
+                        getGuardaCampos(context);
                     }
                 }else{
-                    dialogEjecutar.dismiss();
+
+                    EjecutarReportes.dialogReportes.dismiss();
+                    Toast.makeText(context,"Error al ejecutar Reporte",Toast.LENGTH_LONG).show();
                 }
             }
 
             @Override
             public void onFailure(Call<JsonObject> call, Throwable t) {
 
+                EjecutarReportes.dialogReportes.dismiss();
+                Toast.makeText(context,"Error al ejecutar Reporte",Toast.LENGTH_LONG).show();
             }
         });
     }
@@ -1944,18 +1956,21 @@ public class Request extends AppCompatActivity {
             @Override
             public void onResponse(Call<JsonObject> call, Response<JsonObject> response1) {
                 if (response1.code() == 200) {
-                    if (String.valueOf(response1.body().getAsJsonPrimitive("GetGuardaHoraOrdenResult")).equals(0)) {
+                    String string1 =String.valueOf(response1.body().getAsJsonPrimitive("GetGuardaHoraOrdenResult"));
+                    if (string1.equals("0")) {
 
                         getValidaReporte(context);
                     }
                 }else{
-                    dialogEjecutar.dismiss();
+                    EjecutarReportes.dialogReportes.dismiss();
+                    Toast.makeText(context,"Error al ejecutar Reporte",Toast.LENGTH_LONG).show();
                 }
             }
 
             @Override
             public void onFailure(Call<JsonObject> call, Throwable t) {
-
+                EjecutarReportes.dialogReportes.dismiss();
+                Toast.makeText(context,"Error al ejecutar Reporte",Toast.LENGTH_LONG).show();
             }
         });
     }
@@ -1975,15 +1990,23 @@ public class Request extends AppCompatActivity {
             public void onResponse(Call<JsonObject> call, Response<JsonObject> response1) {
                 if (response1.code() == 200) {
                     if (String.valueOf(response1.body().getAsJsonPrimitive("UpdateQuejasResult")).equals(-1)) {
+                        EjecutarReportes.dialogReportes.dismiss();
+                        clavequeja = 0;
+                        opcion = 1;
+                        Inicio.tipodeDescarga = "Q";
+                        getListQuejas(context);
                     }
                 }else{
-                    dialogEjecutar.dismiss();
+                    try {
+                        getListQuejas(context);
+                    }catch (Exception e){}
                 }
             }
 
             @Override
             public void onFailure(Call<JsonObject> call, Throwable t) {
-
+                EjecutarReportes.dialogReportes.dismiss();
+                Toast.makeText(context,"Error al ejecutar Reporte",Toast.LENGTH_LONG).show();
             }
         });
     }

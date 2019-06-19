@@ -2,6 +2,7 @@ package com.example.pablo.prueba7.Fragments;
 
 
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -18,6 +19,7 @@ import com.example.pablo.prueba7.Activitys.Inicio;
 import com.example.pablo.prueba7.R;
 import com.example.pablo.prueba7.Activitys.Reportes;
 import com.example.pablo.prueba7.Request.Request;
+import com.example.pablo.prueba7.sampledata.BarraCargar;
 
 import java.util.Calendar;
 
@@ -41,6 +43,7 @@ public class EjecutarReportes extends Fragment {
     public static String year, horas12;
     public static   String month;
    public static  String minute;
+    public static ProgressDialog dialogReportes;
    Inicio in;
     public EjecutarReportes() {
         // Required empty public constructor
@@ -54,6 +57,7 @@ public class EjecutarReportes extends Fragment {
         setRetainInstance(true);
         in = new Inicio();
 
+        dialogReportes = new BarraCargar().showDialog(getContext());
         View view = inflater.inflate(R.layout.activity_ejecutar_reporte, container, false);
         eject = view.findViewById(R.id.ejecutarR);
         salir= view.findViewById(R.id.SalirR);
@@ -161,15 +165,11 @@ public class EjecutarReportes extends Fragment {
 
 
             }else {
-
+                dialogReportes.show();
                 if (horas.reporteEjecutada == 1) {
                     year = añoE + "" + month + "" + diaE;
                     horas12 = mHour + ":" + minute;
                     request.getGuardaHoraReporte(getContext());
-                    request.getGuardaCampos(getContext());
-                    Intent intent1 = new Intent(getActivity(), Reportes.class);
-                    request.getListQuejas(getContext());
-                    startActivity(intent1);
 
 
                 }
@@ -179,10 +179,7 @@ public class EjecutarReportes extends Fragment {
             if (horas.repotteVisita == 1) {
                 try {
                     request.getGuardaHoraReporte(getContext());
-                    request.getGuardaCampos(getContext());
-                    Intent intent1 = new Intent(getActivity(), Reportes.class);
-                    startActivity(intent1);
-                    request.getListQuejas(getContext());
+
 
                 } catch (Exception e) {
                     Toast.makeText(getContext(), "La Fecha es obligatoria", Toast.LENGTH_SHORT).show();
@@ -192,10 +189,7 @@ public class EjecutarReportes extends Fragment {
             if (horas.reporteVisita1 == 1) {
                 try {
                     request.getGuardaHoraReporte(getContext());
-                    request.getGuardaCampos(getContext());
-                    Intent intent1 = new Intent(getActivity(), Reportes.class);
-                    startActivity(intent1);
-                    request.getListQuejas(getContext());
+
                 } catch (Exception e) {
                     Toast.makeText(getContext(), "La Fecha es obligatoria", Toast.LENGTH_SHORT).show();
                 }
@@ -203,10 +197,6 @@ public class EjecutarReportes extends Fragment {
             if (horas.reporteVisita2 == 1) {
                 try {
                     request.getGuardaHoraReporte(getContext());
-                    request.getGuardaCampos(getContext());
-                    Intent intent1 = new Intent(getActivity(), Reportes.class);
-                    startActivity(intent1);
-                    request.getListQuejas(getContext());
 
                 } catch (Exception e) {
                     Toast.makeText(getContext(), "La Fecha es obligatoria", Toast.LENGTH_SHORT).show();

@@ -2,6 +2,7 @@ package com.example.pablo.prueba7.Services;
 
 
 import android.content.Context;
+import android.util.Log;
 
 import com.example.pablo.prueba7.Activitys.CambioAparato;
 import com.example.pablo.prueba7.Dibujo.Firma;
@@ -83,6 +84,7 @@ public class Services {
     public static String cont;
     public static JSONObject jsonObject = new JSONObject();
     JSONObject jsonObject20 = new JSONObject();
+    public static long ClvTrabajoRequest;
 
     public static JSONArray jsonArrayap = new JSONArray();
    // public static JSONArray jsonTokenFirebase = new JSONArray();
@@ -1143,6 +1145,7 @@ public class Services {
 
     public Service getGuardaInfoReportes(final Context context) throws JSONException {
         //POST Body Json
+
         JSONObject objQuejas = new JSONObject();
         JSONObject jsonObject = new JSONObject();
         objQuejas.put("Clv_Queja", clvReport.toString());
@@ -1163,7 +1166,8 @@ public class Services {
         objQuejas.put("Visita2", HorasReportes.reportesselectDate2.getText());
         objQuejas.put("Visita3", HorasReportes.reportesselectDate3.getText());
         objQuejas.put("clvPrioridadQueja", clvP);
-        objQuejas.put("clvProblema", Clv_Sol);
+        objQuejas.put("clvProblema",ClvTrabajoRequest );
+        objQuejas.put("clvProblemaS", Clv_Sol);
         jsonObject.put("objQuejas", objQuejas);
         MediaType JSON = MediaType.parse("application/json; charset=utf-8");
         final RequestBody body = RequestBody.create(JSON, jsonObject.toString());
@@ -2073,6 +2077,7 @@ public class Services {
         String token;
         Util.preferences = context.getSharedPreferences("credenciales", Context.MODE_PRIVATE);
         token = Util.getTokenPreference(Util.preferences);
+        Log.d("token", token);
         return token;
     }
 

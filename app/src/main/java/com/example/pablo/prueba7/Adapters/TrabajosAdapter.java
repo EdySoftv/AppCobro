@@ -107,19 +107,18 @@ try{
     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
         Iterator<List<GetBUSCADetOrdSerListResult>> itData1 = Array.dataTrabajos.iterator();
         List<GetBUSCADetOrdSerListResult> dat1 = (List<GetBUSCADetOrdSerListResult>) itData1.next();
+
+        String palabra = holder.trabajo.getText().toString();
+        String[] caracteres = palabra.split(" ");
+        Log.d("caracteres0",caracteres[0]);
+        Log.d("caracteres1",caracteres[1]);
         if(holder.recibi.isChecked()){
             dat1.get(position).setSeRealiza(true);
             recibixnew=new ArrayList<>();
             for(int i=0;i<dat1.size();i++){
                recibixnew.add(dat1.get(i).getSeRealiza());
             }
-            if ((holder.trabajo.getText().toString().trim()).equalsIgnoreCase("ISTVA - Instalación de Servicio de TV")
-                    ||(holder.trabajo.getText().toString().trim()).equalsIgnoreCase("CONEX - Contratación De Extensión")
-                    ||(holder.trabajo.getText().toString().trim()).equalsIgnoreCase("CAPAT - Cambio De Tipo De Aparato")
-                    ||(holder.trabajo.getText().toString().trim()).equalsIgnoreCase("CAMDO - Cambio De Domicilio")
-                    ||(holder.trabajo.getText().toString().trim()).equalsIgnoreCase("ISNET - Instalación de Servicio de Internet")
-                    ||(holder.trabajo.getText().toString().trim()).equalsIgnoreCase("FUERA - Fuera Del Area De Instalación")
-                    ||(holder.trabajo.getText().toString().trim()).equalsIgnoreCase("CAPAG - Cambio de tipo de aparato  FTTH")) {
+            if (!caracteres[0].equals("RAPAG")){
                 Toast.makeText(Cmcontext, "Acción no asignada", Toast.LENGTH_SHORT).show();
                 holder.recibi.setChecked(false);
                 rapg=false;
