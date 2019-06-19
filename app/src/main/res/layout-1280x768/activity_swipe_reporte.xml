@@ -62,6 +62,7 @@
             android:background="@drawable/boton"
             android:text="@string/datos_Cliente"
             android:textStyle="bold"
+            android:textSize="7dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 

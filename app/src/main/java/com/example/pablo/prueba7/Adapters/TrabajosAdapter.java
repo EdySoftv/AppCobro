@@ -3,6 +3,7 @@ package com.example.pablo.prueba7.Adapters;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -135,41 +136,36 @@ try{
                 isnet=0;
 
                 String palabra = holder.trabajo.getText().toString();
-                char[] caracteres = palabra.toCharArray();
-                String trabajo="";
-                for (int i = 0; i < 5; i++) {
-                    trabajo=trabajo+caracteres[i];
-                }
-
-
-
+                String[] caracteres = palabra.split(" ");
+                Log.d("caracteres0",caracteres[0]);
+                Log.d("caracteres1",caracteres[1]);
                 Request request = new Request();
-                if (trabajo.equals("ISTVA")) {
+                if (caracteres[0].equals("ISTVA")) {
                     dialogTrabajos.show();
                     request.getArbSer(Cmcontext);
                 }
-                if (trabajo.equals("ISNET")) {
+                if (caracteres[0].equals("ISNET")) {
                     dialogTrabajos.show();
                     request.getArbSer(Cmcontext);
                     isnet=1;
                 }
-                if (trabajo.equals("CAPAG")) {
+                if (caracteres[0].equals("CAPAG")) {
                     dialogTrabajos.show();
                     Intent intento = new Intent(Cmcontext, CambioAparato.class);
                     ftth=1;
                     Cmcontext.startActivity(intento);
                 }
-                if (trabajo.equals("CAMDO")) {
+                if (caracteres[0].equals("CAMDO")) {
                     dialogTrabajos.show();
                     request.getCAMDO(Cmcontext);
                 }
-                if (trabajo.equals("CAPAT")) {
+                if (caracteres[0].equals("CAPAT")) {
                     dialogTrabajos.show();
                     Intent intento = new Intent(Cmcontext, CambioAparato.class);
                     Cmcontext.startActivity(intento);
                     ftth=0;
                 }
-                if (trabajo.equals("CONEX")) {
+                if (caracteres[0].equals("CONEX")) {
                     dialogTrabajos.show();
                     request.getExtencionesAdicionales(Cmcontext);
                 }

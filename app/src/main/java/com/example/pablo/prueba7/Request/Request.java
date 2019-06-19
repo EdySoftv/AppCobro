@@ -183,7 +183,9 @@ public class Request extends AppCompatActivity {
     public void ErrorInicioDeSesion(final Context context) {
         try {
             Login.dialogLogin.dismiss();
-
+            Util.preferences = getSharedPreferences("credenciales", Context.MODE_PRIVATE);
+            Util.preferences.edit().clear().commit();
+            SplashActivity.LoginShare=false;
         } catch (Exception e) {
             dialogInicio.dismiss();
             Intent intento = new Intent(context, Inicio.class);
@@ -1851,8 +1853,14 @@ public class Request extends AppCompatActivity {
                         List<GetBUSCADetOrdSerListResult> dat = itData.next();
 
                         if (HorasReportes.statusHora.equals("E")) {
+
                             for (int a = 0; a < dat.size(); a++) {
-                                if (dat.get(a).getClvTrabajo() == 1270 || dat.get(a).getClvTrabajo() == 1271 || dat.get(a).getClvTrabajo() == 1272) {
+
+                                String palabra = dat.get(a).getDescripcion();
+                                String[] caracteres = palabra.split(" ");
+                                Log.d("caracteres0",caracteres[0]);
+                                Log.d("caracteres1",caracteres[1]);
+                                if (caracteres[0].equals("ISNET") || caracteres[0].equals("ISDIG") || caracteres[0].equals("ISTVA")) {
                                     IS = 1;
                                 }
                             }
