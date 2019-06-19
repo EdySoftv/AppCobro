@@ -44,7 +44,7 @@
         android:layout_width="130dp"
         android:layout_height="45dp"
         android:layout_marginStart="24dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="24dp"
         android:inputType="number"
         app:layout_constraintEnd_toStartOf="@+id/borden"
         app:layout_constraintStart_toStartOf="parent"
@@ -66,7 +66,7 @@
         android:layout_width="130dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="24dp"
         android:inputType="text|number"
         app:layout_constraintStart_toEndOf="@+id/borden"
         app:layout_constraintTop_toTopOf="parent" />
@@ -84,14 +84,13 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:text="@string/n_Contrato"
         android:textSize="20dp"
         android:textStyle="bold"
-        app:layout_constraintEnd_toStartOf="@+id/bcontrato"
-        app:layout_constraintStart_toEndOf="@+id/borden"
+        app:layout_constraintEnd_toEndOf="@+id/contsearch"
+        app:layout_constraintStart_toStartOf="@+id/contsearch"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView

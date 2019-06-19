@@ -37,10 +37,10 @@
 
     <EditText
         android:id="@+id/reportesearch"
-        android:layout_width="123dp"
-        android:layout_height="28dp"
+        android:layout_width="130dp"
+        android:layout_height="45dp"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="32dp"
+        android:layout_marginStart="24dp"
         android:layout_marginTop="3dp"
         android:inputType="number"
         android:textSize="15dp"
@@ -60,11 +60,11 @@
 
     <EditText
         android:id="@+id/contsearch"
-        android:layout_width="123dp"
-        android:layout_height="28dp"
+        android:layout_width="130dp"
+        android:layout_height="45dp"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginStart="32dp"
+        android:layout_marginStart="24dp"
         android:layout_marginTop="3dp"
         android:inputType="text|number"
         android:textSize="15dp"
@@ -75,25 +75,22 @@
         android:id="@+id/bcontrato"
         android:layout_width="25dp"
         android:layout_height="25dp"
-        android:layout_marginStart="8dp"
         android:background="@drawable/busqueda"
         android:gravity="center_vertical"
         app:layout_constraintBottom_toBottomOf="@+id/contsearch"
         app:layout_constraintStart_toEndOf="@+id/contsearch"
-        app:layout_constraintTop_toTopOf="@+id/contsearch"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintTop_toTopOf="@+id/contsearch" />
 
     <TextView
         android:id="@+id/textView44"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:text="@string/n_Contrato"
         android:textSize="20dp"
         android:textStyle="bold"
-        app:layout_constraintEnd_toStartOf="@+id/bcontrato"
+        app:layout_constraintEnd_toEndOf="@+id/contsearch"
         app:layout_constraintStart_toStartOf="@+id/contsearch"
         app:layout_constraintTop_toTopOf="parent" />
 
