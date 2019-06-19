@@ -134,34 +134,42 @@ try{
             public void onClick(View v) {
                 isnet=0;
 
+                String palabra = holder.trabajo.getText().toString();
+                char[] caracteres = palabra.toCharArray();
+                String trabajo="";
+                for (int i = 0; i < 5; i++) {
+                    trabajo=trabajo+caracteres[i];
+                }
+
+
 
                 Request request = new Request();
-                if ((holder.trabajo.getText().toString().trim()).equalsIgnoreCase("ISTVA - Instalación de Servicio de TV")) {
+                if (trabajo.equals("ISTVA")) {
                     dialogTrabajos.show();
                     request.getArbSer(Cmcontext);
                 }
-                if ((holder.trabajo.getText().toString().trim()).equalsIgnoreCase("ISNET - Instalación de Servicio de Internet")) {
+                if (trabajo.equals("ISNET")) {
                     dialogTrabajos.show();
                     request.getArbSer(Cmcontext);
                     isnet=1;
                 }
-                if ((holder.trabajo.getText().toString().trim()).equalsIgnoreCase("CAPAG - Cambio de tipo de aparato  FTTH")) {
+                if (trabajo.equals("CAPAG")) {
                     dialogTrabajos.show();
                     Intent intento = new Intent(Cmcontext, CambioAparato.class);
                     ftth=1;
                     Cmcontext.startActivity(intento);
                 }
-                if ((holder.trabajo.getText().toString().trim()).equalsIgnoreCase("CAMDO - Cambio De Domicilio")) {
+                if (trabajo.equals("CAMDO")) {
                     dialogTrabajos.show();
                     request.getCAMDO(Cmcontext);
                 }
-                if ((holder.trabajo.getText().toString().trim()).equalsIgnoreCase("CAPAT - Cambio De Tipo De Aparato")) {
+                if (trabajo.equals("CAPAT")) {
                     dialogTrabajos.show();
                     Intent intento = new Intent(Cmcontext, CambioAparato.class);
                     Cmcontext.startActivity(intento);
                     ftth=0;
                 }
-                if ((holder.trabajo.getText().toString().trim()).equalsIgnoreCase("CONEX - Contratación De Extensión")) {
+                if (trabajo.equals("CONEX")) {
                     dialogTrabajos.show();
                     request.getExtencionesAdicionales(Cmcontext);
                 }
