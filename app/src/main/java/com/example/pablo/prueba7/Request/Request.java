@@ -2380,9 +2380,11 @@ public class Request extends AppCompatActivity {
                     );
                     if (user.Tipo.equals("Piezas")) {
                         MaterialesOrdenes.piezasMat.setVisibility(View.VISIBLE);
+                        MaterialesOrdenes.metrosMat.setVisibility(View.INVISIBLE);
                         pieza = true;
                     } else {
                         MaterialesOrdenes.metrosMat.setVisibility(View.VISIBLE);
+                        MaterialesOrdenes.piezasMat.setVisibility(View.INVISIBLE);
                         pieza = false;
                     }
                 }
@@ -2552,9 +2554,11 @@ public class Request extends AppCompatActivity {
                     );
                     if (user.Tipo.equals("Piezas")) {
                         MaterialesReportes.piezasMatR.setVisibility(View.VISIBLE);
+                        MaterialesReportes.metrosMatR.setVisibility(View.INVISIBLE);
                         pieza = true;
                     } else {
                         MaterialesReportes.metrosMatR.setVisibility(View.VISIBLE);
+                        MaterialesReportes.piezasMatR.setVisibility(View.INVISIBLE);
                         pieza = false;
                     }
                 }
