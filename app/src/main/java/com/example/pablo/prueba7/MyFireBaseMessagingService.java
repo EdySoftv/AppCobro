@@ -47,10 +47,8 @@ public class MyFireBaseMessagingService extends FirebaseMessagingService {
 
         // Check if message contains a notification payload.
         if (remoteMessage.getNotification() != null) {
-            String titulo = remoteMessage.getNotification().getTitle();
-            String texto = remoteMessage.getNotification().getBody();
-            noti(titulo,texto);
-
+            noti(remoteMessage.getNotification().getTitle(),remoteMessage.getNotification().getBody());
+            Log.d("asd", "Message data payload: " + remoteMessage.getNotification().getBody());
         }
     }
 
@@ -71,6 +69,7 @@ public class MyFireBaseMessagingService extends FirebaseMessagingService {
         builder.setSmallIcon(R.drawable.ic_menu_send);
         builder.setContentTitle(titulo);
         builder.setContentText(body);
+        builder.setStyle(new NotificationCompat.BigTextStyle().bigText(body));
         builder.setPriority(NotificationCompat.PRIORITY_HIGH);
         builder.setDefaults(Notification.DEFAULT_SOUND);
         NotificationManagerCompat notificationManagerCompat = NotificationManagerCompat.from(getApplicationContext());
