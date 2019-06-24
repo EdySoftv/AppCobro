@@ -141,7 +141,11 @@ try{
                 Request request = new Request();
                 if (caracteres[0].equals("ISTVA")) {
                     dialogTrabajos.show();
-                    request.getArbSer(Cmcontext);
+                    try{
+                        JSONObject jsonObject = new JSONObject();
+                        jsonObject.put("clv_orden", OrdenesAdapter.clvor);
+                        request.PreguntaMedios(Cmcontext,jsonObject);
+                    }catch (Exception e){}
                 }
                 if (caracteres[0].equals("ISNET")) {
                     dialogTrabajos.show();

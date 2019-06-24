@@ -21,6 +21,7 @@ import com.example.pablo.prueba7.Activitys.CambioDom;
 import com.example.pablo.prueba7.Activitys.CambioAparato;
 import com.example.pablo.prueba7.Activitys.ReporteAsignacion;
 import com.example.pablo.prueba7.Activitys.Reportes;
+import com.example.pablo.prueba7.Adapters.OrdenesAdapter;
 import com.example.pablo.prueba7.Adapters.TablaAdapter;
 import com.example.pablo.prueba7.Fragments.EjecutarOrdenes;
 import com.example.pablo.prueba7.Activitys.ExtensionesAdi;
@@ -1224,6 +1225,7 @@ public class Request extends AppCompatActivity {
                     Intent intento25 = new Intent(context, ServiciosAInstalar.class);
                     context.startActivity(intento25);
                     dialogTrabajos.dismiss();
+                    //Request pregunta
                 } else {
                     Toast.makeText(context, "Error al conseguir datos", Toast.LENGTH_LONG).show();
                 }
@@ -2889,27 +2891,28 @@ public class Request extends AppCompatActivity {
         call.enqueue(new Callback<JSONPregunta>() {
             @Override
             public void onResponse(Call<JSONPregunta> call, Response<JSONPregunta> response) {
-                Log.d("asd","asd");
+                Log.d("asd", "asd");
+                requierePregunta = false;
                 if (response.code() == 200) {
                     JSONPregunta jsonResponse = response.body();
                     try {
                         array.dataPregunta.clear();
-                    }catch (Exception e){}
+                    } catch (Exception e) {
+                    }
                     array.dataPregunta = new ArrayList<List<RequierePregunta>>(asList(jsonResponse.getDamePreguntaMedioPorOrdenResult.getRequierePregunta()));
                     Iterator<List<RequierePregunta>> itData = array.dataPregunta.iterator();
                     while (itData.hasNext()) {
                         List<RequierePregunta> dat = (List<RequierePregunta>) itData.next();
                         for (int i = 0; i < dat.size(); i++) {
-                            requierePregunta= dat.get(i).RequierePregunta;
+                            requierePregunta = dat.get(i).RequierePregunta;
                         }
                     }
-
-                    if(requierePregunta==true){
-                        ServiciosAInstalar.layoutMedio.setVisibility(View.VISIBLE);
+                    if (requierePregunta == true) {
                         try {
                             array.dataMediosPregunta.clear();
                             array.medioPregunta.clear();
-                        }catch (Exception e){}
+                        } catch (Exception e) {
+                        }
 
 
                         array.dataMediosPregunta = new ArrayList<List<mediosPregunta>>(asList(response.body().getDamePreguntaMedioPorOrdenResult.getmediosPregunta()));
@@ -2921,19 +2924,10 @@ public class Request extends AppCompatActivity {
                                 array.medioPregunta.add(dat1.get(i).getDescripcion());
                             }
                         }
-                        ArrayAdapter<String> adapter = new ArrayAdapter<String>(context, android.R.layout.simple_spinner_dropdown_item, array.medioPregunta);
-                        ServiciosAInstalar.spinnerMedio.setAdapter(adapter);
-                        ServiciosAInstalar.spinnerMedio.setEnabled(false);
-                    }else{
-
+                    } else {
                     }
-                }else {
+                    getArbSer(context);
                 }
-
-
-
-
-
             }
 
             @Override

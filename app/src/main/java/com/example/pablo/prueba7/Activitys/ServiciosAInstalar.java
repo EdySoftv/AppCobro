@@ -27,6 +27,7 @@ import com.example.pablo.prueba7.Adapters.ArbolAdapter;
 import com.example.pablo.prueba7.Adapters.OrdenesAdapter;
 import com.example.pablo.prueba7.Listas.Array;
 import com.example.pablo.prueba7.Modelos.GetMuestraArbolServiciosAparatosPorinstalarListResult;
+import com.example.pablo.prueba7.Modelos.RequierePregunta;
 import com.example.pablo.prueba7.Modelos.mediosPregunta;
 import com.example.pablo.prueba7.R;
 import com.example.pablo.prueba7.Request.Request;
@@ -36,8 +37,11 @@ import com.example.pablo.prueba7.sampledata.Util;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+
+import static java.util.Arrays.asList;
 
 
 public class ServiciosAInstalar extends AppCompatActivity {
@@ -49,15 +53,9 @@ public class ServiciosAInstalar extends AppCompatActivity {
     public static RecyclerView Asignacion;
     public static Spinner spinnerMedio;
     public static ConstraintLayout layoutMedio;
-    int c, e;
-    String f;
+    int c;
     public static ProgressDialog dialogAsignacion;
-    public static JSONArray jsonArray = new JSONArray();
     public static JSONArray jsonArray2 = new JSONArray();
-    public static JSONArray jsonArray3 = new JSONArray();
-    public static JSONObject jsonObject2 = new JSONObject();
-    public static JSONObject jsonObject3 = new JSONObject();
-    public static JSONObject jsonObject4 = new JSONObject();
     public static ArbolAdapter adapter;
     CheckBox checkBoxSi,checkBoxNo;
     TextView txtMedio;
@@ -103,17 +101,13 @@ public class ServiciosAInstalar extends AppCompatActivity {
         /////
         dialogAsignacion = new BarraCargar().showDialog(this);
 
-        //Request pregunta
-        try{
-            JSONObject jsonObject = new JSONObject();
-            jsonObject.put("clv_orden", OrdenesAdapter.clvor);
-            request.PreguntaMedios(getApplicationContext(),jsonObject);
-        }catch (Exception e){}
+
 
 
         final Iterator<List<GetMuestraArbolServiciosAparatosPorinstalarListResult>> itData4 = array.dataArbSer.iterator();
         final List<GetMuestraArbolServiciosAparatosPorinstalarListResult> dat4 = (List<GetMuestraArbolServiciosAparatosPorinstalarListResult>) itData4.next();
-
+        Iterator<List<RequierePregunta>> itData = array.dataPregunta.iterator();
+        List<RequierePregunta> dat = (List<RequierePregunta>) itData.next();
 
         //Llenar lista
 
@@ -130,14 +124,38 @@ public class ServiciosAInstalar extends AppCompatActivity {
         /*
         Revisar si los servicios tiene minimo un medio
  */
+
+
+
+
+
+        if(dat.get(0).RequierePregunta==true){
+            ServiciosAInstalar.layoutMedio.setVisibility(View.VISIBLE);
+
+            ArrayAdapter<String> adapter = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_spinner_dropdown_item, array.medioPregunta);
+            ServiciosAInstalar.spinnerMedio.setAdapter(adapter);
+            ServiciosAInstalar.spinnerMedio.setEnabled(false);
+        }else{
+
+        }
+
+
+
+
+
+
+
+
         c = 0;
         for (int a = 0; a < dat4.size(); a++) {
             if (dat4.get(a).IdMedio == 0 || dat4.get(a).IdMedio == null) {
                 c = c + 1;
             }
         }
-
-        if (request.requierePregunta == true) {
+        todosLosMedios=2;
+        if (dat.get(0).RequierePregunta == true) {
+            checkBoxSi.setChecked(false);
+            checkBoxNo.setChecked(false);
         }else{
             if (c != dat4.size()) {
                 layoutMedio.setVisibility(View.GONE);
@@ -152,13 +170,22 @@ public class ServiciosAInstalar extends AppCompatActivity {
                 if(contador==(dat4.size()-1)){
                     if(dat4.size()==1){
                         todosLosMedios=0;
+                        checkBoxSi.setChecked(false);
+                        checkBoxNo.setChecked(true);
                     }else{
                         todosLosMediosValidacion=true;
                         todosLosMedios=1;
+                        checkBoxNo.setChecked(false);
+                        checkBoxSi.setChecked(true);
                     }
                 }else{
                     todosLosMedios=0;
                 }
+            }
+            if(c==dat4.size()){
+                todosLosMedios=0;
+                checkBoxSi.setChecked(false);
+                checkBoxNo.setChecked(true);
             }
         }
 
@@ -238,34 +265,36 @@ public class ServiciosAInstalar extends AppCompatActivity {
 
             }
         });
+        if (dat.get(0).RequierePregunta == true) {
+            try{
+                ArrayAdapter<String> adapter = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_spinner_dropdown_item, Array.medioPregunta);
+                spinnerMedio.setAdapter(adapter);
+                spinnerMedio.setSelection(ReporteAsignacion.obtenerPosicionSpinnerMedioSI(dat4.get(ArbolAdapter.posicionArbol).IdMedio));
+                spinnerMedio.setEnabled(false);
+            }catch (Exception e){}
 
-try{
-    ArrayAdapter<String> adapter = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_spinner_dropdown_item, Array.medioPregunta);
-    spinnerMedio.setAdapter(adapter);
-    spinnerMedio.setSelection(ReporteAsignacion.obtenerPosicionSpinnerMedioSI(dat4.get(ArbolAdapter.posicionArbol).IdMedio));
-    spinnerMedio.setEnabled(false);
-}catch (Exception e){}
-
-        spinnerMedio.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int positionSpinnerSi, long id) {
-                if (positionSpinnerSi != 0) {
-                    //seleccionar medio
-                    Iterator<List<mediosPregunta>> itdata3 = Array.dataMediosPregunta.iterator();
-                    List<mediosPregunta> dat3 = itdata3.next();
-                    idMedioSI=dat3.get(positionSpinnerSi-1).getIdMedio();
-                    detalleSI=dat3.get(positionSpinnerSi-1).getDescripcion();
-                    todosLosMediosValidacion=false;
-                } else {
-                    //no se ha seleccionado ningun medio.
+            spinnerMedio.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                @Override
+                public void onItemSelected(AdapterView<?> parent, View view, int positionSpinnerSi, long id) {
+                    if (positionSpinnerSi != 0) {
+                        //seleccionar medio
+                        Iterator<List<mediosPregunta>> itdata3 = Array.dataMediosPregunta.iterator();
+                        List<mediosPregunta> dat3 = itdata3.next();
+                        idMedioSI=dat3.get(positionSpinnerSi-1).getIdMedio();
+                        detalleSI=dat3.get(positionSpinnerSi-1).getDescripcion();
+                        todosLosMediosValidacion=false;
+                    } else {
+                        //no se ha seleccionado ningun medio.
+                    }
                 }
-            }
 
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
+                @Override
+                public void onNothingSelected(AdapterView<?> parent) {
 
-            }
-        });
+                }
+            });
+        }else{}
+
 
     }
     @Override
