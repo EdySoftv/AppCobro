@@ -181,7 +181,6 @@ public class Request extends AppCompatActivity {
     String a = "Seleccione técnico secundario";
     String f = "Seleccione tipo de solución";
     public static String datos[];
-    public static boolean Ejecutar;
     BarraCargar barraCargar = new BarraCargar();
     public static boolean requierePregunta=false;
 
@@ -2135,7 +2134,7 @@ public class Request extends AppCompatActivity {
             public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
                 if (response.code() == 200) {
                     Toast.makeText(context, "Se ha guardado el aparato correctamente", Toast.LENGTH_SHORT).show();
-                    Ejecutar=true;
+
                     try {
                         dialogCAPAT.dismiss();
                     }catch (Exception e){}

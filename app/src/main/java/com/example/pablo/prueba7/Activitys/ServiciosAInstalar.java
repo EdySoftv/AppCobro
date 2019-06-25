@@ -253,7 +253,6 @@ public class ServiciosAInstalar extends AppCompatActivity {
                     }
                 }
                 if(dat4.size()==valida){
-                    request.Ejecutar=true;
                     Intent intento = new Intent(ServiciosAInstalar.this, MainActivity.class);
                     intento.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                     startActivity(intento);

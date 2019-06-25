@@ -66,14 +66,12 @@ public class CambioDom extends AppCompatActivity {
         regresar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                request.Ejecutar=true;
                 finish();
             }
         });
         aceptar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                request.Ejecutar=true;
                 Intent intento1 = new Intent(CambioDom.this, Orden.class);
                 startActivity(intento1);
                 finish();

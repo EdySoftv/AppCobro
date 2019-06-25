@@ -31,7 +31,6 @@ public class ExtensionesAdi extends AppCompatActivity {
         salir.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                request.Ejecutar=true;
                 finish();
             }
         });
@@ -40,7 +39,6 @@ public class ExtensionesAdi extends AppCompatActivity {
         aceptar.setOnClickListener(new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            request.Ejecutar=true;
             finish();
         }
     });
