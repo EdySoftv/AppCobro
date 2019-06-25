@@ -62,6 +62,7 @@ public class TrabajosAdapter extends BaseAdapter {
     public class viewHolder{
         TextView trabajo,accion,control;
         CheckBox recibi;
+        TextView recibitext;
     }
     @Override
     public int getCount() {
@@ -93,6 +94,7 @@ try{
             holder.accion=(TextView)convertView.findViewById(R.id.tv_Accion);
             holder.recibi=(CheckBox)convertView.findViewById(R.id.check_recibi);
             holder.control=(TextView)convertView.findViewById(R.id.click);
+            holder.recibitext = (TextView)convertView.findViewById(R.id.recibitext);
             convertView.setTag(holder);
         }
         else {
@@ -119,8 +121,11 @@ try{
                recibixnew.add(dat1.get(i).getSeRealiza());
             }
             if (!caracteres[0].equals("RAPAG")){
-                Toast.makeText(Cmcontext, "Acción no asignada", Toast.LENGTH_SHORT).show();
+               // Toast.makeText(Cmcontext, "Acción no asignada", Toast.LENGTH_SHORT).show();
                 holder.recibi.setChecked(false);
+                holder.recibi.setVisibility(View.VISIBLE);
+                holder.recibitext.setVisibility(View.VISIBLE);
+
                 rapg=false;
             }
         }

@@ -55,7 +55,18 @@
                     app:layout_constraintBottom_toBottomOf="@+id/tv_Accion"
                     app:layout_constraintStart_toEndOf="@+id/tv_Accion"
                     app:layout_constraintTop_toTopOf="@+id/tv_Accion"
-                    app:layout_constraintVertical_bias="0.545" />
+                    app:layout_constraintVertical_bias="0.545"
+                    android:visibility="gone"/>
+
+                <TextView
+                    android:id="@+id/recibitext"
+                    android:layout_width="wrap_content"
+                    android:layout_height="15dp"
+                    android:layout_marginBottom="4dp"
+                    android:text="@string/recibi"
+                    app:layout_constraintBottom_toTopOf="@+id/check_recibi"
+                    tools:layout_editor_absoluteX="321dp"
+                    android:visibility="gone"/>
 
 
                 <TextView
