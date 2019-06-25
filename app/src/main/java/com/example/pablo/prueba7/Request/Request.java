@@ -2777,7 +2777,6 @@ public class Request extends AppCompatActivity {
                 }
                         if (validFirma == 1) {
                             firma=true;
-                            Toast.makeText(context, "Firma requerida", Toast.LENGTH_LONG).show();
                         }else if (validFirma == 0){
                             firma=false;
                         }
