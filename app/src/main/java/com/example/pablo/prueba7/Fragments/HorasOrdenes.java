@@ -44,8 +44,9 @@ public class HorasOrdenes extends Fragment implements View.OnClickListener, Loca
     public static String latitud, longitud, diaI, mesI, añoI, diaV1, mesV1, añoV1, diaV2, mesV2, añoV2;
     public static int ejecutada = 1, visita = 0, visita1 = 0, TecSecSelecc = -1;
     private int mYear, mMonth, mDay ;
-    private View contenedorParticular;
+   // private View contenedorParticular;
     private View contenedorCorporativo;
+    private View contenedorObservacionesTecnico;
     public static TextView cordLat, cordLong;
     public static TextView Obs;
     public static Spinner TecSec;
@@ -95,15 +96,16 @@ public class HorasOrdenes extends Fragment implements View.OnClickListener, Loca
 
         request.getTecSec(getContext());
         //////////// acciones de botones de hora y fecha//////
-        selectDate = view.findViewById(R.id.tv_Ejecucion);
-        selectDate1 = view.findViewById(R.id.tv_PrimerVisita);
-        selectDate2 = view.findViewById(R.id.tv_SegundaVisita);
+        //selectDate = view.findViewById(R.id.tv_Ejecucion);
+       // selectDate1 = view.findViewById(R.id.tv_PrimerVisita);
+        //selectDate2 = view.findViewById(R.id.tv_SegundaVisita);
         todo = view.findViewById(R.id.todo);
         ///////////////////////////////////////////////////////
 
         ///////////contenedores y acciones de radiobuttons////
-        contenedorParticular = view.findViewById(R.id.constrain_Ejecutada);
-        contenedorCorporativo = view.findViewById(R.id.constrain_Visita);
+        //contenedorParticular = view.findViewById(R.id.constrain_Ejecutada);
+       // contenedorCorporativo = view.findViewById(R.id.constrain_Visita);
+        contenedorObservacionesTecnico=view.findViewById(R.id.contraintObservacionesTecnico);
         btn1 = view.findViewById(R.id.rb_Visita);
         bt2 = view.findViewById(R.id.rb_Ejecutada);
         /////////////////////////////////////////////////////
@@ -132,9 +134,9 @@ public class HorasOrdenes extends Fragment implements View.OnClickListener, Loca
         cordLong = (TextView) view.findViewById(R.id.tv_Longitud);
 
         ////////// fecaha, hora y radio buttons/////////
-        selectDate.setOnClickListener(this);
-        selectDate1.setOnClickListener(this);
-        selectDate2.setOnClickListener(this);
+      //  selectDate.setOnClickListener(this);
+       // selectDate1.setOnClickListener(this);
+      //  selectDate2.setOnClickListener(this);
 //        selectTime.setOnClickListener(this);
 //        selectTime2.setOnClickListener(this);
         bt2.setOnClickListener(this);
@@ -148,13 +150,13 @@ public class HorasOrdenes extends Fragment implements View.OnClickListener, Loca
             ejecutada = 0;
             visita = 1;
             ConstraintLayout.LayoutParams params = (ConstraintLayout.LayoutParams) todo.getLayoutParams();
-            params.setMargins(0, 150, 0, 0);
+            params.setMargins(0, 8, 0, 0);
             todo.setLayoutParams(params);
             mostrarParticular(false);
-            selectDate.setText("");
+            /*selectDate.setText("");
             selectDate1.setText("");
             selectDate2.setText("");
-            selectDate2.setEnabled(false);
+            selectDate2.setEnabled(false);*/
             ejecutada = 0;
             visita = 1;
         }
@@ -163,14 +165,15 @@ public class HorasOrdenes extends Fragment implements View.OnClickListener, Loca
             visita = 0;
             mostrarParticular(true);
             ConstraintLayout.LayoutParams params = (ConstraintLayout.LayoutParams) todo.getLayoutParams();
-            params.setMargins(0, 0, 0, 0);
+            params.setMargins(0, 8, 0, 0);
             todo.setLayoutParams(params);
-            selectDate.setText("");
+       /*     selectDate.setText("");
             selectDate1.setText("");
-            selectDate2.setText("");
+            selectDate2.setText("");*/
             ejecutada = 1;
             visita = 0;
         }
+/*
         if (view == selectDate) {
             final Calendar c = Calendar.getInstance();
             mYear = c.get(Calendar.YEAR);
@@ -206,8 +209,9 @@ public class HorasOrdenes extends Fragment implements View.OnClickListener, Loca
             }, mYear, mMonth, mDay);
             datePickerDialog.show();
         }
+*/
 
-        if (view == selectDate1) {
+   /*     if (view == selectDate1) {
             final Calendar c = Calendar.getInstance();
             mYear = c.get(Calendar.YEAR);
             mMonth = c.get(Calendar.MONTH);
@@ -241,10 +245,10 @@ public class HorasOrdenes extends Fragment implements View.OnClickListener, Loca
                 }
             }, mYear, mMonth, mDay);
             datePickerDialog1.show();
-        }
+        }*/
 
 
-        if (view == selectDate2) {
+ /*       if (view == selectDate2) {
             final Calendar c = Calendar.getInstance();
             mYear = c.get(Calendar.YEAR);
             mMonth = c.get(Calendar.MONTH);
@@ -277,12 +281,13 @@ public class HorasOrdenes extends Fragment implements View.OnClickListener, Loca
                 }
             }, mYear, mMonth, mDay);
             datePickerDialog.show();
-        }
+        }*/
     }
 
     private void mostrarParticular(boolean b) {
-        contenedorParticular.setVisibility(b ? View.VISIBLE : View.GONE);
-        contenedorCorporativo.setVisibility(b ? View.GONE : View.VISIBLE);
+        //contenedorParticular.setVisibility(b ? View.VISIBLE : View.GONE);
+       // contenedorCorporativo.setVisibility(b ? View.GONE : View.VISIBLE);
+        contenedorObservacionesTecnico.setVisibility(b ? View.GONE : View.VISIBLE);
     }
 
     /////////////////////////GPS///////////////////

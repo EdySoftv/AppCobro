@@ -87,6 +87,8 @@
     <string name="prioridad">Prioridad</string>
     <string name="reporte_Cliente">Reporte del cliente</string>
     <string name="observaciones">Observaciones</string>
+    <string name="observacionesPrevias">Observaciones previas</string>
+    <string name="observacionesTecnico">Observaciones Técnico</string>
     <string name="tipo_Solucion">Tipo de solución</string>
     <string name="problema_Real">Problema real</string>
     <string name="Regresar">Regresar</string>

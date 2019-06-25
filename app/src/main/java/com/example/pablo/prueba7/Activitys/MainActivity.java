@@ -102,10 +102,10 @@ public class MainActivity extends AppCompatActivity implements ActionBar.TabList
         actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
 
 
-        ActionBar.Tab tab = actionBar.newTab().setText("Trabajo").setTabListener(this);
+        ActionBar.Tab tab = actionBar.newTab().setText("Estatus").setTabListener(this);
         actionBar.addTab(tab);
 
-        tab = actionBar.newTab().setText("Horas").setTabListener(this);
+        tab = actionBar.newTab().setText("Trabajo").setTabListener(this);
         actionBar.addTab(tab);
 
         tab = actionBar.newTab().setText("Material").setTabListener(this);
@@ -131,9 +131,9 @@ public class MainActivity extends AppCompatActivity implements ActionBar.TabList
         public Fragment getItem(int arg0) {
             switch (arg0) {
                 case 0:
-                    return new TrabajosOrdenes();
-                case 1:
                     return new HorasOrdenes();
+                case 1:
+                    return new TrabajosOrdenes();
                 case 2:
                     return new MaterialesOrdenes();
                 case 3:

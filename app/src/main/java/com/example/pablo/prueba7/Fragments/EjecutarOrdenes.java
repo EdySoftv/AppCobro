@@ -227,8 +227,8 @@ public class EjecutarOrdenes extends Fragment {
                 jsonObject.put("Obs", DeepConsModel.Obs);
                 jsonObject.put("Status", "V");
                 jsonObject.put("TecnicoCuadrilla", HorasOrdenes.TecSecSelecc);
-                jsonObject.put("Visita1", fechaHoy);
-                jsonObject.put("Visita2", "");
+               // jsonObject.put("Visita1", fechaHoy);
+               // jsonObject.put("Visita2", "");
                 System.out.println("VAL 2");
                 request.getValidaOrdSer(getActivity(),jsonObject);
             }catch (Exception e){}
@@ -248,8 +248,8 @@ public class EjecutarOrdenes extends Fragment {
                 jsonObject.put("Obs", DeepConsModel.Obs);
                 jsonObject.put("Status", "V");
                 jsonObject.put("TecnicoCuadrilla", HorasOrdenes.TecSecSelecc);
-                jsonObject.put("Visita1", DeepConsModel.Visita1);
-                jsonObject.put("Visita2", fechaHoy);
+               // jsonObject.put("Visita1", DeepConsModel.Visita1);
+                //jsonObject.put("Visita2", fechaHoy);
                 System.out.println("VAL 3");
                 request.getValidaOrdSer(getActivity(),jsonObject);
             }catch (Exception e){}
