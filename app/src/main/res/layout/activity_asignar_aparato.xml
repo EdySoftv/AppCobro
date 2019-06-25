@@ -27,13 +27,14 @@
 
             <TextView
                 android:id="@+id/textView7"
-                android:layout_width="wrap_content"
+                android:layout_width="275dp"
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="8dp"
                 android:text="@string/asignacion_Aparatos"
                 android:textSize="@dimen/titulos"
                 android:textStyle="bold"
+                android:textAlignment="center"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/includeAsignarAparatos" />
@@ -61,7 +62,7 @@
 -->
             <TextView
                 android:id="@+id/textView8"
-                android:layout_width="wrap_content"
+                android:layout_width="270dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="4dp"
                 android:layout_marginTop="16dp"
@@ -83,7 +84,7 @@
 
             <TextView
                 android:id="@+id/textView18"
-                android:layout_width="wrap_content"
+                android:layout_width="270dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="4dp"
                 android:layout_marginTop="16dp"
@@ -138,13 +139,16 @@
 
             <TextView
                 android:id="@+id/textView24"
-                android:layout_width="wrap_content"
-                android:layout_height="27dp"
-                android:layout_marginStart="8dp"
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
                 android:layout_marginTop="8dp"
+                android:layout_marginEnd="4dp"
                 android:text="@string/servicios_a_los_que"
                 android:textSize="@dimen/grande"
                 android:textStyle="bold"
+                android:textAlignment="center"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/MACWAMConstraint" />
 
@@ -160,7 +164,11 @@
                     android:id="@+id/Servicios123"
                     android:layout_width="match_parent"
                     android:layout_height="100dp"
+                    android:layout_marginStart="8dp"
                     android:layout_marginTop="8dp"
+                    android:layout_marginEnd="8dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"></ListView>
             </android.support.constraint.ConstraintLayout>
         </android.support.constraint.ConstraintLayout>
@@ -173,16 +181,13 @@
             android:layout_alignParentBottom="true"
             android:layout_marginStart="24dp"
             android:layout_marginTop="8dp"
-            android:layout_marginEnd="8dp"
             android:layout_marginBottom="8dp"
             android:background="@drawable/boton"
             android:backgroundTint="@color/colorPrimary"
             android:text="@string/agregar"
-            android:textColor="#000"
+            android:textColor="#ffff"
             android:textSize="@dimen/mediano"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/cancelarAsignacionAparato"
-            app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/constraintLayout2" />
 
@@ -197,7 +202,7 @@
             android:background="@drawable/boton"
             android:backgroundTint="@color/colorPrimary"
             android:text="@string/cancelar"
-            android:textColor="#000"
+            android:textColor="#ffff"
             android:textSize="@dimen/mediano"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

@@ -12,35 +12,39 @@
 
     <TextView
         android:id="@+id/qwe"
-        android:layout_width="wrap_content"
-        android:layout_height="30dp"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:layout_marginTop="16dp"
         android:text="@string/extensiones_Adicionales"
         android:textSize="@dimen/grande"
         android:textStyle="bold"
+        android:textAlignment="center"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/includeExtencion" />
 
     <TextView
         android:id="@+id/asd"
-        android:layout_width="wrap_content"
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:layout_below="@+id/qwe"
 
         android:layout_marginStart="8dp"
         android:layout_marginTop="24dp"
+        android:layout_marginEnd="8dp"
         android:text="@string/numero_de_Extensiones"
         android:textSize="@dimen/mediano"
         android:textStyle="bold"
+        android:textAlignment="center"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/qwe" />
 
     <TextView
         android:id="@+id/txtExtencion"
-        android:layout_width="wrap_content"
+        android:layout_width="100dp"
         android:layout_height="wrap_content"
         android:layout_below="@+id/asd"
         android:layout_centerHorizontal="true"
@@ -56,15 +60,15 @@
     <Button
         android:id="@+id/extencionAceptar"
         android:layout_width="@dimen/botonChicoL"
-        android:layout_height="@dimen/botonChicoA"
+        android:layout_height="wrap_content"
         android:layout_below="@+id/txtExtencion"
         android:layout_alignParentStart="true"
         android:layout_marginStart="56dp"
         android:layout_marginTop="32dp"
-        android:textColor="#000"
         android:background="@drawable/boton"
         android:backgroundTint="@color/colorPrimary"
         android:text="@string/aceptar"
+        android:textColor="#fff"
         android:textSize="10dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtExtencion" />
@@ -72,15 +76,15 @@
     <Button
         android:id="@+id/extencionSalir"
         android:layout_width="@dimen/botonChicoL"
-        android:layout_height="@dimen/botonChicoA"
+        android:layout_height="wrap_content"
         android:layout_below="@+id/txtExtencion"
         android:layout_marginTop="32dp"
         android:layout_marginEnd="48dp"
         android:layout_toEndOf="@+id/extencionAceptar"
-        android:textColor="#000"
         android:background="@drawable/boton"
         android:backgroundTint="@color/colorPrimary"
         android:text="@string/salir"
+        android:textColor="#fff"
         android:textSize="10dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtExtencion" />

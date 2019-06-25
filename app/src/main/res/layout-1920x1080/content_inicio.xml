@@ -26,10 +26,9 @@
 
         <TextView
             android:id="@+id/textView"
-            android:layout_width="wrap_content"
+            android:layout_width="200dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            android:layout_marginLeft="8dp"
             android:layout_marginTop="5dp"
             android:text="@string/proximo_Trabajo"
             android:textColor="#000"
@@ -41,10 +40,9 @@
 
         <TextView
             android:id="@+id/textView2"
-            android:layout_width="wrap_content"
+            android:layout_width="200dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            android:layout_marginLeft="8dp"
             android:layout_marginTop="8dp"
             android:text="@string/direccion"
             android:textColor="#000"
@@ -55,10 +53,9 @@
 
         <TextView
             android:id="@+id/textView16"
-            android:layout_width="wrap_content"
+            android:layout_width="150dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            android:layout_marginLeft="8dp"
             android:layout_marginTop="8dp"
             android:text="@string/tipoDeTrabajo"
             app:layout_constraintStart_toStartOf="parent"
@@ -77,10 +74,9 @@
 
         <TextView
             android:id="@+id/textView20"
-            android:layout_width="wrap_content"
+            android:layout_width="150dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            android:layout_marginLeft="8dp"
             android:layout_marginTop="8dp"
             android:text="@string/contrato"
             app:layout_constraintStart_toStartOf="parent"
@@ -97,10 +93,9 @@
 
         <TextView
             android:id="@+id/textView25"
-            android:layout_width="wrap_content"
+            android:layout_width="150dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            android:layout_marginLeft="8dp"
             android:layout_marginTop="8dp"
             android:text="@string/hora"
             app:layout_constraintStart_toStartOf="parent"
@@ -117,10 +112,9 @@
 
         <TextView
             android:id="@+id/textView27"
-            android:layout_width="wrap_content"
+            android:layout_width="150dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            android:layout_marginLeft="8dp"
             android:layout_marginTop="8dp"
             android:text="@string/calle"
             app:layout_constraintStart_toStartOf="parent"
@@ -128,10 +122,9 @@
 
         <TextView
             android:id="@+id/textView28"
-            android:layout_width="wrap_content"
+            android:layout_width="150dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            android:layout_marginLeft="8dp"
             android:layout_marginTop="8dp"
             android:text="@string/numero"
             app:layout_constraintStart_toStartOf="parent"
@@ -139,10 +132,9 @@
 
         <TextView
             android:id="@+id/textView29"
-            android:layout_width="wrap_content"
+            android:layout_width="150dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            android:layout_marginLeft="8dp"
             android:layout_marginTop="8dp"
             android:text="@string/colonia"
             app:layout_constraintStart_toStartOf="parent"

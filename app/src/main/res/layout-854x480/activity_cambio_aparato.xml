@@ -29,19 +29,20 @@
 
                 <TextView
                     android:id="@+id/qwe"
-                    android:layout_width="wrap_content"
+                    android:layout_width="250dp"
                     android:layout_height="wrap_content"
                     android:layout_centerHorizontal="true"
                     android:text="@string/selecciona_Aparato"
                     android:textSize="@dimen/grande"
                     android:textStyle="bold"
+                    android:textAlignment="center"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
                     android:id="@+id/posicion"
-                    android:layout_width="wrap_content"
+                    android:layout_width="300dp"
                     android:layout_height="wrap_content"
                     android:layout_alignTop="@id/qwe"
                     android:layout_marginStart="4dp"
@@ -54,7 +55,7 @@
 
                 <TextView
                     android:id="@+id/textView26"
-                    android:layout_width="wrap_content"
+                    android:layout_width="300dp"
                     android:layout_height="wrap_content"
                     android:layout_alignParentTop="true"
                     android:layout_marginStart="8dp"
@@ -77,7 +78,7 @@
 
                 <TextView
                     android:id="@+id/textView30"
-                    android:layout_width="wrap_content"
+                    android:layout_width="300dp"
                     android:layout_height="wrap_content"
                     android:layout_alignParentTop="true"
                     android:layout_marginStart="8dp"
@@ -109,7 +110,7 @@
 
                 <TextView
                     android:id="@+id/textView31"
-                    android:layout_width="wrap_content"
+                    android:layout_width="300dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="4dp"
                     android:layout_marginTop="8dp"
@@ -131,7 +132,7 @@
 
                     <TextView
                         android:id="@+id/textView32"
-                        android:layout_width="wrap_content"
+                        android:layout_width="300dp"
                         android:layout_height="wrap_content"
                         android:layout_alignParentTop="true"
                         android:layout_marginStart="8dp"
@@ -164,7 +165,7 @@
 
                     <TextView
                         android:id="@+id/textView33"
-                        android:layout_width="wrap_content"
+                        android:layout_width="300dp"
                         android:layout_height="wrap_content"
                         android:layout_alignParentTop="true"
                         android:layout_marginStart="4dp"
@@ -213,7 +214,7 @@
                 <Button
                     android:id="@+id/uno"
                     android:layout_width="100dp"
-                    android:layout_height="50dp"
+                    android:layout_height="wrap_content"
                     android:layout_below="@+id/aa"
                     android:layout_alignParentStart="true"
                     android:layout_marginStart="32dp"
@@ -221,7 +222,7 @@
                     android:background="@drawable/boton"
                     android:backgroundTint="@color/colorPrimary"
                     android:text="@string/aceptar"
-                    android:textColor="#000"
+                    android:textColor="#fff"
                     android:textSize="@dimen/mediano"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/constraintLayout" />
@@ -229,7 +230,7 @@
                 <Button
                     android:id="@+id/dos"
                     android:layout_width="100dp"
-                    android:layout_height="50dp"
+                    android:layout_height="wrap_content"
                     android:layout_below="@+id/aa"
                     android:layout_marginTop="24dp"
                     android:layout_marginEnd="32dp"
@@ -237,7 +238,7 @@
                     android:background="@drawable/boton"
                     android:backgroundTint="@color/colorPrimary"
                     android:text="@string/Regresar"
-                    android:textColor="#000"
+                    android:textColor="#fff"
                     android:textSize="@dimen/mediano"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/constraintLayout" />

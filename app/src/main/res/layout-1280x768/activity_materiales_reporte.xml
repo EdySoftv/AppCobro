@@ -34,7 +34,7 @@
 
                 <TextView
                     android:id="@+id/textView10"
-                    android:layout_width="wrap_content"
+                    android:layout_width="350dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="4dp"
                     android:text="@string/descripArticu"
@@ -56,7 +56,7 @@
 
                 <TextView
                     android:id="@+id/textView9"
-                    android:layout_width="wrap_content"
+                    android:layout_width="350dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="4dp"
                     android:layout_marginTop="16dp"
@@ -87,8 +87,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="1.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/constrain_descargaMaterialesR"
-                >
+                app:layout_constraintTop_toBottomOf="@+id/constrain_descargaMaterialesR">
 
                 <TextView
                     android:id="@+id/textView11"
@@ -119,18 +118,17 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:visibility="gone"
+                android:visibility="invisible"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/constrain_Extenciones">
+                app:layout_constraintTop_toTopOf="@+id/constrain_MetrajeR">
 
                 <TextView
                     android:id="@+id/textView12"
-                    android:layout_width="wrap_content"
+                    android:layout_width="350dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
-                    android:layout_marginLeft="8dp"
                     android:layout_marginTop="8dp"
                     android:text="@string/cantidad"
                     android:textSize="20dp"
@@ -164,7 +162,7 @@
 
                 <TextView
                     android:id="@+id/textView13"
-                    android:layout_width="wrap_content"
+                    android:layout_width="50dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="50dp"
                     android:layout_marginTop="8dp"
@@ -176,23 +174,21 @@
 
                 <TextView
                     android:id="@+id/textView14"
-                    android:layout_width="wrap_content"
+                    android:layout_width="50dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="150dp"
-                    android:layout_marginLeft="8dp"
                     android:layout_marginTop="8dp"
+                    android:layout_marginEnd="50dp"
                     android:text="@string/fin"
                     android:textSize="20dp"
                     android:textStyle="bold"
-                    app:layout_constraintStart_toStartOf="@id/textView13"
+                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
                     android:id="@+id/textView15"
-                    android:layout_width="100dp"
+                    android:layout_width="75dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
-                    android:layout_marginLeft="8dp"
                     android:layout_marginTop="60dp"
                     android:text="@string/interior"
                     android:textSize="20dp"
@@ -202,10 +198,9 @@
 
                 <TextView
                     android:id="@+id/textView16"
-                    android:layout_width="100dp"
+                    android:layout_width="75dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
-                    android:layout_marginLeft="8dp"
                     android:layout_marginTop="50dp"
                     android:text="@string/exterior"
                     android:textSize="20dp"
@@ -217,48 +212,44 @@
                     android:id="@+id/InicialIDMR"
                     android:layout_width="100dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="24dp"
-                    android:layout_marginLeft="24dp"
                     android:layout_marginTop="20dp"
                     android:inputType="number"
                     android:textSize="20dp"
-                    app:layout_constraintStart_toEndOf="@+id/textView15"
+                    app:layout_constraintEnd_toEndOf="@+id/textView13"
+                    app:layout_constraintStart_toStartOf="@+id/textView13"
                     app:layout_constraintTop_toBottomOf="@+id/textView13" />
 
                 <EditText
                     android:id="@+id/FinalIDMR"
                     android:layout_width="100dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="40dp"
-                    android:layout_marginLeft="40dp"
                     android:layout_marginTop="20dp"
                     android:inputType="number"
                     android:textSize="20dp"
-                    app:layout_constraintStart_toEndOf="@+id/InicialIDMR"
+                    app:layout_constraintEnd_toEndOf="@+id/textView14"
+                    app:layout_constraintStart_toStartOf="@+id/textView14"
                     app:layout_constraintTop_toBottomOf="@+id/textView14" />
 
                 <EditText
                     android:id="@+id/InicialEDMR"
                     android:layout_width="100dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="24dp"
-                    android:layout_marginLeft="24dp"
                     android:layout_marginTop="8dp"
                     android:inputType="number"
                     android:textSize="20dp"
-                    app:layout_constraintStart_toEndOf="@+id/textView16"
+                    app:layout_constraintEnd_toEndOf="@+id/textView13"
+                    app:layout_constraintStart_toStartOf="@+id/textView13"
                     app:layout_constraintTop_toBottomOf="@+id/InicialIDMR" />
 
                 <EditText
                     android:id="@+id/FinalEDMR"
                     android:layout_width="100dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="40dp"
-                    android:layout_marginLeft="40dp"
                     android:layout_marginTop="8dp"
                     android:inputType="number"
                     android:textSize="20dp"
-                    app:layout_constraintStart_toEndOf="@+id/InicialEDMR"
+                    app:layout_constraintEnd_toEndOf="@+id/textView14"
+                    app:layout_constraintStart_toStartOf="@+id/textView14"
                     app:layout_constraintTop_toBottomOf="@+id/FinalIDMR" />
             </android.support.constraint.ConstraintLayout>
 
@@ -269,7 +260,7 @@
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="8dp"
-                android:textColor="#000"
+                android:textColor="#fff"
                 android:background="@drawable/boton"
                 android:backgroundTint="@color/colorPrimary"
                 android:text="@string/agregar"

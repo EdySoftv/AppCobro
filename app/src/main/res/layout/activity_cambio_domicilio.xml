@@ -22,12 +22,13 @@
 
             <TextView
                 android:id="@+id/textView37"
-                android:layout_width="wrap_content"
+                android:layout_width="250dp"
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
                 android:layout_marginStart="8dp"
                 android:layout_marginEnd="8dp"
                 android:text="@string/cambio_Domicilio"
+                android:textAlignment="center"
                 android:textSize="25dp"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -36,7 +37,7 @@
 
             <TextView
                 android:id="@+id/textView36"
-                android:layout_width="wrap_content"
+                android:layout_width="120dp"
                 android:layout_height="wrap_content"
                 android:layout_alignParentTop="true"
                 android:layout_marginStart="8dp"
@@ -63,7 +64,7 @@
 
             <TextView
                 android:id="@+id/textView48"
-                android:layout_width="wrap_content"
+                android:layout_width="120dp"
                 android:layout_height="wrap_content"
                 android:layout_alignParentTop="true"
                 android:layout_marginStart="8dp"
@@ -90,7 +91,7 @@
 
             <TextView
                 android:id="@+id/textView34"
-                android:layout_width="wrap_content"
+                android:layout_width="120dp"
                 android:layout_height="wrap_content"
                 android:layout_alignParentTop="true"
                 android:layout_marginStart="8dp"
@@ -118,7 +119,7 @@
 
             <TextView
                 android:id="@+id/textView49"
-                android:layout_width="wrap_content"
+                android:layout_width="120dp"
                 android:layout_height="wrap_content"
                 android:layout_alignParentTop="true"
                 android:layout_marginStart="8dp"
@@ -145,7 +146,7 @@
 
             <TextView
                 android:id="@+id/textView50"
-                android:layout_width="wrap_content"
+                android:layout_width="120dp"
                 android:layout_height="wrap_content"
                 android:layout_alignParentTop="true"
                 android:layout_marginStart="8dp"
@@ -172,7 +173,7 @@
 
             <TextView
                 android:id="@+id/textView51"
-                android:layout_width="wrap_content"
+                android:layout_width="120dp"
                 android:layout_height="wrap_content"
                 android:layout_alignParentTop="true"
                 android:layout_marginStart="8dp"
@@ -199,7 +200,7 @@
 
             <TextView
                 android:id="@+id/textView52"
-                android:layout_width="wrap_content"
+                android:layout_width="120dp"
                 android:layout_height="wrap_content"
                 android:layout_alignParentTop="true"
                 android:layout_marginStart="8dp"
@@ -525,7 +526,7 @@
                 android:background="@drawable/boton"
                 android:backgroundTint="@color/colorPrimary"
                 android:text="@string/aceptar"
-                android:textColor="#000"
+                android:textColor="#fff"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/map" />
 
@@ -540,7 +541,7 @@
                 android:background="@drawable/boton"
                 android:backgroundTint="@color/colorPrimary"
                 android:text="@string/Regresar"
-                android:textColor="#000"
+                android:textColor="#fff"
                 app:layout_constraintBottom_toBottomOf="@+id/aceptar"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/aceptar" />

@@ -9,9 +9,9 @@
 
         <Button
             android:id="@+id/servicioAAsignar"
-            android:layout_width="150dp"
-            android:layout_height="150dp"
-            android:layout_marginStart="16dp"
+            android:layout_width="160dp"
+            android:layout_height="160dp"
+            android:layout_marginStart="20dp"
             android:layout_marginTop="16dp"
             android:background="#85C1E9"
             android:drawableTop="@drawable/iconoserviciointernet"
@@ -21,11 +21,10 @@
         <ProgressBar
             android:id="@+id/progressBarServicio"
             style="?android:attr/progressBarStyleHorizontal"
-            android:layout_width="150dp"
+            android:layout_width="160dp"
             android:layout_height="30dp"
             android:layout_marginTop="8dp"
             app:layout_constraintEnd_toEndOf="@+id/servicioAAsignar"
             app:layout_constraintStart_toStartOf="@+id/servicioAAsignar"
             app:layout_constraintTop_toBottomOf="@+id/servicioAAsignar" />
-
-</android.support.constraint.ConstraintLayout>
+       </android.support.constraint.ConstraintLayout>
