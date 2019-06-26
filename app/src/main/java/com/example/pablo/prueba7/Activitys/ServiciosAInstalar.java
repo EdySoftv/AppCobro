@@ -93,9 +93,7 @@ public class ServiciosAInstalar extends AppCompatActivity {
                     dat4.get(a).setIdMedio(0);
                     dat4.get(a).setDetalle("");
                 }
-                Intent intento = new Intent(ServiciosAInstalar.this, MainActivity.class);
-                intento.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                startActivity(intento);
+
                 finish();
             }
         });
@@ -257,10 +255,6 @@ public class ServiciosAInstalar extends AppCompatActivity {
         aceptarAsignacion.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                    Intent intento = new Intent(ServiciosAInstalar.this, MainActivity.class);
-                    intento.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                    startActivity(intento);
                     finish();
 
             }
@@ -313,9 +307,6 @@ public class ServiciosAInstalar extends AppCompatActivity {
                     dat4.get(a).setIdMedio(0);
                     dat4.get(a).setDetalle("");
                 }
-                Intent intento = new Intent(ServiciosAInstalar.this, MainActivity.class);
-                intento.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                startActivity(intento);
                 finish();
                 //regresar...
 
@@ -326,9 +317,6 @@ public class ServiciosAInstalar extends AppCompatActivity {
     }
 
     public void onBackPressed() {
-        Intent intento = new Intent(ServiciosAInstalar.this, MainActivity.class);
-        intento.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-        startActivity(intento);
         finish();
     }
 
