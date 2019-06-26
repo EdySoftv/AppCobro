@@ -1729,11 +1729,9 @@ public class Request extends AppCompatActivity {
             public void onResponse(Call<JsonObject> call, Response<JsonObject> response1) {
                 if (response1.code() == 200) {
                     if (HorasReportes.statusHora.equals("E")) {
-                        System.out.println("ENTRAAAAAAA  E");
                         getDeepMODORDSER(context);
                     }
                     if (HorasReportes.statusHora.equals("V")) {
-                        System.out.println("ENTRAAAAAAA  V");
                         getDeepMODORDSERV(context, jsonObject);
                     }
                 } else {
@@ -1752,7 +1750,6 @@ public class Request extends AppCompatActivity {
     public void getDeepMODORDSER(final Context context) {
         Service service = null;
         try {
-            System.out.println("ENTRAAAAAAA");
             service = services.getDeppMODORDSERService(context);
         } catch (JSONException e) {
             e.printStackTrace();
@@ -1890,17 +1887,13 @@ public class Request extends AppCompatActivity {
                             } else {
                                 Toast.makeText(context, "Se ha ejecutado correctamente", Toast.LENGTH_LONG).show();
                                 dialogEjecutar.dismiss();
-                                Intent intent = new Intent(context, Orden.class);
-                                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                                context.startActivity(intent);
+                                getListOrd(context);
                             }
                         }
                         if (HorasReportes.statusHora.equals("V")) {
                             dialogEjecutar.dismiss();
                             Toast.makeText(context, "Se ha ejecutado correctamente", Toast.LENGTH_LONG).show();
-                            Intent intent = new Intent(context, Orden.class);
-                            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                            context.startActivity(intent);
+                            getListOrd(context);
                         }
 
 

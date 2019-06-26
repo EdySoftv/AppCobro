@@ -16,23 +16,18 @@
 
                 <TextView
                     android:id="@+id/tv_Descripcion"
-                    android:layout_width="139dp"
-                    android:layout_height="71dp"
+                    android:layout_width="240dp"
+                    android:layout_height="wrap_content"
                     android:layout_marginStart="4dp"
-                    android:layout_marginLeft="4dp"
                     android:layout_marginTop="8dp"
-                    android:layout_marginEnd="8dp"
-                    android:layout_marginRight="8dp"
                     android:layout_marginBottom="8dp"
-                    android:gravity="center|left"
-                    android:text="CAPAG - Cambio de tipo de aparato"
-                    android:textStyle="bold"
-                    android:textSize="12dp"
                     android:ellipsize="end"
+                    android:gravity="center|left"
                     android:maxLines="3"
+                    android:text="CAPAG - Cambio de tipo de aparato"
+                    android:textSize="12dp"
+                    android:textStyle="bold"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
@@ -43,6 +38,7 @@
                     android:layout_marginStart="32dp"
                     android:gravity="center|left"
                     android:text="TextView"
+                    android:visibility="invisible"
                     app:layout_constraintBottom_toBottomOf="@+id/tv_Descripcion"
                     app:layout_constraintStart_toEndOf="@+id/tv_Descripcion"
                     app:layout_constraintTop_toTopOf="@+id/tv_Descripcion"
@@ -52,28 +48,30 @@
                     android:id="@+id/check_recibi"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
-                    app:layout_constraintBottom_toBottomOf="@+id/tv_Accion"
-                    app:layout_constraintStart_toEndOf="@+id/click"
-                    app:layout_constraintTop_toTopOf="@+id/tv_Accion"
-                    android:visibility="gone"/>
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="16dp"
+                    android:visibility="invisible"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/recibitext" />
 
                 <TextView
                     android:id="@+id/recibitext"
-                    android:layout_width="wrap_content"
-                    android:layout_height="15dp"
-                    android:layout_marginBottom="8dp"
+                    android:layout_width="60dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="16dp"
                     android:text="@string/recibi"
-                    app:layout_constraintBottom_toTopOf="@+id/check_recibi"
-                    tools:layout_editor_absoluteX="243dp"
-                    android:visibility="gone"/>
+                    android:textAlignment="textEnd"
+                    android:visibility="invisible"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
                     android:id="@+id/click"
-                    android:layout_width="276dp"
+                    android:layout_width="250dp"
                     android:layout_height="67dp"
                     app:layout_constraintBottom_toBottomOf="@+id/tv_Descripcion"
-                    app:layout_constraintEnd_toEndOf="@+id/tv_Accion"
+                    app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="@+id/tv_Descripcion" />
 
 
