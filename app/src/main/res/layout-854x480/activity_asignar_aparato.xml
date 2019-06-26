@@ -182,6 +182,7 @@
             android:background="@drawable/boton"
             android:backgroundTint="@color/colorPrimary"
             android:text="@string/agregar"
+            android:enabled="false"
             android:textColor="#ffff"
             android:textSize="@dimen/mediano"
             app:layout_constraintStart_toStartOf="parent"

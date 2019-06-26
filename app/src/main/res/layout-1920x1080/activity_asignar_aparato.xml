@@ -187,6 +187,7 @@
         android:backgroundTint="@color/colorPrimary"
         android:text="@string/agregar"
         android:textColor="#ffff"
+        android:enabled="false"
         android:textSize="@dimen/mediano"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"

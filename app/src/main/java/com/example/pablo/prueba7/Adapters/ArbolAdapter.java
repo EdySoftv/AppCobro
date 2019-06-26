@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -55,6 +56,7 @@ public class ArbolAdapter extends RecyclerView.Adapter<ArbolAdapter.ArbolViewHol
     public static String nombreToolBar;
     private Array array = new Array();
     public static int a=0;
+    boolean avanzar;
 
    public static  class ArbolViewHolder extends  RecyclerView.ViewHolder{
        public static Button Asignar;
@@ -90,19 +92,26 @@ public class ArbolAdapter extends RecyclerView.Adapter<ArbolAdapter.ArbolViewHol
         viewHolder.Asignar.setText(dat4.get(i).Nombre);
         if(dat4.get(i).IdMedio!=0){
             viewHolder.progressBar.setProgress(50);
-
             if(dat4.get(i).children.size()!=0){
                 viewHolder.progressBar.setProgress(100);
                 viewHolder.Asignar.setBackgroundColor(Color.parseColor("#48C9B0"));
             }
-
         }
-
-
-
+        int valida=0;
+        for(int q=0;q<dat4.size(); q++){
+            if(dat4.get(q).children.size()!=0){
+                valida=valida+1;
+            }
+        }
+        if(valida==dat4.size()){
+            ServiciosAInstalar.aceptarAsignacion.setEnabled(true);
+            ServiciosAInstalar.aceptarAsignacion.setTextColor(Color.WHITE);
+        }
         viewHolder.Asignar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                boolean pasa=false;
+
                 //Crear intento
                 Intent intento = new Intent(mcontext, ReporteAsignacion.class);
                 //Valida que la pregunta haya sido contestada
@@ -112,28 +121,39 @@ public class ArbolAdapter extends RecyclerView.Adapter<ArbolAdapter.ArbolViewHol
                 }else{
                     //Verificar si van para todos los medios 1=si 0=no 2=no se ha respondido la pregunta
                     if(ServiciosAInstalar.todosLosMedios==1){
-                        if(ServiciosAInstalar.todosLosMediosValidacion==true){
+                        if(ServiciosAInstalar.spinnerMedio.getSelectedItemPosition()==-1){
+                            pasa=true;
+                        }
 
+                        if(ServiciosAInstalar.spinnerMedio.getSelectedItemPosition()!=0){
+                        if(ServiciosAInstalar.todosLosMediosValidacion==true){
                         }else{
                             for(int a=0; a<dat4.size(); a++){
                                 dat4.get(a).setIdMedio(ServiciosAInstalar.idMedioSI);
                                 dat4.get(a).setDetalle(ServiciosAInstalar.detalleSI);
                             }
+                            //Mandar el nombre del servicio para colocarlo en la toolbar, mandar posicion de servicio
+                            pasa=true;
                         }
-
-
-
+                        }else{
+                            Toast.makeText(mcontext,"Seleccione un medio",Toast.LENGTH_LONG).show();
+                        }
                     }
                     if(ServiciosAInstalar.todosLosMedios==0){
                         //Mandar en intent la clvunicanet para consultar los medios
                         clv_unicaNet=dat4.get(i).getClv_UnicaNet();
+                        //Mandar el nombre del servicio para colocarlo en la toolbar, mandar posicion de servicio
+                        pasa=true;
                     }
+
+                }
+
+                if(pasa==true){
                     //Mandar el nombre del servicio para colocarlo en la toolbar, mandar posicion de servicio
                     nombreToolBar=dat4.get(i).Nombre;
                     posicionArbol=i;
                     mcontext.startActivity(intento);
                 }
-
 
 
             }

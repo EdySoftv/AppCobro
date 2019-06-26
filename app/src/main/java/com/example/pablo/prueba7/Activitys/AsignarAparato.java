@@ -1,6 +1,7 @@
 package com.example.pablo.prueba7.Activitys;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.constraint.ConstraintLayout;
@@ -8,6 +9,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.InputFilter;
 import android.text.Spanned;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -24,6 +26,7 @@ import com.example.pablo.prueba7.Adapters.ArbolAdapter;
 import com.example.pablo.prueba7.Listas.Array;
 import com.example.pablo.prueba7.Modelos.GetMuestraAparatosDisponiblesListResult;
 import com.example.pablo.prueba7.Modelos.GetMuestraArbolServiciosAparatosPorinstalarListResult;
+import com.example.pablo.prueba7.Modelos.GetMuestraMedioPorServicoContratadoListResult;
 import com.example.pablo.prueba7.Modelos.GetMuestraServiciosRelTipoAparatoListResult;
 import com.example.pablo.prueba7.Modelos.GetMuestraTipoAparatoListResult;
 import com.example.pablo.prueba7.Modelos.children;
@@ -81,12 +84,14 @@ public class AsignarAparato extends AppCompatActivity {
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intento = new Intent(getApplicationContext(), ReporteAsignacion.class);
+                Intent intento = new Intent(AsignarAparato.this, ReporteAsignacion.class);
                 startActivity(intento);
                 finish();
             }
         });
         setTitle(ArbolAdapter.nombreToolBar);
+        final Iterator<List<GetMuestraArbolServiciosAparatosPorinstalarListResult>> itData4 = array.dataArbSer.iterator();
+        final List<GetMuestraArbolServiciosAparatosPorinstalarListResult> dat4 = (List<GetMuestraArbolServiciosAparatosPorinstalarListResult>) itData4.next();
 
 
         //Recibimos datos
@@ -95,6 +100,11 @@ public class AsignarAparato extends AppCompatActivity {
         MACWAMText = findViewById(R.id.MacWam);
         //filtro para la macwan
         MACWAMText.setFilters(new InputFilter[]{filter,new InputFilter.LengthFilter(12)});
+
+
+        if(agragar.isEnabled()==false){
+            agragar.setTextColor(Color.GRAY);
+        }
 
 
 
@@ -114,6 +124,8 @@ public class AsignarAparato extends AppCompatActivity {
         cancelar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Intent intento = new Intent(AsignarAparato.this, ReporteAsignacion.class);
+                startActivity(intento);
                 finish();
             }
         });
@@ -140,7 +152,7 @@ public class AsignarAparato extends AppCompatActivity {
                     //Request Servicios
                     request.getServiciosAparatos(getApplicationContext(),
                             LlenarSpinnerTipoDeAparato(datos.getInt("Clv_UnicaNet"),datos.getInt("idMedio"),
-                                    dat.get(position-1).getIdArticulo()),serviciosAparato);
+                                    dat.get(position-1).getIdArticulo()),serviciosAparato,agragar);
 
 
 
@@ -157,7 +169,7 @@ public class AsignarAparato extends AppCompatActivity {
                         @Override
                         public void onItemClick(AdapterView<?> parent, View view, int position1, long id) {
                             Iterator<List<GetMuestraServiciosRelTipoAparatoListResult>> itData2 = array.dataserviciosAparatos.iterator();
-                            List<GetMuestraServiciosRelTipoAparatoListResult> dat2 = itData2.next();
+                            final List<GetMuestraServiciosRelTipoAparatoListResult> dat2 = itData2.next();
 
                             if (clveAparatoSpinner == 0) {
                                 Toast.makeText(getApplicationContext(), "Seleccione un tipo de aparato", Toast.LENGTH_LONG).show();
@@ -169,8 +181,14 @@ public class AsignarAparato extends AppCompatActivity {
                                 }
                                 if (dat2.get(position1).baseIdUser == 1) {
                                     selectedStrings.add(dat2.get(position1).clv_UnicaNet);
+                                    agragar.setEnabled(true);
+                                    agragar.setTextColor(Color.WHITE);
                                 } else {
                                     selectedStrings.remove(dat2.get(position1).clv_UnicaNet);
+                                    if(selectedStrings.size()==0){
+                                        agragar.setEnabled(false);
+                                        agragar.setTextColor(Color.GRAY);
+                                    }
                                 }
                             }
                         }
@@ -208,6 +226,11 @@ public class AsignarAparato extends AppCompatActivity {
 
             }
         });
+
+
+
+
+
         agragar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -279,14 +302,7 @@ public class AsignarAparato extends AppCompatActivity {
         }
     }
 
-    public boolean onKeyDown(int keyCode, KeyEvent event) {
-        if ((keyCode == KeyEvent.KEYCODE_BACK)) {
-            Intent intento = new Intent(AsignarAparato.this, ServiciosAInstalar.class);
-            startActivity(intento);
-            finish();
-        }
-        return true;
-    }
+
 
     public void EjecutarAsignacion() {
         Iterator<List<GetMuestraArbolServiciosAparatosPorinstalarListResult>> itData4 = Array.dataArbSer.iterator();
@@ -371,6 +387,13 @@ public class AsignarAparato extends AppCompatActivity {
     }
 
 
+    public void onBackPressed() {
+        Intent intento = new Intent(AsignarAparato.this, ReporteAsignacion.class);
+        startActivity(intento);
+        finish();
+    }
+
+
     InputFilter filter = new InputFilter() {
         @Override
         public CharSequence filter(CharSequence source, int start, int end, Spanned dest, int dstart, int dend) {
@@ -404,4 +427,22 @@ public class AsignarAparato extends AppCompatActivity {
         }
         return true;
     }
+
+    public static int obtenerPosicionLista ( int clv_UnicaNet,Button agregar){
+        int position = 0;
+        //Arbol
+        Iterator<List<GetMuestraServiciosRelTipoAparatoListResult>> itData = Array.dataserviciosAparatos.iterator();
+            List<GetMuestraServiciosRelTipoAparatoListResult> dat = (List<GetMuestraServiciosRelTipoAparatoListResult>) itData.next();
+        for (int i = 0; i < dat.size(); i++) {
+            if (dat.get(i).clv_UnicaNet == clv_UnicaNet) {
+                position = i;
+            }
+        }
+        dat.get(position).baseIdUser = 1;
+        selectedStrings.add(dat.get(position).clv_UnicaNet);
+        agregar.setEnabled(true);
+        agregar.setTextColor(Color.WHITE);
+        return position;
+    }
+
 }

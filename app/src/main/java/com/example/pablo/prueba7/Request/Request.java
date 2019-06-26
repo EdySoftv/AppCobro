@@ -11,16 +11,19 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.example.pablo.prueba7.Activitys.AsignarAparato;
 import com.example.pablo.prueba7.Activitys.Orden;
 import com.example.pablo.prueba7.Activitys.CambioDom;
 
 import com.example.pablo.prueba7.Activitys.CambioAparato;
 import com.example.pablo.prueba7.Activitys.ReporteAsignacion;
 import com.example.pablo.prueba7.Activitys.Reportes;
+import com.example.pablo.prueba7.Adapters.ArbolAdapter;
 import com.example.pablo.prueba7.Adapters.OrdenesAdapter;
 import com.example.pablo.prueba7.Adapters.TablaAdapter;
 import com.example.pablo.prueba7.Fragments.EjecutarOrdenes;
@@ -1347,7 +1350,7 @@ public class Request extends AppCompatActivity {
     }
 
     //Servicios Aparatos//
-    public void getServiciosAparatos(final Context context, final JSONObject jsonObject, final ListView lista) {
+    public void getServiciosAparatos(final Context context, final JSONObject jsonObject, final ListView lista, final Button agregar) {
         Call<JSONServiciosAparatos> call = services.RequestPost(context, jsonObject).getDataServiciosAparatos();
         call.enqueue(new Callback<JSONServiciosAparatos>() {
             @Override
@@ -1365,6 +1368,14 @@ public class Request extends AppCompatActivity {
                     }
                     ArrayAdapter arrayAdapter = new ArrayAdapter(context, android.R.layout.simple_list_item_checked, array.serviciosAparatos);
                     lista.setAdapter(arrayAdapter);
+                    //lista.setItemChecked(0,true);
+                    Iterator<List<GetMuestraArbolServiciosAparatosPorinstalarListResult>> itData4 = array.dataArbSer.iterator();
+                    List<GetMuestraArbolServiciosAparatosPorinstalarListResult> dat4 = (List<GetMuestraArbolServiciosAparatosPorinstalarListResult>) itData4.next();
+                    lista.setItemChecked(AsignarAparato.obtenerPosicionLista(dat4.get(ArbolAdapter.posicionArbol).Clv_UnicaNet,agregar),true);
+
+
+
+
                 } else {
                     Toast.makeText(context, "Error al conseguir servicios de aparatos", Toast.LENGTH_LONG).show();
                 }

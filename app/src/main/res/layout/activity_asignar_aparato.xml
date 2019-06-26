@@ -183,6 +183,7 @@
             android:layout_marginTop="8dp"
             android:layout_marginBottom="8dp"
             android:background="@drawable/boton"
+            android:enabled="false"
             android:backgroundTint="@color/colorPrimary"
             android:text="@string/agregar"
             android:textColor="#ffff"

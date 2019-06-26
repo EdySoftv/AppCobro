@@ -124,7 +124,7 @@
             android:layout_marginTop="8dp"
             android:background="@drawable/boton"
             android:backgroundTint="@color/colorPrimary"
-            android:enabled="true"
+            android:enabled="false"
             android:text="@string/aceptar"
             android:textColor="#fff"
             android:textSize="@dimen/mediano"

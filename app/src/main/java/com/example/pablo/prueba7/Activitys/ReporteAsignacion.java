@@ -2,6 +2,7 @@ package com.example.pablo.prueba7.Activitys;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -66,14 +67,18 @@ public class ReporteAsignacion extends AppCompatActivity {
             public void onClick(View v) {
                 /*Intent intento = new Intent(getApplicationContext(), ServiciosAInstalar.class);
                 startActivity(intento);*/
-                GuardarAparatos(getApplicationContext());
+                //GuardarAparatos(getApplicationContext());
                 ServiciosAInstalar.Asignacion.refreshDrawableState();
                 finish();
-                guardarAparatosProgresBar=false;
             }
         });
         setTitle(ArbolAdapter.nombreToolBar);
         //
+
+        if(guardarAparatos.isEnabled()==false){
+            guardarAparatos.setTextColor(Color.GRAY);
+        }
+
 
         //Barra de cargando
         dialogReporteAsignacion = new BarraCargar().showDialog(this);
@@ -98,9 +103,11 @@ public class ReporteAsignacion extends AppCompatActivity {
             spinerMedio.setEnabled(true);
             //si no tiene hijos deshabilitamos el boton de guarda
             guardarAparatos.setEnabled(false);
+            guardarAparatos.setTextColor(Color.GRAY);
         } else {
             //si tiene hijos habilitamos el boton de guarda
             guardarAparatos.setEnabled(true);
+            guardarAparatos.setTextColor(Color.WHITE);
             //si tiene hijos bloqueamos el spinner porque no se puede cambiar el medio con hijos ya asignados
             spinerMedio.setEnabled(false);
             //si tiene hijos, llenamos lista
@@ -241,8 +248,8 @@ public class ReporteAsignacion extends AppCompatActivity {
 
                 /*Intent intento = new Intent(ReporteAsignacion.this, ServiciosAInstalar.class);
                 startActivity(intento);*/
-                guardarAparatosProgresBar=false;
-                GuardarAparatos(getApplicationContext());
+                //guardarAparatosProgresBar=false;
+                //GuardarAparatos(getApplicationContext());
                 ServiciosAInstalar.Asignacion.refreshDrawableState();
                 finish();
 
@@ -317,4 +324,10 @@ public class ReporteAsignacion extends AppCompatActivity {
         guardarAparatosProgresBar=true;
 
     }
+
+    public void onBackPressed() {
+        ServiciosAInstalar.Asignacion.refreshDrawableState();
+        finish();
+    }
+
     }

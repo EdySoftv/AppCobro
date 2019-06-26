@@ -3,6 +3,7 @@ package com.example.pablo.prueba7.Activitys;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AppCompatActivity;
@@ -62,6 +63,7 @@ public class ServiciosAInstalar extends AppCompatActivity {
     public static int idMedioSI,todosLosMedios=2; //2 es no haber responidido la pregunta
     public static String detalleSI;
     public static boolean todosLosMediosValidacion=false;
+    public int valida=0;
     protected void onCreate(Bundle onSaveInstanceState) {
         super.onCreate(onSaveInstanceState);
         setContentView(R.layout.activity_serviciosinstalar);
@@ -103,7 +105,11 @@ public class ServiciosAInstalar extends AppCompatActivity {
 
 
 
-
+            if(aceptarAsignacion.isEnabled()==false){
+                aceptarAsignacion.setTextColor(Color.GRAY);
+            }else{
+                aceptarAsignacion.setTextColor(Color.WHITE);
+            }
         final Iterator<List<GetMuestraArbolServiciosAparatosPorinstalarListResult>> itData4 = array.dataArbSer.iterator();
         final List<GetMuestraArbolServiciosAparatosPorinstalarListResult> dat4 = (List<GetMuestraArbolServiciosAparatosPorinstalarListResult>) itData4.next();
         Iterator<List<RequierePregunta>> itData = array.dataPregunta.iterator();
@@ -131,7 +137,6 @@ public class ServiciosAInstalar extends AppCompatActivity {
 
         if(dat.get(0).RequierePregunta==true){
             ServiciosAInstalar.layoutMedio.setVisibility(View.VISIBLE);
-
             ArrayAdapter<String> adapter = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_spinner_dropdown_item, array.medioPregunta);
             ServiciosAInstalar.spinnerMedio.setAdapter(adapter);
             ServiciosAInstalar.spinnerMedio.setEnabled(false);
@@ -243,24 +248,20 @@ public class ServiciosAInstalar extends AppCompatActivity {
         }
 
 
+
+
+
+
+
+
         aceptarAsignacion.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                int valida=0;
-                for(int c=0;c<dat4.size(); c++){
-                    if(dat4.get(c).children.size()!=0){
-                        valida=valida+1;
-                    }
-                }
-                if(dat4.size()==valida){
+
                     Intent intento = new Intent(ServiciosAInstalar.this, MainActivity.class);
                     intento.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                     startActivity(intento);
                     finish();
-                }else{
-                    Toast.makeText(getApplicationContext(),"Seleccione el aparato a asignar",Toast.LENGTH_LONG).show();
-                }
-
 
             }
         });
@@ -323,4 +324,12 @@ public class ServiciosAInstalar extends AppCompatActivity {
         }
         return true;
     }
+
+    public void onBackPressed() {
+        Intent intento = new Intent(ServiciosAInstalar.this, MainActivity.class);
+        intento.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(intento);
+        finish();
+    }
+
 }
