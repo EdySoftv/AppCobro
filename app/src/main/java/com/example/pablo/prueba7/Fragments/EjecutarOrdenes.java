@@ -26,6 +26,8 @@ import org.json.JSONObject;
 
 import java.util.Calendar;
 
+import static com.example.pablo.prueba7.Fragments.HorasOrdenes.obsTec;
+import static com.example.pablo.prueba7.Fragments.HorasOrdenes.observacionesTecnico;
 import static com.example.pablo.prueba7.Services.Services.claveTecnico;
 
 
@@ -87,6 +89,7 @@ public class EjecutarOrdenes extends Fragment {
             public void onClick(View v) {
 
                 dialogEjecutar.show();
+                observacionesTecnico = obsTec.getText().toString();
                 if(request.rapagejecutar==true){
                     if (Array.recibixnew.size() == 0) {
                         Toast.makeText(getContext(), "Ningún aparato seleccionado", Toast.LENGTH_LONG).show();
@@ -224,11 +227,11 @@ public class EjecutarOrdenes extends Fragment {
                 jsonObject.put("FecSol", DeepConsModel.Fec_Sol);
                 jsonObject.put("Impresa", 1);
                 jsonObject.put("ListadeArticulos", "");
-                jsonObject.put("Obs", DeepConsModel.Obs);
+                jsonObject.put("Obs", DeepConsModel.Obs + observacionesTecnico);
                 jsonObject.put("Status", "V");
                 jsonObject.put("TecnicoCuadrilla", HorasOrdenes.TecSecSelecc);
-               // jsonObject.put("Visita1", fechaHoy);
-               // jsonObject.put("Visita2", "");
+                jsonObject.put("Visita1", fechaHoy);
+                jsonObject.put("Visita2", "");
                 System.out.println("VAL 2");
                 request.getValidaOrdSer(getActivity(),jsonObject);
             }catch (Exception e){}
@@ -245,11 +248,11 @@ public class EjecutarOrdenes extends Fragment {
                 jsonObject.put("FecSol", DeepConsModel.Fec_Sol);
                 jsonObject.put("Impresa", 1);
                 jsonObject.put("ListadeArticulos", "");
-                jsonObject.put("Obs", DeepConsModel.Obs);
+                jsonObject.put("Obs", DeepConsModel.Obs + observacionesTecnico);
                 jsonObject.put("Status", "V");
                 jsonObject.put("TecnicoCuadrilla", HorasOrdenes.TecSecSelecc);
-               // jsonObject.put("Visita1", DeepConsModel.Visita1);
-                //jsonObject.put("Visita2", fechaHoy);
+               jsonObject.put("Visita1", DeepConsModel.Visita1);
+                jsonObject.put("Visita2", fechaHoy);
                 System.out.println("VAL 3");
                 request.getValidaOrdSer(getActivity(),jsonObject);
             }catch (Exception e){}

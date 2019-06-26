@@ -18,19 +18,25 @@ import android.support.constraint.ConstraintLayout;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.DatePicker;
+import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.example.pablo.prueba7.Activitys.MainActivity;
 import com.example.pablo.prueba7.Listas.Array;
 import com.example.pablo.prueba7.R;
 import com.example.pablo.prueba7.Request.Request;
 
 import static android.content.Context.LOCATION_SERVICE;
+
 
 import java.util.Calendar;
 
@@ -42,7 +48,8 @@ public class HorasOrdenes extends Fragment implements View.OnClickListener, Loca
 
     public static TextView selectDate,  selectDate1, selectDate2;
     public static String latitud, longitud, diaI, mesI, añoI, diaV1, mesV1, añoV1, diaV2, mesV2, añoV2;
-    public static int ejecutada = 1, visita = 0, visita1 = 0, TecSecSelecc = -1;
+    public static int ejecutada = 0, visita = 0, visita1 = 0, TecSecSelecc = -1;
+    public static  String observacionesTecnico;
     private int mYear, mMonth, mDay ;
    // private View contenedorParticular;
     private View contenedorCorporativo;
@@ -52,11 +59,14 @@ public class HorasOrdenes extends Fragment implements View.OnClickListener, Loca
     public static Spinner TecSec;
     private Request request = new Request();
     private RadioButton btn1, bt2;
+    public static EditText obsTec;
     private ConstraintLayout todo;
     private ViewGroup container;
     private Bundle onsavedInstanceState;
     private LocationManager locationManager;
     public static  int posTec;
+    public MainActivity mainAct = new MainActivity();
+    private View touchViewEstatus;
 
     public HorasOrdenes() {
         // Required empty public constructor
@@ -108,6 +118,11 @@ public class HorasOrdenes extends Fragment implements View.OnClickListener, Loca
         contenedorObservacionesTecnico=view.findViewById(R.id.contraintObservacionesTecnico);
         btn1 = view.findViewById(R.id.rb_Visita);
         bt2 = view.findViewById(R.id.rb_Ejecutada);
+        obsTec = view.findViewById(R.id.observaciones_Tecnico);
+
+
+
+
         /////////////////////////////////////////////////////
         Obs.setText(request.obsMA);
         TecSec = view.findViewById(R.id.spinnerTecnicoSec);
@@ -141,26 +156,44 @@ public class HorasOrdenes extends Fragment implements View.OnClickListener, Loca
 //        selectTime2.setOnClickListener(this);
         bt2.setOnClickListener(this);
         btn1.setOnClickListener(this);
-
         comprobarGPSActivo();
+
+
+
+        if(visita==1){
+            contenedorObservacionesTecnico.setVisibility(View.VISIBLE);
+        }
     }
+
+
 
     public void onClick(View view) {
         if (btn1.isChecked() == true) {
+            contenedorObservacionesTecnico.setVisibility(View.VISIBLE);
             ejecutada = 0;
             visita = 1;
             ConstraintLayout.LayoutParams params = (ConstraintLayout.LayoutParams) todo.getLayoutParams();
             params.setMargins(0, 8, 0, 0);
             todo.setLayoutParams(params);
             mostrarParticular(false);
+
+
+           // mainAct.mViewPager.setCurrentItem(positionTab);
+
+     /*       if((horas.ejecutada == 1||horas.visita == 1)){
+                Toast.makeText(getContext(), "Seleccione un estatus", Toast.LENGTH_SHORT).show();
+                mainAct.mViewPager.setCurrentItem(3);
+            }*/
             /*selectDate.setText("");
             selectDate1.setText("");
             selectDate2.setText("");
             selectDate2.setEnabled(false);*/
-            ejecutada = 0;
-            visita = 1;
+
+
         }
         if (bt2.isChecked() == true) {
+
+            contenedorObservacionesTecnico.setVisibility(View.GONE);
             ejecutada = 1;
             visita = 0;
             mostrarParticular(true);

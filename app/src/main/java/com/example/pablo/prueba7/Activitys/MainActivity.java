@@ -33,15 +33,19 @@ import androidx.annotation.RequiresApi;
 
 import static com.example.pablo.prueba7.Adapters.OrdenesAdapter.noOrden;
 import static com.example.pablo.prueba7.Fragments.HorasOrdenes.TecSec;
+import static com.example.pablo.prueba7.Fragments.HorasOrdenes.ejecutada;
+import static com.example.pablo.prueba7.Fragments.HorasOrdenes.visita;
 
 
 public class MainActivity extends AppCompatActivity implements ActionBar.TabListener, ViewPager.OnPageChangeListener {
-    private ViewPager mViewPager;
+    public ViewPager mViewPager;
     ScrollView hzScrollView;
     Button info;
-    int position;
+
+    public  int positionTab;
     ConstraintLayout layoutAnimado;
     public static TextView NombreTec, Contrato, Status, Nombre, Direccion, InfoServicios;
+    boolean visitaValida=false;
 
     Request request = new Request();
 
@@ -61,6 +65,9 @@ public class MainActivity extends AppCompatActivity implements ActionBar.TabList
         Direccion= findViewById(R.id.infodireccion);
         InfoServicios= findViewById(R.id.infoservicios);
         setTitle("No. de Orden: " + noOrden);
+
+        ejecutada = 0;
+        visita = 0;
 
        // NombreTec.setText(nombre_tecnico);
         Contrato.setText(request.contraroMA);
@@ -113,6 +120,8 @@ public class MainActivity extends AppCompatActivity implements ActionBar.TabList
 
         tab = actionBar.newTab().setText("Finalizar").setTabListener(this);
         actionBar.addTab(tab);
+
+
 
     }
 
@@ -169,10 +178,29 @@ public class MainActivity extends AppCompatActivity implements ActionBar.TabList
 
     @Override
     public void onTabSelected(ActionBar.Tab tab, FragmentTransaction fragmentTransaction) {
-       // mViewPager.setCurrentItem(tab.getPosition());
-        position=tab.getPosition();
-        mViewPager.setCurrentItem(position);
+        // mViewPager.setCurrentItem(tab.getPosition());
+        positionTab = tab.getPosition();
 
+        if (ejecutada == 1) {
+            mViewPager.setCurrentItem(positionTab);
+        } else {
+
+            if (ejecutada == 0 && visita == 0) {
+                Toast.makeText(this, "Seleccione un estatus", Toast.LENGTH_SHORT).show();
+                mViewPager.setCurrentItem(0);
+            } else {
+
+                if (visitaValida == false) {
+                    mViewPager.setCurrentItem(3);
+                    visitaValida = true;
+                } else {
+                    mViewPager.setCurrentItem(0);
+                    visitaValida = false;
+                }
+
+            }
+
+        }
     }
 
     @Override
@@ -186,8 +214,9 @@ public class MainActivity extends AppCompatActivity implements ActionBar.TabList
     }
 
     public void regresar(){
-        if((position-1)>=0){
-            mViewPager.setCurrentItem(position-1);}
+        if((positionTab-1)>=0){
+            mViewPager.setCurrentItem(positionTab-1);
+        }
             else{
                 if(layoutAnimado.getVisibility()==View.VISIBLE){
                     layoutAnimado.setVisibility(View.GONE);
