@@ -133,6 +133,7 @@ public class Reportes extends AppCompatActivity
             drawer.closeDrawer(GravityCompat.START);
         } else {
             Intent intento1=new Intent(Reportes.this,Inicio.class);
+            intento1.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(intento1);
         }
 
@@ -144,6 +145,7 @@ public class Reportes extends AppCompatActivity
         int id = item.getItemId();
         if (id == R.id.Inicio) {
             Intent intent1 = new Intent(Reportes.this, Inicio.class);
+            intent1.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(intent1);
             //DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
             request.getOrdenes(getBaseContext());
@@ -159,6 +161,7 @@ public class Reportes extends AppCompatActivity
             }
         } else if (id == R.id.Configuraciones) {
             Intent intent1 = new Intent(Reportes.this, Configuracion.class);
+            intent1.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(intent1);
         }
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

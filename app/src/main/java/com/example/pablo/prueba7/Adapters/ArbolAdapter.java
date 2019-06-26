@@ -152,6 +152,7 @@ public class ArbolAdapter extends RecyclerView.Adapter<ArbolAdapter.ArbolViewHol
                     //Mandar el nombre del servicio para colocarlo en la toolbar, mandar posicion de servicio
                     nombreToolBar=dat4.get(i).Nombre;
                     posicionArbol=i;
+                    intento.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                     mcontext.startActivity(intento);
                 }
 

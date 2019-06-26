@@ -182,6 +182,7 @@ public class ReporteAsignacion extends AppCompatActivity {
                         Intent intento = new Intent(ReporteAsignacion.this, AsignarAparato.class);
                         intento.putExtra("Clv_UnicaNet", dat4.get(ArbolAdapter.posicionArbol).Clv_UnicaNet);
                         intento.putExtra("idMedio", dat4.get(ArbolAdapter.posicionArbol).IdMedio);
+                        intento.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                         startActivity(intento);
                         finish();
                     }else{
@@ -191,6 +192,7 @@ public class ReporteAsignacion extends AppCompatActivity {
                     Intent intento = new Intent(ReporteAsignacion.this, AsignarAparato.class);
                     intento.putExtra("Clv_UnicaNet", dat4.get(ArbolAdapter.posicionArbol).Clv_UnicaNet);
                     intento.putExtra("idMedio", dat4.get(ArbolAdapter.posicionArbol).IdMedio);
+                    intento.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                     startActivity(intento);
                     finish();
 

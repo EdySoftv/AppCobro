@@ -85,6 +85,7 @@ public class AsignarAparato extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intento = new Intent(AsignarAparato.this, ReporteAsignacion.class);
+                intento.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(intento);
                 finish();
             }
@@ -125,6 +126,7 @@ public class AsignarAparato extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intento = new Intent(AsignarAparato.this, ReporteAsignacion.class);
+                intento.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(intento);
                 finish();
             }
@@ -333,6 +335,7 @@ public class AsignarAparato extends AppCompatActivity {
             }
         }
           Intent intento = new Intent(AsignarAparato.this, ReporteAsignacion.class);
+        intento.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intento);
         finish();
     }
@@ -389,6 +392,7 @@ public class AsignarAparato extends AppCompatActivity {
 
     public void onBackPressed() {
         Intent intento = new Intent(AsignarAparato.this, ReporteAsignacion.class);
+        intento.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intento);
         finish();
     }
@@ -420,6 +424,7 @@ public class AsignarAparato extends AppCompatActivity {
             case R.id.siguiente:
 
                 Intent intento = new Intent(AsignarAparato.this, ReporteAsignacion.class);
+                intento.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(intento);
                 finish();
 

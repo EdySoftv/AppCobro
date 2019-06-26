@@ -165,6 +165,7 @@ try{
                     dialogTrabajos.show();
                     Intent intento = new Intent(Cmcontext, CambioAparato.class);
                     ftth=1;
+                    intento.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                     Cmcontext.startActivity(intento);
                 }
                 if (caracteres[0].equals("CAMDO")) {
@@ -174,6 +175,7 @@ try{
                 if (caracteres[0].equals("CAPAT")) {
                     dialogTrabajos.show();
                     Intent intento = new Intent(Cmcontext, CambioAparato.class);
+                    intento.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                     Cmcontext.startActivity(intento);
                     ftth=0;
                 }

@@ -55,6 +55,7 @@ public class Configuracion extends AppCompatActivity
                     Util.preferences.edit().clear().commit();
                     SplashActivity.LoginShare=false;
                     Intent intento = new Intent(Configuracion.this, Login.class);
+                    intento.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                     startActivity(intento);
                 }
                 catch (Exception e){
@@ -111,16 +112,19 @@ public class Configuracion extends AppCompatActivity
 
         if (id == R.id.Inicio) {
             Intent intent1 = new Intent(Configuracion.this, Inicio.class);
+            intent1.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(intent1);
             //DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
             request.getOrdenes(getBaseContext());
 
         } else if (id == R.id.Ordenes_menu) {
             Intent intent1 = new Intent(Configuracion.this, Orden.class);
+            intent1.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(intent1);
 
         } else if (id == R.id.Reportes) {
             Intent intent1 = new Intent(Configuracion.this, Reportes.class);
+            intent1.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(intent1);
 
         } else if (id == R.id.Configuraciones) {

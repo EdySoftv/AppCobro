@@ -229,6 +229,7 @@ public class Inicio extends AppCompatActivity
 
         } else if (id == R.id.Configuraciones) {
             Intent intent1 = new Intent(Inicio.this, Configuracion.class);
+            intent1.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(intent1);
             finish();
         }

@@ -574,6 +574,7 @@ public class Request extends AppCompatActivity {
                         }
                     }
                     Intent intent1 = new Intent(context, Reportes.class);
+                    intent1.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                     context.startActivity(intent1);
                 } else {
                     Toast.makeText(context, "Error al conseguir lista quejas", Toast.LENGTH_LONG).show();
@@ -618,6 +619,7 @@ public class Request extends AppCompatActivity {
                         }
                     }
                     Intent intent1 = new Intent(context, Orden.class);
+                    intent1.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                     context.startActivity(intent1);
                 } else {
                     Toast.makeText(context, "Error al conseguir datos", Toast.LENGTH_LONG).show();
@@ -802,6 +804,7 @@ public class Request extends AppCompatActivity {
                             }
                         }
                         Intent intento1 = new Intent(context, MainActivity.class);
+                        intento1.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                         context.startActivity(intento1);
                         try {
                             trabajos.setAdapter(adaptertrabajos);
@@ -882,6 +885,7 @@ public class Request extends AppCompatActivity {
                     String string = String.valueOf(response1.body().getAsJsonPrimitive("GetCONCONEXResult"));
                     extencionesE = string;
                     Intent intento = new Intent(context, ExtensionesAdi.class);
+                    intento.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                     context.startActivity(intento);
                     dialogTrabajos.dismiss();
                 } else {
@@ -1168,6 +1172,7 @@ public class Request extends AppCompatActivity {
                             calleocmdo = dat.get(0).calleOeste;
                             casacmdo = dat.get(0).Casa;
                             Intent intento = new Intent(context, CambioDom.class);
+                            intento.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                             context.startActivity(intento);
                             dialogTrabajos.dismiss();
                         }
@@ -1185,6 +1190,7 @@ public class Request extends AppCompatActivity {
                         calleocmdo = "";
                         casacmdo = "";
                         Intent intento = new Intent(context, CambioDom.class);
+                        intento.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                         context.startActivity(intento);
                         dialogTrabajos.dismiss();
                         Toast.makeText(context, "Error al conseguir datos de cambio de domicilio", Toast.LENGTH_LONG).show();
@@ -1225,6 +1231,7 @@ public class Request extends AppCompatActivity {
                         }
                     }
                     Intent intento25 = new Intent(context, ServiciosAInstalar.class);
+                    intento25.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                     context.startActivity(intento25);
                     dialogTrabajos.dismiss();
                     //Request pregunta

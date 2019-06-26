@@ -114,6 +114,7 @@ public class EjecutarReportes extends Fragment {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 Intent intento = new Intent(getActivity(), Reportes.class);
+                                intento.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                                 startActivity(intento);
                                 Toast.makeText(getActivity(), "Reporte no ejecutado", Toast.LENGTH_LONG).show();
                             }

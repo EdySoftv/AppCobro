@@ -149,6 +149,7 @@ public class Orden extends AppCompatActivity implements NavigationView.OnNavigat
             drawer.closeDrawer(GravityCompat.START);
         } else {
             Intent intento1=new Intent(Orden.this,Inicio.class);
+            intento1.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(intento1);
         }
 
@@ -161,6 +162,7 @@ public class Orden extends AppCompatActivity implements NavigationView.OnNavigat
         int id = item.getItemId();
         if (id == R.id.Inicio) {
             Intent intent1 = new Intent(Orden.this, Inicio.class);
+            intent1.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(intent1);
             //DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
             request.getOrdenes(getBaseContext());
@@ -176,6 +178,7 @@ public class Orden extends AppCompatActivity implements NavigationView.OnNavigat
             request.getListQuejas(getApplicationContext());
         } else if (id == R.id.Configuraciones) {
             Intent intent1 = new Intent(Orden.this, Configuracion.class);
+            intent1.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(intent1);
         }
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

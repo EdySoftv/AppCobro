@@ -79,6 +79,7 @@ public class QuejasAdapter extends BaseAdapter {
             @Override
             public void onClick(View v) {
                 Intent intento1 = new Intent(mContext, MainReportes.class);
+                intento1.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 mContext.startActivity(intento1);
                 clvReport=Integer.valueOf(Queja.get(position));
                 contratoReport=String.valueOf(Array.contratoQ.get(position));

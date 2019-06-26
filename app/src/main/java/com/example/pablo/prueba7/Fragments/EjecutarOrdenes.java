@@ -132,6 +132,7 @@ public class EjecutarOrdenes extends Fragment {
             public void onClick(View v) {
                 //in.dialogoSalida(getContext());
                 Intent intent = new Intent(getActivity(), Firma.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(intent);
 
             }
@@ -165,6 +166,7 @@ public class EjecutarOrdenes extends Fragment {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 Intent intento = new Intent(getActivity(), Orden.class);
+                                intento.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                                 startActivity(intento);
                                 Toast.makeText(getActivity(), "Orden no ejecutada", Toast.LENGTH_LONG).show();
                             }
