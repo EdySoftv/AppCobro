@@ -745,7 +745,7 @@ public class Request extends AppCompatActivity {
                         List<GetdameSerDELCliresumenResult> dat = (List<GetdameSerDELCliresumenResult>) itData.next();
                         for (int i = 0; i < dat.size(); i++) {
                             String a = "";
-                            a += dat.get(i).getResumen() + "\t\t";
+                            a += dat.get(i).getResumen() + "\n";
                             resumen.add(i, a);
                         }
                         MainActivity.InfoServicios.setText(resumen.toString());
