@@ -21,6 +21,7 @@ import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.pablo.prueba7.Fragments.HorasReportes;
 import com.example.pablo.prueba7.Fragments.TrabajosOrdenes;
 import com.example.pablo.prueba7.R;
 import com.example.pablo.prueba7.Request.Request;
@@ -193,9 +194,11 @@ public class MainActivity extends AppCompatActivity implements ActionBar.TabList
                 if (visitaValida == false) {
                     mViewPager.setCurrentItem(3);
                     visitaValida = true;
+                    HorasReportes.statusHora = "V";
                 } else {
                     mViewPager.setCurrentItem(0);
                     visitaValida = false;
+                    HorasReportes.statusHora = "E";
                 }
 
             }

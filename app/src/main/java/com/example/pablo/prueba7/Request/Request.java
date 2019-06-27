@@ -1892,14 +1892,14 @@ public class Request extends AppCompatActivity {
 
                                 GuardaCoordenadas(context);
                             } else {
-                                Toast.makeText(context, "Se ha ejecutado correctamente", Toast.LENGTH_LONG).show();
+                                Toast.makeText(context, "Se ha guardado correctamente", Toast.LENGTH_LONG).show();
                                 dialogEjecutar.dismiss();
                                 getListOrd(context);
                             }
                         }
                         if (HorasReportes.statusHora.equals("V")) {
                             dialogEjecutar.dismiss();
-                            Toast.makeText(context, "Se ha ejecutado correctamente", Toast.LENGTH_LONG).show();
+                            Toast.makeText(context, "Se ha guardado correctamente", Toast.LENGTH_LONG).show();
                             getListOrd(context);
                         }
 
@@ -2042,7 +2042,7 @@ public class Request extends AppCompatActivity {
 
                 if (response1.code() == 200) {
                     dialogEjecutar.dismiss();
-                    Toast.makeText(context, "Orden ejecutada correctamente", Toast.LENGTH_LONG);
+                    Toast.makeText(context, "Orden guardado correctamente", Toast.LENGTH_LONG);
                     getListOrd(context);
                 } else {
                     Toast.makeText(context, "Error, aparatos no enviados", Toast.LENGTH_SHORT);

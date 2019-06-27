@@ -45,6 +45,7 @@ public class EjecutarOrdenes extends Fragment {
     private HorasOrdenes horas = new HorasOrdenes();
     private Request request = new Request();
     public static ProgressDialog dialogEjecutar;
+    public static String ejecutarStatus;
     Inicio in;
     Button salir;
 
@@ -211,6 +212,7 @@ public class EjecutarOrdenes extends Fragment {
         minutoE = c.get(Calendar.MINUTE);
 
         if (horas.ejecutada == 1) {
+            ejecutarStatus="E";
             System.out.println("VAL 1");
             fechaHoy = diaE + "/" + mesE + 1 + "/" + añoE;
             horaHoy = horaE + ":" + minutoE;
@@ -219,6 +221,7 @@ public class EjecutarOrdenes extends Fragment {
 
         }
         if (horas.visita == 1) {
+            ejecutarStatus="V";
             try{
                 jsonObject.put("ClvFactura", DeepConsModel.Clv_FACTURA);
                 jsonObject.put("ClvOrden", DeepConsModel.Clv_Orden);
@@ -240,6 +243,7 @@ public class EjecutarOrdenes extends Fragment {
 
         }
         if (horas.visita1 == 1) {
+            ejecutarStatus="V";
             try{
                 jsonObject.put("ClvFactura", DeepConsModel.Clv_FACTURA);
                 jsonObject.put("ClvOrden", DeepConsModel.Clv_Orden);

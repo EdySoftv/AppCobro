@@ -862,7 +862,7 @@ public class Services {
         jsonObject.put("Clv_Tecnico", Util.getClvTec(Util.preferences));
         jsonObject.put("OP2", 0);
         jsonObject.put("OPCION", "M");
-        jsonObject.put("STATUS", HorasReportes.statusHora);
+        jsonObject.put("STATUS", EjecutarOrdenes.ejecutarStatus);
         MediaType JSON = MediaType.parse("application/json; charset=utf-8");
         final RequestBody body = RequestBody.create(JSON, jsonObject.toString());
         final OkHttpClient client = new OkHttpClient.Builder().addInterceptor(new Interceptor() {

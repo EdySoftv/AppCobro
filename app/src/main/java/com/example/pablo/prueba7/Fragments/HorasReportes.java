@@ -38,7 +38,7 @@ public class HorasReportes extends Fragment  implements View.OnClickListener {
     private ConstraintLayout todo;
     private RadioButton btn1, bt2;
     public static int tecPosRepo;
-    public static String statusHora = "E";
+    public static String statusHora;
 
     public HorasReportes() {
         // Required empty public constructor
