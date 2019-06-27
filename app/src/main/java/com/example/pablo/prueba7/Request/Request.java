@@ -1735,11 +1735,20 @@ public class Request extends AppCompatActivity {
             @Override
             public void onResponse(Call<JsonObject> call, Response<JsonObject> response1) {
                 if (response1.code() == 200) {
-                    if (HorasReportes.statusHora.equals("E")) {
-                        getDeepMODORDSER(context);
-                    }
-                    if (HorasReportes.statusHora.equals("V")) {
-                        getDeepMODORDSERV(context, jsonObject);
+                    try {
+                        if (EjecutarOrdenes.ejecutarStatus.equals("E")) {
+                            getDeepMODORDSER(context, jsonObject);
+                        }
+                        if (EjecutarOrdenes.ejecutarStatus.equals("V")) {
+                            getDeepMODORDSERV(context, jsonObject);
+                        }
+                    }catch (Exception e){
+                        if (HorasReportes.statusHora.equals("E")) {
+                            getDeepMODORDSER(context, jsonObject);
+                        }
+                        if (HorasReportes.statusHora.equals("V")) {
+                            getDeepMODORDSERV(context, jsonObject);
+                        }
                     }
                 } else {
                     Toast.makeText(context, "Error, aparatos no enviados", Toast.LENGTH_SHORT);
@@ -1754,19 +1763,12 @@ public class Request extends AppCompatActivity {
         });
     }
 
-    public void getDeepMODORDSER(final Context context) {
-        Service service = null;
-        try {
-            service = services.getDeppMODORDSERService(context);
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-        Call<JsonObject> call = service.getMODORDSER();
+    public void getDeepMODORDSER(final Context context, final JSONObject jsonObject) {
+        Call<JsonObject> call = services.RequestPost(context, jsonObject).getMODORDSER();
         call.enqueue(new Callback<JsonObject>() {
             @Override
-            public void onResponse(Call<JsonObject> call, Response<JsonObject> response1) {
-                System.out.println(response1.message());
-                if (response1.code() == 200) {
+            public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
+                if (response.code() == 200) {
                     getGuardaHora(context);
                 } else {
                     Toast.makeText(context, "Error, aparatos no enviados", Toast.LENGTH_SHORT);
@@ -1875,33 +1877,62 @@ public class Request extends AppCompatActivity {
                     if (String.valueOf(response1.body().getAsJsonPrimitive("AddSP_LLena_Bitacora_OrdenesResult")).equals("-1")) {
                         Iterator<List<GetBUSCADetOrdSerListResult>> itData = Array.dataTrabajos.iterator();
                         List<GetBUSCADetOrdSerListResult> dat = itData.next();
+try{
+    if (EjecutarOrdenes.ejecutarStatus.equals("E")) {
 
-                        if (HorasReportes.statusHora.equals("E")) {
+        for (int a = 0; a < dat.size(); a++) {
 
-                            for (int a = 0; a < dat.size(); a++) {
+            String palabra = dat.get(a).getDescripcion();
+            String[] caracteres = palabra.split(" ");
+            Log.d("caracteres0",caracteres[0]);
+            Log.d("caracteres1",caracteres[1]);
+            if (caracteres[0].equals("ISNET") || caracteres[0].equals("ISDIG") || caracteres[0].equals("ISTVA")) {
+                IS = 1;
+            }
+        }
+        if (IS == 1) {
 
-                                String palabra = dat.get(a).getDescripcion();
-                                String[] caracteres = palabra.split(" ");
-                                Log.d("caracteres0",caracteres[0]);
-                                Log.d("caracteres1",caracteres[1]);
-                                if (caracteres[0].equals("ISNET") || caracteres[0].equals("ISDIG") || caracteres[0].equals("ISTVA")) {
-                                    IS = 1;
-                                }
-                            }
-                            if (IS == 1) {
+            GuardaCoordenadas(context);
+        } else {
+            Toast.makeText(context, "Se ha guardado correctamente", Toast.LENGTH_LONG).show();
+            dialogEjecutar.dismiss();
+            getListOrd(context);
+        }
+    }
+    if (EjecutarOrdenes.ejecutarStatus.equals("V")) {
+        dialogEjecutar.dismiss();
+        Toast.makeText(context, "Se ha guardado correctamente", Toast.LENGTH_LONG).show();
+        getListOrd(context);
+    }
+}catch (Exception e){
+    if (HorasReportes.statusHora.equals("E")) {
 
-                                GuardaCoordenadas(context);
-                            } else {
-                                Toast.makeText(context, "Se ha guardado correctamente", Toast.LENGTH_LONG).show();
-                                dialogEjecutar.dismiss();
-                                getListOrd(context);
-                            }
-                        }
-                        if (HorasReportes.statusHora.equals("V")) {
-                            dialogEjecutar.dismiss();
-                            Toast.makeText(context, "Se ha guardado correctamente", Toast.LENGTH_LONG).show();
-                            getListOrd(context);
-                        }
+        for (int a = 0; a < dat.size(); a++) {
+
+            String palabra = dat.get(a).getDescripcion();
+            String[] caracteres = palabra.split(" ");
+            Log.d("caracteres0",caracteres[0]);
+            Log.d("caracteres1",caracteres[1]);
+            if (caracteres[0].equals("ISNET") || caracteres[0].equals("ISDIG") || caracteres[0].equals("ISTVA")) {
+                IS = 1;
+            }
+        }
+        if (IS == 1) {
+
+            GuardaCoordenadas(context);
+        } else {
+            Toast.makeText(context, "Se ha guardado correctamente", Toast.LENGTH_LONG).show();
+            dialogEjecutar.dismiss();
+            getListOrd(context);
+        }
+    }
+    if (HorasReportes.statusHora.equals("V")) {
+        dialogEjecutar.dismiss();
+        Toast.makeText(context, "Se ha guardado correctamente", Toast.LENGTH_LONG).show();
+        getListOrd(context);
+    }
+}
+
 
 
                     }

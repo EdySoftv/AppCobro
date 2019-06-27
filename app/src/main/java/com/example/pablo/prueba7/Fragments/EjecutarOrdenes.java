@@ -21,6 +21,7 @@ import com.example.pablo.prueba7.Modelos.DeepConsModel;
 import com.example.pablo.prueba7.R;
 import com.example.pablo.prueba7.Request.Request;
 import com.example.pablo.prueba7.sampledata.BarraCargar;
+import com.example.pablo.prueba7.sampledata.Util;
 
 import org.json.JSONObject;
 
@@ -210,14 +211,35 @@ public class EjecutarOrdenes extends Fragment {
         diaE = c.get(Calendar.DAY_OF_MONTH);
         horaE = c.get(Calendar.HOUR);
         minutoE = c.get(Calendar.MINUTE);
-
+        String ab;
+        if ((mesE+1) < 10) {
+            ab = "0" + (mesE+1);
+        } else {
+            ab = String.valueOf(mesE+1);
+        }
+        fechaHoy = diaE + "/" + ab + "/" + añoE;
+        horaHoy = horaE + ":" + minutoE;
         if (horas.ejecutada == 1) {
             ejecutarStatus="E";
-            System.out.println("VAL 1");
-            fechaHoy = diaE + "/" + mesE + 1 + "/" + añoE;
-            horaHoy = horaE + ":" + minutoE;
             eject.setEnabled(false);
-            request.getValidaOrdSer(getActivity(),jsonObject);
+            try {
+                jsonObject.put("ClvFactura", DeepConsModel.Clv_FACTURA);
+                jsonObject.put("ClvOrden", DeepConsModel.Clv_Orden);
+                jsonObject.put("ClvTecnico", Util.getClvTec(Util.preferences));
+                jsonObject.put("ClvTipSer", DeepConsModel.Clv_TipSer);
+                jsonObject.put("Contrato", DeepConsModel.Contrato);
+                jsonObject.put("FecEje", fechaHoy);
+                jsonObject.put("FecSol", DeepConsModel.Fec_Sol);
+                jsonObject.put("Impresa", 1);
+                jsonObject.put("ListadeArticulos", "");
+                jsonObject.put("Obs", DeepConsModel.Obs);
+                jsonObject.put("Status", "E");
+                jsonObject.put("TecnicoCuadrilla", HorasOrdenes.TecSecSelecc);
+                jsonObject.put("Visita1", "");
+                jsonObject.put("Visita2", "");
+                request.getValidaOrdSer(getActivity(),jsonObject);
+            }catch (Exception e){}
+
 
         }
         if (horas.visita == 1) {

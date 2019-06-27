@@ -956,27 +956,14 @@ public class Services {
     public Service getDeppMODORDSERService(final Context context) throws JSONException {
         //POST Body Json
         String ab = "";
-        JSONObject jsonObject = new JSONObject();
+
         if ((mesE+1) < 10) {
             ab = "0" + (mesE+1);
         } else {
             ab = String.valueOf(mesE+1);
         }
         String s = diaE + "-" + ab + "-" + +añoE;
-        jsonObject.put("ClvFactura", DeepConsModel.Clv_FACTURA);
-        jsonObject.put("ClvOrden", DeepConsModel.Clv_Orden);
-        jsonObject.put("ClvTecnico", Util.getClvTec(Util.preferences));
-        jsonObject.put("ClvTipSer", DeepConsModel.Clv_TipSer);
-        jsonObject.put("Contrato", DeepConsModel.Contrato);
-        jsonObject.put("FecEje", s);
-        jsonObject.put("FecSol", DeepConsModel.Fec_Sol);
-        jsonObject.put("Impresa", 1);
-        jsonObject.put("ListadeArticulos", "");
-        jsonObject.put("Obs", DeepConsModel.Obs);
-        jsonObject.put("Status", HorasReportes.statusHora);
-        jsonObject.put("TecnicoCuadrilla", HorasOrdenes.TecSecSelecc);
-        jsonObject.put("Visita1", "");
-        jsonObject.put("Visita2", "");
+
 
         MediaType JSON = MediaType.parse("application/json; charset=utf-8");
         final RequestBody body = RequestBody.create(JSON, jsonObject.toString());
