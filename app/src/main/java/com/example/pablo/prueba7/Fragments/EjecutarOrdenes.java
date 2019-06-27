@@ -253,7 +253,7 @@ public class EjecutarOrdenes extends Fragment {
                 jsonObject.put("FecSol", DeepConsModel.Fec_Sol);
                 jsonObject.put("Impresa", 1);
                 jsonObject.put("ListadeArticulos", "");
-                jsonObject.put("Obs", DeepConsModel.Obs + observacionesTecnico);
+                jsonObject.put("Obs", DeepConsModel.Obs + "\t" + observacionesTecnico);
                 jsonObject.put("Status", "V");
                 jsonObject.put("TecnicoCuadrilla", HorasOrdenes.TecSecSelecc);
                 jsonObject.put("Visita1", fechaHoy);
@@ -275,7 +275,7 @@ public class EjecutarOrdenes extends Fragment {
                 jsonObject.put("FecSol", DeepConsModel.Fec_Sol);
                 jsonObject.put("Impresa", 1);
                 jsonObject.put("ListadeArticulos", "");
-                jsonObject.put("Obs", DeepConsModel.Obs + observacionesTecnico);
+                jsonObject.put("Obs", DeepConsModel.Obs + "\t" + observacionesTecnico);
                 jsonObject.put("Status", "V");
                 jsonObject.put("TecnicoCuadrilla", HorasOrdenes.TecSecSelecc);
                jsonObject.put("Visita1", DeepConsModel.Visita1);
