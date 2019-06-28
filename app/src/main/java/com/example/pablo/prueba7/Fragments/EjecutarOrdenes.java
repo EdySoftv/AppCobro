@@ -100,7 +100,7 @@ public class EjecutarOrdenes extends Fragment {
                         try {
                             request.send_aparat(getContext());
                             //**************************************
-                                Ejecutar();
+                            dialogoEjecutar1();
 
                             ////////*************************
 
@@ -110,8 +110,7 @@ public class EjecutarOrdenes extends Fragment {
                         }
                     }
                 }else {
-                        Ejecutar();
-
+                    dialogoEjecutar1();
                 }
             }
 
@@ -247,7 +246,7 @@ public class EjecutarOrdenes extends Fragment {
             try{
                 jsonObject.put("ClvFactura", DeepConsModel.Clv_FACTURA);
                 jsonObject.put("ClvOrden", DeepConsModel.Clv_Orden);
-                jsonObject.put("ClvTecnico", claveTecnico);
+                jsonObject.put("ClvTecnico", Util.getClvTec(Util.preferences));
                 jsonObject.put("ClvTipSer", DeepConsModel.Clv_TipSer);
                 jsonObject.put("Contrato", DeepConsModel.Contrato);
                 jsonObject.put("FecEje", "");
@@ -269,7 +268,7 @@ public class EjecutarOrdenes extends Fragment {
             try{
                 jsonObject.put("ClvFactura", DeepConsModel.Clv_FACTURA);
                 jsonObject.put("ClvOrden", DeepConsModel.Clv_Orden);
-                jsonObject.put("ClvTecnico", claveTecnico);
+                jsonObject.put("ClvTecnico", Util.getClvTec(Util.preferences));
                 jsonObject.put("ClvTipSer", DeepConsModel.Clv_TipSer);
                 jsonObject.put("Contrato", DeepConsModel.Contrato);
                 jsonObject.put("FecEje", "");

@@ -25,13 +25,11 @@
 
         <TextView
             android:id="@+id/tv_NContrato"
-            android:layout_width="wrap_content"
+            android:layout_width="150dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="4dp"
-            android:layout_marginLeft="4dp"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="8dp"
-            android:layout_marginRight="8dp"
             android:text="2660-22"
             android:textSize="22dp"
             android:textStyle="bold"
@@ -42,7 +40,7 @@
 
         <TextView
             android:id="@+id/tv_Nombre"
-            android:layout_width="168dp"
+            android:layout_width="250dp"
             android:layout_height="21dp"
             android:layout_marginTop="8dp"
             android:ellipsize="end"
@@ -55,18 +53,18 @@
             android:id="@+id/tv_NOrden"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="96dp"
+            android:layout_marginEnd="100dp"
             android:text="1025"
             android:textSize="22sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="@+id/tv_NContrato"
-            app:layout_constraintStart_toEndOf="@+id/tv_NContrato"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@+id/tv_NContrato"
             app:layout_constraintVertical_bias="0.0" />
 
         <TextView
             android:id="@+id/tv_estatus"
-            android:layout_width="wrap_content"
+            android:layout_width="50dp"
             android:layout_height="wrap_content"
             android:layout_marginEnd="24dp"
             android:textSize="16dp"
@@ -76,7 +74,7 @@
 
         <TextView
             android:id="@+id/txt"
-            android:layout_width="wrap_content"
+            android:layout_width="100dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"

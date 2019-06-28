@@ -28,8 +28,9 @@
             android:text="nobre tecnico"
             android:textAppearance="@style/TextAppearance.AppCompat.Large"
             android:textColor="#fff"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toEndOf="@+id/fotografiaTecnico"
-            app:layout_constraintTop_toTopOf="@+id/fotografiaTecnico" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
             android:id="@+id/fotografiaTecnico"

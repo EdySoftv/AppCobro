@@ -83,7 +83,7 @@
         android:layout_toEndOf="@+id/extencionAceptar"
         android:background="@drawable/boton"
         android:backgroundTint="@color/colorPrimary"
-        android:text="@string/salir"
+        android:text="@string/Regresar"
         android:textColor="#fff"
         android:textSize="@dimen/mediano"
         app:layout_constraintEnd_toEndOf="parent"

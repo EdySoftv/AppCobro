@@ -49,7 +49,7 @@
                 android:layout_weight="1"
                 android:checked="true"
                 android:onClick="onRadioButtonClicked"
-                android:text="@string/ejecutada"
+                android:text="@string/ejecutar"
                 android:textSize="@dimen/mediano" />
         </RadioGroup>
 

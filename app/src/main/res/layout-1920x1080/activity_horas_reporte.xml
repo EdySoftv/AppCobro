@@ -34,7 +34,7 @@
                 android:layout_width="107dp"
                 android:checked="true"
                 android:layout_height="wrap_content"
-                android:text="@string/ejecutada"
+                android:text="@string/ejecutar"
                  />
         </RadioGroup>
     </android.support.constraint.ConstraintLayout>

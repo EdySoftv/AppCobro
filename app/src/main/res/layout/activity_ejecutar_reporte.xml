@@ -19,7 +19,7 @@
             android:layout_marginTop="8dp"
             android:background="@drawable/boton"
             android:backgroundTint="@color/colorPrimary"
-            android:text="@string/ejecutar"
+            android:text="@string/guardar"
             android:textColor="#fff"
             app:layout_constraintEnd_toEndOf="@+id/firmarRep"
             app:layout_constraintStart_toStartOf="@+id/firmarRep"

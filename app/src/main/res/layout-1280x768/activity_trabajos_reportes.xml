@@ -15,9 +15,10 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             >
+
             <TextView
                 android:id="@+id/uno"
-                android:layout_width="wrap_content"
+                android:layout_width="300dp"
                 android:layout_height="wrap_content"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentTop="true"
@@ -37,9 +38,10 @@
                 android:textColor="#000"
                 android:background="@drawable/disenio_spinner"
                 android:focusableInTouchMode="false"/>
+
             <TextView
                 android:id="@+id/dos"
-                android:layout_width="wrap_content"
+                android:layout_width="300dp"
                 android:layout_height="wrap_content"
                 android:layout_alignStart="@+id/uno"
                 android:layout_alignParentTop="true"
@@ -57,25 +59,28 @@
                 android:layout_alignStart="@+id/uno"
                 android:background="@drawable/disenio_spinner">
             </TextView>
+
             <TextView
                 android:id="@+id/cinco"
-                android:layout_width="wrap_content"
+                android:layout_width="300dp"
                 android:layout_height="wrap_content"
                 android:layout_alignStart="@+id/uno"
                 android:layout_marginTop="185dp"
                 android:text="@string/reporte_Cliente"
                 android:textColor="#000"
                 android:textSize="20dp" />
+
             <TextView
                 android:id="@+id/report"
-                android:layout_width="wrap_content"
+                android:layout_width="350dp"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/cinco"
                 android:layout_alignStart="@+id/uno"
                 android:hint="---" />
+
             <TextView
                 android:id="@+id/tres"
-                android:layout_width="wrap_content"
+                android:layout_width="300dp"
                 android:layout_height="wrap_content"
                 android:layout_alignStart="@+id/uno"
                 android:layout_alignParentTop="true"
@@ -83,16 +88,18 @@
                 android:text="@string/observaciones"
                 android:textColor="#000"
                 android:textSize="20dp" />
+
             <TextView
                 android:id="@+id/observa"
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
+                android:layout_height="wrap_content"
                 android:layout_below="@+id/tres"
                 android:layout_alignStart="@+id/uno"
                 android:hint="---" />
+
             <TextView
                 android:id="@+id/cuatro"
-                android:layout_width="wrap_content"
+                android:layout_width="300dp"
                 android:layout_height="wrap_content"
                 android:layout_alignStart="@+id/uno"
                 android:layout_marginTop="360dp"
@@ -107,26 +114,28 @@
                 android:layout_alignStart="@+id/uno"
                 android:background="@drawable/disenio_spinner"
                 android:hint="---" />
+
             <TextView
                 android:id="@+id/txtw"
-                android:layout_width="wrap_content"
+                android:layout_width="300dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="450dp"
                 android:layout_alignStart="@+id/uno"
-                android:textSize="20dp"
+                android:layout_marginTop="450dp"
+                android:text="@string/problema_Real"
                 android:textColor="#000000"
-                android:text="@string/problema_Real" />
+                android:textSize="20dp" />
+
             <EditText
                 android:id="@+id/problema"
-                android:textSize="20dp"
                 android:layout_width="match_parent"
-                android:layout_height="47dp"
+                android:layout_height="wrap_content"
                 android:layout_below="@+id/txtw"
                 android:layout_alignStart="@+id/uno"
                 android:layout_alignParentStart="true"
                 android:layout_marginStart="10dp"
                 android:background="@drawable/contorno"
-                android:inputType="text" />
+                android:inputType="text"
+                android:textSize="20dp" />
         </RelativeLayout>
     </ScrollView>
 </FrameLayout>
