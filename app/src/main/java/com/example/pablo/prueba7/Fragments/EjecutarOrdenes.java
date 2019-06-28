@@ -25,10 +25,14 @@ import com.example.pablo.prueba7.sampledata.Util;
 
 import org.json.JSONObject;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 
 import static com.example.pablo.prueba7.Fragments.HorasOrdenes.obsTec;
 import static com.example.pablo.prueba7.Fragments.HorasOrdenes.observacionesTecnico;
+import static com.example.pablo.prueba7.Fragments.HorasOrdenes.visita1;
 import static com.example.pablo.prueba7.Services.Services.claveTecnico;
 
 
@@ -47,6 +51,11 @@ public class EjecutarOrdenes extends Fragment {
     private Request request = new Request();
     public static ProgressDialog dialogEjecutar;
     public static String ejecutarStatus;
+    public  String fechaActual;
+    Date objDate = new Date();
+    DateFormat hourFormat = new SimpleDateFormat("HH:mm:ss");
+    DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+
     Inicio in;
     Button salir;
 
@@ -73,14 +82,21 @@ public class EjecutarOrdenes extends Fragment {
         salir = view.findViewById(R.id.salirEjecutarOrd);
 
 
-
-        if (request.firma==true){
-            firmar.setVisibility(View.VISIBLE);
-
-        }else if (request.firma == false){
+        if(horas.visita == 1){
             firmar.setVisibility(View.GONE);
 
+        }else {
+            if (request.firma==true){
+                firmar.setVisibility(View.VISIBLE);
+
+            }else if (request.firma == false){
+                firmar.setVisibility(View.GONE);
+
+            }
         }
+
+        fechaActual = ( dateFormat.format(objDate)) +" " + (hourFormat.format(objDate));
+
        /* if(request.isnet==true){
             ejecutar.setVisibility(View.VISIBLE);
         }else{
@@ -113,11 +129,6 @@ public class EjecutarOrdenes extends Fragment {
                     dialogoEjecutar1();
                 }
             }
-
-
-
-
-
 
         });
 /*        reiniciar.setOnClickListener(new View.OnClickListener() {
@@ -177,29 +188,7 @@ public class EjecutarOrdenes extends Fragment {
 
     }
 
-    private void dialogoEjecutar1() {
-            new AlertDialog.Builder(getContext())
-                    .setTitle("Ejecutar Orden")
-                    .setMessage("¿Desea Ejecutar Orden?")
-                    .setPositiveButton("ACEPTAR",
-                            new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialog, int which) {
-                                    Ejecutar();
-                                }
-                            })
-                    .setNegativeButton("CANCELAR",
-                            new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialog, int which) {
-                                    dialogEjecutar.dismiss();
-                                }
-                            }).show();
 
-
-
-
-    }
 
     public void Ejecutar(){
         System.out.println("Ejecutar");
@@ -253,11 +242,16 @@ public class EjecutarOrdenes extends Fragment {
                 jsonObject.put("FecSol", DeepConsModel.Fec_Sol);
                 jsonObject.put("Impresa", 1);
                 jsonObject.put("ListadeArticulos", "");
-                jsonObject.put("Obs", DeepConsModel.Obs + "\t" + observacionesTecnico);
+                jsonObject.put("Obs", DeepConsModel.Obs + " " + observacionesTecnico);
                 jsonObject.put("Status", "V");
                 jsonObject.put("TecnicoCuadrilla", HorasOrdenes.TecSecSelecc);
-                jsonObject.put("Visita1", fechaHoy);
-                jsonObject.put("Visita2", "");
+                if (DeepConsModel.Visita1.equals("null") || DeepConsModel.Visita1.equals(" ") ){
+                    jsonObject.put("Visita1", fechaActual);
+                    jsonObject.put("Visita2", "");
+                }else{
+                    jsonObject.put("Visita1", DeepConsModel.Visita1);
+                    jsonObject.put("Visita2", fechaActual);
+                }
                 System.out.println("VAL 2");
                 request.getValidaOrdSer(getActivity(),jsonObject);
             }catch (Exception e){}

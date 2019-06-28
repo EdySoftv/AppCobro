@@ -672,6 +672,7 @@ public class Request extends AppCompatActivity {
                         } else if (DeepConsModel.STATUS.equals("V")) {
                             statusMA = ("En Visita");
                         }
+
                     } catch (Exception e) {
 
                     }
