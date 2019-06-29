@@ -118,7 +118,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_alignParentTop="true"
-            android:background="@drawable/contorno"
+            android:background="@color/colorPrimary"
             android:backgroundTint="@color/colorPrimary"
             android:visibility="gone">
 
@@ -162,8 +162,8 @@
                 android:layout_marginStart="10dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="10dp"
-                android:textSize="20dp"
                 android:textColor="#fff"
+                android:textSize="20dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView56" />
@@ -193,8 +193,8 @@
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="10dp"
                 android:hint="---"
-                android:textSize="20dp"
                 android:textColor="#fff"
+                android:textSize="20dp"
                 app:layout_constraintEnd_toEndOf="@+id/textView55"
                 app:layout_constraintStart_toStartOf="@+id/textView55"
                 app:layout_constraintTop_toBottomOf="@+id/textView57" />
@@ -224,8 +224,8 @@
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="10dp"
                 android:text="---"
-                android:textSize="20dp"
                 android:textColor="#fff"
+                android:textSize="20dp"
                 app:layout_constraintEnd_toEndOf="@+id/textView55"
                 app:layout_constraintStart_toStartOf="@+id/textView55"
                 app:layout_constraintTop_toBottomOf="@+id/textView58" />
@@ -255,8 +255,8 @@
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="10dp"
                 android:text="---"
-                android:textSize="20dp"
                 android:textColor="#fff"
+                android:textSize="20dp"
                 app:layout_constraintEnd_toEndOf="@+id/textView55"
                 app:layout_constraintStart_toStartOf="@+id/textView55"
                 app:layout_constraintTop_toBottomOf="@+id/textView59" />

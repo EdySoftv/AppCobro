@@ -111,7 +111,7 @@
     <string name="configuracion">Configuración</string>
     <string name="cerrarSesion">Cerrar sesión</string>
     <string name="proximo_Trabajo">Próximo trabajo</string>
-    <string name="direccion">Dirección</string>
+    <string name="direccion">DIRECCIÓN:</string>
 
     <string name="nContrato"># de contrato</string>
     <string name="btn_CAparato">Cambio aparato</string>

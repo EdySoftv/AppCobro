@@ -116,7 +116,7 @@ public class EjecutarOrdenes extends Fragment {
                         try {
                             request.send_aparat(getContext());
                             //**************************************
-                            dialogoEjecutar1();
+                            Ejecutar();
 
                             ////////*************************
 
@@ -126,7 +126,7 @@ public class EjecutarOrdenes extends Fragment {
                         }
                     }
                 }else {
-                    dialogoEjecutar1();
+                    Ejecutar();
                 }
             }
 
@@ -216,7 +216,7 @@ public class EjecutarOrdenes extends Fragment {
                 jsonObject.put("ClvTecnico", Util.getClvTec(Util.preferences));
                 jsonObject.put("ClvTipSer", DeepConsModel.Clv_TipSer);
                 jsonObject.put("Contrato", DeepConsModel.Contrato);
-                jsonObject.put("FecEje", fechaHoy);
+                jsonObject.put("FecEje", fechaActual);
                 jsonObject.put("FecSol", DeepConsModel.Fec_Sol);
                 jsonObject.put("Impresa", 1);
                 jsonObject.put("ListadeArticulos", "");
@@ -257,28 +257,7 @@ public class EjecutarOrdenes extends Fragment {
             }catch (Exception e){}
 
         }
-        if (horas.visita1 == 1) {
-            ejecutarStatus="V";
-            try{
-                jsonObject.put("ClvFactura", DeepConsModel.Clv_FACTURA);
-                jsonObject.put("ClvOrden", DeepConsModel.Clv_Orden);
-                jsonObject.put("ClvTecnico", Util.getClvTec(Util.preferences));
-                jsonObject.put("ClvTipSer", DeepConsModel.Clv_TipSer);
-                jsonObject.put("Contrato", DeepConsModel.Contrato);
-                jsonObject.put("FecEje", "");
-                jsonObject.put("FecSol", DeepConsModel.Fec_Sol);
-                jsonObject.put("Impresa", 1);
-                jsonObject.put("ListadeArticulos", "");
-                jsonObject.put("Obs", DeepConsModel.Obs + "\t" + observacionesTecnico);
-                jsonObject.put("Status", "V");
-                jsonObject.put("TecnicoCuadrilla", HorasOrdenes.TecSecSelecc);
-               jsonObject.put("Visita1", DeepConsModel.Visita1);
-                jsonObject.put("Visita2", fechaHoy);
-                System.out.println("VAL 3");
-                request.getValidaOrdSer(getActivity(),jsonObject);
-            }catch (Exception e){}
-        }
-        System.out.println("SALIO");
+
     }
 }
 

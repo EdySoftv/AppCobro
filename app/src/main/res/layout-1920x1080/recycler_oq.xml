@@ -15,88 +15,127 @@
         android:paddingRight="8dp">
 
         <TextView
+            android:id="@+id/contrto"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="16dp"
+            android:text="Contrato"
+            android:textSize="18dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/controla" />
+
+        <TextView
+            android:id="@+id/noOrden"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="52dp"
+            android:layout_marginTop="16dp"
+            android:text="No. de Orden"
+            android:textSize="18dp"
+            app:layout_constraintStart_toEndOf="@+id/contrto"
+            app:layout_constraintTop_toTopOf="@+id/controla" />
+
+        <TextView
+            android:id="@+id/status"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="48dp"
+            android:layout_marginTop="16dp"
+            android:text="Estatus"
+            android:textSize="18dp"
+            app:layout_constraintStart_toEndOf="@+id/noOrden"
+            app:layout_constraintTop_toTopOf="@+id/controla" />
+
+        <TextView
             android:id="@+id/controla"
-            android:layout_width="0dp"
-            android:layout_height="123dp"
+            android:layout_width="399dp"
+            android:layout_height="153dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.473"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.021" />
 
         <TextView
             android:id="@+id/tv_NContrato"
-            android:layout_width="150dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="4dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="8dp"
+            android:layout_width="102dp"
+            android:layout_height="30dp"
+            android:layout_marginStart="36dp"
+            android:layout_marginTop="8dp"
             android:text="2660-22"
             android:textSize="22dp"
             android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintStart_toStartOf="@+id/controla"
+            app:layout_constraintTop_toBottomOf="@+id/contrto" />
 
         <TextView
             android:id="@+id/tv_Nombre"
             android:layout_width="250dp"
             android:layout_height="21dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="12dp"
             android:ellipsize="end"
             android:maxLines="1"
             android:text="SELENE PEREZ MENDOZA"
-            app:layout_constraintStart_toStartOf="@+id/tv_NContrato"
+            app:layout_constraintStart_toStartOf="@+id/controla"
             app:layout_constraintTop_toBottomOf="@+id/tv_NContrato" />
 
         <TextView
             android:id="@+id/tv_NOrden"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="100dp"
+            android:layout_marginStart="72dp"
+            android:layout_marginTop="8dp"
             android:text="1025"
             android:textSize="22sp"
             android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="@+id/tv_NContrato"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/tv_NContrato"
-            app:layout_constraintVertical_bias="0.0" />
+            app:layout_constraintStart_toEndOf="@+id/tv_NContrato"
+            app:layout_constraintTop_toBottomOf="@+id/noOrden" />
 
         <TextView
             android:id="@+id/tv_estatus"
-            android:layout_width="50dp"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="24dp"
+            android:layout_width="52dp"
+            android:layout_height="31dp"
+            android:layout_marginStart="100dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp"
             android:textSize="16dp"
-            app:layout_constraintBottom_toBottomOf="@+id/tv_Nombre"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/tv_Nombre" />
+            android:textStyle="bold"
+            android:visibility="visible"
+            app:layout_constraintBottom_toTopOf="@+id/tv_Nombre"
+            app:layout_constraintEnd_toEndOf="@+id/controla"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toEndOf="@+id/tv_NOrden"
+            app:layout_constraintTop_toBottomOf="@+id/status"
+            app:layout_constraintVertical_bias="0.0" />
 
         <TextView
             android:id="@+id/txt"
-            android:layout_width="100dp"
-            android:layout_height="wrap_content"
+            android:layout_width="71dp"
+            android:layout_height="22dp"
+            android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
-            android:layout_marginEnd="8dp"
             android:text="@string/direccion"
-            app:layout_constraintEnd_toStartOf="@+id/tv_estatus"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="@+id/tv_Nombre"
+            app:layout_constraintStart_toStartOf="@+id/controla"
             app:layout_constraintTop_toBottomOf="@+id/tv_Nombre" />
 
         <TextView
             android:id="@+id/id_direccion"
-            android:layout_width="0dp"
+            android:layout_width="291dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
-            android:layout_marginEnd="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
             android:ellipsize="end"
             android:maxLines="1"
             android:textSize="15dp"
-            app:layout_constraintBottom_toBottomOf="@+id/txt"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="@+id/controla"
             app:layout_constraintStart_toEndOf="@+id/txt"
-            app:layout_constraintTop_toTopOf="@+id/txt" />
+            app:layout_constraintTop_toBottomOf="@+id/tv_Nombre"
+            app:layout_constraintVertical_bias="0.0" />
 
     </android.support.constraint.ConstraintLayout>
 </android.support.v7.widget.CardView>
