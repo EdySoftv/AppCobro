@@ -1681,7 +1681,7 @@ public class Request extends AppCompatActivity {
                         Toast.makeText(context, "Error" + string1, Toast.LENGTH_LONG).show();
                         EjecutarOrdenes.eject.setEnabled(true);
                     }
-                    Toast.makeText(context, "Orden guardada con exito" + string1, Toast.LENGTH_LONG).show();
+                    Toast.makeText(context, "Error: " + string1, Toast.LENGTH_LONG).show();
                 }
             }
 
@@ -1713,7 +1713,7 @@ public class Request extends AppCompatActivity {
                     } else {
                         dialogEjecutar.dismiss();
                         EjecutarOrdenes.eject.setEnabled(true);
-                        Toast.makeText(context, "Error" + checa.Error, Toast.LENGTH_LONG).show();
+                        Toast.makeText(context, "Error: " + checa.Error, Toast.LENGTH_LONG).show();
                     }
                 }
             }
