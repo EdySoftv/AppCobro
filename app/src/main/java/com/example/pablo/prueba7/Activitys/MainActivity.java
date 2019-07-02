@@ -59,7 +59,7 @@ public class MainActivity extends AppCompatActivity implements ActionBar.TabList
         info= findViewById(R.id.info);
         layoutAnimado= findViewById(R.id.animado);
         hzScrollView= findViewById(R.id.scv);
-        NombreTec= findViewById(R.id.tecniconame);
+        //NombreTec= findViewById(R.id.tecniconame);
         Contrato= findViewById(R.id.contrato);
         Status= findViewById(R.id.status);
         Nombre= findViewById(R.id.infonombre);
@@ -73,7 +73,7 @@ public class MainActivity extends AppCompatActivity implements ActionBar.TabList
        // NombreTec.setText(nombre_tecnico);
         Contrato.setText(request.contraroMA);
         Status.setText(request.statusMA);
-        NombreTec.setText(Util.getNombreTecnicoPreference(Util.preferences));
+//        NombreTec.setText(Util.getNombreTecnicoPreference(Util.preferences));
         //* Boton de informacion
         info.setOnClickListener(new View.OnClickListener() {
             @Override

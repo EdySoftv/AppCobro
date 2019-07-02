@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -12,84 +13,120 @@
         android:layout_marginTop="80dp">
 
 
-        <RelativeLayout
+        <android.support.constraint.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
             <TextView
                 android:id="@+id/uno"
-                android:layout_width="275dp"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentTop="true"
-                android:layout_marginStart="10dp"
-                android:layout_marginTop="0dp"
+                android:layout_marginStart="4dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
                 android:text="@string/clasificacion_Problema"
                 android:textColor="#000"
-                android:textSize="@dimen/mediano" />
+                android:textSize="@dimen/mediano"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/Sp1"
-                android:layout_width="@dimen/spinnerS"
-                android:layout_height="20dp"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
                 android:layout_below="@+id/uno"
                 android:layout_alignStart="@+id/uno"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
                 android:background="@drawable/disenio_spinner"
                 android:focusableInTouchMode="false"
                 android:gravity="center"
-                android:textColor="#000" />
+                android:textColor="#000"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/uno" />
 
             <TextView
                 android:id="@+id/dos"
-                android:layout_width="275dp"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_alignStart="@+id/uno"
                 android:layout_alignParentTop="true"
-                android:layout_marginTop="75dp"
+                android:layout_marginStart="4dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
                 android:text="@string/prioridad"
                 android:textColor="#000"
-                android:textSize="@dimen/mediano" />
+                android:textSize="@dimen/mediano"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/Sp1" />
 
             <TextView
                 android:id="@+id/Sp2"
-                android:layout_width="@dimen/spinnerS"
-                android:layout_height="20dp"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
                 android:layout_below="@+id/dos"
                 android:layout_alignStart="@+id/uno"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
                 android:background="@drawable/disenio_spinner"
                 android:gravity="center"
-                android:textColor="#000"></TextView>
+                android:textColor="#000"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/dos"></TextView>
 
             <TextView
                 android:id="@+id/cinco"
-                android:layout_width="275dp"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_alignStart="@+id/uno"
-                android:layout_marginTop="155dp"
+                android:layout_marginStart="4dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
                 android:text="@string/reporte_Cliente"
                 android:textColor="#000"
-                android:textSize="@dimen/mediano" />
+                android:textSize="@dimen/mediano"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/Sp2" />
 
             <TextView
                 android:id="@+id/report"
-                android:layout_width="275dp"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/cinco"
                 android:layout_alignStart="@+id/uno"
-                android:layout_marginTop="10dp"
-                android:hint="---" />
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:hint="---"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/cinco" />
 
             <TextView
                 android:id="@+id/tres"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_alignStart="@+id/uno"
                 android:layout_alignParentTop="true"
-                android:layout_marginTop="230dp"
+                android:layout_marginStart="4dp"
+                android:layout_marginTop="8dp"
+
+                android:layout_marginEnd="8dp"
                 android:text="@string/observaciones"
                 android:textColor="#000"
-
-                android:textSize="@dimen/mediano" />
+                android:textSize="@dimen/mediano"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/report" />
 
             <TextView
                 android:id="@+id/observa"
@@ -97,44 +134,63 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/tres"
                 android:layout_alignStart="@+id/uno"
-                android:layout_marginTop="10dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
                 android:hint="---"
-                android:textSize="@dimen/mediano" />
+                android:textSize="@dimen/mediano"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tres" />
 
             <TextView
                 android:id="@+id/cuatro"
-                android:layout_width="275dp"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/observa"
                 android:layout_alignStart="@+id/uno"
-                android:layout_marginStart="2dp"
-                android:layout_marginTop="17dp"
+                android:layout_marginStart="4dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
                 android:text="@string/tipo_Solucion"
                 android:textColor="#000"
-                android:textSize="@dimen/mediano" />
+                android:textSize="@dimen/mediano"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/observa" />
 
             <Spinner
                 android:id="@+id/tiposol"
-                android:layout_width="@dimen/spinnerS"
-                android:layout_height="20dp"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
                 android:layout_below="@+id/cuatro"
                 android:layout_alignStart="@+id/uno"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
                 android:background="@drawable/disenio_spinner"
                 android:hint="---"
-                android:textSize="@dimen/mediano" />
+                android:textSize="@dimen/mediano"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/cuatro" />
 
             <TextView
                 android:id="@+id/txtw"
-                android:layout_width="275dp"
-                android:layout_height="@dimen/spinnerA"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
                 android:layout_below="@+id/tiposol"
                 android:layout_alignStart="@+id/uno"
 
-                android:layout_marginStart="1dp"
-                android:layout_marginTop="16dp"
+                android:layout_marginStart="4dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
                 android:text="@string/problema_Real"
                 android:textColor="#000000"
-                android:textSize="@dimen/mediano" />
+                android:textSize="@dimen/mediano"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tiposol" />
 
             <EditText
                 android:id="@+id/problema"
@@ -143,10 +199,17 @@
                 android:layout_below="@+id/txtw"
                 android:layout_alignStart="@+id/uno"
                 android:layout_alignParentStart="true"
-                android:layout_marginStart="10dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginBottom="8dp"
                 android:background="@drawable/contorno"
                 android:inputType="text"
-                android:textSize="@dimen/mediano" />
-        </RelativeLayout>
+                android:textSize="@dimen/mediano"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/txtw" />
+        </android.support.constraint.ConstraintLayout>
     </ScrollView>
 </FrameLayout>

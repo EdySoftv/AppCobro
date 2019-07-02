@@ -10,22 +10,11 @@
 
     tools:showIn="@layout/app_bar_orden">
 
-    <ListView
-        android:id="@+id/listorden"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="80dp"
-        android:layout_alignParentTop="true"
-        android:backgroundTint="@color/colorPrimary"
-        android:dividerHeight="10dp"
-        android:elevation="80dp"
-        android:paddingLeft="8dp"
-        android:paddingRight="8dp"
-        app:layout_constraintTop_toBottomOf="@+id/ordsearch" />
+
 
     <TextView
         android:id="@+id/textView39"
-        android:layout_width="100dp"
+        android:layout_width="130dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
@@ -42,49 +31,49 @@
     <EditText
         android:id="@+id/ordsearch"
         android:layout_width="130dp"
-        android:layout_height="45dp"
+        android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:inputType="number"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.1"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/textView39" />
 
     <Button
         android:id="@+id/borden"
         android:layout_width="25dp"
         android:layout_height="25dp"
-        android:layout_marginTop="32dp"
         android:background="@drawable/busqueda"
         android:gravity="center_vertical"
+        app:layout_constraintBottom_toBottomOf="@+id/ordsearch"
         app:layout_constraintStart_toEndOf="@+id/ordsearch"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="@+id/ordsearch" />
 
 
     <EditText
         android:id="@+id/contsearch"
-        android:layout_width="130dp"
+        android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:inputType="text|number"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.83"
+        app:layout_constraintHorizontal_bias="0.85"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/textView60" />
 
     <Button
         android:id="@+id/bcontrato"
         android:layout_width="25dp"
         android:layout_height="25dp"
-        android:layout_marginTop="32dp"
         android:background="@drawable/busqueda"
         android:gravity="center_vertical"
+        app:layout_constraintBottom_toBottomOf="@+id/contsearch"
         app:layout_constraintStart_toEndOf="@+id/contsearch"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="@+id/contsearch" />
 
     <TextView
         android:id="@+id/textView60"
@@ -94,13 +83,26 @@
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:text="@string/n_Contrato"
-        android:textAlignment="textEnd"
+        android:textAlignment="center"
         android:textSize="20dp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.84"
+        app:layout_constraintHorizontal_bias="0.85"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-
+    <ListView
+        android:id="@+id/listorden"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="8dp"
+        android:backgroundTint="@color/colorPrimary"
+        android:dividerHeight="10dp"
+        android:elevation="80dp"
+        android:paddingLeft="8dp"
+        android:paddingRight="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ordsearch" />
 </android.support.constraint.ConstraintLayout>

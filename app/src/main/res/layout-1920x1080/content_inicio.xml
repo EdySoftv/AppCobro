@@ -13,41 +13,45 @@
         android:paddingBottom="16dp">
         <!-- TODO: Update blank fragment layout -->
         <com.github.mikephil.charting.charts.PieChart
-            android:visibility="invisible"
             android:id="@+id/graficaPastel"
             android:layout_width="match_parent"
-            android:layout_height="400dp"
+            android:layout_height="500dp"
             android:layout_marginTop="50dp"
             android:paddingLeft="32dp"
             android:paddingRight="32dp"
+            android:visibility="invisible"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/textView"
-            android:layout_width="200dp"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginTop="5dp"
+            android:layout_marginEnd="8dp"
             android:text="@string/proximo_Trabajo"
             android:textColor="#000"
             android:textSize="18sp"
             android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/graficaPastel" />
 
 
         <TextView
             android:id="@+id/textView2"
-            android:layout_width="200dp"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
             android:text="@string/direccion"
             android:textColor="#000"
             android:textSize="18sp"
             android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView25" />
 
@@ -80,7 +84,7 @@
             android:layout_marginTop="8dp"
             android:text="@string/contrato"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView16" />
+            app:layout_constraintTop_toTopOf="@+id/contrato" />
 
         <TextView
             android:id="@+id/contrato"
@@ -99,7 +103,7 @@
             android:layout_marginTop="8dp"
             android:text="@string/hora"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView20" />
+            app:layout_constraintTop_toTopOf="@+id/hora" />
 
         <TextView
             android:id="@+id/hora"
@@ -164,7 +168,8 @@
             android:id="@+id/colonia"
             android:layout_width="220sp"
             android:layout_height="wrap_content"
-            app:layout_constraintBottom_toBottomOf="@+id/textView29"
+            android:layout_marginBottom="16dp"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@+id/numero"
             app:layout_constraintStart_toStartOf="@+id/numero"
             app:layout_constraintTop_toTopOf="@+id/textView29" />

@@ -3,53 +3,54 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content">
 
     <!-- TODO: Update blank fragment layout -->
-<ScrollView
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_marginTop="85dp">
-    <android.support.constraint.ConstraintLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:paddingBottom="8dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        android:layout_height="wrap_content"
+        android:layout_marginTop="90dp">
 
-        <RadioGroup
-            android:id="@+id/radioGroup"
-            android:layout_width="253dp"
+        <android.support.constraint.ConstraintLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginEnd="8dp"
-            android:orientation="horizontal"
+            android:paddingBottom="8dp"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
-            <RadioButton
-                android:id="@+id/rb_Visita"
-                android:layout_width="100dp"
+            <RadioGroup
+                android:id="@+id/radioGroup"
+                android:layout_width="253dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:onClick="onRadioButtonClicked"
-                android:text="@string/visita"
-                android:textSize="@dimen/mediano" />
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"
+                android:orientation="horizontal"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
 
-            <RadioButton
-                android:id="@+id/rb_Ejecutada"
-                android:layout_width="100dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:onClick="onRadioButtonClicked"
-                android:text="@string/ejecutar"
-                android:textSize="@dimen/mediano" />
-        </RadioGroup>
+                <RadioButton
+                    android:id="@+id/rb_Visita"
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:onClick="onRadioButtonClicked"
+                    android:text="@string/visita"
+                    android:textSize="@dimen/mediano" />
 
-        <!--   <android.support.constraint.ConstraintLayout
+                <RadioButton
+                    android:id="@+id/rb_Ejecutada"
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:onClick="onRadioButtonClicked"
+                    android:text="@string/ejecutar"
+                    android:textSize="@dimen/mediano" />
+            </RadioGroup>
+
+            <!--   <android.support.constraint.ConstraintLayout
             android:id="@+id/constrain_Visita"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -116,7 +117,7 @@
         </android.support.constraint.ConstraintLayout>-->
 
 
-        <!--        <android.support.constraint.ConstraintLayout
+            <!--        <android.support.constraint.ConstraintLayout
             android:id="@+id/constrain_Ejecutada"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -157,159 +158,170 @@
 
         </android.support.constraint.ConstraintLayout>-->
 
-        <android.support.constraint.ConstraintLayout
-            android:id="@+id/todo"
-            android:layout_width="325dp"
-            android:layout_height="325dp"
-            android:layout_marginTop="8dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/radioGroup">
-
-            <TextView
-                android:id="@+id/tv_textTecSec"
-                android:layout_width="250dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="4dp"
-                android:layout_marginTop="8dp"
-                android:text="@string/tecnicoSecundario"
-                android:textSize="@dimen/xl"
-                android:textStyle="bold"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <Spinner
-                android:id="@+id/spinnerTecnicoSec"
-                android:layout_width="300dp"
-                android:layout_height="@dimen/spinnerA"
-                android:layout_marginStart="4dp"
-                android:layout_marginTop="8dp"
-                android:background="@drawable/disenio_spinner"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tv_textTecSec" />
-
-            <TextView
-                android:id="@+id/textView19"
-                android:layout_width="250dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
-                android:text="@string/observacionesPrevias"
-                android:textSize="@dimen/xl"
-                android:textStyle="bold"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/spinnerTecnicoSec" />
-
-
-            <TextView
-                android:id="@+id/tv_Observaciones"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="16dp"
-                android:textSize="@dimen/grande"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView19" />
-
             <android.support.constraint.ConstraintLayout
-                android:id="@+id/contraintObservacionesTecnico"
-                android:layout_width="320dp"
-                android:layout_height="98dp"
+                android:id="@+id/todo"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:layout_marginBottom="8dp"
-                android:visibility="gone"
-                app:layout_constraintBottom_toTopOf="@+id/textView21"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tv_Observaciones"
-                app:layout_constraintVertical_bias="0.12">
+                app:layout_constraintTop_toBottomOf="@+id/radioGroup">
 
                 <TextView
-                    android:id="@+id/textob"
-                    android:layout_width="250dp"
+                    android:id="@+id/tv_textTecSec"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="4dp"
-                    android:text="@string/observacionesTecnico"
+                    android:layout_marginStart="4dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:text="@string/tecnicoSecundario"
                     android:textSize="@dimen/xl"
                     android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
-                <EditText
-                    android:id="@+id/observaciones_Tecnico"
-                    android:layout_width="298dp"
-                    android:layout_height="38dp"
-                    android:layout_marginStart="2dp"
-                    android:layout_marginTop="14dp"
-                    android:layout_marginEnd="20dp"
-                    android:background="@drawable/contorno"
-                    android:inputType="text"
-                    android:textSize="20dp"
+                <Spinner
+                    android:id="@+id/spinnerTecnicoSec"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="4dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:background="@drawable/disenio_spinner"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/textob" />
+                    app:layout_constraintTop_toBottomOf="@+id/tv_textTecSec" />
 
+                <TextView
+                    android:id="@+id/textView19"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:text="@string/observacionesPrevias"
+                    android:textSize="@dimen/xl"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/spinnerTecnicoSec" />
+
+
+                <TextView
+                    android:id="@+id/tv_Observaciones"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="16dp"
+                    android:textSize="@dimen/grande"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textView19" />
+
+                <android.support.constraint.ConstraintLayout
+                    android:id="@+id/contraintObservacionesTecnico"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="8dp"
+                    android:visibility="gone"
+                    app:layout_constraintBottom_toTopOf="@+id/textView21"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_Observaciones"
+                    app:layout_constraintVertical_bias="0.12">
+
+                    <TextView
+                        android:id="@+id/textob"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginTop="4dp"
+                        android:layout_marginEnd="8dp"
+                        android:text="@string/observacionesTecnico"
+                        android:textSize="@dimen/xl"
+                        android:textStyle="bold"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <EditText
+                        android:id="@+id/observaciones_Tecnico"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="2dp"
+                        android:layout_marginTop="14dp"
+                        android:layout_marginEnd="8dp"
+                        android:background="@drawable/contorno"
+                        android:inputType="text"
+                        android:textSize="20dp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/textob" />
+
+                </android.support.constraint.ConstraintLayout>
+
+
+                <TextView
+                    android:id="@+id/textView21"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="4dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:text="@string/coordenadas"
+                    android:textSize="@dimen/xl"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/contraintObservacionesTecnico" />
+
+                <TextView
+                    android:id="@+id/textView22"
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="8dp"
+                    android:text="@string/latitud"
+                    android:textSize="@dimen/grande"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textView21" />
+
+                <TextView
+                    android:id="@+id/textView23"
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="8dp"
+                    android:text="@string/longitud"
+                    android:textSize="@dimen/grande"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_Latitud" />
+
+                <TextView
+                    android:id="@+id/tv_Latitud"
+                    android:layout_width="175dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="16dp"
+                    android:text="---"
+                    android:textSize="@dimen/grande"
+                    app:layout_constraintBottom_toBottomOf="@+id/textView22"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/textView22" />
+
+                <TextView
+                    android:id="@+id/tv_Longitud"
+                    android:layout_width="175dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="16dp"
+                    android:text="---"
+                    android:textSize="@dimen/grande"
+                    app:layout_constraintBottom_toBottomOf="@+id/textView23"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/textView23" />
             </android.support.constraint.ConstraintLayout>
-
-
-            <TextView
-                android:id="@+id/textView21"
-                android:layout_width="250dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="4dp"
-                android:layout_marginTop="8dp"
-                android:text="@string/coordenadas"
-                android:textSize="@dimen/xl"
-                android:textStyle="bold"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/contraintObservacionesTecnico" />
-
-            <TextView
-                android:id="@+id/textView22"
-                android:layout_width="100dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
-                android:text="@string/latitud"
-                android:textSize="@dimen/grande"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView21" />
-
-            <TextView
-                android:id="@+id/textView23"
-                android:layout_width="100dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
-                android:text="@string/longitud"
-                android:textSize="@dimen/grande"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView22" />
-
-            <TextView
-                android:id="@+id/tv_Latitud"
-                android:layout_width="175dp"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="16dp"
-                android:text="---"
-                android:textSize="@dimen/grande"
-                app:layout_constraintBottom_toBottomOf="@+id/textView22"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/textView22" />
-
-            <TextView
-                android:id="@+id/tv_Longitud"
-                android:layout_width="175dp"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="16dp"
-                android:text="---"
-                android:textSize="@dimen/grande"
-                app:layout_constraintBottom_toBottomOf="@+id/textView23"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/textView23" />
         </android.support.constraint.ConstraintLayout>
-    </android.support.constraint.ConstraintLayout>
-</ScrollView>
+    </ScrollView>
 </RelativeLayout>

@@ -25,7 +25,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <TextView
+       <!-- <TextView
             android:id="@+id/qwe"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -44,11 +44,11 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="32dp"
             android:layout_marginEnd="8dp"
-            android:text="---"
+            android:text="-&#45;&#45;"
             app:layout_constraintBottom_toBottomOf="@+id/qwe"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/zaw"
-            app:layout_constraintTop_toTopOf="@+id/qwe" />
+            app:layout_constraintTop_toTopOf="@+id/qwe" />-->
 
         <Button
             android:id="@+id/info"
@@ -69,23 +69,26 @@
 
         <TextView
             android:id="@+id/zaw"
-            android:layout_width="wrap_content"
+            android:layout_width="100dp"
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
-            android:layout_marginTop="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="8dp"
             android:text="@string/contratoDos"
+            android:textAlignment="textEnd"
             android:textColor="#000"
-            app:layout_constraintEnd_toEndOf="@+id/qwe"
-            app:layout_constraintStart_toStartOf="@+id/qwe"
-            app:layout_constraintTop_toBottomOf="@+id/qwe" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/contrato"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
-            android:layout_marginStart="32dp"
+            android:layout_marginStart="8dp"
             android:layout_marginEnd="8dp"
             android:layout_toEndOf="@+id/zaw"
             android:hint="---"
@@ -96,22 +99,25 @@
 
         <TextView
             android:id="@+id/txtqwe"
-            android:layout_width="wrap_content"
+            android:layout_width="100dp"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
+            android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
             android:text="@string/estatusDos"
+            android:textAlignment="textEnd"
             android:textColor="#000"
-            app:layout_constraintEnd_toEndOf="@+id/qwe"
-            app:layout_constraintStart_toStartOf="@+id/qwe"
-            app:layout_constraintTop_toBottomOf="@+id/zaw" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/contrato" />
 
         <TextView
             android:id="@+id/status"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
-            android:layout_marginStart="32dp"
+            android:layout_marginStart="8dp"
             android:layout_marginEnd="8dp"
             android:hint="---"
             app:layout_constraintBottom_toBottomOf="@+id/txtqwe"
