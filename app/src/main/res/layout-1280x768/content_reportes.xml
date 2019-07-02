@@ -8,7 +8,7 @@
     tools:context=".Activitys.Reportes"
     tools:showIn="@layout/app_bar_reportes">
 
-    <ListView
+    <android.support.v7.widget.RecyclerView
         android:id="@+id/listreporte"
         android:layout_width="match_parent"
         android:layout_height="0dp"
@@ -18,6 +18,7 @@
         android:paddingLeft="8dp"
         android:paddingRight="8dp"
         android:textSize="@dimen/chico"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"

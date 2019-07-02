@@ -2,23 +2,28 @@ package com.example.pablo.prueba7.Adapters;
 
 
 import android.content.Context;
+import android.support.annotation.NonNull;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
+import android.widget.Button;
+import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.pablo.prueba7.Listas.Array;
 import com.example.pablo.prueba7.R;
 import com.example.pablo.prueba7.Request.Request;
 
 import java.util.ArrayList;
+import java.util.List;
 
 
-
-public class OrdenesAdapter extends BaseAdapter implements AdapterView.OnItemClickListener {
+public class OrdenesAdapter extends RecyclerView.Adapter<OrdenesAdapter.ordensrcViewHolder> implements AdapterView.OnItemClickListener {
 
     public static Integer clvor;
     public static String noOrden;
@@ -31,66 +36,54 @@ public class OrdenesAdapter extends BaseAdapter implements AdapterView.OnItemCli
     private ArrayList<String>direccionsrc;
     private Request request=new Request();
 
-    public OrdenesAdapter(Context context, ArrayList<String>ordensrc, ArrayList<String>nombrex, ArrayList<String>contratosrc, ArrayList<String>statusrc, ArrayList<String>direccionsrc){
 
+
+    public static  class ordensrcViewHolder extends  RecyclerView.ViewHolder{
+        private TextView status,contrato1,nombre,direccionOrd,orden,control;
+        public ordensrcViewHolder( View v) {
+            super(v);
+            status=(TextView)itemView.findViewById(R.id.tv_estatus);
+            orden=(TextView)itemView.findViewById(R.id.tv_NOrden);
+            contrato1=(TextView)itemView.findViewById(R.id.tv_NContrato);
+            nombre=(TextView)itemView.findViewById(R.id.tv_Nombre);
+            direccionOrd=(TextView)itemView.findViewById(R.id.id_direccion);
+            control=(TextView)itemView.findViewById(R.id.controla);
+        }
+    }
+
+    public OrdenesAdapter(Context mContext, ArrayList<String>ordensrc, ArrayList<String>nombrex, ArrayList<String>contratosrc, ArrayList<String>statusrc, ArrayList<String>direccionsrc){
         this.ordensrc=ordensrc;
         this.contratosrc=contratosrc;
         this.nombresrc=nombrex;
         this.statusrc=statusrc;
         this.direccionsrc=direccionsrc;
-
-        mContext=context;
-        inflater=LayoutInflater.from(mContext); }
-        @Override
+        this.mContext=mContext;
+    }
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         Log.i("APP","Click");
     }
-    public  class viewHolder{
-        private TextView status,contrato1,nombre,direccionOrd,orden,control;
-
-    }
     @Override
-    public int getCount() {
-        return Array.ordensrc.size();
-
-    }
-    @Override
-    public Object getItem(int position) {
-        return position;
+    public int getItemCount() {
+        return ordensrc.size();
     }
 
+    @NonNull
     @Override
-    public long getItemId(int position) {
-        return position;
+    public ordensrcViewHolder onCreateViewHolder(ViewGroup viewGroup, int position) {
+        View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.recycler_oq,viewGroup,false);
+
+        return new ordensrcViewHolder(v);
     }
 
     @Override
-    public View getView(final int position, View convertView, ViewGroup parent) {
-        final viewHolder holder;
-        if (convertView == null) {
-            holder = new viewHolder();
+    public void onBindViewHolder(ordensrcViewHolder viewHolder, final int position) {
 
-            convertView=inflater.inflate(R.layout.recycler_oq,null);
-
-            holder.status=(TextView)convertView.findViewById(R.id.tv_estatus);
-            holder.orden=(TextView)convertView.findViewById(R.id.tv_NOrden);
-            holder.contrato1=(TextView)convertView.findViewById(R.id.tv_NContrato);
-            holder.nombre=(TextView)convertView.findViewById(R.id.tv_Nombre);
-            holder.direccionOrd=(TextView)convertView.findViewById(R.id.id_direccion);
-            holder.control=(TextView)convertView.findViewById(R.id.controla);
-
-            convertView.setTag(holder);
-        }
-        else {
-            holder=(viewHolder)convertView.getTag();
-        }
-
-        holder.nombre.setText(Array.nombresrc.get(position));
-        holder.orden.setText(Array.ordensrc.get(position));
-        holder.contrato1.setText(Array.contratosrc.get(position));
-        holder.status.setText(Array.statusrc.get(position));
-        holder.direccionOrd.setText(Array.direccionsrc.get(position));
-        holder.control.setOnClickListener(new View.OnClickListener() {
+        viewHolder.nombre.setText(Array.nombresrc.get(position));
+        viewHolder.orden.setText(Array.ordensrc.get(position));
+        viewHolder.contrato1.setText(Array.contratosrc.get(position));
+        viewHolder.status.setText(Array.statusrc.get(position));
+        viewHolder.direccionOrd.setText(Array.direccionsrc.get(position));
+        viewHolder.control.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 clvor = Integer.valueOf(ordensrc.get(position));
@@ -99,6 +92,6 @@ public class OrdenesAdapter extends BaseAdapter implements AdapterView.OnItemCli
                 request.getValidaFirma(mContext);
             }
         });
-        return convertView;
+
     }
 }

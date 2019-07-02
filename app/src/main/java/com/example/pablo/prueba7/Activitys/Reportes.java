@@ -8,6 +8,8 @@ import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
@@ -33,7 +35,7 @@ import static com.example.pablo.prueba7.Services.Services.opcion;
 public class Reportes extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
    private Request request = new Request();
-   private ListView reportes;
+   private RecyclerView reportes;
    private Button breporte,bcontrato;
    private EditText reportesearch,contratosearch;
 
@@ -64,6 +66,8 @@ public class Reportes extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
         adapterqueja=new QuejasAdapter(Reportes.this,Array.Queja,Array.nombreQ,Array.statusQ,Array.contratoQ,Array.Direccion);
+        RecyclerView.LayoutManager layoutManager = new GridLayoutManager(getApplicationContext(),1);
+        reportes.setLayoutManager(layoutManager);
         reportes.setAdapter(adapterqueja);    //Asignacion del adapatador a la listView
         dialogReportes= new BarraCargar().showDialog(this);
         barraCargar.terminarBarra();
@@ -91,6 +95,8 @@ public class Reportes extends AppCompatActivity
                     clavequeja=Integer.parseInt(reportesearch.getText().toString().toLowerCase().trim());
                     request.getListQuejas(getApplicationContext());
                     Toast toast1 =Toast.makeText(getApplicationContext(), "Reporte encontrado", Toast.LENGTH_SHORT);toast1.show();
+                    RecyclerView.LayoutManager layoutManager = new GridLayoutManager(getApplicationContext(),1);
+                    reportes.setLayoutManager(layoutManager);
                     reportes.setAdapter(adapterqueja);
                 }
             }
@@ -108,6 +114,8 @@ public class Reportes extends AppCompatActivity
                     Array.Direccion.clear();
                     clavequeja=0;
                     opcion=1;
+                    RecyclerView.LayoutManager layoutManager = new GridLayoutManager(getApplicationContext(),1);
+                    reportes.setLayoutManager(layoutManager);
                     request.getListQuejas(getApplicationContext());
                     toast1.show();
                 } else {
@@ -120,6 +128,8 @@ public class Reportes extends AppCompatActivity
                     cont=(contratosearch.getText().toString().toLowerCase().trim());
                     request.getListQuejas(getApplicationContext());
                     Toast toast1 = Toast.makeText(getApplicationContext(), "Contrato encontrado", Toast.LENGTH_SHORT);toast1.show();
+                    RecyclerView.LayoutManager layoutManager = new GridLayoutManager(getApplicationContext(),1);
+                    reportes.setLayoutManager(layoutManager);
                     reportes.setAdapter(adapterqueja);
                 }
             }

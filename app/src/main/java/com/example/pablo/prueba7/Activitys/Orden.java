@@ -3,6 +3,8 @@ package com.example.pablo.prueba7.Activitys;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -33,7 +35,7 @@ public class Orden extends AppCompatActivity implements NavigationView.OnNavigat
     private Request request = new Request();
     private OrdenesAdapter adapterord;
     private Button ordenb,contratob;
-    public static   ListView ordenes;
+    public static RecyclerView ordenes;
     private EditText ordsearch,contsearch;
     NavigationView barra;
     TextView nombreTec;
@@ -64,6 +66,8 @@ public class Orden extends AppCompatActivity implements NavigationView.OnNavigat
         ////////////////
         //////////////////
         adapterord=new OrdenesAdapter(Orden.this,Array.ordensrc,Array.nombresrc,Array.statusrc,Array.contratosrc,Array.direccionsrc);
+        RecyclerView.LayoutManager layoutManager = new GridLayoutManager(getApplicationContext(),1);
+        ordenes.setLayoutManager(layoutManager);
         ordenes.setAdapter(adapterord);    //Asignacion del adapatador a la listView
         ordenes.refreshDrawableState();
         //if(ordenes.getAdapter()!=null){
@@ -84,6 +88,8 @@ public class Orden extends AppCompatActivity implements NavigationView.OnNavigat
                     opcion=1;
                     request.getListOrd(getApplicationContext());
                     toast1.show();
+                    RecyclerView.LayoutManager layoutManager = new GridLayoutManager(getApplicationContext(),1);
+                    ordenes.setLayoutManager(layoutManager);
                     ordenes.setAdapter(adapterord);
                 } else {
                     Array.ordensrc.clear();
@@ -95,6 +101,8 @@ public class Orden extends AppCompatActivity implements NavigationView.OnNavigat
                     clvorden=Integer.parseInt(ordsearch.getText().toString().toLowerCase().trim());
                     rqs.getListOrd(getApplicationContext());
                     Toast toast1 = Toast.makeText(getApplicationContext(), "Orden encontrada", Toast.LENGTH_SHORT);toast1.show();
+                    RecyclerView.LayoutManager layoutManager = new GridLayoutManager(getApplicationContext(),1);
+                    ordenes.setLayoutManager(layoutManager);
                     ordenes.setAdapter(adapterord);
                 }
             }
