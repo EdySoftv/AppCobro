@@ -49,7 +49,7 @@ import static com.example.pablo.prueba7.Adapters.OrdenesAdapter.clvor;
 public class AsignarAparato extends AppCompatActivity {
 
     private Button escanear, agragar, cancelar;
-    private TextView codigo;
+    private TextView codigo,textView18,textView24;
     private String contents;
     public static ListView serviciosAparato;
     public static Spinner spinnerAparato, spinneraparatoDisponible;
@@ -76,6 +76,9 @@ public class AsignarAparato extends AppCompatActivity {
         agragar = findViewById(R.id.agregarAsignacionAparato);
         cancelar = findViewById(R.id.cancelarAsignacionAparato);
         constraintLayoutMACWAM = findViewById(R.id.MACWAMConstraint);
+        textView24 = findViewById(R.id.textView24);
+        textView18 = findViewById(R.id.textView18);
+
 
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -196,8 +199,9 @@ public class AsignarAparato extends AppCompatActivity {
                         }
 
                     });
+                    textView18.setVisibility(View.VISIBLE);
+                            textView24.setVisibility(View.VISIBLE);
                 }
-
             }
 
             @Override
