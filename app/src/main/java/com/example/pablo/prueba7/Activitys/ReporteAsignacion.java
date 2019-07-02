@@ -5,6 +5,8 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -41,7 +43,7 @@ public class ReporteAsignacion extends AppCompatActivity {
     Request request = new Request();
     Spinner spinerMedio;
     Button agregarAparato, guardarAparatos;
-    public static ListView reporteAsignacion;
+    public static RecyclerView reporteAsignacion;
     public static EliminarAparatosAdapter adapter;
     int posicionSpinnerSelect;
     public static ProgressDialog dialogReporteAsignacion;
@@ -111,11 +113,12 @@ public class ReporteAsignacion extends AppCompatActivity {
             //si tiene hijos bloqueamos el spinner porque no se puede cambiar el medio con hijos ya asignados
             spinerMedio.setEnabled(false);
             //si tiene hijos, llenamos lista
-            adapter = new EliminarAparatosAdapter(getApplicationContext(), ReporteAsignacion.this,
-                    ArbolAdapter.posicionArbol, spinerMedio, guardarAparatos);
+            RecyclerView.LayoutManager layoutManager = new GridLayoutManager(this,1);
+            reporteAsignacion.setLayoutManager(layoutManager);
+            adapter = new EliminarAparatosAdapter(Array.children,getApplicationContext(),this,ArbolAdapter.posicionArbol,
+                    spinerMedio,guardarAparatos);
             reporteAsignacion.setAdapter(adapter);
-            reporteAsignacion.setChoiceMode(AbsListView.CHOICE_MODE_SINGLE);
-            reporteAsignacion.refreshDrawableState();
+
         }
 
 

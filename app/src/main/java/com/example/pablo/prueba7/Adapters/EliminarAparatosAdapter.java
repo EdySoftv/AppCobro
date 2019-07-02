@@ -3,7 +3,9 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AlertDialog;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,6 +22,7 @@ import com.example.pablo.prueba7.Activitys.ReporteAsignacion;
 
 import com.example.pablo.prueba7.Listas.Array;
 import com.example.pablo.prueba7.Modelos.GetMuestraArbolServiciosAparatosPorinstalarListResult;
+import com.example.pablo.prueba7.Modelos.children;
 import com.example.pablo.prueba7.R;
 
 import java.util.ArrayList;
@@ -29,61 +32,58 @@ import java.util.List;
 import static com.example.pablo.prueba7.Activitys.ReporteAsignacion.adapter;
 import static com.example.pablo.prueba7.Activitys.ReporteAsignacion.reporteAsignacion;
 
-public class EliminarAparatosAdapter extends BaseAdapter {
+public class EliminarAparatosAdapter extends RecyclerView.Adapter<EliminarAparatosAdapter.childrenViewHolder> {
+
+    ArrayList <String>children= Array.children;
+
     private LayoutInflater inflater;
     private Context mcontext;
     private Activity activity;
     private int pos;
     Spinner spinnerMedio;
     Button guardarAparatos;
+    Array array = new Array();
     int b=0;
     Iterator<List<GetMuestraArbolServiciosAparatosPorinstalarListResult>> itData = Array.dataArbSer.iterator();
     List<GetMuestraArbolServiciosAparatosPorinstalarListResult> dat = (List<GetMuestraArbolServiciosAparatosPorinstalarListResult>) itData.next();
+    public static  class childrenViewHolder extends  RecyclerView.ViewHolder{
+        public static TextView nombre;
+        public static ImageButton elimarAparato;
+        public childrenViewHolder( View v) {
+            super(v);
+            nombre = itemView.findViewById(R.id.textelimnar);
+            elimarAparato = itemView.findViewById(R.id.eliminarAparatos);
+        }
+    }
 
-    Array array = new Array();
-    public EliminarAparatosAdapter(Context context, final Activity activity, int pos, Spinner spinnerMedio,Button guardarAparatos){
-        mcontext=context;
-        inflater = LayoutInflater.from(mcontext);
+    public EliminarAparatosAdapter(ArrayList <String> children, final Context mcontext, final Activity activity, int pos, Spinner spinnerMedio,Button guardarAparatos){
+        this.children=children;
+        this.mcontext = mcontext;
         this.activity = activity;
         this.pos = pos;
         this.spinnerMedio = spinnerMedio;
         this.guardarAparatos = guardarAparatos;
-
     }
-    public static class viewHolder{
-        public static TextView nombre;
-        ImageButton elimarAparato;
 
 
-
-    }
     @Override
-    public int getCount() {
+    public int getItemCount() {
         return array.children.size();
     }
 
+    @NonNull
     @Override
-    public Object getItem(int position) {
-        return position;
+    public childrenViewHolder onCreateViewHolder(ViewGroup viewGroup, int position) {
+        View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.activity_reporte_asignacion_list,viewGroup,false);
+
+        return new childrenViewHolder(v);
     }
 
     @Override
-    public long getItemId(int position) {
-        return position;
-    }
+    public void onBindViewHolder(childrenViewHolder viewHolder, final int position) {
 
-    @Override
-    public View getView(final int position, View convertView, ViewGroup parent) {
-
-        final EliminarAparatosAdapter.viewHolder holder;
-        holder = new EliminarAparatosAdapter.viewHolder();
-        convertView = inflater.inflate(R.layout.activity_reporte_asignacion_list,null);
-        holder.nombre=convertView.findViewById(R.id.textelimnar);
-        holder.elimarAparato = convertView.findViewById(R.id.eliminarAparatos);
-        convertView.setTag(holder);
-
-        holder.nombre.setText(array.children.get(position));
-        holder.elimarAparato.setOnClickListener(new View.OnClickListener() {
+        childrenViewHolder.nombre.setText(array.children.get(position));
+        childrenViewHolder.elimarAparato.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
@@ -91,13 +91,6 @@ public class EliminarAparatosAdapter extends BaseAdapter {
             }
         });
 
-
-
-
-
-
-
-        return convertView;
     }
     public void dialogoReinicio(final Context context, String abc, final int posicion, final Activity activity,
                                 final int pos, final Spinner spinnerMedio, final Button guardarAparatos) {
