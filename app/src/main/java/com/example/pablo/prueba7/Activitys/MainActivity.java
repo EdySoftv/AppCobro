@@ -36,6 +36,7 @@ import static com.example.pablo.prueba7.Adapters.OrdenesAdapter.noOrden;
 import static com.example.pablo.prueba7.Fragments.HorasOrdenes.TecSec;
 import static com.example.pablo.prueba7.Fragments.HorasOrdenes.ejecutada;
 import static com.example.pablo.prueba7.Fragments.HorasOrdenes.visita;
+import static com.example.pablo.prueba7.Request.Request.stringValidaTrabajos;
 
 
 public class MainActivity extends AppCompatActivity implements ActionBar.TabListener, ViewPager.OnPageChangeListener {
@@ -47,6 +48,7 @@ public class MainActivity extends AppCompatActivity implements ActionBar.TabList
     ConstraintLayout layoutAnimado;
     public static TextView NombreTec, Contrato, Status, Nombre, Direccion, InfoServicios;
     boolean visitaValida=false;
+    public static String Estatus;
 
     Request request = new Request();
 
@@ -182,8 +184,25 @@ public class MainActivity extends AppCompatActivity implements ActionBar.TabList
         // mViewPager.setCurrentItem(tab.getPosition());
         positionTab = tab.getPosition();
 
+
         if (ejecutada == 1) {
-            mViewPager.setCurrentItem(positionTab);
+            Estatus="E";
+            request.getValidaTrabajos(getApplicationContext());
+            if(positionTab == 2){
+                if(stringValidaTrabajos.length() == 2 ){
+                    Toast.makeText(getApplicationContext(), "Sección de trabajos completa" + stringValidaTrabajos, Toast.LENGTH_SHORT).show();
+                    mViewPager.setCurrentItem(positionTab);
+                }else{
+                    Toast.makeText(getApplicationContext(), "Error " + stringValidaTrabajos, Toast.LENGTH_LONG).show();
+                    mViewPager.setCurrentItem(1);
+                    positionTab--;
+                }
+            }
+            else{
+            mViewPager.setCurrentItem(positionTab);}
+
+
+
         } else {
 
             if (ejecutada == 0 && visita == 0) {
@@ -195,6 +214,7 @@ public class MainActivity extends AppCompatActivity implements ActionBar.TabList
                     mViewPager.setCurrentItem(3);
                     visitaValida = true;
                     HorasReportes.statusHora = "V";
+                    Estatus="V";
                 } else {
                     mViewPager.setCurrentItem(0);
                     visitaValida = false;

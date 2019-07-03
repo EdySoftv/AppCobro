@@ -178,6 +178,7 @@ public class Request extends AppCompatActivity {
     public static Long abc;
     public static int clvP, tecC, nExtenciones = 0;
     public int reintentaB;
+    public static String stringValidaTrabajos;
     public static ArrayAdapter adapterTecSec, adapterTecSecR;
     public static boolean pieza = false, rapagejecutar = false, extencionesMat = false;
    public static int validFirma;
@@ -1683,6 +1684,32 @@ public class Request extends AppCompatActivity {
                         Toast.makeText(context, "Error" + string1, Toast.LENGTH_LONG).show();
                         EjecutarOrdenes.eject.setEnabled(true);
                     }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<JsonObject> call, Throwable t) {
+
+            }
+        });
+    }
+
+    public void getValidaTrabajos(final Context context) {
+        Service service = null;
+        try {
+            service = services.getValidaOrdSerService(context);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        Call<JsonObject> call = service.getVALIOrdSer();
+        call.enqueue(new Callback<JsonObject>() {
+            @Override
+            public void onResponse(Call<JsonObject> call, Response<JsonObject> response1) {
+                if (response1.code() == 200) {
+                    System.out.println("Entra");
+                     stringValidaTrabajos = String.valueOf(response1.body().getAsJsonPrimitive("GetSP_ValidaGuardaOrdSerAparatosResult"));
+
+                    //Toast.makeText(context, "Error: " + stringValidaTrabajos, Toast.LENGTH_LONG).show();
                 }
             }
 

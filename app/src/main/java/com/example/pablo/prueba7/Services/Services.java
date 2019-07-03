@@ -5,6 +5,7 @@ import android.content.Context;
 import android.util.Log;
 
 import com.example.pablo.prueba7.Activitys.CambioAparato;
+import com.example.pablo.prueba7.Activitys.MainActivity;
 import com.example.pablo.prueba7.Dibujo.Firma;
 import com.example.pablo.prueba7.Fragments.EjecutarOrdenes;
 import com.example.pablo.prueba7.Fragments.HorasReportes;
@@ -862,7 +863,7 @@ public class Services {
         jsonObject.put("Clv_Tecnico", Util.getClvTec(Util.preferences));
         jsonObject.put("OP2", 0);
         jsonObject.put("OPCION", "M");
-        jsonObject.put("STATUS", EjecutarOrdenes.ejecutarStatus);
+        jsonObject.put("STATUS", MainActivity.Estatus);
         MediaType JSON = MediaType.parse("application/json; charset=utf-8");
         final RequestBody body = RequestBody.create(JSON, jsonObject.toString());
         final OkHttpClient client = new OkHttpClient.Builder().addInterceptor(new Interceptor() {
