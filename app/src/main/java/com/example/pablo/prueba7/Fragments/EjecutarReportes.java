@@ -76,6 +76,12 @@ public class EjecutarReportes extends Fragment {
 
         request.validaExisteFirmaBool=false;
 
+        if (HorasReportes.reporteEjecutada == 0) {
+            firmaRep.setVisibility(View.GONE);
+        }
+
+
+
        //final  String month;  //6565656fdgsdfg
         if(mesE<10){
             month= "0"+mesE;

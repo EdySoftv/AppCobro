@@ -39,7 +39,7 @@ public class OrdenesAdapter extends RecyclerView.Adapter<OrdenesAdapter.ordensrc
 
 
     public static  class ordensrcViewHolder extends  RecyclerView.ViewHolder{
-        private TextView status,contrato1,nombre,direccionOrd,orden,control;
+        private TextView status,contrato1,nombre,direccionOrd,orden,control,noOrden;
         public ordensrcViewHolder( View v) {
             super(v);
             status=(TextView)itemView.findViewById(R.id.tv_estatus);
@@ -48,6 +48,7 @@ public class OrdenesAdapter extends RecyclerView.Adapter<OrdenesAdapter.ordensrc
             nombre=(TextView)itemView.findViewById(R.id.tv_Nombre);
             direccionOrd=(TextView)itemView.findViewById(R.id.id_direccion);
             control=(TextView)itemView.findViewById(R.id.controla);
+            noOrden=itemView.findViewById(R.id.noOrden);
         }
     }
 
@@ -78,6 +79,7 @@ public class OrdenesAdapter extends RecyclerView.Adapter<OrdenesAdapter.ordensrc
     @Override
     public void onBindViewHolder(ordensrcViewHolder viewHolder, final int position) {
 
+        viewHolder.noOrden.setText("No. de Orden");
         viewHolder.nombre.setText(Array.nombresrc.get(position));
         viewHolder.orden.setText(Array.ordensrc.get(position));
         viewHolder.contrato1.setText(Array.contratosrc.get(position));

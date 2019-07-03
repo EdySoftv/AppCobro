@@ -15,6 +15,7 @@ import android.widget.Button;
 import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.pablo.prueba7.R;
 import com.example.pablo.prueba7.Request.Request;
@@ -33,9 +34,11 @@ public class MainReportes extends AppCompatActivity implements ActionBar.TabList
     private ScrollView hzScrollView;
     private Button info;
     private ConstraintLayout layoutAnimado;
+    public  int positionTab;
     int position;
     public static TextView Nombre1, Direccion1,NombreTec1,infoA,contrato1,ciudad1;
     Request request = new Request();
+    boolean visitaValidaReporte=false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,9 +79,9 @@ public class MainReportes extends AppCompatActivity implements ActionBar.TabList
         mViewPager.setOnPageChangeListener(this);
         ActionBar actionBar = getSupportActionBar();
         actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
-        ActionBar.Tab tab = actionBar.newTab().setText("Reporte").setTabListener(this);
+        ActionBar.Tab tab = actionBar.newTab().setText("Estatus").setTabListener(this);
         actionBar.addTab(tab);
-        tab = actionBar.newTab().setText("Horas").setTabListener(this);
+        tab = actionBar.newTab().setText("Reporte").setTabListener(this);
         actionBar.addTab(tab);
         tab = actionBar.newTab().setText("Material").setTabListener(this);
         actionBar.addTab(tab);
@@ -92,9 +95,9 @@ public class MainReportes extends AppCompatActivity implements ActionBar.TabList
         public Fragment getItem(int arg0) {
             switch (arg0) {
                 case 0:
-                    return new TrabajosReportes();
-                case 1:
                     return new HorasReportes();
+                case 1:
+                    return new TrabajosReportes();
                 case 2:
                     return new MaterialesReportes();
                 case 3:
@@ -125,6 +128,30 @@ public class MainReportes extends AppCompatActivity implements ActionBar.TabList
     public void onTabSelected(ActionBar.Tab tab, FragmentTransaction fragmentTransaction) {
         position=tab.getPosition();
         mViewPager.setCurrentItem(position);
+        positionTab = tab.getPosition();
+
+        if (HorasReportes.reporteEjecutada == 1) {
+            mViewPager.setCurrentItem(positionTab);
+        } else {
+
+            if (HorasReportes.repotteVisita == 0 && HorasReportes.reporteEjecutada == 0) {
+                Toast.makeText(this, "Seleccione un estatus", Toast.LENGTH_SHORT).show();
+                mViewPager.setCurrentItem(0);
+            } else {
+
+                if (visitaValidaReporte == false) {
+                    mViewPager.setCurrentItem(3);
+                    visitaValidaReporte = true;
+                    HorasReportes.statusHora = "V";
+                } else {
+                    mViewPager.setCurrentItem(0);
+                    visitaValidaReporte = false;
+                    HorasReportes.statusHora = "E";
+                }
+
+            }
+
+        }
     }
     @Override
     public void onTabUnselected(ActionBar.Tab tab, FragmentTransaction fragmentTransaction) {
@@ -132,8 +159,7 @@ public class MainReportes extends AppCompatActivity implements ActionBar.TabList
     }
     @Override
     public void onTabReselected(ActionBar.Tab tab, FragmentTransaction fragmentTransaction) {
-
-    }
+            }
     public void onBackPressed(){
         regresar();
     }

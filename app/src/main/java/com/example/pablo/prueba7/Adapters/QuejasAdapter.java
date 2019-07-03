@@ -33,7 +33,7 @@ public class QuejasAdapter extends RecyclerView.Adapter<QuejasAdapter.QuejaViewH
     public static String contratoReport;
 
     public static  class QuejaViewHolder extends  RecyclerView.ViewHolder{
-        TextView statusq,contratoq,nombreq,direccion,quejaq,control;
+        TextView statusq,contratoq,nombreq,direccion,quejaq,control,noOrden;
         public QuejaViewHolder( View v) {
             super(v);
 
@@ -43,6 +43,7 @@ public class QuejasAdapter extends RecyclerView.Adapter<QuejasAdapter.QuejaViewH
             nombreq=(TextView)itemView.findViewById(R.id.tv_Nombre);
             direccion=(TextView)itemView.findViewById(R.id.id_direccion);
             control=(TextView)itemView.findViewById(R.id.controla);
+            noOrden=itemView.findViewById(R.id.noOrden);
 
         }
     }
@@ -67,6 +68,7 @@ public class QuejasAdapter extends RecyclerView.Adapter<QuejasAdapter.QuejaViewH
     @Override
     public void onBindViewHolder(QuejaViewHolder viewHolder, final int position) {
 
+        viewHolder.noOrden.setText("No. de Reporte");
         viewHolder.nombreq.setText(Array.nombreQ.get(position));
         viewHolder.quejaq.setText(Array.Queja.get(position));
         viewHolder.contratoq.setText(Array.contratoQ.get(position));

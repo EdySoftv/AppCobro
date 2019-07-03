@@ -18,12 +18,11 @@
             android:id="@+id/grupo_dias"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:checkedButton="@+id/ejutada1"
             android:orientation="horizontal">
 
             <RadioButton
                 android:id="@+id/ejutada1"
-                android:layout_width="82dp"
+                android:layout_width="100dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="80dp"
                 android:text="@string/visita"
@@ -31,8 +30,7 @@
 
             <RadioButton
                 android:id="@+id/visitada1"
-                android:layout_width="107dp"
-                android:checked="true"
+                android:layout_width="100dp"
                 android:layout_height="wrap_content"
                 android:text="@string/ejecutar"
                 />

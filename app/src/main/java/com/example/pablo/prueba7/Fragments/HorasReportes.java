@@ -30,14 +30,14 @@ public class HorasReportes extends Fragment  implements View.OnClickListener {
     Request request = new Request();
     public static String diaV11, mesV11, añoV11, diaV21, mesV21, añoV21, diaV3, mesV3, añoV3;
     public static TextView reportesselectDate1, reportesselectDate2, reportesselectDate3;
-    public static int reporteEjecutada = 1, repotteVisita = 0, reporteVisita1 = 0, reporteVisita2 = 0, TecSecSelecc1 = -1;
+    public static int reporteEjecutada = 0, repotteVisita = 0, reporteVisita1 = 0, reporteVisita2 = 0, TecSecSelecc1 = -1;
     private int mYear, mMonth, mDay;
     private View contenedorParticular;
     private View contenedorCorporativo;
     public static Spinner TecSec1;
     private ConstraintLayout todo;
     private RadioButton btn1, bt2;
-    public static int tecPosRepo;
+    public static int tecPosRepo,ejecutadaReporte;
     public static String statusHora;
 
     public HorasReportes() {
