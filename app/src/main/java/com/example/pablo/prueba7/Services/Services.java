@@ -2019,12 +2019,13 @@ public class Services {
         return retrofit.create(Service.class);
     }
     ////////////////////////
-    public Service addFirmaService(final Context context) {
+    /*public Service addFirmaService(final Context context) {
         //POST Body Json
 
-        JSONObject jsonObject = new JSONObject();
-        JSONObject jsonObject1 = new JSONObject();
+
         try {
+            JSONObject jsonObject = new JSONObject();
+            JSONObject jsonObject1 = new JSONObject();
             jsonObject.put("Clv_orden", clvor);
             jsonObject.put("FirmaCliente",Firma.imagenAEnviar);
             jsonObject1.put("ObjLista",jsonObject);
@@ -2059,7 +2060,7 @@ public class Services {
                 .build();
 
         return retrofit.create(Service.class);
-    }
+    }*/
     public String getToken(final Context context) {
         String token;
         Util.preferences = context.getSharedPreferences("credenciales", Context.MODE_PRIVATE);

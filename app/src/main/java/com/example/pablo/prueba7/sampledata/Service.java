@@ -188,5 +188,9 @@ public interface Service {
     @POST(Constants.URL_GET_PREGUNTA)
     Call<JSONPregunta> getPregunta();
 
+    @POST(Constants.URL_VALIDA_EXISTE_FIRMA)
+    Call<JsonObject> validaExisteFirma();
+
+
 }
 

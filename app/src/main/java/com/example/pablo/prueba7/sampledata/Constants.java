@@ -75,4 +75,5 @@ public class Constants {
     public static final String URL_ASIGNA_MACWAM = "AsignaAparatosAlServicio/GetSaveRelMacsTemp";
 
     public static final String URL_GET_PREGUNTA = "AplicacionMovil/GetDamePreguntaMedioPorOrden";
+    public static final String URL_VALIDA_EXISTE_FIRMA = "AplicacionMovil/ValidaExisteTblFirmaCliente";
 }

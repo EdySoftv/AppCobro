@@ -123,6 +123,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
@@ -143,6 +144,7 @@ import static com.example.pablo.prueba7.Activitys.AsignarAparato.idArticuloasign
 import static com.example.pablo.prueba7.Activitys.AsignarAparato.jsonArrayMAC;
 import static com.example.pablo.prueba7.Adapters.TrabajosAdapter.dialogTrabajos;
 import static com.example.pablo.prueba7.Fragments.EjecutarOrdenes.dialogEjecutar;
+import static com.example.pablo.prueba7.Fragments.HorasOrdenes.observacionesTecnico;
 import static com.example.pablo.prueba7.Fragments.HorasReportes.TecSec1;
 import static com.example.pablo.prueba7.Fragments.HorasReportes.tecPosRepo;
 import static com.example.pablo.prueba7.Fragments.HorasOrdenes.TecSec;
@@ -172,7 +174,7 @@ public class Request extends AppCompatActivity {
     Services services = new Services();
     Array array = new Array();
     public static String reintentarComando, contraroMA, obsMA, statusMA, extencionesE, Obs, nombre_tecnico, clave_tecnico, msgComando = "", sigueinteTipo, siguenteContrato, sigueinteHora, siguenteCalle, sigueinteNumero, siguenteColonia;
-    public static boolean isnet, firma,MACWAM;
+    public static boolean isnet, firma,MACWAM,validaExisteFirmaBool;
     public static Long abc;
     public static int clvP, tecC, nExtenciones = 0;
     public int reintentaB;
@@ -1681,7 +1683,6 @@ public class Request extends AppCompatActivity {
                         Toast.makeText(context, "Error" + string1, Toast.LENGTH_LONG).show();
                         EjecutarOrdenes.eject.setEnabled(true);
                     }
-                    Toast.makeText(context, "Error: " + string1, Toast.LENGTH_LONG).show();
                 }
             }
 
@@ -2712,10 +2713,8 @@ try{
         });
     }
     //////////
-    public void addFirma(final Context context) {
-        Service service = null;
-        service = services.addFirmaService(context);
-        Call<JsonObject> call = service.addFirma();
+    public void addFirma(final Context context, final JSONObject jsonObject) {
+        Call<JsonObject> call = services.RequestPost(context, jsonObject).addFirma();
         call.enqueue(new Callback<JsonObject>() {
             @Override
             public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
@@ -2977,5 +2976,178 @@ try{
                 }
         });
     }
+    public void validaExisteFirma(final Context context, final JSONObject jsonObject,final Activity activity) {
+        Call<JsonObject> call = services.RequestPost(context, jsonObject).validaExisteFirma();
+        call.enqueue(new Callback<JsonObject>() {
+            @Override
+            public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
+                if (response.code() == 200) {
 
+                    String dato;
+                    dato = String.valueOf(response.body().getAsJsonPrimitive("ValidaExisteTblFirmaClienteResult"));
+                    if (dato.equals("1")) {
+                        validaExisteFirmaBool=true;
+                        System.out.println("Ejecutar");
+                        JSONObject jsonObject = new JSONObject();
+                        final Calendar c = Calendar.getInstance();
+                        EjecutarOrdenes.añoE = c.get(Calendar.YEAR);
+                        EjecutarOrdenes.mesE = c.get(Calendar.MONTH);
+                        EjecutarOrdenes.diaE = c.get(Calendar.DAY_OF_MONTH);
+                        EjecutarOrdenes.horaE = c.get(Calendar.HOUR);
+                        EjecutarOrdenes.minutoE = c.get(Calendar.MINUTE);
+                        String ab;
+                        if (( EjecutarOrdenes.mesE+1) < 10) {
+                            ab = "0" + ( EjecutarOrdenes.mesE+1);
+                        } else {
+                            ab = String.valueOf( EjecutarOrdenes.mesE+1);
+                        }
+                        EjecutarOrdenes.fechaHoy =  EjecutarOrdenes.diaE + "/" + ab + "/" +  EjecutarOrdenes.añoE;
+                        EjecutarOrdenes.horaHoy =  EjecutarOrdenes.horaE + ":" +  EjecutarOrdenes.minutoE;
+                        if (HorasOrdenes.ejecutada == 1) {
+                            EjecutarOrdenes.ejecutarStatus="E";
+                            EjecutarOrdenes.eject.setEnabled(false);
+                            try {
+                                jsonObject.put("ClvFactura", DeepConsModel.Clv_FACTURA);
+                                jsonObject.put("ClvOrden", DeepConsModel.Clv_Orden);
+                                jsonObject.put("ClvTecnico", Util.getClvTec(Util.preferences));
+                                jsonObject.put("ClvTipSer", DeepConsModel.Clv_TipSer);
+                                jsonObject.put("Contrato", DeepConsModel.Contrato);
+                                jsonObject.put("FecEje",  EjecutarOrdenes.fechaActual);
+                                jsonObject.put("FecSol", DeepConsModel.Fec_Sol);
+                                jsonObject.put("Impresa", 1);
+                                jsonObject.put("ListadeArticulos", "");
+                                jsonObject.put("Obs", DeepConsModel.Obs);
+                                jsonObject.put("Status", "E");
+                                jsonObject.put("TecnicoCuadrilla", HorasOrdenes.TecSecSelecc);
+                                jsonObject.put("Visita1", "");
+                                jsonObject.put("Visita2", "");
+                                getValidaOrdSer(activity,jsonObject);
+                            }catch (Exception e){}
+
+
+                        }
+                        if ( HorasOrdenes.visita == 1) {
+                            EjecutarOrdenes.ejecutarStatus="V";
+                            try{
+                                jsonObject.put("ClvFactura", DeepConsModel.Clv_FACTURA);
+                                jsonObject.put("ClvOrden", DeepConsModel.Clv_Orden);
+                                jsonObject.put("ClvTecnico", Util.getClvTec(Util.preferences));
+                                jsonObject.put("ClvTipSer", DeepConsModel.Clv_TipSer);
+                                jsonObject.put("Contrato", DeepConsModel.Contrato);
+                                jsonObject.put("FecEje", "");
+                                jsonObject.put("FecSol", DeepConsModel.Fec_Sol);
+                                jsonObject.put("Impresa", 1);
+                                jsonObject.put("ListadeArticulos", "");
+                                jsonObject.put("Obs", DeepConsModel.Obs + " " + observacionesTecnico);
+                                jsonObject.put("Status", "V");
+                                jsonObject.put("TecnicoCuadrilla", HorasOrdenes.TecSecSelecc);
+                                if (DeepConsModel.Visita1.equals("null") || DeepConsModel.Visita1.equals(" ") ){
+                                    jsonObject.put("Visita1",  EjecutarOrdenes.fechaActual);
+                                    jsonObject.put("Visita2", "");
+                                }else{
+                                    jsonObject.put("Visita1", DeepConsModel.Visita1);
+                                    jsonObject.put("Visita2",  EjecutarOrdenes.fechaActual);
+                                }
+                                System.out.println("VAL 2");
+                                getValidaOrdSer(activity,jsonObject);
+                            }catch (Exception e){}
+
+                        }
+                    }
+                    if (dato.equals("0")) {
+                        validaExisteFirmaBool=false;
+                            EjecutarOrdenes.dialogEjecutar.dismiss();
+                        Toast.makeText(context, "Es obligatoria la firma", Toast.LENGTH_SHORT).show();
+
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<JsonObject> call, Throwable t) {
+
+            }
+
+        });
+    }
+    public void validaExisteFirmaReporte(final Context context, final JSONObject jsonObject) {
+        Call<JsonObject> call = services.RequestPost(context, jsonObject).validaExisteFirma();
+        call.enqueue(new Callback<JsonObject>() {
+            @Override
+            public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
+                if (response.code() == 200) {
+
+                    String dato;
+                    dato = String.valueOf(response.body().getAsJsonPrimitive("ValidaExisteTblFirmaClienteResult"));
+                    if (dato.equals("1")) {
+                        if (TrabajosReportes.solucion.getSelectedItem().toString().trim().equals("Seleccione tipo de solución")) {
+                            Toast.makeText(context, "Seleccione un tipo de solución", Toast.LENGTH_SHORT).show();
+                        }else {
+                            if(TrabajosReportes.proble.getText().toString().isEmpty()){
+
+                                Toast.makeText(context,"Campo Problema real vacío", Toast.LENGTH_LONG).show();
+
+
+                            }else {
+                                EjecutarReportes.dialogReportes.show();
+                                if (HorasReportes.reporteEjecutada == 1) {
+                                    EjecutarReportes.year = EjecutarReportes.añoE + "" + EjecutarReportes.month + "" + EjecutarReportes.diaE;
+                                    EjecutarReportes.horas12 = EjecutarReportes.mHour + ":" + EjecutarReportes.minute;
+                                    getGuardaHoraReporte(context);
+
+
+                                }
+                            }
+
+
+                            if (HorasReportes.repotteVisita == 1) {
+                                try {
+                                    getGuardaHoraReporte(context);
+
+
+                                } catch (Exception e) {
+                                    Toast.makeText(context, "La Fecha es obligatoria", Toast.LENGTH_SHORT).show();
+                                }
+
+                            }
+                            if (HorasReportes.reporteVisita1 == 1) {
+                                try {
+                                    getGuardaHoraReporte(context);
+
+                                } catch (Exception e) {
+                                    Toast.makeText(context, "La Fecha es obligatoria", Toast.LENGTH_SHORT).show();
+                                }
+                            }
+                            if (HorasReportes.reporteVisita2 == 1) {
+                                try {
+                                    getGuardaHoraReporte(context);
+
+                                } catch (Exception e) {
+                                    Toast.makeText(context, "La Fecha es obligatoria", Toast.LENGTH_SHORT).show();
+                                }
+                            }
+                            ////////*************************
+                        }
+
+                    }
+                    if (dato.equals("0")) {
+                        validaExisteFirmaBool=false;
+                        try{
+                            EjecutarOrdenes.dialogEjecutar.dismiss();
+                        }catch (Exception e) {
+                            EjecutarReportes.dialogReportes.dismiss();
+                        }
+                        Toast.makeText(context, "Es obligatoria la firma", Toast.LENGTH_SHORT).show();
+
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<JsonObject> call, Throwable t) {
+
+            }
+
+        });
+    }
 }

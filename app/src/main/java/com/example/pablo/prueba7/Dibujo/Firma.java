@@ -9,13 +9,21 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.example.pablo.prueba7.Activitys.Inicio;
 import com.example.pablo.prueba7.R;
 import com.example.pablo.prueba7.Request.Request;
+import com.example.pablo.prueba7.sampledata.Util;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.ByteArrayOutputStream;
 import java.io.UnsupportedEncodingException;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
+
+import static com.example.pablo.prueba7.Adapters.OrdenesAdapter.clvor;
+import static com.example.pablo.prueba7.Adapters.QuejasAdapter.clvReport;
 
 public class Firma extends AppCompatActivity {
      Dibujar dibujar;
@@ -49,7 +57,37 @@ public class Firma extends AppCompatActivity {
             case R.id.guardarDibujo:
                 recortar(Screenshot.TakeScreenshot(dibujar.getRootView()));
                 finish();
-                request.addFirma(getApplicationContext());
+                if(Inicio.tipodeDescarga.equals("O")){
+                    try {
+                        JSONObject jsonObject = new JSONObject();
+                        JSONObject jsonObject1 = new JSONObject();
+                        jsonObject.put("Clv_orden", clvor);
+                        jsonObject.put("Clv_reporte",0);
+                        jsonObject.put("Tipo",1);
+                        jsonObject.put("FirmaCliente",Firma.imagenAEnviar);
+                        jsonObject1.put("ObjLista",jsonObject);
+                        request.addFirma(getApplicationContext(),jsonObject1);
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+
+                }
+                if(Inicio.tipodeDescarga.equals("Q")){
+                    try {
+                        JSONObject jsonObject = new JSONObject();
+                        JSONObject jsonObject1 = new JSONObject();
+                        jsonObject.put("Clv_orden", 0);
+                        jsonObject.put("Clv_reporte",clvReport);
+                        jsonObject.put("Tipo",0);
+                        jsonObject.put("FirmaCliente",Firma.imagenAEnviar);
+                        jsonObject1.put("ObjLista",jsonObject);
+                        request.addFirma(getApplicationContext(),jsonObject1);
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+
+
         }
         return true;
     }

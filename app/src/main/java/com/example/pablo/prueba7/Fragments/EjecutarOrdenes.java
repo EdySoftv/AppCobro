@@ -22,6 +22,7 @@ import com.example.pablo.prueba7.R;
 import com.example.pablo.prueba7.Request.Request;
 import com.example.pablo.prueba7.sampledata.BarraCargar;
 import com.example.pablo.prueba7.sampledata.Util;
+import com.google.gson.JsonObject;
 
 import org.json.JSONObject;
 
@@ -51,7 +52,7 @@ public class EjecutarOrdenes extends Fragment {
     private Request request = new Request();
     public static ProgressDialog dialogEjecutar;
     public static String ejecutarStatus;
-    public  String fechaActual;
+    public static String fechaActual;
     Date objDate = new Date();
     DateFormat hourFormat = new SimpleDateFormat("HH:mm:ss");
     DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
@@ -81,7 +82,7 @@ public class EjecutarOrdenes extends Fragment {
 //        reiniciar.setEnabled(false);
         salir = view.findViewById(R.id.salirEjecutarOrd);
 
-
+        request.validaExisteFirmaBool=false;
         if(horas.visita == 1){
             firmar.setVisibility(View.GONE);
 
@@ -116,9 +117,23 @@ public class EjecutarOrdenes extends Fragment {
                         try {
                             request.send_aparat(getContext());
                             //**************************************
-                            Ejecutar();
+                            if(horas.ejecutada==1){
+                                if(request.firma==true){
+                                    try{
+                                        JSONObject jsonObject = new JSONObject();
+                                        jsonObject.put("clvOrden",DeepConsModel.Clv_Orden);
+                                        jsonObject.put("clvReporte",0);
+                                        request.validaExisteFirma(getContext(),jsonObject,getActivity());
+                                    }catch (Exception e){}
+                                }
+                                if(request.firma==false){
+                                    Ejecutar();
+                                }
+                            }else{
+                                Ejecutar();
+                            }
 
-                            ////////*************************
+                                                       ////////*************************
 
                         } catch (Exception e) {
                             Toast.makeText(getContext(), "Error, aparatos no enviados", Toast.LENGTH_SHORT);
@@ -126,7 +141,20 @@ public class EjecutarOrdenes extends Fragment {
                         }
                     }
                 }else {
-                    Ejecutar();
+                    if(horas.ejecutada==1){
+                        try{
+                            JSONObject jsonObject = new JSONObject();
+                            jsonObject.put("clvOrden",DeepConsModel.Clv_Orden);
+                            jsonObject.put("clvReporte",0);
+                            request.validaExisteFirma(getContext(),jsonObject,getActivity());
+                        }catch (Exception e){}
+                        if(request.validaExisteFirmaBool==true){
+                            Ejecutar();
+                        }
+                    }else{
+                        Ejecutar();
+                    }
+
                 }
             }
 
@@ -190,7 +218,9 @@ public class EjecutarOrdenes extends Fragment {
 
 
 
-    public void Ejecutar(){
+
+
+    public  void Ejecutar(){
         System.out.println("Ejecutar");
         JSONObject jsonObject = new JSONObject();
         final Calendar c = Calendar.getInstance();

@@ -16,13 +16,17 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import com.example.pablo.prueba7.Activitys.Inicio;
+import com.example.pablo.prueba7.Dibujo.Firma;
 import com.example.pablo.prueba7.R;
 import com.example.pablo.prueba7.Activitys.Reportes;
 import com.example.pablo.prueba7.Request.Request;
 import com.example.pablo.prueba7.sampledata.BarraCargar;
 
+import org.json.JSONObject;
+
 import java.util.Calendar;
 
+import static com.example.pablo.prueba7.Adapters.QuejasAdapter.clvReport;
 import static com.example.pablo.prueba7.Fragments.TrabajosReportes.proble;
 
 
@@ -33,11 +37,11 @@ import static com.example.pablo.prueba7.Fragments.TrabajosReportes.proble;
 //REPORTES
 public class EjecutarReportes extends Fragment {
 
-    private Button eject,salir;
+    private Button eject,salir,firmaRep;
     private Request request = new Request();
     private HorasReportes horas = new HorasReportes();
     public static String solution;
-    int añoE, mesE, diaE;
+    public static int añoE, mesE, diaE;
     public static int mHour;
     public static int mMinute;
     public static String year, horas12;
@@ -61,6 +65,7 @@ public class EjecutarReportes extends Fragment {
         View view = inflater.inflate(R.layout.activity_ejecutar_reporte, container, false);
         eject = view.findViewById(R.id.ejecutarR);
         salir= view.findViewById(R.id.SalirR);
+        firmaRep = view.findViewById(R.id.firmarRep);
         solution = proble.getText().toString();
         final Calendar c = Calendar.getInstance();
         añoE = c.get(Calendar.YEAR);
@@ -68,6 +73,9 @@ public class EjecutarReportes extends Fragment {
         diaE = c.get(Calendar.DAY_OF_MONTH);
         mHour = c.get(Calendar.HOUR);
         mMinute = c.get(Calendar.MINUTE);
+
+        request.validaExisteFirmaBool=false;
+
        //final  String month;  //6565656fdgsdfg
         if(mesE<10){
             month= "0"+mesE;
@@ -94,6 +102,14 @@ public class EjecutarReportes extends Fragment {
                 dialogoEjecutar(getContext());
             }
 
+        });
+        firmaRep.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), Firma.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent);
+            }
         });
 
         return view;
@@ -145,7 +161,14 @@ public class EjecutarReportes extends Fragment {
                             new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialog, int which) {
-                                    validacionReporte();
+
+
+                                    try{
+                                        JSONObject jsonObject = new JSONObject();
+                                        jsonObject.put("clvOrden",0);
+                                        jsonObject.put("clvReporte",clvReport);
+                                        request.validaExisteFirmaReporte(getContext(),jsonObject);
+                                    }catch (Exception e){}
                                 }
                             }).show();
 

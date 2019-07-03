@@ -23,6 +23,7 @@ import com.example.pablo.prueba7.Fragments.HorasReportes;
 import com.example.pablo.prueba7.Fragments.MaterialesReportes;
 import com.example.pablo.prueba7.Fragments.TrabajosReportes;
 
+import static com.example.pablo.prueba7.Adapters.QuejasAdapter.clvReport;
 import static com.example.pablo.prueba7.Fragments.HorasOrdenes.TecSec;
 import static com.example.pablo.prueba7.Fragments.HorasReportes.TecSec1;
 import static com.example.pablo.prueba7.Fragments.HorasReportes.tecPosRepo;
@@ -49,7 +50,7 @@ public class MainReportes extends AppCompatActivity implements ActionBar.TabList
         infoA = findViewById(R.id.infoservicios1);
         contrato1=findViewById(R.id.contrato1);
         ciudad1=findViewById(R.id.infoempresa1);
-        setTitle(null);
+        setTitle("No. de Reporte: " + clvReport);
 //* Boton de informacion
         info.setOnClickListener(new View.OnClickListener() {
             @Override
