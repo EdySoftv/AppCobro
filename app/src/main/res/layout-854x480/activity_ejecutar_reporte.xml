@@ -33,15 +33,17 @@
             android:layout_height="wrap_content"
             android:layout_alignTop="@+id/ejecutarR"
             android:layout_alignBottom="@+id/ejecutarR"
+            android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
             android:layout_toEndOf="@+id/ejecutarR"
             android:background="@drawable/boton"
             android:backgroundTint="@color/colorPrimary"
             android:enabled="true"
             android:text="@string/firmar"
             android:textColor="#fff"
-            app:layout_constraintEnd_toEndOf="@+id/SalirR"
-            app:layout_constraintStart_toStartOf="@+id/SalirR"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/SalirR" />
 
         <Button

@@ -138,7 +138,7 @@ public class HorasReportes extends Fragment  implements View.OnClickListener {
         });
         switch (v.getId()) {
             case R.id.ejutada1: {
-                mostrarParticular(false);
+                //mostrarParticular(false);
                 reportesselectDate1.setText("");
                 reportesselectDate2.setText("");
                 reportesselectDate3.setText("");
@@ -148,7 +148,7 @@ public class HorasReportes extends Fragment  implements View.OnClickListener {
             }
             break;
             case R.id.visitada1: {
-                mostrarParticular(true);
+                //mostrarParticular(true);
                 reportesselectDate2.setText("");
                 reportesselectDate3.setText("");
                 reporteEjecutada = 1;
