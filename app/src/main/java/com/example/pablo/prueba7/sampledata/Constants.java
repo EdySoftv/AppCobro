@@ -1,7 +1,7 @@
 package com.example.pablo.prueba7.sampledata;
 
 public class Constants {
-    //public static final String NEW_URL="http://187.248.67.68:9002/SoftvWCFService.svc/";
+    //public static final String NEW_URL="http://187.163.207.252:9002/SoftvWCFService.svc/";
     //public static final String NEW_URL="http://45.226.32.2:5600/SoftvWCFService.svc/";
     public static final String NEW_URL="http://192.168.0.5:10000/SoftvWCFService.svc/";
     public static final String URL_GET_USER = "Usuario/LogOn";
