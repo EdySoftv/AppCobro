@@ -11,6 +11,8 @@ import android.support.annotation.RequiresApi;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -29,6 +31,7 @@ import com.example.pablo.prueba7.Activitys.CambioAparato;
 import com.example.pablo.prueba7.Activitys.ReporteAsignacion;
 import com.example.pablo.prueba7.Activitys.Reportes;
 import com.example.pablo.prueba7.Adapters.ArbolAdapter;
+import com.example.pablo.prueba7.Adapters.GraficaAdapter;
 import com.example.pablo.prueba7.Adapters.OrdenesAdapter;
 import com.example.pablo.prueba7.Adapters.TablaAdapter;
 import com.example.pablo.prueba7.Fragments.EjecutarOrdenes;
@@ -392,10 +395,12 @@ public class Request extends AppCompatActivity {
                 if (response.code() == 200) {
                     Example jsonResponse = response.body();
                     PieChart pieChart;
-
+                    GraficaAdapter adapter;
                     ArrayList<Integer> color = new ArrayList<>();
+                    ArrayList<String> nombre = new ArrayList<>();
+                    RecyclerView lista;
 
-
+                    lista = view.findViewById(R.id.recyclerGrafica);
                     pieChart = view.findViewById(R.id.graficaPastel);
                     int OE=0,OP=0,OV=0,OEP=0,OO=0,RE=0,RP=0,RV=0,REP=0,RO=0;
                     array.dataord = new ArrayList<List<OrdSer>>(asList(jsonResponse.getDameOrdenesQuejasTotalesResult.getOrdSer()));
@@ -516,58 +521,74 @@ public class Request extends AppCompatActivity {
                             yValues.add(new PieEntry(OE, "OrdenEjecutada"));
                             int color1=Color.rgb(100,221,23);//verde
                             color.add(color1);
+                            //nombre.add("Orden Ejecutada");
                         }
                         if (OP != 0) {
                             yValues.add(new PieEntry(OP, "OrdenPendiente"));
                             int color2=Color.rgb(0,147,255);//azul
                             color.add(color2);
+                            //nombre.add("Orden Pendiente");
                         }
                         if (OV != 0) {
                             yValues.add(new PieEntry(OV, "OrdenEnVisita"));
                             int color3=Color.rgb(255,128,0);//naranja
                             color.add(color3);
+                            //nombre.add("Orden En Visita");
                         }
                         if (OEP != 0) {
                             yValues.add(new PieEntry(OEP, "OrdenEnProceso"));
                             int color4=Color.rgb(255,0,0);//rojo
                             color.add(color4);
+                            //nombre.add("Orden En Proceso");
                         }
                         if (OO != 0) {
                             yValues.add(new PieEntry(OO, "Otros"));
                             int color5=Color.rgb(255,0,0);//rojo
                             color.add(color5);
+                            //nombre.add("Otros");
                         }
                         if (RE != 0) {
                             yValues.add(new PieEntry(RE, "ReportesEjecutadas"));
                             int color6=Color.rgb(100,224,23);//verde
                             color.add(color6);
+                            //nombre.add("Reportes Ejecutada");
                         }
                         if (RP != 0) {
                             yValues.add(new PieEntry(RP, "ReportesPendiente"));
                             int color7=Color.rgb(0,147,255);//azul
                             color.add(color7);
+                            //nombre.add("Reportes Pendiente");
                         }
                         if (RV != 0) {
                             yValues.add(new PieEntry(RV, "ReportesEnVisita"));
                             int color9=Color.rgb(255,128,0);//
                             color.add(color9);
+                            //nombre.add("Reportes En Visita");
                         }
                         if (REP != 0) {
                             yValues.add(new PieEntry(REP, "ReportesEnProceso"));
                             int color8=Color.rgb(255,128,0);
                             color.add(color8);
+                            //nombre.add("Reportes En Proceso");
                         }
                         if (RO != 0) {
                             yValues.add(new PieEntry(RO, "Otros"));
                             int color10=Color.rgb(255,0,0);
                             color.add(color10);
+                            //nombre.add("Reportes");
                         }
                     }
+
+
+                    /*adapter = new GraficaAdapter(context,nombre,color);
+                    RecyclerView.LayoutManager layoutManager = new GridLayoutManager(context,1);
+                    lista.setLayoutManager(layoutManager);
+                    lista.setAdapter(adapter);*/
 
                     PieDataSet dataSet = new PieDataSet(yValues, "");
                     dataSet.setSliceSpace(7f);
                     dataSet.setSelectionShift(10f);
-                    dataSet.setColors(color);
+                    dataSet.setColors(ColorTemplate.MATERIAL_COLORS);
                     dataSet.setHighlightEnabled(true);
                     PieData data = new PieData((dataSet));
                     data.setValueTextSize(15f);

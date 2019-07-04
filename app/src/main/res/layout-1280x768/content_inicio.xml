@@ -20,7 +20,6 @@
             android:layout_marginTop="50dp"
             android:paddingLeft="32dp"
             android:paddingRight="32dp"
-            android:visibility="invisible"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
