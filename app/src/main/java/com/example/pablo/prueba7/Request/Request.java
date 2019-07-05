@@ -528,19 +528,19 @@ public class Request extends AppCompatActivity {
 
                         if (OE != 0) {
                             yValues.add(new PieEntry(OE, "Orden Ejecutada"));
-                            int color1=Color.rgb(100,221,23);//verde
+                            int color1=Color.rgb(119,189,79);//#77bd4f
                             color.add(color1);
                             nombre.add("Orden Ejecutada");
                         }
                         if (OP != 0) {
                             yValues.add(new PieEntry(OP, "Orden Pendiente"));
-                            int color2=Color.rgb(0,147,255);//azul
+                            int color2=Color.rgb(40,187,130);//#28bb82
                             color.add(color2);
                             nombre.add("Orden Pendiente");
                         }
                         if (OV != 0) {
                             yValues.add(new PieEntry(OV, "Orden En Visita"));
-                            int color3=Color.rgb(255,128,0);//naranja
+                            int color3=Color.rgb(189,184,22);//#bab816
                             color.add(color3);
                             nombre.add("Orden En Visita");
                         }
@@ -558,19 +558,19 @@ public class Request extends AppCompatActivity {
                         }
                         if (RE != 0) {
                             yValues.add(new PieEntry(RE, "Reportes Ejecutadas"));
-                            int color6=Color.rgb(100,224,23);//verde
+                            int color6=Color.rgb(6,167,189);//#06a7bd
                             color.add(color6);
                             nombre.add("Reportes Ejecutada");
                         }
                         if (RP != 0) {
                             yValues.add(new PieEntry(RP, "Reportes Pendiente"));
-                            int color7=Color.rgb(0,147,255);//azul
+                            int color7=Color.rgb(0,187,169);//#00b3a9
                             color.add(color7);
                             nombre.add("Reportes Pendiente");
                         }
                         if (RV != 0) {
                             yValues.add(new PieEntry(RV, "Reportes En Visita"));
-                            int color9=Color.rgb(255,128,0);//
+                            int color9=Color.rgb(255,166,0);//#ffa600
                             color.add(color9);
                             nombre.add("Reportes En Visita");
                         }
