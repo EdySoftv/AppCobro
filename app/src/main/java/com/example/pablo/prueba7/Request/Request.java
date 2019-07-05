@@ -505,10 +505,19 @@ public class Request extends AppCompatActivity {
                             RV == 0 && REP == 0 && RO == 0) {
 
                         yValues.add(new PieEntry(100f, "Completado"));
+                        int color1=Color.rgb(100,221,23);//verde
+                        color.add(color1);
+                        nombre.add("Orden Ejecutada");
+
+                        adapter = new GraficaAdapter(context,nombre,color);
+                        RecyclerView.LayoutManager layoutManager = new GridLayoutManager(context,2);
+                        lista.setLayoutManager(layoutManager);
+                        lista.setAdapter(adapter);
+
                         PieDataSet dataSet = new PieDataSet(yValues, "");
                         dataSet.setSliceSpace(7f);
                         dataSet.setSelectionShift(10f);
-                        dataSet.setColors(ColorTemplate.MATERIAL_COLORS);
+                        dataSet.setColors(color);
                         dataSet.setHighlightEnabled(true);
                         PieData data = new PieData((dataSet));
                         data.setValueTextSize(15f);
@@ -518,77 +527,79 @@ public class Request extends AppCompatActivity {
                     } else {
 
                         if (OE != 0) {
-                            yValues.add(new PieEntry(OE, "OrdenEjecutada"));
+                            yValues.add(new PieEntry(OE, "Orden Ejecutada"));
                             int color1=Color.rgb(100,221,23);//verde
                             color.add(color1);
-                            //nombre.add("Orden Ejecutada");
+                            nombre.add("Orden Ejecutada");
                         }
                         if (OP != 0) {
-                            yValues.add(new PieEntry(OP, "OrdenPendiente"));
+                            yValues.add(new PieEntry(OP, "Orden Pendiente"));
                             int color2=Color.rgb(0,147,255);//azul
                             color.add(color2);
-                            //nombre.add("Orden Pendiente");
+                            nombre.add("Orden Pendiente");
                         }
                         if (OV != 0) {
-                            yValues.add(new PieEntry(OV, "OrdenEnVisita"));
+                            yValues.add(new PieEntry(OV, "Orden En Visita"));
                             int color3=Color.rgb(255,128,0);//naranja
                             color.add(color3);
-                            //nombre.add("Orden En Visita");
+                            nombre.add("Orden En Visita");
                         }
                         if (OEP != 0) {
-                            yValues.add(new PieEntry(OEP, "OrdenEnProceso"));
+                            yValues.add(new PieEntry(OEP, "Orden En Proceso"));
                             int color4=Color.rgb(255,0,0);//rojo
                             color.add(color4);
-                            //nombre.add("Orden En Proceso");
+                            nombre.add("Orden En Proceso");
                         }
                         if (OO != 0) {
                             yValues.add(new PieEntry(OO, "Otros"));
                             int color5=Color.rgb(255,0,0);//rojo
                             color.add(color5);
-                            //nombre.add("Otros");
+                            nombre.add("Otros");
                         }
                         if (RE != 0) {
-                            yValues.add(new PieEntry(RE, "ReportesEjecutadas"));
+                            yValues.add(new PieEntry(RE, "Reportes Ejecutadas"));
                             int color6=Color.rgb(100,224,23);//verde
                             color.add(color6);
-                            //nombre.add("Reportes Ejecutada");
+                            nombre.add("Reportes Ejecutada");
                         }
                         if (RP != 0) {
-                            yValues.add(new PieEntry(RP, "ReportesPendiente"));
+                            yValues.add(new PieEntry(RP, "Reportes Pendiente"));
                             int color7=Color.rgb(0,147,255);//azul
                             color.add(color7);
-                            //nombre.add("Reportes Pendiente");
+                            nombre.add("Reportes Pendiente");
                         }
                         if (RV != 0) {
-                            yValues.add(new PieEntry(RV, "ReportesEnVisita"));
+                            yValues.add(new PieEntry(RV, "Reportes En Visita"));
                             int color9=Color.rgb(255,128,0);//
                             color.add(color9);
-                            //nombre.add("Reportes En Visita");
+                            nombre.add("Reportes En Visita");
                         }
                         if (REP != 0) {
-                            yValues.add(new PieEntry(REP, "ReportesEnProceso"));
+                            yValues.add(new PieEntry(REP, "Reportes En Proceso"));
                             int color8=Color.rgb(255,128,0);
-                            color.add(color8);
-                            //nombre.add("Reportes En Proceso");
+                            color.add(color8);nombre.add("Reportes En Proceso");
                         }
                         if (RO != 0) {
                             yValues.add(new PieEntry(RO, "Otros"));
                             int color10=Color.rgb(255,0,0);
                             color.add(color10);
-                            //nombre.add("Reportes");
+                            nombre.add("Reportes");
                         }
                     }
 
 
-                    /*adapter = new GraficaAdapter(context,nombre,color);
-                    RecyclerView.LayoutManager layoutManager = new GridLayoutManager(context,1);
+                    adapter = new GraficaAdapter(context,nombre,color);
+                    RecyclerView.LayoutManager layoutManager = new GridLayoutManager(context,2);
                     lista.setLayoutManager(layoutManager);
-                    lista.setAdapter(adapter);*/
+                    lista.setAdapter(adapter);
 
+
+
+                    pieChart.getLegend().setEnabled(false);
                     PieDataSet dataSet = new PieDataSet(yValues, "");
                     dataSet.setSliceSpace(7f);
                     dataSet.setSelectionShift(10f);
-                    dataSet.setColors(ColorTemplate.MATERIAL_COLORS);
+                    dataSet.setColors(color);
                     dataSet.setHighlightEnabled(true);
                     PieData data = new PieData((dataSet));
                     data.setValueTextSize(15f);

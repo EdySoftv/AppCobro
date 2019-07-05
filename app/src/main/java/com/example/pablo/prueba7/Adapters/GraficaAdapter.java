@@ -47,6 +47,7 @@ public class GraficaAdapter extends RecyclerView.Adapter<GraficaAdapter.Grafiaca
     @Override
     public void onBindViewHolder(GraficaAdapter.GrafiacaViewHolder viewHolder, final int position) {
         viewHolder.textgrafica.setText(nombreGrafica.get(position));
+        viewHolder.colorGrafica.setBackgroundColor(coloresGrafica.get(position));
     }
 
 }
