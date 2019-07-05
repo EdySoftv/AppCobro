@@ -30,8 +30,11 @@ import com.example.pablo.prueba7.Fragments.HorasOrdenes;
 import com.example.pablo.prueba7.Fragments.MaterialesOrdenes;
 import com.example.pablo.prueba7.sampledata.Util;
 
+import org.json.JSONObject;
+
 import androidx.annotation.RequiresApi;
 
+import static com.example.pablo.prueba7.Adapters.OrdenesAdapter.clvor;
 import static com.example.pablo.prueba7.Adapters.OrdenesAdapter.noOrden;
 import static com.example.pablo.prueba7.Fragments.HorasOrdenes.TecSec;
 import static com.example.pablo.prueba7.Fragments.HorasOrdenes.ejecutada;
@@ -186,8 +189,16 @@ public class MainActivity extends AppCompatActivity implements ActionBar.TabList
 
 
         if (ejecutada == 1) {
-            Estatus="E";
-            request.getValidaTrabajos(getApplicationContext());
+            try{
+                JSONObject jsonObject = new JSONObject();
+                jsonObject.put("CLV_ORDEN", clvor);
+                jsonObject.put("Clv_Tecnico", Util.getClvTec(Util.preferences));
+                jsonObject.put("OP2", 0);
+                jsonObject.put("OPCION", "M");
+                jsonObject.put("STATUS", "E");
+                request.getValidaTrabajos(getApplicationContext(),jsonObject);
+            }catch (Exception e){}
+
             if(positionTab == 2){
                 if(stringValidaTrabajos.length() == 2 ){
                     Toast.makeText(getApplicationContext(), "Sección de trabajos completa" + stringValidaTrabajos, Toast.LENGTH_SHORT).show();

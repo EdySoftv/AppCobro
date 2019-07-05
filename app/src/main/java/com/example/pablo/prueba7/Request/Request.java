@@ -1694,20 +1694,14 @@ public class Request extends AppCompatActivity {
         });
     }
 
-    public void getValidaTrabajos(final Context context) {
-        Service service = null;
-        try {
-            service = services.getValidaOrdSerService(context);
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-        Call<JsonObject> call = service.getVALIOrdSer();
+    public void getValidaTrabajos(final Context context, final JSONObject jsonObject) {
+        Call<JsonObject> call = services.RequestPost(context, jsonObject).getVALIOrdSer();
         call.enqueue(new Callback<JsonObject>() {
             @Override
-            public void onResponse(Call<JsonObject> call, Response<JsonObject> response1) {
-                if (response1.code() == 200) {
+            public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
+                if (response.code() == 200) {
                     System.out.println("Entra");
-                     stringValidaTrabajos = String.valueOf(response1.body().getAsJsonPrimitive("GetSP_ValidaGuardaOrdSerAparatosResult"));
+                     stringValidaTrabajos = String.valueOf(response.body().getAsJsonPrimitive("GetSP_ValidaGuardaOrdSerAparatosResult"));
 
                     //Toast.makeText(context, "Error: " + stringValidaTrabajos, Toast.LENGTH_LONG).show();
                 }
