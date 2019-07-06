@@ -17,6 +17,8 @@ import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.StyleableRes;
+
 import com.example.pablo.prueba7.R;
 import com.example.pablo.prueba7.Request.Request;
 import com.example.pablo.prueba7.Fragments.EjecutarReportes;
@@ -28,6 +30,8 @@ import static com.example.pablo.prueba7.Adapters.QuejasAdapter.clvReport;
 import static com.example.pablo.prueba7.Fragments.HorasOrdenes.TecSec;
 import static com.example.pablo.prueba7.Fragments.HorasReportes.TecSec1;
 import static com.example.pablo.prueba7.Fragments.HorasReportes.tecPosRepo;
+import static com.example.pablo.prueba7.Fragments.TrabajosReportes.posSolucionRepo;
+import static com.example.pablo.prueba7.Fragments.TrabajosReportes.proble;
 
 public class MainReportes extends AppCompatActivity implements ActionBar.TabListener, ViewPager.OnPageChangeListener {
     private ViewPager mViewPager;
@@ -35,6 +39,7 @@ public class MainReportes extends AppCompatActivity implements ActionBar.TabList
     private Button info;
     private ConstraintLayout layoutAnimado;
     public  int positionTab;
+    public String valorProblema;
     int position;
     public static TextView Nombre1, Direccion1,NombreTec1,infoA,contrato1,ciudad1;
     Request request = new Request();
@@ -132,6 +137,18 @@ public class MainReportes extends AppCompatActivity implements ActionBar.TabList
 
         if (HorasReportes.reporteEjecutada == 1) {
             mViewPager.setCurrentItem(positionTab);
+            if (positionTab == 2){
+                if(posSolucionRepo == 0 || valorProblema == null||valorProblema == "" ){
+                    valorProblema =  proble.getText().toString();
+                    mViewPager.setCurrentItem(1);
+                    Toast.makeText(this, "Seleccione un tipo de solución y un problema real", Toast.LENGTH_SHORT).show();
+                }
+                else {
+                    mViewPager.setCurrentItem(positionTab);
+                }
+            }
+
+
         } else {
 
             if (HorasReportes.repotteVisita == 0 && HorasReportes.reporteEjecutada == 0) {

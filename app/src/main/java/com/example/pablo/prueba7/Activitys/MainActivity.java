@@ -201,18 +201,25 @@ public class MainActivity extends AppCompatActivity implements ActionBar.TabList
 
             if(positionTab == 2){
                 if(stringValidaTrabajos.length() == 2 ){
-                    Toast.makeText(getApplicationContext(), "Sección de trabajos completa" + stringValidaTrabajos, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "Sección de trabajos completa", Toast.LENGTH_SHORT).show();
                     mViewPager.setCurrentItem(positionTab);
                 }else{
-                    Toast.makeText(getApplicationContext(), "Error " + stringValidaTrabajos, Toast.LENGTH_LONG).show();
+
+                    Toast.makeText(getApplicationContext(), "Error: " + stringValidaTrabajos, Toast.LENGTH_LONG).show();
                     mViewPager.setCurrentItem(1);
-                    positionTab--;
+
+                    //positionTab--;
                 }
             }
             else{
-            mViewPager.setCurrentItem(positionTab);}
+                if(positionTab ==3){
+                    mViewPager.setCurrentItem(positionTab);
+                }
+                else{
+            mViewPager.setCurrentItem(positionTab);
+                }
 
-
+                }
 
         } else {
 
