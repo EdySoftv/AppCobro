@@ -142,6 +142,7 @@ import static com.example.pablo.prueba7.Activitys.AsignarAparato.MACWAMText;
 import static com.example.pablo.prueba7.Activitys.AsignarAparato.constraintLayoutMACWAM;
 import static com.example.pablo.prueba7.Activitys.AsignarAparato.idArticuloasignado;
 import static com.example.pablo.prueba7.Activitys.AsignarAparato.jsonArrayMAC;
+import static com.example.pablo.prueba7.Adapters.OrdenesAdapter.clvor;
 import static com.example.pablo.prueba7.Adapters.TrabajosAdapter.dialogTrabajos;
 import static com.example.pablo.prueba7.Fragments.EjecutarOrdenes.dialogEjecutar;
 import static com.example.pablo.prueba7.Fragments.HorasOrdenes.observacionesTecnico;
@@ -183,6 +184,7 @@ public class Request extends AppCompatActivity {
     public static boolean pieza = false, rapagejecutar = false, extencionesMat = false;
    public static int validFirma;
     public static String ciudadcmdo, localidadcmdo, coloniacmdo, callecmdo, numerocmdo, numeroicmdo, telefonocmdo, callencmdo, callescmdo, calleecmdo, calleocmdo, casacmdo;
+    public static String ejecutarStatus;
     JsonObject jsonConsultaIp;
     String a = "Seleccione técnico secundario";
     String f = "Seleccione tipo de solución";
@@ -1661,22 +1663,16 @@ public class Request extends AppCompatActivity {
         });
     }
 
-    public void getValidaOrdSer(final Context context, final JSONObject jsonObjet) {
-        Service service = null;
-        try {
-            service = services.getValidaOrdSerService(context);
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-        Call<JsonObject> call = service.getVALIOrdSer();
+    public void getValidaOrdSer(final Context context, final JSONObject jsonObjet, final JSONObject jsonObjet1) {
+        Call<JsonObject> call = services.RequestPost(context, jsonObjet1).getVALIOrdSer();
         call.enqueue(new Callback<JsonObject>() {
             @Override
-            public void onResponse(Call<JsonObject> call, Response<JsonObject> response1) {
-                if (response1.code() == 200) {
+            public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
+                if (response.code() == 200) {
                     System.out.println("Entra");
-                    String string1 = String.valueOf(response1.body().getAsJsonPrimitive("GetSP_ValidaGuardaOrdSerAparatosResult"));
+                    String string1 = String.valueOf(response.body().getAsJsonPrimitive("GetSP_ValidaGuardaOrdSerAparatosResult"));
 
-                    if (String.valueOf(response1.body().getAsJsonPrimitive("GetSP_ValidaGuardaOrdSerAparatosResult")).length() == 2) {
+                    if (String.valueOf(response.body().getAsJsonPrimitive("GetSP_ValidaGuardaOrdSerAparatosResult")).length() == 2) {
                         getChecaCAMDO(context, jsonObjet);
                     } else {
 
@@ -1731,7 +1727,16 @@ public class Request extends AppCompatActivity {
                             jsonObject.get("Error").getAsString()
                     );
                     if (checa.Error.equals("0")) {
-                        getAddRelOrdUsu(context, jsonObject1);
+                        try{
+                            JSONObject jsonObject2 = new JSONObject();
+                            JSONObject jsonObject3 = new JSONObject();
+                            jsonObject2.put("ClvOrden", clvor);
+                            jsonObject2.put("ClvUsuario", UserModel.Id_Usuario);
+                            jsonObject2.put("Status", ejecutarStatus);
+                            jsonObject3.put("objNueRelOrdenUsuario", jsonObject2);
+                            getAddRelOrdUsu(context, jsonObject1,jsonObject3);
+                        }catch (Exception e){}
+
                     } else {
                         dialogEjecutar.dismiss();
                         EjecutarOrdenes.eject.setEnabled(true);
@@ -1747,30 +1752,24 @@ public class Request extends AppCompatActivity {
         });
     }
 
-    public void getAddRelOrdUsu(final Context context, final JSONObject jsonObject) {
-        Service service = null;
-        try {
-            service = services.getADDRELORDUSUService(context);
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-        Call<JsonObject> call = service.getADDRELORDUSU();
+    public void getAddRelOrdUsu(final Context context, final JSONObject jsonObject, final JSONObject jsonObject1) {
+        Call<JsonObject> call = services.RequestPost(context, jsonObject1).getADDRELORDUSU();
         call.enqueue(new Callback<JsonObject>() {
             @Override
-            public void onResponse(Call<JsonObject> call, Response<JsonObject> response1) {
-                if (response1.code() == 200) {
+            public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
+                if (response.code() == 200) {
                     try {
-                        if (EjecutarOrdenes.ejecutarStatus.equals("E")) {
+                        if (ejecutarStatus.equals("E")) {
                             getDeepMODORDSER(context, jsonObject);
                         }
-                        if (EjecutarOrdenes.ejecutarStatus.equals("V")) {
+                        if (ejecutarStatus.equals("V")) {
                             getDeepMODORDSERV(context, jsonObject);
                         }
                     }catch (Exception e){
-                        if (HorasReportes.statusHora.equals("E")) {
+                        if (ejecutarStatus.equals("E")) {
                             getDeepMODORDSER(context, jsonObject);
                         }
-                        if (HorasReportes.statusHora.equals("V")) {
+                        if (ejecutarStatus.equals("V")) {
                             getDeepMODORDSERV(context, jsonObject);
                         }
                     }
@@ -1815,7 +1814,16 @@ public class Request extends AppCompatActivity {
             @Override
             public void onResponse(Call<JsonObject> call, Response<JsonObject> response1) {
                 if (response1.code() == 200) {
-                    getGuardaOrdSerAparatos(context);
+                    try{
+                        JSONObject jsonObject = new JSONObject();
+                        jsonObject.put("ClvOrden", clvor);
+                        jsonObject.put("Op", "M");
+                        jsonObject.put("Status", ejecutarStatus);
+                        jsonObject.put("Op2", 0);
+                        getGuardaOrdSerAparatos(context,jsonObject);
+                    }catch (Exception e){}
+
+
                 } else {
                     Toast.makeText(context, "Error, aparatos no enviados", Toast.LENGTH_SHORT);
                     dialogEjecutar.dismiss();
@@ -1841,8 +1849,14 @@ public class Request extends AppCompatActivity {
             @Override
             public void onResponse(Call<JsonObject> call, Response<JsonObject> response1) {
                 if (response1.code() == 200) {
-
-                    getGuardaOrdSerAparatos(context);
+                    try{
+                        JSONObject jsonObject = new JSONObject();
+                        jsonObject.put("ClvOrden", clvor);
+                        jsonObject.put("Op", "M");
+                        jsonObject.put("Status", ejecutarStatus);
+                        jsonObject.put("Op2", 0);
+                        getGuardaOrdSerAparatos(context,jsonObject);
+                    }catch (Exception e){}
                 } else {
                     dialogEjecutar.dismiss();
                     Toast.makeText(context, "Error, aparatos no enviados", Toast.LENGTH_SHORT);
@@ -1857,18 +1871,12 @@ public class Request extends AppCompatActivity {
         });
     }
 
-    public void getGuardaOrdSerAparatos(final Context context) {
-        Service service = null;
-        try {
-            service = services.getGuardaOrdSerAparatosService(context);
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-        Call<JsonObject> call = service.getGUARDAOrdSerAparatos();
+    public void getGuardaOrdSerAparatos(final Context context, final JSONObject jsonObject) {
+        Call<JsonObject> call = services.RequestPost(context, jsonObject).getGUARDAOrdSerAparatos();
         call.enqueue(new Callback<JsonObject>() {
             @Override
-            public void onResponse(Call<JsonObject> call, Response<JsonObject> response1) {
-                if (response1.code() == 200) {
+            public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
+                if (response.code() == 200) {
 
                     addLlenaBitacora(context);
                 } else {
@@ -1902,7 +1910,7 @@ public class Request extends AppCompatActivity {
                         Iterator<List<GetBUSCADetOrdSerListResult>> itData = Array.dataTrabajos.iterator();
                         List<GetBUSCADetOrdSerListResult> dat = itData.next();
 try{
-    if (EjecutarOrdenes.ejecutarStatus.equals("E")) {
+    if (ejecutarStatus.equals("E")) {
 
         for (int a = 0; a < dat.size(); a++) {
 
@@ -1923,13 +1931,13 @@ try{
             getListOrd(context);
         }
     }
-    if (EjecutarOrdenes.ejecutarStatus.equals("V")) {
+    if (ejecutarStatus.equals("V")) {
         dialogEjecutar.dismiss();
         Toast.makeText(context, "Se ha guardado correctamente", Toast.LENGTH_LONG).show();
         getListOrd(context);
     }
 }catch (Exception e){
-    if (HorasReportes.statusHora.equals("E")) {
+    if (ejecutarStatus.equals("E")) {
 
         for (int a = 0; a < dat.size(); a++) {
 
@@ -1950,7 +1958,7 @@ try{
             getListOrd(context);
         }
     }
-    if (HorasReportes.statusHora.equals("V")) {
+    if (ejecutarStatus.equals("V")) {
         dialogEjecutar.dismiss();
         Toast.makeText(context, "Se ha guardado correctamente", Toast.LENGTH_LONG).show();
         getListOrd(context);
@@ -3010,6 +3018,7 @@ try{
                         validaExisteFirmaBool=true;
                         System.out.println("Ejecutar");
                         JSONObject jsonObject = new JSONObject();
+                        JSONObject jsonObject1 = new JSONObject();
                         final Calendar c = Calendar.getInstance();
                         EjecutarOrdenes.añoE = c.get(Calendar.YEAR);
                         EjecutarOrdenes.mesE = c.get(Calendar.MONTH);
@@ -3025,8 +3034,8 @@ try{
                         EjecutarOrdenes.fechaHoy =  EjecutarOrdenes.diaE + "/" + ab + "/" +  EjecutarOrdenes.añoE;
                         EjecutarOrdenes.horaHoy =  EjecutarOrdenes.horaE + ":" +  EjecutarOrdenes.minutoE;
                         if (HorasOrdenes.ejecutada == 1) {
-                            EjecutarOrdenes.ejecutarStatus="E";
                             EjecutarOrdenes.eject.setEnabled(false);
+                            ejecutarStatus="E";
                             try {
                                 jsonObject.put("ClvFactura", DeepConsModel.Clv_FACTURA);
                                 jsonObject.put("ClvOrden", DeepConsModel.Clv_Orden);
@@ -3042,13 +3051,20 @@ try{
                                 jsonObject.put("TecnicoCuadrilla", HorasOrdenes.TecSecSelecc);
                                 jsonObject.put("Visita1", "");
                                 jsonObject.put("Visita2", "");
-                                getValidaOrdSer(activity,jsonObject);
+
+
+                                jsonObject1.put("CLV_ORDEN", clvor);
+                                jsonObject1.put("Clv_Tecnico", Util.getClvTec(Util.preferences));
+                                jsonObject1.put("OP2", 0);
+                                jsonObject1.put("OPCION", "M");
+                                jsonObject1.put("STATUS", "E");
+                                getValidaOrdSer(activity,jsonObject,jsonObject1);
                             }catch (Exception e){}
 
 
                         }
                         if ( HorasOrdenes.visita == 1) {
-                            EjecutarOrdenes.ejecutarStatus="V";
+                            ejecutarStatus="V";
                             try{
                                 jsonObject.put("ClvFactura", DeepConsModel.Clv_FACTURA);
                                 jsonObject.put("ClvOrden", DeepConsModel.Clv_Orden);
@@ -3070,7 +3086,12 @@ try{
                                     jsonObject.put("Visita2",  EjecutarOrdenes.fechaActual);
                                 }
                                 System.out.println("VAL 2");
-                                getValidaOrdSer(activity,jsonObject);
+                                jsonObject1.put("CLV_ORDEN", clvor);
+                                jsonObject1.put("Clv_Tecnico", Util.getClvTec(Util.preferences));
+                                jsonObject1.put("OP2", 0);
+                                jsonObject1.put("OPCION", "M");
+                                jsonObject1.put("STATUS", "V");
+                                getValidaOrdSer(activity,jsonObject,jsonObject1);
                             }catch (Exception e){}
 
                         }

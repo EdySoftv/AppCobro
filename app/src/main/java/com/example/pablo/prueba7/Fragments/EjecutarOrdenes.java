@@ -31,6 +31,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
+import static com.example.pablo.prueba7.Adapters.OrdenesAdapter.clvor;
 import static com.example.pablo.prueba7.Fragments.HorasOrdenes.obsTec;
 import static com.example.pablo.prueba7.Fragments.HorasOrdenes.observacionesTecnico;
 import static com.example.pablo.prueba7.Fragments.HorasOrdenes.visita1;
@@ -109,16 +110,18 @@ public class EjecutarOrdenes extends Fragment {
 
                 dialogEjecutar.show();
                 observacionesTecnico = obsTec.getText().toString();
-                if(request.rapagejecutar==true){
+                /*if(request.rapagejecutar==true){
                     if (Array.recibixnew.size() == 0) {
                         Toast.makeText(getContext(), "Ningún aparato seleccionado", Toast.LENGTH_LONG).show();
                         dialogEjecutar.dismiss();
-                    } else {
+                    } else {*/
                         try {
-                            request.send_aparat(getContext());
+                            //request.send_aparat(getContext());
                             //**************************************
                             if(horas.ejecutada==1){
                                 if(request.firma==true){
+                                        request.ejecutarStatus="E";
+
                                     try{
                                         JSONObject jsonObject = new JSONObject();
                                         jsonObject.put("clvOrden",DeepConsModel.Clv_Orden);
@@ -128,9 +131,11 @@ public class EjecutarOrdenes extends Fragment {
                                 }
                                 if(request.firma==false){
                                     Ejecutar();
+                                    request.ejecutarStatus="E";
                                 }
                             }else{
                                 Ejecutar();
+                                request.ejecutarStatus="V";
                             }
 
                                                        ////////*************************
@@ -140,9 +145,10 @@ public class EjecutarOrdenes extends Fragment {
                             dialogEjecutar.dismiss();
                         }
                     }
-                }else {
+                /*}else {
                     if(horas.ejecutada==1){
                         try{
+                            request.ejecutarStatus="E";
                             JSONObject jsonObject = new JSONObject();
                             jsonObject.put("clvOrden",DeepConsModel.Clv_Orden);
                             jsonObject.put("clvReporte",0);
@@ -150,13 +156,15 @@ public class EjecutarOrdenes extends Fragment {
                         }catch (Exception e){}
                         if(request.validaExisteFirmaBool==true){
                             Ejecutar();
+                            request.ejecutarStatus="E";
                         }
                     }else{
+                        request.ejecutarStatus="V";
                         Ejecutar();
                     }
 
                 }
-            }
+            }*/
 
         });
 /*        reiniciar.setOnClickListener(new View.OnClickListener() {
@@ -223,6 +231,7 @@ public class EjecutarOrdenes extends Fragment {
     public  void Ejecutar(){
         System.out.println("Ejecutar");
         JSONObject jsonObject = new JSONObject();
+        JSONObject jsonObject1 = new JSONObject();
         final Calendar c = Calendar.getInstance();
         añoE = c.get(Calendar.YEAR);
         mesE = c.get(Calendar.MONTH);
@@ -255,7 +264,14 @@ public class EjecutarOrdenes extends Fragment {
                 jsonObject.put("TecnicoCuadrilla", HorasOrdenes.TecSecSelecc);
                 jsonObject.put("Visita1", "");
                 jsonObject.put("Visita2", "");
-                request.getValidaOrdSer(getActivity(),jsonObject);
+
+                jsonObject1.put("CLV_ORDEN", clvor);
+                jsonObject1.put("Clv_Tecnico", Util.getClvTec(Util.preferences));
+                jsonObject1.put("OP2", 0);
+                jsonObject1.put("OPCION", "M");
+                jsonObject1.put("STATUS", "E");
+
+                request.getValidaOrdSer(getActivity(),jsonObject,jsonObject1);
             }catch (Exception e){}
 
 
@@ -283,7 +299,15 @@ public class EjecutarOrdenes extends Fragment {
                     jsonObject.put("Visita2", fechaActual);
                 }
                 System.out.println("VAL 2");
-                request.getValidaOrdSer(getActivity(),jsonObject);
+
+                jsonObject1.put("CLV_ORDEN", clvor);
+                jsonObject1.put("Clv_Tecnico", Util.getClvTec(Util.preferences));
+                jsonObject1.put("OP2", 0);
+                jsonObject1.put("OPCION", "M");
+                jsonObject1.put("STATUS", "V");
+
+
+                request.getValidaOrdSer(getActivity(),jsonObject,jsonObject1);
             }catch (Exception e){}
 
         }

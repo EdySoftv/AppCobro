@@ -86,7 +86,7 @@ public class Services {
     public static JSONObject jsonObject = new JSONObject();
     JSONObject jsonObject20 = new JSONObject();
     public static long ClvTrabajoRequest;
-
+    public static String ejecutarStatus;
     public static JSONArray jsonArrayap = new JSONArray();
    // public static JSONArray jsonTokenFirebase = new JSONArray();
     public static JSONObject jsonTokenFirebase = new JSONObject();
@@ -858,12 +858,20 @@ public class Services {
 
     public Service getValidaOrdSerService(final Context context) throws JSONException {
         //POST Body Json
+
+        String ejecutar;
+        if(EjecutarOrdenes.ejecutarStatus.equals(null)){
+            ejecutar=ejecutarStatus;
+        }else{
+            ejecutar = EjecutarOrdenes.ejecutarStatus;
+        }
+
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("CLV_ORDEN", clvor);
         jsonObject.put("Clv_Tecnico", Util.getClvTec(Util.preferences));
         jsonObject.put("OP2", 0);
         jsonObject.put("OPCION", "M");
-        jsonObject.put("STATUS", EjecutarOrdenes.ejecutarStatus);
+        jsonObject.put("STATUS", ejecutar);
         MediaType JSON = MediaType.parse("application/json; charset=utf-8");
         final RequestBody body = RequestBody.create(JSON, jsonObject.toString());
         final OkHttpClient client = new OkHttpClient.Builder().addInterceptor(new Interceptor() {
