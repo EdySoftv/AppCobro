@@ -46,7 +46,7 @@ public class MainActivity extends AppCompatActivity implements ActionBar.TabList
     public ViewPager mViewPager;
     ScrollView hzScrollView;
     Button info;
-
+    private Boolean cambio = false;
     public  int positionTab;
     ConstraintLayout layoutAnimado;
     public static TextView NombreTec, Contrato, Status, Nombre, Direccion, InfoServicios;
@@ -202,8 +202,9 @@ public class MainActivity extends AppCompatActivity implements ActionBar.TabList
             if(positionTab == 2){
                 if(stringValidaTrabajos.length() == 2 ){
                     Toast.makeText(getApplicationContext(), "Sección de trabajos completa", Toast.LENGTH_SHORT).show();
+                    cambio = true;
                     mViewPager.setCurrentItem(positionTab);
-                }else{
+                }else {
 
                     Toast.makeText(getApplicationContext(), "Error: " + stringValidaTrabajos, Toast.LENGTH_LONG).show();
                     mViewPager.setCurrentItem(1);
@@ -211,14 +212,22 @@ public class MainActivity extends AppCompatActivity implements ActionBar.TabList
                     //positionTab--;
                 }
             }
+            if(positionTab == 3){
+          if(cambio == false){
+              mViewPager.setCurrentItem(2);
+
+          }else if (cambio == true) {
+              mViewPager.setCurrentItem(positionTab);
+          }
+            }
             else{
-                if(positionTab ==3){
+        /*        if(positionTab ==3){
                     mViewPager.setCurrentItem(positionTab);
                 }
                 else{
             mViewPager.setCurrentItem(positionTab);
-                }
-
+                }*/
+                mViewPager.setCurrentItem(positionTab);
                 }
 
         } else {

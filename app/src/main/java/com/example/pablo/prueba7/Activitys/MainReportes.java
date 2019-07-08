@@ -40,6 +40,7 @@ public class MainReportes extends AppCompatActivity implements ActionBar.TabList
     private ConstraintLayout layoutAnimado;
     public  int positionTab;
     public String valorProblema;
+    private boolean cambioRepo = false;
     int position;
     public static TextView Nombre1, Direccion1,NombreTec1,infoA,contrato1,ciudad1;
     Request request = new Request();
@@ -138,14 +139,22 @@ public class MainReportes extends AppCompatActivity implements ActionBar.TabList
         if (HorasReportes.reporteEjecutada == 1) {
             mViewPager.setCurrentItem(positionTab);
             if (positionTab == 2){
-                if(posSolucionRepo == 0 || valorProblema == null||valorProblema == "" ){
-                    valorProblema =  proble.getText().toString();
+                valorProblema =  proble.getText().toString();
+                if(posSolucionRepo == 0 || valorProblema.equals(null) || valorProblema.equals("")){
                     mViewPager.setCurrentItem(1);
                     Toast.makeText(this, "Seleccione un tipo de solución y un problema real", Toast.LENGTH_SHORT).show();
+                    cambioRepo = false;
                 }
                 else {
-                    mViewPager.setCurrentItem(positionTab);
+                    cambioRepo = true;
+                    if (cambioRepo==true) {
+                        mViewPager.setCurrentItem(positionTab);
+                    }
+
                 }
+            }
+            if (positionTab ==3 && cambioRepo == false){
+                mViewPager.setCurrentItem(1);
             }
 
 
