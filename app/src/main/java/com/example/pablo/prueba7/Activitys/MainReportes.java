@@ -141,8 +141,14 @@ public class MainReportes extends AppCompatActivity implements ActionBar.TabList
             if (positionTab == 2){
                 valorProblema =  proble.getText().toString();
                 if(posSolucionRepo == 0 || valorProblema.equals(null) || valorProblema.equals("")){
+                    if(posSolucionRepo == 0) {
+                        Toast.makeText(this, "Seleccione un tipo de solución.", Toast.LENGTH_SHORT).show();
+                    }
+                    if( valorProblema.equals(null) || valorProblema.equals("")) {
+                        Toast.makeText(this, "Escriba el problema real.", Toast.LENGTH_SHORT).show();
+                    }
                     mViewPager.setCurrentItem(1);
-                    Toast.makeText(this, "Seleccione un tipo de solución y un problema real", Toast.LENGTH_SHORT).show();
+
                     cambioRepo = false;
                 }
                 else {
