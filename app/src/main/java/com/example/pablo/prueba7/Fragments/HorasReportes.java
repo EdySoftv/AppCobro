@@ -56,7 +56,6 @@ public class HorasReportes extends Fragment  implements View.OnClickListener {
         todo = view.findViewById(R.id.todo);
         TecSec1 = view.findViewById(R.id.tecnicosec1);
         request.getTecSecR(getContext());
-
         TecSec1.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -114,6 +113,7 @@ public class HorasReportes extends Fragment  implements View.OnClickListener {
                     reporteEjecutada = 0;
                     repotteVisita = 1;
                     statusHora = "V";
+
                 }
 
             }
@@ -145,6 +145,7 @@ public class HorasReportes extends Fragment  implements View.OnClickListener {
                 reporteEjecutada = 0;
                 repotteVisita = 1;
                 statusHora = "V";
+                request.getReportesC(getContext());
             }
             break;
             case R.id.visitada1: {

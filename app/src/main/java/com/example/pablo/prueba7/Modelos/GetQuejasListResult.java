@@ -76,16 +76,16 @@ public class GetQuejasListResult {
     public  String fechaSoliciutud;
     @SerializedName("HP")
     @Expose
-    private Object hP;
+    public String hP;
     @SerializedName("HV1")
     @Expose
-    private Object hV1;
+    public String hV1;
     @SerializedName("HV2")
     @Expose
-    private Object hV2;
+    public String hV2;
     @SerializedName("HV3")
     @Expose
-    private Object hV3;
+    public String hV3;
     @SerializedName("Hora_Ejecucion")
     @Expose
     private Object horaEjecucion;
@@ -151,13 +151,13 @@ public class GetQuejasListResult {
     private Boolean visita;
     @SerializedName("Visita1")
     @Expose
-    private Object visita1;
+    public String visita1;
     @SerializedName("Visita2")
     @Expose
-    private Object visita2;
+    public String visita2;
     @SerializedName("Visita3")
     @Expose
-    private Object visita3;
+    public String visita3;
     @SerializedName("clvPrioridadQueja")
     @Expose
     public int clvPrioridadQueja;

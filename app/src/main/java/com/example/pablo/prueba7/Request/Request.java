@@ -143,10 +143,12 @@ import static com.example.pablo.prueba7.Activitys.AsignarAparato.constraintLayou
 import static com.example.pablo.prueba7.Activitys.AsignarAparato.idArticuloasignado;
 import static com.example.pablo.prueba7.Activitys.AsignarAparato.jsonArrayMAC;
 import static com.example.pablo.prueba7.Adapters.OrdenesAdapter.clvor;
+import static com.example.pablo.prueba7.Adapters.QuejasAdapter.clvReport;
 import static com.example.pablo.prueba7.Adapters.TrabajosAdapter.dialogTrabajos;
 import static com.example.pablo.prueba7.Fragments.EjecutarOrdenes.dialogEjecutar;
 import static com.example.pablo.prueba7.Fragments.HorasOrdenes.observacionesTecnico;
 import static com.example.pablo.prueba7.Fragments.HorasReportes.TecSec1;
+import static com.example.pablo.prueba7.Fragments.HorasReportes.TecSecSelecc1;
 import static com.example.pablo.prueba7.Fragments.HorasReportes.tecPosRepo;
 import static com.example.pablo.prueba7.Fragments.HorasOrdenes.TecSec;
 import static com.example.pablo.prueba7.Fragments.HorasOrdenes.posTec;
@@ -163,10 +165,12 @@ import static com.example.pablo.prueba7.Fragments.MaterialesReportes.posExtMatR;
 import static com.example.pablo.prueba7.Fragments.MaterialesReportes.spinnerExtMatR;
 import static com.example.pablo.prueba7.Fragments.TrabajosOrdenes.adaptertrabajos;
 import static com.example.pablo.prueba7.Fragments.TrabajosOrdenes.trabajos;
+import static com.example.pablo.prueba7.Fragments.TrabajosReportes.Clv_Sol;
 import static com.example.pablo.prueba7.Fragments.TrabajosReportes.posSolucionRepo;
 import static com.example.pablo.prueba7.Listas.Array.Asigna;
 import static com.example.pablo.prueba7.Listas.Array.Asigna1;
 import static com.example.pablo.prueba7.Fragments.TrabajosReportes.solucion;
+import static com.example.pablo.prueba7.Services.Services.ClvTrabajoRequest;
 import static com.example.pablo.prueba7.Services.Services.clavequeja;
 import static com.example.pablo.prueba7.Services.Services.opcion;
 import static java.util.Arrays.asList;
@@ -184,7 +188,8 @@ public class Request extends AppCompatActivity {
     public static boolean pieza = false, rapagejecutar = false, extencionesMat = false;
    public static int validFirma;
     public static String ciudadcmdo, localidadcmdo, coloniacmdo, callecmdo, numerocmdo, numeroicmdo, telefonocmdo, callencmdo, callescmdo, calleecmdo, calleocmdo, casacmdo;
-    public static String ejecutarStatus;
+    public static String ejecutarStatus,reporteStatus;
+    public static String reporteVisita1,reporteVisita2,reporteVisita3,reporteHora1,reporteHora2,reporteHora3;
     JsonObject jsonConsultaIp;
     String a = "Seleccione técnico secundario";
     String f = "Seleccione tipo de solución";
@@ -1501,13 +1506,42 @@ public class Request extends AppCompatActivity {
                             Obs = dat.get(i).observaciones;
                             clvP = dat.get(i).clvPrioridadQueja;
                             tecC = dat.get(i).tecnicoCuadrilla;
-                            TrabajosReportes.prioridad.setText(String.valueOf(dat.get(i).getPrioridad()));
-                            TrabajosReportes.clasific.setText(String.valueOf(dat.get(i).getClasificacionProblema()));
-                            TrabajosReportes.desc.setText(String.valueOf(dat.get(i).getObservaciones()));
-                            TrabajosReportes.problm.setText(String.valueOf(dat.get(i).getProblema()));
+                            try {
+                                TrabajosReportes.prioridad.setText(String.valueOf(dat.get(i).getPrioridad()));
+                                TrabajosReportes.clasific.setText(String.valueOf(dat.get(i).getClasificacionProblema()));
+                                TrabajosReportes.desc.setText(String.valueOf(dat.get(i).getObservaciones()));
+                                TrabajosReportes.problm.setText(String.valueOf(dat.get(i).getProblema()));
+                            }catch (Exception e){}
+                            if(dat.get(i).visita1!=null){
+                                String palabra = dat.get(i).visita1;
+                                String[] caracteres = palabra.split(" ");
+                                Log.d("caracteres0",caracteres[0]);
+                                Log.d("caracteres1",caracteres[1]);
+                                String hora=caracteres[1].substring(0,5);
+                                reporteVisita1=caracteres[0];
+                                reporteHora1=hora;
+                            }
+                            if(dat.get(i).visita2!=null){
+                                String palabra = dat.get(i).visita2;
+                                String[] caracteres = palabra.split(" ");
+                                Log.d("caracteres0",caracteres[0]);
+                                Log.d("caracteres1",caracteres[1]);
+                                String hora=caracteres[1].substring(0,5);
+                                reporteVisita2=caracteres[0];
+                                reporteHora2=hora;
+                            }
+                            if(dat.get(i).visita3!=null){
+                                String palabra = dat.get(i).visita3;
+                                String[] caracteres = palabra.split(" ");
+                                Log.d("caracteres0",caracteres[0]);
+                                Log.d("caracteres1",caracteres[1]);
+                                String hora=caracteres[1].substring(0,5);
+                                reporteVisita3=caracteres[0];
+                                reporteHora3=hora;
+                            }
                             String a="";
 
-                            services.ClvTrabajoRequest=dat.get(i).getClvTrabajo();
+                            ClvTrabajoRequest=dat.get(i).getClvTrabajo();
                         }
                     }
                 }
@@ -1983,14 +2017,8 @@ try{
     }
 
     //Ejecutar Reporte//
-    public void getValidaReporte(final Context context) {
-        Service service = null;
-        try {
-            service = services.getValidaInfoReportes(context);
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-        Call<JsonObject> call = service.getValidaRep();
+    public void getValidaReporte(final Context context, final JSONObject jsonObject,final String fecha,final String hora ) {
+        Call<JsonObject> call = services.RequestPost(context, jsonObject).getValidaRep();
         call.enqueue(new Callback<JsonObject>() {
             @Override
             public void onResponse(Call<JsonObject> call, Response<JsonObject> response1) {
@@ -2000,12 +2028,40 @@ try{
                             jsonObject.get("BaseIdUser").getAsInt()
                     );
                     if (checa.getBaseIdUser() == 0) {
-                        getGuardaCampos(context);
+                        JSONObject objQuejas = new JSONObject();
+                        JSONObject jsonObject1 = new JSONObject();
+                        if(reporteStatus.equals("E")){
+                            try{
+                                objQuejas.put("Clv_Queja", clvReport.toString());
+                                objQuejas.put("Clv_Tecnico", Util.getClvTec(Util.preferences));
+                                objQuejas.put("FechaProceso", "");
+                                objQuejas.put("Fecha_Ejecucion", fecha + " " + hora);
+                                objQuejas.put("HP", "");
+                                objQuejas.put("HV1", "");
+                                objQuejas.put("HV2", "");
+                                objQuejas.put("HV2", "");
+                                objQuejas.put("IdUsuario", 1);
+                                objQuejas.put("Observaciones", Obs);
+                                objQuejas.put("Solucion", TrabajosReportes.proble.getText());
+                                objQuejas.put("Status", reporteStatus);
+                                objQuejas.put("TecnicoCuadrilla", TecSecSelecc1);
+                                objQuejas.put("Visita", false);
+                                objQuejas.put("Visita1", "");
+                                objQuejas.put("Visita2", "");
+                                objQuejas.put("Visita3", "");
+                                objQuejas.put("clvPrioridadQueja", clvP);
+                                objQuejas.put("clvProblema",ClvTrabajoRequest );
+                                objQuejas.put("clvProblemaS", Clv_Sol);
+                                jsonObject1.put("objQuejas", objQuejas);
+                                getGuardaCampos(context,jsonObject1);
+                            }catch (Exception e){}
+                        }
+
                     }
                 }else{
 
                     EjecutarReportes.dialogReportes.dismiss();
-                    Toast.makeText(context,"Error al ejecutar Reporte",Toast.LENGTH_LONG).show();
+                    Toast.makeText(context,"Error al ejecutar Reporte2",Toast.LENGTH_LONG).show();
                 }
             }
 
@@ -2013,32 +2069,31 @@ try{
             public void onFailure(Call<JsonObject> call, Throwable t) {
 
                 EjecutarReportes.dialogReportes.dismiss();
-                Toast.makeText(context,"Error al ejecutar Reporte",Toast.LENGTH_LONG).show();
+                Toast.makeText(context,"Error al ejecutar Reporte2",Toast.LENGTH_LONG).show();
             }
         });
     }
 
     //horas//
-    public void getGuardaHoraReporte(final Context context) {
-        Service service = null;
-        try {
-            service = services.getGuardaHoraReporte(context);
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-        Call<JsonObject> call = service.getHiHf();
+    public void getGuardaHoraReporte(final Context context, final JSONObject jsonObject,final String fecha,final String hora ) {
+        Call<JsonObject> call = services.RequestPost(context, jsonObject).getHiHf();
         call.enqueue(new Callback<JsonObject>() {
             @Override
             public void onResponse(Call<JsonObject> call, Response<JsonObject> response1) {
                 if (response1.code() == 200) {
                     String string1 =String.valueOf(response1.body().getAsJsonPrimitive("GetGuardaHoraOrdenResult"));
                     if (string1.equals("0")) {
+try{
+    JSONObject jsonObject = new JSONObject();
+    jsonObject.put("ClvQueja", clvReport);
+    jsonObject.put("IdUsuario", 1);
+    getValidaReporte(context,jsonObject,fecha,hora);
+}catch (Exception e){}
 
-                        getValidaReporte(context);
                     }
                 }else{
                     EjecutarReportes.dialogReportes.dismiss();
-                    Toast.makeText(context,"Error al ejecutar Reporte",Toast.LENGTH_LONG).show();
+                    Toast.makeText(context,"Error al ejecutar Reporte1",Toast.LENGTH_LONG).show();
                 }
             }
 
@@ -2051,15 +2106,8 @@ try{
     }
 
     //guardar campos//
-    public void getGuardaCampos(final Context context) {
-        Service service = null;
-        try {
-            service = services.getGuardaInfoReportes(context);
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-
-        Call<JsonObject> call = service.getLLenaReporte();
+    public void getGuardaCampos(final Context context, final JSONObject jsonObject) {
+        Call<JsonObject> call = services.RequestPost(context, jsonObject).getLLenaReporte();
         call.enqueue(new Callback<JsonObject>() {
             @Override
             public void onResponse(Call<JsonObject> call, Response<JsonObject> response1) {
@@ -2081,7 +2129,7 @@ try{
             @Override
             public void onFailure(Call<JsonObject> call, Throwable t) {
                 EjecutarReportes.dialogReportes.dismiss();
-                Toast.makeText(context,"Error al ejecutar Reporte",Toast.LENGTH_LONG).show();
+                Toast.makeText(context,"Error al ejecutar Reporte3",Toast.LENGTH_LONG).show();
             }
         });
     }
@@ -3122,53 +3170,120 @@ try{
                     String dato;
                     dato = String.valueOf(response.body().getAsJsonPrimitive("ValidaExisteTblFirmaClienteResult"));
                     if (dato.equals("1")) {
-                        if (TrabajosReportes.solucion.getSelectedItem().toString().trim().equals("Seleccione tipo de solución")) {
-                            Toast.makeText(context, "Seleccione un tipo de solución", Toast.LENGTH_SHORT).show();
-                        }else {
-                            if(TrabajosReportes.proble.getText().toString().isEmpty()){
-
-                                Toast.makeText(context,"Campo Problema real vacío", Toast.LENGTH_LONG).show();
-
-
+                        final Calendar c = Calendar.getInstance();
+                        EjecutarReportes.añoE = c.get(Calendar.YEAR);
+                        EjecutarReportes.mesE = c.get(Calendar.MONTH);
+                        EjecutarReportes.diaE = c.get(Calendar.DAY_OF_MONTH);
+                        EjecutarReportes.horaE = c.get(Calendar.HOUR);
+                        EjecutarReportes.minutoE = c.get(Calendar.MINUTE);
+                        String ab;
+                        if ((EjecutarReportes.mesE + 1) < 10) {
+                            ab = "0" + (EjecutarReportes.mesE + 1);
+                        } else {
+                            ab = String.valueOf(EjecutarReportes.mesE + 1);
+                        }
+                        EjecutarReportes.fechaHoy = EjecutarReportes.diaE + "/" + ab + "/" + EjecutarReportes.añoE;
+                        if(EjecutarReportes.horaE<10){
+                            if(EjecutarReportes.minutoE<10){
+                                EjecutarReportes.horaHoy = '0'+String.valueOf(EjecutarReportes.horaE) + ":" + '0'+String.valueOf(EjecutarReportes.minutoE);
                             }else {
-                                EjecutarReportes.dialogReportes.show();
-                                if (HorasReportes.reporteEjecutada == 1) {
-                                    EjecutarReportes.year = EjecutarReportes.añoE + "" + EjecutarReportes.month + "" + EjecutarReportes.diaE;
-                                    EjecutarReportes.horas12 = EjecutarReportes.mHour + ":" + EjecutarReportes.minute;
-                                    getGuardaHoraReporte(context);
+                                EjecutarReportes.horaHoy = '0'+String.valueOf(EjecutarReportes.horaE) + ":" + String.valueOf(EjecutarReportes.minutoE);
+                            }
+                        }else{
+                            if(EjecutarReportes.minutoE<10){
+                                EjecutarReportes.horaHoy = String.valueOf(EjecutarReportes.horaE) + ":" + '0'+String.valueOf(EjecutarReportes.minutoE);
+                            }else{
+                                EjecutarReportes.horaHoy = String.valueOf(EjecutarReportes.horaE) + ":" + String.valueOf(EjecutarReportes.minutoE);
+                            }
+                        }
+
+                        if (HorasReportes.reporteEjecutada == 1) {
+                            //ejecutar
+                            if (TrabajosReportes.solucion.getSelectedItem().toString().trim().equals("Seleccione tipo de solución")) {
+                                Toast.makeText(context, "Seleccione un tipo de solución", Toast.LENGTH_SHORT).show();
+                            } else {
+                                if (TrabajosReportes.proble.getText().toString().isEmpty()) {
+
+                                    Toast.makeText(context, "Campo Problema real vacío", Toast.LENGTH_LONG).show();
+
+
+                                } else {
+                                    EjecutarReportes.dialogReportes.show();
+                                    reporteStatus = "E";
+                                    try {
+                                        JSONObject jsonObject = new JSONObject();
+                                        jsonObject.put("Clv_orden", clvReport);
+                                        jsonObject.put("horaFin", EjecutarReportes.horaHoy);
+                                        jsonObject.put("horaInicio", "08:00");
+                                        jsonObject.put("opcion", 2);
+                                        getGuardaHoraReporte(context, jsonObject, EjecutarReportes.fechaHoy, EjecutarReportes.horaHoy);
+                                    } catch (Exception e) { }
 
 
                                 }
-                            }
 
-
-                            if (HorasReportes.repotteVisita == 1) {
-                                try {
-                                    getGuardaHoraReporte(context);
-
-
-                                } catch (Exception e) {
-                                    Toast.makeText(context, "La Fecha es obligatoria", Toast.LENGTH_SHORT).show();
+                                ////////*************************
+                            }///fin de ejecutar
+                        }
+                        if (HorasReportes.repotteVisita == 1) {
+                            JSONObject objQuejas = new JSONObject();
+                            JSONObject jsonObject1 = new JSONObject();
+                            try{
+                                objQuejas.put("Clv_Queja", clvReport.toString());
+                                objQuejas.put("Clv_Tecnico", Util.getClvTec(Util.preferences));
+                                objQuejas.put("FechaProceso", "");
+                                objQuejas.put("Fecha_Ejecucion", "");
+                                objQuejas.put("HP", "");
+                                objQuejas.put("IdUsuario", 1);
+                                objQuejas.put("Observaciones", Obs);
+                                objQuejas.put("Solucion", TrabajosReportes.proble.getText());
+                                objQuejas.put("Status", "V");
+                                objQuejas.put("Visita", false);
+                                if(reporteVisita1!=null){
+                                    if(reporteVisita2!=null){
+                                        if(reporteVisita3!=null){
+                                            objQuejas.put("HV1", reporteHora1);
+                                            objQuejas.put("HV2", reporteHora2);
+                                            objQuejas.put("HV3", EjecutarReportes.horaHoy);
+                                            objQuejas.put("Visita1", reporteVisita1);
+                                            objQuejas.put("Visita2", reporteVisita2);
+                                            objQuejas.put("Visita3", EjecutarReportes.fechaHoy);
+                                        }else{
+                                            objQuejas.put("HV1", reporteHora1);
+                                            objQuejas.put("HV2", reporteHora2);
+                                            objQuejas.put("HV3", EjecutarReportes.horaHoy);
+                                            objQuejas.put("Visita1", reporteVisita1);
+                                            objQuejas.put("Visita2", reporteVisita2);
+                                            objQuejas.put("Visita3", EjecutarReportes.fechaHoy);
+                                        }
+                                    }else{
+                                        objQuejas.put("HV1", reporteHora1);
+                                        objQuejas.put("HV2", EjecutarReportes.horaHoy);
+                                        objQuejas.put("HV3", "");
+                                        objQuejas.put("Visita1", reporteVisita1);
+                                        objQuejas.put("Visita2", EjecutarReportes.fechaHoy);
+                                        objQuejas.put("Visita3", "");
+                                    }
+                                }else{
+                                    objQuejas.put("HV1", EjecutarReportes.horaHoy);
+                                    objQuejas.put("HV2", "");
+                                    objQuejas.put("HV3", "");
+                                    objQuejas.put("Visita1", EjecutarReportes.fechaHoy);
+                                    objQuejas.put("Visita2", "");
+                                    objQuejas.put("Visita3", "");
                                 }
 
-                            }
-                            if (HorasReportes.reporteVisita1 == 1) {
-                                try {
-                                    getGuardaHoraReporte(context);
 
-                                } catch (Exception e) {
-                                    Toast.makeText(context, "La Fecha es obligatoria", Toast.LENGTH_SHORT).show();
-                                }
-                            }
-                            if (HorasReportes.reporteVisita2 == 1) {
-                                try {
-                                    getGuardaHoraReporte(context);
 
-                                } catch (Exception e) {
-                                    Toast.makeText(context, "La Fecha es obligatoria", Toast.LENGTH_SHORT).show();
-                                }
+                                objQuejas.put("clvPrioridadQueja", clvP);
+                                objQuejas.put("clvProblema",ClvTrabajoRequest );
+                                objQuejas.put("clvProblemaS", Clv_Sol);
+                                jsonObject1.put("objQuejas", objQuejas);
+                                getGuardaCampos(context,jsonObject1);
+                            } catch (Exception e) {
+                                Toast.makeText(context, "La Fecha es obligatoria", Toast.LENGTH_SHORT).show();
                             }
-                            ////////*************************
+
                         }
 
                     }

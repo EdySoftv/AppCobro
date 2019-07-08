@@ -41,9 +41,9 @@ public class EjecutarReportes extends Fragment {
     private Request request = new Request();
     private HorasReportes horas = new HorasReportes();
     public static String solution;
+    public static String fechaHoy,horaHoy;
     public static int añoE, mesE, diaE;
-    public static int mHour;
-    public static int mMinute;
+    public static int horaE,minutoE;
     public static String year, horas12;
     public static   String month;
    public static  String minute;
@@ -71,8 +71,8 @@ public class EjecutarReportes extends Fragment {
         añoE = c.get(Calendar.YEAR);
         mesE = c.get(Calendar.MONTH);
         diaE = c.get(Calendar.DAY_OF_MONTH);
-        mHour = c.get(Calendar.HOUR);
-        mMinute = c.get(Calendar.MINUTE);
+        horaE = c.get(Calendar.HOUR);
+        minutoE = c.get(Calendar.MINUTE);
 
         request.validaExisteFirmaBool=false;
 
@@ -90,10 +90,10 @@ public class EjecutarReportes extends Fragment {
         }
 
        // final String minute;
-        if(mMinute<10){
-            minute= "0"+mMinute;
+        if(minutoE<10){
+            minute= "0"+minutoE;
         }else{
-            minute=String.valueOf(mMinute);
+            minute=String.valueOf(minutoE);
         }
 
         salir.setOnClickListener(new View.OnClickListener() {
@@ -198,8 +198,8 @@ public class EjecutarReportes extends Fragment {
                 dialogReportes.show();
                 if (horas.reporteEjecutada == 1) {
                     year = añoE + "" + month + "" + diaE;
-                    horas12 = mHour + ":" + minute;
-                    request.getGuardaHoraReporte(getContext());
+                    horas12 = horaE  + ":" + minute;
+                    //request.getGuardaHoraReporte(getContext());
 
 
                 }
@@ -208,7 +208,7 @@ public class EjecutarReportes extends Fragment {
 
             if (horas.repotteVisita == 1) {
                 try {
-                    request.getGuardaHoraReporte(getContext());
+                    //request.getGuardaHoraReporte(getContext());
 
 
                 } catch (Exception e) {
@@ -218,7 +218,7 @@ public class EjecutarReportes extends Fragment {
             }
             if (horas.reporteVisita1 == 1) {
                 try {
-                    request.getGuardaHoraReporte(getContext());
+                    //request.getGuardaHoraReporte(getContext());
 
                 } catch (Exception e) {
                     Toast.makeText(getContext(), "La Fecha es obligatoria", Toast.LENGTH_SHORT).show();
@@ -226,7 +226,7 @@ public class EjecutarReportes extends Fragment {
             }
             if (horas.reporteVisita2 == 1) {
                 try {
-                    request.getGuardaHoraReporte(getContext());
+                    //request.getGuardaHoraReporte(getContext());
 
                 } catch (Exception e) {
                     Toast.makeText(getContext(), "La Fecha es obligatoria", Toast.LENGTH_SHORT).show();
