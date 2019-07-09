@@ -1,12 +1,15 @@
 package com.example.pablo.prueba7.Fragments;
 
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
+
+import com.example.pablo.prueba7.Activitys.MainActivity;
 import com.example.pablo.prueba7.Adapters.TrabajosAdapter;
 import com.example.pablo.prueba7.Listas.Array;
 import com.example.pablo.prueba7.R;

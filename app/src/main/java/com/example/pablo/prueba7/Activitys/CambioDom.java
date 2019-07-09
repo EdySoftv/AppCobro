@@ -10,6 +10,11 @@ import android.widget.TextView;
 
 import com.example.pablo.prueba7.R;
 import com.example.pablo.prueba7.Request.Request;
+import com.example.pablo.prueba7.sampledata.Util;
+
+import org.json.JSONObject;
+
+import static com.example.pablo.prueba7.Adapters.OrdenesAdapter.clvor;
 
 
 public class CambioDom extends AppCompatActivity {
@@ -75,6 +80,15 @@ public class CambioDom extends AppCompatActivity {
                 Intent intento1 = new Intent(CambioDom.this, Orden.class);
                 intento1.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(intento1);
+                JSONObject jsonObject = new JSONObject();
+                try{
+                    jsonObject.put("CLV_ORDEN", clvor);
+                    jsonObject.put("Clv_Tecnico", Util.getClvTec(Util.preferences));
+                    jsonObject.put("OP2", 0);
+                    jsonObject.put("OPCION", "M");
+                    jsonObject.put("STATUS", "E");
+                    request.getValidaTrabajos(getApplicationContext(),jsonObject);
+                }catch (Exception e){}
                 finish();
             }
         });

@@ -42,6 +42,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import static com.example.pablo.prueba7.Adapters.OrdenesAdapter.clvor;
 import static java.util.Arrays.asList;
 
 
@@ -93,7 +94,15 @@ public class ServiciosAInstalar extends AppCompatActivity {
                     dat4.get(a).setIdMedio(0);
                     dat4.get(a).setDetalle("");
                 }
-
+                JSONObject jsonObject = new JSONObject();
+                try{
+                    jsonObject.put("CLV_ORDEN", clvor);
+                    jsonObject.put("Clv_Tecnico", Util.getClvTec(Util.preferences));
+                    jsonObject.put("OP2", 0);
+                    jsonObject.put("OPCION", "M");
+                    jsonObject.put("STATUS", "E");
+                    request.getValidaTrabajos(getApplicationContext(),jsonObject);
+                }catch (Exception e){}
                 finish();
             }
         });
@@ -255,6 +264,15 @@ public class ServiciosAInstalar extends AppCompatActivity {
         aceptarAsignacion.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                JSONObject jsonObject = new JSONObject();
+                try{
+                    jsonObject.put("CLV_ORDEN", clvor);
+                    jsonObject.put("Clv_Tecnico", Util.getClvTec(Util.preferences));
+                    jsonObject.put("OP2", 0);
+                    jsonObject.put("OPCION", "M");
+                    jsonObject.put("STATUS", "E");
+                    request.getValidaTrabajos(getApplicationContext(),jsonObject);
+                }catch (Exception e){}
                     finish();
 
             }
@@ -307,6 +325,15 @@ public class ServiciosAInstalar extends AppCompatActivity {
                     dat4.get(a).setIdMedio(0);
                     dat4.get(a).setDetalle("");
                 }
+                JSONObject jsonObject = new JSONObject();
+                try{
+                    jsonObject.put("CLV_ORDEN", clvor);
+                    jsonObject.put("Clv_Tecnico", Util.getClvTec(Util.preferences));
+                    jsonObject.put("OP2", 0);
+                    jsonObject.put("OPCION", "M");
+                    jsonObject.put("STATUS", "E");
+                    request.getValidaTrabajos(getApplicationContext(),jsonObject);
+                }catch (Exception e){}
                 finish();
                 //regresar...
 
@@ -317,6 +344,15 @@ public class ServiciosAInstalar extends AppCompatActivity {
     }
 
     public void onBackPressed() {
+        JSONObject jsonObject = new JSONObject();
+        try{
+            jsonObject.put("CLV_ORDEN", clvor);
+            jsonObject.put("Clv_Tecnico", Util.getClvTec(Util.preferences));
+            jsonObject.put("OP2", 0);
+            jsonObject.put("OPCION", "M");
+            jsonObject.put("STATUS", "E");
+            request.getValidaTrabajos(getApplicationContext(),jsonObject);
+        }catch (Exception e){}
         finish();
     }
 

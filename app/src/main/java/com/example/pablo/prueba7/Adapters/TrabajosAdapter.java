@@ -1,5 +1,6 @@
 package com.example.pablo.prueba7.Adapters;
 
+import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
@@ -37,9 +38,7 @@ import static com.example.pablo.prueba7.Services.Services.jsonObject;
 public class TrabajosAdapter extends BaseAdapter {
     private LayoutInflater inflatertrab;
     private Context Cmcontext;
-    private ArrayList<String>trabajox;
-    private ArrayList<String>accionx;
-    private ArrayList<Boolean>recibix;
+    public Activity activity;
     public static int Clave, isnet,clvTra;
     public static  int lugar;
     public static boolean stat;
@@ -52,9 +51,7 @@ public class TrabajosAdapter extends BaseAdapter {
 
 
     public TrabajosAdapter(Context context, ArrayList<String>trabajox, ArrayList<String>accionx, ArrayList<Boolean>recibix){
-        this.trabajox=trabajox;
-        this.accionx=accionx;
-        this.recibix=recibix;
+       // activity=activity;
         Cmcontext=context;
         inflatertrab=LayoutInflater.from(Cmcontext);
         inflatertrab=LayoutInflater.from(context);

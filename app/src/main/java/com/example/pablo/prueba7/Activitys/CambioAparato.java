@@ -29,6 +29,7 @@ import com.example.pablo.prueba7.Modelos.GetSP_StatusAparatosListResult;
 import com.example.pablo.prueba7.R;
 import com.example.pablo.prueba7.Request.Request;
 import com.example.pablo.prueba7.sampledata.BarraCargar;
+import com.example.pablo.prueba7.sampledata.Util;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -258,6 +259,15 @@ public class CambioAparato extends AppCompatActivity {
         Finish.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                JSONObject jsonObject = new JSONObject();
+                try{
+                    jsonObject.put("CLV_ORDEN", clvor);
+                    jsonObject.put("Clv_Tecnico", Util.getClvTec(Util.preferences));
+                    jsonObject.put("OP2", 0);
+                    jsonObject.put("OPCION", "M");
+                    jsonObject.put("STATUS", "E");
+                    request.getValidaTrabajos(getApplicationContext(),jsonObject);
+                }catch (Exception e){}
                 finish();
             }
         });
@@ -309,6 +319,15 @@ public class CambioAparato extends AppCompatActivity {
     }
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if ((keyCode == KeyEvent.KEYCODE_BACK)) {
+            JSONObject jsonObject = new JSONObject();
+            try{
+                jsonObject.put("CLV_ORDEN", clvor);
+                jsonObject.put("Clv_Tecnico", Util.getClvTec(Util.preferences));
+                jsonObject.put("OP2", 0);
+                jsonObject.put("OPCION", "M");
+                jsonObject.put("STATUS", "E");
+                request.getValidaTrabajos(getApplicationContext(),jsonObject);
+            }catch (Exception e){}
             finish();
         }
         return super.onKeyDown(keyCode, event);

@@ -10,6 +10,11 @@ import android.widget.TextView;
 import com.example.pablo.prueba7.Adapters.OrdenesAdapter;
 import com.example.pablo.prueba7.R;
 import com.example.pablo.prueba7.Request.Request;
+import com.example.pablo.prueba7.sampledata.Util;
+
+import org.json.JSONObject;
+
+import static com.example.pablo.prueba7.Adapters.OrdenesAdapter.clvor;
 
 public class ExtensionesAdi extends AppCompatActivity {
     private Button aceptar,salir;
@@ -31,6 +36,15 @@ public class ExtensionesAdi extends AppCompatActivity {
         salir.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                JSONObject jsonObject = new JSONObject();
+                try{
+                    jsonObject.put("CLV_ORDEN", clvor);
+                    jsonObject.put("Clv_Tecnico", Util.getClvTec(Util.preferences));
+                    jsonObject.put("OP2", 0);
+                    jsonObject.put("OPCION", "M");
+                    jsonObject.put("STATUS", "E");
+                    request.getValidaTrabajos(getApplicationContext(),jsonObject);
+                }catch (Exception e){}
                 finish();
             }
         });
@@ -39,6 +53,15 @@ public class ExtensionesAdi extends AppCompatActivity {
         aceptar.setOnClickListener(new View.OnClickListener() {
         @Override
         public void onClick(View v) {
+            JSONObject jsonObject = new JSONObject();
+            try{
+                jsonObject.put("CLV_ORDEN", clvor);
+                jsonObject.put("Clv_Tecnico", Util.getClvTec(Util.preferences));
+                jsonObject.put("OP2", 0);
+                jsonObject.put("OPCION", "M");
+                jsonObject.put("STATUS", "E");
+                request.getValidaTrabajos(getApplicationContext(),jsonObject);
+            }catch (Exception e){}
             finish();
         }
     });
