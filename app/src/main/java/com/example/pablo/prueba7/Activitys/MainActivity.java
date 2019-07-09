@@ -218,6 +218,24 @@ public class MainActivity extends AppCompatActivity implements ActionBar.TabList
 
         } else {
 
+            if(visita==1){
+                if(positionTab == 1){
+                    mViewPager.setCurrentItem(0);
+                    getSupportActionBar().setSelectedNavigationItem(0);
+
+                }
+                if(positionTab == 2){
+                    mViewPager.setCurrentItem(0);
+                    getSupportActionBar().setSelectedNavigationItem(0);
+
+                } else{
+                    mViewPager.setCurrentItem(positionTab);
+                }
+            }
+
+
+
+
             if (ejecutada == 0 && visita == 0) {
                 Toast.makeText(this, "Seleccione un estatus", Toast.LENGTH_SHORT).show();
                 mViewPager.setCurrentItem(0);
