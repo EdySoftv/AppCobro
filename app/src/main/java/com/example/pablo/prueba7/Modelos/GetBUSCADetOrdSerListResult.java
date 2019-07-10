@@ -30,7 +30,7 @@ public class GetBUSCADetOrdSerListResult {
     private String descripcion;
     @SerializedName("Obs")
     @Expose
-    private Object obs;
+    private String obs;
     @SerializedName("SeRealiza")
     @Expose
     private Boolean seRealiza=false;
@@ -57,6 +57,10 @@ public class GetBUSCADetOrdSerListResult {
 
     public Integer getClave() {
         return clave;
+    }
+
+    public String getObs() {
+        return obs;
     }
 
     public Integer getClvTrabajo() {

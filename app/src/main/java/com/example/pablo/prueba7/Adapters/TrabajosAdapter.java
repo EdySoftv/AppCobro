@@ -57,7 +57,7 @@ public class TrabajosAdapter extends BaseAdapter {
         inflatertrab=LayoutInflater.from(context);
     }
     public class viewHolder{
-        TextView trabajo,accion,control;
+        TextView trabajo,control,observacionesTrabajo;
         CheckBox recibi;
         TextView recibitext;
     }
@@ -88,17 +88,30 @@ try{
             holder = new viewHolder();
             convertView=inflatertrab.inflate(R.layout.recycler_trabajo,null);
             holder.trabajo=(TextView)convertView.findViewById(R.id.tv_Descripcion);
-            holder.accion=(TextView)convertView.findViewById(R.id.tv_Accion);
+            //holder.accion=(TextView)convertView.findViewById(R.id.tv_Accion);
             holder.recibi=(CheckBox)convertView.findViewById(R.id.check_recibi);
             holder.control=(TextView)convertView.findViewById(R.id.click);
             holder.recibitext = (TextView)convertView.findViewById(R.id.recibitext);
+            holder.observacionesTrabajo = (TextView)convertView.findViewById(R.id.observacionesTrabajo);
             convertView.setTag(holder);
         }
         else {
             holder=(viewHolder)convertView.getTag();
         }
         holder.trabajo.setText(Array.trabajox.get(position));
-        holder.accion.setText(Array.accionx.get(position));
+        //holder.accion.setText(Array.accionx.get(position));
+        holder.observacionesTrabajo.setText(Array.observacionesx.get(position));
+        String palabra = holder.trabajo.getText().toString();
+        String[] caracteres = palabra.split(" ");
+
+        if (caracteres[0].equals("RAPAG")){
+            holder.recibi.setChecked(false);
+            holder.recibi.setVisibility(View.VISIBLE);
+            holder.recibitext.setVisibility(View.VISIBLE);
+            rapg=false;
+
+        }
+
         holder.recibi.setChecked(Array.recibix.get(position));
         rapg=true;
         holder.recibi.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
@@ -107,23 +120,12 @@ try{
         Iterator<List<GetBUSCADetOrdSerListResult>> itData1 = Array.dataTrabajos.iterator();
         List<GetBUSCADetOrdSerListResult> dat1 = (List<GetBUSCADetOrdSerListResult>) itData1.next();
 
-        String palabra = holder.trabajo.getText().toString();
-        String[] caracteres = palabra.split(" ");
-        Log.d("caracteres0",caracteres[0]);
-        Log.d("caracteres1",caracteres[1]);
+
         if(holder.recibi.isChecked()){
             dat1.get(position).setSeRealiza(true);
             recibixnew=new ArrayList<>();
             for(int i=0;i<dat1.size();i++){
                recibixnew.add(dat1.get(i).getSeRealiza());
-            }
-            if (!caracteres[0].equals("RAPAG")){
-               // Toast.makeText(Cmcontext, "Acción no asignada", Toast.LENGTH_SHORT).show();
-                holder.recibi.setChecked(false);
-                holder.recibi.setVisibility(View.VISIBLE);
-                holder.recibitext.setVisibility(View.VISIBLE);
-
-                rapg=false;
             }
         }
     }
@@ -141,6 +143,7 @@ try{
                 Log.d("caracteres0",caracteres[0]);
                 Log.d("caracteres1",caracteres[1]);
                 Request request = new Request();
+
                 if (caracteres[0].equals("ISTVA")) {
                     dialogTrabajos.show();
                     try{

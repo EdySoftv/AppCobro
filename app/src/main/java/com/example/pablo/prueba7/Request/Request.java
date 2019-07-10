@@ -788,6 +788,7 @@ public class Request extends AppCompatActivity {
                 Log.d("asd","asd");
                 if (response.code() == 200) {
                     Array.trabajox.clear();
+                    Array.observacionesx.clear();
                     Array.accionx.clear();
                     Array.clavex.clear();
                     Array.clv_trabajox.clear();
@@ -798,6 +799,7 @@ public class Request extends AppCompatActivity {
                     Iterator<List<GetBUSCADetOrdSerListResult>> itData = array.dataTrabajos.iterator();
                     Array.trabajox.clear();
                     Array.accionx.clear();
+                    Array.observacionesx.clear();
                     while (itData.hasNext()) {
                         List<GetBUSCADetOrdSerListResult> dat = (List<GetBUSCADetOrdSerListResult>) itData.next();
                         for (int i = 0; i < dat.size(); i++) {
@@ -807,6 +809,7 @@ public class Request extends AppCompatActivity {
                             Array.clavex.add(dat.get(i).getClave());
                             Array.clv_trabajox.add(dat.get(i).getClvTrabajo());
                             Array.recibix.add(dat.get(i).getSeRealiza());
+                            Array.observacionesx.add(dat.get(i).getObs());
                             if (dat.get(i).getClvTrabajo() == 1270) {
                                 isnet = true;
                             }

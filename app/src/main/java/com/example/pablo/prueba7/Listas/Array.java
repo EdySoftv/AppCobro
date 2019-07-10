@@ -54,6 +54,7 @@ public class Array {
     public static ArrayList<String> Direccion= new ArrayList<String>();
     ///////////////////////ARRAY TRABAJOS///////////////////
     public static ArrayList <String>trabajox=new ArrayList<>();
+    public static ArrayList <String>observacionesx=new ArrayList<>();
     public static ArrayList<String>accionx=new ArrayList<>();
     public static ArrayList<Integer>clavex=new ArrayList<>();
     public static ArrayList<Integer>clv_trabajox=new ArrayList<>();
