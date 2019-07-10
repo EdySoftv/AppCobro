@@ -23,6 +23,7 @@ import android.widget.Toast;
 
 import com.example.pablo.prueba7.Fragments.HorasReportes;
 import com.example.pablo.prueba7.Fragments.TrabajosOrdenes;
+import com.example.pablo.prueba7.Modelos.ValidaMACWAMMODEL;
 import com.example.pablo.prueba7.R;
 import com.example.pablo.prueba7.Request.Request;
 import com.example.pablo.prueba7.Fragments.EjecutarOrdenes;
@@ -52,6 +53,7 @@ public class MainActivity extends AppCompatActivity implements ActionBar.TabList
     public static TextView NombreTec, Contrato, Status, Nombre, Direccion, InfoServicios;
     boolean visitaValida=false;
     public static String Estatus;
+    int ValidaRegreso=0,ValidaHora=0;
 
     Request request = new Request();
 
@@ -194,23 +196,42 @@ public class MainActivity extends AppCompatActivity implements ActionBar.TabList
     public void onTabSelected(ActionBar.Tab tab, FragmentTransaction fragmentTransaction) {
         // mViewPager.setCurrentItem(tab.getPosition());
         positionTab = tab.getPosition();
+        if (ejecutada == 0 && visita == 0) {
+            Toast.makeText(this, "Seleccione un estatus", Toast.LENGTH_SHORT).show();
+            mViewPager.setCurrentItem(0);
+            getSupportActionBar().setSelectedNavigationItem(0);
+        } else {
 
+            if (visitaValida == false) {
+                mViewPager.setCurrentItem(3);
+                getSupportActionBar().setSelectedNavigationItem(3);
+                visitaValida = true;
+                HorasReportes.statusHora = "V";
+                Estatus="V";
+                ValidaRegreso=3;
+            } else {
+                mViewPager.setCurrentItem(0);
+                getSupportActionBar().setSelectedNavigationItem(0);
+                visitaValida = false;
+                HorasReportes.statusHora = "E";
+            }
+
+        }
         if (ejecutada == 1) {
-
            if(positionTab == 2){
 
                 try{
-                    ValidaTrabajos(0,2);
+                    ValidaTrabajos(0);
                 }catch (Exception e){
-                    ValidaTrabajos(0,2);
+                    ValidaTrabajos(0);
                 }
 
             }
             if(positionTab == 3){
                 try{
-                    ValidaTrabajos(1,3);
+                    ValidaTrabajos(1);
                 }catch (Exception e){
-                    ValidaTrabajos(1,3);
+                    ValidaTrabajos(1);
                 }
 
             } else{
@@ -218,46 +239,38 @@ public class MainActivity extends AppCompatActivity implements ActionBar.TabList
                 }
 
         } else {
-
             if(visita==1){
-                if(positionTab == 1){
+                if(ValidaRegreso==1){
                     mViewPager.setCurrentItem(0);
                     getSupportActionBar().setSelectedNavigationItem(0);
+                    ValidaRegreso=0;
 
+                }else{
+                    if(positionTab == 0){
+                        mViewPager.setCurrentItem(0);
+                        getSupportActionBar().setSelectedNavigationItem(0);
+                        //ValidaRegreso=3;
+
+                    }
+                    if(positionTab == 1){
+                        mViewPager.setCurrentItem(0);
+                        getSupportActionBar().setSelectedNavigationItem(0);
+                        //ValidaRegreso=3;
+                    }
+                    if(positionTab == 2){
+                        mViewPager.setCurrentItem(0);
+                        getSupportActionBar().setSelectedNavigationItem(0);
+                        //ValidaRegreso=3;
+                    }
+                    if(positionTab==3){
+                        mViewPager.setCurrentItem(3);
+                        getSupportActionBar().setSelectedNavigationItem(3);
+                        ValidaRegreso=1;
+                    }
                 }
-                if(positionTab == 2){
-                    mViewPager.setCurrentItem(0);
-                    getSupportActionBar().setSelectedNavigationItem(0);
 
-                } else{
-                    mViewPager.setCurrentItem(positionTab);
-                }
-            }
-
-
-
-
-            if (ejecutada == 0 && visita == 0) {
-                Toast.makeText(this, "Seleccione un estatus", Toast.LENGTH_SHORT).show();
-                mViewPager.setCurrentItem(0);
-                getSupportActionBar().setSelectedNavigationItem(0);
-            } else {
-
-                if (visitaValida == false) {
-                    mViewPager.setCurrentItem(3);
-                    getSupportActionBar().setSelectedNavigationItem(3);
-                    visitaValida = true;
-                    HorasReportes.statusHora = "V";
-                    Estatus="V";
-                } else {
-                    mViewPager.setCurrentItem(0);
-                    getSupportActionBar().setSelectedNavigationItem(0);
-                    visitaValida = false;
-                    HorasReportes.statusHora = "E";
-                }
 
             }
-
         }
     }
 
@@ -319,7 +332,7 @@ public class MainActivity extends AppCompatActivity implements ActionBar.TabList
             }
         }
     }
-public void ValidaTrabajos(final int a,final int posicion){
+public void ValidaTrabajos(final int a){
         try {
             if (stringValidaTrabajos.length() == 2) {
                if(a==1){
