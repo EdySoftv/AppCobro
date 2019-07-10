@@ -40,10 +40,12 @@ public class TrabajosAdapter extends BaseAdapter {
     private Context Cmcontext;
     public Activity activity;
     public static int Clave, isnet,clvTra;
+    public String observacionesRwtiro;
     public static  int lugar;
     public static boolean stat;
     public static int ClaveTrabajo;
     public static int ftth=0;
+    public static  boolean retiro = false;
     public static String descr;
     public static boolean rapg =false;
     public static ProgressDialog dialogTrabajos;
@@ -105,6 +107,7 @@ try{
         String[] caracteres = palabra.split(" ");
 
         if (caracteres[0].equals("RAPAG")){
+            retiro = true;
             holder.recibi.setChecked(false);
             holder.recibi.setVisibility(View.VISIBLE);
             holder.recibitext.setVisibility(View.VISIBLE);
@@ -195,7 +198,9 @@ try{
         stat=(recibixnew.get(i));
             Clave =Integer.valueOf( clavex.get(i));
             clvTra=Integer.valueOf(Array.clv_trabajox.get(i));
+            observacionesRwtiro = (Array.observacionesx.get(i));
             descr=String.valueOf(Array.trabajox.get(i));
+
 
         if (stat==false){
             System.out.println("statusx"+stat);
@@ -206,7 +211,7 @@ try{
             jsonObject.put("Clv_Orden", clvor);
             jsonObject.put("Clv_Trabajo", clvTra);
             jsonObject.put("Descripcion", descr);
-            jsonObject.put("Obs", JSONObject.NULL);
+            jsonObject.put("Obs", observacionesRwtiro);
             jsonObject.put("SeRealiza", true);
             jsonObject.put("recibi", stat);
             jsonArrayap.put(jsonObject);
