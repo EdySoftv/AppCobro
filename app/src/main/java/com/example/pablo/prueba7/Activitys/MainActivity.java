@@ -198,7 +198,7 @@ public class MainActivity extends AppCompatActivity implements ActionBar.TabList
         if (ejecutada == 1) {
 
            if(positionTab == 2){
-               //request.send_aparat(getApplicationContext());
+
                 try{
                     ValidaTrabajos(0,2);
                 }catch (Exception e){

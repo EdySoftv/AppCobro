@@ -117,6 +117,9 @@ try{
 
         holder.recibi.setChecked(Array.recibix.get(position));
         rapg=true;
+
+
+
         holder.recibi.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
     @Override
     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
@@ -128,7 +131,9 @@ try{
             dat1.get(position).setSeRealiza(true);
             recibixnew=new ArrayList<>();
             for(int i=0;i<dat1.size();i++){
-               recibixnew.add(dat1.get(i).getSeRealiza());
+                if (retiro==true){
+                    recibixnew.add(dat1.get(i).getSeRealiza());
+                }
             }
         }
     }

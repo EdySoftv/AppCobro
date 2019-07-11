@@ -32,6 +32,7 @@ import java.util.Calendar;
 import java.util.Date;
 
 import static com.example.pablo.prueba7.Adapters.OrdenesAdapter.clvor;
+import static com.example.pablo.prueba7.Adapters.TrabajosAdapter.retiro;
 import static com.example.pablo.prueba7.Fragments.HorasOrdenes.obsTec;
 import static com.example.pablo.prueba7.Fragments.HorasOrdenes.observacionesTecnico;
 import static com.example.pablo.prueba7.Fragments.HorasOrdenes.visita1;
@@ -247,6 +248,7 @@ public class EjecutarOrdenes extends Fragment {
         fechaHoy = diaE + "/" + ab + "/" + añoE;
         horaHoy = horaE + ":" + minutoE;
         if (horas.ejecutada == 1) {
+
             ejecutarStatus="E";
             eject.setEnabled(false);
             try {
@@ -272,6 +274,9 @@ public class EjecutarOrdenes extends Fragment {
                 jsonObject1.put("STATUS", "E");
 
                 request.getValidaOrdSer(getActivity(),jsonObject,jsonObject1);
+                if (retiro == true){
+                    request.send_aparat(getContext());
+                }
             }catch (Exception e){}
 
 

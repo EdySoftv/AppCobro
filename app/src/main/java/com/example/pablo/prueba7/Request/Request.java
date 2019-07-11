@@ -2293,7 +2293,7 @@ try{
             @Override
             public void onResponse(Call<JsonObject> call, Response<JsonObject> response1) {
                 if (response1.code() == 200) {
-                    Toast.makeText(getApplicationContext(), "Envío de aparatos con éxito", Toast.LENGTH_SHORT);
+                    //Toast.makeText(getApplicationContext(), "Envío de aparatos con éxito", Toast.LENGTH_SHORT);
                 }
             }
 
