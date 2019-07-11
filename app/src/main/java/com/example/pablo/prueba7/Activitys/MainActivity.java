@@ -200,24 +200,10 @@ public class MainActivity extends AppCompatActivity implements ActionBar.TabList
             Toast.makeText(this, "Seleccione un estatus", Toast.LENGTH_SHORT).show();
             mViewPager.setCurrentItem(0);
             getSupportActionBar().setSelectedNavigationItem(0);
-        } else {
-
-            if (visitaValida == false) {
-                mViewPager.setCurrentItem(3);
-                getSupportActionBar().setSelectedNavigationItem(3);
-                visitaValida = true;
-                HorasReportes.statusHora = "V";
-                Estatus="V";
-                ValidaRegreso=3;
-            } else {
-                mViewPager.setCurrentItem(0);
-                getSupportActionBar().setSelectedNavigationItem(0);
-                visitaValida = false;
-                HorasReportes.statusHora = "E";
-            }
-
         }
         if (ejecutada == 1) {
+            visitaValida = false;
+            HorasReportes.statusHora = "E";
            if(positionTab == 2){
 
                 try{
@@ -240,6 +226,9 @@ public class MainActivity extends AppCompatActivity implements ActionBar.TabList
 
         } else {
             if(visita==1){
+                visitaValida = true;
+                HorasReportes.statusHora = "V";
+                Estatus="V";
                 if(ValidaRegreso==1){
                     mViewPager.setCurrentItem(0);
                     getSupportActionBar().setSelectedNavigationItem(0);
@@ -247,20 +236,20 @@ public class MainActivity extends AppCompatActivity implements ActionBar.TabList
 
                 }else{
                     if(positionTab == 0){
-                        mViewPager.setCurrentItem(0);
-                        getSupportActionBar().setSelectedNavigationItem(0);
-                        //ValidaRegreso=3;
+                        /*mViewPager.setCurrentItem(0);
+                        getSupportActionBar().setSelectedNavigationItem(0);*/
+                        ValidaRegreso=3;
 
                     }
                     if(positionTab == 1){
-                        mViewPager.setCurrentItem(0);
-                        getSupportActionBar().setSelectedNavigationItem(0);
-                        //ValidaRegreso=3;
+                        mViewPager.setCurrentItem(3);
+                        getSupportActionBar().setSelectedNavigationItem(3);
+                        ValidaRegreso=3;
                     }
                     if(positionTab == 2){
-                        mViewPager.setCurrentItem(0);
-                        getSupportActionBar().setSelectedNavigationItem(0);
-                        //ValidaRegreso=3;
+                        mViewPager.setCurrentItem(3);
+                        getSupportActionBar().setSelectedNavigationItem(3);
+                        ValidaRegreso=3;
                     }
                     if(positionTab==3){
                         mViewPager.setCurrentItem(3);
