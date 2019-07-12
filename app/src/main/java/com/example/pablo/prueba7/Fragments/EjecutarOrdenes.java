@@ -11,7 +11,9 @@ import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -50,7 +52,10 @@ public class EjecutarOrdenes extends Fragment {
     public static String fechaHoy, horaHoy;
     public static View ejecutar;
     public static TextView msgEjecutarOrd;
+    public static TextView tv_textTecSec;
     public static int añoE, mesE, diaE, horaE, minutoE;
+    public static  int posTec,TecSecSelecc = -1;
+    public static Spinner TecSec;
     private HorasOrdenes horas = new HorasOrdenes();
     private Request request = new Request();
     public static ProgressDialog dialogEjecutar;
@@ -75,23 +80,28 @@ public class EjecutarOrdenes extends Fragment {
         super.onCreate(savedInstanceState);
         setRetainInstance(true);
         dialogEjecutar = new BarraCargar().showDialog(getContext());
-
+        request.getTecSec(getContext());
         View view = inflater.inflate(R.layout.activity_ejecutar_orden, container, false);
         //reiniciar = view.findViewById(R.id.restart);
         eject = view.findViewById(R.id.ejec);
+        tv_textTecSec =view.findViewById(R.id.tv_textTecSec);
         // msgEjecutarOrd = view.findViewById(R.id.msgEjecutarOrd);
         //ejecutar = view.findViewById(R.id.ejecutarLay);
         firmar = view.findViewById(R.id.firmarOrd);
+        TecSec = view.findViewById(R.id.spinnerTecnicoSec);
 //        reiniciar.setEnabled(false);
         salir = view.findViewById(R.id.salirEjecutarOrd);
 
         request.validaExisteFirmaBool=false;
         if(horas.visita == 1){
             firmar.setVisibility(View.GONE);
-
+            TecSec.setVisibility(View.GONE);
+            tv_textTecSec.setVisibility(View.GONE);
         } else {
             if (request.firma == true) {
                 firmar.setVisibility(View.VISIBLE);
+                TecSec.setVisibility(View.VISIBLE);
+                tv_textTecSec.setVisibility(View.VISIBLE);
 
             } else if (request.firma == false) {
                 firmar.setVisibility(View.GONE);
@@ -106,6 +116,22 @@ public class EjecutarOrdenes extends Fragment {
         }else{
             ejecutar.setVisibility(View.GONE);
         }*/
+
+
+        TecSec.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                posTec=position;
+                TecSecSelecc = Array.clv_tecnicoSecundario.get(position);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
+
         eject.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -273,7 +299,7 @@ public class EjecutarOrdenes extends Fragment {
                 jsonObject.put("ListadeArticulos", "");
                 jsonObject.put("Obs", DeepConsModel.Obs);
                 jsonObject.put("Status", "E");
-                jsonObject.put("TecnicoCuadrilla", HorasOrdenes.TecSecSelecc);
+                jsonObject.put("TecnicoCuadrilla", TecSecSelecc);
                 jsonObject.put("Visita1", "");
                 jsonObject.put("Visita2", "");
 
@@ -305,7 +331,7 @@ public class EjecutarOrdenes extends Fragment {
                 jsonObject.put("ListadeArticulos", "");
                 jsonObject.put("Obs", DeepConsModel.Obs + " " + observacionesTecnico);
                 jsonObject.put("Status", "V");
-                jsonObject.put("TecnicoCuadrilla", HorasOrdenes.TecSecSelecc);
+                jsonObject.put("TecnicoCuadrilla", TecSecSelecc);
                 if (DeepConsModel.Visita1.equals("null") || DeepConsModel.Visita1.equals(" ") ){
                     jsonObject.put("Visita1", fechaActual);
                     jsonObject.put("Visita2", "");

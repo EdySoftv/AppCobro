@@ -48,7 +48,7 @@ public class HorasOrdenes extends Fragment implements View.OnClickListener, Loca
 
     public static TextView selectDate,  selectDate1, selectDate2;
     public static String latitud, longitud, diaI, mesI, añoI, diaV1, mesV1, añoV1, diaV2, mesV2, añoV2;
-    public static int ejecutada = 0, visita = 0, visita1 = 0, TecSecSelecc = -1;
+    public static int ejecutada = 0, visita = 0, visita1 = 0;
     public static  String observacionesTecnico;
     private int mYear, mMonth, mDay ;
    // private View contenedorParticular;
@@ -56,7 +56,6 @@ public class HorasOrdenes extends Fragment implements View.OnClickListener, Loca
     private View contenedorObservacionesTecnico;
     public static TextView cordLat, cordLong;
     public static TextView Obs;
-    public static Spinner TecSec;
     private Request request = new Request();
     private RadioButton btn1, bt2;
     public static EditText obsTec;
@@ -64,7 +63,6 @@ public class HorasOrdenes extends Fragment implements View.OnClickListener, Loca
     private ViewGroup container;
     private Bundle onsavedInstanceState;
     private LocationManager locationManager;
-    public static  int posTec;
     public MainActivity mainAct = new MainActivity();
     private View touchViewEstatus;
 
@@ -104,7 +102,7 @@ public class HorasOrdenes extends Fragment implements View.OnClickListener, Loca
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         Obs = view.findViewById(R.id.tv_Observaciones);
 
-        request.getTecSec(getContext());
+
         //////////// acciones de botones de hora y fecha//////
         //selectDate = view.findViewById(R.id.tv_Ejecucion);
        // selectDate1 = view.findViewById(R.id.tv_PrimerVisita);
@@ -125,23 +123,7 @@ public class HorasOrdenes extends Fragment implements View.OnClickListener, Loca
 
         /////////////////////////////////////////////////////
         Obs.setText(request.obsMA);
-        TecSec = view.findViewById(R.id.spinnerTecnicoSec);
-        // bt2.setChecked(true);
-     //   Util.preferences = getContext().getSharedPreferences("credenciales", Context.MODE_PRIVATE);
 
-       // TecSec.setSelection(Util.getPositionTecSec(Util.preferences));
-        TecSec.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                  posTec=position;
-                  TecSecSelecc = Array.clv_tecnicoSecundario.get(position);
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-        });
         ///////////////////GPS//////////////////////////////
 
 

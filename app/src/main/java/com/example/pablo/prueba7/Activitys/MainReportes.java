@@ -27,7 +27,6 @@ import com.example.pablo.prueba7.Fragments.MaterialesReportes;
 import com.example.pablo.prueba7.Fragments.TrabajosReportes;
 
 import static com.example.pablo.prueba7.Adapters.QuejasAdapter.clvReport;
-import static com.example.pablo.prueba7.Fragments.HorasOrdenes.TecSec;
 import static com.example.pablo.prueba7.Fragments.HorasReportes.TecSec1;
 import static com.example.pablo.prueba7.Fragments.HorasReportes.tecPosRepo;
 import static com.example.pablo.prueba7.Fragments.TrabajosReportes.posSolucionRepo;

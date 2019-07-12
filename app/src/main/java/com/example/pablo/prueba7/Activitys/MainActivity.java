@@ -37,7 +37,6 @@ import androidx.annotation.RequiresApi;
 
 
 
-import static com.example.pablo.prueba7.Fragments.HorasOrdenes.TecSec;
 import static com.example.pablo.prueba7.Fragments.HorasOrdenes.ejecutada;
 import static com.example.pablo.prueba7.Fragments.HorasOrdenes.visita;
 import static com.example.pablo.prueba7.Listas.Array.recibixnew;
@@ -303,7 +302,6 @@ public class MainActivity extends AppCompatActivity implements ActionBar.TabList
                     intento.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                     startActivity(intento);
                     finish();
-                    TecSec.setSelection(0);
                 }
 
             }

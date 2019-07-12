@@ -157,13 +157,13 @@ import static com.example.pablo.prueba7.Activitys.AsignarAparato.jsonArrayMAC;
 
 import static com.example.pablo.prueba7.Adapters.QuejasAdapter.clvReport;
 import static com.example.pablo.prueba7.Adapters.TrabajosAdapter.dialogTrabajos;
+import static com.example.pablo.prueba7.Fragments.EjecutarOrdenes.TecSec;
 import static com.example.pablo.prueba7.Fragments.EjecutarOrdenes.dialogEjecutar;
+import static com.example.pablo.prueba7.Fragments.EjecutarOrdenes.posTec;
 import static com.example.pablo.prueba7.Fragments.HorasOrdenes.observacionesTecnico;
 import static com.example.pablo.prueba7.Fragments.HorasReportes.TecSec1;
 import static com.example.pablo.prueba7.Fragments.HorasReportes.TecSecSelecc1;
 import static com.example.pablo.prueba7.Fragments.HorasReportes.tecPosRepo;
-import static com.example.pablo.prueba7.Fragments.HorasOrdenes.TecSec;
-import static com.example.pablo.prueba7.Fragments.HorasOrdenes.posTec;
 import static com.example.pablo.prueba7.Fragments.MaterialesOrdenes.clasificacionMat;
 import static com.example.pablo.prueba7.Fragments.MaterialesOrdenes.descripcionMat;
 import static com.example.pablo.prueba7.Fragments.MaterialesOrdenes.posClasMat;
@@ -3172,7 +3172,7 @@ try{
                                 jsonObject.put("ListadeArticulos", "");
                                 jsonObject.put("Obs", DeepConsModel.Obs);
                                 jsonObject.put("Status", "E");
-                                jsonObject.put("TecnicoCuadrilla", HorasOrdenes.TecSecSelecc);
+                                jsonObject.put("TecnicoCuadrilla", EjecutarOrdenes.TecSecSelecc);
                                 jsonObject.put("Visita1", "");
                                 jsonObject.put("Visita2", "");
 
@@ -3201,7 +3201,7 @@ try{
                                 jsonObject.put("ListadeArticulos", "");
                                 jsonObject.put("Obs", DeepConsModel.Obs + " " + observacionesTecnico);
                                 jsonObject.put("Status", "V");
-                                jsonObject.put("TecnicoCuadrilla", HorasOrdenes.TecSecSelecc);
+                                jsonObject.put("TecnicoCuadrilla", EjecutarOrdenes.TecSecSelecc);
                                 if (DeepConsModel.Visita1.equals("null") || DeepConsModel.Visita1.equals(" ") ){
                                     jsonObject.put("Visita1",  EjecutarOrdenes.fechaActual);
                                     jsonObject.put("Visita2", "");
