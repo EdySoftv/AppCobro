@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@color/colorPrimary"
     tools:context=".Activitys.Login"
-    android:id="@+id/contenidoLogin">
+    android:id="@+id/ContenidoLogin">
 
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"

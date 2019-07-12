@@ -45,6 +45,9 @@ public class CambioDom extends AppCompatActivity {
         CasaEste = findViewById(R.id.casaeste);
         CasaOeste = findViewById(R.id.casaoeste);
         regresar=findViewById(R.id.regresa);
+
+        setTitle("No. de Orden: " +  Util.getClvOrden(Util.preferences));
+
         Ciudad.setText(Request.ciudadcmdo);
         Localidad.setText(Request.localidadcmdo);
         Colonia.setText(Request.coloniacmdo);

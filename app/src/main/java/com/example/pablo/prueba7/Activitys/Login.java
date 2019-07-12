@@ -48,7 +48,7 @@ public class Login extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        view = (View) findViewById(R.id.contenidoLogin);
+        view = (View) findViewById(R.id.ContenidoLogin);
         usurio = (EditText) findViewById(R.id.usuario);
         contraseña = (EditText) findViewById(R.id.contrasenia);
         entrar = (Button) findViewById(R.id.btnLogin);

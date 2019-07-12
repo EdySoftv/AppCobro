@@ -29,7 +29,7 @@ public class ExtensionesAdi extends AppCompatActivity {
         txtExtencion = findViewById(R.id.txtExtencion);
         salir=findViewById(R.id.extencionSalir);
         txtExtencion.setText(request.extencionesE);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.includeExtencion);
+
         setTitle("No. de Orden: " +  Util.getClvOrden(Util.preferences));
 
 

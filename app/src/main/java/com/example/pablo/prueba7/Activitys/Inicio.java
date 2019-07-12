@@ -65,7 +65,7 @@ public class Inicio extends AppCompatActivity
     protected void onCreate(Bundle onSaveInstanceState) {
         super.onCreate(onSaveInstanceState);
         setContentView(R.layout.activity_inicio);
-        view = (View) findViewById(R.id.contenidoInicio);
+        view = (View) findViewById(R.id.ContenidoInicio);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         barra = findViewById(R.id.nav_view);
         setSupportActionBar(toolbar);

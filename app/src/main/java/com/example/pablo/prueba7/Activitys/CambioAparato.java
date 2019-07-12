@@ -62,7 +62,7 @@ public class CambioAparato extends AppCompatActivity {
         super.onCreate(onSaveInstanceState);
         setContentView(R.layout.activity_cambio_aparato);
         aceptarCambioAparato =  findViewById(R.id.uno);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.includeCambioApa);
+
         aparato = findViewById(R.id.aparato);
         estado = findViewById(R.id.estadoaparato);
         tipoAparato = findViewById(R.id.tipo_aparato1);
@@ -72,7 +72,7 @@ public class CambioAparato extends AppCompatActivity {
         dialogCAPAT= new BarraCargar().showDialog(this);
 
 
-        setTitle("No. de Orden: " + noOrden);
+        setTitle("No. de Orden: " + Util.getClvOrden(Util.preferences));
         textView35 = findViewById(R.id.textView35);
         MACWAMTextCambioAparato = findViewById(R.id.cambioaparatMacwan);
         //filtro para la macwan

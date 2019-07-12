@@ -68,7 +68,7 @@
         <activity
             android:name=".Activitys.ExtensionesAdi"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBar" />
+             />
         <activity
             android:name=".Activitys.MainReportes"
             android:configChanges="screenSize|orientation"
@@ -80,11 +80,11 @@
         <activity
             android:name=".Activitys.CambioDom"
             android:configChanges="screenSize|orientation"
-            android:theme="@style/AppTheme.NoActionBar" />
+            />
         <activity
             android:name=".Activitys.CambioAparato"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBar" />
+            />
         <activity android:name=".Activitys.ReporteAsignacion"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar"/>
