@@ -84,6 +84,10 @@ public class CambioAparato extends AppCompatActivity {
         }else{
             aa.setVisibility(View.GONE);
         }
+
+
+
+
         aparato.setOnItemSelectedListener(
                 new AdapterView.OnItemSelectedListener() {
                     @Override
@@ -100,9 +104,9 @@ public class CambioAparato extends AppCompatActivity {
                                 contrato = dat.get(position-1).getControNet();
                                 request.getApaTipo(getApplicationContext());
                             }
-                            aparatoClienteValidar=true;
+
                         }else{
-                            aparatoClienteValidar=false;
+
                         }
                     }
 
@@ -112,6 +116,8 @@ public class CambioAparato extends AppCompatActivity {
                     }
                 }
         );
+
+
         estado.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -173,8 +179,10 @@ public class CambioAparato extends AppCompatActivity {
                         request.GetMACWAM(getApplicationContext(),jsonObject2);
                     }catch (Exception e){}
                     nombreSpinnerCambioAparato = dat1.get(position-1).Descripcion;
+                    aparatoClienteValidar=true;
                 }else{
                     clvAparatoCAPAT=0;
+                    aparatoClienteValidar=false;
                 }
             }
             @Override
@@ -186,8 +194,8 @@ public class CambioAparato extends AppCompatActivity {
         aceptarCambioAparato.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(clvAparatoCAPAT==0){
-                    Toast.makeText(getApplicationContext(),"Seleccione el nuevo aparato a asignar",Toast.LENGTH_SHORT).show();
+                if(aparato.getSelectedItemPosition()==0){
+                    Toast.makeText(getApplicationContext(),"Seleccione el aparato a cambiar",Toast.LENGTH_SHORT).show();
                 }else{
                     if(statusAparato.equals("")){
                         Toast.makeText(getApplicationContext(),"Seleccione el estado del aparato",Toast.LENGTH_SHORT).show();
@@ -199,34 +207,46 @@ public class CambioAparato extends AppCompatActivity {
                                 if(aparatoClienteValidar==false){
                                     Toast.makeText(getApplicationContext(),"Seleccione el aparato a asignar",Toast.LENGTH_SHORT).show();
                                 }else{
-                                    try {
-                                        JSONObject jsonObjectMACWAM = new JSONObject();
-                                        jsonObjectMACWAM.put("Clv_Aparato", clvAparatoCAPAT);
-                                        jsonObjectMACWAM.put("MacLan", nombreSpinnerCambioAparato);
-                                        jsonObjectMACWAM.put("MacWan", MACWAMTextCambioAparato.getText());
-                                        jsonObjectMACWAM.put("Clv_Orden", clvor);
+                                    if (MACWAMTextCambioAparato.equals("") == true) {
+                                        Toast.makeText(getApplicationContext(), "Escriba MACWAN", Toast.LENGTH_LONG).show();
+                                    } else {
+                                        if (MACWAMTextCambioAparato.getText().toString().equals(nombreSpinnerCambioAparato) == false) {
+                                            if (MACWAMTextCambioAparato.length() == 12) {
+                                                try {
+                                                    JSONObject jsonObjectMACWAM = new JSONObject();
+                                                    jsonObjectMACWAM.put("Clv_Aparato", clvAparatoCAPAT);
+                                                    jsonObjectMACWAM.put("MacLan", nombreSpinnerCambioAparato);
+                                                    jsonObjectMACWAM.put("MacWan", MACWAMTextCambioAparato.getText());
+                                                    jsonObjectMACWAM.put("Clv_Orden", clvor);
 
-                                        jsonArrayMACCambioAparato.put(jsonObjectMACWAM);
-                                        JSONObject jsonObject = new JSONObject();
-                                        jsonObject.put("RelMacwanList",jsonArrayMACCambioAparato);
-                                        request.AsignaMACWAM(getApplicationContext(),jsonObject);
-                                    } catch (Exception e) {
+                                                    jsonArrayMACCambioAparato.put(jsonObjectMACWAM);
+                                                    JSONObject jsonObject = new JSONObject();
+                                                    jsonObject.put("RelMacwanList",jsonArrayMACCambioAparato);
+                                                    request.AsignaMACWAM(getApplicationContext(),jsonObject);
+                                                } catch (Exception e) {
+                                                }
+
+
+                                                try{
+                                                    JSONObject jsonObject = new JSONObject();
+                                                    JSONObject jsonObject1 = new JSONObject();
+                                                    jsonObject.put("ClvAparato", clvAparatoCAPAT);
+                                                    jsonObject.put("ClvOrden", OrdenesAdapter.clvor);
+                                                    jsonObject.put("ContratoNet", contrato);
+                                                    jsonObject.put("Status", statusAparato);
+                                                    jsonObject.put("Trabajo", "CAPAT");
+                                                    jsonObject1.put("ObjCambioAparato", jsonObject);
+                                                    request.SetCambioAparato(getApplicationContext(), jsonObject1);
+                                                    dialogCAPAT.show();
+                                                    finish();
+                                                }catch (Exception e){}
+                                            }else{
+                                                Toast.makeText(getApplicationContext(), "La MACWAN debe de ser 12 caracteres", Toast.LENGTH_SHORT).show();
+                                            }
+                                        }else{
+                                            Toast.makeText(getApplicationContext(), "La MACWAN no puede ser igual que la MacLan", Toast.LENGTH_SHORT).show();
+                                        }
                                     }
-
-
-                                    try{
-                                        JSONObject jsonObject = new JSONObject();
-                                        JSONObject jsonObject1 = new JSONObject();
-                                        jsonObject.put("ClvAparato", clvAparatoCAPAT);
-                                        jsonObject.put("ClvOrden", OrdenesAdapter.clvor);
-                                        jsonObject.put("ContratoNet", contrato);
-                                        jsonObject.put("Status", statusAparato);
-                                        jsonObject.put("Trabajo", "CAPAT");
-                                        jsonObject1.put("ObjCambioAparato", jsonObject);
-                                        request.SetCambioAparato(getApplicationContext(), jsonObject1);
-                                        dialogCAPAT.show();
-                                        finish();
-                                    }catch (Exception e){}
                                 }
                             }
                         }else{

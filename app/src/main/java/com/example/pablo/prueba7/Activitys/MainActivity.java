@@ -53,7 +53,6 @@ public class MainActivity extends AppCompatActivity implements ActionBar.TabList
     public  int positionTab;
     ConstraintLayout layoutAnimado;
     public static TextView NombreTec, Contrato, Status, Nombre, Direccion, InfoServicios;
-    boolean visitaValida=false;
     public static String Estatus;
     int ValidaRegreso=0,ValidaHora=0;
 
@@ -204,7 +203,6 @@ public class MainActivity extends AppCompatActivity implements ActionBar.TabList
             getSupportActionBar().setSelectedNavigationItem(0);
         }
         if (ejecutada == 1) {
-            visitaValida = false;
             HorasReportes.statusHora = "E";
            if(positionTab == 2){
 
@@ -244,7 +242,6 @@ public class MainActivity extends AppCompatActivity implements ActionBar.TabList
 
         } else {
             if(visita==1){
-                visitaValida = true;
                 HorasReportes.statusHora = "V";
                 Estatus="V";
                 if(ValidaRegreso==1){

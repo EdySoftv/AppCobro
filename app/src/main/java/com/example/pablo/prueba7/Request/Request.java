@@ -2915,6 +2915,11 @@ try{
                         MACWAM = true;
                         try{
                             constraintLayoutMACWAM.setVisibility(View.VISIBLE);
+
+                            AsignarAparato.MACWAMText.setHeight(AsignarAparato.spinnerAparato.getHeight());
+
+
+
                             try{
                                 JSONObject jsonObject1 = new JSONObject();
                                 JSONObject jsonObject2 = new JSONObject();
@@ -2923,6 +2928,7 @@ try{
                                 GetMACWAM(context,jsonObject2);
                             }catch (Exception e){}
                         }catch (Exception e){
+                            CambioAparato.MACWAMTextCambioAparato.setHeight(CambioAparato.aparato.getHeight());
                             CambioAparato.textView35.setVisibility(View.VISIBLE);
                             CambioAparato.MACWAMTextCambioAparato.setVisibility(View.VISIBLE);
                         }
