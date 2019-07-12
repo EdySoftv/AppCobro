@@ -36,7 +36,7 @@ import org.json.JSONObject;
 import androidx.annotation.RequiresApi;
 
 
-
+import static com.example.pablo.prueba7.Adapters.TrabajosAdapter.retiro;
 import static com.example.pablo.prueba7.Fragments.HorasOrdenes.ejecutada;
 import static com.example.pablo.prueba7.Fragments.HorasOrdenes.visita;
 import static com.example.pablo.prueba7.Listas.Array.recibixnew;

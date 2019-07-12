@@ -36,6 +36,7 @@ import java.util.Calendar;
 import java.util.Date;
 
 
+import static com.example.pablo.prueba7.Adapters.TrabajosAdapter.retiro;
 import static com.example.pablo.prueba7.Fragments.HorasOrdenes.obsTec;
 import static com.example.pablo.prueba7.Fragments.HorasOrdenes.observacionesTecnico;
 import static com.example.pablo.prueba7.Fragments.HorasOrdenes.visita1;
