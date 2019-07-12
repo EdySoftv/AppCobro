@@ -111,14 +111,9 @@ public class EjecutarOrdenes extends Fragment {
 
                 dialogEjecutar.show();
                 observacionesTecnico = obsTec.getText().toString();
-                /*if(request.rapagejecutar==true){
-                    if (Array.recibixnew.size() == 0) {
-                        Toast.makeText(getContext(), "Ningún aparato seleccionado", Toast.LENGTH_LONG).show();
-                        dialogEjecutar.dismiss();
-                    } else {*/
+
                         try {
-                            //request.send_aparat(getContext());
-                            //**************************************
+
                             if(horas.ejecutada==1){
                                 if(request.firma==true){
                                         request.ejecutarStatus="E";
@@ -139,10 +134,7 @@ public class EjecutarOrdenes extends Fragment {
                                 request.ejecutarStatus="V";
                             }
 
-                                                       ////////*************************
-
                         } catch (Exception e) {
-                            Toast.makeText(getContext(), "Error, aparatos no enviados", Toast.LENGTH_SHORT);
                             dialogEjecutar.dismiss();
                         }
                     }
@@ -266,14 +258,13 @@ public class EjecutarOrdenes extends Fragment {
                 jsonObject.put("TecnicoCuadrilla", HorasOrdenes.TecSecSelecc);
                 jsonObject.put("Visita1", "");
                 jsonObject.put("Visita2", "");
-
                 jsonObject1.put("CLV_ORDEN", clvor);
                 jsonObject1.put("Clv_Tecnico", Util.getClvTec(Util.preferences));
                 jsonObject1.put("OP2", 0);
                 jsonObject1.put("OPCION", "M");
                 jsonObject1.put("STATUS", "E");
 
-                request.getValidaOrdSer(getActivity(),jsonObject,jsonObject1);
+                //request.getValidaOrdSer(getActivity(),jsonObject,jsonObject1);
                 if (retiro == true){
                     request.send_aparat(getContext());
                 }

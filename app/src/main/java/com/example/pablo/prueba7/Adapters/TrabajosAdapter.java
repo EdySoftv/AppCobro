@@ -30,6 +30,7 @@ import java.util.List;
 
 import static com.example.pablo.prueba7.Adapters.OrdenesAdapter.clvor;
 import static com.example.pablo.prueba7.Listas.Array.clavex;
+import static com.example.pablo.prueba7.Listas.Array.observacionesx;
 import static com.example.pablo.prueba7.Listas.Array.recibixnew;
 
 import static com.example.pablo.prueba7.Services.Services.jsonArrayap;
@@ -115,6 +116,11 @@ try{
 
         }
 
+        if (caracteres[0].equals("RETLI")){
+            holder.recibi.setChecked(true);
+            holder.recibi.setEnabled(false);
+        }
+
         holder.recibi.setChecked(Array.recibix.get(position));
         rapg=true;
 
@@ -135,7 +141,16 @@ try{
                     recibixnew.add(dat1.get(i).getSeRealiza());
                 }
             }
+        }else{
+            dat1.get(position).setSeRealiza(false);
+            recibixnew=new ArrayList<>();
+            for(int i=0;i<dat1.size();i++){
+                if (retiro==true){
+                    recibixnew.add(dat1.get(i).getSeRealiza());
+                }
+            }
         }
+
     }
 });
         ClaveTrabajo = Array.clavex.get(position);

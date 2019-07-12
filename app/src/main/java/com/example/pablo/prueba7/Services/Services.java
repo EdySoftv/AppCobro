@@ -317,7 +317,6 @@ public class Services {
                 .build();
 
         return retrofit.create(Service.class);
-
     }
 
     //Informacion pantalla de ordenes//

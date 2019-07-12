@@ -37,9 +37,11 @@ import androidx.annotation.RequiresApi;
 
 import static com.example.pablo.prueba7.Adapters.OrdenesAdapter.clvor;
 import static com.example.pablo.prueba7.Adapters.OrdenesAdapter.noOrden;
+import static com.example.pablo.prueba7.Adapters.TrabajosAdapter.retiro;
 import static com.example.pablo.prueba7.Fragments.HorasOrdenes.TecSec;
 import static com.example.pablo.prueba7.Fragments.HorasOrdenes.ejecutada;
 import static com.example.pablo.prueba7.Fragments.HorasOrdenes.visita;
+import static com.example.pablo.prueba7.Listas.Array.recibixnew;
 import static com.example.pablo.prueba7.Request.Request.stringValidaTrabajos;
 
 
@@ -206,13 +208,29 @@ public class MainActivity extends AppCompatActivity implements ActionBar.TabList
             HorasReportes.statusHora = "E";
            if(positionTab == 2){
 
-                try{
-                    ValidaTrabajos(0);
-                }catch (Exception e){
-                    ValidaTrabajos(0);
-                }
+               if (positionTab ==2 && retiro == true && recibixnew.size() > 0){
+                   recibixnew.clear();
+                   try{
+                       ValidaTrabajos(0);
+                   }catch (Exception e){
+                       ValidaTrabajos(0);
+                   }
+
+               }else if (positionTab ==2 && retiro == true && recibixnew.size() == 0) {
+                   recibixnew.clear();
+                   Toast.makeText(this, "Debe seleccionar al menos un aparato", Toast.LENGTH_SHORT).show();
+                   mViewPager.setCurrentItem(1);
+               }
+               else if (positionTab == 2){
+                   try{
+                       ValidaTrabajos(0);
+                   }catch (Exception e){
+                       ValidaTrabajos(0);
+                   }
+               }
 
             }
+
             if(positionTab == 3){
                 try{
                     ValidaTrabajos(1);
@@ -246,11 +264,13 @@ public class MainActivity extends AppCompatActivity implements ActionBar.TabList
                         getSupportActionBar().setSelectedNavigationItem(3);
                         ValidaRegreso=3;
                     }
+
                     if(positionTab == 2){
                         mViewPager.setCurrentItem(3);
                         getSupportActionBar().setSelectedNavigationItem(3);
                         ValidaRegreso=3;
                     }
+
                     if(positionTab==3){
                         mViewPager.setCurrentItem(3);
                         getSupportActionBar().setSelectedNavigationItem(3);
