@@ -17,7 +17,7 @@ public class SplashActivity extends AppCompatActivity {
 
     private SharedPreferences preferences;
     public static boolean LoginShare=false;
-
+    Request request = new Request();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

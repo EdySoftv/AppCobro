@@ -1,8 +1,10 @@
 package com.example.pablo.prueba7.Fragments;
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
@@ -39,6 +41,7 @@ import static com.example.pablo.prueba7.Fragments.HorasOrdenes.visita1;
 import static com.example.pablo.prueba7.Services.Services.claveTecnico;
 
 
+
 /**
  * A simple {@link Fragment} subclass.
  */
@@ -61,6 +64,7 @@ public class EjecutarOrdenes extends Fragment {
 
     Inicio in;
     Button salir;
+    static SharedPreferences preferences;
 
     public EjecutarOrdenes() {
         // Required empty public constructor
@@ -72,7 +76,6 @@ public class EjecutarOrdenes extends Fragment {
         // Inflate the layout for this fragment
         super.onCreate(savedInstanceState);
         setRetainInstance(true);
-        in = new Inicio();
         dialogEjecutar= new BarraCargar().showDialog(getContext());
 
         View view = inflater.inflate(R.layout.activity_ejecutar_orden, container, false);
@@ -217,6 +220,24 @@ public class EjecutarOrdenes extends Fragment {
 
     }
 
+    private void dialogoEjecutar1() {
+            new AlertDialog.Builder(getContext())
+                    .setTitle("Ejecutar Orden")
+                    .setMessage("¿Desea Ejecutar Orden?")
+                    .setPositiveButton("ACEPTAR",
+                            new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    Ejecutar(getContext());
+                                }
+                            })
+                    .setNegativeButton("CANCELAR",
+                            new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    dialogEjecutar.dismiss();
+                                }
+                            }).show();
 
 
 

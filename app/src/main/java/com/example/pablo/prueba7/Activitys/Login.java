@@ -25,6 +25,7 @@ import android.widget.ImageButton;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import com.example.pablo.prueba7.R;
 import com.example.pablo.prueba7.Request.Request;
 import com.example.pablo.prueba7.sampledata.BarraCargar;
@@ -34,35 +35,34 @@ import com.google.firebase.iid.FirebaseInstanceId;
 
 public class Login extends AppCompatActivity {
 
-    public static EditText usurio, contraseña;
-    public static Button entrar;
-    public static ImageButton viewPassword;
+    private EditText usurio, contraseña;
+    private Button entrar;
+    private ImageButton viewPassword;
     private String user;
-    public static String enco;
+    private String enco;
     private Request request = new Request();
-    public final static String CHANNEL_ID = "NOTIFICACION";
-    public final static int NOTIFICACION_ID = 0;
-    public static TextView clave;
-    public static ProgressDialog dialogLogin;
-BarraCargar barraCargar = new BarraCargar();
+    private View view;
+    private ProgressDialog dialogLogin;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        view = (View) findViewById(R.id.contenidoLogin);
         usurio = (EditText) findViewById(R.id.usuario);
         contraseña = (EditText) findViewById(R.id.contrasenia);
-        entrar = (Button)findViewById(R.id.btnLogin);
-
+        entrar = (Button) findViewById(R.id.btnLogin);
         viewPassword = (ImageButton) findViewById(R.id.viewPassword);
+        //titulo del login 'null' para que se muestre pantalla completa
         setTitle(null);
-        dialogLogin= new BarraCargar().showDialog(this);
+        //se declara el dialog de carga
+        dialogLogin = new BarraCargar().showDialog(this);
 
-        //Log.d("asd", FirebaseInstanceId.getInstance().getToken());
-
+        //Metodo para mostrar contraseña
         viewPassword.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
-                switch (event.getAction()){
+                switch (event.getAction()) {
                     case MotionEvent.ACTION_DOWN:
                         contraseña.setInputType(InputType.TYPE_CLASS_TEXT);
                         break;
@@ -73,55 +73,55 @@ BarraCargar barraCargar = new BarraCargar();
             }
         });
 
-
+        //Boton de inicio de sesion
         entrar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(usurio.getText().toString().length()==0){
-    Toast.makeText(getApplicationContext(), "Introduzca usuario", Toast.LENGTH_LONG).show();
-     }else{
-                    if(contraseña.getText().toString().length()==0){
-        Toast.makeText(getApplicationContext(), "Introduzca contraseña", Toast.LENGTH_LONG).show();
-    }else{
-if(!isOnline()){
-   Toast.makeText(getApplicationContext(), "No cuenta con conexión a Internet", Toast.LENGTH_LONG).show();
-}else{
-    user = usurio.getText().toString() + ":" + contraseña.getText().toString();
-    enco = (android.util.Base64.encodeToString(user.getBytes(), android.util.Base64.NO_WRAP));
-    guardarPre(usurio.getText().toString(),enco);
-    request.getReviews(Login.this);
-    /////////////
+                //verifica que el campo usuario este lleno
+                if (usurio.getText().toString().length() == 0) {
+                    Toast.makeText(getApplicationContext(), "Introduzca usuario", Toast.LENGTH_LONG).show();
+                } else {
+                    //varifica que el campo contraseña este lleno
+                    if (contraseña.getText().toString().length() == 0) {
+                        Toast.makeText(getApplicationContext(), "Introduzca contraseña", Toast.LENGTH_LONG).show();
+                    } else {
+                        //verifica que el usuario tenga internet
+                        if (!isOnline()) {
+                            Toast.makeText(getApplicationContext(), "No cuenta con conexión a Internet", Toast.LENGTH_LONG).show();
+                        } else {
+                            //se encadena el usuario y contraseña
+                            user = usurio.getText().toString() + ":" + contraseña.getText().toString();
+                            //se codifica la cadena de texto en base64
+                            enco = (android.util.Base64.encodeToString(user.getBytes(), android.util.Base64.NO_WRAP));
+                            //se manda el campo usuario y enco para guardarlos en el SharedPreferences
+                            guardarPre(usurio.getText().toString(), enco);
+                            //manda request del login
+                            request.getReviews(Login.this,dialogLogin,view);
+                            //inicia el dialog de carga
+                            dialogLogin.show();
+                            /////////////
+                        }
 
-dialogLogin.show();
-    /////////////
-}
-
-    }
-}
+                    }
+                }
             }
         });
 
     }
 
-
-
-    public void guardarPre(String usario,String encode){
-    Util.preferences = getSharedPreferences("credenciales", Context.MODE_PRIVATE);
-    Util.editor = Util.preferences.edit();
-    Util.editor.putString("usuario",usario);
-    Util.editor.putString("enco","Basic: " +encode);
-    Util.editor.commit();
-}
-    //Notificaciones
-
-    //Metodo para hacer detener el codigo
-    public static void esperar(int segundos){
-        try {
-            Thread.sleep(segundos * 1000);
-        } catch (Exception e) {
-            System.out.println(e);
-        }
+    //metodo que guarda datos en el preference
+    public void guardarPre(String usario, String encode) {
+        //se inicia el preferences
+        Util.preferences = getSharedPreferences("credenciales", Context.MODE_PRIVATE);
+        Util.editor = Util.preferences.edit();
+        //se guarda el usario
+        Util.editor.putString("usuario", usario);
+        //se guarda la cadena en base64
+        Util.editor.putString("enco", "Basic: " + encode);
+        Util.editor.commit();
     }
+
+    //verifica que el usuario tenga internet
     public boolean isOnline() {
         ConnectivityManager cm =
                 (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
@@ -129,6 +129,7 @@ dialogLogin.show();
         NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
         return activeNetwork != null && activeNetwork.isConnected();
     }
+
     @Override
     public void onBackPressed() {
 

@@ -41,7 +41,7 @@ import okhttp3.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-import static com.example.pablo.prueba7.Activitys.Inicio.tipodeDescarga;
+
 
 import static com.example.pablo.prueba7.Adapters.OrdenesAdapter.clvor;
 import static com.example.pablo.prueba7.Adapters.QuejasAdapter.clvReport;
@@ -78,7 +78,7 @@ import static com.example.pablo.prueba7.Request.Request.clvP;
 
 
 public class Services {
-    public static int claveTecnico;
+
     public static int opcion;
     public static int clvorden = 0;
     public static int clavequeja = 0;
@@ -120,77 +120,6 @@ public class Services {
         return retrofit.create(Service.class);
     }
 
-    //Servicio Tecnico///
-    public Service getTecService(final Context context) throws JSONException {
-        //POST Body Json
-        Util.preferences = context.getSharedPreferences("credenciales", Context.MODE_PRIVATE);
-        JSONObject jsonObject = new JSONObject();
-        jsonObject.put("Clv_Usuario", Util.getUsuarioPreference(Util.preferences));
-        MediaType JSON = MediaType.parse("application/json; charset=utf-8");
-        final RequestBody body = RequestBody.create(JSON, jsonObject.toString());
-        try {
-            final OkHttpClient client = new OkHttpClient.Builder().addInterceptor(new Interceptor() {
-
-                @Override
-                public okhttp3.Response intercept(Interceptor.Chain chain) throws IOException {
-                    //Modificacion del Header
-                    Request newRequest = chain.request().newBuilder()
-                            .addHeader("Authorization", getToken(context))
-                            .addHeader("Content-Type", "application/json")
-                            .post(body)
-                            .build();
-                    return chain.proceed(newRequest);
-                }
-            }).connectTimeout(15, TimeUnit.MINUTES)
-                    .readTimeout(15, TimeUnit.MINUTES)
-                    .writeTimeout(15, TimeUnit.MINUTES)
-                    .build();
-            Retrofit retrofit = new Retrofit.Builder()
-                    .baseUrl(Constants.NEW_URL)
-                    .client(client)
-                    .addConverterFactory(GsonConverterFactory.create())
-                    .build();
-
-            return retrofit.create(Service.class);
-        } catch (Exception e) {
-
-        }
-        return null;
-    }
-
-    //Proximo Servicio/////
-    public Service getProxService(final Context context) throws JSONException {
-        //POST Body Json
-        JSONObject jsonObject = new JSONObject();
-        jsonObject.put("clv_tecnico", Util.getClvTec(Util.preferences));
-        MediaType JSON = MediaType.parse("application/json; charset=utf-8");
-        final RequestBody body = RequestBody.create(JSON, jsonObject.toString());
-        final OkHttpClient client = new OkHttpClient.Builder().addInterceptor(new Interceptor() {
-
-            @Override
-            public okhttp3.Response intercept(Interceptor.Chain chain) throws IOException {
-                //Modificacion del Header
-                Request newRequest = chain.request().newBuilder()
-                        .addHeader("Authorization", getToken(context))
-                        .addHeader("Content-Type", "application/json")
-                        .post(body)
-                        .build();
-
-
-                return chain.proceed(newRequest);
-            }
-        }).connectTimeout(15, TimeUnit.MINUTES)
-                .readTimeout(15, TimeUnit.MINUTES)
-                .writeTimeout(15, TimeUnit.MINUTES)
-                .build();
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(Constants.NEW_URL)
-                .client(client)
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
-
-        return retrofit.create(Service.class);
-    }
 
     //Orden de servicio//
     public Service getOrdSerService(final Context context) throws JSONException {
@@ -1683,7 +1612,7 @@ public class Services {
             jsonObject.put("metrajeInicio", IIDM);
             jsonObject.put("metrajeFin", IFDM);
             jsonObject.put("esCable", escable);
-            jsonObject.put("tipoDescarga", tipodeDescarga);
+            jsonObject.put("tipoDescarga", Util.getTipoDescarga(Util.preferences));
             jsonObject.put("metrajeInicioExterior", EIMD);
             jsonObject.put("metrajeFinExterior", EFDM);
             jsonObject.put("NoExt", extSer);
@@ -1912,7 +1841,7 @@ public class Services {
             jsonObject.put("metrajeInicio", IIDMR);
             jsonObject.put("metrajeFin", IFDMR);
             jsonObject.put("esCable", escable);
-            jsonObject.put("tipoDescarga", tipodeDescarga);
+            jsonObject.put("tipoDescarga", Util.getTipoDescarga(Util.preferences));
             jsonObject.put("metrajeInicioExterior", EIMDR);
             jsonObject.put("metrajeFinExterior", EFDMR);
             jsonObject.put("NoExt", extSerR);

@@ -27,6 +27,8 @@ import com.example.pablo.prueba7.Request.Request;
 import com.example.pablo.prueba7.sampledata.BarraCargar;
 import com.example.pablo.prueba7.sampledata.Util;
 
+import org.json.JSONObject;
+
 import static com.example.pablo.prueba7.Services.Services.clavequeja;
 import static com.example.pablo.prueba7.Services.Services.clvorden;
 import static com.example.pablo.prueba7.Services.Services.cont;
@@ -154,11 +156,10 @@ public class Reportes extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
         if (id == R.id.Inicio) {
-            Intent intent1 = new Intent(Reportes.this, Inicio.class);
-            intent1.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            startActivity(intent1);
-            //DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-            request.getOrdenes(getBaseContext());
+            Intent intento = new Intent(getApplicationContext(), Inicio.class);
+            intento.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            startActivity(intento);
+
         } else if (id == R.id.Ordenes_menu) {
             dialogReportes.show();
             clvorden=0;

@@ -21,9 +21,6 @@ public class BarraCargar {
     }
     public void terminarBarra() {
         try {
-            Inicio.dialogInicio.dismiss();
-        } catch (Exception e){}
-        try {
             Reportes.dialogReportes.dismiss();
         } catch (Exception e){}
         try {

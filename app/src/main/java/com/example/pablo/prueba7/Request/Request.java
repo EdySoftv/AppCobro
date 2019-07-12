@@ -1,19 +1,24 @@
 package com.example.pablo.prueba7.Request;
 
 import android.app.Activity;
-import android.arch.lifecycle.ReportFragment;
+import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Build;
 import android.support.annotation.RequiresApi;
 import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.pablo.prueba7.Activitys.AsignarAparato;
@@ -110,6 +115,7 @@ import com.example.pablo.prueba7.Modelos.Queja;
 import com.example.pablo.prueba7.Modelos.TipoMaterialModel;
 import com.example.pablo.prueba7.Modelos.UserModel;
 import com.example.pablo.prueba7.Modelos.mediosPregunta;
+import com.example.pablo.prueba7.R;
 import com.example.pablo.prueba7.Services.Services;
 import com.example.pablo.prueba7.Fragments.TrabajosReportes;
 import com.example.pablo.prueba7.Activitys.ServiciosAInstalar;
@@ -117,6 +123,11 @@ import com.example.pablo.prueba7.sampledata.BarraCargar;
 import com.example.pablo.prueba7.sampledata.Service;
 import com.example.pablo.prueba7.sampledata.SplashActivity;
 import com.example.pablo.prueba7.sampledata.Util;
+import com.github.mikephil.charting.charts.PieChart;
+import com.github.mikephil.charting.data.PieData;
+import com.github.mikephil.charting.data.PieDataSet;
+import com.github.mikephil.charting.data.PieEntry;
+import com.github.mikephil.charting.utils.ColorTemplate;
 import com.google.gson.JsonObject;
 
 import org.json.JSONException;
@@ -133,10 +144,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 import static com.example.pablo.prueba7.Activitys.CambioAparato.dialogCAPAT;
-import static com.example.pablo.prueba7.Activitys.Inicio.dialogInicio;
-import static com.example.pablo.prueba7.Activitys.Login.contraseña;
-import static com.example.pablo.prueba7.Activitys.Login.entrar;
-import static com.example.pablo.prueba7.Activitys.Login.usurio;
+
 import static com.example.pablo.prueba7.Activitys.ServiciosAInstalar.dialogAsignacion;
 import static com.example.pablo.prueba7.Activitys.AsignarAparato.MACWAMText;
 import static com.example.pablo.prueba7.Activitys.AsignarAparato.constraintLayoutMACWAM;
@@ -178,7 +186,7 @@ import static java.util.Arrays.asList;
 public class Request extends AppCompatActivity {
     Services services = new Services();
     Array array = new Array();
-    public static String reintentarComando, contraroMA, obsMA, statusMA, extencionesE, Obs, nombre_tecnico, clave_tecnico, msgComando = "", sigueinteTipo, siguenteContrato, sigueinteHora, siguenteCalle, sigueinteNumero, siguenteColonia;
+    public static String reintentarComando, contraroMA, obsMA, statusMA, extencionesE, Obs, msgComando = "";
     public static boolean isnet, firma,MACWAM,validaExisteFirmaBool;
     public static Long abc;
     public static int clvP, tecC, nExtenciones = 0;
@@ -197,37 +205,69 @@ public class Request extends AppCompatActivity {
     BarraCargar barraCargar = new BarraCargar();
     public static boolean requierePregunta=false;
 
-
-    public void ErrorInicioDeSesion(final Context context) {
-        try {
-            Login.dialogLogin.dismiss();
-            Util.preferences = getSharedPreferences("credenciales", Context.MODE_PRIVATE);
-            Util.preferences.edit().clear().commit();
+    //Metodo por si existe un error en el login o inicio de sesion
+    public void ErrorLogin(final Context context,ProgressDialog dialogLogin, View view) {
+        EditText usurio, contraseña;
+        Button entrar;
+        usurio = view.findViewById(R.id.usuario);
+        contraseña = view.findViewById(R.id.contrasenia);
+        entrar = view.findViewById(R.id.btnLogin);
+            //si el error pasa al momento de hacer el login se borran todos los datos del preference para que
+            //el usuario tenga que volver a iniciar sesion
+            Toast.makeText(context, "Error al iniciar sesión", Toast.LENGTH_LONG).show();
+            usurio.setEnabled(true);
+            contraseña.setEnabled(true);
+            entrar.setEnabled(true);
+            dialogLogin.dismiss();
+        Util.preferences = getSharedPreferences("credenciales", Context.MODE_PRIVATE);
+        Util.preferences.edit().clear().commit();
             SplashActivity.LoginShare=false;
-        } catch (Exception e) {
+    }
+    public void ErrorInicioDeSesion(final Context context, ProgressDialog dialogInicio) {
+            //en caso de que el erro sea al momento de abrir la aplicacion con el usuario logeado se manda un
+            //mensaje de error
             dialogInicio.dismiss();
-            Intent intento = new Intent(context, Inicio.class);
-            intento.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-            intento.putExtra("Reiniciar", "1");
-            context.startActivity(intento);
+        new AlertDialog.Builder(context)
+                .setTitle("Error")
+                .setMessage("Error al inciar aplicación")
+                .setPositiveButton("Intentar otra vez",
+                        new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                Intent intento = new Intent(context, Inicio.class);
+                                intento.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                                context.startActivity(intento);
+                            }
+                        })
+                .setNegativeButton("Cerrar aplicación",
+                        new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                finish();
+                            }
+                        }).show();
 
         }
 
-    }
-
 
     //Token///
-    public void getReviews(final Context context) {
+    public void getReviews(final Context context, final ProgressDialog dialogLogin, final View view) {
+        //se inicializa la clase Service y le declaras en donde vas a guardar los datos y de que link
+        //se van a obtener con los servicios 'Services'
         Services restApiAdapter = new Services();
         Service service = restApiAdapter.getClientService(context);
         Call<JsonObject> call = service.getDataUser();
         call.enqueue(new Callback<JsonObject>() {
             @Override
+            //
             public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
                 //Peticion de datos sobre el Json "LogOnResult"
+                //se verifica que el resultado del request sea 200=ok
                 if (response.code() == 200) {
+                    //inicia el preferences
                     Util.preferences = context.getSharedPreferences("credenciales", Context.MODE_PRIVATE);
                     Util.editor = Util.preferences.edit();
+                    //se guarda el json de response en un json para sacar los datos
                     JsonObject userJson = response.body().getAsJsonObject("LogOnResult");
                     //Introduccion de datos del request en el Modelo para poder usarlos
                     UserModel user = new UserModel(
@@ -238,46 +278,34 @@ public class Request extends AppCompatActivity {
                     );
                     Util.editor.putString("token", user.getCodigo());
                     Util.editor.commit();
-                    getClv_tecnico(context);
+                    try{
+                        //terminando el proceso de obtener token es hora de obtener la clvtecnico
+                        JSONObject jsonObject = new JSONObject();
+                        jsonObject.put("Clv_Usuario",Util.getUsuarioPreference(Util.preferences));
+                        getClv_tecnico(context,jsonObject,dialogLogin,view);
+                    }catch (Exception e){}
                 } else {
-                    Login.dialogLogin.dismiss();
-                    Toast.makeText(context, "Error al iniciar sesión", Toast.LENGTH_LONG).show();
-                    usurio.setEnabled(true);
-                    contraseña.setEnabled(true);
-                    entrar.setEnabled(true);
+                    //en caso de ser diferente de 200 el codigo de respuesta, mandar al metodo de error
+                    ErrorLogin(context,dialogLogin,view);
                 }
-
-
             }
 
             @Override
             public void onFailure(Call<JsonObject> call, Throwable t) {
-                usurio.setEnabled(true);
-                contraseña.setEnabled(true);
-                entrar.setEnabled(true);
-                Login.dialogLogin.dismiss();
-                Toast.makeText(context, "Error al iniciar sesión", Toast.LENGTH_LONG).show();
+                //en caso que no se pueda ejecturar el request mandar al metodo de error
+                ErrorLogin(context,dialogLogin,view);
             }
         });
     }
 
     //Clave Tecnico//
-    public void getClv_tecnico(final Context context) {
-        Service service = null;
-        try {
-            service = services.getTecService(context);
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-        Call<JSONResponseTecnico> call = service.getDataTec();
+    public void getClv_tecnico(final Context context, final JSONObject jsonObject, final ProgressDialog dialogLogin, final View view) {
+        Call<JSONResponseTecnico> call = services.RequestPost(context, jsonObject).getDataTec();
         call.enqueue(new Callback<JSONResponseTecnico>() {
             @Override
             public void onResponse(Call<JSONResponseTecnico> call, Response<JSONResponseTecnico> response) {
                 //Guardar Body del request en JSONResponseTecnico ya que lo regresa como una lista
-                Log.d("asd", "asd");
-
                 if (response.code() == 200) {
-                    try {
                         Util.preferences = context.getSharedPreferences("credenciales", Context.MODE_PRIVATE);
                         Util.editor = Util.preferences.edit();
                         JSONResponseTecnico jsonResponse = response.body();
@@ -287,47 +315,37 @@ public class Request extends AppCompatActivity {
                         Iterator<List<Get_ClvTecnicoResult>> iteData = array.datatec.iterator();
                         while (iteData.hasNext()) {
                             List<Get_ClvTecnicoResult> data = (List<Get_ClvTecnicoResult>) iteData.next();
-                            //Se recorre la lista y se guarla la informacion en el Modelo
-                            clave_tecnico = data.get(0).clv_tecnico;
-                            nombre_tecnico = data.get(0).tecnico;
-                            services.claveTecnico = Integer.parseInt(data.get(0).clv_tecnico);
+                            //se guardan los datos en el preference
                             Util.editor.putInt("clvTec",Integer.parseInt(data.get(0).clv_tecnico));
                             Util.editor.putString("nombre_Tecnico", data.get(0).getNombre_tec());
                             Util.editor.commit();
                         }
-                        getProximaCita(context);
-                    } catch (Exception e) {
-                        Toast.makeText(context, "Error al conseguir clave técnico", Toast.LENGTH_LONG).show();
-                        ErrorInicioDeSesion(context);
-                    }
+                    Intent intento = new Intent(context, Inicio.class);
+                    intento.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                    context.startActivity(intento);
+                    dialogLogin.dismiss();
                 } else {
-                    Login.dialogLogin.dismiss();
+                    ErrorLogin(context,dialogLogin,view);
                     Toast.makeText(context, "Error al conseguir clave técnico", Toast.LENGTH_LONG).show();
                 }
             }
 
             @Override
             public void onFailure(Call<JSONResponseTecnico> call, Throwable t) {
-                ErrorInicioDeSesion(context);
-                finish();
+                ErrorLogin(context,dialogLogin,view);
+                Toast.makeText(context, "Error al conseguir clave técnico", Toast.LENGTH_LONG).show();
             }
         });
     }
 
     //Proxima Cita//
-    public void getProximaCita(final Context context) {
-        Service service = null;
-        try {
-            service = services.getProxService(context);
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-        Call<JsonObject> call = service.getDataProx();
+    public void getProximaCita(final Context context, final JSONObject jsonObject, final View view, final ProgressDialog dialogInicio) {
+        Call<JsonObject> call = services.RequestPost(context, jsonObject).getDataProx();
         call.enqueue(new Callback<JsonObject>() {
             @Override
             public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
                 if (response.code() == 200) {
-                    try {
+                    TextView tipoTrabajo, contratoTrabajo, horaTrabajo, calleDireccion, numeroDireccion, coloniaDireccion;
                         JsonObject userJson = response.body().getAsJsonObject("GetDameSiguienteCitaResult");
                         ProximaCitaModel user = new ProximaCitaModel(
                                 userJson.get("Calle").getAsString(),
@@ -338,214 +356,218 @@ public class Request extends AppCompatActivity {
                                 userJson.get("NUMERO").getAsString(),
                                 userJson.get("Tipo").getAsString()
                         );
-                        sigueinteTipo = user.Tipo;
-                        siguenteContrato = user.Contrato;
-                        sigueinteHora = user.Hora;
-                        siguenteCalle = user.Calle;
-                        sigueinteNumero = user.NUMERO;
-                        siguenteColonia = user.Colonia;
-                    } catch (Exception e) {
-                    }
-                    getOrdenes(context);
+                    tipoTrabajo = view.findViewById(R.id.tipoDeTrabajo);
+                    contratoTrabajo = view.findViewById(R.id.contrato);
+                    horaTrabajo =  view.findViewById(R.id.hora);
+                    calleDireccion = view.findViewById(R.id.calle);
+                    numeroDireccion = view.findViewById(R.id.numero);
+                    coloniaDireccion =  view.findViewById(R.id.colonia);
+                    tipoTrabajo.setText(user.Tipo);
+                    contratoTrabajo.setText(user.Contrato);
+                    horaTrabajo.setText(user.Hora);
+                    calleDireccion.setText(user.Calle);
+                    numeroDireccion.setText(user.NUMERO);
+                    coloniaDireccion.setText(user.Colonia);
+
+
+                    
 
                 } else {
-                    ErrorInicioDeSesion(context);
-                    Toast.makeText(context, "Error al conseguir datos, intente otra vez", Toast.LENGTH_LONG).show();
+                    ErrorInicioDeSesion(context,dialogInicio);
+                    Toast.makeText(context, "Error al conseguir datos de inicio", Toast.LENGTH_LONG).show();
                 }
             }
 
             @Override
             public void onFailure(Call<JsonObject> call, Throwable t) {
-                ErrorInicioDeSesion(context);
-                Toast.makeText(context, "Error al conseguir, intente otra vez", Toast.LENGTH_LONG).show();
+                ErrorInicioDeSesion(context,dialogInicio);
+                Toast.makeText(context, "Error al conseguir datos de inicio", Toast.LENGTH_LONG).show();
             }
         });
     }
 
     //ORDENES//
-    public void getOrdenes(final Context context) {
-        Service service = null;
-        try {
-            service = services.getOrdSerService(context);
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-        Call<Example> call = service.getDataOrdenes();
+    public void getOrdenes(final Context context, final JSONObject jsonObject,final View view, final ProgressDialog dialogInicio) {
+        Call<Example> call = services.RequestPost(context, jsonObject).getDataOrdenes();
         call.enqueue(new Callback<Example>() {
             @Override
             public void onResponse(Call<Example> call, Response<Example> response) {
                 if (response.code() == 200) {
-                    Util.preferences = context.getSharedPreferences("credenciales", Context.MODE_PRIVATE);
-                    Util.editor = Util.preferences.edit();
                     Example jsonResponse = response.body();
-                    try {
-                        array.dataord = new ArrayList<List<OrdSer>>(asList(jsonResponse.getDameOrdenesQuejasTotalesResult.getOrdSer()));
-                        Iterator<List<OrdSer>> itData = array.dataord.iterator();
+                    PieChart pieChart;
+                    pieChart = view.findViewById(R.id.graficaPastel);
+                    int OE=0,OP=0,OV=0,OEP=0,OO=0,RE=0,RP=0,RV=0,REP=0,RO=0;
+                    array.dataord = new ArrayList<List<OrdSer>>(asList(jsonResponse.getDameOrdenesQuejasTotalesResult.getOrdSer()));
+                    Iterator<List<OrdSer>> itData = array.dataord.iterator();
+                    array.dataque = new ArrayList<List<Queja>>(asList(jsonResponse.getDameOrdenesQuejasTotalesResult.getQueja()));
+                    Iterator<List<Queja>> itData1 = array.dataque.iterator();
                         while (itData.hasNext()) {
                             List<OrdSer> dat = (List<OrdSer>) itData.next();
                             for (int i = 0; i < dat.size(); i++) {
                                 if (dat.get(i).getStatus().equals("Ejecutada")) {
                                     try {
-                                        Inicio.OE = dat.get(i).getTotal();
+                                        OE = dat.get(i).getTotal();
                                     } catch (Exception e) {
-                                        Inicio.OE = 0;
+                                        OE = 0;
                                     }
                                 }
                                 if (dat.get(i).getStatus().equals("Pendiente")) {
                                     try {
-                                        Inicio.OP = dat.get(i).getTotal();
+                                        OP = dat.get(i).getTotal();
                                     } catch (Exception e) {
-                                        Inicio.OP = 0;
+                                        OP = 0;
                                     }
                                 }
                                 if (dat.get(i).getStatus().equals("Visita")) {
                                     try {
-                                        Inicio.OV = dat.get(i).getTotal();
+                                        OV = dat.get(i).getTotal();
                                     } catch (Exception e) {
-                                        Inicio.OV = 0;
+                                        OV = 0;
                                     }
 
                                 }
                                 if (dat.get(i).getStatus().equals("En Proceso")) {
                                     try {
-                                        Inicio.OEP = dat.get(i).getTotal();
+                                        OEP = dat.get(i).getTotal();
                                     } catch (Exception e) {
-                                        Inicio.OEP = 0;
+                                        OEP = 0;
                                     }
                                 }
                                 if (dat.get(i).getStatus().equals("otro")) {
                                     try {
-                                        Inicio.OO = dat.get(i).getTotal();
+                                        OO = dat.get(i).getTotal();
                                     } catch (Exception e) {
-                                        Inicio.OO = 0;
+                                        OO = 0;
                                     }
                                 }
                             }
                         }
-                    } catch (Exception e) {
-                        Inicio.OE = 0;
-                        Inicio.OP = 0;
-                        Inicio.OV = 0;
-                        Inicio.OEP = 0;
-                        Inicio.OO = 0;
-                    }
-                    Util.editor.putInt("OE", Inicio.OE);
-                    Util.editor.putInt("OP", Inicio.OP);
-                    Util.editor.putInt("OV", Inicio.OV);
-                    Util.editor.putInt("OEP", Inicio.OEP);
-                    Util.editor.putInt("OO", Inicio.OO);
-                    Util.editor.commit();
-                    getQuejas(context);
-                } else {
-                    ErrorInicioDeSesion(context);
 
-                    Toast.makeText(context, "Error al conseguir, intente otra vez", Toast.LENGTH_LONG).show();
-                }
-            }
-
-            @Override
-            public void onFailure(Call<Example> call, Throwable t) {
-                ErrorInicioDeSesion(context);
-                Toast.makeText(context, "Error al conseguir, intente otra vez", Toast.LENGTH_LONG).show();
-            }
-        });
-    }
-
-    //Quejas//
-    public void getQuejas(final Context context) {
-        Service service = null;
-        try {
-            service = services.getOrdSerService(context);
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-        Call<Example> call = service.getDataOrdenes();
-
-        call.enqueue(new Callback<Example>() {
-            @Override
-            public void onResponse(Call<Example> call, Response<Example> response) {
-                if (response.code() == 200) {
-                    Util.preferences = context.getSharedPreferences("credenciales", Context.MODE_PRIVATE);
-                    Util.editor = Util.preferences.edit();
-                    Example jsonResponse = response.body();
-                    array.dataque = new ArrayList<List<Queja>>(asList(jsonResponse.getDameOrdenesQuejasTotalesResult.getQueja()));
-                    Iterator<List<Queja>> itData = array.dataque.iterator();
-                    while (itData.hasNext()) {
-                        List<Queja> dat = (List<Queja>) itData.next();
-                        for (int i = 0; i < dat.size(); i++) {
-                            if (dat.get(i).getStatus().equals("Ejecutada")) {
+                    while (itData1.hasNext()) {
+                        List<Queja> dat1 = (List<Queja>) itData1.next();
+                        for (int i = 0; i < dat1.size(); i++) {
+                            if (dat1.get(i).getStatus().equals("Ejecutada")) {
                                 try {
-                                    Inicio.RE = dat.get(i).getTotal();
-
+                                    RE = dat1.get(i).getTotal();
                                 } catch (Exception e) {
-                                    Inicio.RE = 0;
+                                    RE = 0;
                                 }
                             }
-                            if (dat.get(i).getStatus().equals("Pendiente")) {
+                            if (dat1.get(i).getStatus().equals("Pendiente")) {
                                 try {
-                                    Inicio.RP = dat.get(i).getTotal();
+                                    RP = dat1.get(i).getTotal();
                                 } catch (Exception e) {
-                                    Inicio.RP = 0;
+                                    RP = 0;
                                 }
                             }
-                            if (dat.get(i).getStatus().equals("Visita")) {
+                            if (dat1.get(i).getStatus().equals("Visita")) {
                                 try {
-                                    Inicio.RV = dat.get(i).getTotal();
+                                    RV = dat1.get(i).getTotal();
                                 } catch (Exception e) {
-                                    Inicio.RV = 0;
+                                    RV = 0;
                                 }
 
                             }
-                            if (dat.get(i).getStatus().equals("En Proceso")) {
+                            if (dat1.get(i).getStatus().equals("En Proceso")) {
                                 try {
-                                    Inicio.REP = dat.get(i).getTotal();
+                                    REP = dat1.get(i).getTotal();
                                 } catch (Exception e) {
-                                    Inicio.REP = 0;
+                                    REP = 0;
                                 }
                             }
-                            if (dat.get(i).getStatus().equals("otro")) {
+                            if (dat1.get(i).getStatus().equals("otro")) {
                                 try {
-                                    Inicio.RO = dat.get(i).getTotal();
-                                    System.out.println("aaaaaaaaaaaaaa "+ dat.get(i).getTotal());
+                                    RO = dat1.get(i).getTotal();
                                 } catch (Exception e) {
-                                    Inicio.RO = 0;
+                                    RO = 0;
                                 }
                             }
                         }
-                        Util.editor.putInt("RE", Inicio.RE);
-                        Util.editor.putInt("RP", Inicio.RP);
-                        Util.editor.putInt("RV", Inicio.RV);
-                        Util.editor.putInt("REP", Inicio.REP);
-                        Util.editor.putInt("RO", Inicio.RO);
-                        Util.editor.commit();
                     }
-                    if (SplashActivity.LoginShare == true) {
-                        Inicio.drawer.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED);
-                        Inicio.pieChart.setVisibility(View.VISIBLE);
-                        Inicio.Grafica(Inicio.pieChart);
-                        Inicio.tipoTrabajo.setText(sigueinteTipo);
-                        Inicio.contratoTrabajo.setText(siguenteContrato);
-                        Inicio.horaTrabajo.setText(sigueinteHora);
-                        Inicio.calleDireccion.setText(siguenteCalle);
-                        Inicio.numeroDireccion.setText(sigueinteNumero);
-                        Inicio.coloniaDireccion.setText(siguenteColonia);
-                        dialogInicio.dismiss();
-                    } else {
-                        Intent intento = new Intent(context, Inicio.class);
-                        intento.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                        context.startActivity(intento);
-                        Login.dialogLogin.dismiss();
-                    }
-                } else {
-                    ErrorInicioDeSesion(context);
-                    Toast.makeText(context, "Error al conseguir, intente otra vez", Toast.LENGTH_LONG).show();
 
+                    pieChart.setUsePercentValues(true);
+                    pieChart.getDescription().setEnabled(false);
+                    pieChart.setExtraOffsets(5, 10, 5, 5);
+                    pieChart.setDragDecelerationFrictionCoef(1f);
+                    pieChart.setDrawHoleEnabled(false);
+                    pieChart.setHoleColor(android.R.color.white);
+                    pieChart.setTransparentCircleRadius(1f);
+
+                    //Datos de la grafica
+                    ArrayList<PieEntry> yValues = new ArrayList<>();
+                    if (OE == 0 && OP == 0 && OV == 0 && RP == 0&& OEP == 0 && OO == 0 && RE == 0 &&
+                            RV == 0 && REP == 0 && RO == 0) {
+
+                        yValues.add(new PieEntry(100f, "Completado"));
+                        PieDataSet dataSet = new PieDataSet(yValues, "");
+                        dataSet.setSliceSpace(7f);
+                        dataSet.setSelectionShift(10f);
+                        dataSet.setColors(ColorTemplate.MATERIAL_COLORS);
+                        dataSet.setHighlightEnabled(true);
+                        PieData data = new PieData((dataSet));
+                        data.setValueTextSize(15f);
+                        data.setValueTextColor(Color.BLACK);
+                        pieChart.setData(data);
+
+                    } else {
+                        if (OE != 0) {
+                            yValues.add(new PieEntry(OE, "OrdenEjecutada"));
+                        }
+                        if (OP != 0) {
+                            yValues.add(new PieEntry(OP, "OrdenPendiente"));
+                        }
+                        if (OV != 0) {
+                            yValues.add(new PieEntry(OV, "OrdenEnVisita"));
+                        }
+                        if (OEP != 0) {
+                            yValues.add(new PieEntry(OEP, "OrdenEnProceso"));
+                        }
+                        if (OO != 0) {
+                            yValues.add(new PieEntry(OO, "Otros"));
+                        }
+                        if (RE != 0) {
+                            yValues.add(new PieEntry(RE, "ReportesEjecutadas"));
+                        }
+                        if (RP != 0) {
+                            yValues.add(new PieEntry(RP, "ReportesPendiente"));
+                        }
+                        if (REP != 0) {
+                            yValues.add(new PieEntry(REP, "ReportesEnProceso"));
+                        }
+                        if (RV != 0) {
+                            yValues.add(new PieEntry(RV, "ReportesEnVisita"));
+                        }
+                        if (RO != 0) {
+                            yValues.add(new PieEntry(RO, "Otros"));
+                        }
+                    }
+
+                    PieDataSet dataSet = new PieDataSet(yValues, "");
+                    dataSet.setSliceSpace(7f);
+                    dataSet.setSelectionShift(10f);
+                    dataSet.setColors(ColorTemplate.MATERIAL_COLORS);
+                    dataSet.setHighlightEnabled(true);
+                    PieData data = new PieData((dataSet));
+                    data.setValueTextSize(15f);
+                    data.setValueTextColor(Color.BLACK);
+                    pieChart.animateXY(2000, 2000);
+                    pieChart.setData(data);
+                    dialogInicio.dismiss();
+
+
+
+
+
+                } else {
+                    ErrorInicioDeSesion(context,dialogInicio);
+
+                    Toast.makeText(context, "Error al conseguir, intente otra vez", Toast.LENGTH_LONG).show();
                 }
             }
 
             @Override
             public void onFailure(Call<Example> call, Throwable t) {
-                ErrorInicioDeSesion(context);
+                ErrorInicioDeSesion(context,dialogInicio);
                 Toast.makeText(context, "Error al conseguir, intente otra vez", Toast.LENGTH_LONG).show();
             }
         });
@@ -2305,18 +2327,11 @@ try{
         });
     }
 
-    public void envioTokenTecnicoRequest(final Context context) {
-
-        Service service = null;
-        try {
-            service = services.enviocClvTecnicoToken(context);
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-        Call<JsonObject> call = service.envtokenfire();
+    public void envioTokenTecnicoRequest(final Context context, final JSONObject jsonObject) {
+        Call<JsonObject> call = services.RequestPost(context, jsonObject).envtokenfire();
         call.enqueue(new Callback<JsonObject>() {
             @Override
-            public void onResponse(Call<JsonObject> call, Response<JsonObject> response1) {
+            public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
               
             }
 
@@ -2937,14 +2952,12 @@ try{
                         constraintLayoutMACWAM.setVisibility(View.GONE);
                     }
                 } else {
-                    ErrorInicioDeSesion(context);
                     Toast.makeText(context, "Error al conseguir datos, intente otra vez", Toast.LENGTH_LONG).show();
                 }
             }
 
             @Override
             public void onFailure(Call<JsonObject> call, Throwable t) {
-                ErrorInicioDeSesion(context);
                 Toast.makeText(context, "Error al conseguir, intente otra vez", Toast.LENGTH_LONG).show();
             }
         });
@@ -2976,14 +2989,12 @@ try{
                     }
 
                 } else {
-                    ErrorInicioDeSesion(context);
                     Toast.makeText(context, "Error al conseguir datos, intente otra vez", Toast.LENGTH_LONG).show();
                 }
             }
 
             @Override
             public void onFailure(Call<JsonObject> call, Throwable t) {
-                ErrorInicioDeSesion(context);
                 Toast.makeText(context, "Error al conseguir, intente otra vez", Toast.LENGTH_LONG).show();
             }
         });
@@ -3000,14 +3011,12 @@ try{
                         dialogAsignacion.dismiss();
                         finish();}catch (Exception e){}
                 } else {
-                    ErrorInicioDeSesion(context);
                     Toast.makeText(context, "Error al conseguir datos, intente otra vez", Toast.LENGTH_LONG).show();
                 }
             }
 
             @Override
             public void onFailure(Call<JsonObject> call, Throwable t) {
-                ErrorInicioDeSesion(context);
                 Toast.makeText(context, "Error al conseguir, intente otra vez", Toast.LENGTH_LONG).show();
             }
         });

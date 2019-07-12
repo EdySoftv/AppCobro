@@ -30,24 +30,7 @@ public class Util {
         return preferences.getInt("clvTec", 0);
 
     }
-    public static int OE(SharedPreferences preferences){
-        return preferences.getInt("OE", 0);}
-    public static int OP(SharedPreferences preferences){
-        return preferences.getInt("OP", 0);}
-    public static int OV(SharedPreferences preferences){
-        return preferences.getInt("OV", 0);}
-    public static int OEP(SharedPreferences preferences){
-        return preferences.getInt("OEP", 0);}
-    public static int OO(SharedPreferences preferences){
-        return preferences.getInt("OO", 0);}
-    public static int RE(SharedPreferences preferences){
-        return preferences.getInt("RE", 0);}
-    public static int RP(SharedPreferences preferences){
-        return preferences.getInt("RP", 0);}
-    public static int RV(SharedPreferences preferences){
-        return preferences.getInt("RV", 0);}
-    public static int REP(SharedPreferences preferences){
-        return preferences.getInt("REP", 0);}
-    public static int RO(SharedPreferences preferences){
-        return preferences.getInt("RO", 0);}
+    public static String getTipoDescarga(SharedPreferences preferences){
+        return preferences.getString("TipoDescarga", "");}
+
 }
