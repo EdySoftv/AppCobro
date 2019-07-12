@@ -159,7 +159,8 @@ public class AsignarAparato extends AppCompatActivity {
                             LlenarSpinnerTipoDeAparato(datos.getInt("Clv_UnicaNet"),datos.getInt("idMedio"),
                                     dat.get(position-1).getIdArticulo()),serviciosAparato,agragar);
 
-
+                    agragar.setEnabled(true);
+                    agragar.setTextColor(Color.WHITE);
 
                     try {
                         JSONObject jsonObject = new JSONObject();
@@ -169,7 +170,7 @@ public class AsignarAparato extends AppCompatActivity {
                         request.ValidaMACWAM(getApplicationContext(), jsonObject1);
                     } catch (Exception e) {
                     }
-                    serviciosAparato.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
+                    /*serviciosAparato.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
                     serviciosAparato.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                         @Override
                         public void onItemClick(AdapterView<?> parent, View view, int position1, long id) {
@@ -198,10 +199,14 @@ public class AsignarAparato extends AppCompatActivity {
                             }
                         }
 
-                    });
+                    });*/
                     textView18.setVisibility(View.VISIBLE);
-                            textView24.setVisibility(View.VISIBLE);
+                            //textView24.setVisibility(View.VISIBLE);
+                }else{
+                    agragar.setEnabled(false);
+                    agragar.setTextColor(Color.GRAY);
                 }
+
             }
 
             @Override

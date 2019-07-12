@@ -1461,14 +1461,15 @@ public class Request extends AppCompatActivity {
                         List<GetMuestraServiciosRelTipoAparatoListResult> dat = (List<GetMuestraServiciosRelTipoAparatoListResult>) itData.next();
                         for (int i = 0; i < dat.size(); i++) {
                             array.serviciosAparatos.add(dat.get(i).getNombre());
+                            AsignarAparato.selectedStrings.add(dat.get(i).clv_UnicaNet);
                         }
                     }
                     ArrayAdapter arrayAdapter = new ArrayAdapter(context, android.R.layout.simple_list_item_checked, array.serviciosAparatos);
                     lista.setAdapter(arrayAdapter);
                     //lista.setItemChecked(0,true);
-                    Iterator<List<GetMuestraArbolServiciosAparatosPorinstalarListResult>> itData4 = array.dataArbSer.iterator();
-                    List<GetMuestraArbolServiciosAparatosPorinstalarListResult> dat4 = (List<GetMuestraArbolServiciosAparatosPorinstalarListResult>) itData4.next();
-                    lista.setItemChecked(AsignarAparato.obtenerPosicionLista(dat4.get(ArbolAdapter.posicionArbol).Clv_UnicaNet,agregar),true);
+                    //Iterator<List<GetMuestraArbolServiciosAparatosPorinstalarListResult>> itData4 = array.dataArbSer.iterator();
+                    //List<GetMuestraArbolServiciosAparatosPorinstalarListResult> dat4 = (List<GetMuestraArbolServiciosAparatosPorinstalarListResult>) itData4.next();
+                    //lista.setItemChecked(AsignarAparato.obtenerPosicionLista(dat4.get(ArbolAdapter.posicionArbol).Clv_UnicaNet,agregar),true);
 
 
 
