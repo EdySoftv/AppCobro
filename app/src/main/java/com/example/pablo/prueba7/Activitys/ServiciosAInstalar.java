@@ -42,7 +42,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-import static com.example.pablo.prueba7.Adapters.OrdenesAdapter.clvor;
+
 import static java.util.Arrays.asList;
 
 
@@ -96,7 +96,7 @@ public class ServiciosAInstalar extends AppCompatActivity {
                 }
                 JSONObject jsonObject = new JSONObject();
                 try{
-                    jsonObject.put("CLV_ORDEN", clvor);
+                    jsonObject.put("CLV_ORDEN",  Util.getClvOrden(Util.preferences));
                     jsonObject.put("Clv_Tecnico", Util.getClvTec(Util.preferences));
                     jsonObject.put("OP2", 0);
                     jsonObject.put("OPCION", "M");
@@ -266,7 +266,7 @@ public class ServiciosAInstalar extends AppCompatActivity {
             public void onClick(View v) {
                 JSONObject jsonObject = new JSONObject();
                 try{
-                    jsonObject.put("CLV_ORDEN", clvor);
+                    jsonObject.put("CLV_ORDEN",  Util.getClvOrden(Util.preferences));
                     jsonObject.put("Clv_Tecnico", Util.getClvTec(Util.preferences));
                     jsonObject.put("OP2", 0);
                     jsonObject.put("OPCION", "M");
@@ -327,7 +327,7 @@ public class ServiciosAInstalar extends AppCompatActivity {
                 }
                 JSONObject jsonObject = new JSONObject();
                 try{
-                    jsonObject.put("CLV_ORDEN", clvor);
+                    jsonObject.put("CLV_ORDEN",  Util.getClvOrden(Util.preferences));
                     jsonObject.put("Clv_Tecnico", Util.getClvTec(Util.preferences));
                     jsonObject.put("OP2", 0);
                     jsonObject.put("OPCION", "M");
@@ -346,7 +346,7 @@ public class ServiciosAInstalar extends AppCompatActivity {
     public void onBackPressed() {
         JSONObject jsonObject = new JSONObject();
         try{
-            jsonObject.put("CLV_ORDEN", clvor);
+            jsonObject.put("CLV_ORDEN",  Util.getClvOrden(Util.preferences));
             jsonObject.put("Clv_Tecnico", Util.getClvTec(Util.preferences));
             jsonObject.put("OP2", 0);
             jsonObject.put("OPCION", "M");

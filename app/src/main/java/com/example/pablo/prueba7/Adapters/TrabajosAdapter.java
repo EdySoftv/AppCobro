@@ -20,6 +20,7 @@ import com.example.pablo.prueba7.Modelos.GetBUSCADetOrdSerListResult;
 import com.example.pablo.prueba7.R;
 import com.example.pablo.prueba7.Request.Request;
 import com.example.pablo.prueba7.sampledata.BarraCargar;
+import com.example.pablo.prueba7.sampledata.Util;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -28,7 +29,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-import static com.example.pablo.prueba7.Adapters.OrdenesAdapter.clvor;
+
 import static com.example.pablo.prueba7.Listas.Array.clavex;
 import static com.example.pablo.prueba7.Listas.Array.observacionesx;
 import static com.example.pablo.prueba7.Listas.Array.recibixnew;
@@ -171,7 +172,7 @@ try{
                     dialogTrabajos.show();
                     try{
                         JSONObject jsonObject = new JSONObject();
-                        jsonObject.put("clv_orden", OrdenesAdapter.clvor);
+                        jsonObject.put("clv_orden",  Util.getClvOrden(Util.preferences));
                         request.PreguntaMedios(Cmcontext,jsonObject);
                     }catch (Exception e){}
                 }
@@ -179,7 +180,7 @@ try{
                     dialogTrabajos.show();
                     try{
                         JSONObject jsonObject = new JSONObject();
-                        jsonObject.put("clv_orden", OrdenesAdapter.clvor);
+                        jsonObject.put("clv_orden",  Util.getClvOrden(Util.preferences));
                         request.PreguntaMedios(Cmcontext,jsonObject);
                     }catch (Exception e){}
                     isnet=1;
@@ -228,7 +229,7 @@ try{
 
             jsonObject = new JSONObject();
             jsonObject.put("Clave", Clave);
-            jsonObject.put("Clv_Orden", clvor);
+            jsonObject.put("Clv_Orden",  Util.getClvOrden(Util.preferences));
             jsonObject.put("Clv_Trabajo", clvTra);
             jsonObject.put("Descripcion", descr);
             jsonObject.put("Obs", observacionesRwtiro);

@@ -38,8 +38,8 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.regex.Pattern;
 
-import static com.example.pablo.prueba7.Adapters.OrdenesAdapter.clvor;
-import static com.example.pablo.prueba7.Adapters.OrdenesAdapter.noOrden;
+
+
 
 public class CambioAparato extends AppCompatActivity {
 
@@ -62,7 +62,7 @@ public class CambioAparato extends AppCompatActivity {
         super.onCreate(onSaveInstanceState);
         setContentView(R.layout.activity_cambio_aparato);
         aceptarCambioAparato =  findViewById(R.id.uno);
-        //Toolbar toolbar = (Toolbar) findViewById(R.id.includeCambioAparato);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.includeCambioApa);
         aparato = findViewById(R.id.aparato);
         estado = findViewById(R.id.estadoaparato);
         tipoAparato = findViewById(R.id.tipo_aparato1);
@@ -217,7 +217,7 @@ public class CambioAparato extends AppCompatActivity {
                                                     jsonObjectMACWAM.put("Clv_Aparato", clvAparatoCAPAT);
                                                     jsonObjectMACWAM.put("MacLan", nombreSpinnerCambioAparato);
                                                     jsonObjectMACWAM.put("MacWan", MACWAMTextCambioAparato.getText());
-                                                    jsonObjectMACWAM.put("Clv_Orden", clvor);
+                                                    jsonObjectMACWAM.put("Clv_Orden",  Util.getClvOrden(Util.preferences));
 
                                                     jsonArrayMACCambioAparato.put(jsonObjectMACWAM);
                                                     JSONObject jsonObject = new JSONObject();
@@ -231,7 +231,7 @@ public class CambioAparato extends AppCompatActivity {
                                                     JSONObject jsonObject = new JSONObject();
                                                     JSONObject jsonObject1 = new JSONObject();
                                                     jsonObject.put("ClvAparato", clvAparatoCAPAT);
-                                                    jsonObject.put("ClvOrden", OrdenesAdapter.clvor);
+                                                    jsonObject.put("ClvOrden",  Util.getClvOrden(Util.preferences));
                                                     jsonObject.put("ContratoNet", contrato);
                                                     jsonObject.put("Status", statusAparato);
                                                     jsonObject.put("Trabajo", "CAPAT");
@@ -257,7 +257,7 @@ public class CambioAparato extends AppCompatActivity {
                                     JSONObject jsonObject = new JSONObject();
                                     JSONObject jsonObject1 = new JSONObject();
                                     jsonObject.put("ClvAparato", clvAparatoCAPAT);
-                                    jsonObject.put("ClvOrden", OrdenesAdapter.clvor);
+                                    jsonObject.put("ClvOrden",  Util.getClvOrden(Util.preferences));
                                     jsonObject.put("ContratoNet", contrato);
                                     jsonObject.put("Status", statusAparato);
                                     jsonObject.put("Trabajo", "CAPAT");
@@ -281,7 +281,7 @@ public class CambioAparato extends AppCompatActivity {
             public void onClick(View v) {
                 JSONObject jsonObject = new JSONObject();
                 try{
-                    jsonObject.put("CLV_ORDEN", clvor);
+                    jsonObject.put("CLV_ORDEN",  Util.getClvOrden(Util.preferences));
                     jsonObject.put("Clv_Tecnico", Util.getClvTec(Util.preferences));
                     jsonObject.put("OP2", 0);
                     jsonObject.put("OPCION", "M");
@@ -341,7 +341,7 @@ public class CambioAparato extends AppCompatActivity {
         if ((keyCode == KeyEvent.KEYCODE_BACK)) {
             JSONObject jsonObject = new JSONObject();
             try{
-                jsonObject.put("CLV_ORDEN", clvor);
+                jsonObject.put("CLV_ORDEN",  Util.getClvOrden(Util.preferences));
                 jsonObject.put("Clv_Tecnico", Util.getClvTec(Util.preferences));
                 jsonObject.put("OP2", 0);
                 jsonObject.put("OPCION", "M");

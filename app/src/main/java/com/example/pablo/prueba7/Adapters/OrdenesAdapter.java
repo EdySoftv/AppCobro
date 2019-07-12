@@ -18,6 +18,7 @@ import android.widget.Toast;
 import com.example.pablo.prueba7.Listas.Array;
 import com.example.pablo.prueba7.R;
 import com.example.pablo.prueba7.Request.Request;
+import com.example.pablo.prueba7.sampledata.Util;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,8 +26,6 @@ import java.util.List;
 
 public class OrdenesAdapter extends RecyclerView.Adapter<OrdenesAdapter.ordensrcViewHolder> implements AdapterView.OnItemClickListener {
 
-    public static Integer clvor;
-    public static String noOrden;
     private LayoutInflater inflater;
     private Context mContext;
     private ArrayList<String> ordensrc;
@@ -88,8 +87,12 @@ public class OrdenesAdapter extends RecyclerView.Adapter<OrdenesAdapter.ordensrc
         viewHolder.control.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                clvor = Integer.valueOf(ordensrc.get(position));
-                noOrden = Integer.toString(clvor);
+                Util.preferences = mContext.getSharedPreferences("credenciales", Context.MODE_PRIVATE);
+                Util.editor = Util.preferences.edit();
+                Util.editor.putInt("clvOrden", Integer.valueOf(ordensrc.get(position)));
+                Util.editor.commit();
+
+
                 request.getDeepCons(mContext);
                 request.getValidaFirma(mContext);
             }

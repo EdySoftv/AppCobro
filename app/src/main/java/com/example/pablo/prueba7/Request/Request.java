@@ -154,7 +154,7 @@ import static com.example.pablo.prueba7.Activitys.AsignarAparato.MACWAMText;
 import static com.example.pablo.prueba7.Activitys.AsignarAparato.constraintLayoutMACWAM;
 import static com.example.pablo.prueba7.Activitys.AsignarAparato.idArticuloasignado;
 import static com.example.pablo.prueba7.Activitys.AsignarAparato.jsonArrayMAC;
-import static com.example.pablo.prueba7.Adapters.OrdenesAdapter.clvor;
+
 import static com.example.pablo.prueba7.Adapters.QuejasAdapter.clvReport;
 import static com.example.pablo.prueba7.Adapters.TrabajosAdapter.dialogTrabajos;
 import static com.example.pablo.prueba7.Fragments.EjecutarOrdenes.dialogEjecutar;
@@ -1843,7 +1843,7 @@ public class Request extends AppCompatActivity {
                         try{
                             JSONObject jsonObject2 = new JSONObject();
                             JSONObject jsonObject3 = new JSONObject();
-                            jsonObject2.put("ClvOrden", clvor);
+                            jsonObject2.put("ClvOrden",  Util.getClvOrden(Util.preferences));
                             jsonObject2.put("ClvUsuario", UserModel.Id_Usuario);
                             jsonObject2.put("Status", ejecutarStatus);
                             jsonObject3.put("objNueRelOrdenUsuario", jsonObject2);
@@ -1929,7 +1929,7 @@ public class Request extends AppCompatActivity {
                 if (response1.code() == 200) {
                     try{
                         JSONObject jsonObject = new JSONObject();
-                        jsonObject.put("ClvOrden", clvor);
+                        jsonObject.put("ClvOrden",  Util.getClvOrden(Util.preferences));
                         jsonObject.put("Op", "M");
                         jsonObject.put("Status", ejecutarStatus);
                         jsonObject.put("Op2", 0);
@@ -1964,7 +1964,7 @@ public class Request extends AppCompatActivity {
                 if (response1.code() == 200) {
                     try{
                         JSONObject jsonObject = new JSONObject();
-                        jsonObject.put("ClvOrden", clvor);
+                        jsonObject.put("ClvOrden",  Util.getClvOrden(Util.preferences));
                         jsonObject.put("Op", "M");
                         jsonObject.put("Status", ejecutarStatus);
                         jsonObject.put("Op2", 0);
@@ -3176,7 +3176,7 @@ try{
                                 jsonObject.put("Visita2", "");
 
 
-                                jsonObject1.put("CLV_ORDEN", clvor);
+                                jsonObject1.put("CLV_ORDEN",  Util.getClvOrden(Util.preferences));
                                 jsonObject1.put("Clv_Tecnico", Util.getClvTec(Util.preferences));
                                 jsonObject1.put("OP2", 0);
                                 jsonObject1.put("OPCION", "M");
@@ -3209,7 +3209,7 @@ try{
                                     jsonObject.put("Visita2",  EjecutarOrdenes.fechaActual);
                                 }
                                 System.out.println("VAL 2");
-                                jsonObject1.put("CLV_ORDEN", clvor);
+                                jsonObject1.put("CLV_ORDEN",  Util.getClvOrden(Util.preferences));
                                 jsonObject1.put("Clv_Tecnico", Util.getClvTec(Util.preferences));
                                 jsonObject1.put("OP2", 0);
                                 jsonObject1.put("OPCION", "M");

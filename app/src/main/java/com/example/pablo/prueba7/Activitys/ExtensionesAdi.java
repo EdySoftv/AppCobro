@@ -14,7 +14,7 @@ import com.example.pablo.prueba7.sampledata.Util;
 
 import org.json.JSONObject;
 
-import static com.example.pablo.prueba7.Adapters.OrdenesAdapter.clvor;
+
 
 public class ExtensionesAdi extends AppCompatActivity {
     private Button aceptar,salir;
@@ -30,7 +30,7 @@ public class ExtensionesAdi extends AppCompatActivity {
         salir=findViewById(R.id.extencionSalir);
         txtExtencion.setText(request.extencionesE);
         Toolbar toolbar = (Toolbar) findViewById(R.id.includeExtencion);
-        setTitle("No. de Orden: " + OrdenesAdapter.noOrden);
+        setTitle("No. de Orden: " +  Util.getClvOrden(Util.preferences));
 
 
         salir.setOnClickListener(new View.OnClickListener() {
@@ -38,7 +38,7 @@ public class ExtensionesAdi extends AppCompatActivity {
             public void onClick(View v) {
                 JSONObject jsonObject = new JSONObject();
                 try{
-                    jsonObject.put("CLV_ORDEN", clvor);
+                    jsonObject.put("CLV_ORDEN",  Util.getClvOrden(Util.preferences));
                     jsonObject.put("Clv_Tecnico", Util.getClvTec(Util.preferences));
                     jsonObject.put("OP2", 0);
                     jsonObject.put("OPCION", "M");
@@ -55,7 +55,7 @@ public class ExtensionesAdi extends AppCompatActivity {
         public void onClick(View v) {
             JSONObject jsonObject = new JSONObject();
             try{
-                jsonObject.put("CLV_ORDEN", clvor);
+                jsonObject.put("CLV_ORDEN",  Util.getClvOrden(Util.preferences));
                 jsonObject.put("Clv_Tecnico", Util.getClvTec(Util.preferences));
                 jsonObject.put("OP2", 0);
                 jsonObject.put("OPCION", "M");

@@ -14,7 +14,7 @@ import com.example.pablo.prueba7.sampledata.Util;
 
 import org.json.JSONObject;
 
-import static com.example.pablo.prueba7.Adapters.OrdenesAdapter.clvor;
+
 
 
 public class CambioDom extends AppCompatActivity {
@@ -82,7 +82,7 @@ public class CambioDom extends AppCompatActivity {
                 startActivity(intento1);
                 JSONObject jsonObject = new JSONObject();
                 try{
-                    jsonObject.put("CLV_ORDEN", clvor);
+                    jsonObject.put("CLV_ORDEN",  Util.getClvOrden(Util.preferences));
                     jsonObject.put("Clv_Tecnico", Util.getClvTec(Util.preferences));
                     jsonObject.put("OP2", 0);
                     jsonObject.put("OPCION", "M");

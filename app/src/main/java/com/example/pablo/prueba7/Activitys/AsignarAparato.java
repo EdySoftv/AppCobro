@@ -44,7 +44,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.regex.Pattern;
 
-import static com.example.pablo.prueba7.Adapters.OrdenesAdapter.clvor;
+
 
 public class AsignarAparato extends AppCompatActivity {
 
@@ -147,7 +147,7 @@ public class AsignarAparato extends AppCompatActivity {
                     //Request Aparatos Disponibles
                     try{
                         JSONObject jsonObject = new JSONObject();
-                        jsonObject.put("clv_orden", clvor);
+                        jsonObject.put("clv_orden", Util.getClvOrden(Util.preferences));
                         jsonObject.put("Clv_Tecnico", Util.getClvTec(Util.preferences));
                         jsonObject.put("idArticulo", dat.get(position - 1).getIdArticulo());
                         request.getAparatosDisponibles(getApplicationContext(),
@@ -260,7 +260,7 @@ public class AsignarAparato extends AppCompatActivity {
                                             jsonObjectMACWAM.put("Clv_Aparato", clveAparatoSpinner);
                                             jsonObjectMACWAM.put("MacLan", nombreSpinner);
                                             jsonObjectMACWAM.put("MacWan", MACWAMText.getText());
-                                            jsonObjectMACWAM.put("Clv_Orden", clvor);
+                                            jsonObjectMACWAM.put("Clv_Orden",  Util.getClvOrden(Util.preferences));
 
 
                                         } catch (Exception e) {

@@ -29,6 +29,7 @@ import com.example.pablo.prueba7.Modelos.mediosPregunta;
 import com.example.pablo.prueba7.R;
 import com.example.pablo.prueba7.Request.Request;
 import com.example.pablo.prueba7.sampledata.BarraCargar;
+import com.example.pablo.prueba7.sampledata.Util;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -270,7 +271,7 @@ public class ReporteAsignacion extends AppCompatActivity {
         JSONObject jsonObject4 ;
         JSONArray jsonArray2 = new JSONArray();
         for (int a = 0; a < Array.dataArbSer.get(0).size(); a++) {
-            Array.dataArbSer.get(0).get(a).setClv_orden(OrdenesAdapter.clvor);
+            Array.dataArbSer.get(0).get(a).setClv_orden( Util.getClvOrden(Util.preferences));
         }
         Iterator<List<GetMuestraArbolServiciosAparatosPorinstalarListResult>> itData = Array.dataArbSer.iterator();
         List<GetMuestraArbolServiciosAparatosPorinstalarListResult> dat = (List<GetMuestraArbolServiciosAparatosPorinstalarListResult>) itData.next();

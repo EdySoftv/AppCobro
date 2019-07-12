@@ -166,6 +166,7 @@ public class Inicio extends AppCompatActivity
             clvorden = 0;
             opcion = 1;
             Util.editor.putString("TipoDescarga", "O");
+            Util.editor.commit();
             request.getListOrd(getApplicationContext());
 
 
@@ -174,6 +175,7 @@ public class Inicio extends AppCompatActivity
             clavequeja = 0;
             opcion = 1;
             Util.editor.putString("TipoDescarga", "Q");
+            Util.editor.commit();
             request.getListQuejas(getApplicationContext());
 
         } else if (id == R.id.Configuraciones) {

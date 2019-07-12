@@ -35,9 +35,8 @@ import org.json.JSONObject;
 
 import androidx.annotation.RequiresApi;
 
-import static com.example.pablo.prueba7.Adapters.OrdenesAdapter.clvor;
-import static com.example.pablo.prueba7.Adapters.OrdenesAdapter.noOrden;
-import static com.example.pablo.prueba7.Adapters.TrabajosAdapter.retiro;
+
+
 import static com.example.pablo.prueba7.Fragments.HorasOrdenes.TecSec;
 import static com.example.pablo.prueba7.Fragments.HorasOrdenes.ejecutada;
 import static com.example.pablo.prueba7.Fragments.HorasOrdenes.visita;
@@ -73,13 +72,13 @@ public class MainActivity extends AppCompatActivity implements ActionBar.TabList
         Nombre= findViewById(R.id.infonombre);
         Direccion= findViewById(R.id.infodireccion);
         InfoServicios= findViewById(R.id.infoservicios);
-        setTitle("No. de Orden: " + noOrden);
+        setTitle("No. de Orden: " +  Util.getClvOrden(Util.preferences));
 
         ejecutada = 0;
         visita = 0;
         JSONObject jsonObject = new JSONObject();
         try{
-            jsonObject.put("CLV_ORDEN", clvor);
+            jsonObject.put("CLV_ORDEN",  Util.getClvOrden(Util.preferences));
             jsonObject.put("Clv_Tecnico", Util.getClvTec(Util.preferences));
             jsonObject.put("OP2", 0);
             jsonObject.put("OPCION", "M");

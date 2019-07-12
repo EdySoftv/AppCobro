@@ -33,8 +33,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
-import static com.example.pablo.prueba7.Adapters.OrdenesAdapter.clvor;
-import static com.example.pablo.prueba7.Adapters.TrabajosAdapter.retiro;
+
 import static com.example.pablo.prueba7.Fragments.HorasOrdenes.obsTec;
 import static com.example.pablo.prueba7.Fragments.HorasOrdenes.observacionesTecnico;
 import static com.example.pablo.prueba7.Fragments.HorasOrdenes.visita1;
@@ -219,26 +218,26 @@ public class EjecutarOrdenes extends Fragment {
     }
 
     private void dialogoEjecutar1() {
-            new AlertDialog.Builder(getContext())
-                    .setTitle("Ejecutar Orden")
-                    .setMessage("¿Desea Ejecutar Orden?")
-                    .setPositiveButton("ACEPTAR",
-                            new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialog, int which) {
-                                    Ejecutar(getContext());
-                                }
-                            })
-                    .setNegativeButton("CANCELAR",
-                            new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialog, int which) {
-                                    dialogEjecutar.dismiss();
-                                }
-                            }).show();
+        new AlertDialog.Builder(getContext())
+                .setTitle("Ejecutar Orden")
+                .setMessage("¿Desea Ejecutar Orden?")
+                .setPositiveButton("ACEPTAR",
+                        new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                Ejecutar();
+                            }
+                        })
+                .setNegativeButton("CANCELAR",
+                        new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialogEjecutar.dismiss();
+                            }
+                        }).show();
 
 
-
+    }
 
     public  void Ejecutar(){
         System.out.println("Ejecutar");
@@ -277,7 +276,8 @@ public class EjecutarOrdenes extends Fragment {
                 jsonObject.put("TecnicoCuadrilla", HorasOrdenes.TecSecSelecc);
                 jsonObject.put("Visita1", "");
                 jsonObject.put("Visita2", "");
-                jsonObject1.put("CLV_ORDEN", clvor);
+
+                jsonObject1.put("CLV_ORDEN",  Util.getClvOrden(Util.preferences));
                 jsonObject1.put("Clv_Tecnico", Util.getClvTec(Util.preferences));
                 jsonObject1.put("OP2", 0);
                 jsonObject1.put("OPCION", "M");
@@ -315,7 +315,7 @@ public class EjecutarOrdenes extends Fragment {
                 }
                 System.out.println("VAL 2");
 
-                jsonObject1.put("CLV_ORDEN", clvor);
+                jsonObject1.put("CLV_ORDEN",  Util.getClvOrden(Util.preferences));
                 jsonObject1.put("Clv_Tecnico", Util.getClvTec(Util.preferences));
                 jsonObject1.put("OP2", 0);
                 jsonObject1.put("OPCION", "M");

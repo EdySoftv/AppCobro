@@ -22,7 +22,7 @@ import java.io.UnsupportedEncodingException;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 
-import static com.example.pablo.prueba7.Adapters.OrdenesAdapter.clvor;
+
 import static com.example.pablo.prueba7.Adapters.QuejasAdapter.clvReport;
 
 public class Firma extends AppCompatActivity {
@@ -57,11 +57,11 @@ public class Firma extends AppCompatActivity {
             case R.id.guardarDibujo:
                 recortar(Screenshot.TakeScreenshot(dibujar.getRootView()));
                 finish();
-                if(Inicio.tipodeDescarga.equals("O")){
+                if(Util.getTipoDescarga(Util.preferences).equals("O")){
                     try {
                         JSONObject jsonObject = new JSONObject();
                         JSONObject jsonObject1 = new JSONObject();
-                        jsonObject.put("Clv_orden", clvor);
+                        jsonObject.put("Clv_orden",  Util.getClvOrden(Util.preferences));
                         jsonObject.put("Clv_reporte",0);
                         jsonObject.put("Tipo",1);
                         jsonObject.put("FirmaCliente",Firma.imagenAEnviar);
@@ -72,7 +72,7 @@ public class Firma extends AppCompatActivity {
                     }
 
                 }
-                if(Inicio.tipodeDescarga.equals("Q")){
+                if(Util.getTipoDescarga(Util.preferences).equals("Q")){
                     try {
                         JSONObject jsonObject = new JSONObject();
                         JSONObject jsonObject1 = new JSONObject();
