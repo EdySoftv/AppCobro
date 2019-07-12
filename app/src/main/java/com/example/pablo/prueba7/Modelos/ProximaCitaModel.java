@@ -10,16 +10,7 @@ public class ProximaCitaModel {
     public String Tipo;
 
 
-    public ProximaCitaModel(String Calle, int Clave, String Colonia, String Contrato, String Hora, String NUMERO, String Tipo){
-        this.Calle = Calle;
-        this.Clave = Clave;
-        this.Colonia = Colonia;
-        this.Contrato = Contrato;
-        this.Hora = Hora;
-        this.NUMERO = NUMERO;
-        this.Tipo = Tipo;
 
-    }
 
     public String getCalle() {
         return Calle;

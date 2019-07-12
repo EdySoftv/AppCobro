@@ -38,7 +38,6 @@ import static com.example.pablo.prueba7.Adapters.TrabajosAdapter.retiro;
 import static com.example.pablo.prueba7.Fragments.HorasOrdenes.obsTec;
 import static com.example.pablo.prueba7.Fragments.HorasOrdenes.observacionesTecnico;
 import static com.example.pablo.prueba7.Fragments.HorasOrdenes.visita1;
-import static com.example.pablo.prueba7.Services.Services.claveTecnico;
 
 
 
@@ -48,11 +47,11 @@ import static com.example.pablo.prueba7.Services.Services.claveTecnico;
 public class EjecutarOrdenes extends Fragment {
 
     public static Button reiniciar;
-    public static Button eject,firmar;
-    public static String fechaHoy,horaHoy;
+    public static Button eject, firmar;
+    public static String fechaHoy, horaHoy;
     public static View ejecutar;
     public static TextView msgEjecutarOrd;
-    public static int añoE, mesE, diaE,horaE,minutoE;
+    public static int añoE, mesE, diaE, horaE, minutoE;
     private HorasOrdenes horas = new HorasOrdenes();
     private Request request = new Request();
     public static ProgressDialog dialogEjecutar;
@@ -76,12 +75,12 @@ public class EjecutarOrdenes extends Fragment {
         // Inflate the layout for this fragment
         super.onCreate(savedInstanceState);
         setRetainInstance(true);
-        dialogEjecutar= new BarraCargar().showDialog(getContext());
+        dialogEjecutar = new BarraCargar().showDialog(getContext());
 
         View view = inflater.inflate(R.layout.activity_ejecutar_orden, container, false);
         //reiniciar = view.findViewById(R.id.restart);
         eject = view.findViewById(R.id.ejec);
-       // msgEjecutarOrd = view.findViewById(R.id.msgEjecutarOrd);
+        // msgEjecutarOrd = view.findViewById(R.id.msgEjecutarOrd);
         //ejecutar = view.findViewById(R.id.ejecutarLay);
         firmar = view.findViewById(R.id.firmarOrd);
 //        reiniciar.setEnabled(false);
@@ -91,17 +90,17 @@ public class EjecutarOrdenes extends Fragment {
         if(horas.visita == 1){
             firmar.setVisibility(View.GONE);
 
-        }else {
-            if (request.firma==true){
+        } else {
+            if (request.firma == true) {
                 firmar.setVisibility(View.VISIBLE);
 
-            }else if (request.firma == false){
+            } else if (request.firma == false) {
                 firmar.setVisibility(View.GONE);
 
             }
         }
 
-        fechaActual = ( dateFormat.format(objDate)) +" " + (hourFormat.format(objDate));
+        fechaActual = (dateFormat.format(objDate)) + " " + (hourFormat.format(objDate));
 
        /* if(request.isnet==true){
             ejecutar.setVisibility(View.VISIBLE);
@@ -215,7 +214,6 @@ public class EjecutarOrdenes extends Fragment {
                                 Toast.makeText(getActivity(), "Orden no ejecutada", Toast.LENGTH_LONG).show();
                             }
                         }).show();
-
 
 
     }

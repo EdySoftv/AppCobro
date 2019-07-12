@@ -15,11 +15,12 @@ import android.util.Log;
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
 
-import static com.example.pablo.prueba7.Activitys.Login.CHANNEL_ID;
-import static com.example.pablo.prueba7.Activitys.Login.NOTIFICACION_ID;
+
 
 
 public class MyFireBaseMessagingService extends FirebaseMessagingService {
+    public final String CHANNEL_ID = "NOTIFICACION";
+    public final int NOTIFICACION_ID = 0;
     public MyFireBaseMessagingService() {
     }
 

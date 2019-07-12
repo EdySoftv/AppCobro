@@ -128,6 +128,7 @@ import com.github.mikephil.charting.data.PieData;
 import com.github.mikephil.charting.data.PieDataSet;
 import com.github.mikephil.charting.data.PieEntry;
 import com.github.mikephil.charting.utils.ColorTemplate;
+import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 
 import org.json.JSONException;
@@ -346,28 +347,24 @@ public class Request extends AppCompatActivity {
             public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
                 if (response.code() == 200) {
                     TextView tipoTrabajo, contratoTrabajo, horaTrabajo, calleDireccion, numeroDireccion, coloniaDireccion;
-                        JsonObject userJson = response.body().getAsJsonObject("GetDameSiguienteCitaResult");
-                        ProximaCitaModel user = new ProximaCitaModel(
-                                userJson.get("Calle").getAsString(),
-                                userJson.get("Clave").getAsInt(),
-                                userJson.get("Colonia").getAsString(),
-                                userJson.get("Contrato").getAsString(),
-                                userJson.get("Hora").getAsString(),
-                                userJson.get("NUMERO").getAsString(),
-                                userJson.get("Tipo").getAsString()
-                        );
+                    JsonObject userJson = response.body().getAsJsonObject("GetDameSiguienteCitaResult");
+                    String jsonToString = String.valueOf(userJson);
+                    ProximaCitaModel proximaCitaModel = new ProximaCitaModel();
+                    Gson gson = new Gson();
+                    proximaCitaModel = gson.fromJson(jsonToString,ProximaCitaModel.class);
+
                     tipoTrabajo = view.findViewById(R.id.tipoDeTrabajo);
                     contratoTrabajo = view.findViewById(R.id.contrato);
                     horaTrabajo =  view.findViewById(R.id.hora);
                     calleDireccion = view.findViewById(R.id.calle);
                     numeroDireccion = view.findViewById(R.id.numero);
                     coloniaDireccion =  view.findViewById(R.id.colonia);
-                    tipoTrabajo.setText(user.Tipo);
-                    contratoTrabajo.setText(user.Contrato);
-                    horaTrabajo.setText(user.Hora);
-                    calleDireccion.setText(user.Calle);
-                    numeroDireccion.setText(user.NUMERO);
-                    coloniaDireccion.setText(user.Colonia);
+                    tipoTrabajo.setText(proximaCitaModel.Tipo);
+                    contratoTrabajo.setText(proximaCitaModel.Contrato);
+                    horaTrabajo.setText(proximaCitaModel.Hora);
+                    calleDireccion.setText(proximaCitaModel.Calle);
+                    numeroDireccion.setText(proximaCitaModel.NUMERO);
+                    coloniaDireccion.setText(proximaCitaModel.Colonia);
 
 
                     
@@ -395,6 +392,10 @@ public class Request extends AppCompatActivity {
                 if (response.code() == 200) {
                     Example jsonResponse = response.body();
                     PieChart pieChart;
+
+                    ArrayList<Integer> color = new ArrayList<>();
+
+
                     pieChart = view.findViewById(R.id.graficaPastel);
                     int OE=0,OP=0,OV=0,OEP=0,OO=0,RE=0,RP=0,RV=0,REP=0,RO=0;
                     array.dataord = new ArrayList<List<OrdSer>>(asList(jsonResponse.getDameOrdenesQuejasTotalesResult.getOrdSer()));
@@ -510,42 +511,63 @@ public class Request extends AppCompatActivity {
                         pieChart.setData(data);
 
                     } else {
+
                         if (OE != 0) {
                             yValues.add(new PieEntry(OE, "OrdenEjecutada"));
+                            int color1=Color.rgb(100,221,23);//verde
+                            color.add(color1);
                         }
                         if (OP != 0) {
                             yValues.add(new PieEntry(OP, "OrdenPendiente"));
+                            int color2=Color.rgb(0,147,255);//azul
+                            color.add(color2);
                         }
                         if (OV != 0) {
                             yValues.add(new PieEntry(OV, "OrdenEnVisita"));
+                            int color3=Color.rgb(255,128,0);//naranja
+                            color.add(color3);
                         }
                         if (OEP != 0) {
                             yValues.add(new PieEntry(OEP, "OrdenEnProceso"));
+                            int color4=Color.rgb(255,0,0);//rojo
+                            color.add(color4);
                         }
                         if (OO != 0) {
                             yValues.add(new PieEntry(OO, "Otros"));
+                            int color5=Color.rgb(255,0,0);//rojo
+                            color.add(color5);
                         }
                         if (RE != 0) {
                             yValues.add(new PieEntry(RE, "ReportesEjecutadas"));
+                            int color6=Color.rgb(100,224,23);//verde
+                            color.add(color6);
                         }
                         if (RP != 0) {
                             yValues.add(new PieEntry(RP, "ReportesPendiente"));
-                        }
-                        if (REP != 0) {
-                            yValues.add(new PieEntry(REP, "ReportesEnProceso"));
+                            int color7=Color.rgb(0,147,255);//azul
+                            color.add(color7);
                         }
                         if (RV != 0) {
                             yValues.add(new PieEntry(RV, "ReportesEnVisita"));
+                            int color9=Color.rgb(255,128,0);//
+                            color.add(color9);
+                        }
+                        if (REP != 0) {
+                            yValues.add(new PieEntry(REP, "ReportesEnProceso"));
+                            int color8=Color.rgb(255,128,0);
+                            color.add(color8);
                         }
                         if (RO != 0) {
                             yValues.add(new PieEntry(RO, "Otros"));
+                            int color10=Color.rgb(255,0,0);
+                            color.add(color10);
                         }
                     }
 
                     PieDataSet dataSet = new PieDataSet(yValues, "");
                     dataSet.setSliceSpace(7f);
                     dataSet.setSelectionShift(10f);
-                    dataSet.setColors(ColorTemplate.MATERIAL_COLORS);
+                    dataSet.setColors(color);
                     dataSet.setHighlightEnabled(true);
                     PieData data = new PieData((dataSet));
                     data.setValueTextSize(15f);
@@ -2141,7 +2163,10 @@ try{
                         EjecutarReportes.dialogReportes.dismiss();
                         clavequeja = 0;
                         opcion = 1;
-                        Inicio.tipodeDescarga = "Q";
+                        Util.preferences = getSharedPreferences("credenciales", Context.MODE_PRIVATE);
+                        Util.editor = Util.preferences.edit();
+                        Util.editor.putString("TipoDescarga", "Q");
+                        Util.editor.commit();
                         getListQuejas(context);
                     }
                 }else{
