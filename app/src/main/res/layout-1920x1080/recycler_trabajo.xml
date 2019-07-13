@@ -9,15 +9,15 @@
 
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:background="@drawable/disenio_recyclerview"
         android:paddingLeft="8dp"
         android:paddingRight="8dp">
 
         <TextView
             android:id="@+id/tv_Descripcion"
-            android:layout_width="320dp"
-            android:layout_height="wrap_content"
+            android:layout_width="283dp"
+            android:layout_height="31dp"
             android:ellipsize="end"
             android:gravity="center|left"
             android:maxLines="3"
@@ -25,29 +25,26 @@
             android:textSize="15sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="@+id/click"
-            app:layout_constraintHorizontal_bias="0.461"
+            app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="@+id/click"
             tools:layout_editor_absoluteY="16dp" />
 
         <CheckBox
             android:id="@+id/check_recibi"
-            android:layout_width="49dp"
-            android:layout_height="40dp"
-            android:layout_marginTop="8dp"
+            android:layout_width="46dp"
+            android:layout_height="34dp"
+            android:layout_marginTop="5dp"
             android:layout_marginEnd="8dp"
-            android:layout_marginBottom="8dp"
             android:visibility="invisible"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@+id/recibitext"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="@+id/recibitext"
-            app:layout_constraintTop_toBottomOf="@+id/recibitext"
-            app:layout_constraintVertical_bias="0.0" />
+            app:layout_constraintTop_toBottomOf="@+id/recibitext" />
 
         <TextView
             android:id="@+id/observacionesTrabajo"
-            android:layout_width="320dp"
-            android:layout_height="20dp"
+            android:layout_width="284dp"
+            android:layout_height="29dp"
             android:layout_marginTop="5dp"
             android:layout_marginEnd="8dp"
             android:layout_marginBottom="8dp"
@@ -64,21 +61,20 @@
             android:id="@+id/recibitext"
             android:layout_width="53dp"
             android:layout_height="23dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="4dp"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="8dp"
             android:text="@string/recibi"
             android:textAlignment="textEnd"
             android:visibility="invisible"
-            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/click"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="@+id/click" />
 
         <TextView
             android:id="@+id/click"
-            android:layout_width="333dp"
-            android:layout_height="71dp"
-            tools:layout_editor_absoluteX="2dp"
-            tools:layout_editor_absoluteY="8dp" />
+            android:layout_width="295dp"
+            android:layout_height="80dp"
+            tools:layout_editor_absoluteX="-4dp"
+            tools:layout_editor_absoluteY="2dp" />
 
     </android.support.constraint.ConstraintLayout>
 </android.support.v7.widget.CardView>

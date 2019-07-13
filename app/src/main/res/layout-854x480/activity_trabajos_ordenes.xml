@@ -69,13 +69,16 @@
         <ListView
             android:id="@+id/listTrabajos"
             android:layout_width="match_parent"
-            android:layout_height="391dp"
+            android:layout_height="294dp"
             android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
             android:background="#f5f5f5"
             android:dividerHeight="5dp"
             android:paddingLeft="8dp"
             android:paddingRight="8dp"
-            app:layout_constraintTop_toBottomOf="@+id/textView42">
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView42"
+            tools:layout_editor_absoluteX="0dp">
 
         </ListView>
     </android.support.constraint.ConstraintLayout>

@@ -205,7 +205,6 @@ public class MainActivity extends AppCompatActivity implements ActionBar.TabList
            if(positionTab == 2){
 
                if (positionTab ==2 && retiro == true && recibixnew.size() > 0){
-                   recibixnew.clear();
                    try{
                        ValidaTrabajos(0);
                    }catch (Exception e){

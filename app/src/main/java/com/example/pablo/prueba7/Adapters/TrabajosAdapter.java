@@ -109,6 +109,7 @@ try{
         String[] caracteres = palabra.split(" ");
 
         if (caracteres[0].equals("RAPAG")){
+            recibixnew.clear();
             retiro = true;
             holder.recibi.setChecked(false);
             holder.recibi.setVisibility(View.VISIBLE);
@@ -118,8 +119,11 @@ try{
         }
 
         if (caracteres[0].equals("RETLI")){
+            recibixnew.clear();
+            retiro = true;
             holder.recibi.setChecked(true);
-            holder.recibi.setEnabled(false);
+            holder.recibi.setVisibility(View.INVISIBLE);
+            holder.recibitext.setVisibility(View.INVISIBLE);
         }
 
         holder.recibi.setChecked(Array.recibix.get(position));
@@ -169,6 +173,7 @@ try{
                 Request request = new Request();
 
                 if (caracteres[0].equals("ISTVA")) {
+                    retiro = false;
                     dialogTrabajos.show();
                     try{
                         JSONObject jsonObject = new JSONObject();
@@ -177,6 +182,7 @@ try{
                     }catch (Exception e){}
                 }
                 if (caracteres[0].equals("ISNET")) {
+                    retiro = false;
                     dialogTrabajos.show();
                     try{
                         JSONObject jsonObject = new JSONObject();
@@ -186,6 +192,7 @@ try{
                     isnet=1;
                 }
                 if (caracteres[0].equals("CAPAG")) {
+                    retiro = false;
                     dialogTrabajos.show();
                     Intent intento = new Intent(Cmcontext, CambioAparato.class);
                     ftth=1;
@@ -193,10 +200,12 @@ try{
                     Cmcontext.startActivity(intento);
                 }
                 if (caracteres[0].equals("CAMDO")) {
+                    retiro = false;
                     dialogTrabajos.show();
                     request.getCAMDO(Cmcontext);
                 }
                 if (caracteres[0].equals("CAPAT")) {
+                    retiro = false;
                     dialogTrabajos.show();
                     Intent intento = new Intent(Cmcontext, CambioAparato.class);
                     intento.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -204,6 +213,7 @@ try{
                     ftth=0;
                 }
                 if (caracteres[0].equals("CONEX")) {
+                    retiro = false;
                     dialogTrabajos.show();
                     request.getExtencionesAdicionales(Cmcontext);
                 }
@@ -223,10 +233,9 @@ try{
             descr=String.valueOf(Array.trabajox.get(i));
 
 
-        if (stat==false){
+        if (stat==false && !observacionesRwtiro.equals("FTTH")){
             System.out.println("statusx"+stat);
         try{
-
             jsonObject = new JSONObject();
             jsonObject.put("Clave", Clave);
             jsonObject.put("Clv_Orden",  Util.getClvOrden(Util.preferences));
