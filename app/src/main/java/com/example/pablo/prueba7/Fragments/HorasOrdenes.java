@@ -4,6 +4,7 @@ import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -31,14 +32,26 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.pablo.prueba7.Activitys.MainActivity;
+import com.example.pablo.prueba7.Activitys.Orden;
 import com.example.pablo.prueba7.Listas.Array;
+import com.example.pablo.prueba7.Modelos.DeepConsModel;
 import com.example.pablo.prueba7.R;
 import com.example.pablo.prueba7.Request.Request;
+import com.example.pablo.prueba7.sampledata.Util;
+
+import org.json.JSONObject;
 
 import static android.content.Context.LOCATION_SERVICE;
+import static com.example.pablo.prueba7.Adapters.TrabajosAdapter.retiro;
+import static com.example.pablo.prueba7.Fragments.EjecutarOrdenes.TecSecSelecc;
+import static com.example.pablo.prueba7.Fragments.EjecutarOrdenes.dialogEjecutar;
+import static com.example.pablo.prueba7.Fragments.EjecutarOrdenes.fechaActual;
 
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 
 
 /**
@@ -56,9 +69,13 @@ public class HorasOrdenes extends Fragment implements View.OnClickListener, Loca
     private View contenedorObservacionesTecnico;
     public static TextView cordLat, cordLong;
     public static TextView Obs;
+    public   EjecutarOrdenes ejecOrd;
     private Request request = new Request();
     private RadioButton btn1, bt2;
+    public static   Button ejecVisita;
     public static EditText obsTec;
+    public String fechaActualVisita;
+    public String valorObsTec = null;
     private ConstraintLayout todo;
     private ViewGroup container;
     private Bundle onsavedInstanceState;
@@ -77,11 +94,26 @@ public class HorasOrdenes extends Fragment implements View.OnClickListener, Loca
         // TecSec.setSelection(posTec);
 
         // Inflate the layout for this fragment
-
+        super.onCreate(savedInstanceState);
         setRetainInstance(true);
-
         View view = inflater.inflate(R.layout.activity_hora_ordenes, container, false);
 
+        cordLat = (TextView) view.findViewById(R.id.tv_Latitud);
+        cordLong = (TextView) view.findViewById(R.id.tv_Longitud);
+        Obs = view.findViewById(R.id.tv_Observaciones);
+        todo = view.findViewById(R.id.todo);
+        contenedorObservacionesTecnico=view.findViewById(R.id.contraintObservacionesTecnico);
+        btn1 = view.findViewById(R.id.rb_Visita);
+        bt2 = view.findViewById(R.id.rb_Ejecutada);
+        obsTec = view.findViewById(R.id.observaciones_Tecnico);
+
+        ejecVisita = view.findViewById(R.id.ejecVisita);
+
+/////////////////////////
+        Date objDate = new Date();
+        DateFormat hourFormat = new SimpleDateFormat("HH:mm:ss");
+        DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+/////////////////////////
         locationManager = (LocationManager)
                 getActivity().getSystemService(LOCATION_SERVICE);
         if (ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
@@ -95,63 +127,35 @@ public class HorasOrdenes extends Fragment implements View.OnClickListener, Loca
             return null;
         }
         locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 1000, 0, this);
-        return view;
-    }
 
-    @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        Obs = view.findViewById(R.id.tv_Observaciones);
-
-
-        //////////// acciones de botones de hora y fecha//////
-        //selectDate = view.findViewById(R.id.tv_Ejecucion);
-       // selectDate1 = view.findViewById(R.id.tv_PrimerVisita);
-        //selectDate2 = view.findViewById(R.id.tv_SegundaVisita);
-        todo = view.findViewById(R.id.todo);
-        ///////////////////////////////////////////////////////
-
-        ///////////contenedores y acciones de radiobuttons////
-        //contenedorParticular = view.findViewById(R.id.constrain_Ejecutada);
-       // contenedorCorporativo = view.findViewById(R.id.constrain_Visita);
-        contenedorObservacionesTecnico=view.findViewById(R.id.contraintObservacionesTecnico);
-        btn1 = view.findViewById(R.id.rb_Visita);
-        bt2 = view.findViewById(R.id.rb_Ejecutada);
-        obsTec = view.findViewById(R.id.observaciones_Tecnico);
-
-
-
-
-        /////////////////////////////////////////////////////
+        fechaActualVisita = (dateFormat.format(objDate)) + " " + (hourFormat.format(objDate));
         Obs.setText(request.obsMA);
-
-        ///////////////////GPS//////////////////////////////
-
-
-        cordLat = (TextView) view.findViewById(R.id.tv_Latitud);
-        cordLong = (TextView) view.findViewById(R.id.tv_Longitud);
-
-        ////////// fecaha, hora y radio buttons/////////
-      //  selectDate.setOnClickListener(this);
-       // selectDate1.setOnClickListener(this);
-      //  selectDate2.setOnClickListener(this);
-//        selectTime.setOnClickListener(this);
-//        selectTime2.setOnClickListener(this);
         bt2.setOnClickListener(this);
         btn1.setOnClickListener(this);
+        ejecVisita.setOnClickListener(this);
         comprobarGPSActivo();
+        ejecVisita.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                valorObsTec=obsTec.getText().toString();
+                if( valorObsTec.equals(null) || valorObsTec.equals("")) {
+                    Toast.makeText(getContext(), "Escriba sus observaciones", Toast.LENGTH_SHORT).show();
+                }else if (visita == 1){
+                    dialogoEjecutarVisita();
+                    //Toast.makeText(getContext(), "Estoy presionando este boton", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+        return view;
 
-
-
-        if(visita==1){
-            contenedorObservacionesTecnico.setVisibility(View.VISIBLE);
-        }
     }
-
 
 
     public void onClick(View view) {
         if (btn1.isChecked() == true) {
+            Toast.makeText(getContext(), "Escriba sus observaciones y presione GUARDAR", Toast.LENGTH_LONG).show();
             contenedorObservacionesTecnico.setVisibility(View.VISIBLE);
+            ejecVisita.setVisibility(View.VISIBLE);
             ejecutada = 0;
             visita = 1;
             ConstraintLayout.LayoutParams params = (ConstraintLayout.LayoutParams) todo.getLayoutParams();
@@ -176,6 +180,7 @@ public class HorasOrdenes extends Fragment implements View.OnClickListener, Loca
         if (bt2.isChecked() == true) {
 
             contenedorObservacionesTecnico.setVisibility(View.GONE);
+            ejecVisita.setVisibility(View.GONE);
             ejecutada = 1;
             visita = 0;
             mostrarParticular(true);
@@ -188,6 +193,9 @@ public class HorasOrdenes extends Fragment implements View.OnClickListener, Loca
             ejecutada = 1;
             visita = 0;
         }
+
+
+
 /*
         if (view == selectDate) {
             final Calendar c = Calendar.getInstance();
@@ -305,6 +313,7 @@ public class HorasOrdenes extends Fragment implements View.OnClickListener, Loca
         contenedorObservacionesTecnico.setVisibility(b ? View.GONE : View.VISIBLE);
     }
 
+
     /////////////////////////GPS///////////////////
     private boolean comprobarGPSActivo() {
         try {
@@ -357,6 +366,72 @@ public class HorasOrdenes extends Fragment implements View.OnClickListener, Loca
                     }
                 })
                 .show();
+    }
+
+    private void dialogoEjecutarVisita() {
+        new android.support.v7.app.AlertDialog.Builder(getContext())
+                .setTitle("GUARDAR")
+                .setMessage("La orden será registrada como VISITA")
+                .setPositiveButton("CANCELAR",
+                        new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+
+                            }
+                        })
+                .setNegativeButton("ACEPTAR",
+                        new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                EjecutarVisita();
+                                Intent intento = new Intent(getActivity(), Orden.class);
+                                intento.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                                startActivity(intento);
+                                Toast.makeText(getActivity(), "Orden enviada como visita.", Toast.LENGTH_LONG).show();
+                            }
+                        }).show();
+
+
+    }
+
+    public void EjecutarVisita(){
+
+        JSONObject jsonObject = new JSONObject();
+        JSONObject jsonObject1 = new JSONObject();
+        observacionesTecnico = obsTec.getText().toString();
+        if (visita == 1) {
+            request.ejecutarStatus = "V";
+            try{
+                jsonObject.put("ClvFactura", DeepConsModel.Clv_FACTURA);
+                jsonObject.put("ClvOrden", DeepConsModel.Clv_Orden);
+                jsonObject.put("ClvTecnico", Util.getClvTec(Util.preferences));
+                jsonObject.put("ClvTipSer", DeepConsModel.Clv_TipSer);
+                jsonObject.put("Contrato", DeepConsModel.Contrato);
+                jsonObject.put("FecEje", "");
+                jsonObject.put("FecSol", DeepConsModel.Fec_Sol);
+                jsonObject.put("Impresa", 1);
+                jsonObject.put("ListadeArticulos", "");
+                jsonObject.put("Obs", DeepConsModel.Obs + " " + observacionesTecnico);
+                jsonObject.put("Status", "V");
+                jsonObject.put("TecnicoCuadrilla", TecSecSelecc);
+                if (DeepConsModel.Visita1.equals("null") || DeepConsModel.Visita1.equals(" ") ){
+                    jsonObject.put("Visita1", fechaActualVisita);
+                    jsonObject.put("Visita2", "");
+                }else{
+                    jsonObject.put("Visita1", DeepConsModel.Visita1);
+                    jsonObject.put("Visita2", fechaActualVisita);
+                }
+                jsonObject1.put("CLV_ORDEN",  Util.getClvOrden(Util.preferences));
+                jsonObject1.put("Clv_Tecnico", Util.getClvTec(Util.preferences));
+                jsonObject1.put("OP2", 0);
+                jsonObject1.put("OPCION", "M");
+                jsonObject1.put("STATUS", "E");
+
+                request.getValidaOrdSer(getActivity(),jsonObject,jsonObject1);
+            }catch (Exception e){}
+
+        }
+
     }
 
     private boolean isCoordenadas = false;

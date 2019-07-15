@@ -1818,7 +1818,6 @@ public class Request extends AppCompatActivity {
                     System.out.println("Entra");
                      stringValidaTrabajos = String.valueOf(response.body().getAsJsonPrimitive("GetSP_ValidaGuardaOrdSerAparatosResult"));
 
-                    //Toast.makeText(context, "Error: " + stringValidaTrabajos, Toast.LENGTH_LONG).show();
                 }
             }
 

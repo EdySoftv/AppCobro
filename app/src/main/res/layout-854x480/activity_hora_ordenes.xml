@@ -238,8 +238,8 @@
 
             <TextView
                 android:id="@+id/textView21"
-                android:layout_width="450dp"
-                android:layout_height="wrap_content"
+                android:layout_width="305dp"
+                android:layout_height="34dp"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
                 android:text="@string/coordenadas"
@@ -294,6 +294,26 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/textView23"
                 app:layout_constraintTop_toTopOf="@+id/textView23" />
+
+            <Button
+                android:id="@+id/ejecVisita"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="8dp"
+                android:background="@drawable/boton"
+                android:backgroundTint="@color/colorPrimary"
+                android:enabled="true"
+                android:text="@string/guardar"
+                android:textColor="#fff"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="@+id/tv_Longitud"
+                app:layout_constraintHorizontal_bias="0.522"
+                app:layout_constraintStart_toStartOf="@+id/textView23"
+                app:layout_constraintTop_toBottomOf="@+id/textView23" />
+
         </android.support.constraint.ConstraintLayout>
     </android.support.constraint.ConstraintLayout>
 </ScrollView>

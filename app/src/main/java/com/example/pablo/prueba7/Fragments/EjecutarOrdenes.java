@@ -57,7 +57,7 @@ public class EjecutarOrdenes extends Fragment {
     public static int añoE, mesE, diaE, horaE, minutoE;
     public static  int posTec,TecSecSelecc = -1;
     public static Spinner TecSec;
-    private HorasOrdenes horas = new HorasOrdenes();
+    public HorasOrdenes horas = new HorasOrdenes();
     private Request request = new Request();
     public static ProgressDialog dialogEjecutar;
     public static String ejecutarStatus;
@@ -154,11 +154,11 @@ public class EjecutarOrdenes extends Fragment {
                                     }catch (Exception e){}
                                 }
                                 if(request.firma==false){
-                                    Ejecutar();
+                                    Ejecutar(getContext());
                                     request.ejecutarStatus="E";
                                 }
                             }else{
-                                Ejecutar();
+                                Ejecutar(getContext());
                                 request.ejecutarStatus="V";
                             }
 
@@ -252,7 +252,7 @@ public class EjecutarOrdenes extends Fragment {
                         new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-                                Ejecutar();
+                                Ejecutar(getContext());
                             }
                         })
                 .setNegativeButton("CANCELAR",
@@ -266,7 +266,7 @@ public class EjecutarOrdenes extends Fragment {
 
     }
 
-    public  void Ejecutar(){
+    public void Ejecutar(Context cxt){
         System.out.println("Ejecutar");
         JSONObject jsonObject = new JSONObject();
         JSONObject jsonObject1 = new JSONObject();
@@ -310,7 +310,7 @@ public class EjecutarOrdenes extends Fragment {
                 jsonObject1.put("OPCION", "M");
                 jsonObject1.put("STATUS", "E");
 
-                //request.getValidaOrdSer(getActivity(),jsonObject,jsonObject1);
+                request.getValidaOrdSer(getActivity(),jsonObject,jsonObject1);
                 if (retiro == true){
                     request.send_aparat(getContext());
                 }

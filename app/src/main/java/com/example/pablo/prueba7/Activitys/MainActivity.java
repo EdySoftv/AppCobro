@@ -241,15 +241,18 @@ public class MainActivity extends AppCompatActivity implements ActionBar.TabList
             if(visita==1){
                 HorasReportes.statusHora = "V";
                 Estatus="V";
-                if(ValidaRegreso==1){
+                mViewPager.setCurrentItem(0);
+                getSupportActionBar().setSelectedNavigationItem(0);
+
+          /*      if(ValidaRegreso==1){
                     mViewPager.setCurrentItem(0);
                     getSupportActionBar().setSelectedNavigationItem(0);
                     ValidaRegreso=0;
 
                 }else{
                     if(positionTab == 0){
-                        /*mViewPager.setCurrentItem(0);
-                        getSupportActionBar().setSelectedNavigationItem(0);*/
+                        *//*mViewPager.setCurrentItem(0);
+                        getSupportActionBar().setSelectedNavigationItem(0);*//*
                         ValidaRegreso=3;
 
                     }
@@ -270,7 +273,7 @@ public class MainActivity extends AppCompatActivity implements ActionBar.TabList
                         getSupportActionBar().setSelectedNavigationItem(3);
                         ValidaRegreso=1;
                     }
-                }
+                }*/
 
 
             }
