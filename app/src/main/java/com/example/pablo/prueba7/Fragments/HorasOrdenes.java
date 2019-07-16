@@ -42,6 +42,7 @@ import com.example.pablo.prueba7.sampledata.Util;
 import org.json.JSONObject;
 
 import static android.content.Context.LOCATION_SERVICE;
+import static com.example.pablo.prueba7.Activitys.MainActivity.mViewPager;
 import static com.example.pablo.prueba7.Adapters.TrabajosAdapter.retiro;
 import static com.example.pablo.prueba7.Fragments.EjecutarOrdenes.TecSecSelecc;
 import static com.example.pablo.prueba7.Fragments.EjecutarOrdenes.dialogEjecutar;
@@ -192,6 +193,8 @@ public class HorasOrdenes extends Fragment implements View.OnClickListener, Loca
             selectDate2.setText("");*/
             ejecutada = 1;
             visita = 0;
+            mViewPager.setCurrentItem(1);
+            Toast.makeText(getContext(), "Sección de trabajos", Toast.LENGTH_SHORT).show();
         }
 
 

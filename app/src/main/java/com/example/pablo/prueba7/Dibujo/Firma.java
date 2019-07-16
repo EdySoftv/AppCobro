@@ -24,7 +24,6 @@ import java.nio.charset.StandardCharsets;
 
 
 import static com.example.pablo.prueba7.Adapters.QuejasAdapter.clvReport;
-import static com.example.pablo.prueba7.Request.Request.validaExisteFirmaBool;
 
 public class Firma extends AppCompatActivity {
      Dibujar dibujar;
@@ -68,11 +67,9 @@ public class Firma extends AppCompatActivity {
                         jsonObject.put("FirmaCliente",Firma.imagenAEnviar);
                         jsonObject1.put("ObjLista",jsonObject);
                         request.addFirma(getApplicationContext(),jsonObject1);
-                        validaExisteFirmaBool = true;
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
-
 
                 }
                 if(Util.getTipoDescarga(Util.preferences).equals("Q")){
@@ -89,9 +86,8 @@ public class Firma extends AppCompatActivity {
                         e.printStackTrace();
                     }
                 }
-
-
         }
+
         return true;
     }
 

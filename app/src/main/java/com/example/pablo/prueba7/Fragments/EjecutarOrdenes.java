@@ -93,7 +93,6 @@ public class EjecutarOrdenes extends Fragment {
 //        reiniciar.setEnabled(false);
         salir = view.findViewById(R.id.salirEjecutarOrd);
 
-        validaExisteFirmaBool=false;
         if(horas.visita == 1){
             firmar.setVisibility(View.GONE);
             TecSec.setVisibility(View.GONE);

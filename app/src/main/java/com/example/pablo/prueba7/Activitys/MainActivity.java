@@ -44,7 +44,7 @@ import static com.example.pablo.prueba7.Request.Request.stringValidaTrabajos;
 
 
 public class MainActivity extends AppCompatActivity implements ActionBar.TabListener, ViewPager.OnPageChangeListener {
-    public ViewPager mViewPager;
+    public static ViewPager mViewPager;
     ScrollView hzScrollView;
     Button info;
     private Boolean cambio = false;
@@ -75,6 +75,7 @@ public class MainActivity extends AppCompatActivity implements ActionBar.TabList
 
         ejecutada = 0;
         visita = 0;
+
         JSONObject jsonObject = new JSONObject();
         try{
             jsonObject.put("CLV_ORDEN",  Util.getClvOrden(Util.preferences));
