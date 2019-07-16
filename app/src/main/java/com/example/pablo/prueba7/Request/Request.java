@@ -3176,92 +3176,12 @@ try{
                     String dato;
                     dato = String.valueOf(response.body().getAsJsonPrimitive("ValidaExisteTblFirmaClienteResult"));
                     if (dato.equals("1")) {
-                        validaExisteFirmaBool=true;
-                        System.out.println("Ejecutar");
-                        JSONObject jsonObject = new JSONObject();
-                        JSONObject jsonObject1 = new JSONObject();
-                        final Calendar c = Calendar.getInstance();
-                        EjecutarOrdenes.añoE = c.get(Calendar.YEAR);
-                        EjecutarOrdenes.mesE = c.get(Calendar.MONTH);
-                        EjecutarOrdenes.diaE = c.get(Calendar.DAY_OF_MONTH);
-                        EjecutarOrdenes.horaE = c.get(Calendar.HOUR);
-                        EjecutarOrdenes.minutoE = c.get(Calendar.MINUTE);
-                        String ab;
-                        if (( EjecutarOrdenes.mesE+1) < 10) {
-                            ab = "0" + ( EjecutarOrdenes.mesE+1);
-                        } else {
-                            ab = String.valueOf( EjecutarOrdenes.mesE+1);
-                        }
-                        EjecutarOrdenes.fechaHoy =  EjecutarOrdenes.diaE + "/" + ab + "/" +  EjecutarOrdenes.añoE;
-                        EjecutarOrdenes.horaHoy =  EjecutarOrdenes.horaE + ":" +  EjecutarOrdenes.minutoE;
-                        if (HorasOrdenes.ejecutada == 1) {
-                            EjecutarOrdenes.eject.setEnabled(false);
-                            ejecutarStatus="E";
-                            try {
-                                jsonObject.put("ClvFactura", DeepConsModel.Clv_FACTURA);
-                                jsonObject.put("ClvOrden", DeepConsModel.Clv_Orden);
-                                jsonObject.put("ClvTecnico", Util.getClvTec(Util.preferences));
-                                jsonObject.put("ClvTipSer", DeepConsModel.Clv_TipSer);
-                                jsonObject.put("Contrato", DeepConsModel.Contrato);
-                                jsonObject.put("FecEje",  EjecutarOrdenes.fechaActual);
-                                jsonObject.put("FecSol", DeepConsModel.Fec_Sol);
-                                jsonObject.put("Impresa", 1);
-                                jsonObject.put("ListadeArticulos", "");
-                                jsonObject.put("Obs", DeepConsModel.Obs);
-                                jsonObject.put("Status", "E");
-                                jsonObject.put("TecnicoCuadrilla", EjecutarOrdenes.TecSecSelecc);
-                                jsonObject.put("Visita1", "");
-                                jsonObject.put("Visita2", "");
+                        validaExisteFirmaBool = true;
 
-
-                                jsonObject1.put("CLV_ORDEN",  Util.getClvOrden(Util.preferences));
-                                jsonObject1.put("Clv_Tecnico", Util.getClvTec(Util.preferences));
-                                jsonObject1.put("OP2", 0);
-                                jsonObject1.put("OPCION", "M");
-                                jsonObject1.put("STATUS", "E");
-                                getValidaOrdSer(activity,jsonObject,jsonObject1);
-                            }catch (Exception e){}
-
-
-                        }
-                        if ( HorasOrdenes.visita == 1) {
-                            ejecutarStatus="V";
-                            try{
-                                jsonObject.put("ClvFactura", DeepConsModel.Clv_FACTURA);
-                                jsonObject.put("ClvOrden", DeepConsModel.Clv_Orden);
-                                jsonObject.put("ClvTecnico", Util.getClvTec(Util.preferences));
-                                jsonObject.put("ClvTipSer", DeepConsModel.Clv_TipSer);
-                                jsonObject.put("Contrato", DeepConsModel.Contrato);
-                                jsonObject.put("FecEje", "");
-                                jsonObject.put("FecSol", DeepConsModel.Fec_Sol);
-                                jsonObject.put("Impresa", 1);
-                                jsonObject.put("ListadeArticulos", "");
-                                jsonObject.put("Obs", DeepConsModel.Obs + " " + observacionesTecnico);
-                                jsonObject.put("Status", "V");
-                                jsonObject.put("TecnicoCuadrilla", EjecutarOrdenes.TecSecSelecc);
-                                if (DeepConsModel.Visita1.equals("null") || DeepConsModel.Visita1.equals(" ") ){
-                                    jsonObject.put("Visita1",  EjecutarOrdenes.fechaActual);
-                                    jsonObject.put("Visita2", "");
-                                }else{
-                                    jsonObject.put("Visita1", DeepConsModel.Visita1);
-                                    jsonObject.put("Visita2",  EjecutarOrdenes.fechaActual);
-                                }
-                                System.out.println("VAL 2");
-                                jsonObject1.put("CLV_ORDEN",  Util.getClvOrden(Util.preferences));
-                                jsonObject1.put("Clv_Tecnico", Util.getClvTec(Util.preferences));
-                                jsonObject1.put("OP2", 0);
-                                jsonObject1.put("OPCION", "M");
-                                jsonObject1.put("STATUS", "V");
-                                getValidaOrdSer(activity,jsonObject,jsonObject1);
-                            }catch (Exception e){}
-
-                        }
                     }
                     if (dato.equals("0")) {
-                        validaExisteFirmaBool=false;
-                            EjecutarOrdenes.dialogEjecutar.dismiss();
-                        Toast.makeText(context, "Es obligatoria la firma", Toast.LENGTH_SHORT).show();
-
+                        validaExisteFirmaBool = false;
+                        //Toast.makeText(context, "Es obligatoria la firma", Toast.LENGTH_SHORT).show();
                     }
                 }
             }

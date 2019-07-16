@@ -371,7 +371,7 @@ public class HorasOrdenes extends Fragment implements View.OnClickListener, Loca
     private void dialogoEjecutarVisita() {
         new android.support.v7.app.AlertDialog.Builder(getContext())
                 .setTitle("GUARDAR")
-                .setMessage("La orden será registrada como VISITA")
+                .setMessage("La visita será registrada con fecha:  " + fechaActualVisita)
                 .setPositiveButton("CANCELAR",
                         new DialogInterface.OnClickListener() {
                             @Override

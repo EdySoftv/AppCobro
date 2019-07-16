@@ -79,8 +79,9 @@ public class Inicio extends AppCompatActivity
         Util.preferences = getApplicationContext().getSharedPreferences("credenciales", Context.MODE_PRIVATE);
         if (!isOnline()) {
             dialogInicio.dismiss();
-            Toast.makeText(getApplicationContext(), "No cuenta con conexión a Internet", Toast.LENGTH_LONG).show();
-            finish();
+            EstatusInternet(getApplicationContext());
+           // Toast.makeText(getApplicationContext(), "No cuenta con conexión a Internet", Toast.LENGTH_LONG).show();
+           // finish();
 
         }else{
             try{
@@ -112,6 +113,18 @@ public class Inicio extends AppCompatActivity
 
     }
 
+public void EstatusInternet (Context ctx){
+    ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+    NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
+
+    if (networkInfo != null && networkInfo.isConnected()) {
+        Toast.makeText(getApplicationContext(), "Internet Activo", Toast.LENGTH_LONG).show();
+    } else {
+        dialogoSalidaInternet();
+
+    }
+}
+
 
     @Override
     public void onBackPressed() {
@@ -122,6 +135,29 @@ public class Inicio extends AppCompatActivity
         dialogoSalida(this);
         //}
     }
+
+
+
+    private void dialogoSalidaInternet() {
+        new AlertDialog.Builder(this)
+                .setTitle("Sin conexión")
+                .setMessage("Para continuar debes tener conexión a internet")
+                .setPositiveButton("Aceptar",
+                        new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                finish();
+                            }
+                        })
+                .setNegativeButton("",
+                        new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+
+                            }
+                        }).show();
+    }
+
 
     public void dialogoSalida(final Context ctx) {
         new AlertDialog.Builder(ctx)

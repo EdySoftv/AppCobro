@@ -40,7 +40,7 @@ import static com.example.pablo.prueba7.Adapters.TrabajosAdapter.retiro;
 import static com.example.pablo.prueba7.Fragments.HorasOrdenes.obsTec;
 import static com.example.pablo.prueba7.Fragments.HorasOrdenes.observacionesTecnico;
 import static com.example.pablo.prueba7.Fragments.HorasOrdenes.visita1;
-
+import static com.example.pablo.prueba7.Request.Request.validaExisteFirmaBool;
 
 
 /**
@@ -93,7 +93,7 @@ public class EjecutarOrdenes extends Fragment {
 //        reiniciar.setEnabled(false);
         salir = view.findViewById(R.id.salirEjecutarOrd);
 
-        request.validaExisteFirmaBool=false;
+        validaExisteFirmaBool=false;
         if(horas.visita == 1){
             firmar.setVisibility(View.GONE);
             TecSec.setVisibility(View.GONE);
@@ -137,34 +137,36 @@ public class EjecutarOrdenes extends Fragment {
             @Override
             public void onClick(View v) {
 
-                dialogEjecutar.show();
+
                 observacionesTecnico = obsTec.getText().toString();
 
-                        try {
+                try{
+                    JSONObject jsonObject = new JSONObject();
+                    jsonObject.put("clvOrden",DeepConsModel.Clv_Orden);
+                    jsonObject.put("clvReporte",0);
+                    request.validaExisteFirma(getContext(),jsonObject,getActivity());
+                }catch (Exception e){}
 
                             if(horas.ejecutada==1){
                                 if(request.firma==true){
                                         request.ejecutarStatus="E";
 
-                                    try{
-                                        JSONObject jsonObject = new JSONObject();
-                                        jsonObject.put("clvOrden",DeepConsModel.Clv_Orden);
-                                        jsonObject.put("clvReporte",0);
-                                        request.validaExisteFirma(getContext(),jsonObject,getActivity());
-                                    }catch (Exception e){}
-                                }
-                                if(request.firma==false){
-                                    Ejecutar(getContext());
-                                    request.ejecutarStatus="E";
-                                }
-                            }else{
-                                Ejecutar(getContext());
-                                request.ejecutarStatus="V";
-                            }
+                                        if(validaExisteFirmaBool == true){
+                                            dialogoEjecutar1();
+                                            validaExisteFirmaBool = true;
 
-                        } catch (Exception e) {
+                                        }else if (validaExisteFirmaBool == false ){
+                                            dialogoRequiereFirma();
+                                        }
+                                }else if (request.firma == false){
+                                    request.ejecutarStatus="E";
+                                    dialogoEjecutar1();
+                                }
+
+                            }
                             dialogEjecutar.dismiss();
-                        }
+
+
                     }
                 /*}else {
                     if(horas.ejecutada==1){
@@ -247,12 +249,18 @@ public class EjecutarOrdenes extends Fragment {
     private void dialogoEjecutar1() {
         new AlertDialog.Builder(getContext())
                 .setTitle("Ejecutar Orden")
-                .setMessage("¿Desea Ejecutar Orden?")
+                .setMessage("¿Desea ejecutar la orden?")
                 .setPositiveButton("ACEPTAR",
                         new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-                                Ejecutar(getContext());
+                                dialogEjecutar.show();
+                                Ejecutar();
+                                Intent intento = new Intent(getActivity(), Orden.class);
+                                intento.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                                startActivity(intento);
+                                Toast.makeText(getActivity(), "Orden ejecutada.", Toast.LENGTH_LONG).show();
+
                             }
                         })
                 .setNegativeButton("CANCELAR",
@@ -262,28 +270,31 @@ public class EjecutarOrdenes extends Fragment {
                                 dialogEjecutar.dismiss();
                             }
                         }).show();
-
-
     }
 
-    public void Ejecutar(Context cxt){
-        System.out.println("Ejecutar");
+    private void dialogoRequiereFirma() {
+        new AlertDialog.Builder(getContext())
+                .setTitle("ADVERTENCIA")
+                .setMessage("Para completar la orden se requiere la firma del cliente")
+                .setPositiveButton("ACEPTAR",
+                        new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+
+                            }
+                        })
+                .setNegativeButton("",
+                        new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                            }
+                        }).show();
+    }
+
+    public void Ejecutar(){
         JSONObject jsonObject = new JSONObject();
         JSONObject jsonObject1 = new JSONObject();
-        final Calendar c = Calendar.getInstance();
-        añoE = c.get(Calendar.YEAR);
-        mesE = c.get(Calendar.MONTH);
-        diaE = c.get(Calendar.DAY_OF_MONTH);
-        horaE = c.get(Calendar.HOUR);
-        minutoE = c.get(Calendar.MINUTE);
-        String ab;
-        if ((mesE+1) < 10) {
-            ab = "0" + (mesE+1);
-        } else {
-            ab = String.valueOf(mesE+1);
-        }
-        fechaHoy = diaE + "/" + ab + "/" + añoE;
-        horaHoy = horaE + ":" + minutoE;
+
         if (horas.ejecutada == 1) {
 
             ejecutarStatus="E";
@@ -318,41 +329,7 @@ public class EjecutarOrdenes extends Fragment {
 
 
         }
-        if (horas.visita == 1) {
-            ejecutarStatus="V";
-            try{
-                jsonObject.put("ClvFactura", DeepConsModel.Clv_FACTURA);
-                jsonObject.put("ClvOrden", DeepConsModel.Clv_Orden);
-                jsonObject.put("ClvTecnico", Util.getClvTec(Util.preferences));
-                jsonObject.put("ClvTipSer", DeepConsModel.Clv_TipSer);
-                jsonObject.put("Contrato", DeepConsModel.Contrato);
-                jsonObject.put("FecEje", "");
-                jsonObject.put("FecSol", DeepConsModel.Fec_Sol);
-                jsonObject.put("Impresa", 1);
-                jsonObject.put("ListadeArticulos", "");
-                jsonObject.put("Obs", DeepConsModel.Obs + " " + observacionesTecnico);
-                jsonObject.put("Status", "V");
-                jsonObject.put("TecnicoCuadrilla", TecSecSelecc);
-                if (DeepConsModel.Visita1.equals("null") || DeepConsModel.Visita1.equals(" ") ){
-                    jsonObject.put("Visita1", fechaActual);
-                    jsonObject.put("Visita2", "");
-                }else{
-                    jsonObject.put("Visita1", DeepConsModel.Visita1);
-                    jsonObject.put("Visita2", fechaActual);
-                }
-                System.out.println("VAL 2");
 
-                jsonObject1.put("CLV_ORDEN",  Util.getClvOrden(Util.preferences));
-                jsonObject1.put("Clv_Tecnico", Util.getClvTec(Util.preferences));
-                jsonObject1.put("OP2", 0);
-                jsonObject1.put("OPCION", "M");
-                jsonObject1.put("STATUS", "V");
-
-
-                request.getValidaOrdSer(getActivity(),jsonObject,jsonObject1);
-            }catch (Exception e){}
-
-        }
 
     }
 }
