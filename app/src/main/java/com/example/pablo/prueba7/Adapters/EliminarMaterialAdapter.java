@@ -1,5 +1,6 @@
 package com.example.pablo.prueba7.Adapters;
 
+import android.app.Activity;
 import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.constraint.ConstraintLayout;
@@ -11,6 +12,11 @@ import android.widget.ImageButton;
 import android.widget.Toast;
 
 import com.example.pablo.prueba7.R;
+import com.example.pablo.prueba7.Request.Request;
+import com.example.pablo.prueba7.sampledata.Util;
+import com.google.gson.JsonObject;
+
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 
@@ -18,7 +24,8 @@ public class EliminarMaterialAdapter extends RecyclerView.Adapter<EliminarMateri
 
     ArrayList<Integer>material;
     Context context;
-    ConstraintLayout constraintLayout;
+    Activity activity;
+    Request request = new Request();
 
     public static  class materialesViewHolder extends  RecyclerView.ViewHolder{
 
@@ -29,9 +36,10 @@ public class EliminarMaterialAdapter extends RecyclerView.Adapter<EliminarMateri
 
         }
     }
-    public EliminarMaterialAdapter(ArrayList<Integer> material, Context context){
+    public EliminarMaterialAdapter(ArrayList<Integer> material, Context context, Activity activity){
         this.material=material;
         this.context=context;
+        this.activity=activity;
     }
     @Override
     public int getItemCount() {
@@ -56,7 +64,14 @@ public class EliminarMaterialAdapter extends RecyclerView.Adapter<EliminarMateri
             @Override
             public void onClick(View v) {
 
-                Toast.makeText(context,String.valueOf(position) ,Toast.LENGTH_SHORT ).show();
+                try{
+                    JSONObject jsonObject = new JSONObject();
+                    jsonObject.put("clvOrden", Util.getClvOrden(Util.preferences));
+                    jsonObject.put("noArticulo",material.get(position) );
+                    request.eliminarPreDescarga(context,jsonObject,activity );
+                }catch (Exception e){}
+
+
             }
         });
 

@@ -165,6 +165,10 @@ public interface Service {
     Call<JsonObject> getTipoMat();
     @POST(Constants.URL_VALIDAPRE)
     Call<JsonObject> getValidaPre();
+
+    @POST(Constants.URL_ELIMINA_PREDESCARGA)
+    Call<JsonObject> eliminaPreDescarga();
+
     @POST(Constants.URL_ADD_PREDESCARGA)
     Call<JsonObject> addPreDescarga();
     @POST(Constants.URL_GET_PREDESCARGA)

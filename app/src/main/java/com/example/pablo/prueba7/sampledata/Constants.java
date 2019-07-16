@@ -65,6 +65,7 @@ public class Constants {
     public static final String URL_GET_LLENAEXT="UspChecaSiTieneExtensiones/GetUspLlenaComboExtensionesList";
     public static final String URL_GET_TIPOMAT="OrdSer/GetSoftv_ObtenTipoMaterial";
     public static final String URL_VALIDAPRE="AplicacionMovil/ValidaExisteTblPreDescargaMaterial";
+    public static final String URL_ELIMINA_PREDESCARGA="AplicacionMovil/EliminarTblPreDescargaMaterial";
     public static final String URL_ADD_PREDESCARGA="AplicacionMovil/InsertaTblPreDescargaMaterial";
     public static final String URL_GET_PREDESCARGA="AplicacionMovil/dameTblPreDescargaMaterial";
     public static final String URL_ADD_FIRMA="AplicacionMovil/InsertaTblFirmaCliente";

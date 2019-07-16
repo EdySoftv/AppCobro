@@ -76,7 +76,7 @@ public class MaterialesOrdenes extends Fragment {
 
         scrollViewM = view.findViewById(R.id.scrollhorizontal);
         final TablaAdapter tablaAdapter = new TablaAdapter(getActivity(), tabla);
-        tablaAdapter.agregarCabecera(R.array.cabecera_tabla);
+
         if(request.extencionesMat==true){
             spinnerExtMat.setVisibility(View.VISIBLE);
         }else{

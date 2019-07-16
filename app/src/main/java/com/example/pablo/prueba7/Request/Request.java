@@ -2665,6 +2665,9 @@ try{
                 }
                 EliminarMaterialAdapter adapter;
                 ConstraintLayout constraintLayout;
+                try {
+                    MaterialesOrdenes.tabla.removeAllViews();
+                }catch (Exception e){}
                 array.listaTabla.clear();
                 array.clv_Material.clear();
                 if (response.code() == 200) {
@@ -2682,6 +2685,7 @@ try{
                         }
                     }
                     try {
+                        tablaAdapter.agregarCabecera(R.array.cabecera_tabla);
                         MaterialesOrdenes.scrollViewM.setVisibility(View.VISIBLE);
                         MaterialesOrdenes.tabla.setVisibility(View.VISIBLE);
                         for (int a = 0; a < array.listaTabla.size(); a++) {
@@ -2691,7 +2695,7 @@ try{
                         MaterialesOrdenes.elimarMaterialesList.setVisibility(View.VISIBLE);
                         RecyclerView.LayoutManager layoutManager = new GridLayoutManager(context,1);
                         MaterialesOrdenes.elimarMaterialesList.setLayoutManager(layoutManager);
-                        adapter = new EliminarMaterialAdapter(array.clv_Material,context);
+                        adapter = new EliminarMaterialAdapter(array.clv_Material,context,activity);
                         MaterialesOrdenes.elimarMaterialesList.setAdapter(adapter);
 
 
@@ -2898,6 +2902,26 @@ try{
             }
         });
     }
+
+    public void eliminarPreDescarga(final Context context,final JSONObject jsonObject,final Activity activity) {
+        Call<JsonObject> call = services.RequestPost(context, jsonObject).eliminaPreDescarga();
+        call.enqueue(new Callback<JsonObject>() {
+            @Override
+            public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
+                if (response.code() == 200) {
+                        getPredescarga(activity,context );
+                } else {
+                    Toast.makeText(context, "Error al eliminar material", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<JsonObject> call, Throwable t) {
+                Toast.makeText(context, "Error al eliminar material", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
 
     public void TryDeepConsulta1(JsonObject userJson) {
         try {
