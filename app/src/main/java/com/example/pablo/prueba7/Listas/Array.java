@@ -109,6 +109,7 @@ public class Array {
     public static ArrayList <List<dameTblPreDescargaMaterialResultModel>>dataPreDescarga;
     public static ArrayList<String> descripcionExt= new ArrayList<String>();
     public static ArrayList<ArrayList<String>> listaTabla= new ArrayList<ArrayList<String>>();
+    public static  ArrayList<Integer> clv_Material;
 
     /////////////////
     public static ArrayList<List<mediosPregunta>> dataMediosPregunta;

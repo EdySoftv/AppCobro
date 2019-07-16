@@ -292,18 +292,29 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/constrain_Metraje" />
-            <!---->
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/eliminarMaterialesList"
+                android:layout_width="30dp"
+                android:layout_height="0dp"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="@+id/scrollhorizontal"
+                app:layout_constraintStart_toStartOf="parent" />
+
+
+
             <HorizontalScrollView
                 android:id="@+id/scrollhorizontal"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
                 android:layout_marginTop="16dp"
                 android:layout_marginBottom="8dp"
-                android:scrollbars="horizontal"
                 android:visibility="gone"
+                android:scrollbars="horizontal"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/eliminarMaterialesList"
                 app:layout_constraintTop_toBottomOf="@+id/agregarMaterial">
 
                 <LinearLayout
@@ -318,7 +329,15 @@
                         android:id="@+id/tabla"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:visibility="visible" />
+                        android:visibility="visible">
+
+                        <TableRow
+                            android:id="@+id/Accion"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content">
+                        </TableRow>
+
+                    </TableLayout>
                 </LinearLayout>
             </HorizontalScrollView>
         </android.support.constraint.ConstraintLayout>

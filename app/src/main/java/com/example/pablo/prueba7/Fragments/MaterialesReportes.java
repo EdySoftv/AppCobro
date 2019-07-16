@@ -12,6 +12,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.HorizontalScrollView;
+import android.widget.ImageButton;
 import android.widget.Spinner;
 import android.widget.TableLayout;
 import android.widget.Toast;
@@ -46,6 +47,7 @@ public class MaterialesReportes extends Fragment {
     Button agragarDMR;
     public static int posDescMatR,posClasMatR,posExtMatR;
     int seleccionR,seleccionExteR;
+    public static ImageButton imageButtonR;
 
 
     public MaterialesReportes() {
@@ -75,7 +77,7 @@ public class MaterialesReportes extends Fragment {
         mFER=view.findViewById(R.id.FinalEDMR);
         tablaR = view.findViewById(R.id.tablaR);
         horizontalScrollViewR = view.findViewById(R.id.scrollhorizontalR);
-        final TablaAdapter tablaAdapter = new TablaAdapter(getActivity(), MaterialesReportes.tablaR);
+        final TablaAdapter tablaAdapter = new TablaAdapter(getActivity(), tablaR);
         tablaAdapter.agregarCabecera(R.array.cabecera_tabla);
         if(extencionesMat==true){
             spinnerExtMatR.setVisibility(View.VISIBLE);

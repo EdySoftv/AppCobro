@@ -1,7 +1,10 @@
 package com.example.pablo.prueba7.Fragments;
 import android.os.Bundle;
 import android.support.constraint.ConstraintLayout;
+import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +13,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.HorizontalScrollView;
+import android.widget.ImageButton;
 import android.widget.Spinner;
 import android.widget.TableLayout;
 import android.widget.Toast;
@@ -32,6 +36,7 @@ public class MaterialesOrdenes extends Fragment {
     private ViewGroup container;
     public static HorizontalScrollView scrollViewM;
     public static TableLayout tabla;
+    public static RecyclerView elimarMaterialesList;
     Request request = new Request();
     EditText pieza,mII,mIE,mFI,mFE;
     public static int clvTipoDescMat,idArticuloDM,cantidadDM,idInventarioMD,piezaSer, metros, totalDM,IIDM,IFDM,EIMD,EFDM;
@@ -39,6 +44,7 @@ public class MaterialesOrdenes extends Fragment {
     public static Spinner descripcionMat,clasificacionMat,spinnerExtMat;
     public static ConstraintLayout extMat, piezasMat,metrosMat;
     Button agragarDM;
+
     int seleccion,seleccionExte;
     public static int posDescMat,posClasMat,posExtMat;
 
@@ -59,6 +65,7 @@ public class MaterialesOrdenes extends Fragment {
         piezasMat = view.findViewById(R.id.constrain_Cantidad);
         metrosMat = view.findViewById(R.id.constrain_Metraje);
         spinnerExtMat = view.findViewById(R.id.extencionesDescarga);
+        elimarMaterialesList = view.findViewById(R.id.eliminarMaterialesList);
         agragarDM=view.findViewById(R.id.agregarMaterial);
         pieza = view.findViewById(R.id.piezaMD);
         mII = view.findViewById(R.id.InicialIDM);
@@ -66,8 +73,9 @@ public class MaterialesOrdenes extends Fragment {
         mIE = view.findViewById(R.id.InicialEDM);
         mFE=view.findViewById(R.id.FinalEDM);
         tabla = view.findViewById(R.id.tabla);
+
         scrollViewM = view.findViewById(R.id.scrollhorizontal);
-        final TablaAdapter tablaAdapter = new TablaAdapter(getActivity(), MaterialesOrdenes.tabla);
+        final TablaAdapter tablaAdapter = new TablaAdapter(getActivity(), tabla);
         tablaAdapter.agregarCabecera(R.array.cabecera_tabla);
         if(request.extencionesMat==true){
             spinnerExtMat.setVisibility(View.VISIBLE);
@@ -149,6 +157,8 @@ agragarDM.setOnClickListener(new View.OnClickListener() {
                if(seleccionExte==0){
                    Toast.makeText(getContext(),"Seleccione una extensión",Toast.LENGTH_SHORT).show();
                }else{
+
+
                    EjecutarDescargaMaterial();
                }
            }else{
@@ -157,6 +167,7 @@ agragarDM.setOnClickListener(new View.OnClickListener() {
         }
 }
 });
+
 
         return view;
     }

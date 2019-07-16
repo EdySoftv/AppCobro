@@ -5,9 +5,11 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.graphics.Color;
 import android.os.Build;
 import android.support.annotation.RequiresApi;
+import android.support.constraint.ConstraintLayout;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -18,8 +20,10 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.Spinner;
+import android.widget.TableRow;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -31,6 +35,7 @@ import com.example.pablo.prueba7.Activitys.CambioAparato;
 import com.example.pablo.prueba7.Activitys.ReporteAsignacion;
 import com.example.pablo.prueba7.Activitys.Reportes;
 import com.example.pablo.prueba7.Adapters.ArbolAdapter;
+import com.example.pablo.prueba7.Adapters.EliminarMaterialAdapter;
 import com.example.pablo.prueba7.Adapters.GraficaAdapter;
 import com.example.pablo.prueba7.Adapters.OrdenesAdapter;
 import com.example.pablo.prueba7.Adapters.TablaAdapter;
@@ -2653,11 +2658,15 @@ try{
             @Override
             public void onResponse(Call<JSONPreDescarga> call, Response<JSONPreDescarga> response) {
                 final TablaAdapter tablaAdapter = new TablaAdapter(activity, MaterialesOrdenes.tabla);
+                array.clv_Material = new ArrayList<>();
                 try {
                     tablaAdapter.eliminarFila(1);
                 } catch (Exception e) {
                 }
+                EliminarMaterialAdapter adapter;
+                ConstraintLayout constraintLayout;
                 array.listaTabla.clear();
+                array.clv_Material.clear();
                 if (response.code() == 200) {
                     JSONPreDescarga jsonResponse = response.body();
                     array.dataPreDescarga = new ArrayList<List<dameTblPreDescargaMaterialResultModel>>(asList(jsonResponse.getdameTblPreDescargaMaterialResultModel()));
@@ -2666,14 +2675,10 @@ try{
                         List<dameTblPreDescargaMaterialResultModel> dat = itdata.next();
                         for (int i = 0; i < dat.size(); i++) {
                             array.listaTabla.add(new ArrayList<String>());
-                            array.listaTabla.get(i).add(String.valueOf(dat.get(i).clvOrden));
                             array.listaTabla.get(i).add(String.valueOf(dat.get(i).getNombre()));
                             array.listaTabla.get(i).add(String.valueOf(dat.get(i).cantidadUtilizada));
-                            array.listaTabla.get(i).add(String.valueOf(dat.get(i).metrajeInicio));
-                            array.listaTabla.get(i).add(String.valueOf(dat.get(i).metrajeFin));
-                            array.listaTabla.get(i).add(String.valueOf(dat.get(i).metrajeInicioExterior));
-                            array.listaTabla.get(i).add(String.valueOf(dat.get(i).metrajeFinExterior));
                             array.listaTabla.get(i).add(String.valueOf(dat.get(i).getNoExt()));
+                            array.clv_Material.add(dat.get(i).noArticulo);
                         }
                     }
                     try {
@@ -2682,6 +2687,14 @@ try{
                         for (int a = 0; a < array.listaTabla.size(); a++) {
                             tablaAdapter.agregarFilaTabla(Array.listaTabla.get(a));
                         }
+
+                        MaterialesOrdenes.elimarMaterialesList.setVisibility(View.VISIBLE);
+                        RecyclerView.LayoutManager layoutManager = new GridLayoutManager(context,1);
+                        MaterialesOrdenes.elimarMaterialesList.setLayoutManager(layoutManager);
+                        adapter = new EliminarMaterialAdapter(array.clv_Material,context);
+                        MaterialesOrdenes.elimarMaterialesList.setAdapter(adapter);
+
+
                     }catch (Exception e){
                         MaterialesReportes.horizontalScrollViewR.setVisibility(View.VISIBLE);
                         MaterialesReportes.tablaR.setVisibility(View.VISIBLE);
@@ -2826,7 +2839,7 @@ try{
         call.enqueue(new Callback<JSONPreDescarga>() {
             @Override
             public void onResponse(Call<JSONPreDescarga> call, Response<JSONPreDescarga> response) {
-                final TablaAdapter tablaAdapter = new TablaAdapter(activity, MaterialesOrdenes.tabla);
+                final TablaAdapter tablaAdapter = new TablaAdapter(activity, MaterialesReportes.tablaR);
                 try {
                     tablaAdapter.eliminarFila(1);
                 } catch (Exception e) {

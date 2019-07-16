@@ -1,40 +1,59 @@
 package com.example.pablo.prueba7.Adapters;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Paint;
 import android.graphics.Rect;
+import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.Gravity;
+import android.view.View;
+import android.widget.ImageButton;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.example.pablo.prueba7.Fragments.MaterialesOrdenes;
 import com.example.pablo.prueba7.R;
 
 import java.util.ArrayList;
 
-public class TablaAdapter  {
+public class TablaAdapter extends AppCompatActivity {
     // Variables de la clase
+    TableLayout tabla;          // Layout donde se pintará la tabla
+    ArrayList<TableRow> filas;  // Array de las filas de la tabla
+    Activity activity;
+     Resources rs;
+    int FILAS, COLUMNAS;        // Filas y columnas de nuestra tabla
+    public static ImageButton imageButton;
+    TableRow filaPosisicon;
+    public static int tamaño;
 
-    private TableLayout tabla;          // Layout donde se pintará la tabla
-    private ArrayList<TableRow> filas;  // Array de las filas de la tabla
-    private Activity activity;
-    private Resources rs;
-    private int FILAS, COLUMNAS;        // Filas y columnas de nuestra tabla
+
 
     /**
      * Constructor de la tabla
      * @param activity Actividad donde va a estar la tabla
      * @param tabla TableLayout donde se pintará la tabla
      */
-    public TablaAdapter(Activity activity, TableLayout tabla)
+    public TablaAdapter(final Activity activity, TableLayout tabla)
     {
         this.activity = activity;
         this.tabla = tabla;
         rs = this.activity.getResources();
         FILAS = COLUMNAS = 0;
         filas = new ArrayList<TableRow>();
+
+
+
+
     }
+
+
+
+
 
     /**
      * Añade la cabecera a la tabla
@@ -46,7 +65,6 @@ public class TablaAdapter  {
         TableRow fila = new TableRow(activity);
         TableRow.LayoutParams layoutFila = new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT, TableRow.LayoutParams.WRAP_CONTENT);
         fila.setLayoutParams(layoutFila);
-
         String[] arraycabecera = rs.getStringArray(recursocabecera);
         COLUMNAS = arraycabecera.length;
 
@@ -59,16 +77,13 @@ public class TablaAdapter  {
             texto.setTextAppearance(activity, R.style.estilo_celda);
             texto.setBackgroundResource(R.drawable.tabla_celda_cabecera);
             texto.setLayoutParams(layoutCelda);
-
             fila.addView(texto);
         }
 
         tabla.addView(fila);
         filas.add(fila);
-
         FILAS++;
     }
-
     /**
      * Agrega una fila a la tabla
      * @param elementos Elementos de la fila
@@ -79,7 +94,9 @@ public class TablaAdapter  {
         TableRow.LayoutParams layoutFila = new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT, TableRow.LayoutParams.WRAP_CONTENT);
         TableRow fila = new TableRow(activity);
         fila.setLayoutParams(layoutFila);
-
+/*        imageButton = new ImageButton(activity);
+        imageButton.setBackgroundResource(R.drawable.tabla_celda);
+        imageButton.setImageResource(R.drawable.ic_clear_black_24dp);*/
         for(int i = 0; i< elementos.size(); i++)
         {
             TextView texto = new TextView(activity);
@@ -87,17 +104,22 @@ public class TablaAdapter  {
             texto.setGravity(Gravity.CENTER_HORIZONTAL);
             texto.setTextAppearance(activity, R.style.estilo_celda);
             texto.setBackgroundResource(R.drawable.tabla_celda);
-            layoutCelda = new TableRow.LayoutParams(obtenerAnchoPixelesTexto(texto.getText().toString()), TableRow.LayoutParams.WRAP_CONTENT);
+            layoutCelda = new TableRow.LayoutParams(obtenerAnchoPixelesTexto(texto.getText().toString()), 130);
             texto.setLayoutParams(layoutCelda);
             fila.addView(texto);
+            tamaño = obtenerLargoPixelesTexto(texto.getText().toString());
         }
 
-        tabla.addView(fila);
+
         filas.add(fila);
-
-
+        filaPosisicon = fila;
+        tabla.addView(fila);
         FILAS++;
     }
+
+
+
+
 
     /**
      * Elimina una fila de la tabla
@@ -117,5 +139,15 @@ public class TablaAdapter  {
 
         p.getTextBounds(texto, 0, texto.length(), bounds);
         return bounds.width();
+    }
+
+    public int obtenerLargoPixelesTexto(String texto)
+    {
+        Paint p = new Paint();
+        Rect bounds = new Rect();
+        p.setTextSize(50);
+
+        p.getTextBounds(texto, 0, texto.length(), bounds);
+        return bounds.height();
     }
 }
