@@ -2116,7 +2116,7 @@ try{
                         JSONObject jsonObject1 = new JSONObject();
                         if(reporteStatus.equals("E")){
                             try{
-                                objQuejas.put("Clv_Queja", clvReport.toString());
+                                objQuejas.put("Clv_Queja", String.valueOf(Util.getClvQueja(Util.preferences)));
                                 objQuejas.put("Clv_Tecnico", Util.getClvTec(Util.preferences));
                                 objQuejas.put("FechaProceso", "");
                                 objQuejas.put("Fecha_Ejecucion", fecha + " " + hora);
@@ -2169,7 +2169,7 @@ try{
                     if (string1.equals("0")) {
 try{
     JSONObject jsonObject = new JSONObject();
-    jsonObject.put("ClvQueja", clvReport);
+    jsonObject.put("ClvQueja", Util.getClvQueja(Util.preferences));
     jsonObject.put("IdUsuario", 1);
     getValidaReporte(context,jsonObject,fecha,hora);
 }catch (Exception e){}
@@ -2659,6 +2659,7 @@ try{
                 final TablaAdapter tablaAdapter = new TablaAdapter(activity, MaterialesOrdenes.tabla);
                 array.clv_Material = new ArrayList<>();
                 try {
+                    tablaAdapter.eliminarFila(0);
                     tablaAdapter.eliminarFila(1);
                 } catch (Exception e) {
                 }
@@ -2667,8 +2668,14 @@ try{
                 try {
                     MaterialesOrdenes.tabla.removeAllViews();
                 }catch (Exception e){}
-                array.listaTabla.clear();
-                array.clv_Material.clear();
+                try{
+                    array.listaTabla.clear();
+                }catch (Exception e){}
+                try{
+                    array.clv_Material.clear();
+                }catch (Exception e){}
+
+
                 if (response.code() == 200) {
                     JSONPreDescarga jsonResponse = response.body();
                     array.dataPreDescarga = new ArrayList<List<dameTblPreDescargaMaterialResultModel>>(asList(jsonResponse.getdameTblPreDescargaMaterialResultModel()));
@@ -2684,26 +2691,29 @@ try{
                         }
                     }
                     try {
-                        tablaAdapter.agregarCabecera(R.array.cabecera_tabla);
-                        MaterialesOrdenes.scrollViewM.setVisibility(View.VISIBLE);
-                        MaterialesOrdenes.tabla.setVisibility(View.VISIBLE);
-                        for (int a = 0; a < array.listaTabla.size(); a++) {
-                            tablaAdapter.agregarFilaTabla(Array.listaTabla.get(a));
+                        if(Array.listaTabla.size()!=0) {
+                            tablaAdapter.agregarCabecera(R.array.cabecera_tabla);
+                            MaterialesOrdenes.scrollViewM.setVisibility(View.VISIBLE);
+                            MaterialesOrdenes.tabla.setVisibility(View.VISIBLE);
+                            for (int a = 0; a < array.listaTabla.size(); a++) {
+                                tablaAdapter.agregarFilaTabla(Array.listaTabla.get(a));
+                            }
+                        }else{
+                            MaterialesOrdenes.scrollViewM.setVisibility(View.GONE);
+                            MaterialesOrdenes.tabla.setVisibility(View.GONE);
                         }
-
-                        MaterialesOrdenes.elimarMaterialesList.setVisibility(View.VISIBLE);
-                        RecyclerView.LayoutManager layoutManager = new GridLayoutManager(context,1);
-                        MaterialesOrdenes.elimarMaterialesList.setLayoutManager(layoutManager);
-                        adapter = new EliminarMaterialAdapter(array.clv_Material,context,activity);
-                        MaterialesOrdenes.elimarMaterialesList.setAdapter(adapter);
-
+                        if(array.clv_Material.size()!=0) {
+                            MaterialesOrdenes.elimarMaterialesList.setVisibility(View.VISIBLE);
+                            RecyclerView.LayoutManager layoutManager = new GridLayoutManager(context, 1);
+                            MaterialesOrdenes.elimarMaterialesList.setLayoutManager(layoutManager);
+                            adapter = new EliminarMaterialAdapter(array.clv_Material, context, activity);
+                            MaterialesOrdenes.elimarMaterialesList.setAdapter(adapter);
+                        }else{
+                            MaterialesOrdenes.elimarMaterialesList.setVisibility(View.GONE);
+                        }
 
                     }catch (Exception e){
-                        MaterialesReportes.horizontalScrollViewR.setVisibility(View.VISIBLE);
-                        MaterialesReportes.tablaR.setVisibility(View.VISIBLE);
-                        for (int a = 0; a < array.listaTabla.size(); a++) {
-                            tablaAdapter.agregarFilaTabla(Array.listaTabla.get(a));
-                        }
+                       Toast.makeText(context,"Error al cargar Tabla" ,Toast.LENGTH_SHORT ).show();
                     }
                 }
             }
@@ -2844,10 +2854,22 @@ try{
             public void onResponse(Call<JSONPreDescarga> call, Response<JSONPreDescarga> response) {
                 final TablaAdapter tablaAdapter = new TablaAdapter(activity, MaterialesReportes.tablaR);
                 try {
+                    tablaAdapter.eliminarFila(0);
                     tablaAdapter.eliminarFila(1);
                 } catch (Exception e) {
                 }
-                array.listaTabla.clear();
+                EliminarMaterialAdapter adapter;
+                array.clv_Material = new ArrayList<>();
+                try {
+                    MaterialesOrdenes.tabla.removeAllViews();
+                }catch (Exception e){}
+                try{
+                    array.listaTabla.clear();
+                }catch (Exception e){}
+                try{
+                    array.clv_Material.clear();
+                }catch (Exception e){}
+
                 if (response.code() == 200) {
                     JSONPreDescarga jsonResponse = response.body();
                     array.dataPreDescarga = new ArrayList<List<dameTblPreDescargaMaterialResultModel>>(asList(jsonResponse.getdameTblPreDescargaMaterialResultModel()));
@@ -2856,22 +2878,36 @@ try{
                         List<dameTblPreDescargaMaterialResultModel> dat = itdata.next();
                         for (int i = 0; i < dat.size(); i++) {
                             array.listaTabla.add(new ArrayList<String>());
-                            array.listaTabla.get(i).add(String.valueOf(dat.get(i).clvOrden));
                             array.listaTabla.get(i).add(String.valueOf(dat.get(i).getNombre()));
                             array.listaTabla.get(i).add(String.valueOf(dat.get(i).cantidadUtilizada));
-                            array.listaTabla.get(i).add(String.valueOf(dat.get(i).metrajeInicio));
-                            array.listaTabla.get(i).add(String.valueOf(dat.get(i).metrajeFin));
-                            array.listaTabla.get(i).add(String.valueOf(dat.get(i).metrajeInicioExterior));
-                            array.listaTabla.get(i).add(String.valueOf(dat.get(i).metrajeFinExterior));
                             array.listaTabla.get(i).add(String.valueOf(dat.get(i).getNoExt()));
-
+                            array.clv_Material.add(dat.get(i).noArticulo);
                         }
                     }
-                    MaterialesReportes.horizontalScrollViewR.setVisibility(View.VISIBLE);
-                    MaterialesReportes.tablaR.setVisibility(View.VISIBLE);
-                    for(int a=0; a<array.listaTabla.size(); a++){
-                        tablaAdapter.agregarFilaTabla(Array.listaTabla.get(a));
-                    }
+
+                    try {
+                        if(Array.listaTabla.size()!=0) {
+                            tablaAdapter.agregarCabecera(R.array.cabecera_tabla);
+                            MaterialesReportes.horizontalScrollViewR.setVisibility(View.VISIBLE);
+                            MaterialesReportes.tablaR.setVisibility(View.VISIBLE);
+                            for (int a = 0; a < array.listaTabla.size(); a++) {
+                                tablaAdapter.agregarFilaTabla(Array.listaTabla.get(a));
+                            }
+                        }else{
+                            MaterialesReportes.horizontalScrollViewR.setVisibility(View.GONE);
+                            MaterialesReportes.tablaR.setVisibility(View.GONE);
+                        }
+                        if(array.clv_Material.size()!=0) {
+                            MaterialesReportes.elimarMaterialesListR.setVisibility(View.VISIBLE);
+                            RecyclerView.LayoutManager layoutManager = new GridLayoutManager(context, 1);
+                            MaterialesReportes.elimarMaterialesListR.setLayoutManager(layoutManager);
+                            adapter = new EliminarMaterialAdapter(array.clv_Material, context, activity);
+                            MaterialesReportes.elimarMaterialesListR.setAdapter(adapter);
+                        }else{
+                            MaterialesReportes.elimarMaterialesListR.setVisibility(View.GONE);
+                        }
+                    }catch (Exception e){}
+
                 }
             }
 
@@ -2909,7 +2945,12 @@ try{
             @Override
             public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
                 if (response.code() == 200) {
+                    if(Util.getTipoDescarga(Util.preferences).equals("O")){
                         getPredescarga(activity,context );
+                    }else if(Util.getTipoDescarga(Util.preferences).equals("Q")){
+                        getPredescargaR(activity,context );
+                    }
+
                 } else {
                     Toast.makeText(context, "Error al eliminar material", Toast.LENGTH_SHORT).show();
                 }
@@ -3246,7 +3287,7 @@ try{
                                     reporteStatus = "E";
                                     try {
                                         JSONObject jsonObject = new JSONObject();
-                                        jsonObject.put("Clv_orden", clvReport);
+                                        jsonObject.put("Clv_orden", Util.getClvQueja(Util.preferences));
                                         jsonObject.put("horaFin", EjecutarReportes.horaHoy);
                                         jsonObject.put("horaInicio", "08:00");
                                         jsonObject.put("opcion", 2);
@@ -3263,7 +3304,7 @@ try{
                             JSONObject objQuejas = new JSONObject();
                             JSONObject jsonObject1 = new JSONObject();
                             try{
-                                objQuejas.put("Clv_Queja", clvReport.toString());
+                                objQuejas.put("Clv_Queja", String.valueOf(Util.getClvQueja(Util.preferences)));
                                 objQuejas.put("Clv_Tecnico", Util.getClvTec(Util.preferences));
                                 objQuejas.put("FechaProceso", "");
                                 objQuejas.put("Fecha_Ejecucion", "");

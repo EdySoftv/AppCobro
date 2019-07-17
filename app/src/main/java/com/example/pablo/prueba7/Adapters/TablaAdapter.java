@@ -28,7 +28,6 @@ public class TablaAdapter extends AppCompatActivity {
      Resources rs;
     int FILAS, COLUMNAS;        // Filas y columnas de nuestra tabla
     public static ImageButton imageButton;
-    TableRow filaPosisicon;
     public static int tamaño;
 
 
@@ -112,7 +111,6 @@ public class TablaAdapter extends AppCompatActivity {
 
 
         filas.add(fila);
-        filaPosisicon = fila;
         tabla.addView(fila);
         FILAS++;
     }

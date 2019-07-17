@@ -21,6 +21,7 @@ import com.example.pablo.prueba7.R;
 import com.example.pablo.prueba7.Activitys.Reportes;
 import com.example.pablo.prueba7.Request.Request;
 import com.example.pablo.prueba7.sampledata.BarraCargar;
+import com.example.pablo.prueba7.sampledata.Util;
 
 import org.json.JSONObject;
 
@@ -172,7 +173,7 @@ public class EjecutarReportes extends Fragment {
                                     try{
                                         JSONObject jsonObject = new JSONObject();
                                         jsonObject.put("clvOrden",0);
-                                        jsonObject.put("clvReporte",clvReport);
+                                        jsonObject.put("clvReporte", Util.getClvQueja(Util.preferences));
                                         request.validaExisteFirmaReporte(getContext(),jsonObject);
                                     }catch (Exception e){}
                                 }

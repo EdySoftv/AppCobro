@@ -15,6 +15,7 @@ import android.widget.TextView;
 import com.example.pablo.prueba7.Listas.Array;
 import com.example.pablo.prueba7.Activitys.MainReportes;
 import com.example.pablo.prueba7.R;
+import com.example.pablo.prueba7.sampledata.Util;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -79,9 +80,12 @@ public class QuejasAdapter extends RecyclerView.Adapter<QuejasAdapter.QuejaViewH
             public void onClick(View v) {
                 Intent intento1 = new Intent(mContext, MainReportes.class);
                 intento1.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                mContext.startActivity(intento1);
-                clvReport=Integer.valueOf(Array.Queja.get(position));
+                Util.preferences = mContext.getSharedPreferences("credenciales", Context.MODE_PRIVATE);
+                Util.editor = Util.preferences.edit();
+                Util.editor.putInt("clvQueja", Integer.valueOf(Array.Queja.get(position)));
+                Util.editor.commit();
                 contratoReport=String.valueOf(Array.contratoQ.get(position));
+                mContext.startActivity(intento1);
             }
         });
     }

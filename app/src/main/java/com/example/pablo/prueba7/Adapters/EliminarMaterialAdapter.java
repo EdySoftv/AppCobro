@@ -66,7 +66,12 @@ public class EliminarMaterialAdapter extends RecyclerView.Adapter<EliminarMateri
 
                 try{
                     JSONObject jsonObject = new JSONObject();
-                    jsonObject.put("clvOrden", Util.getClvOrden(Util.preferences));
+
+                    if(Util.getTipoDescarga(Util.preferences).equals("Q")){
+                        jsonObject.put("clvOrden", Util.getClvQueja(Util.preferences));
+                    }else if(Util.getTipoDescarga(Util.preferences).equals("O")){
+                        jsonObject.put("clvOrden", Util.getClvOrden(Util.preferences));
+                    }
                     jsonObject.put("noArticulo",material.get(position) );
                     request.eliminarPreDescarga(context,jsonObject,activity );
                 }catch (Exception e){}

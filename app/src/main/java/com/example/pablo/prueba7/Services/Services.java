@@ -674,7 +674,7 @@ public class Services {
     //observacion y problema ///
     public Service getReporteCService(final Context context) throws JSONException {
         JSONObject jsonObject = new JSONObject();
-        jsonObject.put("Clv_Queja", clvReport);
+        jsonObject.put("Clv_Queja", Util.getClvQueja(Util.preferences));
         MediaType JSON = MediaType.parse("application/json; charse=utf-8");
         final RequestBody body = RequestBody.create(JSON, jsonObject.toString());
         final OkHttpClient client = new OkHttpClient.Builder().addInterceptor(new Interceptor() {
@@ -702,7 +702,7 @@ public class Services {
     //tecnicoNombre///
     public Service getNombreService(final Context context) throws JSONException {
         JSONObject jsonObject = new JSONObject();
-        jsonObject.put("Clv", clvReport);
+        jsonObject.put("Clv", Util.getClvQueja(Util.preferences));
         jsonObject.put("Op", 1);
         MediaType JSON = MediaType.parse("application/json; charse=utf-8");
         final RequestBody body = RequestBody.create(JSON, jsonObject.toString());
@@ -1033,7 +1033,7 @@ public class Services {
     public Service getGuardaHoraReporte(final Context context) throws JSONException {
         //POST Body Json
         JSONObject jsonObject = new JSONObject();
-        jsonObject.put("Clv_orden", clvReport);
+        jsonObject.put("Clv_orden", Util.getClvQueja(Util.preferences));
         jsonObject.put("horaFin", horas12);
         jsonObject.put("horaInicio", "08:00");
         jsonObject.put("opcion", 2);
@@ -1072,7 +1072,7 @@ public class Services {
 
         JSONObject objQuejas = new JSONObject();
         JSONObject jsonObject = new JSONObject();
-        objQuejas.put("Clv_Queja", clvReport.toString());
+        objQuejas.put("Clv_Queja", String.valueOf(Util.getClvQueja(Util.preferences)));
         objQuejas.put("Clv_Tecnico", Util.getClvTec(Util.preferences));
         objQuejas.put("FechaProceso", "");
         objQuejas.put("Fecha_Ejecucion", year + " " + horas12);
@@ -1123,7 +1123,7 @@ public class Services {
     public Service getValidaInfoReportes(final Context context) throws JSONException {
         //POST Body Json
         JSONObject jsonObject = new JSONObject();
-        jsonObject.put("ClvQueja", clvReport);
+        jsonObject.put("ClvQueja", Util.getClvQueja(Util.preferences));
         jsonObject.put("IdUsuario", 1);
         MediaType JSON = MediaType.parse("application/json; charset=utf-8");
         final RequestBody body = RequestBody.create(JSON, jsonObject.toString());
@@ -1782,7 +1782,7 @@ public class Services {
         JSONObject jsonObject = new JSONObject();
 
         try {
-            jsonObject.put("clvOrden",  Util.getClvOrden(Util.preferences));
+            jsonObject.put("clvOrden",  Util.getClvQueja(Util.preferences));
             jsonObject.put("noArticulo", idInventarioMDR);
             jsonObject.put("NoExt", extSerR);
         } catch (JSONException e) {
@@ -1833,7 +1833,7 @@ public class Services {
         }
         try {
             jsonObject.put("contrato", DeepConsModel.Contrato);
-            jsonObject.put("clvOrden",  Util.getClvOrden(Util.preferences));
+            jsonObject.put("clvOrden",  Util.getClvQueja(Util.preferences));
             jsonObject.put("noArticulo", idInventarioMDR);
             jsonObject.put("cantidadUtilizada", totalDMR);
             jsonObject.put("clvTecnico", Util.getClvTec(Util.preferences));
@@ -1887,7 +1887,7 @@ public class Services {
         JSONObject jsonObject = new JSONObject();
 
         try {
-            jsonObject.put("clvOrden",  Util.getClvOrden(Util.preferences));
+            jsonObject.put("clvOrden",  Util.getClvQueja(Util.preferences));
             jsonObject.put("NoExt", extSer);
         } catch (JSONException e) {
             e.printStackTrace();

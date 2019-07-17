@@ -4,6 +4,7 @@ package com.example.pablo.prueba7.Fragments;
 import android.os.Bundle;
 import android.support.constraint.ConstraintLayout;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -38,6 +39,7 @@ public class MaterialesReportes extends Fragment {
     private ViewGroup container;
     public static HorizontalScrollView horizontalScrollViewR;
     public static TableLayout tablaR;
+    public static RecyclerView elimarMaterialesListR;
     Request request = new Request();
     EditText piezaR,mIIR,mIER,mFIR,mFER;
     public static int clvTipoDescMatR,idArticuloDMR,cantidadDMR,idInventarioMDR,piezaSerR, metrosR, totalDMR,IIDMR,IFDMR,EIMDR,EFDMR;
@@ -61,7 +63,7 @@ public class MaterialesReportes extends Fragment {
         super.onCreate(savedInstanceState);
         setRetainInstance(true);
         // Inflate the layout for this fragment
-        View view= inflater.inflate(R.layout.activity_materiales_reporte, container, false);
+        View view= inflater.inflate(R.layout.activity_descarga_reporte, container, false);
         request.getChecaExt(getContext());
         descripcionMatR = view.findViewById(R.id.descripcionArticuloDescR);
         clasificacionMatR = view.findViewById(R.id.clasificacionMatDescR);
@@ -77,8 +79,11 @@ public class MaterialesReportes extends Fragment {
         mFER=view.findViewById(R.id.FinalEDMR);
         tablaR = view.findViewById(R.id.tablaR);
         horizontalScrollViewR = view.findViewById(R.id.scrollhorizontalR);
-        final TablaAdapter tablaAdapter = new TablaAdapter(getActivity(), tablaR);
-        tablaAdapter.agregarCabecera(R.array.cabecera_tabla);
+        elimarMaterialesListR = view.findViewById(R.id.eliminarMaterialesListR);
+
+
+       /* final TablaAdapter tablaAdapter = new TablaAdapter(getActivity(), tablaR);
+        tablaAdapter.agregarCabecera(R.array.cabecera_tabla);*/
         if(extencionesMat==true){
             spinnerExtMatR.setVisibility(View.VISIBLE);
         }else{

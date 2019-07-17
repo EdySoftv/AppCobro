@@ -331,12 +331,6 @@
                         android:layout_height="wrap_content"
                         android:visibility="visible">
 
-                        <TableRow
-                            android:id="@+id/Accion"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content">
-                        </TableRow>
-
                     </TableLayout>
                 </LinearLayout>
             </HorizontalScrollView>

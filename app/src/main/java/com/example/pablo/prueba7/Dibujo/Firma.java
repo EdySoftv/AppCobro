@@ -77,7 +77,7 @@ public class Firma extends AppCompatActivity {
                         JSONObject jsonObject = new JSONObject();
                         JSONObject jsonObject1 = new JSONObject();
                         jsonObject.put("Clv_orden", 0);
-                        jsonObject.put("Clv_reporte",clvReport);
+                        jsonObject.put("Clv_reporte",Util.getClvQueja(Util.preferences));
                         jsonObject.put("Tipo",0);
                         jsonObject.put("FirmaCliente",Firma.imagenAEnviar);
                         jsonObject1.put("ObjLista",jsonObject);

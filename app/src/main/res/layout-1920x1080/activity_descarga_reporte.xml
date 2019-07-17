@@ -25,7 +25,7 @@
                 android:id="@+id/constrain_descargaMaterialesR"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="16dp"
                 android:visibility="visible"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -91,7 +91,7 @@
                 android:id="@+id/constrain_ExtencionesR"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="16dp"
                 android:visibility="gone"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="1.0"
@@ -119,6 +119,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
                     android:layout_marginTop="8dp"
+                    android:layout_marginEnd="8dp"
                     android:layout_marginBottom="8dp"
                     android:background="@drawable/disenio_spinner"
                     app:layout_constraintBottom_toBottomOf="parent"
@@ -181,10 +182,10 @@
 
                 <TextView
                     android:id="@+id/textView13"
-                    android:layout_width="wrap_content"
+                    android:layout_width="75dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="50dp"
-                    android:layout_marginTop="8dp"
+                    android:layout_marginTop="16dp"
                     android:text="@string/inicio"
                     android:textSize="20dp"
                     android:textStyle="bold"
@@ -195,7 +196,7 @@
                     android:id="@+id/textView14"
                     android:layout_width="50dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
+                    android:layout_marginTop="16dp"
                     android:layout_marginEnd="50dp"
                     android:text="@string/fin"
                     android:textSize="20dp"
@@ -292,21 +293,29 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/constrain_MetrajeR" />
             <!---->
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/eliminarMaterialesListR"
+                android:layout_width="30dp"
+                android:layout_height="0dp"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="@+id/scrollhorizontalR"
+                app:layout_constraintStart_toStartOf="parent" />
+
             <HorizontalScrollView
                 android:id="@+id/scrollhorizontalR"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:layout_marginBottom="8dp"
+                android:layout_marginBottom="16dp"
                 android:scrollbars="horizontal"
                 android:visibility="gone"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/eliminarMaterialesListR"
                 app:layout_constraintTop_toBottomOf="@+id/agregarMaterialR">
 
                 <LinearLayout
-                    android:id="@+id/linearLayout"
+                    android:id="@+id/linearLayoutR"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
@@ -322,7 +331,5 @@
             </HorizontalScrollView>
         </android.support.constraint.ConstraintLayout>
     </ScrollView>
-
-
 
 </RelativeLayout>
