@@ -933,7 +933,7 @@ public class Services {
         //POST Body Json
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("Clv_orden",  Util.getClvOrden(Util.preferences));
-        jsonObject.put("horaFin", EjecutarOrdenes.horaHoy);
+        jsonObject.put("horaFin", EjecutarOrdenes.horaFin);
         jsonObject.put("horaInicio", "08:00");
         jsonObject.put("opcion", 1);
         MediaType JSON = MediaType.parse("application/json; charset=utf-8");

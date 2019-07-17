@@ -62,6 +62,7 @@ public class EjecutarOrdenes extends Fragment {
     public static ProgressDialog dialogEjecutar;
     public static String ejecutarStatus;
     public static String fechaActual;
+    public static String horaFin;
     Date objDate = new Date();
     DateFormat hourFormat = new SimpleDateFormat("HH:mm:ss");
     DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
@@ -110,7 +111,7 @@ public class EjecutarOrdenes extends Fragment {
         }
 
         fechaActual = (dateFormat.format(objDate)) + " " + (hourFormat.format(objDate));
-
+        horaFin = (hourFormat.format(objDate));
        /* if(request.isnet==true){
             ejecutar.setVisibility(View.VISIBLE);
         }else{
@@ -255,6 +256,7 @@ public class EjecutarOrdenes extends Fragment {
                             public void onClick(DialogInterface dialog, int which) {
                                 dialogEjecutar.show();
                                 Ejecutar();
+                                //request.getListOrd(getContext());
                                 Intent intento = new Intent(getActivity(), Orden.class);
                                 intento.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                                 startActivity(intento);
@@ -321,6 +323,7 @@ public class EjecutarOrdenes extends Fragment {
                 jsonObject1.put("STATUS", "E");
 
                 request.getValidaOrdSer(getActivity(),jsonObject,jsonObject1);
+
                 if (retiro == true){
                     request.send_aparat(getContext());
                 }

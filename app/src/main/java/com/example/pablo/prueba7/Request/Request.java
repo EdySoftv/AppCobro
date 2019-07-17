@@ -1829,6 +1829,7 @@ public class Request extends AppCompatActivity {
     }
 
     public void getValidaOrdSer(final Context context, final JSONObject jsonObjet, final JSONObject jsonObjet1) {
+
         Call<JsonObject> call = services.RequestPost(context, jsonObjet1).getVALIOrdSer();
         call.enqueue(new Callback<JsonObject>() {
             @Override
@@ -2146,7 +2147,7 @@ try{
         }
     }
     if (ejecutarStatus.equals("V")) {
-        dialogEjecutar.dismiss();
+        //dialogEjecutar.dismiss();
         Toast.makeText(context, "Se ha guardado correctamente", Toast.LENGTH_LONG).show();
         getListOrd(context);
     }
