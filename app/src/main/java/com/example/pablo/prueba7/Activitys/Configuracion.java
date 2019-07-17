@@ -24,6 +24,10 @@ import com.example.pablo.prueba7.sampledata.Util;
 
 import org.json.JSONObject;
 
+import static com.example.pablo.prueba7.Services.Services.clavequeja;
+import static com.example.pablo.prueba7.Services.Services.clvorden;
+import static com.example.pablo.prueba7.Services.Services.opcion;
+
 
 public class Configuracion extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -109,6 +113,8 @@ public class Configuracion extends AppCompatActivity
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
+        Util.preferences = getApplicationContext().getSharedPreferences("credenciales", Context.MODE_PRIVATE);
+        Util.editor = Util.preferences.edit();
         int id = item.getItemId();
 
         if (id == R.id.Inicio) {
@@ -118,14 +124,18 @@ public class Configuracion extends AppCompatActivity
 
 
         } else if (id == R.id.Ordenes_menu) {
-            Intent intent1 = new Intent(Configuracion.this, Orden.class);
-            intent1.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            startActivity(intent1);
+            clvorden = 0;
+            opcion = 1;
+            Util.editor.putString("TipoDescarga", "O");
+            Util.editor.commit();
+            request.getListOrd(getApplicationContext());
 
         } else if (id == R.id.Reportes) {
-            Intent intent1 = new Intent(Configuracion.this, Reportes.class);
-            intent1.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            startActivity(intent1);
+            clavequeja = 0;
+            opcion = 1;
+            Util.editor.putString("TipoDescarga", "Q");
+            Util.editor.commit();
+            request.getListQuejas(getApplicationContext());
 
         } else if (id == R.id.Configuraciones) {
             DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

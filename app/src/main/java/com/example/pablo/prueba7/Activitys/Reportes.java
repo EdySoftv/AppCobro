@@ -1,6 +1,7 @@
 package com.example.pablo.prueba7.Activitys;
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
@@ -161,6 +162,10 @@ public class Reportes extends AppCompatActivity
             startActivity(intento);
 
         } else if (id == R.id.Ordenes_menu) {
+            Util.preferences = getApplicationContext().getSharedPreferences("credenciales", Context.MODE_PRIVATE);
+            Util.editor = Util.preferences.edit();
+            Util.editor.putString("TipoDescarga", "O");
+            Util.editor.commit();
             dialogReportes.show();
             clvorden=0;
             opcion=1;

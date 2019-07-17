@@ -1,6 +1,7 @@
 package com.example.pablo.prueba7.Activitys;
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
@@ -181,6 +182,10 @@ public class Orden extends AppCompatActivity implements NavigationView.OnNavigat
                 drawer.closeDrawer(GravityCompat.START);
             }
         } else if (id == R.id.Reportes) {
+            Util.preferences = getApplicationContext().getSharedPreferences("credenciales", Context.MODE_PRIVATE);
+            Util.editor = Util.preferences.edit();
+            Util.editor.putString("TipoDescarga", "Q");
+            Util.editor.commit();
             dialogOrdenes.show();
             clavequeja=0;
             opcion=1;
