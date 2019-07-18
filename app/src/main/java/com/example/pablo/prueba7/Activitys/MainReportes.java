@@ -17,7 +17,7 @@ import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.StyleableRes;
+//import androidx.annotation.StyleableRes;
 
 import com.example.pablo.prueba7.R;
 import com.example.pablo.prueba7.Request.Request;

@@ -6,6 +6,7 @@ import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.annotation.RequiresApi;
 import android.support.constraint.ConstraintLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -33,7 +34,7 @@ import com.example.pablo.prueba7.sampledata.Util;
 
 import org.json.JSONObject;
 
-import androidx.annotation.RequiresApi;
+//import androidx.annotation.RequiresApi;
 
 
 import static com.example.pablo.prueba7.Adapters.TrabajosAdapter.retiro;

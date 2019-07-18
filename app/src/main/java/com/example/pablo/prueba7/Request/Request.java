@@ -166,6 +166,7 @@ import static com.example.pablo.prueba7.Fragments.EjecutarOrdenes.TecSec;
 import static com.example.pablo.prueba7.Fragments.EjecutarOrdenes.dialogEjecutar;
 import static com.example.pablo.prueba7.Fragments.EjecutarOrdenes.posTec;
 import static com.example.pablo.prueba7.Fragments.HorasOrdenes.observacionesTecnico;
+import static com.example.pablo.prueba7.Fragments.HorasOrdenes.visita;
 import static com.example.pablo.prueba7.Fragments.HorasReportes.TecSec1;
 import static com.example.pablo.prueba7.Fragments.HorasReportes.TecSecSelecc1;
 import static com.example.pablo.prueba7.Fragments.HorasReportes.tecPosRepo;
@@ -1835,12 +1836,19 @@ public class Request extends AppCompatActivity {
             @Override
             public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
                 if (response.code() == 200) {
-                    System.out.println("Entra");
-                    String string1 = String.valueOf(response.body().getAsJsonPrimitive("GetSP_ValidaGuardaOrdSerAparatosResult"));
+
+                        System.out.println("Entra");
+                        String string1 = String.valueOf(response.body().getAsJsonPrimitive("GetSP_ValidaGuardaOrdSerAparatosResult"));
+
+
 
                     if (String.valueOf(response.body().getAsJsonPrimitive("GetSP_ValidaGuardaOrdSerAparatosResult")).length() == 2) {
                         getChecaCAMDO(context, jsonObjet);
-                    } else {
+                    }
+                    if (visita==1){
+                        getChecaCAMDO(context, jsonObjet);
+                    }
+                    else {
 
                         dialogEjecutar.dismiss();
                         ErrorMensaje(context,"Error"+ string1);
