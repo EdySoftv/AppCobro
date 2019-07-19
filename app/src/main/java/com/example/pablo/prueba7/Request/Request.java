@@ -198,7 +198,7 @@ import static java.util.Arrays.asList;
 public class Request extends AppCompatActivity {
     Services services = new Services();
     Array array = new Array();
-    public static String reintentarComando, contraroMA, obsMA, statusMA, extencionesE, Obs, msgComando = "";
+    public static String reintentarComando, contraroMA, obsMA, statusMA, extencionesE, Obs,ObsR, msgComando = "";
     public static boolean isnet, firma,MACWAM,validaExisteFirmaBool;
     public static Long abc;
     public static int clvP, tecC, nExtenciones = 0;
@@ -1623,6 +1623,7 @@ public class Request extends AppCompatActivity {
                             Asigna.add(dat.get(i).getPrioridad());
                             Asigna1.add(dat.get(i).getClasificacionProblema());
                             Obs = dat.get(i).observaciones;
+                            ObsR = dat.get(i).observaciones;
                             clvP = dat.get(i).clvPrioridadQueja;
                             tecC = dat.get(i).tecnicoCuadrilla;
                             try {

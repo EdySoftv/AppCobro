@@ -72,7 +72,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <EditText
-                android:id="@+id/problema"
+                android:id="@+id/obsTecReporte"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/txtw"
@@ -99,12 +99,12 @@
                 android:backgroundTint="@color/colorPrimary"
                 android:text="@string/salir"
                 android:textColor="#fff"
-                app:layout_constraintEnd_toEndOf="@+id/salirR"
-                app:layout_constraintStart_toStartOf="@+id/salirR"
-                app:layout_constraintTop_toBottomOf="@+id/salirR" />
+                app:layout_constraintEnd_toEndOf="@+id/guardarReporte"
+                app:layout_constraintStart_toStartOf="@+id/guardarReporte"
+                app:layout_constraintTop_toBottomOf="@+id/guardarReporte" />
 
             <Button
-                android:id="@+id/salirR"
+                android:id="@+id/guardarReporte"
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/ejecutarR"
@@ -115,10 +115,10 @@
                 android:backgroundTint="@color/colorPrimary"
                 android:text="@string/guardar"
                 android:textColor="#fff"
-                app:layout_constraintEnd_toEndOf="@+id/problema"
+                app:layout_constraintEnd_toEndOf="@+id/obsTecReporte"
                 app:layout_constraintHorizontal_bias="0.514"
-                app:layout_constraintStart_toStartOf="@+id/problema"
-                app:layout_constraintTop_toBottomOf="@+id/problema" />
+                app:layout_constraintStart_toStartOf="@+id/obsTecReporte"
+                app:layout_constraintTop_toBottomOf="@+id/obsTecReporte" />
 
         </android.support.constraint.ConstraintLayout>
     </ScrollView>

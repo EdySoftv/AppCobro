@@ -31,6 +31,7 @@ import static com.example.pablo.prueba7.Adapters.QuejasAdapter.clvReport;
 
 import static com.example.pablo.prueba7.Fragments.EjecutarReportes.TecSecu;
 import static com.example.pablo.prueba7.Fragments.EjecutarReportes.tecSecPosRepo;
+import static com.example.pablo.prueba7.Fragments.HorasReportes.repotteVisita;
 import static com.example.pablo.prueba7.Fragments.HorasReportes.tecPosRepo;
 import static com.example.pablo.prueba7.Fragments.TrabajosReportes.posSolucionRepo;
 import static com.example.pablo.prueba7.Fragments.TrabajosReportes.proble;
@@ -190,7 +191,6 @@ public class MainReportes extends AppCompatActivity implements ActionBar.TabList
                 hzScrollView.setVisibility(View.GONE);
                 info.setText("Datos Cliente");
             }else{
-                TecSecu.setSelection(tecSecPosRepo);
                 finish();
             }
 

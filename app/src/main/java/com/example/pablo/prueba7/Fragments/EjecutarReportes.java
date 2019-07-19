@@ -176,11 +176,11 @@ public class EjecutarReportes extends Fragment {
                             new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialog, int which) {
-                                    try {
+                                 /*   try {
                                         EjecutarReportes.this.finalize();
                                     } catch (Throwable throwable) {
                                         throwable.printStackTrace();
-                                    }
+                                    }*/
                                 }
                             })
                     .setNegativeButton("ACEPTAR",

@@ -2,28 +2,45 @@ package com.example.pablo.prueba7.Fragments;
 
 
 import android.app.DatePickerDialog;
+import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.constraint.ConstraintLayout;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.DatePicker;
+import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 
 import com.example.pablo.prueba7.Activitys.MainReportes;
+import com.example.pablo.prueba7.Activitys.Orden;
+import com.example.pablo.prueba7.Activitys.Reportes;
 import com.example.pablo.prueba7.Listas.Array;
 import com.example.pablo.prueba7.R;
 import com.example.pablo.prueba7.Request.Request;
+import com.example.pablo.prueba7.sampledata.Util;
 
+import org.json.JSONObject;
+
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 
-
+import static com.example.pablo.prueba7.Fragments.TrabajosReportes.Clv_Sol;
+import static com.example.pablo.prueba7.Modelos.DeepConsModel.Obs;
+import static com.example.pablo.prueba7.Services.Services.ClvTrabajoRequest;
 
 
 /**
@@ -34,22 +51,28 @@ public class HorasReportes extends Fragment  implements View.OnClickListener {
     public static int reporteEjecutada = 0, repotteVisita = 0, reporteVisita1 = 0, reporteVisita2 = 0, TecSecSelecc1 = -1;
     private View contenedorParticular;
     private RadioButton btn1, bt2;
+    public Button salirReporte,guardarReporte;
     public static int tecPosRepo;
     public static String statusHora;
+    public String fechaVisitaReporte;
+    public String observacionesTecReportes = null;
+    public EditText obsTecReporte;
 
     public HorasReportes() {
         // Required empty public constructor
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setRetainInstance(true);
 
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.activity_horas_reporte, container, false);
-
+        Date objDate = new Date();
+        DateFormat hourFormat = new SimpleDateFormat("HH:mm:ss");
+        DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        fechaVisitaReporte = (dateFormat.format(objDate)) + " " + (hourFormat.format(objDate));
 
         ///////////////////////////////////////////////////////
 
@@ -57,36 +80,48 @@ public class HorasReportes extends Fragment  implements View.OnClickListener {
         contenedorParticular = view.findViewById(R.id.RV7);
         btn1 = view.findViewById(R.id.ejutada1);
         bt2 = view.findViewById(R.id.visitada1);
+        guardarReporte = view.findViewById(R.id.guardarReporte);
+        salirReporte = view.findViewById(R.id.salirReporte);
+        obsTecReporte = view.findViewById(R.id.obsTecReporte);
         /////////////////////////////////////////////////////
 
         ////////// fecaha, hora y radio buttons/////////
 
         bt2.setOnClickListener(this);
         btn1.setOnClickListener(this);
+        guardarReporte.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                observacionesTecReportes = obsTecReporte.getText().toString();
+                if (observacionesTecReportes.equals(null)||observacionesTecReportes.equals("")){
+                    Toast.makeText(getContext(), "Escriba sus observaciones", Toast.LENGTH_SHORT).show();
+                }else{
+                    DialogoejecutarVisita();
+                }
+
+            }
+        });
+        salirReporte.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialogoSalida();
+            }
+        });
 
         return view;
     }
 
     @Override
-    public void onClick(View v) {
-
-        btn1.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+    public void onClick(View view) {
 
                 if (btn1.isChecked() == true) {
-                    mostrarParticular(false);
                     repotteVisita = 1;
                     statusHora = "V";
                     reporteEjecutada = 0;
-
+                    mostrarParticular(false);
+                    Toast.makeText(getContext(), "Escriba sus observaciones", Toast.LENGTH_SHORT).show();
                 }
 
-            }
-        });
-        bt2.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
 
                 if (bt2.isChecked() == true) {
                     reporteEjecutada = 1;
@@ -96,31 +131,117 @@ public class HorasReportes extends Fragment  implements View.OnClickListener {
                     MainReportes.mViewPager.setCurrentItem(1);
                 }
 
-            }
-        });
-
-        switch (v.getId()) {
-            case R.id.ejutada1: {
-                mostrarParticular(false);
-                repotteVisita = 1;
-                statusHora = "V";
-                reporteEjecutada = 0;
-            }
-            break;
-            case R.id.visitada1: {
-                reporteEjecutada = 1;
-                repotteVisita = 0;
-                statusHora = "E";
-                mostrarParticular(true);
-                MainReportes.mViewPager.setCurrentItem(1);
-            }
-            break;
-        }
     }
 
     private void mostrarParticular(boolean b) {
 
         contenedorParticular.setVisibility(b ? View.GONE : View.VISIBLE);
+    }
+    private void DialogoejecutarVisita() {
+        new AlertDialog.Builder(getContext())
+                .setTitle("GUARDAR")
+                .setMessage("La visita será registrada con fecha: " + fechaVisitaReporte )
+                .setPositiveButton("CANCELAR",
+                        new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+
+                            }
+                        })
+                .setNegativeButton("ACEPTAR",
+                        new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                envioJsonVisita(getContext());
+                                Intent intento = new Intent(getActivity(), Reportes.class);
+                                intento.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                                startActivity(intento);
+
+                            }
+                        }).show();
+    }
+
+
+    private void dialogoSalida() {
+        new AlertDialog.Builder(getContext())
+                .setTitle("SALIR")
+                .setMessage("¿Desea salir de la orden?")
+                .setPositiveButton("CANCELAR",
+                        new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+
+                            }
+                        })
+                .setNegativeButton("ACEPTAR",
+                        new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                Intent intento = new Intent(getActivity(), Reportes.class);
+                                intento.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                                startActivity(intento);
+                                Toast.makeText(getActivity(), "Respore no ejecutado", Toast.LENGTH_LONG).show();
+                            }
+                        }).show();
+    }
+
+    public void envioJsonVisita(final Context context){
+        JSONObject objQuejas = new JSONObject();
+        JSONObject jsonObject1 = new JSONObject();
+        try{
+            objQuejas.put("Clv_Queja", String.valueOf(Util.getClvQueja(Util.preferences)));
+            objQuejas.put("Clv_Tecnico", Util.getClvTec(Util.preferences));
+            objQuejas.put("FechaProceso", "");
+            objQuejas.put("Fecha_Ejecucion", "");
+            objQuejas.put("HP", "");
+            objQuejas.put("IdUsuario", 1);
+            objQuejas.put("Observaciones", request.ObsR + " " + observacionesTecReportes);
+            objQuejas.put("Solucion", TrabajosReportes.proble.getText());
+            objQuejas.put("Status", "V");
+            objQuejas.put("Visita", false);
+            if(request.reporteVisita1!=null){
+                if(request.reporteVisita2!=null){
+                    if(request.reporteVisita3!=null){
+                        objQuejas.put("HV1", request.reporteHora1);
+                        objQuejas.put("HV2", request.reporteHora2);
+                        objQuejas.put("HV3", EjecutarReportes.horaHoy);
+                        objQuejas.put("Visita1", reporteVisita1);
+                        objQuejas.put("Visita2", reporteVisita2);
+                        objQuejas.put("Visita3", EjecutarReportes.fechaHoy);
+                    }else{
+                        objQuejas.put("HV1", request.reporteHora1);
+                        objQuejas.put("HV2", request.reporteHora2);
+                        objQuejas.put("HV3", EjecutarReportes.horaHoy);
+                        objQuejas.put("Visita1", reporteVisita1);
+                        objQuejas.put("Visita2", reporteVisita2);
+                        objQuejas.put("Visita3", EjecutarReportes.fechaHoy);
+                    }
+                }else{
+                    objQuejas.put("HV1", request.reporteHora1);
+                    objQuejas.put("HV2", EjecutarReportes.horaHoy);
+                    objQuejas.put("HV3", "");
+                    objQuejas.put("Visita1", reporteVisita1);
+                    objQuejas.put("Visita2", EjecutarReportes.fechaHoy);
+                    objQuejas.put("Visita3", "");
+                }
+            }else{
+                objQuejas.put("HV1", EjecutarReportes.horaHoy);
+                objQuejas.put("HV2", "");
+                objQuejas.put("HV3", "");
+                objQuejas.put("Visita1", EjecutarReportes.fechaHoy);
+                objQuejas.put("Visita2", "");
+                objQuejas.put("Visita3", "");
+            }
+
+
+
+            objQuejas.put("clvPrioridadQueja", request.clvP);
+            objQuejas.put("clvProblema",ClvTrabajoRequest );
+            objQuejas.put("clvProblemaS", Clv_Sol);
+            jsonObject1.put("objQuejas", objQuejas);
+            request.getGuardaCampos(context,jsonObject1);
+        }catch (Exception e){}
+
     }
 }
 
