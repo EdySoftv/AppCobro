@@ -137,8 +137,10 @@ public class MainReportes extends AppCompatActivity implements ActionBar.TabList
         position=tab.getPosition();
         mViewPager.setCurrentItem(position);
         positionTab = tab.getPosition();
-
-        if (HorasReportes.reporteEjecutada == 1) {
+        if (HorasReportes.repotteVisita == 0 && HorasReportes.reporteEjecutada == 0) {
+            Toast.makeText(this, "Seleccione un estatus", Toast.LENGTH_SHORT).show();
+            mViewPager.setCurrentItem(0);
+        }else if (HorasReportes.reporteEjecutada == 1) {
             mViewPager.setCurrentItem(positionTab);
             if (positionTab == 2){
                 valorProblema =  proble.getText().toString();
@@ -164,27 +166,8 @@ public class MainReportes extends AppCompatActivity implements ActionBar.TabList
             if (positionTab ==3 && cambioRepo == false){
                 mViewPager.setCurrentItem(1);
             }
-
-
-        } else {
-
-            if (HorasReportes.repotteVisita == 0 && HorasReportes.reporteEjecutada == 0) {
-                Toast.makeText(this, "Seleccione un estatus", Toast.LENGTH_SHORT).show();
-                mViewPager.setCurrentItem(0);
-            } else {
-
-                if (visitaValidaReporte == false) {
-                    mViewPager.setCurrentItem(3);
-                    visitaValidaReporte = true;
-                    HorasReportes.statusHora = "V";
-                } else {
-                    mViewPager.setCurrentItem(0);
-                    visitaValidaReporte = false;
-                    HorasReportes.statusHora = "E";
-                }
-
-            }
-
+        } else if(HorasReportes.repotteVisita == 1) {
+            mViewPager.setCurrentItem(0);
         }
     }
     @Override

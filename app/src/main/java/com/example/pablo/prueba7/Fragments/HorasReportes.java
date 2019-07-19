@@ -23,7 +23,7 @@ import com.example.pablo.prueba7.Request.Request;
 
 import java.util.Calendar;
 
-import static com.example.pablo.prueba7.Activitys.MainReportes.mViewPager;
+
 
 
 /**
@@ -93,13 +93,29 @@ public class HorasReportes extends Fragment  implements View.OnClickListener {
                     repotteVisita = 0;
                     statusHora = "E";
                     mostrarParticular(true);
-                    mViewPager.setCurrentItem(1);
+                    MainReportes.mViewPager.setCurrentItem(1);
                 }
 
             }
         });
 
-
+        switch (v.getId()) {
+            case R.id.ejutada1: {
+                mostrarParticular(false);
+                repotteVisita = 1;
+                statusHora = "V";
+                reporteEjecutada = 0;
+            }
+            break;
+            case R.id.visitada1: {
+                reporteEjecutada = 1;
+                repotteVisita = 0;
+                statusHora = "E";
+                mostrarParticular(true);
+                MainReportes.mViewPager.setCurrentItem(1);
+            }
+            break;
+        }
     }
 
     private void mostrarParticular(boolean b) {
