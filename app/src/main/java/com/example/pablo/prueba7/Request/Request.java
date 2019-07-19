@@ -237,11 +237,11 @@ public class Request extends AppCompatActivity {
             SplashActivity.LoginShare = false;
         }catch (Exception e){}
     }
-    public void ErrorInicioDeSesion(final Context context, ProgressDialog dialogInicio) {
+    public void ErrorInicioDeSesion(final Context context, ProgressDialog dialogInicio,final Activity activity) {
             //en caso de que el erro sea al momento de abrir la aplicacion con el usuario logeado se manda un
             //mensaje de error
             dialogInicio.dismiss();
-        new AlertDialog.Builder(context)
+        new AlertDialog.Builder(activity,R.style.InvitationDialog)
                 .setTitle("Error")
                 .setMessage("Error al inciar aplicación")
                 .setPositiveButton("Intentar otra vez",
@@ -362,7 +362,7 @@ public class Request extends AppCompatActivity {
     }
 
     //Proxima Cita//
-    public void getProximaCita(final Context context, final JSONObject jsonObject, final View view, final ProgressDialog dialogInicio) {
+    public void getProximaCita(final Context context, final JSONObject jsonObject, final View view, final ProgressDialog dialogInicio, final Activity activity) {
         Call<JsonObject> call = services.RequestPost(context, jsonObject).getDataProx();
         call.enqueue(new Callback<JsonObject>() {
             @Override
@@ -392,14 +392,14 @@ public class Request extends AppCompatActivity {
                     
 
                 } else {
-                    ErrorInicioDeSesion(context,dialogInicio);
+                    ErrorInicioDeSesion(context,dialogInicio,activity);
                     ErrorMensaje(context,"Error al conseguir datos de inicio");
                 }
             }
 
             @Override
             public void onFailure(Call<JsonObject> call, Throwable t) {
-                ErrorInicioDeSesion(context,dialogInicio);
+                ErrorInicioDeSesion(context,dialogInicio,activity);
                 ErrorMensaje(context,"Error al conseguir datos de inicio");
 
             }
@@ -407,7 +407,7 @@ public class Request extends AppCompatActivity {
     }
 
     //ORDENES//
-    public void getOrdenes(final Context context, final JSONObject jsonObject,final View view, final ProgressDialog dialogInicio) {
+    public void getOrdenes(final Context context, final JSONObject jsonObject,final View view, final ProgressDialog dialogInicio,final Activity activity) {
         Call<Example> call = services.RequestPost(context, jsonObject).getDataOrdenes();
         call.enqueue(new Callback<Example>() {
             @Override
@@ -633,14 +633,14 @@ public class Request extends AppCompatActivity {
 
 
                 } else {
-                    ErrorInicioDeSesion(context,dialogInicio);
+                    ErrorInicioDeSesion(context,dialogInicio,activity);
                     ErrorMensaje(context,"Error al conseguir, intente otra vez");
                 }
             }
 
             @Override
             public void onFailure(Call<Example> call, Throwable t) {
-                ErrorInicioDeSesion(context,dialogInicio);
+                ErrorInicioDeSesion(context,dialogInicio,activity);
                 ErrorMensaje(context,"Error al conseguir, intente otra vez");
             }
         });

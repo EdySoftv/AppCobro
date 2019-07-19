@@ -87,8 +87,8 @@ public class Inicio extends AppCompatActivity
             try{
                 JSONObject jsonObject = new JSONObject();
                 jsonObject.put("clv_tecnico", Util.getClvTec(Util.preferences));
-                request.getProximaCita(getApplicationContext(),jsonObject,view,dialogInicio);
-                request.getOrdenes(getApplicationContext(),jsonObject,view,dialogInicio);
+                request.getProximaCita(getApplicationContext(),jsonObject,view,dialogInicio,this);
+                request.getOrdenes(getApplicationContext(),jsonObject,view,dialogInicio,this);
             }catch (Exception x){dialogInicio.dismiss();}
         }
 

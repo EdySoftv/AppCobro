@@ -16,6 +16,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 
+import com.example.pablo.prueba7.Activitys.MainReportes;
 import com.example.pablo.prueba7.Listas.Array;
 import com.example.pablo.prueba7.R;
 import com.example.pablo.prueba7.Request.Request;
