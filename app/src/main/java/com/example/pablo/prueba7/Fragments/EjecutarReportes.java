@@ -12,11 +12,14 @@ import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.example.pablo.prueba7.Activitys.Inicio;
 import com.example.pablo.prueba7.Dibujo.Firma;
+import com.example.pablo.prueba7.Listas.Array;
 import com.example.pablo.prueba7.R;
 import com.example.pablo.prueba7.Activitys.Reportes;
 import com.example.pablo.prueba7.Request.Request;
@@ -47,6 +50,9 @@ public class EjecutarReportes extends Fragment {
     public static int horaE,minutoE;
     public static String year, horas12;
     public static   String month;
+    public static Spinner TecSecu;
+    public static  int TecSecSeleccion = -1;
+    public static int tecSecPosRepo;
    public static  String minute;
     public static ProgressDialog dialogReportes;
    Inicio in;
@@ -66,6 +72,7 @@ public class EjecutarReportes extends Fragment {
         View view = inflater.inflate(R.layout.activity_ejecutar_reporte, container, false);
         eject = view.findViewById(R.id.ejecutarR);
         salir= view.findViewById(R.id.SalirR);
+        TecSecu = view.findViewById(R.id.tecnicosecundario);
         firmaRep = view.findViewById(R.id.firmarRep);
         solution = proble.getText().toString();
         final Calendar c = Calendar.getInstance();
@@ -76,6 +83,7 @@ public class EjecutarReportes extends Fragment {
         minutoE = c.get(Calendar.MINUTE);
 
         request.validaExisteFirmaBool=false;
+        request.getTecSecR(getContext());
 
         if (HorasReportes.reporteEjecutada == 0) {
             firmaRep.setVisibility(View.GONE);
@@ -96,7 +104,18 @@ public class EjecutarReportes extends Fragment {
         }else{
             minute=String.valueOf(minutoE);
         }
+        TecSecu.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                TecSecSeleccion = Array.Clv_TecSecR.get(position);
+                tecSecPosRepo=position;
+            }
 
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
         salir.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

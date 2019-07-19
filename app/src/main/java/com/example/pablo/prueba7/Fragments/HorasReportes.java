@@ -34,7 +34,7 @@ public class HorasReportes extends Fragment  implements View.OnClickListener {
     private int mYear, mMonth, mDay;
     private View contenedorParticular;
     private View contenedorCorporativo;
-    public static Spinner TecSec1;
+
     private ConstraintLayout todo;
     private RadioButton btn1, bt2;
     public static int tecPosRepo,ejecutadaReporte;
@@ -52,21 +52,10 @@ public class HorasReportes extends Fragment  implements View.OnClickListener {
 
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.activity_horas_reporte, container, false);
-        request.getTecSecR(getContext());
-        todo = view.findViewById(R.id.todo);
-        TecSec1 = view.findViewById(R.id.tecnicosec1);
-        request.getTecSecR(getContext());
-        TecSec1.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                TecSecSelecc1 = Array.Clv_TecSecR.get(position);
-                tecPosRepo=position;
-            }
 
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-            }
-        });
+        todo = view.findViewById(R.id.todo);
+
+
 
         //////////// acciones de botones de hora y fecha//////
 

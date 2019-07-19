@@ -165,9 +165,11 @@ import static com.example.pablo.prueba7.Adapters.TrabajosAdapter.dialogTrabajos;
 import static com.example.pablo.prueba7.Fragments.EjecutarOrdenes.TecSec;
 import static com.example.pablo.prueba7.Fragments.EjecutarOrdenes.dialogEjecutar;
 import static com.example.pablo.prueba7.Fragments.EjecutarOrdenes.posTec;
+import static com.example.pablo.prueba7.Fragments.EjecutarReportes.TecSecSeleccion;
+import static com.example.pablo.prueba7.Fragments.EjecutarReportes.TecSecu;
+import static com.example.pablo.prueba7.Fragments.EjecutarReportes.tecSecPosRepo;
 import static com.example.pablo.prueba7.Fragments.HorasOrdenes.observacionesTecnico;
 import static com.example.pablo.prueba7.Fragments.HorasOrdenes.visita;
-import static com.example.pablo.prueba7.Fragments.HorasReportes.TecSec1;
 import static com.example.pablo.prueba7.Fragments.HorasReportes.TecSecSelecc1;
 import static com.example.pablo.prueba7.Fragments.HorasReportes.tecPosRepo;
 import static com.example.pablo.prueba7.Fragments.MaterialesOrdenes.clasificacionMat;
@@ -1814,8 +1816,8 @@ public class Request extends AppCompatActivity {
                             j = j + 1;
                         }
                         adapterTecSecR = new ArrayAdapter(context, android.R.layout.simple_spinner_dropdown_item, datos);
-                        TecSec1.setAdapter(adapterTecSecR);
-                        TecSec1.setSelection(tecPosRepo);
+                        TecSecu.setAdapter(adapterTecSecR);
+                        TecSecu.setSelection(TecSecSeleccion);
                     }
                 }else{
                     ErrorMensaje(context,"Error al conseguir datos del tecnico secundario");
