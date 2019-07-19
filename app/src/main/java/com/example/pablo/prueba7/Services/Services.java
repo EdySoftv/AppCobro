@@ -1086,9 +1086,9 @@ public class Services {
         objQuejas.put("Status", HorasReportes.statusHora);
         objQuejas.put("TecnicoCuadrilla", TecSecSelecc1);
         objQuejas.put("Visita", false);
-        objQuejas.put("Visita1", HorasReportes.reportesselectDate1.getText());
-        objQuejas.put("Visita2", HorasReportes.reportesselectDate2.getText());
-        objQuejas.put("Visita3", HorasReportes.reportesselectDate3.getText());
+        objQuejas.put("Visita1", "");
+        objQuejas.put("Visita2", "");
+        objQuejas.put("Visita3", "");
         objQuejas.put("clvPrioridadQueja", clvP);
         objQuejas.put("clvProblema",ClvTrabajoRequest );
         objQuejas.put("clvProblemaS", Clv_Sol);

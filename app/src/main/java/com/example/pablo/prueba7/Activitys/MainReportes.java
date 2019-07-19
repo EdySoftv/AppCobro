@@ -36,7 +36,7 @@ import static com.example.pablo.prueba7.Fragments.TrabajosReportes.posSolucionRe
 import static com.example.pablo.prueba7.Fragments.TrabajosReportes.proble;
 
 public class MainReportes extends AppCompatActivity implements ActionBar.TabListener, ViewPager.OnPageChangeListener {
-    private ViewPager mViewPager;
+    public static ViewPager mViewPager;
     private ScrollView hzScrollView;
     private Button info;
     private ConstraintLayout layoutAnimado;

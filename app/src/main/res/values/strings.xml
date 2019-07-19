@@ -47,6 +47,7 @@
     <string name="horai">Hora inicio</string>
     <string name="horaf">Hora fin</string>
     <string name="tecnico_Sec">Tecnico Secundario</string>
+    <string name="ObservacionesTecnico">ObservacionesTecnico</string>
     <string name="observacionesDos">Observaciones:</string>
     <string name="espere3">Espere...</string>
     <string name="usuario">Usuario</string>

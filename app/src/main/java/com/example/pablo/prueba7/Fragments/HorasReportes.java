@@ -22,22 +22,18 @@ import com.example.pablo.prueba7.Request.Request;
 
 import java.util.Calendar;
 
+import static com.example.pablo.prueba7.Activitys.MainReportes.mViewPager;
+
 
 /**
  * A simple {@link Fragment} subclass.
  */
 public class HorasReportes extends Fragment  implements View.OnClickListener {
     Request request = new Request();
-    public static String diaV11, mesV11, añoV11, diaV21, mesV21, añoV21, diaV3, mesV3, añoV3;
-    public static TextView reportesselectDate1, reportesselectDate2, reportesselectDate3;
     public static int reporteEjecutada = 0, repotteVisita = 0, reporteVisita1 = 0, reporteVisita2 = 0, TecSecSelecc1 = -1;
-    private int mYear, mMonth, mDay;
     private View contenedorParticular;
-    private View contenedorCorporativo;
-
-    private ConstraintLayout todo;
     private RadioButton btn1, bt2;
-    public static int tecPosRepo,ejecutadaReporte;
+    public static int tecPosRepo;
     public static String statusHora;
 
     public HorasReportes() {
@@ -53,34 +49,19 @@ public class HorasReportes extends Fragment  implements View.OnClickListener {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.activity_horas_reporte, container, false);
 
-        todo = view.findViewById(R.id.todo);
 
-
-
-        //////////// acciones de botones de hora y fecha//////
-
-        reportesselectDate1 = view.findViewById(R.id.visita11);
-        reportesselectDate2 = view.findViewById(R.id.visita21);
-        reportesselectDate3 = view.findViewById(R.id.visita31);
         ///////////////////////////////////////////////////////
 
         ///////////contenedores y acciones de radiobuttons////
-        contenedorParticular = view.findViewById(R.id.RE1);
-        contenedorCorporativo = view.findViewById(R.id.RV1);
-
+        contenedorParticular = view.findViewById(R.id.RV7);
         btn1 = view.findViewById(R.id.ejutada1);
         bt2 = view.findViewById(R.id.visitada1);
         /////////////////////////////////////////////////////
 
         ////////// fecaha, hora y radio buttons/////////
-        reportesselectDate1.setOnClickListener(this);
-        reportesselectDate2.setOnClickListener(this);
-        reportesselectDate3.setOnClickListener(this);
+
         bt2.setOnClickListener(this);
         btn1.setOnClickListener(this);
-
-        reportesselectDate2.setEnabled(false);
-        reportesselectDate3.setEnabled(false);
 
         return view;
     }
@@ -93,15 +74,10 @@ public class HorasReportes extends Fragment  implements View.OnClickListener {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
 
                 if (btn1.isChecked() == true) {
-                    reporteEjecutada = 0;
+                    mostrarParticular(false);
                     repotteVisita = 1;
                     statusHora = "V";
-                    reportesselectDate1.setText("");
-                    reportesselectDate2.setText("");
-                    reportesselectDate3.setText("");
                     reporteEjecutada = 0;
-                    repotteVisita = 1;
-                    statusHora = "V";
 
                 }
 
@@ -115,148 +91,19 @@ public class HorasReportes extends Fragment  implements View.OnClickListener {
                     reporteEjecutada = 1;
                     repotteVisita = 0;
                     statusHora = "E";
-                    reportesselectDate1.setText("");
-                    reportesselectDate2.setText("");
-                    reportesselectDate3.setText("");
-                    reporteEjecutada = 1;
-                    repotteVisita = 0;
-                    statusHora = "E";
+                    mostrarParticular(true);
+                    mViewPager.setCurrentItem(1);
                 }
 
             }
         });
-        switch (v.getId()) {
-            case R.id.ejutada1: {
-                //mostrarParticular(false);
-                reportesselectDate1.setText("");
-                reportesselectDate2.setText("");
-                reportesselectDate3.setText("");
-                reporteEjecutada = 0;
-                repotteVisita = 1;
-                statusHora = "V";
-                request.getReportesC(getContext());
-            }
-            break;
-            case R.id.visitada1: {
-                //mostrarParticular(true);
-                reportesselectDate2.setText("");
-                reportesselectDate3.setText("");
-                reporteEjecutada = 1;
-                repotteVisita = 0;
-                statusHora = "E";
-            }
-            break;
-        }
-            if (v == reportesselectDate1) {
-                final Calendar c = Calendar.getInstance();
-                mYear = c.get(Calendar.YEAR);
-                mMonth = c.get(Calendar.MONTH);
-                mDay = c.get(Calendar.DAY_OF_MONTH);
 
 
-                DatePickerDialog datePickerDialog1 = new DatePickerDialog(getActivity(), new DatePickerDialog.OnDateSetListener() {
+    }
 
-                    @Override
-                    public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
-
-                        if (monthOfYear < 10) {
-                            if (dayOfMonth < 10) {
-                                reportesselectDate1.setText("0" + dayOfMonth + "/0" + (monthOfYear + 1) + "/" + year);
-                                diaV11 = "0" + String.valueOf(dayOfMonth);
-                                mesV11 = "0" + String.valueOf((monthOfYear + 1));
-                                añoV11 = String.valueOf(year);
-                            } else {
-                                reportesselectDate1.setText(dayOfMonth + "/0" + (monthOfYear + 1) + "/" + year);
-                                diaV11 = String.valueOf(dayOfMonth);
-                                mesV11 = "0" + String.valueOf((monthOfYear + 1));
-                                añoV11 = String.valueOf(year);
-                            }
-                        } else {
-                            reportesselectDate1.setText(dayOfMonth + "/" + (monthOfYear + 1) + "/" + year);
-                            diaV11 = String.valueOf(dayOfMonth);
-                            mesV11 = String.valueOf((monthOfYear + 1));
-                            añoV11 = String.valueOf(year);
-                        }
-
-                    }
-                }, mYear, mMonth, mDay);
-                datePickerDialog1.show();
-            }
-
-
-            if (v == reportesselectDate2) {
-                final Calendar c = Calendar.getInstance();
-                mYear = c.get(Calendar.YEAR);
-                mMonth = c.get(Calendar.MONTH);
-                mDay = c.get(Calendar.DAY_OF_MONTH);
-
-
-                DatePickerDialog datePickerDialog = new DatePickerDialog(getActivity(), new DatePickerDialog.OnDateSetListener() {
-
-                    @Override
-                    public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
-
-                        if (monthOfYear < 10) {
-                            if (dayOfMonth < 10) {
-                                reportesselectDate2.setText("0" + dayOfMonth + "/0" + (monthOfYear + 1) + "/" + year);
-                                diaV21 = "0" + String.valueOf(dayOfMonth);
-                                mesV21 = "0" + String.valueOf((monthOfYear + 1));
-                                añoV21 = String.valueOf(year);
-                            } else {
-                                reportesselectDate2.setText(dayOfMonth + "/0" + (monthOfYear + 1) + "/" + year);
-                                diaV21 = String.valueOf(dayOfMonth);
-                                mesV21 = "0" + String.valueOf((monthOfYear + 1));
-                                añoV21 = String.valueOf(year);
-                            }
-                        } else {
-                            reportesselectDate2.setText(dayOfMonth + "/" + (monthOfYear + 1) + "/" + year);
-                            diaV21 = String.valueOf(dayOfMonth);
-                            mesV21 = String.valueOf((monthOfYear + 1));
-                            añoV21 = String.valueOf(year);
-                        }
-
-                    }
-                }, mYear, mMonth, mDay);
-                datePickerDialog.show();
-            }
-
-            if (v == reportesselectDate3) {
-                final Calendar c = Calendar.getInstance();
-                mYear = c.get(Calendar.YEAR);
-                mMonth = c.get(Calendar.MONTH);
-                mDay = c.get(Calendar.DAY_OF_MONTH);
-                DatePickerDialog datePickerDialog = new DatePickerDialog(getActivity(), new DatePickerDialog.OnDateSetListener() {
-
-                    @Override
-                    public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
-                        if (monthOfYear < 10) {
-                            if (dayOfMonth < 10) {
-                                reportesselectDate3.setText("0" + dayOfMonth + "/0" + (monthOfYear + 1) + "/" + year);
-                                diaV3 = "0" + String.valueOf(dayOfMonth);
-                                mesV3 = "0" + String.valueOf((monthOfYear + 1));
-                                añoV3 = String.valueOf(year);
-                            } else {
-                                reportesselectDate3.setText(dayOfMonth + "/0" + (monthOfYear + 1) + "/" + year);
-                                diaV3 = String.valueOf(dayOfMonth);
-                                mesV3 = "0" + String.valueOf((monthOfYear + 1));
-                                añoV3 = String.valueOf(year);
-                            }
-                        } else {
-                            reportesselectDate3.setText(dayOfMonth + "/" + (monthOfYear + 1) + "/" + year);
-                            diaV3 = String.valueOf(dayOfMonth);
-                            mesV3 = String.valueOf((monthOfYear + 1));
-                            añoV3 = String.valueOf(year);
-                        }
-
-                    }
-
-                }, mYear, mMonth, mDay);
-                datePickerDialog.show();
-            }
-        }
     private void mostrarParticular(boolean b) {
-        contenedorParticular.setVisibility(b ? View.VISIBLE: View.GONE);
-        contenedorCorporativo.setVisibility(b ? View.GONE: View.VISIBLE);
+
+        contenedorParticular.setVisibility(b ? View.GONE : View.VISIBLE);
     }
 }
 
