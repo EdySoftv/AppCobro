@@ -15,7 +15,7 @@
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:background="@drawable/tabla_celda"
-            android:src="@drawable/ic_close_black_24dp"
+            android:src="@drawable/ic_close_red_24dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             />

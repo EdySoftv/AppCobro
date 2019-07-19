@@ -13,7 +13,7 @@
             android:layout_height="30dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            android:src="@drawable/ic_close_black_24dp"
+            android:src="@drawable/ic_close_red_24dp"
             android:background="@drawable/tabla_celda"
             />
 </android.support.constraint.ConstraintLayout>
