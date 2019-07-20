@@ -28,7 +28,10 @@ import com.example.pablo.prueba7.sampledata.Util;
 
 import org.json.JSONObject;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 
 import static com.example.pablo.prueba7.Adapters.QuejasAdapter.clvReport;
 import static com.example.pablo.prueba7.Fragments.TrabajosReportes.proble;
@@ -49,7 +52,7 @@ public class EjecutarReportes extends Fragment {
     public static int añoE, mesE, diaE;
     public static int horaE,minutoE;
     public static String year, horas12;
-    public static   String month;
+    public static   String month,fechaEjecujtar;
     public static Spinner TecSecu;
     public static  int TecSecSeleccion = -1;
     public static int tecSecPosRepo;
@@ -67,7 +70,11 @@ public class EjecutarReportes extends Fragment {
         super.onCreate(savedInstanceState);
         setRetainInstance(true);
         in = new Inicio();
+        Date objDate = new Date();
+        DateFormat hourFormat = new SimpleDateFormat("HH:mm");
+        DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
 
+        fechaEjecujtar = (dateFormat.format(objDate)) + " " + (hourFormat.format(objDate));
         dialogReportes = new BarraCargar().showDialog(getContext());
         View view = inflater.inflate(R.layout.activity_ejecutar_reporte, container, false);
         eject = view.findViewById(R.id.ejecutarR);

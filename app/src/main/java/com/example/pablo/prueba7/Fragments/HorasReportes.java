@@ -54,7 +54,7 @@ public class HorasReportes extends Fragment  implements View.OnClickListener {
     public Button salirReporte,guardarReporte;
     public static int tecPosRepo;
     public static String statusHora;
-    public String fechaVisitaReporte;
+    public String fechaVisitaReporte,horaVisitaR,fechaVisitaR;
     public String observacionesTecReportes = null;
     public EditText obsTecReporte;
 
@@ -72,6 +72,8 @@ public class HorasReportes extends Fragment  implements View.OnClickListener {
         Date objDate = new Date();
         DateFormat hourFormat = new SimpleDateFormat("HH:mm:ss");
         DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        fechaVisitaR= dateFormat.format(objDate);
+        horaVisitaR=(hourFormat.format(objDate));
         fechaVisitaReporte = (dateFormat.format(objDate)) + " " + (hourFormat.format(objDate));
 
         ///////////////////////////////////////////////////////
@@ -165,7 +167,7 @@ public class HorasReportes extends Fragment  implements View.OnClickListener {
     private void dialogoSalida() {
         new AlertDialog.Builder(getContext())
                 .setTitle("SALIR")
-                .setMessage("¿Desea salir de la orden?")
+                .setMessage("¿Desea salir del reporte?")
                 .setPositiveButton("CANCELAR",
                         new DialogInterface.OnClickListener() {
                             @Override
@@ -199,36 +201,89 @@ public class HorasReportes extends Fragment  implements View.OnClickListener {
             objQuejas.put("Solucion", TrabajosReportes.proble.getText());
             objQuejas.put("Status", "V");
             objQuejas.put("Visita", false);
+            ////////////////////
+             if (request.reporteVisita1!=null) {
+                objQuejas.put("HV1", horaVisitaR);
+                objQuejas.put("HV2", "");
+                objQuejas.put("HV3", "");
+                objQuejas.put("Visita1", fechaVisitaR);
+                objQuejas.put("Visita2", "");
+                objQuejas.put("Visita3", "");
+            }
+             else if (request.reporteVisita2!=null) {
+                 objQuejas.put("HV1", request.reporteHora1);
+                 objQuejas.put("HV2", horaVisitaR);
+                 objQuejas.put("HV3", "");
+                 objQuejas.put("Visita1", request.reporteVisita1);
+                 objQuejas.put("Visita2", fechaVisitaR);
+                 objQuejas.put("Visita3", "");
+             }
+            else if(request.reporteVisita3!=null){
+                objQuejas.put("HV1", request.reporteHora1);
+                objQuejas.put("HV2", request.reporteHora2);
+                objQuejas.put("HV3", horaVisitaR);
+                objQuejas.put("Visita1", request.reporteVisita1);
+                objQuejas.put("Visita2", request.reporteVisita2);
+                objQuejas.put("Visita3", fechaVisitaR);
+            }
+            ////////////////////
+            objQuejas.put("clvPrioridadQueja", request.clvP);
+            objQuejas.put("clvProblema",ClvTrabajoRequest );
+            objQuejas.put("clvProblemaS", Clv_Sol);
+            jsonObject1.put("objQuejas", objQuejas);
+            request.getGuardaCampos(context,jsonObject1);
+
+        }catch (Exception e){}
+
+    }
+
+
+
+
+    public void envioJsonVisita2(final Context context){
+        JSONObject objQuejas = new JSONObject();
+        JSONObject jsonObject1 = new JSONObject();
+        try{
+            objQuejas.put("Clv_Queja", String.valueOf(Util.getClvQueja(Util.preferences)));
+            objQuejas.put("Clv_Tecnico", Util.getClvTec(Util.preferences));
+            objQuejas.put("FechaProceso", "");
+            objQuejas.put("Fecha_Ejecucion", "");
+            objQuejas.put("HP", "");
+            objQuejas.put("IdUsuario", 1);
+            objQuejas.put("Observaciones", request.ObsR + " " + observacionesTecReportes);
+            objQuejas.put("Solucion", TrabajosReportes.proble.getText());
+            objQuejas.put("Status", "V");
+            objQuejas.put("Visita", false);
             if(request.reporteVisita1!=null){
                 if(request.reporteVisita2!=null){
                     if(request.reporteVisita3!=null){
                         objQuejas.put("HV1", request.reporteHora1);
                         objQuejas.put("HV2", request.reporteHora2);
-                        objQuejas.put("HV3", EjecutarReportes.horaHoy);
-                        objQuejas.put("Visita1", reporteVisita1);
-                        objQuejas.put("Visita2", reporteVisita2);
-                        objQuejas.put("Visita3", EjecutarReportes.fechaHoy);
+                        objQuejas.put("HV3", horaVisitaR);
+                        objQuejas.put("Visita1", request.reporteVisita1);
+                        objQuejas.put("Visita2", request.reporteVisita2);
+                        objQuejas.put("Visita3", fechaVisitaR);
                     }else{
                         objQuejas.put("HV1", request.reporteHora1);
                         objQuejas.put("HV2", request.reporteHora2);
-                        objQuejas.put("HV3", EjecutarReportes.horaHoy);
-                        objQuejas.put("Visita1", reporteVisita1);
-                        objQuejas.put("Visita2", reporteVisita2);
-                        objQuejas.put("Visita3", EjecutarReportes.fechaHoy);
+                        objQuejas.put("HV3", horaVisitaR);
+                        objQuejas.put("Visita1", request.reporteVisita1);
+                        objQuejas.put("Visita2", request.reporteVisita2);
+                        objQuejas.put("Visita3", fechaVisitaR);
                     }
                 }else{
                     objQuejas.put("HV1", request.reporteHora1);
-                    objQuejas.put("HV2", EjecutarReportes.horaHoy);
+                    objQuejas.put("HV2", horaVisitaR);
                     objQuejas.put("HV3", "");
-                    objQuejas.put("Visita1", reporteVisita1);
-                    objQuejas.put("Visita2", EjecutarReportes.fechaHoy);
+                    objQuejas.put("Visita1", request.reporteVisita1);
+                    objQuejas.put("Visita2", fechaVisitaR);
                     objQuejas.put("Visita3", "");
                 }
             }else{
-                objQuejas.put("HV1", EjecutarReportes.horaHoy);
+                objQuejas.put("HV1", horaVisitaR);
                 objQuejas.put("HV2", "");
                 objQuejas.put("HV3", "");
-                objQuejas.put("Visita1", EjecutarReportes.fechaHoy);
+                objQuejas.put("Visita1", fechaVisitaR);
                 objQuejas.put("Visita2", "");
                 objQuejas.put("Visita3", "");
             }
@@ -240,6 +295,7 @@ public class HorasReportes extends Fragment  implements View.OnClickListener {
             objQuejas.put("clvProblemaS", Clv_Sol);
             jsonObject1.put("objQuejas", objQuejas);
             request.getGuardaCampos(context,jsonObject1);
+            Toast.makeText(getContext(), "Reporte guardado correctamente", Toast.LENGTH_LONG).show();
         }catch (Exception e){}
 
     }

@@ -13,30 +13,30 @@
 
         <TextView
             android:id="@+id/textView46"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_width="319dp"
+            android:layout_height="23dp"
             android:layout_below="@+id/RV1"
-            android:layout_marginStart="4dp"
+            android:layout_marginStart="8dp"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="8dp"
             android:text="@string/tecnico_Sec"
             android:textSize="@dimen/mediano"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintHorizontal_bias="0.836"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/ejecutarR" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <Spinner
             android:id="@+id/tecnicosecundario3"
-            android:layout_width="369dp"
-            android:layout_height="24dp"
+            android:layout_width="346dp"
+            android:layout_height="23dp"
             android:layout_below="@+id/textView3"
             android:layout_alignParentStart="true"
             android:layout_marginTop="12dp"
             android:layout_marginEnd="8dp"
             android:background="@drawable/disenio_spinner"
             app:layout_constraintEnd_toEndOf="@+id/textView46"
-            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintHorizontal_bias="0.706"
             app:layout_constraintStart_toStartOf="@+id/textView46"
             app:layout_constraintTop_toBottomOf="@+id/textView46" />
 
@@ -47,13 +47,13 @@
             android:layout_alignParentStart="true"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
-            android:layout_marginEnd="8dp"
             android:background="@drawable/boton"
             android:backgroundTint="@color/colorPrimary"
             android:text="@string/guardar"
             android:textColor="#fff"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/firmarRep"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="@+id/firmarRep"
             app:layout_constraintTop_toBottomOf="@+id/firmarRep" />
 
         <Button
@@ -62,15 +62,15 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
-            android:layout_marginEnd="8dp"
             android:layout_toEndOf="@+id/ejecutarR"
             android:background="@drawable/boton"
             android:backgroundTint="@color/colorPrimary"
             android:enabled="true"
             android:text="@string/firmar"
             android:textColor="#fff"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/SalirR"
+            app:layout_constraintHorizontal_bias="0.875"
+            app:layout_constraintStart_toStartOf="@+id/SalirR"
             app:layout_constraintTop_toBottomOf="@+id/SalirR" />
 
         <Button
@@ -80,15 +80,14 @@
             android:layout_below="@+id/ejecutarR"
             android:layout_centerHorizontal="true"
 
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="8dp"
+            android:layout_marginTop="20dp"
             android:background="@drawable/boton"
             android:backgroundTint="@color/colorPrimary"
             android:text="@string/salir"
             android:textColor="#fff"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintEnd_toEndOf="@+id/tecnicosecundario3"
+            app:layout_constraintHorizontal_bias="0.475"
+            app:layout_constraintStart_toStartOf="@+id/tecnicosecundario3"
+            app:layout_constraintTop_toBottomOf="@+id/tecnicosecundario3" />
     </android.support.constraint.ConstraintLayout>
     </FrameLayout>

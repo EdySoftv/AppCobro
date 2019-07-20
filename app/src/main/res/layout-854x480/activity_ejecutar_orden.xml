@@ -96,26 +96,26 @@
               android:enabled="true"
               android:text="@string/guardar"
               android:textColor="#fff"
-              app:layout_constraintEnd_toEndOf="@+id/salirEjecutarOrd"
+              app:layout_constraintEnd_toEndOf="@+id/firmarOrd"
               app:layout_constraintHorizontal_bias="0.0"
-              app:layout_constraintStart_toStartOf="@+id/salirEjecutarOrd"
+              app:layout_constraintStart_toStartOf="@+id/firmarOrd"
               app:layout_constraintTop_toBottomOf="@+id/firmarOrd" />
 
 
           <TextView
               android:id="@+id/tv_textTecSec"
-              android:layout_width="0dp"
+              android:layout_width="304dp"
               android:layout_height="wrap_content"
               android:layout_marginStart="8dp"
-              android:layout_marginTop="8dp"
+              android:layout_marginTop="16dp"
               android:layout_marginEnd="8dp"
               android:text="@string/tecnicoSecundario"
               android:textSize="20dp"
               android:textStyle="bold"
-              android:visibility="gone"
+              android:visibility="visible"
               app:layout_constraintEnd_toEndOf="parent"
               app:layout_constraintStart_toStartOf="parent"
-              app:layout_constraintTop_toBottomOf="@+id/ejec" />
+              app:layout_constraintTop_toTopOf="parent" />
 
           <Spinner
               android:id="@+id/spinnerTecnicoSec"
@@ -129,7 +129,7 @@
               app:layout_constraintEnd_toEndOf="parent"
               app:layout_constraintStart_toStartOf="parent"
               app:layout_constraintTop_toBottomOf="@+id/tv_textTecSec"
-              tools:visibility="gone" />
+              tools:visibility="visible" />
 
           <Button
               android:id="@+id/salirEjecutarOrd"
@@ -137,14 +137,16 @@
               android:layout_height="wrap_content"
               android:layout_below="@+id/animado9"
               android:layout_centerHorizontal="true"
-              android:layout_marginTop="8dp"
+              android:layout_marginStart="8dp"
+              android:layout_marginTop="12dp"
               android:background="@drawable/boton"
               android:backgroundTint="@color/colorPrimary"
               android:text="@string/salir"
               android:textColor="#fff"
-              app:layout_constraintEnd_toEndOf="@+id/tv_textTecSec"
-              app:layout_constraintStart_toStartOf="@+id/tv_textTecSec"
-              app:layout_constraintTop_toTopOf="parent" />
+              app:layout_constraintEnd_toEndOf="@+id/spinnerTecnicoSec"
+              app:layout_constraintHorizontal_bias="0.542"
+              app:layout_constraintStart_toStartOf="@+id/spinnerTecnicoSec"
+              app:layout_constraintTop_toBottomOf="@+id/spinnerTecnicoSec" />
           <!--app:layout_constraintTop_toBottomOf="@+id/ejecutarLay" -->
 
           <Button
@@ -153,12 +155,12 @@
               android:layout_height="wrap_content"
               android:layout_below="@+id/salirEjecutarOrd"
               android:layout_centerHorizontal="true"
-              android:layout_marginTop="8dp"
+              android:layout_marginTop="16dp"
               android:background="@drawable/boton"
               android:backgroundTint="@color/colorPrimary"
               android:text="@string/firmar"
               android:textColor="#fff"
-              android:visibility="visible"
+              android:visibility="gone"
               app:layout_constraintEnd_toEndOf="@+id/salirEjecutarOrd"
               app:layout_constraintHorizontal_bias="0.0"
               app:layout_constraintStart_toStartOf="@+id/salirEjecutarOrd"

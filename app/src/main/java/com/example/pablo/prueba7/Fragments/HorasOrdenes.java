@@ -112,7 +112,7 @@ public class HorasOrdenes extends Fragment implements View.OnClickListener, Loca
 
 /////////////////////////
         Date objDate = new Date();
-        DateFormat hourFormat = new SimpleDateFormat("HH:mm:ss");
+        DateFormat hourFormat = new SimpleDateFormat("HH:mm");
         DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
 /////////////////////////
         locationManager = (LocationManager)
@@ -143,7 +143,7 @@ public class HorasOrdenes extends Fragment implements View.OnClickListener, Loca
                     Toast.makeText(getContext(), "Escriba sus observaciones", Toast.LENGTH_SHORT).show();
                 }else if (visita == 1){
                     dialogoEjecutarVisita();
-                    //Toast.makeText(getContext(), "Estoy presionando este boton", Toast.LENGTH_SHORT).show();
+
                 }
             }
         });
@@ -390,7 +390,8 @@ public class HorasOrdenes extends Fragment implements View.OnClickListener, Loca
                                 Intent intento = new Intent(getActivity(), Orden.class);
                                 intento.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                                 startActivity(intento);
-                                Toast.makeText(getActivity(), "Orden enviada como visita.", Toast.LENGTH_LONG).show();
+
+                              //  Toast.makeText(getActivity(), "Orden enviada como visita.", Toast.LENGTH_LONG).show();
                             }
                         }).show();
 

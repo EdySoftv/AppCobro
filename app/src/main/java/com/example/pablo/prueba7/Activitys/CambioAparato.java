@@ -238,7 +238,7 @@ public class CambioAparato extends AppCompatActivity {
                                                     jsonObject1.put("ObjCambioAparato", jsonObject);
                                                     request.SetCambioAparato(getApplicationContext(), jsonObject1);
                                                     dialogCAPAT.show();
-                                                    finish();
+
                                                 }catch (Exception e){}
                                             }else{
                                                 Toast.makeText(getApplicationContext(), "La MACWAN debe de ser 12 caracteres", Toast.LENGTH_SHORT).show();
