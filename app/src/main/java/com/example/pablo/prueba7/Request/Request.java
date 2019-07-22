@@ -2540,13 +2540,13 @@ try{
             @Override
             public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
               if(response.code()!=200){
-                  ErrorMensaje(context,"Error");
+                  ErrorMensaje(context,"Error"+response.message());
               }
             }
 
             @Override
             public void onFailure(Call<JsonObject> call, Throwable t) {
-                ErrorMensaje(context,"Error");
+                ErrorMensaje(context,"Error"+t.getMessage());
             }
 
         });
@@ -3251,9 +3251,7 @@ try{
                                 GetMACWAM(context,jsonObject2);
                             }catch (Exception e){}
                         }catch (Exception e){
-                            Log.d("qqqq", String.valueOf(CambioAparato.aparato.getHeight())+" "+CambioAparato.MACWAMTextCambioAparato.getHeight());
                             CambioAparato.textView35.setVisibility(View.VISIBLE);
-                            Log.d("qqqq", String.valueOf(CambioAparato.aparato.getHeight())+" "+CambioAparato.MACWAMTextCambioAparato.getHeight());
                             CambioAparato.MACWAMTextCambioAparato.setVisibility(View.VISIBLE);
                         }
                     }else {
