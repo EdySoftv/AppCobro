@@ -164,11 +164,14 @@ import static com.example.pablo.prueba7.Adapters.QuejasAdapter.clvReport;
 import static com.example.pablo.prueba7.Adapters.TrabajosAdapter.dialogTrabajos;
 import static com.example.pablo.prueba7.Fragments.EjecutarOrdenes.TecSec;
 import static com.example.pablo.prueba7.Fragments.EjecutarOrdenes.dialogEjecutar;
+import static com.example.pablo.prueba7.Fragments.EjecutarOrdenes.ejecutar;
 import static com.example.pablo.prueba7.Fragments.EjecutarOrdenes.posTec;
 import static com.example.pablo.prueba7.Fragments.EjecutarReportes.TecSecSeleccion;
 import static com.example.pablo.prueba7.Fragments.EjecutarReportes.TecSecu;
 import static com.example.pablo.prueba7.Fragments.EjecutarReportes.fechaEjecujtar;
 import static com.example.pablo.prueba7.Fragments.EjecutarReportes.tecSecPosRepo;
+import static com.example.pablo.prueba7.Fragments.HorasOrdenes.dialogVisitaOrd;
+import static com.example.pablo.prueba7.Fragments.HorasOrdenes.ejecutada;
 import static com.example.pablo.prueba7.Fragments.HorasOrdenes.observacionesTecnico;
 import static com.example.pablo.prueba7.Fragments.HorasOrdenes.visita;
 import static com.example.pablo.prueba7.Fragments.HorasReportes.TecSecSelecc1;
@@ -1860,7 +1863,12 @@ public class Request extends AppCompatActivity {
                     }*/
                 }else{
                     ErrorMensaje(context,"Se ha producido un error, verifique su conexion e intente nuevamente");
-                    dialogEjecutar.dismiss();
+                    if(visita == 1){
+                        dialogVisitaOrd.dismiss();
+                    }else if (ejecutada == 1){
+                        dialogEjecutar.dismiss();
+                    }
+
                     EjecutarOrdenes.eject.setEnabled(true);
                 }
             }
@@ -1929,6 +1937,11 @@ public class Request extends AppCompatActivity {
                     }
                 }else{
                     ErrorMensaje(context,"Se ha producido un error, verifique su conexion e intente nuevamente");
+                    if(visita == 1){
+                        dialogVisitaOrd.dismiss();
+                    }else if (ejecutada == 1){
+                        dialogEjecutar.dismiss();
+                    }
                 }
             }
 
@@ -1962,7 +1975,11 @@ public class Request extends AppCompatActivity {
                     }
                 } else {
                     ErrorMensaje(context,"Se ha producido un error, verifique su conexion e intente nuevamente");
-                    dialogEjecutar.dismiss();
+                    if(visita == 1){
+                        dialogVisitaOrd.dismiss();
+                    }else if (ejecutada == 1){
+                        dialogEjecutar.dismiss();
+                    }
                     EjecutarOrdenes.eject.setEnabled(true);
                 }
             }
@@ -2019,7 +2036,11 @@ public class Request extends AppCompatActivity {
 
                 } else {
                     ErrorMensaje(context,"Error, aparatos no enviados");
-                    dialogEjecutar.dismiss();
+                    if(visita == 1){
+                        dialogVisitaOrd.dismiss();
+                    }else if (ejecutada == 1){
+                        dialogEjecutar.dismiss();
+                    }
                     EjecutarOrdenes.eject.setEnabled(true);
                 }
             }
@@ -2079,7 +2100,11 @@ public class Request extends AppCompatActivity {
                     addLlenaBitacora(context);
                 } else {
                     ErrorMensaje(context,"Se ha producido un error, verifique su conexion e intente nuevamente");
-                    dialogEjecutar.dismiss();
+                    if(visita == 1){
+                        dialogVisitaOrd.dismiss();
+                    }else if (ejecutada == 1){
+                        dialogEjecutar.dismiss();
+                    }
                     EjecutarOrdenes.eject.setEnabled(true);
                 }
             }
@@ -2127,14 +2152,15 @@ try{
             GuardaCoordenadas(context);
         } else {
             Toast.makeText(context, "Se ha guardado correctamente", Toast.LENGTH_LONG).show();
-            dialogEjecutar.dismiss();
             getListOrd(context);
+            dialogVisitaOrd.dismiss();
         }
     }
     if (ejecutarStatus.equals("V")) {
         //dialogEjecutar.dismiss();
         Toast.makeText(context, "Visita guardada correctamente", Toast.LENGTH_LONG).show();
         getListOrd(context);
+        dialogVisitaOrd.dismiss();
     }
 }catch (Exception e){
 /*    if (ejecutarStatus.equals("E")) {
@@ -2167,7 +2193,11 @@ try{
                     }
                 } else {
                     ErrorMensaje(context,"Error al guardar");
-                    dialogEjecutar.dismiss();
+                    if(visita == 1){
+                        dialogVisitaOrd.dismiss();
+                    }else if (ejecutada == 1){
+                        dialogEjecutar.dismiss();
+                    }
                     EjecutarOrdenes.eject.setEnabled(true);
                 }
             }
@@ -2277,17 +2307,21 @@ try{
             @Override
             public void onResponse(Call<JsonObject> call, Response<JsonObject> response1) {
                 if (response1.code() == 200) {
-                    if (String.valueOf(response1.body().getAsJsonPrimitive("UpdateQuejasResult")).equals(-1)) {
-                       /* EjecutarReportes.dialogReportes.dismiss();
+             /*       if (String.valueOf(response1.body().getAsJsonPrimitive("UpdateQuejasResult")).equals(-1)) {
+                        EjecutarReportes.dialogReportes.dismiss();
                         clavequeja = 0;
                         opcion = 1;
                         Util.preferences = getSharedPreferences("credenciales", Context.MODE_PRIVATE);
                         Util.editor = Util.preferences.edit();
                         Util.editor.putString("TipoDescarga", "Q");
-                        Util.editor.commit();*/
-                        getListQuejas(context);
+                        Util.editor.commit();
                         Toast.makeText(context, "Reporte guardado correctamente", Toast.LENGTH_LONG).show();
-                    }
+                        getListQuejas(context);
+
+                    }*/
+
+                    Toast.makeText(context, "Reporte guardado correctamente", Toast.LENGTH_LONG).show();
+                    getListQuejas(context);
                 }else
                     {
                         ErrorMensaje(context,"Se ha producido un error, verifique su conexión e intente nuevamente");
@@ -3424,7 +3458,7 @@ try{
 
 
                                 } else {
-                                    EjecutarReportes.dialogReportes.show();
+                                    //EjecutarReportes.dialogReportes.show();
                                     reporteStatus = "E";
                                     try {
                                         JSONObject jsonObject = new JSONObject();

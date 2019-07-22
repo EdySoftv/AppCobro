@@ -4,6 +4,7 @@ import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -37,6 +38,7 @@ import com.example.pablo.prueba7.Listas.Array;
 import com.example.pablo.prueba7.Modelos.DeepConsModel;
 import com.example.pablo.prueba7.R;
 import com.example.pablo.prueba7.Request.Request;
+import com.example.pablo.prueba7.sampledata.BarraCargar;
 import com.example.pablo.prueba7.sampledata.Util;
 
 import org.json.JSONObject;
@@ -76,6 +78,7 @@ public class HorasOrdenes extends Fragment implements View.OnClickListener, Loca
     public static   Button ejecVisita;
     public static EditText obsTec;
     public String fechaActualVisita;
+    public static ProgressDialog dialogVisitaOrd;
     public String valorObsTec = null;
     private ConstraintLayout todo;
     private ViewGroup container;
@@ -98,7 +101,7 @@ public class HorasOrdenes extends Fragment implements View.OnClickListener, Loca
         super.onCreate(savedInstanceState);
         setRetainInstance(true);
         View view = inflater.inflate(R.layout.activity_hora_ordenes, container, false);
-
+        dialogVisitaOrd = new BarraCargar().showDialog(getContext());
         cordLat = (TextView) view.findViewById(R.id.tv_Latitud);
         cordLong = (TextView) view.findViewById(R.id.tv_Longitud);
         Obs = view.findViewById(R.id.tv_Observaciones);
@@ -399,7 +402,7 @@ public class HorasOrdenes extends Fragment implements View.OnClickListener, Loca
     }
 
     public void EjecutarVisita(){
-
+        dialogVisitaOrd.show();
         JSONObject jsonObject = new JSONObject();
         JSONObject jsonObject1 = new JSONObject();
         observacionesTecnico = obsTec.getText().toString();

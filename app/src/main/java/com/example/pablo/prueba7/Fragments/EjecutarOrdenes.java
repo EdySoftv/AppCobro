@@ -106,7 +106,6 @@ public class EjecutarOrdenes extends Fragment {
 
             } else if (request.firma == false) {
                 firmar.setVisibility(View.GONE);
-
             }
         }
 
@@ -268,7 +267,7 @@ public class EjecutarOrdenes extends Fragment {
                         new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-                                dialogEjecutar.dismiss();
+
                             }
                         }).show();
     }

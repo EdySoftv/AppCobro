@@ -40,6 +40,7 @@ import java.util.Date;
 
 import static com.example.pablo.prueba7.Fragments.TrabajosReportes.Clv_Sol;
 import static com.example.pablo.prueba7.Modelos.DeepConsModel.Obs;
+import static com.example.pablo.prueba7.Request.Request.clvP;
 import static com.example.pablo.prueba7.Services.Services.ClvTrabajoRequest;
 
 
@@ -196,13 +197,13 @@ public class HorasReportes extends Fragment  implements View.OnClickListener {
             objQuejas.put("FechaProceso", "");
             objQuejas.put("Fecha_Ejecucion", "");
             objQuejas.put("HP", "");
-            objQuejas.put("IdUsuario", 1);
+            objQuejas.put("IdUsuario", 2);
             objQuejas.put("Observaciones", request.ObsR + " " + observacionesTecReportes);
-            objQuejas.put("Solucion", TrabajosReportes.proble.getText());
+            objQuejas.put("Solucion", "");
             objQuejas.put("Status", "V");
             objQuejas.put("Visita", false);
             ////////////////////
-             if (request.reporteVisita1!=null) {
+             if (request.reporteVisita1 == null) {
                 objQuejas.put("HV1", horaVisitaR);
                 objQuejas.put("HV2", "");
                 objQuejas.put("HV3", "");
@@ -210,7 +211,7 @@ public class HorasReportes extends Fragment  implements View.OnClickListener {
                 objQuejas.put("Visita2", "");
                 objQuejas.put("Visita3", "");
             }
-             else if (request.reporteVisita2!=null) {
+             if (request.reporteVisita2 == null) {
                  objQuejas.put("HV1", request.reporteHora1);
                  objQuejas.put("HV2", horaVisitaR);
                  objQuejas.put("HV3", "");
@@ -218,7 +219,7 @@ public class HorasReportes extends Fragment  implements View.OnClickListener {
                  objQuejas.put("Visita2", fechaVisitaR);
                  objQuejas.put("Visita3", "");
              }
-            else if(request.reporteVisita3!=null){
+            else  {
                 objQuejas.put("HV1", request.reporteHora1);
                 objQuejas.put("HV2", request.reporteHora2);
                 objQuejas.put("HV3", horaVisitaR);
@@ -227,9 +228,9 @@ public class HorasReportes extends Fragment  implements View.OnClickListener {
                 objQuejas.put("Visita3", fechaVisitaR);
             }
             ////////////////////
-            objQuejas.put("clvPrioridadQueja", request.clvP);
-            objQuejas.put("clvProblema",ClvTrabajoRequest );
-            objQuejas.put("clvProblemaS", Clv_Sol);
+            objQuejas.put("clvPrioridadQueja", clvP);//error
+            objQuejas.put("clvProblema",0 );
+            objQuejas.put("clvProblema2", 3);//error
             jsonObject1.put("objQuejas", objQuejas);
             request.getGuardaCampos(context,jsonObject1);
 
@@ -290,7 +291,7 @@ public class HorasReportes extends Fragment  implements View.OnClickListener {
 
 
 
-            objQuejas.put("clvPrioridadQueja", request.clvP);
+            objQuejas.put("clvPrioridadQueja", clvP);
             objQuejas.put("clvProblema",ClvTrabajoRequest );
             objQuejas.put("clvProblemaS", Clv_Sol);
             jsonObject1.put("objQuejas", objQuejas);
