@@ -13,6 +13,11 @@ import com.example.pablo.prueba7.Activitys.MainActivity;
 import com.example.pablo.prueba7.Adapters.TrabajosAdapter;
 import com.example.pablo.prueba7.Listas.Array;
 import com.example.pablo.prueba7.R;
+import com.example.pablo.prueba7.Request.Request;
+import com.example.pablo.prueba7.sampledata.Util;
+
+import org.json.JSONObject;
+
 import static com.example.pablo.prueba7.Listas.Array.recibix;
 
 
@@ -22,6 +27,7 @@ import static com.example.pablo.prueba7.Listas.Array.recibix;
 public class TrabajosOrdenes extends Fragment{
     public static TrabajosAdapter adaptertrabajos;
     public static ListView trabajos;
+    Request request = new Request();
 
     public TrabajosOrdenes() {
         // Required empty public constructor

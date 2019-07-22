@@ -2452,7 +2452,7 @@ try{
         });
     }*/
 
-    public void SetCambioAparato(final Context context, final JSONObject jsonObject) {
+    public void SetCambioAparato(final Context context, final JSONObject jsonObject, final Activity activity) {
         Call<JsonObject> call = services.RequestPost(context, jsonObject).getCAPAT();
         call.enqueue(new Callback<JsonObject>() {
             @Override
@@ -2469,7 +2469,8 @@ try{
                         jsonObject.put("OPCION", "M");
                         jsonObject.put("STATUS", "E");
                         getValidaTrabajos(getApplicationContext(),jsonObject);
-                        dialogCAPAT.dismiss();
+                        //dialogCAPAT.dismiss();
+                        //activity.finish();
                     }catch (Exception e){}
                     try {
                         JSONObject jsonObject = new JSONObject();
@@ -2479,7 +2480,8 @@ try{
                         jsonObject.put("OPCION", "M");
                         jsonObject.put("STATUS", "E");
                         getValidaTrabajos(getApplicationContext(),jsonObject);
-                        dialogTrabajos.dismiss();
+                        //dialogCAPAT.dismiss();
+                        //activity.finish();
                     }catch (Exception r){}
                 } else {
                     ErrorMensaje(context,"Error al agregar el aparato");
@@ -3249,8 +3251,9 @@ try{
                                 GetMACWAM(context,jsonObject2);
                             }catch (Exception e){}
                         }catch (Exception e){
-                            CambioAparato.MACWAMTextCambioAparato.setHeight(CambioAparato.aparato.getHeight());
+                            Log.d("qqqq", String.valueOf(CambioAparato.aparato.getHeight())+" "+CambioAparato.MACWAMTextCambioAparato.getHeight());
                             CambioAparato.textView35.setVisibility(View.VISIBLE);
+                            Log.d("qqqq", String.valueOf(CambioAparato.aparato.getHeight())+" "+CambioAparato.MACWAMTextCambioAparato.getHeight());
                             CambioAparato.MACWAMTextCambioAparato.setVisibility(View.VISIBLE);
                         }
                     }else {

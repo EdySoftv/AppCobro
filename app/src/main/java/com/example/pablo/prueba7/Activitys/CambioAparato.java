@@ -144,6 +144,11 @@ public class CambioAparato extends AppCompatActivity {
 
                     request.getApaTipDis(getApplicationContext());
                     tipoAparatoClienteValidar=true;
+
+                    ConstraintLayout.LayoutParams layoutParams = (ConstraintLayout.LayoutParams) MACWAMTextCambioAparato.getLayoutParams();
+                    layoutParams.height=aparato.getHeight();
+                    MACWAMTextCambioAparato.setLayoutParams(layoutParams);
+
                     try {
                         Iterator<List<GetListClienteAparatosResult>> itdata1 = array.dataCliApa.iterator();
                         List<GetListClienteAparatosResult> dat1 = itdata1.next();
@@ -236,9 +241,8 @@ public class CambioAparato extends AppCompatActivity {
                                                     jsonObject.put("Status", statusAparato);
                                                     jsonObject.put("Trabajo", "CAPAT");
                                                     jsonObject1.put("ObjCambioAparato", jsonObject);
-                                                    request.SetCambioAparato(getApplicationContext(), jsonObject1);
+                                                    request.SetCambioAparato(getApplicationContext(), jsonObject1,CambioAparato.this);
                                                     dialogCAPAT.show();
-
                                                 }catch (Exception e){}
                                             }else{
                                                 Toast.makeText(getApplicationContext(), "La MACWAN debe de ser 12 caracteres", Toast.LENGTH_SHORT).show();
@@ -262,16 +266,24 @@ public class CambioAparato extends AppCompatActivity {
                                     jsonObject.put("Status", statusAparato);
                                     jsonObject.put("Trabajo", "CAPAT");
                                     jsonObject1.put("ObjCambioAparato", jsonObject);
-                                    request.SetCambioAparato(getApplicationContext(), jsonObject1);
+                                    request.SetCambioAparato(getApplicationContext(), jsonObject1,CambioAparato.this);
                                     dialogCAPAT.show();
-                                    finish();
+
                                 }catch (Exception e){}
                             }
                         }
                     }
                 }
-
-
+                JSONObject jsonObject = new JSONObject();
+                try{
+                    jsonObject.put("CLV_ORDEN",  Util.getClvOrden(Util.preferences));
+                    jsonObject.put("Clv_Tecnico", Util.getClvTec(Util.preferences));
+                    jsonObject.put("OP2", 0);
+                    jsonObject.put("OPCION", "M");
+                    jsonObject.put("STATUS", "E");
+                    request.getValidaTrabajos(getApplicationContext(),jsonObject);
+                }catch (Exception e){}
+                finish();
             }
         });
 
