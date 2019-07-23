@@ -169,12 +169,15 @@ import static com.example.pablo.prueba7.Fragments.EjecutarOrdenes.posTec;
 import static com.example.pablo.prueba7.Fragments.EjecutarReportes.TecSecSeleccion;
 import static com.example.pablo.prueba7.Fragments.EjecutarReportes.TecSecu;
 import static com.example.pablo.prueba7.Fragments.EjecutarReportes.fechaEjecujtar;
+import static com.example.pablo.prueba7.Fragments.EjecutarReportes.horaEjecutar;
 import static com.example.pablo.prueba7.Fragments.EjecutarReportes.tecSecPosRepo;
 import static com.example.pablo.prueba7.Fragments.HorasOrdenes.dialogVisitaOrd;
 import static com.example.pablo.prueba7.Fragments.HorasOrdenes.ejecutada;
 import static com.example.pablo.prueba7.Fragments.HorasOrdenes.observacionesTecnico;
 import static com.example.pablo.prueba7.Fragments.HorasOrdenes.visita;
 import static com.example.pablo.prueba7.Fragments.HorasReportes.TecSecSelecc1;
+import static com.example.pablo.prueba7.Fragments.HorasReportes.dialogVisitaRepo;
+import static com.example.pablo.prueba7.Fragments.HorasReportes.repotteVisita;
 import static com.example.pablo.prueba7.Fragments.HorasReportes.tecPosRepo;
 import static com.example.pablo.prueba7.Fragments.MaterialesOrdenes.clasificacionMat;
 import static com.example.pablo.prueba7.Fragments.MaterialesOrdenes.descripcionMat;
@@ -205,7 +208,7 @@ public class Request extends AppCompatActivity {
     public static String reintentarComando, contraroMA, obsMA, statusMA, extencionesE, Obs,ObsR, msgComando = "";
     public static boolean isnet, firma,MACWAM,validaExisteFirmaBool;
     public static Long abc;
-    public static int clvP, tecC, nExtenciones = 0;
+    public static int clvP, tecC, nExtenciones = 0,clvProblemarepo;
     public int reintentaB;
     public static String stringValidaTrabajos;
     public static ArrayAdapter adapterTecSec, adapterTecSecR;
@@ -638,14 +641,14 @@ public class Request extends AppCompatActivity {
 
                 } else {
                     ErrorInicioDeSesion(context,dialogInicio,activity);
-                    ErrorMensaje(context,"Error al conseguir, intente otra vez");
+                    ErrorMensaje(context,"Error al conseguir datos, intente otra vez "+response.message());
                 }
             }
 
             @Override
             public void onFailure(Call<Example> call, Throwable t) {
                 ErrorInicioDeSesion(context,dialogInicio,activity);
-                ErrorMensaje(context,"Error al conseguir, intente otra vez");
+                ErrorMensaje(context,"Error "+t.getMessage());
             }
         });
     }
@@ -686,13 +689,13 @@ public class Request extends AppCompatActivity {
                     intent1.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                     context.startActivity(intent1);
                 } else {
-                    ErrorMensaje(context,"Error al conseguir lista quejas");
+                    ErrorMensaje(context,"Error al conseguir lista quejas "+response.message());
                 }
             }
 
             @Override
             public void onFailure(Call<QuejasList> call, Throwable t) {
-                ErrorMensaje(context,"Error al conseguir lista quejas");
+                ErrorMensaje(context,"Error "+t.getMessage());
             }
         });
     }
@@ -731,14 +734,14 @@ public class Request extends AppCompatActivity {
                     intent1.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                     context.startActivity(intent1);
                 } else {
-                    ErrorMensaje(context,"Error al conseguir lista ordenes");
+                    ErrorMensaje(context,"Error al conseguir lista ordenes "+response.message());
 
                 }
             }
 
             @Override
             public void onFailure(Call<Example1> call, Throwable t) {
-                ErrorMensaje(context,"Error al conseguir lista ordenes");
+                ErrorMensaje(context,"Error "+t.getMessage());
             }
         });
     }
@@ -788,13 +791,13 @@ public class Request extends AppCompatActivity {
                         ErrorMensaje(context,"Error al conseguir datos de la orden");
                     }
                 } else {
-                    ErrorMensaje(context,"Error al conseguir datos de la orden");
+                    ErrorMensaje(context,"Error al conseguir datos de la orden "+response.message());
                 }
             }
 
             @Override
             public void onFailure(Call<JsonObject> call, Throwable t) {
-                ErrorMensaje(context,"Error al conseguir datos de la orden");
+                ErrorMensaje(context,"Error "+t.getMessage());
             }
         });
     }
@@ -827,13 +830,13 @@ public class Request extends AppCompatActivity {
                     MainActivity.Direccion.setText(InfoClienteModelo.CALLE + " " + InfoClienteModelo.NUMERO + " " + InfoClienteModelo.COLONIA);
                     MainActivity.Nombre.setText(InfoClienteModelo.NOMBRE);
                 } else {
-                    ErrorMensaje(context,"Error al conseguir información del cliente");
+                    ErrorMensaje(context,"Error al conseguir información del cliente "+response.message());
                 }
             }
 
             @Override
             public void onFailure(Call<JsonObject> call, Throwable t) {
-                ErrorMensaje(context,"Error al conseguir información del cliente");
+                ErrorMensaje(context,"Error "+t.getMessage());
             }
         });
     }
@@ -866,13 +869,13 @@ public class Request extends AppCompatActivity {
 
                     }
                 } else {
-                    ErrorMensaje(context,"Error al conseguir servicios del cliente");
+                    ErrorMensaje(context,"Error al conseguir servicios del cliente "+response.message());
                 }
             }
 
             @Override
             public void onFailure(Call<Example2> call, Throwable t) {
-                ErrorMensaje(context,"Error al conseguir servicios del cliente");
+                ErrorMensaje(context,"Error "+t.getMessage());
             }
         });
     }
@@ -931,13 +934,13 @@ public class Request extends AppCompatActivity {
                         }
                     }
                 } else {
-                    ErrorMensaje(context,"Error al conseguir trabajos");
+                    ErrorMensaje(context,"Error al conseguir trabajos "+response.message());
                 }
             }
 
             @Override
             public void onFailure(Call<Example3> call, Throwable t) {
-                ErrorMensaje(context,"Error al conseguir trabajos");
+                ErrorMensaje(context,"Error al conseguir trabajos "+t.getMessage());
             }
         });
     }
@@ -979,13 +982,13 @@ public class Request extends AppCompatActivity {
                         HorasOrdenes.Obs.setText(String.valueOf(DeepConsModel.Obs));
                     }
                 } else {
-                    ErrorMensaje(context,"Error al conseguir lista de técnicos secundarios");
+                    ErrorMensaje(context,"Error al conseguir lista de técnicos secundarios "+response.message());
                 }
             }
 
             @Override
             public void onFailure(Call<JSONTecSec> call, Throwable t) {
-                ErrorMensaje(context,"Error al conseguir lista de técnicos secundarios");
+                ErrorMensaje(context,"Error "+t.getMessage());
             }
         });
     }
@@ -1009,13 +1012,13 @@ public class Request extends AppCompatActivity {
                     context.startActivity(intento);
                     dialogTrabajos.dismiss();
                 } else {
-                    ErrorMensaje(context,"Error al conseguir extensiones adicionales");
+                    ErrorMensaje(context,"Error al conseguir extensiones adicionales "+response1.message());
                 }
             }
 
             @Override
             public void onFailure(Call<JsonObject> call, Throwable t) {
-                ErrorMensaje(context,"Error al conseguir extensiones adicionales");
+                ErrorMensaje(context,"Error "+t.getMessage());
             }
         });
     }
@@ -1062,13 +1065,13 @@ public class Request extends AppCompatActivity {
                         }
                     }
                 } else {
-                    ErrorMensaje(context,"Error al conseguir aparatos del cliente");
+                    ErrorMensaje(context,"Error al conseguir aparatos del cliente "+response.message());
                 }
             }
 
             @Override
             public void onFailure(Call<JSONCLIAPA> call, Throwable t) {
-                ErrorMensaje(context,"Error al conseguir aparatos del cliente");
+                ErrorMensaje(context,"Error "+t.getMessage());
             }
         });
     }
@@ -1103,13 +1106,13 @@ public class Request extends AppCompatActivity {
                         }
                     }
                 } else {
-                    ErrorMensaje(context,"Error al conseguir estatus del aparato");
+                    ErrorMensaje(context,"Error al conseguir estatus del aparato "+response.message());
                 }
             }
 
             @Override
             public void onFailure(Call<JSONStatusApa> call, Throwable t) {
-                ErrorMensaje(context,"Error al conseguir estatus del aparato");
+                ErrorMensaje(context,"Error "+t.getMessage());
             }
         });
     }
@@ -1162,13 +1165,13 @@ public class Request extends AppCompatActivity {
                         }
                     }
                 } else {
-                    ErrorMensaje(context,"Error al conseguir tipo de aparato");
+                    ErrorMensaje(context,"Error al conseguir tipo de aparato "+response.message());
                 }
             }
 
             @Override
             public void onFailure(Call<JSONApaTipo> call, Throwable t) {
-                ErrorMensaje(context,"Error al conseguir tipo de aparato");
+                ErrorMensaje(context,"Error "+t.getMessage());
             }
         });
     }
@@ -1214,13 +1217,13 @@ public class Request extends AppCompatActivity {
                         }
                     }
                 } else {
-                    ErrorMensaje(context,"Error al conseguir aparatos disponibles");
+                    ErrorMensaje(context,"Error al conseguir aparatos disponibles "+response.message());
                 }
             }
 
             @Override
             public void onFailure(Call<JSONApaTipDis> call, Throwable t) {
-                ErrorMensaje(context,"Error al conseguir aparatos disponibles");
+                ErrorMensaje(context,"Error "+t.getMessage());
             }
         });
     }
@@ -1252,13 +1255,13 @@ public class Request extends AppCompatActivity {
                         getCliApa(context);
                     }
                 } else {
-                    ErrorMensaje(context,"Error al conseguir datos de cambio de aparato");
+                    ErrorMensaje(context,"Error al conseguir datos de cambio de aparato "+response.message());
                 }
             }
 
             @Override
             public void onFailure(Call<JsonObject> call, Throwable t) {
-                ErrorMensaje(context,"Error al conseguir datos de cambio de aparato");
+                ErrorMensaje(context,"Error "+t.getMessage());
             }
         });
     }
@@ -1320,13 +1323,13 @@ public class Request extends AppCompatActivity {
                         ErrorMensaje(context,"Error al conseguir datos de cambio de domicilio");
                     }
                 } else {
-                    ErrorMensaje(context,"Error al conseguir datos de cambio de domicilio");
+                    ErrorMensaje(context,"Error al conseguir datos de cambio de domicilio "+response.message());
                 }
             }
 
             @Override
             public void onFailure(Call<JSONCAMDO> call, Throwable t) {
-                ErrorMensaje(context,"Error al conseguir datos de cambio de domicilio");
+                ErrorMensaje(context,"Error "+t.getMessage());
             }
         });
     }
@@ -1361,13 +1364,13 @@ public class Request extends AppCompatActivity {
                     dialogTrabajos.dismiss();
                     //Request pregunta
                 } else {
-                    ErrorMensaje(context,"Error al conseguir datos de la instalacion");
+                    ErrorMensaje(context,"Error al conseguir datos de la instalacion "+response.message());
                 }
             }
 
             @Override
             public void onFailure(Call<JSONArbolServicios> call, Throwable t) {
-                ErrorMensaje(context,"Error al conseguir datos de la instalacion");
+                ErrorMensaje(context,"Error "+t.getMessage());
             }
         });
     }
@@ -1406,13 +1409,13 @@ public class Request extends AppCompatActivity {
 
 
                 } else {
-                    ErrorMensaje(context,"Error al conseguir medios");
+                    ErrorMensaje(context,"Error al conseguir medios "+response.message());
                 }
             }
 
             @Override
             public void onFailure(Call<JSONMediosSer> call, Throwable t) {
-                ErrorMensaje(context,"Error al conseguir medios");
+                ErrorMensaje(context,"Error "+t.getMessage());
             }
         });
     }
@@ -1438,13 +1441,13 @@ public class Request extends AppCompatActivity {
                     ArrayAdapter<String> adapter1 = new ArrayAdapter<String>(context, android.R.layout.simple_spinner_dropdown_item, array.tipoAparato);
                     spinner.setAdapter(adapter1);
                 } else {
-                    ErrorMensaje(context,"Error al conseguir tipos de aparatos");
+                    ErrorMensaje(context,"Error al conseguir tipos de aparatos "+response.message());
                 }
             }
 
             @Override
             public void onFailure(Call<JSONTipoAparatos> call, Throwable t) {
-                ErrorMensaje(context,"Error al conseguir tipos de aparatos");
+                ErrorMensaje(context,"Error "+t.getMessage());
             }
         });
     }
@@ -1474,13 +1477,13 @@ public class Request extends AppCompatActivity {
                     ArrayAdapter<String> adapter1 = new ArrayAdapter<String>(context, android.R.layout.simple_spinner_dropdown_item, array.aparatoAsignacion);
                     spinner.setAdapter(adapter1);
                 } else {
-                    ErrorMensaje(context,"Error al conseguir aparatos disponibles");
+                    ErrorMensaje(context,"Error al conseguir aparatos disponibles "+response.message());
                 }
             }
 
             @Override
             public void onFailure(Call<JSONAparatosDisponibles> call, Throwable t) {
-                ErrorMensaje(context,"Error al conseguir aparatos disponibles");
+                ErrorMensaje(context,"Error "+t.getMessage());
             }
         });
     }
@@ -1514,13 +1517,13 @@ public class Request extends AppCompatActivity {
 
 
                 } else {
-                    ErrorMensaje(context,"Error al conseguir servicios de aparatos");
+                    ErrorMensaje(context,"Error al conseguir servicios de aparatos "+response.message());
                 }
             }
 
             @Override
             public void onFailure(Call<JSONServiciosAparatos> call, Throwable t) {
-                ErrorMensaje(context,"Error al conseguir servicios de aparatos");
+                ErrorMensaje(context,"Error "+t.getMessage());
             }
         });
     }
@@ -1545,14 +1548,14 @@ public class Request extends AppCompatActivity {
                     finish();
                     }
                 } else {
-                    ErrorMensaje(context,"Error al aceptar asignación");
+                    ErrorMensaje(context,"Error al aceptar asignación "+response.message());
                     ReporteAsignacion.dialogReporteAsignacion.dismiss();
                 }
             }
 
             @Override
             public void onFailure(Call<JsonObject> call, Throwable t) {
-                ErrorMensaje(context,"Error al aceptar asignación");
+                ErrorMensaje(context,"Error "+t.getMessage());
                 ReporteAsignacion.dialogReporteAsignacion.dismiss();
             }
         });
@@ -1593,13 +1596,13 @@ public class Request extends AppCompatActivity {
                         solucion.setSelection(posSolucionRepo);
                     }
                 } else {
-                    ErrorMensaje(context,"Error al conseguir soluciones");
+                    ErrorMensaje(context,"Error al conseguir soluciones "+response.message());
                 }
             }
 
             @Override
             public void onFailure(Call<JSONSolucion> call, Throwable t) {
-                ErrorMensaje(context,"Error al conseguir soluciones");
+                ErrorMensaje(context,"Error "+t.getMessage());
 
             }
         });
@@ -1630,6 +1633,7 @@ public class Request extends AppCompatActivity {
                             ObsR = dat.get(i).observaciones;
                             clvP = dat.get(i).clvPrioridadQueja;
                             tecC = dat.get(i).tecnicoCuadrilla;
+                            clvProblemarepo =  dat.get(i).clvProblema;
                             try {
                                 TrabajosReportes.prioridad.setText(String.valueOf(dat.get(i).getPrioridad()));
                                 TrabajosReportes.clasific.setText(String.valueOf(dat.get(i).getClasificacionProblema()));
@@ -1669,13 +1673,13 @@ public class Request extends AppCompatActivity {
                         }
                     }
                 }else{
-                    ErrorMensaje(context,"Error al conseguir datos del reporte");
+                    ErrorMensaje(context,"Error al conseguir datos del reporte "+response.message());
                 }
             }
 
             @Override
             public void onFailure(Call<JSONReporteCliente> call, Throwable t) {
-                ErrorMensaje(context,"Error al conseguir datos del reporte");
+                ErrorMensaje(context,"Error "+t.getMessage());
             }
         });
     }
@@ -1703,13 +1707,13 @@ public class Request extends AppCompatActivity {
                         }
                     }
                 }else{
-                    ErrorMensaje(context,"Error al conseguir datos del tecnico");
+                    ErrorMensaje(context,"Error al conseguir datos del tecnico "+response.message());
                 }
             }
 
             @Override
             public void onFailure(Call<JSONNombreTecnico> call, Throwable t) {
-                ErrorMensaje(context,"Error al conseguir datos del tecnico");
+                ErrorMensaje(context,"Error "+t.getMessage());
             }
         });
     }
@@ -1741,13 +1745,13 @@ public class Request extends AppCompatActivity {
                         }
                     }
                 }else{
-                    ErrorMensaje(context,"Error al conseguir servicios asignados");
+                    ErrorMensaje(context,"Error al conseguir servicios asignados "+response.message());
                 }
             }
 
             @Override
             public void onFailure(Call<JSONServicioAsignado> call, Throwable t) {
-                ErrorMensaje(context,"Error al conseguir servicios asignados");
+                ErrorMensaje(context,"Error "+t.getMessage());
             }
         });
     }
@@ -1782,13 +1786,13 @@ public class Request extends AppCompatActivity {
                         }
                     }
                 }else{
-                    ErrorMensaje(context,"Error al conseguir datos del cliente");
+                    ErrorMensaje(context,"Error al conseguir datos del cliente "+response.message());
                 }
             }
 
             @Override
             public void onFailure(Call<JSONReportes> call, Throwable t) {
-                ErrorMensaje(context,"Error al conseguir datos del cliente");
+                ErrorMensaje(context,"Error "+t.getMessage());
             }
         });
     }
@@ -1825,13 +1829,13 @@ public class Request extends AppCompatActivity {
                         TecSecu.setSelection(TecSecSeleccion);
                     }
                 }else{
-                    ErrorMensaje(context,"Error al conseguir datos del tecnico secundario");
+                    ErrorMensaje(context,"Error al conseguir datos del tecnico secundario "+response.message());
                 }
             }
 
             @Override
             public void onFailure(Call<JSONTecSecReport> call, Throwable t) {
-                ErrorMensaje(context,"Error al conseguir datos del tecnico secundario");
+                ErrorMensaje(context,"Error "+t.getMessage());
             }
         });
     }
@@ -1875,7 +1879,7 @@ public class Request extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<JsonObject> call, Throwable t) {
-                ErrorMensaje(context,"Error al guardar");
+                ErrorMensaje(context,"Se ha producido un error, verifique su conexion e intente nuevamente");
                 dialogEjecutar.dismiss();
                 EjecutarOrdenes.eject.setEnabled(true);
             }
@@ -1892,13 +1896,13 @@ public class Request extends AppCompatActivity {
                      stringValidaTrabajos = String.valueOf(response.body().getAsJsonPrimitive("GetSP_ValidaGuardaOrdSerAparatosResult"));
 
                 }else{
-                    ErrorMensaje(context,"Error al guardar");
+                    ErrorMensaje(context,"Se ha producido un error, verifique su conexion e intente nuevamente");
                 }
             }
 
             @Override
             public void onFailure(Call<JsonObject> call, Throwable t) {
-                ErrorMensaje(context,"Error al guardar");
+                ErrorMensaje(context,"Se ha producido un error, verifique su conexion e intente nuevamente");
             }
         });
     }
@@ -1947,7 +1951,7 @@ public class Request extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<JsonObject> call, Throwable t) {
-                ErrorMensaje(context,"Error al guardar");
+                ErrorMensaje(context,"Se ha producido un error, verifique su conexion e intente nuevamente");
             }
         });
     }
@@ -1986,7 +1990,7 @@ public class Request extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<JsonObject> call, Throwable t) {
-                ErrorMensaje(context,"Error, aparatos no enviados");
+                ErrorMensaje(context,"Se ha producido un error, verifique su conexion e intente nuevamente");
                 dialogEjecutar.dismiss();
                 EjecutarOrdenes.eject.setEnabled(true);
             }
@@ -2009,7 +2013,7 @@ public class Request extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<JsonObject> call, Throwable t) {
-                ErrorMensaje(context,"Error, aparatos no enviados");
+                ErrorMensaje(context,"Se ha producido un error, verifique su conexion e intente nuevamente");
                 dialogEjecutar.dismiss();
                 EjecutarOrdenes.eject.setEnabled(true);
             }
@@ -2047,7 +2051,7 @@ public class Request extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<JsonObject> call, Throwable t) {
-                ErrorMensaje(context,"Error, aparatos no enviados");
+                ErrorMensaje(context,"Se ha producido un error, verifique su conexion e intente nuevamente");
                 dialogEjecutar.dismiss();
                 EjecutarOrdenes.eject.setEnabled(true);
             }
@@ -2083,7 +2087,7 @@ public class Request extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<JsonObject> call, Throwable t) {
-                ErrorMensaje(context,"Error al guardar");
+                ErrorMensaje(context,"Se ha producido un error, verifique su conexion e intente nuevamente");
                 dialogEjecutar.dismiss();
                 EjecutarOrdenes.eject.setEnabled(true);
             }
@@ -2111,7 +2115,7 @@ public class Request extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<JsonObject> call, Throwable t) {
-                ErrorMensaje(context,"Error, aparatos no enviados");
+                ErrorMensaje(context,"Se ha producido un error, verifique su conexion e intente nuevamente");
                 dialogEjecutar.dismiss();
                 EjecutarOrdenes.eject.setEnabled(true);
             }
@@ -2193,18 +2197,14 @@ try{
                     }
                 } else {
                     ErrorMensaje(context,"Error al guardar");
-                    if(visita == 1){
-                        dialogVisitaOrd.dismiss();
-                    }else if (ejecutada == 1){
-                        dialogEjecutar.dismiss();
-                    }
+                    dialogEjecutar.dismiss();
                     EjecutarOrdenes.eject.setEnabled(true);
                 }
             }
 
             @Override
             public void onFailure(Call<JsonObject> call, Throwable t) {
-                ErrorMensaje(context,"Error al guardar");
+                ErrorMensaje(context,"Se ha producido un error, verifique su conexion e intente nuevamente");
                 dialogEjecutar.dismiss();
                 EjecutarOrdenes.eject.setEnabled(true);
             }
@@ -2230,23 +2230,23 @@ try{
                                 objQuejas.put("Clv_Queja", Util.getClvQueja(Util.preferences));
                                 objQuejas.put("Clv_Tecnico", Util.getClvTec(Util.preferences));
                                 objQuejas.put("FechaProceso", "");
-                                objQuejas.put("Fecha_Ejecucion", fecha+" "+hora);
+                                objQuejas.put("Fecha_Ejecucion", fechaEjecujtar + " " + horaEjecutar);
                                 objQuejas.put("HP", "");
                                 objQuejas.put("HV1", "");
                                 objQuejas.put("HV2", "");
-                                objQuejas.put("HV2", "");
+                                objQuejas.put("HV3", "");
                                 objQuejas.put("IdUsuario", 1);
                                 objQuejas.put("Observaciones", Obs);
                                 objQuejas.put("Solucion", TrabajosReportes.proble.getText());
-                                objQuejas.put("Status", reporteStatus);
+                                objQuejas.put("Status", "E");
                                 objQuejas.put("TecnicoCuadrilla", TecSecSeleccion);
-                                objQuejas.put("Visita", 0);
+                                objQuejas.put("Visita", false);
                                 objQuejas.put("Visita1", "");
                                 objQuejas.put("Visita2", "");
                                 objQuejas.put("Visita3", "");
                                 objQuejas.put("clvPrioridadQueja", clvP);
-                                objQuejas.put("clvProblema",ClvTrabajoRequest );
-                                objQuejas.put("clvProblemaS", Clv_Sol);
+                                objQuejas.put("clvProblema",clvProblemarepo);
+                                objQuejas.put("clvProblema2", 3);
                                 jsonObject1.put("objQuejas", objQuejas);
                                 getGuardaCampos(context,jsonObject1);
                             }catch (Exception e){}
@@ -2256,7 +2256,7 @@ try{
                 }else{
 
                     EjecutarReportes.dialogReportes.dismiss();
-                    ErrorMensaje(context,"Error al guardar");
+                    ErrorMensaje(context,"Se ha producido un error, verifique su conexion e intente nuevamente");
                 }
             }
 
@@ -2264,7 +2264,7 @@ try{
             public void onFailure(Call<JsonObject> call, Throwable t) {
 
                 EjecutarReportes.dialogReportes.dismiss();
-                ErrorMensaje(context,"Error al guardar");
+                ErrorMensaje(context,"Se ha producido un error, verifique su conexion e intente nuevamente");
             }
         });
     }
@@ -2288,14 +2288,14 @@ try{
                     }
                 }else{
                     EjecutarReportes.dialogReportes.dismiss();
-                    ErrorMensaje(context,"Error al guardar");
+                    ErrorMensaje(context,"Se ha producido un error, verifique su conexion e intente nuevamente");
                 }
             }
 
             @Override
             public void onFailure(Call<JsonObject> call, Throwable t) {
                 EjecutarReportes.dialogReportes.dismiss();
-                ErrorMensaje(context,"Error al guardar");
+                ErrorMensaje(context,"Se ha producido un error, verifique su conexion e intente nuevamente");
             }
         });
     }
@@ -2322,17 +2322,24 @@ try{
 
                     Toast.makeText(context, "Reporte guardado correctamente", Toast.LENGTH_LONG).show();
                     getListQuejas(context);
+                    if(repotteVisita==1){
+                        dialogVisitaRepo.dismiss();
+                    }
+
                 }else
                     {
                         ErrorMensaje(context,"Se ha producido un error, verifique su conexión e intente nuevamente");
                         getListQuejas(context);
+                        if(repotteVisita==1){
+                            dialogVisitaRepo.dismiss();
+                        }
                 }
             }
 
             @Override
             public void onFailure(Call<JsonObject> call, Throwable t) {
                 EjecutarReportes.dialogReportes.dismiss();
-                ErrorMensaje(context,"Error al guardar");
+                ErrorMensaje(context,"Se ha producido un error, verifique su conexion e intente nuevamente");
             }
         });
     }
@@ -2367,7 +2374,7 @@ try{
 
             @Override
             public void onFailure(Call<JsonObject> call, Throwable t) {
-                ErrorMensaje(context,"Error al guardar");
+                ErrorMensaje(context,"Se ha producido un error, verifique su conexion e intente nuevamente");
             }
         });
     }
@@ -2484,7 +2491,7 @@ try{
                         //activity.finish();
                     }catch (Exception r){}
                 } else {
-                    ErrorMensaje(context,"Error al agregar el aparato");
+                    ErrorMensaje(context,"Error al agregar el aparato "+response.message());
                     try {
                         dialogCAPAT.dismiss();
                     }catch (Exception e){}
@@ -2496,7 +2503,7 @@ try{
 
             @Override
             public void onFailure(Call<JsonObject> call, Throwable t) {
-                ErrorMensaje(context,"Error al agregar el aparato");
+                ErrorMensaje(context,"Error "+t.getMessage());
                 try {
                     dialogCAPAT.dismiss();
                 }catch (Exception e){}
@@ -2522,13 +2529,13 @@ try{
                 if (response1.code() == 200) {
                     //Toast.makeText(getApplicationContext(), "Envío de aparatos con éxito", Toast.LENGTH_SHORT);
                 }else{
-                    ErrorMensaje(context,"Error al mandar aparatos recibidos");
+                    ErrorMensaje(context,"Error al mandar aparatos recibidos "+response1.message());
                 }
             }
 
             @Override
             public void onFailure(Call<JsonObject> call, Throwable t) {
-                ErrorMensaje(context,"Error al mandar aparatos recibidos");
+                ErrorMensaje(context,"Error "+t.getMessage());
             }
 
         });
@@ -2576,13 +2583,13 @@ try{
                         extencionesMat = false;
                     }
                 }else{
-                    ErrorMensaje(context,"Error al conseguir datos del extenciones");
+                    ErrorMensaje(context,"Error al conseguir datos del extenciones "+response.message());
                 }
             }
 
             @Override
             public void onFailure(Call<JsonObject> call, Throwable t) {
-                ErrorMensaje(context,"Error al conseguir datos del extenciones");
+                ErrorMensaje(context,"Error "+t.getMessage());
             }
         });
     }
@@ -2621,13 +2628,13 @@ try{
                     }
 
                 }else{
-                    ErrorMensaje(context,"Error al conseguir datos del materiales");
+                    ErrorMensaje(context,"Error al conseguir datos del materiales "+response1.message());
                 }
             }
 
             @Override
             public void onFailure(Call<JSONDetalleBitacora> call, Throwable t) {
-                ErrorMensaje(context,"Error al conseguir datos del materiales");
+                ErrorMensaje(context,"Error "+t.getMessage());
             }
 
         });
@@ -2667,13 +2674,13 @@ try{
                     }
 
                 }else{
-                    ErrorMensaje(context,"Error al conseguir datos del materiales");
+                    ErrorMensaje(context,"Error al conseguir datos del materiales "+response1.message());
                 }
             }
 
             @Override
             public void onFailure(Call<JSONDescripcionArticulosBit> call, Throwable t) {
-                ErrorMensaje(context,"Error al conseguir datos del materiales");
+                ErrorMensaje(context,"Error "+t.getMessage());
             }
 
         });
@@ -2712,13 +2719,13 @@ try{
                         spinnerExtMatR.setSelection(posExtMatR);
                     }
                 }else{
-                    ErrorMensaje(context,"Error al conseguir datos del materiales");
+                    ErrorMensaje(context,"Error al conseguir datos del materiales "+response1.message());
                 }
             }
 
             @Override
             public void onFailure(Call<JSONLlenaExtenciones> call, Throwable t) {
-                ErrorMensaje(context,"Error al conseguir datos del materiales");
+                ErrorMensaje(context,"Error "+t.getMessage());
             }
 
         });
@@ -2746,13 +2753,13 @@ try{
                         pieza = false;
                     }
                 }else{
-                    ErrorMensaje(context,"Error al conseguir datos del materiales");
+                    ErrorMensaje(context,"Error al conseguir datos del materiales "+response.message());
                 }
             }
 
             @Override
             public void onFailure(Call<JsonObject> call, Throwable t) {
-                ErrorMensaje(context,"Error al conseguir datos del materiales");
+                ErrorMensaje(context,"Error "+t.getMessage());
             }
         });
     }
@@ -2775,13 +2782,13 @@ try{
                         getPredescarga(activity, context);
                     }
                 }else{
-                    ErrorMensaje(context,"Error al conseguir datos del materiales");
+                    ErrorMensaje(context,"Error al conseguir datos del materiales "+response.message());
                 }
             }
 
             @Override
             public void onFailure(Call<JsonObject> call, Throwable t) {
-                ErrorMensaje(context,"Error al conseguir datos del materiales");
+                ErrorMensaje(context,"Error "+t.getMessage());
             }
         });
     }
@@ -2797,13 +2804,13 @@ try{
                     Toast.makeText(context, "Se agrego correctamente", Toast.LENGTH_SHORT).show();
                     getPredescarga(activity, context);
                 } else {
-                    ErrorMensaje(context,"Error al agregar datos del materiales");
+                    ErrorMensaje(context,"Error al agregar datos del materiales "+response.message());
                 }
             }
 
             @Override
             public void onFailure(Call<JsonObject> call, Throwable t) {
-                ErrorMensaje(context,"Error al agregar datos del materiales");
+                ErrorMensaje(context,"Error "+t.getMessage());
             }
         });
     }
@@ -2875,13 +2882,13 @@ try{
                        Toast.makeText(context,"Error al cargar Tabla" ,Toast.LENGTH_SHORT ).show();
                     }
                 }else{
-                    ErrorMensaje(context,"Error al conseguir datos del materiales");
+                    ErrorMensaje(context,"Error al conseguir datos del materiales "+response.message());
                 }
             }
 
             @Override
             public void onFailure(Call<JSONPreDescarga> call, Throwable t) {
-                ErrorMensaje(context,"Error al conseguir datos del materiales");
+                ErrorMensaje(context,"Error "+t.getMessage());
             }
         });
     }
@@ -2917,13 +2924,13 @@ try{
                     ArrayAdapter arrayAdapter = new ArrayAdapter(context, android.R.layout.simple_list_item_1, array.descripcionArtBit);
                     clasificacionMatR.setAdapter(arrayAdapter);
                 }else{
-                    ErrorMensaje(context,"Error al conseguir datos del materiales");
+                    ErrorMensaje(context,"Error al conseguir datos del materiales "+response1.message());
                 }
             }
 
             @Override
             public void onFailure(Call<JSONDescripcionArticulosBit> call, Throwable t) {
-                ErrorMensaje(context,"Error al conseguir datos del materiales");
+                ErrorMensaje(context,"Error "+t.getMessage());
             }
 
         });
@@ -2951,13 +2958,13 @@ try{
                         pieza = false;
                     }
                 }else{
-                    ErrorMensaje(context,"Error al conseguir datos del materiales");
+                    ErrorMensaje(context,"Error al conseguir datos del materiales "+response.message());
                 }
             }
 
             @Override
             public void onFailure(Call<JsonObject> call, Throwable t) {
-                ErrorMensaje(context,"Error al conseguir datos del materiales");
+                ErrorMensaje(context,"Error "+t.getMessage());
             }
         });
     }
@@ -2980,13 +2987,13 @@ try{
                         getPredescargaR(activity, context);
                     }
                 }else{
-                    ErrorMensaje(context,"Error al conseguir datos del materiales");
+                    ErrorMensaje(context,"Error al conseguir datos del materiales "+response.message());
                 }
             }
 
             @Override
             public void onFailure(Call<JsonObject> call, Throwable t) {
-                ErrorMensaje(context,"Error al conseguir datos del materiales");
+                ErrorMensaje(context,"Error "+t.getMessage());
             }
         });
     }
@@ -3002,13 +3009,13 @@ try{
                     Toast.makeText(context, "Se agrego correctamente", Toast.LENGTH_SHORT).show();
                     getPredescargaR(activity, context);
                 } else {
-                    ErrorMensaje(context,"Error al agregar datos del materiales");
+                    ErrorMensaje(context,"Error al agregar datos del materiales "+response.message());
                 }
             }
 
             @Override
             public void onFailure(Call<JsonObject> call, Throwable t) {
-                ErrorMensaje(context,"Error al agregar datos del materiales");
+                ErrorMensaje(context,"Error "+t.getMessage());
             }
         });
     }
@@ -3077,13 +3084,13 @@ try{
                     }catch (Exception e){}
 
                 }else{
-                    ErrorMensaje(context,"Error al conseguir datos del materiales");
+                    ErrorMensaje(context,"Error al conseguir datos del materiales "+response.message());
                 }
             }
 
             @Override
             public void onFailure(Call<JSONPreDescarga> call, Throwable t) {
-                ErrorMensaje(context,"Error al conseguir datos del materiales");
+                ErrorMensaje(context,"Error "+t.getMessage());
             }
         });
     }
@@ -3098,13 +3105,13 @@ try{
                     Toast.makeText(context, "Se agrego correctamente", Toast.LENGTH_SHORT).show();
                     validaExisteFirmaBool = true;
                 } else {
-                    ErrorMensaje(context,"Error al agregar firma");
+                    ErrorMensaje(context,"Error al agregar firma "+response.message());
                 }
             }
 
             @Override
             public void onFailure(Call<JsonObject> call, Throwable t) {
-                ErrorMensaje(context,"Error al agregar firma");
+                ErrorMensaje(context,"Error "+t.getMessage());
             }
         });
     }
@@ -3122,13 +3129,13 @@ try{
                     }
 
                 } else {
-                    Toast.makeText(context, "Error al eliminar material", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(context, "Error al eliminar material "+response.message(), Toast.LENGTH_SHORT).show();
                 }
             }
 
             @Override
             public void onFailure(Call<JsonObject> call, Throwable t) {
-                Toast.makeText(context, "Error al eliminar material", Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, "Error "+t.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -3217,7 +3224,7 @@ try{
                     }
             @Override
             public void onFailure(Call<JsonObject> call, Throwable t) {
-                ErrorMensaje(context,"Error al validar firma");
+                ErrorMensaje(context,"Error  "+t.getMessage());
             }
         });
     }
@@ -3259,14 +3266,14 @@ try{
                         constraintLayoutMACWAM.setVisibility(View.GONE);
                     }
                 } else {
-                    ErrorMensaje(context,"Error al validar MACWAN");
+                    ErrorMensaje(context,"Error al validar MACWAN "+response.message());
 
                 }
             }
 
             @Override
             public void onFailure(Call<JsonObject> call, Throwable t) {
-                ErrorMensaje(context,"Error al validar MACWAN");
+                ErrorMensaje(context,"Error "+t.getMessage());
             }
         });
     }
@@ -3297,13 +3304,13 @@ try{
                     }
 
                 } else {
-                    ErrorMensaje(context,"Error al conseguir MACWAN");
+                    ErrorMensaje(context,"Error al conseguir MACWAN "+response.message());
                 }
             }
 
             @Override
             public void onFailure(Call<JsonObject> call, Throwable t) {
-                ErrorMensaje(context,"Error al conseguir MACWAN");
+                ErrorMensaje(context,"Error "+t.getMessage());
             }
         });
     }
@@ -3319,13 +3326,13 @@ try{
                         dialogAsignacion.dismiss();
                         finish();}catch (Exception e){}
                 } else {
-                    ErrorMensaje(context,"Error al asignar MACWAN");
+                    ErrorMensaje(context,"Error al asignar MACWAN "+response.message());
                 }
             }
 
             @Override
             public void onFailure(Call<JsonObject> call, Throwable t) {
-                ErrorMensaje(context,"Error al asignar MACWAN");
+                ErrorMensaje(context,"Error "+t.getMessage());
             }
         });
     }
@@ -3372,13 +3379,13 @@ try{
                     }
                     getArbSer(context);
                 }else{
-                    ErrorMensaje(context,"Error al conseguir datos de instalacion");
+                    ErrorMensaje(context,"Error al conseguir datos de instalacion "+response.message());
                 }
             }
 
             @Override
             public void onFailure(Call<JSONPregunta> call, Throwable t) {
-                ErrorMensaje(context,"Error al conseguir datos de instalacion");
+                ErrorMensaje(context,"Error "+t.getMessage());
                 }
         });
     }
@@ -3400,13 +3407,13 @@ try{
                         //Toast.makeText(context, "Es obligatoria la firma", Toast.LENGTH_SHORT).show();
                     }
                 }else{
-                    ErrorMensaje(context,"Error al validar firma");
+                    ErrorMensaje(context,"Error al validar firma "+response.message());
                 }
             }
 
             @Override
             public void onFailure(Call<JsonObject> call, Throwable t) {
-                ErrorMensaje(context,"Error al validar firma");
+                ErrorMensaje(context,"Error "+t.getMessage());
             }
 
         });
@@ -3421,7 +3428,7 @@ try{
                     String dato;
                     dato = String.valueOf(response.body().getAsJsonPrimitive("ValidaExisteTblFirmaClienteResult"));
                     if (dato.equals("1")) {
-                        final Calendar c = Calendar.getInstance();
+               /*         final Calendar c = Calendar.getInstance();
                         EjecutarReportes.añoE = c.get(Calendar.YEAR);
                         EjecutarReportes.mesE = c.get(Calendar.MONTH);
                         EjecutarReportes.diaE = c.get(Calendar.DAY_OF_MONTH);
@@ -3446,7 +3453,7 @@ try{
                             }else{
                                 EjecutarReportes.horaHoy = String.valueOf(EjecutarReportes.horaE) + ":" + String.valueOf(EjecutarReportes.minutoE);
                             }
-                        }
+                        }*/
 
                         if (HorasReportes.reporteEjecutada == 1) {
                             //ejecutar
@@ -3464,7 +3471,7 @@ try{
                                     try {
                                         JSONObject jsonObject = new JSONObject();
                                         jsonObject.put("Clv_orden", Util.getClvQueja(Util.preferences));
-                                        jsonObject.put("horaFin", EjecutarReportes.horaHoy);
+                                        jsonObject.put("horaFin", horaEjecutar);
                                         jsonObject.put("horaInicio", "08:00");
                                         jsonObject.put("opcion", 2);
                                         getGuardaHoraReporte(context, jsonObject, EjecutarReportes.fechaHoy, EjecutarReportes.horaHoy);
@@ -3476,7 +3483,7 @@ try{
                                 ////////*************************
                             }///fin de ejecutar
                         }
-                        if (HorasReportes.repotteVisita == 1) {
+                /*        if (repotteVisita == 1) {
                             JSONObject objQuejas = new JSONObject();
                             JSONObject jsonObject1 = new JSONObject();
                             try{
@@ -3535,7 +3542,7 @@ try{
                                 Toast.makeText(context, "La Fecha es obligatoria", Toast.LENGTH_SHORT).show();
                             }
 
-                        }
+                        }*/
 
                     }
                     else if (dato.equals("0")) {
@@ -3555,7 +3562,7 @@ try{
 
             @Override
             public void onFailure(Call<JsonObject> call, Throwable t) {
-                ErrorMensaje(context,"Error al validar firma");
+                ErrorMensaje(context,"Error "+t.getMessage());
             }
 
         });

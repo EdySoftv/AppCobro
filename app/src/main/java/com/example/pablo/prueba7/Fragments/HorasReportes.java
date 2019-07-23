@@ -2,6 +2,7 @@ package com.example.pablo.prueba7.Fragments;
 
 
 import android.app.DatePickerDialog;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -29,6 +30,7 @@ import com.example.pablo.prueba7.Activitys.Reportes;
 import com.example.pablo.prueba7.Listas.Array;
 import com.example.pablo.prueba7.R;
 import com.example.pablo.prueba7.Request.Request;
+import com.example.pablo.prueba7.sampledata.BarraCargar;
 import com.example.pablo.prueba7.sampledata.Util;
 
 import org.json.JSONObject;
@@ -53,6 +55,7 @@ public class HorasReportes extends Fragment  implements View.OnClickListener {
     private View contenedorParticular;
     private RadioButton btn1, bt2;
     public Button salirReporte,guardarReporte;
+    public static ProgressDialog dialogVisitaRepo;
     public static int tecPosRepo;
     public static String statusHora;
     public String fechaVisitaReporte,horaVisitaR,fechaVisitaR;
@@ -75,6 +78,7 @@ public class HorasReportes extends Fragment  implements View.OnClickListener {
         DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
         fechaVisitaR= dateFormat.format(objDate);
         horaVisitaR=(hourFormat.format(objDate));
+        dialogVisitaRepo =  new BarraCargar().showDialog(getContext());
         fechaVisitaReporte = (dateFormat.format(objDate)) + " " + (hourFormat.format(objDate));
 
         ///////////////////////////////////////////////////////
@@ -99,6 +103,7 @@ public class HorasReportes extends Fragment  implements View.OnClickListener {
                 if (observacionesTecReportes.equals(null)||observacionesTecReportes.equals("")){
                     Toast.makeText(getContext(), "Escriba sus observaciones", Toast.LENGTH_SHORT).show();
                 }else{
+
                     DialogoejecutarVisita();
                 }
 
@@ -155,6 +160,7 @@ public class HorasReportes extends Fragment  implements View.OnClickListener {
                         new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
+                                dialogVisitaRepo.show();
                                 envioJsonVisita(getContext());
                                 Intent intento = new Intent(getActivity(), Reportes.class);
                                 intento.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -189,6 +195,7 @@ public class HorasReportes extends Fragment  implements View.OnClickListener {
     }
 
     public void envioJsonVisita(final Context context){
+
         JSONObject objQuejas = new JSONObject();
         JSONObject jsonObject1 = new JSONObject();
         try{

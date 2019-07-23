@@ -163,7 +163,7 @@ public class GetQuejasListResult {
     public int clvPrioridadQueja;
     @SerializedName("clvProblema")
     @Expose
-    private Long clvProblema;
+    public int clvProblema;
     @SerializedName("clv_llamada")
     @Expose
     private Object clvLlamada;

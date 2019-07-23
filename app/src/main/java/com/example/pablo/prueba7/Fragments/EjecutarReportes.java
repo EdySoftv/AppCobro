@@ -52,7 +52,7 @@ public class EjecutarReportes extends Fragment {
     public static int añoE, mesE, diaE;
     public static int horaE,minutoE;
     public static String year, horas12;
-    public static   String month,fechaEjecujtar;
+    public static   String month,fechaEjecujtar, horaEjecutar;
     public static Spinner TecSecu;
     public static  int TecSecSeleccion = -1;
     public static int tecSecPosRepo;
@@ -72,9 +72,9 @@ public class EjecutarReportes extends Fragment {
         in = new Inicio();
         Date objDate = new Date();
         DateFormat hourFormat = new SimpleDateFormat("HH:mm");
-        DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-
-        fechaEjecujtar = (dateFormat.format(objDate)) + " " + (hourFormat.format(objDate));
+        DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
+        horaEjecutar = (hourFormat.format(objDate));
+        fechaEjecujtar = (dateFormat.format(objDate));
         dialogReportes = new BarraCargar().showDialog(getContext());
         View view = inflater.inflate(R.layout.activity_ejecutar_reporte, container, false);
         eject = view.findViewById(R.id.ejecutarR);
@@ -169,10 +169,6 @@ public class EjecutarReportes extends Fragment {
                             }
                         }).show();
 
-
-
-
-
     }
 
     private void dialogoEjecutar(Context onClickListener) {
@@ -212,7 +208,7 @@ public class EjecutarReportes extends Fragment {
 
     }
 
-    public void validacionReporte (){
+/*    public void validacionReporte (){
         if (TrabajosReportes.solucion.getSelectedItem().toString().trim().equals("Seleccione tipo de solución")) {
             Toast.makeText(getContext(), "Seleccione un tipo de solución", Toast.LENGTH_SHORT).show();
         }else {
@@ -263,7 +259,7 @@ public class EjecutarReportes extends Fragment {
         }
 
 
-    }
+    }*/
 
 
 }
