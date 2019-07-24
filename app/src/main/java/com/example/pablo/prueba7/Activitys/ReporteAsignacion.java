@@ -23,6 +23,7 @@ import com.example.pablo.prueba7.Adapters.ArbolAdapter;
 import com.example.pablo.prueba7.Adapters.EliminarAparatosAdapter;
 import com.example.pablo.prueba7.Adapters.OrdenesAdapter;
 import com.example.pablo.prueba7.Listas.Array;
+import com.example.pablo.prueba7.Modelos.DeepConsModel;
 import com.example.pablo.prueba7.Modelos.GetMuestraArbolServiciosAparatosPorinstalarListResult;
 import com.example.pablo.prueba7.Modelos.GetMuestraMedioPorServicoContratadoListResult;
 import com.example.pablo.prueba7.Modelos.mediosPregunta;
@@ -80,6 +81,19 @@ public class ReporteAsignacion extends AppCompatActivity {
 
         if(guardarAparatos.isEnabled()==false){
             guardarAparatos.setTextColor(Color.GRAY);
+            if(DeepConsModel.STATUS.equals("E")){
+                guardarAparatos.setEnabled(false);
+                guardarAparatos.setTextColor(Color.GRAY);
+                agregarAparato.setEnabled(false);
+                agregarAparato.setTextColor(Color.GRAY);
+            }
+        }else{
+            if(DeepConsModel.STATUS.equals("E")){
+                guardarAparatos.setEnabled(false);
+                guardarAparatos.setTextColor(Color.GRAY);
+            }else{
+                guardarAparatos.setTextColor(Color.WHITE);
+            }
         }
 
 
@@ -111,6 +125,10 @@ public class ReporteAsignacion extends AppCompatActivity {
             //si tiene hijos habilitamos el boton de guarda
             guardarAparatos.setEnabled(true);
             guardarAparatos.setTextColor(Color.WHITE);
+            if(DeepConsModel.STATUS.equals("E")){
+                guardarAparatos.setEnabled(false);
+                guardarAparatos.setTextColor(Color.GRAY);
+            }
             //si tiene hijos bloqueamos el spinner porque no se puede cambiar el medio con hijos ya asignados
             spinerMedio.setEnabled(false);
             //si tiene hijos, llenamos lista

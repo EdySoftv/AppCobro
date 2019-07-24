@@ -3,6 +3,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.RecyclerView;
@@ -21,6 +22,7 @@ import android.widget.Toast;
 import com.example.pablo.prueba7.Activitys.ReporteAsignacion;
 
 import com.example.pablo.prueba7.Listas.Array;
+import com.example.pablo.prueba7.Modelos.DeepConsModel;
 import com.example.pablo.prueba7.Modelos.GetMuestraArbolServiciosAparatosPorinstalarListResult;
 import com.example.pablo.prueba7.Modelos.children;
 import com.example.pablo.prueba7.R;
@@ -81,7 +83,11 @@ public class EliminarAparatosAdapter extends RecyclerView.Adapter<EliminarAparat
 
     @Override
     public void onBindViewHolder(childrenViewHolder viewHolder, final int position) {
-
+        if(DeepConsModel.STATUS.equals("E")){
+            childrenViewHolder.elimarAparato.setEnabled(false);
+        }else{
+            childrenViewHolder.elimarAparato.setEnabled(true);
+        }
         childrenViewHolder.nombre.setText(array.children.get(position));
         childrenViewHolder.elimarAparato.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -129,6 +135,12 @@ public class EliminarAparatosAdapter extends RecyclerView.Adapter<EliminarAparat
                                     spinnerMedio.setEnabled(false);
                                     //si tiene hijos habilitamos el boton
                                     guardarAparatos.setEnabled(true);
+                                    if(DeepConsModel.STATUS.equals("E")){
+                                        guardarAparatos.setEnabled(false);
+                                        guardarAparatos.setTextColor(Color.GRAY);
+                                    }
+
+
                                 }
 
                             }

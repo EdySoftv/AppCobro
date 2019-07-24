@@ -24,6 +24,7 @@ import android.widget.Toast;
 import com.example.pablo.prueba7.Activitys.ReporteAsignacion;
 import com.example.pablo.prueba7.Activitys.ServiciosAInstalar;
 import com.example.pablo.prueba7.Listas.Array;
+import com.example.pablo.prueba7.Modelos.DeepConsModel;
 import com.example.pablo.prueba7.Modelos.GetMuestraArbolServiciosAparatosPorinstalarListResult;
 import com.example.pablo.prueba7.Modelos.GetMuestraMedioPorServicoContratadoListResult;
 import com.example.pablo.prueba7.Modelos.mediosPregunta;
@@ -35,13 +36,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-import static com.example.pablo.prueba7.Activitys.ServiciosAInstalar.Asignacion;
-import static com.example.pablo.prueba7.Activitys.ServiciosAInstalar.aceptarAsignacion;
-import static com.example.pablo.prueba7.Activitys.ServiciosAInstalar.aceptarmedio;
-import static com.example.pablo.prueba7.Activitys.ServiciosAInstalar.layoutMedio;
-import static com.example.pablo.prueba7.Activitys.ServiciosAInstalar.siguiente;
-import static com.example.pablo.prueba7.Activitys.ServiciosAInstalar.todosLosMediosValidacion;
-//import static com.example.pablo.prueba7.Adapters.ArbolAdapter.viewHolder.medio;
+
 
 
 public class ArbolAdapter extends RecyclerView.Adapter<ArbolAdapter.ArbolViewHolder> {
@@ -106,6 +101,10 @@ public class ArbolAdapter extends RecyclerView.Adapter<ArbolAdapter.ArbolViewHol
         if(valida==dat4.size()){
             ServiciosAInstalar.aceptarAsignacion.setEnabled(true);
             ServiciosAInstalar.aceptarAsignacion.setTextColor(Color.WHITE);
+            if(DeepConsModel.STATUS.equals("E")){
+                ServiciosAInstalar.aceptarAsignacion.setEnabled(false);
+                ServiciosAInstalar.aceptarAsignacion.setTextColor(Color.GRAY);
+            }
         }
         viewHolder.Asignar.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -27,6 +27,7 @@ import android.widget.Toast;
 import com.example.pablo.prueba7.Adapters.ArbolAdapter;
 import com.example.pablo.prueba7.Adapters.OrdenesAdapter;
 import com.example.pablo.prueba7.Listas.Array;
+import com.example.pablo.prueba7.Modelos.DeepConsModel;
 import com.example.pablo.prueba7.Modelos.GetMuestraArbolServiciosAparatosPorinstalarListResult;
 import com.example.pablo.prueba7.Modelos.RequierePregunta;
 import com.example.pablo.prueba7.Modelos.mediosPregunta;
@@ -50,8 +51,7 @@ public class ServiciosAInstalar extends AppCompatActivity {
     Array array = new Array();
     Request request = new Request();
 
-    public static Button siguiente, aceptarAsignacion, eliminarAparato, cancelarAsigancion;
-    public static Button aceptarmedio, cancelarmedio;
+    public static Button siguiente, aceptarAsignacion;
     public static RecyclerView Asignacion;
     public static Spinner spinnerMedio;
     public static ConstraintLayout layoutMedio;
@@ -112,11 +112,26 @@ public class ServiciosAInstalar extends AppCompatActivity {
 
 
 
+
+
+
             if(aceptarAsignacion.isEnabled()==false){
                 aceptarAsignacion.setTextColor(Color.GRAY);
+                if(DeepConsModel.STATUS.equals("E")){
+                    aceptarAsignacion.setEnabled(false);
+                    aceptarAsignacion.setTextColor(Color.GRAY);
+                }
             }else{
-                aceptarAsignacion.setTextColor(Color.WHITE);
+                if(DeepConsModel.STATUS.equals("E")){
+                    aceptarAsignacion.setEnabled(false);
+                    aceptarAsignacion.setTextColor(Color.GRAY);
+                }else{
+                    aceptarAsignacion.setTextColor(Color.WHITE);
+                }
             }
+
+
+
         final Iterator<List<GetMuestraArbolServiciosAparatosPorinstalarListResult>> itData4 = array.dataArbSer.iterator();
         final List<GetMuestraArbolServiciosAparatosPorinstalarListResult> dat4 = (List<GetMuestraArbolServiciosAparatosPorinstalarListResult>) itData4.next();
         Iterator<List<RequierePregunta>> itData = array.dataPregunta.iterator();

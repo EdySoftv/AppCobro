@@ -2,6 +2,7 @@ package com.example.pablo.prueba7.Activitys;
 
 
 import android.app.ProgressDialog;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.constraint.ConstraintLayout;
@@ -21,6 +22,7 @@ import android.widget.Toast;
 import com.example.pablo.prueba7.Adapters.OrdenesAdapter;
 import com.example.pablo.prueba7.Adapters.TrabajosAdapter;
 import com.example.pablo.prueba7.Listas.Array;
+import com.example.pablo.prueba7.Modelos.DeepConsModel;
 import com.example.pablo.prueba7.Modelos.GetListAparatosDisponiblesByIdArticuloResult;
 import com.example.pablo.prueba7.Modelos.GetListClienteAparatosResult;
 import com.example.pablo.prueba7.Modelos.GetListTipoAparatosByIdArticuloResult;
@@ -85,7 +87,23 @@ public class CambioAparato extends AppCompatActivity {
             aa.setVisibility(View.GONE);
         }
 
-
+if(DeepConsModel.STATUS.equals("E")){
+    aparato.setEnabled(false);
+    estado.setEnabled(false);
+    tipoAparato.setEnabled(false);
+    aparatoAsignar.setEnabled(false);
+    aceptarCambioAparato.setEnabled(false);
+    aceptarCambioAparato.setTextColor(Color.GRAY);
+    MACWAMTextCambioAparato.setEnabled(false);
+}else{
+    aparato.setEnabled(true);
+    estado.setEnabled(true);
+    tipoAparato.setEnabled(true);
+    aparatoAsignar.setEnabled(true);
+    aceptarCambioAparato.setTextColor(Color.WHITE);
+    aceptarCambioAparato.setEnabled(true);
+    MACWAMTextCambioAparato.setEnabled(true);
+}
 
 
         aparato.setOnItemSelectedListener(
@@ -116,8 +134,6 @@ public class CambioAparato extends AppCompatActivity {
                     }
                 }
         );
-
-
         estado.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {

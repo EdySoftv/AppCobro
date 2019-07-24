@@ -62,17 +62,12 @@ import java.util.Date;
  */
 public class HorasOrdenes extends Fragment implements View.OnClickListener, LocationListener {
 
-    public static TextView selectDate,  selectDate1, selectDate2;
-    public static String latitud, longitud, diaI, mesI, añoI, diaV1, mesV1, añoV1, diaV2, mesV2, añoV2;
+
     public static int ejecutada = 0, visita = 0, visita1 = 0;
     public static  String observacionesTecnico;
-    private int mYear, mMonth, mDay ;
-   // private View contenedorParticular;
-    private View contenedorCorporativo;
     private View contenedorObservacionesTecnico;
     public static TextView cordLat, cordLong;
     public static TextView Obs;
-    public   EjecutarOrdenes ejecOrd;
     private Request request = new Request();
     private RadioButton btn1, bt2;
     public static   Button ejecVisita;
@@ -81,11 +76,7 @@ public class HorasOrdenes extends Fragment implements View.OnClickListener, Loca
     public static ProgressDialog dialogVisitaOrd;
     public String valorObsTec = null;
     private ConstraintLayout todo;
-    private ViewGroup container;
-    private Bundle onsavedInstanceState;
     private LocationManager locationManager;
-    public MainActivity mainAct = new MainActivity();
-    private View touchViewEstatus;
 
     public HorasOrdenes() {
         // Required empty public constructor
@@ -95,9 +86,7 @@ public class HorasOrdenes extends Fragment implements View.OnClickListener, Loca
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-        // TecSec.setSelection(posTec);
 
-        // Inflate the layout for this fragment
         super.onCreate(savedInstanceState);
         setRetainInstance(true);
         View view = inflater.inflate(R.layout.activity_hora_ordenes, container, false);
@@ -112,6 +101,19 @@ public class HorasOrdenes extends Fragment implements View.OnClickListener, Loca
         obsTec = view.findViewById(R.id.observaciones_Tecnico);
 
         ejecVisita = view.findViewById(R.id.ejecVisita);
+
+
+
+        if(DeepConsModel.STATUS.equals("E")){
+            bt2.setChecked(true);
+            bt2.setEnabled(false);
+            btn1.setEnabled(false);
+            ejecVisita.setVisibility(View.GONE);
+            ejecutada = 1;
+        }else{
+            bt2.setEnabled(true);
+            btn1.setEnabled(true);
+        }
 
 /////////////////////////
         Date objDate = new Date();
@@ -168,18 +170,6 @@ public class HorasOrdenes extends Fragment implements View.OnClickListener, Loca
             mostrarParticular(false);
 
 
-           // mainAct.mViewPager.setCurrentItem(positionTab);
-
-     /*       if((horas.ejecutada == 1||horas.visita == 1)){
-                Toast.makeText(getContext(), "Seleccione un estatus", Toast.LENGTH_SHORT).show();
-                mainAct.mViewPager.setCurrentItem(3);
-            }*/
-            /*selectDate.setText("");
-            selectDate1.setText("");
-            selectDate2.setText("");
-            selectDate2.setEnabled(false);*/
-
-
         }
         if (bt2.isChecked() == true) {
 
@@ -191,9 +181,6 @@ public class HorasOrdenes extends Fragment implements View.OnClickListener, Loca
             ConstraintLayout.LayoutParams params = (ConstraintLayout.LayoutParams) todo.getLayoutParams();
             params.setMargins(0, 8, 0, 0);
             todo.setLayoutParams(params);
-       /*     selectDate.setText("");
-            selectDate1.setText("");
-            selectDate2.setText("");*/
             ejecutada = 1;
             visita = 0;
             mViewPager.setCurrentItem(1);
@@ -201,121 +188,9 @@ public class HorasOrdenes extends Fragment implements View.OnClickListener, Loca
         }
 
 
-
-/*
-        if (view == selectDate) {
-            final Calendar c = Calendar.getInstance();
-            mYear = c.get(Calendar.YEAR);
-            mMonth = c.get(Calendar.MONTH);
-            mDay = c.get(Calendar.DAY_OF_MONTH);
-
-
-            DatePickerDialog datePickerDialog = new DatePickerDialog(getActivity(), new DatePickerDialog.OnDateSetListener() {
-
-                @Override
-                public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
-                    if (monthOfYear <= 9) {
-                        if (dayOfMonth < 10) {
-                            selectDate.setText("0" + dayOfMonth + "/0" + (monthOfYear + 1) + "/" + year);
-                            diaI = "0" + String.valueOf(dayOfMonth);
-                            mesI = "0" + String.valueOf((monthOfYear + 1));
-                            añoI = String.valueOf(year);
-                        } else {
-                            selectDate.setText(dayOfMonth + "/0" + (monthOfYear + 1) + "/" + year);
-                            diaI = String.valueOf(dayOfMonth);
-                            mesI = "0" + String.valueOf((monthOfYear + 1));
-                            añoI = String.valueOf(year);
-                        }
-                    } else {
-                        selectDate.setText(dayOfMonth + "/" + (monthOfYear + 1) + "/" + year);
-                        diaI = String.valueOf(dayOfMonth);
-                        mesI = String.valueOf((monthOfYear + 1));
-                        añoI = String.valueOf(year);
-                    }
-
-
-                }
-            }, mYear, mMonth, mDay);
-            datePickerDialog.show();
-        }
-*/
-
-   /*     if (view == selectDate1) {
-            final Calendar c = Calendar.getInstance();
-            mYear = c.get(Calendar.YEAR);
-            mMonth = c.get(Calendar.MONTH);
-            mDay = c.get(Calendar.DAY_OF_MONTH);
-
-
-            DatePickerDialog datePickerDialog1 = new DatePickerDialog(getActivity(), new DatePickerDialog.OnDateSetListener() {
-
-                @Override
-                public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
-
-                    if (monthOfYear < 10) {
-                        if (dayOfMonth < 10) {
-                            selectDate1.setText("0" + dayOfMonth + "/0" + (monthOfYear + 1) + "/" + year);
-                            diaV1 = "0" + String.valueOf(dayOfMonth);
-                            mesV1 = "0" + String.valueOf((monthOfYear + 1));
-                            añoV1 = String.valueOf(year);
-                        } else {
-                            selectDate1.setText(dayOfMonth + "/0" + (monthOfYear + 1) + "/" + year);
-                            diaV1 = String.valueOf(dayOfMonth);
-                            mesV1 = "0" + String.valueOf((monthOfYear + 1));
-                            añoV1 = String.valueOf(year);
-                        }
-                    } else {
-                        selectDate1.setText(dayOfMonth + "/" + (monthOfYear + 1) + "/" + year);
-                        diaV1 = String.valueOf(dayOfMonth);
-                        mesV1 = String.valueOf((monthOfYear + 1));
-                        añoV1 = String.valueOf(year);
-                    }
-
-                }
-            }, mYear, mMonth, mDay);
-            datePickerDialog1.show();
-        }*/
-
-
- /*       if (view == selectDate2) {
-            final Calendar c = Calendar.getInstance();
-            mYear = c.get(Calendar.YEAR);
-            mMonth = c.get(Calendar.MONTH);
-            mDay = c.get(Calendar.DAY_OF_MONTH);
-
-
-            DatePickerDialog datePickerDialog = new DatePickerDialog(getActivity(), new DatePickerDialog.OnDateSetListener() {
-
-                @Override
-                public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
-
-                    if (monthOfYear < 10) {
-                        if (dayOfMonth < 10) {
-                            selectDate2.setText("0" + dayOfMonth + "/0" + (monthOfYear + 1) + "/" + year);
-                            diaV2 = "0" + String.valueOf(dayOfMonth);
-                            mesV2 = "0" + String.valueOf((monthOfYear + 1));
-                            añoV2 = String.valueOf(year);
-                        } else {
-                            selectDate2.setText(dayOfMonth + "/0" + (monthOfYear + 1) + "/" + year);
-                            diaV2 = String.valueOf(dayOfMonth);
-                            mesV2 = "0" + String.valueOf((monthOfYear + 1));
-                            añoV2 = String.valueOf(year);
-                        }
-                    } else {
-                        selectDate2.setText(dayOfMonth + "/" + (monthOfYear + 1) + "/" + year);
-                        diaV2 = String.valueOf(dayOfMonth);
-                        mesV2 = String.valueOf((monthOfYear + 1));
-                        añoV2 = String.valueOf(year);
-                    }
-                }
-            }, mYear, mMonth, mDay);
-            datePickerDialog.show();
-        }*/
     }
 
     private void mostrarParticular(boolean b) {
-        //contenedorParticular.setVisibility(b ? View.VISIBLE : View.GONE);
-       // contenedorCorporativo.setVisibility(b ? View.GONE : View.VISIBLE);
         contenedorObservacionesTecnico.setVisibility(b ? View.GONE : View.VISIBLE);
     }
 
