@@ -168,6 +168,7 @@ import static com.example.pablo.prueba7.Fragments.EjecutarOrdenes.ejecutar;
 import static com.example.pablo.prueba7.Fragments.EjecutarOrdenes.posTec;
 import static com.example.pablo.prueba7.Fragments.EjecutarReportes.TecSecSeleccion;
 import static com.example.pablo.prueba7.Fragments.EjecutarReportes.TecSecu;
+import static com.example.pablo.prueba7.Fragments.EjecutarReportes.dialogReportes;
 import static com.example.pablo.prueba7.Fragments.EjecutarReportes.fechaEjecujtar;
 import static com.example.pablo.prueba7.Fragments.EjecutarReportes.horaEjecutar;
 import static com.example.pablo.prueba7.Fragments.EjecutarReportes.tecSecPosRepo;
@@ -177,6 +178,7 @@ import static com.example.pablo.prueba7.Fragments.HorasOrdenes.observacionesTecn
 import static com.example.pablo.prueba7.Fragments.HorasOrdenes.visita;
 import static com.example.pablo.prueba7.Fragments.HorasReportes.TecSecSelecc1;
 import static com.example.pablo.prueba7.Fragments.HorasReportes.dialogVisitaRepo;
+import static com.example.pablo.prueba7.Fragments.HorasReportes.reporteEjecutada;
 import static com.example.pablo.prueba7.Fragments.HorasReportes.repotteVisita;
 import static com.example.pablo.prueba7.Fragments.HorasReportes.tecPosRepo;
 import static com.example.pablo.prueba7.Fragments.MaterialesOrdenes.clasificacionMat;
@@ -2255,7 +2257,7 @@ try{
                     }
                 }else{
 
-                    EjecutarReportes.dialogReportes.dismiss();
+                    dialogReportes.dismiss();
                     ErrorMensaje(context,"Se ha producido un error, verifique su conexion e intente nuevamente");
                 }
             }
@@ -2263,7 +2265,7 @@ try{
             @Override
             public void onFailure(Call<JsonObject> call, Throwable t) {
 
-                EjecutarReportes.dialogReportes.dismiss();
+                dialogReportes.dismiss();
                 ErrorMensaje(context,"Se ha producido un error, verifique su conexion e intente nuevamente");
             }
         });
@@ -2287,14 +2289,14 @@ try{
 
                     }
                 }else{
-                    EjecutarReportes.dialogReportes.dismiss();
+                    dialogReportes.dismiss();
                     ErrorMensaje(context,"Se ha producido un error, verifique su conexion e intente nuevamente");
                 }
             }
 
             @Override
             public void onFailure(Call<JsonObject> call, Throwable t) {
-                EjecutarReportes.dialogReportes.dismiss();
+                dialogReportes.dismiss();
                 ErrorMensaje(context,"Se ha producido un error, verifique su conexion e intente nuevamente");
             }
         });
@@ -2319,26 +2321,32 @@ try{
                         getListQuejas(context);
 
                     }*/
+                    if(repotteVisita==1){
+                        dialogVisitaRepo.dismiss();
+                    }else if (reporteEjecutada ==1) {
+                        dialogReportes.dismiss();
+                    }
 
                     Toast.makeText(context, "Reporte guardado correctamente", Toast.LENGTH_LONG).show();
                     getListQuejas(context);
-                    if(repotteVisita==1){
-                        dialogVisitaRepo.dismiss();
-                    }
+
 
                 }else
                     {
                         ErrorMensaje(context,"Se ha producido un error, verifique su conexión e intente nuevamente");
                         getListQuejas(context);
+
                         if(repotteVisita==1){
                             dialogVisitaRepo.dismiss();
+                        }else if (reporteEjecutada ==1) {
+                            dialogReportes.dismiss();
                         }
                 }
             }
 
             @Override
             public void onFailure(Call<JsonObject> call, Throwable t) {
-                EjecutarReportes.dialogReportes.dismiss();
+                dialogReportes.dismiss();
                 ErrorMensaje(context,"Se ha producido un error, verifique su conexion e intente nuevamente");
             }
         });
@@ -3428,34 +3436,8 @@ try{
                     String dato;
                     dato = String.valueOf(response.body().getAsJsonPrimitive("ValidaExisteTblFirmaClienteResult"));
                     if (dato.equals("1")) {
-               /*         final Calendar c = Calendar.getInstance();
-                        EjecutarReportes.añoE = c.get(Calendar.YEAR);
-                        EjecutarReportes.mesE = c.get(Calendar.MONTH);
-                        EjecutarReportes.diaE = c.get(Calendar.DAY_OF_MONTH);
-                        EjecutarReportes.horaE = c.get(Calendar.HOUR);
-                        EjecutarReportes.minutoE = c.get(Calendar.MINUTE);
-                        String ab;
-                        if ((EjecutarReportes.mesE + 1) < 10) {
-                            ab = "0" + (EjecutarReportes.mesE + 1);
-                        } else {
-                            ab = String.valueOf(EjecutarReportes.mesE + 1);
-                        }
-                        EjecutarReportes.fechaHoy = EjecutarReportes.añoE + "/" + ab + "/" + EjecutarReportes.diaE;
-                        if(EjecutarReportes.horaE<10){
-                            if(EjecutarReportes.minutoE<10){
-                                EjecutarReportes.horaHoy = '0'+String.valueOf(EjecutarReportes.horaE) + ":" + '0'+String.valueOf(EjecutarReportes.minutoE);
-                            }else {
-                                EjecutarReportes.horaHoy = '0'+String.valueOf(EjecutarReportes.horaE) + ":" + String.valueOf(EjecutarReportes.minutoE);
-                            }
-                        }else{
-                            if(EjecutarReportes.minutoE<10){
-                                EjecutarReportes.horaHoy = String.valueOf(EjecutarReportes.horaE) + ":" + '0'+String.valueOf(EjecutarReportes.minutoE);
-                            }else{
-                                EjecutarReportes.horaHoy = String.valueOf(EjecutarReportes.horaE) + ":" + String.valueOf(EjecutarReportes.minutoE);
-                            }
-                        }*/
 
-                        if (HorasReportes.reporteEjecutada == 1) {
+                        if (reporteEjecutada == 1) {
                             //ejecutar
                             if (TrabajosReportes.solucion.getSelectedItem().toString().trim().equals("Seleccione tipo de solución")) {
                                 Toast.makeText(context, "Seleccione un tipo de solución", Toast.LENGTH_SHORT).show();
@@ -3480,69 +3462,9 @@ try{
 
                                 }
 
-                                ////////*************************
-                            }///fin de ejecutar
-                        }
-                /*        if (repotteVisita == 1) {
-                            JSONObject objQuejas = new JSONObject();
-                            JSONObject jsonObject1 = new JSONObject();
-                            try{
-                                objQuejas.put("Clv_Queja", String.valueOf(Util.getClvQueja(Util.preferences)));
-                                objQuejas.put("Clv_Tecnico", Util.getClvTec(Util.preferences));
-                                objQuejas.put("FechaProceso", "");
-                                objQuejas.put("Fecha_Ejecucion", "");
-                                objQuejas.put("HP", "");
-                                objQuejas.put("IdUsuario", 1);
-                                objQuejas.put("Observaciones", Obs);
-                                objQuejas.put("Solucion", TrabajosReportes.proble.getText());
-                                objQuejas.put("Status", "V");
-                                objQuejas.put("Visita", false);
-                                if(reporteVisita1!=null){
-                                    if(reporteVisita2!=null){
-                                        if(reporteVisita3!=null){
-                                            objQuejas.put("HV1", reporteHora1);
-                                            objQuejas.put("HV2", reporteHora2);
-                                            objQuejas.put("HV3", EjecutarReportes.horaHoy);
-                                            objQuejas.put("Visita1", reporteVisita1);
-                                            objQuejas.put("Visita2", reporteVisita2);
-                                            objQuejas.put("Visita3", EjecutarReportes.fechaHoy);
-                                        }else{
-                                            objQuejas.put("HV1", reporteHora1);
-                                            objQuejas.put("HV2", reporteHora2);
-                                            objQuejas.put("HV3", EjecutarReportes.horaHoy);
-                                            objQuejas.put("Visita1", reporteVisita1);
-                                            objQuejas.put("Visita2", reporteVisita2);
-                                            objQuejas.put("Visita3", EjecutarReportes.fechaHoy);
-                                        }
-                                    }else{
-                                        objQuejas.put("HV1", reporteHora1);
-                                        objQuejas.put("HV2", EjecutarReportes.horaHoy);
-                                        objQuejas.put("HV3", "");
-                                        objQuejas.put("Visita1", reporteVisita1);
-                                        objQuejas.put("Visita2", EjecutarReportes.fechaHoy);
-                                        objQuejas.put("Visita3", "");
-                                    }
-                                }else{
-                                    objQuejas.put("HV1", EjecutarReportes.horaHoy);
-                                    objQuejas.put("HV2", "");
-                                    objQuejas.put("HV3", "");
-                                    objQuejas.put("Visita1", EjecutarReportes.fechaHoy);
-                                    objQuejas.put("Visita2", "");
-                                    objQuejas.put("Visita3", "");
-                                }
-
-
-
-                                objQuejas.put("clvPrioridadQueja", clvP);
-                                objQuejas.put("clvProblema",ClvTrabajoRequest );
-                                objQuejas.put("clvProblemaS", Clv_Sol);
-                                jsonObject1.put("objQuejas", objQuejas);
-                                getGuardaCampos(context,jsonObject1);
-                            } catch (Exception e) {
-                                Toast.makeText(context, "La Fecha es obligatoria", Toast.LENGTH_SHORT).show();
                             }
+                        }
 
-                        }*/
 
                     }
                     else if (dato.equals("0")) {
@@ -3550,13 +3472,14 @@ try{
                         try{
                             EjecutarOrdenes.dialogEjecutar.dismiss();
                         }catch (Exception e) {
-                            EjecutarReportes.dialogReportes.dismiss();
+                            dialogReportes.dismiss();
                         }
                         Toast.makeText(context, "Es obligatoria la firma", Toast.LENGTH_SHORT).show();
 
                     }
                 }else{
                     ErrorMensaje(context,"Se ha producido un error, verifique su conexión e intente nuevamente");
+                    EjecutarOrdenes.dialogEjecutar.dismiss();
                 }
             }
 

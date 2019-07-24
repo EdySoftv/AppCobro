@@ -20,6 +20,8 @@ import android.widget.Toast;
 import com.example.pablo.prueba7.Activitys.Inicio;
 import com.example.pablo.prueba7.Dibujo.Firma;
 import com.example.pablo.prueba7.Listas.Array;
+import com.example.pablo.prueba7.Modelos.DeepConsModel;
+import com.example.pablo.prueba7.Modelos.ListadoQuejasAgendadas;
 import com.example.pablo.prueba7.R;
 import com.example.pablo.prueba7.Activitys.Reportes;
 import com.example.pablo.prueba7.Request.Request;
@@ -35,6 +37,7 @@ import java.util.Date;
 
 import static com.example.pablo.prueba7.Adapters.QuejasAdapter.clvReport;
 import static com.example.pablo.prueba7.Fragments.TrabajosReportes.proble;
+import static com.example.pablo.prueba7.Request.Request.validaExisteFirmaBool;
 
 
 /**
@@ -132,7 +135,19 @@ public class EjecutarReportes extends Fragment {
         eject.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                dialogoEjecutar(getContext());
+                try{
+                    JSONObject jsonObject = new JSONObject();
+                    jsonObject.put("clvOrden",0);
+                    jsonObject.put("clvReporte", Util.getClvQueja(Util.preferences));
+                    request.validaExisteFirma(getContext(),jsonObject,getActivity());
+                }catch (Exception e){}
+
+                        if(validaExisteFirmaBool == true){
+                            dialogoEjecutar(getContext());
+                            validaExisteFirmaBool = true;
+                        }else if (validaExisteFirmaBool == false ){
+                            dialogoRequiereFirma();
+                        }
             }
 
         });
@@ -174,7 +189,7 @@ public class EjecutarReportes extends Fragment {
     private void dialogoEjecutar(Context onClickListener) {
             new AlertDialog.Builder(getContext())
                     .setTitle("Ejecutar Reporte")
-                    .setMessage("¿Desea Ejecutar Reporte?")
+                    .setMessage("¿Desea ejecutar el reporte?")
                     .setPositiveButton("CANCELAR",
                             new DialogInterface.OnClickListener() {
                                 @Override
@@ -190,7 +205,7 @@ public class EjecutarReportes extends Fragment {
                             new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialog, int which) {
-
+                                    dialogReportes.show();
 
                                     try{
                                         JSONObject jsonObject = new JSONObject();
@@ -208,6 +223,24 @@ public class EjecutarReportes extends Fragment {
 
     }
 
+    private void dialogoRequiereFirma() {
+        new AlertDialog.Builder(getContext())
+                .setTitle("ADVERTENCIA")
+                .setMessage("Para completar el reporte se requiere la firma del cliente")
+                .setPositiveButton("ACEPTAR",
+                        new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+
+                            }
+                        })
+                .setNegativeButton("",
+                        new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                            }
+                        }).show();
+    }
 /*    public void validacionReporte (){
         if (TrabajosReportes.solucion.getSelectedItem().toString().trim().equals("Seleccione tipo de solución")) {
             Toast.makeText(getContext(), "Seleccione un tipo de solución", Toast.LENGTH_SHORT).show();
