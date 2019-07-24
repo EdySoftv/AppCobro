@@ -2864,18 +2864,14 @@ try{
         call.enqueue(new Callback<JSONPreDescarga>() {
             @Override
             public void onResponse(Call<JSONPreDescarga> call, Response<JSONPreDescarga> response) {
-                //final TablaAdapter tablaAdapter = new TablaAdapter(activity, MaterialesOrdenes.tabla);
-                array.clv_Material = new ArrayList<>();
 
                 EliminarMaterialAdapter adapter;
-                ConstraintLayout constraintLayout;
+
 
                 try{
                     array.listaTabla.clear();
                 }catch (Exception e){}
-                try{
-                    array.clv_Material.clear();
-                }catch (Exception e){}
+
 
 
                 if (response.code() == 200) {
@@ -2889,15 +2885,15 @@ try{
                             array.listaTabla.get(i).add(String.valueOf(dat.get(i).getNombre()));
                             array.listaTabla.get(i).add(String.valueOf(dat.get(i).cantidadUtilizada));
                             array.listaTabla.get(i).add(String.valueOf(dat.get(i).getNoExt()));
-                            array.clv_Material.add(dat.get(i).noArticulo);
+                            array.listaTabla.get(i).add(String.valueOf(dat.get(i).noArticulo));
                         }
                     }
                     try {
-                        if(array.clv_Material.size()!=0) {
+                        if(array.listaTabla.size()!=0) {
                             MaterialesOrdenes.elimarMaterialesList.setVisibility(View.VISIBLE);
                             RecyclerView.LayoutManager layoutManager = new GridLayoutManager(context, 1);
                             MaterialesOrdenes.elimarMaterialesList.setLayoutManager(layoutManager);
-                            adapter = new EliminarMaterialAdapter(array.clv_Material, context, activity);
+                            adapter = new EliminarMaterialAdapter(array.listaTabla, context, activity);
                             MaterialesOrdenes.elimarMaterialesList.setAdapter(adapter);
                         }else{
                             MaterialesOrdenes.elimarMaterialesList.setVisibility(View.GONE);
@@ -3054,13 +3050,10 @@ try{
             public void onResponse(Call<JSONPreDescarga> call, Response<JSONPreDescarga> response) {
 
                 EliminarMaterialAdapter adapter;
-                array.clv_Material = new ArrayList<>();
                 try{
                     array.listaTabla.clear();
                 }catch (Exception e){}
-                try{
-                    array.clv_Material.clear();
-                }catch (Exception e){}
+
 
                 if (response.code() == 200) {
                     JSONPreDescarga jsonResponse = response.body();
@@ -3073,16 +3066,16 @@ try{
                             array.listaTabla.get(i).add(String.valueOf(dat.get(i).getNombre()));
                             array.listaTabla.get(i).add(String.valueOf(dat.get(i).cantidadUtilizada));
                             array.listaTabla.get(i).add(String.valueOf(dat.get(i).getNoExt()));
-                            array.clv_Material.add(dat.get(i).noArticulo);
+                            array.listaTabla.get(i).add(String.valueOf(dat.get(i).getNoArticulo()));
                         }
                     }
 
                     try {
-                        if(array.clv_Material.size()!=0) {
+                        if(array.listaTabla.size()!=0) {
                             MaterialesReportes.elimarMaterialesListR.setVisibility(View.VISIBLE);
                             RecyclerView.LayoutManager layoutManager = new GridLayoutManager(context, 1);
                             MaterialesReportes.elimarMaterialesListR.setLayoutManager(layoutManager);
-                            adapter = new EliminarMaterialAdapter(array.clv_Material, context, activity);
+                            adapter = new EliminarMaterialAdapter(array.listaTabla, context, activity);
                             MaterialesReportes.elimarMaterialesListR.setAdapter(adapter);
                         }else{
                             MaterialesReportes.elimarMaterialesListR.setVisibility(View.GONE);

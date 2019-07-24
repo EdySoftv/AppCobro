@@ -28,11 +28,11 @@ import java.util.ArrayList;
 
 public class EliminarMaterialAdapter extends RecyclerView.Adapter<EliminarMaterialAdapter.materialesViewHolder> {
 
-    ArrayList<Integer>material;
+    ArrayList<ArrayList<String>>material;
     Context context;
     Activity activity;
     Request request = new Request();
-    public static int anchoD=0,anchoC=0,anchoE=0,anchoA=0;
+    public static int anchoD=0,anchoC=0,anchoE=0,anchoA=0,posi;
     public static final int type_head =0,type_list=1;
     public static boolean baccion=false,bdescripcion=false,bcantidad=false,bext=false;
 
@@ -79,7 +79,7 @@ public class EliminarMaterialAdapter extends RecyclerView.Adapter<EliminarMateri
 
         }
     }
-    public EliminarMaterialAdapter(ArrayList<Integer> material, Context context, Activity activity){
+    public EliminarMaterialAdapter(ArrayList<ArrayList<String>> material, Context context, Activity activity){
         this.material=material;
         this.context=context;
         this.activity=activity;
@@ -142,9 +142,21 @@ public class EliminarMaterialAdapter extends RecyclerView.Adapter<EliminarMateri
                         }else if(Util.getTipoDescarga(Util.preferences).equals("O")){
                             jsonObject.put("clvOrden", Util.getClvOrden(Util.preferences));
                         }
-                        jsonObject.put("noArticulo",material.get(position) );
+                        jsonObject.put("noArticulo",Array.listaTabla.get(position-1).get(3) );
                         request.eliminarPreDescarga(context,jsonObject,activity );
-                    }catch (Exception e){}
+                    }catch (Exception e) {
+                        /*try {
+                            JSONObject jsonObject = new JSONObject();
+
+                            if (Util.getTipoDescarga(Util.preferences).equals("Q")) {
+                                jsonObject.put("clvOrden", Util.getClvQueja(Util.preferences));
+                            } else if (Util.getTipoDescarga(Util.preferences).equals("O")) {
+                                jsonObject.put("clvOrden", Util.getClvOrden(Util.preferences));
+                            }
+                            jsonObject.put("noArticulo", Array.listaTabla.get(0).get(3));
+                            request.eliminarPreDescarga(context, jsonObject, activity);
+                        }catch (Exception x){}*/
+                    }
 
 
                 }

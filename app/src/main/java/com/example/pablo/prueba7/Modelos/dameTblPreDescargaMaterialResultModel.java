@@ -45,4 +45,7 @@ public class dameTblPreDescargaMaterialResultModel {
         return contrato;
     }
 
+    public int getNoArticulo() {
+        return noArticulo;
+    }
 }
