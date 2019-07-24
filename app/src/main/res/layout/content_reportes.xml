@@ -25,7 +25,7 @@
 
     <TextView
         android:id="@+id/textView41"
-        android:layout_width="130dp"
+        android:layout_width="175dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="4dp"
         android:layout_marginTop="8dp"
@@ -93,7 +93,7 @@
 
     <TextView
         android:id="@+id/textView44"
-        android:layout_width="130dp"
+        android:layout_width="175dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"

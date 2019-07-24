@@ -72,9 +72,9 @@ public class MaterialesOrdenes extends Fragment {
         mFI = view.findViewById(R.id.FinalIDM);
         mIE = view.findViewById(R.id.InicialEDM);
         mFE=view.findViewById(R.id.FinalEDM);
-        tabla = view.findViewById(R.id.tabla);
 
-        scrollViewM = view.findViewById(R.id.scrollhorizontal);
+
+        //scrollViewM = view.findViewById(R.id.scrollhorizontal);
         final TablaAdapter tablaAdapter = new TablaAdapter(getActivity(), tabla);
 
         if(request.extencionesMat==true){

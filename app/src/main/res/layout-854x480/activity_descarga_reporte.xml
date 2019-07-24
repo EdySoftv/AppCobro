@@ -294,43 +294,24 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/constrain_MetrajeR" />
             <!---->
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/eliminarMaterialesListR"
-                android:layout_width="30dp"
-                android:layout_height="0dp"
-                android:visibility="gone"
-                app:layout_constraintBottom_toBottomOf="@+id/scrollhorizontalR"
-                app:layout_constraintStart_toStartOf="parent" />
-
             <HorizontalScrollView
-                android:id="@+id/scrollhorizontalR"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:layout_marginBottom="16dp"
-                android:scrollbars="horizontal"
-                android:visibility="gone"
-                app:layout_constraintBottom_toBottomOf="parent"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/eliminarMaterialesListR"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/agregarMaterialR">
 
-                <LinearLayout
-                    android:id="@+id/linearLayoutR"
-                    android:layout_width="match_parent"
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/eliminarMaterialesListR"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:orientation="horizontal"
-                    app:layout_constraintTop_toBottomOf="@+id/agregarMaterialR"
-                    tools:visibility="gone">
-
-                    <TableLayout
-                        android:id="@+id/tablaR"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:visibility="invisible" />
-                </LinearLayout>
+                    android:visibility="gone"
+                    />
             </HorizontalScrollView>
+
         </android.support.constraint.ConstraintLayout>
     </ScrollView>
 </RelativeLayout>

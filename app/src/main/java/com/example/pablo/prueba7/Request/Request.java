@@ -2864,18 +2864,12 @@ try{
         call.enqueue(new Callback<JSONPreDescarga>() {
             @Override
             public void onResponse(Call<JSONPreDescarga> call, Response<JSONPreDescarga> response) {
-                final TablaAdapter tablaAdapter = new TablaAdapter(activity, MaterialesOrdenes.tabla);
+                //final TablaAdapter tablaAdapter = new TablaAdapter(activity, MaterialesOrdenes.tabla);
                 array.clv_Material = new ArrayList<>();
-                try {
-                    tablaAdapter.eliminarFila(0);
-                    tablaAdapter.eliminarFila(1);
-                } catch (Exception e) {
-                }
+
                 EliminarMaterialAdapter adapter;
                 ConstraintLayout constraintLayout;
-                try {
-                    MaterialesOrdenes.tabla.removeAllViews();
-                }catch (Exception e){}
+
                 try{
                     array.listaTabla.clear();
                 }catch (Exception e){}
@@ -2899,17 +2893,6 @@ try{
                         }
                     }
                     try {
-                        if(Array.listaTabla.size()!=0) {
-                            tablaAdapter.agregarCabecera(R.array.cabecera_tabla);
-                            MaterialesOrdenes.scrollViewM.setVisibility(View.VISIBLE);
-                            MaterialesOrdenes.tabla.setVisibility(View.VISIBLE);
-                            for (int a = 0; a < array.listaTabla.size(); a++) {
-                                tablaAdapter.agregarFilaTabla(Array.listaTabla.get(a));
-                            }
-                        }else{
-                            MaterialesOrdenes.scrollViewM.setVisibility(View.GONE);
-                            MaterialesOrdenes.tabla.setVisibility(View.GONE);
-                        }
                         if(array.clv_Material.size()!=0) {
                             MaterialesOrdenes.elimarMaterialesList.setVisibility(View.VISIBLE);
                             RecyclerView.LayoutManager layoutManager = new GridLayoutManager(context, 1);
@@ -3069,17 +3052,9 @@ try{
         call.enqueue(new Callback<JSONPreDescarga>() {
             @Override
             public void onResponse(Call<JSONPreDescarga> call, Response<JSONPreDescarga> response) {
-                final TablaAdapter tablaAdapter = new TablaAdapter(activity, MaterialesReportes.tablaR);
-                try {
-                    tablaAdapter.eliminarFila(0);
-                    tablaAdapter.eliminarFila(1);
-                } catch (Exception e) {
-                }
+
                 EliminarMaterialAdapter adapter;
                 array.clv_Material = new ArrayList<>();
-                try {
-                    MaterialesOrdenes.tabla.removeAllViews();
-                }catch (Exception e){}
                 try{
                     array.listaTabla.clear();
                 }catch (Exception e){}
@@ -3103,17 +3078,6 @@ try{
                     }
 
                     try {
-                        if(Array.listaTabla.size()!=0) {
-                            tablaAdapter.agregarCabecera(R.array.cabecera_tabla);
-                            MaterialesReportes.horizontalScrollViewR.setVisibility(View.VISIBLE);
-                            MaterialesReportes.tablaR.setVisibility(View.VISIBLE);
-                            for (int a = 0; a < array.listaTabla.size(); a++) {
-                                tablaAdapter.agregarFilaTabla(Array.listaTabla.get(a));
-                            }
-                        }else{
-                            MaterialesReportes.horizontalScrollViewR.setVisibility(View.GONE);
-                            MaterialesReportes.tablaR.setVisibility(View.GONE);
-                        }
                         if(array.clv_Material.size()!=0) {
                             MaterialesReportes.elimarMaterialesListR.setVisibility(View.VISIBLE);
                             RecyclerView.LayoutManager layoutManager = new GridLayoutManager(context, 1);

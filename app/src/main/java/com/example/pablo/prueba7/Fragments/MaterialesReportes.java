@@ -79,8 +79,7 @@ public class MaterialesReportes extends Fragment {
         mFIR = view.findViewById(R.id.FinalIDMR);
         mIER = view.findViewById(R.id.InicialEDMR);
         mFER=view.findViewById(R.id.FinalEDMR);
-        tablaR = view.findViewById(R.id.tablaR);
-        horizontalScrollViewR = view.findViewById(R.id.scrollhorizontalR);
+
         elimarMaterialesListR = view.findViewById(R.id.eliminarMaterialesListR);
 
 

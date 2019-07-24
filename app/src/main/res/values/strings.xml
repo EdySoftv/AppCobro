@@ -106,14 +106,14 @@
     <string name="contrasenia">Contraseña</string>
     <string name="btnlogin">Entrar</string>
     <string name="recordar">Recordar</string>
-
+    <string name="noext">No. Ext</string>
     <string name="ordenes">Ordenes</string>
     <string name="reportes">Reportes</string>
     <string name="configuracion">Configuración</string>
     <string name="cerrarSesion">Cerrar sesión</string>
     <string name="proximo_Trabajo">Próximo trabajo</string>
     <string name="direccion">Dirección:</string>
-
+    <string name="cantidadD">Cantidad</string>
     <string name="nContrato"># de contrato</string>
     <string name="btn_CAparato">Cambio aparato</string>
     <string name="btn_CDomicilio">Cambio domicilio</string>

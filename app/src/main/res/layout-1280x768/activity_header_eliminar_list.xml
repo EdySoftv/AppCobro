@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<android.support.constraint.ConstraintLayout xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="#ffff"
+    >
+    <TextView
+        android:id="@+id/txtAccion"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/tabla_celda_cabecera"
+        android:text="@string/accion"
+        android:textAlignment="center"
+        app:layout_constraintEnd_toStartOf="@+id/txtDescripcion"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <TextView
+        android:id="@+id/txtDescripcion"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:background="@drawable/tabla_celda_cabecera"
+        android:text="@string/descripcion"
+        android:textAlignment="center"
+        app:layout_constraintEnd_toStartOf="@+id/txtCantidad"
+        app:layout_constraintStart_toEndOf="@+id/txtAccion"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/txtCantidad"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/tabla_celda_cabecera"
+        android:text="@string/cantidadD"
+        android:textAlignment="center"
+        app:layout_constraintEnd_toStartOf="@+id/txtNoExt"
+        app:layout_constraintStart_toEndOf="@+id/txtDescripcion"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/txtNoExt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/tabla_celda_cabecera"
+        android:text="@string/noext"
+        android:textAlignment="center"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/txtCantidad"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+</android.support.constraint.ConstraintLayout>
