@@ -880,18 +880,34 @@ public class Request extends AppCompatActivity {
             @Override
             public void onResponse(Call<Example2> call, Response<Example2> response) {
                 if (response.code() == 200) {
-                    ArrayList<String> resumen = new ArrayList<>();
+                    String a = "";
                     Example2 jsonResponse = response.body();
                     array.dataclientes = new ArrayList<List<GetdameSerDELCliresumenResult>>(asList(jsonResponse.getdameSerDELCliresumenResult()));
                     Iterator<List<GetdameSerDELCliresumenResult>> itData = array.dataclientes.iterator();
                     while (itData.hasNext()) {
                         List<GetdameSerDELCliresumenResult> dat = (List<GetdameSerDELCliresumenResult>) itData.next();
                         for (int i = 0; i < dat.size(); i++) {
-                            String a = "";
-                            a += dat.get(i).getResumen() + "\n";
-                            resumen.add(i, a);
+                            String[] caracteres = dat.get(i).getResumen().split(" ");
+                            if(caracteres[0].equals("Servicios")){
+                                a+="\n";
+                                a+=dat.get(i).getResumen() + "\n";
+                            }else{
+                                try{
+                                    if(caracteres[5].equals("*")){
+                                        a += caracteres[5]+" "+caracteres[6]+" "+caracteres[7]+" "+caracteres[8] + "\n";
+                                        for(int b=9; b<caracteres.length;b++){
+                                            a+= " "+caracteres[b];
+                                        }
+                                        a+="\n";
+                                    }else{
+                                        a += dat.get(i).getResumen() + "\n";
+                                    }
+                                }catch (Exception e){
+                                    a += dat.get(i).getResumen() + "\n";
+                                }
+                            }
                         }
-                        MainActivity.InfoServicios.setText(resumen.toString());
+                        MainActivity.InfoServicios.setText(a);
 
                     }
                 } else {
@@ -1768,16 +1784,37 @@ public class Request extends AppCompatActivity {
             public void onResponse(Call<JSONServicioAsignado> call, Response<JSONServicioAsignado> response) {
                 if (response.code() == 200) {
                     JSONServicioAsignado jsonResponse = response.body();
-                    ArrayList<String> servicio = new ArrayList<>();
+                    String a = "";
                     array.dataServ = new ArrayList<List<GetDameSerDelCliFacListResult>>((asList(jsonResponse.getGetDameSerDelCliFacListResult())));
                     Iterator<List<GetDameSerDelCliFacListResult>> itData = array.dataServ.iterator();
                     while (itData.hasNext()) {
                         List<GetDameSerDelCliFacListResult> dat = (List<GetDameSerDelCliFacListResult>) itData.next();
                         for (int i = 0; i < dat.size(); ++i) {
-                            String a = "";
-                            a += dat.get(i).getServicio() + "\t\t";
-                            servicio.add(i, a);
-                            MainReportes.infoA.setText(servicio.toString());
+                            if(dat.get(i).getServicio().equals("-------------------------------------------------------------")){
+
+                            }else{
+                                String[] caracteres = dat.get(i).getServicio().split(" ");
+                                if(caracteres[0].equals("Servicios")){
+                                    a+="\n";
+                                    a+=dat.get(i).getServicio() + "\n";
+                                }else{
+                                    try{
+                                        if(caracteres[5].equals("*")){
+                                            a += caracteres[5]+" "+caracteres[6]+" "+caracteres[7]+" "+caracteres[8] + "\n";
+                                            for(int b=9; b<caracteres.length;b++){
+                                                a+= " "+caracteres[b];
+                                            }
+                                            a+="\n";
+                                        }else{
+                                            a += dat.get(i).getServicio() + "\n";
+                                        }
+                                    }catch (Exception e){
+                                        a += dat.get(i).getServicio() + "\n";
+                                    }
+                                }
+                            }
+
+                            MainReportes.infoA.setText(a);
                         }
                     }
                 }else{
