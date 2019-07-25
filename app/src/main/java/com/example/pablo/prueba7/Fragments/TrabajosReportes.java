@@ -15,6 +15,9 @@ import com.example.pablo.prueba7.Listas.Array;
 import com.example.pablo.prueba7.R;
 import com.example.pablo.prueba7.Request.Request;
 
+import static com.example.pablo.prueba7.Adapters.QuejasAdapter.statusQueja;
+import static com.example.pablo.prueba7.Request.Request.problemaReal;
+
 
 /**
  * A simple {@link Fragment} subclass.
@@ -44,6 +47,7 @@ public class TrabajosReportes extends Fragment implements View.OnClickListener {
         request.getReportes(getContext());
         proble=view.findViewById(R.id.problema);
         solucion = view.findViewById(R.id.tiposol);
+
         solucion.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {

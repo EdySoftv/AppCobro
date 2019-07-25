@@ -1,6 +1,7 @@
 package com.example.pablo.prueba7.Fragments;
 
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.constraint.ConstraintLayout;
 import android.support.v4.app.Fragment;
@@ -28,6 +29,7 @@ import com.example.pablo.prueba7.Request.Request;
 import java.util.Iterator;
 import java.util.List;
 
+import static com.example.pablo.prueba7.Adapters.QuejasAdapter.statusQueja;
 import static com.example.pablo.prueba7.Request.Request.extencionesMat;
 
 
@@ -84,6 +86,14 @@ public class MaterialesReportes extends Fragment {
 
        /* final TablaAdapter tablaAdapter = new TablaAdapter(getActivity(), tablaR);
         tablaAdapter.agregarCabecera(R.array.cabecera_tabla);*/
+
+            if(statusQueja.equals("E")){
+                agragarDMR.setEnabled(false);
+                descripcionMatR.setEnabled(false);
+                agragarDMR.setTextColor(Color.GRAY);
+
+        }
+
         if(extencionesMat==true){
             spinnerExtMatR.setVisibility(View.VISIBLE);
         }else{

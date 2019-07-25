@@ -216,11 +216,6 @@ public class EjecutarReportes extends Fragment {
                                 }
                             }).show();
 
-
-
-
-
-
     }
 
     private void dialogoRequiereFirma() {

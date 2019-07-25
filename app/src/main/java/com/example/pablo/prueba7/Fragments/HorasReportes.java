@@ -40,6 +40,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
+import static com.example.pablo.prueba7.Adapters.QuejasAdapter.statusQueja;
 import static com.example.pablo.prueba7.Fragments.TrabajosReportes.Clv_Sol;
 import static com.example.pablo.prueba7.Modelos.DeepConsModel.Obs;
 import static com.example.pablo.prueba7.Request.Request.clvP;
@@ -115,6 +116,13 @@ public class HorasReportes extends Fragment  implements View.OnClickListener {
                 dialogoSalida();
             }
         });
+
+        if(statusQueja.equals("E")){
+            bt2.setChecked(true);
+            bt2.setEnabled(false);
+            btn1.setEnabled(false);
+        }
+
 
         return view;
     }

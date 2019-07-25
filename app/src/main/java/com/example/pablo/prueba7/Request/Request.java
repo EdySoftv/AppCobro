@@ -161,6 +161,7 @@ import static com.example.pablo.prueba7.Activitys.AsignarAparato.idArticuloasign
 import static com.example.pablo.prueba7.Activitys.AsignarAparato.jsonArrayMAC;
 
 import static com.example.pablo.prueba7.Adapters.QuejasAdapter.clvReport;
+import static com.example.pablo.prueba7.Adapters.QuejasAdapter.statusQueja;
 import static com.example.pablo.prueba7.Adapters.TrabajosAdapter.dialogTrabajos;
 import static com.example.pablo.prueba7.Fragments.EjecutarOrdenes.TecSec;
 import static com.example.pablo.prueba7.Fragments.EjecutarOrdenes.dialogEjecutar;
@@ -196,6 +197,7 @@ import static com.example.pablo.prueba7.Fragments.TrabajosOrdenes.adaptertrabajo
 import static com.example.pablo.prueba7.Fragments.TrabajosOrdenes.trabajos;
 import static com.example.pablo.prueba7.Fragments.TrabajosReportes.Clv_Sol;
 import static com.example.pablo.prueba7.Fragments.TrabajosReportes.posSolucionRepo;
+import static com.example.pablo.prueba7.Fragments.TrabajosReportes.proble;
 import static com.example.pablo.prueba7.Listas.Array.Asigna;
 import static com.example.pablo.prueba7.Listas.Array.Asigna1;
 import static com.example.pablo.prueba7.Fragments.TrabajosReportes.solucion;
@@ -207,7 +209,7 @@ import static java.util.Arrays.asList;
 public class Request extends AppCompatActivity {
     Services services = new Services();
     Array array = new Array();
-    public static String reintentarComando, contraroMA, obsMA, statusMA, extencionesE, Obs,ObsR, msgComando = "";
+    public static String reintentarComando, contraroMA, obsMA, statusMA, extencionesE, Obs,ObsR, msgComando = "",problemaReal;
     public static boolean isnet, firma,MACWAM,validaExisteFirmaBool;
     public static Long abc;
     public static int clvP, tecC, nExtenciones = 0,clvProblemarepo;
@@ -217,7 +219,7 @@ public class Request extends AppCompatActivity {
     public static boolean pieza = false, rapagejecutar = false, extencionesMat = false;
    public static int validFirma;
     public static String ciudadcmdo, localidadcmdo, coloniacmdo, callecmdo, numerocmdo, numeroicmdo, telefonocmdo, callencmdo, callescmdo, calleecmdo, calleocmdo, casacmdo;
-    public static String ejecutarStatus,reporteStatus;
+    public static String ejecutarStatus,reporteStatus,clasProblema;
     public static String reporteVisita1,reporteVisita2,reporteVisita3,reporteHora1,reporteHora2,reporteHora3;
     JsonObject jsonConsultaIp;
     String a = "Seleccione técnico secundario";
@@ -1636,11 +1638,21 @@ public class Request extends AppCompatActivity {
                             clvP = dat.get(i).clvPrioridadQueja;
                             tecC = dat.get(i).tecnicoCuadrilla;
                             clvProblemarepo =  dat.get(i).clvProblema;
+                            problemaReal = dat.get(i).solucion;
+                            clasProblema = dat.get(i).getClasificacionProblema();
                             try {
                                 TrabajosReportes.prioridad.setText(String.valueOf(dat.get(i).getPrioridad()));
                                 TrabajosReportes.clasific.setText(String.valueOf(dat.get(i).getClasificacionProblema()));
                                 TrabajosReportes.desc.setText(String.valueOf(dat.get(i).getObservaciones()));
                                 TrabajosReportes.problm.setText(String.valueOf(dat.get(i).getProblema()));
+
+                                if(statusQueja.equals("E")){
+                                    TrabajosReportes.proble.setText(String.valueOf(problemaReal));
+                                    TrabajosReportes.proble.setEnabled(false);
+                                    //TrabajosReportes.solucion.setSelection(clasProblema);
+
+                                }
+
                             }catch (Exception e){}
                             if(dat.get(i).visita1!=null){
                                 String palabra = dat.get(i).visita1;
@@ -2239,7 +2251,7 @@ try{
                                 objQuejas.put("HV3", "");
                                 objQuejas.put("IdUsuario", 1);
                                 objQuejas.put("Observaciones", Obs);
-                                objQuejas.put("Solucion", TrabajosReportes.proble.getText());
+                                objQuejas.put("Solucion", proble.getText());
                                 objQuejas.put("Status", "E");
                                 objQuejas.put("TecnicoCuadrilla", TecSecSeleccion);
                                 objQuejas.put("Visita", false);
@@ -2247,15 +2259,15 @@ try{
                                 objQuejas.put("Visita2", "");
                                 objQuejas.put("Visita3", "");
                                 objQuejas.put("clvPrioridadQueja", clvP);
-                                objQuejas.put("clvProblema",clvProblemarepo);
-                                objQuejas.put("clvProblema2", 3);
+                                objQuejas.put("clvProblema",ClvTrabajoRequest );
+                                objQuejas.put("clvProblema2", Clv_Sol);
                                 jsonObject1.put("objQuejas", objQuejas);
                                 getGuardaCampos(context,jsonObject1);
                             }catch (Exception e){}
                         }
 
                     }
-                }else{
+                } else{
 
                     dialogReportes.dismiss();
                     ErrorMensaje(context,"Se ha producido un error, verifique su conexion e intente nuevamente");
@@ -3442,7 +3454,7 @@ try{
                             if (TrabajosReportes.solucion.getSelectedItem().toString().trim().equals("Seleccione tipo de solución")) {
                                 Toast.makeText(context, "Seleccione un tipo de solución", Toast.LENGTH_SHORT).show();
                             } else {
-                                if (TrabajosReportes.proble.getText().toString().isEmpty()) {
+                                if (proble.getText().toString().isEmpty()) {
 
                                     Toast.makeText(context, "Campo Problema real vacío", Toast.LENGTH_LONG).show();
 

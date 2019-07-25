@@ -30,6 +30,7 @@ import com.example.pablo.prueba7.sampledata.Util;
 
 import org.json.JSONObject;
 
+import static com.example.pablo.prueba7.Listas.Array.statusQ;
 import static com.example.pablo.prueba7.Services.Services.clavequeja;
 import static com.example.pablo.prueba7.Services.Services.clvorden;
 import static com.example.pablo.prueba7.Services.Services.cont;
@@ -68,7 +69,7 @@ public class Reportes extends AppCompatActivity
         toggle.syncState();
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
-        adapterqueja=new QuejasAdapter(Reportes.this,Array.Queja,Array.nombreQ,Array.statusQ,Array.contratoQ,Array.Direccion);
+        adapterqueja=new QuejasAdapter(Reportes.this,Array.Queja,Array.nombreQ, statusQ,Array.contratoQ,Array.Direccion);
         RecyclerView.LayoutManager layoutManager = new GridLayoutManager(getApplicationContext(),1);
         reportes.setLayoutManager(layoutManager);
         reportes.setAdapter(adapterqueja);    //Asignacion del adapatador a la listView
@@ -81,7 +82,7 @@ public class Reportes extends AppCompatActivity
                     Toast toast1 = Toast.makeText(getApplicationContext(), "Campo de reporte vacío", Toast.LENGTH_SHORT);
                     Array.Queja.clear();
                     Array.nombreQ.clear();
-                    Array.statusQ.clear();
+                    statusQ.clear();
                     Array.contratoQ.clear();
                     Array.Direccion.clear();
                     toast1.show();
@@ -91,7 +92,7 @@ public class Reportes extends AppCompatActivity
                 } else {
                     Array.Queja.clear();
                     Array.nombreQ.clear();
-                    Array.statusQ.clear();
+                    statusQ.clear();
                     Array.contratoQ.clear();
                     Array.Direccion.clear();
                     opcion=2;
@@ -102,6 +103,8 @@ public class Reportes extends AppCompatActivity
                     reportes.setLayoutManager(layoutManager);
                     reportes.setAdapter(adapterqueja);
                 }
+
+
             }
         });
         //Busqueda de Contrato//
@@ -112,7 +115,7 @@ public class Reportes extends AppCompatActivity
                     Toast toast1 = Toast.makeText(getApplicationContext(), "Campo de contrato vacío", Toast.LENGTH_SHORT);
                     Array.Queja.clear();
                     Array.nombreQ.clear();
-                    Array.statusQ.clear();
+                    statusQ.clear();
                     Array.contratoQ.clear();
                     Array.Direccion.clear();
                     clavequeja=0;
@@ -124,7 +127,7 @@ public class Reportes extends AppCompatActivity
                 } else {
                     Array.Queja.clear();
                     Array.nombreQ.clear();
-                    Array.statusQ.clear();
+                    statusQ.clear();
                     Array.contratoQ.clear();
                     Array.Direccion.clear();
                     opcion=3;

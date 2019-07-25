@@ -118,7 +118,7 @@ public class GetQuejasListResult {
     public String problema;
     @SerializedName("Solucion")
     @Expose
-    private Object solucion;
+    public String solucion;
     @SerializedName("Status")
     @Expose
     private String status;

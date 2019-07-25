@@ -15,10 +15,13 @@ import android.widget.TextView;
 import com.example.pablo.prueba7.Listas.Array;
 import com.example.pablo.prueba7.Activitys.MainReportes;
 import com.example.pablo.prueba7.R;
+import com.example.pablo.prueba7.Request.Request;
 import com.example.pablo.prueba7.sampledata.Util;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static java.security.AccessController.getContext;
 
 public class QuejasAdapter extends RecyclerView.Adapter<QuejasAdapter.QuejaViewHolder> {
 
@@ -32,6 +35,8 @@ public class QuejasAdapter extends RecyclerView.Adapter<QuejasAdapter.QuejaViewH
     private ArrayList<String>Direccion;
     public static Integer clvReport;
     public static String contratoReport;
+    public static String statusQueja;
+    public  Request request = new Request();
 
     public static  class QuejaViewHolder extends  RecyclerView.ViewHolder{
         TextView statusq,contratoq,nombreq,direccion,quejaq,control,noOrden;
@@ -45,6 +50,7 @@ public class QuejasAdapter extends RecyclerView.Adapter<QuejasAdapter.QuejaViewH
             direccion=(TextView)itemView.findViewById(R.id.id_direccion);
             control=(TextView)itemView.findViewById(R.id.controla);
             noOrden=itemView.findViewById(R.id.noOrden);
+
 
         }
     }
@@ -78,6 +84,7 @@ public class QuejasAdapter extends RecyclerView.Adapter<QuejasAdapter.QuejaViewH
         viewHolder.control.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 Intent intento1 = new Intent(mContext, MainReportes.class);
                 intento1.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 Util.preferences = mContext.getSharedPreferences("credenciales", Context.MODE_PRIVATE);
@@ -85,6 +92,7 @@ public class QuejasAdapter extends RecyclerView.Adapter<QuejasAdapter.QuejaViewH
                 Util.editor.putInt("clvQueja", Integer.valueOf(Array.Queja.get(position)));
                 Util.editor.commit();
                 contratoReport=String.valueOf(Array.contratoQ.get(position));
+                statusQueja = String.valueOf(Array.statusQ.get(position));
                 mContext.startActivity(intento1);
             }
         });

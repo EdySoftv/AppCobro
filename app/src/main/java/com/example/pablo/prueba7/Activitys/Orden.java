@@ -29,6 +29,7 @@ import com.example.pablo.prueba7.sampledata.Util;
 
 import org.json.JSONObject;
 
+import static com.example.pablo.prueba7.Listas.Array.statusrc;
 import static com.example.pablo.prueba7.Services.Services.clavequeja;
 import static com.example.pablo.prueba7.Services.Services.clvorden;
 import static com.example.pablo.prueba7.Services.Services.cont;
@@ -68,7 +69,7 @@ public class Orden extends AppCompatActivity implements NavigationView.OnNavigat
         barraCargar.terminarBarra();
         ////////////////
         //////////////////
-        adapterord=new OrdenesAdapter(Orden.this,Array.ordensrc,Array.nombresrc,Array.statusrc,Array.contratosrc,Array.direccionsrc);
+        adapterord=new OrdenesAdapter(Orden.this,Array.ordensrc,Array.nombresrc, statusrc,Array.contratosrc,Array.direccionsrc);
         RecyclerView.LayoutManager layoutManager = new GridLayoutManager(getApplicationContext(),1);
         ordenes.setLayoutManager(layoutManager);
         ordenes.setAdapter(adapterord);    //Asignacion del adapatador a la listView
@@ -83,7 +84,7 @@ public class Orden extends AppCompatActivity implements NavigationView.OnNavigat
                 if (ordsearch.getText().toString().trim().equalsIgnoreCase("")){
                     Array.ordensrc.clear();
                     Array.nombresrc.clear();
-                    Array.statusrc.clear();
+                    statusrc.clear();
                     Array.contratosrc.clear();
                     Array.direccionsrc.clear();
                     Toast toast1 = Toast.makeText(getApplicationContext(), "Campo de orden vacío", Toast.LENGTH_SHORT);
@@ -97,7 +98,7 @@ public class Orden extends AppCompatActivity implements NavigationView.OnNavigat
                 } else {
                     Array.ordensrc.clear();
                     Array.nombresrc.clear();
-                    Array.statusrc.clear();
+                    statusrc.clear();
                     Array.contratosrc.clear();
                     Array.direccionsrc.clear();
                     opcion=2;
@@ -120,7 +121,7 @@ public class Orden extends AppCompatActivity implements NavigationView.OnNavigat
                                     "Campo de contrato vacío", Toast.LENGTH_SHORT);
                     Array.ordensrc.clear();
                     Array.nombresrc.clear();
-                    Array.statusrc.clear();
+                    statusrc.clear();
                     Array.contratosrc.clear();
                     Array.direccionsrc.clear();
                     clvorden=0;
@@ -132,7 +133,7 @@ public class Orden extends AppCompatActivity implements NavigationView.OnNavigat
                 } else {
                     Array.ordensrc.clear();
                     Array.nombresrc.clear();
-                    Array.statusrc.clear();
+                    statusrc.clear();
                     Array.contratosrc.clear();
                     Array.direccionsrc.clear();
                     opcion=3;

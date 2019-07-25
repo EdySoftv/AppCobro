@@ -29,6 +29,7 @@ import com.example.pablo.prueba7.sampledata.Util;
 
 import static com.example.pablo.prueba7.Adapters.QuejasAdapter.clvReport;
 
+import static com.example.pablo.prueba7.Adapters.QuejasAdapter.statusQueja;
 import static com.example.pablo.prueba7.Fragments.EjecutarReportes.TecSecu;
 import static com.example.pablo.prueba7.Fragments.EjecutarReportes.tecSecPosRepo;
 import static com.example.pablo.prueba7.Fragments.HorasReportes.repotteVisita;
@@ -44,7 +45,7 @@ public class MainReportes extends AppCompatActivity implements ActionBar.TabList
     public  int positionTab;
     public String valorProblema;
     private boolean cambioRepo = false;
-    int position;
+     public static  int position;
     public static TextView Nombre1, Direccion1,NombreTec1,infoA,contrato1,ciudad1;
     Request request = new Request();
     boolean visitaValidaReporte=false;
@@ -138,37 +139,42 @@ public class MainReportes extends AppCompatActivity implements ActionBar.TabList
         position=tab.getPosition();
         mViewPager.setCurrentItem(position);
         positionTab = tab.getPosition();
-        if (HorasReportes.repotteVisita == 0 && HorasReportes.reporteEjecutada == 0) {
-            Toast.makeText(this, "Seleccione un estatus", Toast.LENGTH_SHORT).show();
-            mViewPager.setCurrentItem(0);
-        }else if (HorasReportes.reporteEjecutada == 1) {
+
+        if(statusQueja.equals("E")){
             mViewPager.setCurrentItem(positionTab);
-            if (positionTab == 2){
-                valorProblema =  proble.getText().toString();
-                if(posSolucionRepo == 0 || valorProblema.equals(null) || valorProblema.equals("")){
-                    if(posSolucionRepo == 0) {
-                        Toast.makeText(this, "Seleccione un tipo de solución.", Toast.LENGTH_SHORT).show();
+        }else {
+
+            if (HorasReportes.repotteVisita == 0 && HorasReportes.reporteEjecutada == 0) {
+                Toast.makeText(this, "Seleccione un estatus", Toast.LENGTH_SHORT).show();
+                mViewPager.setCurrentItem(0);
+            } else if (HorasReportes.reporteEjecutada == 1) {
+                mViewPager.setCurrentItem(positionTab);
+                if (positionTab == 2) {
+                    valorProblema = proble.getText().toString();
+                    if (posSolucionRepo == 0 || valorProblema.equals(null) || valorProblema.equals("")) {
+                        if (posSolucionRepo == 0) {
+                            Toast.makeText(this, "Seleccione un tipo de solución.", Toast.LENGTH_SHORT).show();
+                        }
+                        if (valorProblema.equals(null) || valorProblema.equals("")) {
+                            Toast.makeText(this, "Escriba el problema real.", Toast.LENGTH_SHORT).show();
+                        }
+                        mViewPager.setCurrentItem(1);
+
+                        cambioRepo = false;
+                    } else {
+                        cambioRepo = true;
+                        if (cambioRepo == true) {
+                            mViewPager.setCurrentItem(positionTab);
+                        }
+
                     }
-                    if( valorProblema.equals(null) || valorProblema.equals("")) {
-                        Toast.makeText(this, "Escriba el problema real.", Toast.LENGTH_SHORT).show();
-                    }
+                }
+                if (positionTab == 3 && cambioRepo == false) {
                     mViewPager.setCurrentItem(1);
-
-                    cambioRepo = false;
                 }
-                else {
-                    cambioRepo = true;
-                    if (cambioRepo==true) {
-                        mViewPager.setCurrentItem(positionTab);
-                    }
-
-                }
+            } else if (HorasReportes.repotteVisita == 1) {
+                mViewPager.setCurrentItem(0);
             }
-            if (positionTab ==3 && cambioRepo == false){
-                mViewPager.setCurrentItem(1);
-            }
-        } else if(HorasReportes.repotteVisita == 1) {
-            mViewPager.setCurrentItem(0);
         }
     }
     @Override
