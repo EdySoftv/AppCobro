@@ -118,6 +118,7 @@ public class HorasReportes extends Fragment  implements View.OnClickListener {
         });
 
         if(statusQueja.equals("E")){
+            Toast.makeText(getContext(), "Reporte ya ejecutado", Toast.LENGTH_LONG).show();
             bt2.setChecked(true);
             bt2.setEnabled(false);
             btn1.setEnabled(false);

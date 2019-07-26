@@ -153,7 +153,10 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 import static com.example.pablo.prueba7.Activitys.CambioAparato.dialogCAPAT;
-
+import static com.example.pablo.prueba7.Activitys.Orden.statusBusquedaContrato;
+import static com.example.pablo.prueba7.Activitys.Orden.statusBusquedaOrden;
+import static com.example.pablo.prueba7.Activitys.Reportes.statusBusquedaContRepo;
+import static com.example.pablo.prueba7.Activitys.Reportes.statusBusquedaReporte;
 import static com.example.pablo.prueba7.Activitys.ServiciosAInstalar.dialogAsignacion;
 import static com.example.pablo.prueba7.Activitys.AsignarAparato.MACWAMText;
 import static com.example.pablo.prueba7.Activitys.AsignarAparato.constraintLayoutMACWAM;
@@ -201,6 +204,9 @@ import static com.example.pablo.prueba7.Fragments.TrabajosReportes.proble;
 import static com.example.pablo.prueba7.Listas.Array.Asigna;
 import static com.example.pablo.prueba7.Listas.Array.Asigna1;
 import static com.example.pablo.prueba7.Fragments.TrabajosReportes.solucion;
+import static com.example.pablo.prueba7.Listas.Array.contratoQ;
+import static com.example.pablo.prueba7.Listas.Array.contratosrc;
+import static com.example.pablo.prueba7.Listas.Array.ordensrc;
 import static com.example.pablo.prueba7.Services.Services.ClvTrabajoRequest;
 import static com.example.pablo.prueba7.Services.Services.clavequeja;
 import static com.example.pablo.prueba7.Services.Services.opcion;
@@ -689,6 +695,15 @@ public class Request extends AppCompatActivity {
 
                         }
                     }
+
+                    if (Array.Queja.size() == 0 && statusBusquedaReporte == true){
+                        ErrorMensaje(context,"Reporte no encontrado ");
+                        statusBusquedaReporte = false;
+                    }else if (contratoQ.size() == 0 && statusBusquedaContRepo == true){
+                        ErrorMensaje(context,"Contrato no encontrado ");
+                        statusBusquedaContRepo = false;
+                    }
+
                     Intent intent1 = new Intent(context, Reportes.class);
                     intent1.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                     context.startActivity(intent1);
@@ -733,6 +748,13 @@ public class Request extends AppCompatActivity {
                             Array.statusrc.add(String.valueOf(dat.get(i).getStatus()));
                             Array.direccionsrc.add(String.valueOf(dat.get(i).getCalle() + ", " + dat.get(i).getNumero() + ", " + dat.get(i).getColonia()));
                         }
+                    }
+                    if (ordensrc.size() == 0 && statusBusquedaOrden == true){
+                        ErrorMensaje(context,"Orden no encontrada ");
+                        statusBusquedaOrden = false;
+                    }else if (contratosrc.size() == 0 && statusBusquedaContrato == true){
+                        ErrorMensaje(context,"Contrato no encontrado ");
+                        statusBusquedaContrato = false;
                     }
                     Intent intent1 = new Intent(context, Orden.class);
                     intent1.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -1649,7 +1671,7 @@ public class Request extends AppCompatActivity {
                                 if(statusQueja.equals("E")){
                                     TrabajosReportes.proble.setText(String.valueOf(problemaReal));
                                     TrabajosReportes.proble.setEnabled(false);
-                                    //TrabajosReportes.solucion.setSelection(clasProblema);
+                                    TrabajosReportes.solucion.setEnabled(false);
 
                                 }
 

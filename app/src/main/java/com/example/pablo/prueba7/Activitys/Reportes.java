@@ -42,7 +42,7 @@ public class Reportes extends AppCompatActivity
    private RecyclerView reportes;
    private Button breporte,bcontrato;
    private EditText reportesearch,contratosearch;
-
+    public static boolean statusBusquedaReporte = false,statusBusquedaContRepo = false;
    private QuejasAdapter adapterqueja;
     NavigationView barra;
     TextView nombreTec;
@@ -78,6 +78,7 @@ public class Reportes extends AppCompatActivity
         breporte.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                statusBusquedaReporte = true;
                 if (reportesearch.getText().toString().trim().equalsIgnoreCase("")){
                     Toast toast1 = Toast.makeText(getApplicationContext(), "Campo de reporte vacío", Toast.LENGTH_SHORT);
                     Array.Queja.clear();
@@ -98,7 +99,6 @@ public class Reportes extends AppCompatActivity
                     opcion=2;
                     clavequeja=Integer.parseInt(reportesearch.getText().toString().toLowerCase().trim());
                     request.getListQuejas(getApplicationContext());
-                    Toast toast1 =Toast.makeText(getApplicationContext(), "Reporte encontrado", Toast.LENGTH_SHORT);toast1.show();
                     RecyclerView.LayoutManager layoutManager = new GridLayoutManager(getApplicationContext(),1);
                     reportes.setLayoutManager(layoutManager);
                     reportes.setAdapter(adapterqueja);
@@ -111,6 +111,7 @@ public class Reportes extends AppCompatActivity
         bcontrato.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                statusBusquedaContRepo = true;
                 if (contratosearch.getText().toString().trim().equalsIgnoreCase("")){
                     Toast toast1 = Toast.makeText(getApplicationContext(), "Campo de contrato vacío", Toast.LENGTH_SHORT);
                     Array.Queja.clear();
@@ -133,7 +134,6 @@ public class Reportes extends AppCompatActivity
                     opcion=3;
                     cont=(contratosearch.getText().toString().toLowerCase().trim());
                     request.getListQuejas(getApplicationContext());
-                    Toast toast1 = Toast.makeText(getApplicationContext(), "Contrato encontrado", Toast.LENGTH_SHORT);toast1.show();
                     RecyclerView.LayoutManager layoutManager = new GridLayoutManager(getApplicationContext(),1);
                     reportes.setLayoutManager(layoutManager);
                     reportes.setAdapter(adapterqueja);

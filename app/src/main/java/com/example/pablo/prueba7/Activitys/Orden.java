@@ -29,6 +29,7 @@ import com.example.pablo.prueba7.sampledata.Util;
 
 import org.json.JSONObject;
 
+import static com.example.pablo.prueba7.Listas.Array.ordensrc;
 import static com.example.pablo.prueba7.Listas.Array.statusrc;
 import static com.example.pablo.prueba7.Services.Services.clavequeja;
 import static com.example.pablo.prueba7.Services.Services.clvorden;
@@ -40,6 +41,7 @@ public class Orden extends AppCompatActivity implements NavigationView.OnNavigat
     private OrdenesAdapter adapterord;
     private Button ordenb,contratob;
     public static RecyclerView ordenes;
+    public static boolean statusBusquedaOrden = false,statusBusquedaContrato = false;
     private EditText ordsearch,contsearch;
     NavigationView barra;
     TextView nombreTec;
@@ -81,7 +83,9 @@ public class Orden extends AppCompatActivity implements NavigationView.OnNavigat
         ordenb.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (ordsearch.getText().toString().trim().equalsIgnoreCase("")){
+
+                statusBusquedaOrden = true;
+                 if (ordsearch.getText().toString().trim().equalsIgnoreCase("")){
                     Array.ordensrc.clear();
                     Array.nombresrc.clear();
                     statusrc.clear();
@@ -96,25 +100,25 @@ public class Orden extends AppCompatActivity implements NavigationView.OnNavigat
                     ordenes.setLayoutManager(layoutManager);
                     ordenes.setAdapter(adapterord);
                 } else {
-                    Array.ordensrc.clear();
-                    Array.nombresrc.clear();
-                    statusrc.clear();
-                    Array.contratosrc.clear();
-                    Array.direccionsrc.clear();
-                    opcion=2;
-                    clvorden=Integer.parseInt(ordsearch.getText().toString().toLowerCase().trim());
-                    rqs.getListOrd(getApplicationContext());
-                    Toast toast1 = Toast.makeText(getApplicationContext(), "Orden encontrada", Toast.LENGTH_SHORT);toast1.show();
-                    RecyclerView.LayoutManager layoutManager = new GridLayoutManager(getApplicationContext(),1);
-                    ordenes.setLayoutManager(layoutManager);
-                    ordenes.setAdapter(adapterord);
-                }
+                     Array.ordensrc.clear();
+                     Array.nombresrc.clear();
+                     statusrc.clear();
+                     Array.contratosrc.clear();
+                     Array.direccionsrc.clear();
+                     opcion = 2;
+                     clvorden = Integer.parseInt(ordsearch.getText().toString().toLowerCase().trim());
+                     rqs.getListOrd(getApplicationContext());
+                     RecyclerView.LayoutManager layoutManager = new GridLayoutManager(getApplicationContext(), 1);
+                     ordenes.setLayoutManager(layoutManager);
+                     ordenes.setAdapter(adapterord);
+                 }
             }
         });
 //Busqueda de Contrato//
         contratob.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                statusBusquedaContrato = true;
                 if (contsearch.getText().toString().trim().equalsIgnoreCase("")){
                     Toast toast1 =
                             Toast.makeText(getApplicationContext(),
@@ -139,8 +143,9 @@ public class Orden extends AppCompatActivity implements NavigationView.OnNavigat
                     opcion=3;
                     cont=(contsearch.getText().toString().toLowerCase().trim());
                     rqs.getListOrd(getApplicationContext());
-                    Toast toast1 = Toast.makeText(getApplicationContext(), "Contrato encontrado", Toast.LENGTH_SHORT);toast1.show();
+                   // Toast toast1 = Toast.makeText(getApplicationContext(), "Contrato encontrado", Toast.LENGTH_SHORT);toast1.show();
                     ordenes.setAdapter(adapterord);
+
                 }
             }
         });

@@ -6,6 +6,7 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
@@ -36,6 +37,7 @@ import java.util.Calendar;
 import java.util.Date;
 
 import static com.example.pablo.prueba7.Adapters.QuejasAdapter.clvReport;
+import static com.example.pablo.prueba7.Adapters.QuejasAdapter.statusQueja;
 import static com.example.pablo.prueba7.Fragments.TrabajosReportes.proble;
 import static com.example.pablo.prueba7.Request.Request.validaExisteFirmaBool;
 
@@ -94,6 +96,14 @@ public class EjecutarReportes extends Fragment {
 
         request.validaExisteFirmaBool=false;
         request.getTecSecR(getContext());
+
+        if(statusQueja.equals("E")){
+          eject.setEnabled(false);
+          salir.setEnabled(false);
+          TecSecu.setEnabled(false);
+          eject.setTextColor(Color.GRAY);
+          salir.setTextColor(Color.GRAY);
+        }
 
         if (HorasReportes.reporteEjecutada == 0) {
             firmaRep.setVisibility(View.GONE);
