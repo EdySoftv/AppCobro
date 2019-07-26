@@ -11,10 +11,12 @@
         android:id="@+id/servicioAAsignar"
         android:layout_width="125dp"
         android:layout_height="125dp"
-        android:layout_marginStart="25dp"
+        android:layout_marginStart="13dp"
         android:layout_marginTop="16dp"
+        android:layout_marginEnd="13dp"
         android:background="#85C1E9"
         android:drawableTop="@drawable/iconoserviciointernet"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -24,6 +26,8 @@
         android:layout_width="125dp"
         android:layout_height="30dp"
         android:layout_marginTop="8dp"
+        android:layout_marginBottom="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/servicioAAsignar"
         app:layout_constraintStart_toStartOf="@+id/servicioAAsignar"
         app:layout_constraintTop_toBottomOf="@+id/servicioAAsignar" />
