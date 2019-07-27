@@ -1539,13 +1539,19 @@ public class Request extends AppCompatActivity {
                 if (response.code() == 200) {
                     array.serviciosAparatos.clear();
                     JSONServiciosAparatos jsonResponse = response.body();
+                    final Iterator<List<GetMuestraArbolServiciosAparatosPorinstalarListResult>> itData4 = array.dataArbSer.iterator();
+                    final List<GetMuestraArbolServiciosAparatosPorinstalarListResult> dat4 = (List<GetMuestraArbolServiciosAparatosPorinstalarListResult>) itData4.next();
+
                     array.dataserviciosAparatos = new ArrayList<List<GetMuestraServiciosRelTipoAparatoListResult>>(asList(jsonResponse.GetMuestraServiciosRelTipoAparatoListResult()));
                     Iterator<List<GetMuestraServiciosRelTipoAparatoListResult>> itData = array.dataserviciosAparatos.iterator();
                     while (itData.hasNext()) {
                         List<GetMuestraServiciosRelTipoAparatoListResult> dat = (List<GetMuestraServiciosRelTipoAparatoListResult>) itData.next();
                         for (int i = 0; i < dat.size(); i++) {
                             array.serviciosAparatos.add(dat.get(i).getNombre());
-                            AsignarAparato.selectedStrings.add(dat.get(i).clv_UnicaNet);
+
+                                AsignarAparato.selectedStrings.add(dat.get(i).clv_UnicaNet);
+
+
                         }
                     }
                     ArrayAdapter arrayAdapter = new ArrayAdapter(context, android.R.layout.simple_list_item_checked, array.serviciosAparatos);

@@ -84,27 +84,43 @@ public class ArbolAdapter extends RecyclerView.Adapter<ArbolAdapter.ArbolViewHol
     @Override
     public void onBindViewHolder(ArbolViewHolder viewHolder, final int i) {
 
-        viewHolder.Asignar.setText(dat4.get(i).Nombre);
+
         if(dat4.get(i).IdMedio!=0){
             viewHolder.progressBar.setProgress(50);
+            viewHolder.Asignar.setText(dat4.get(i).Nombre+" ("+dat4.get(i).Detalle+")");
+            if(dat4.get(i).Clv_TipSer==1){
+                if(dat4.get(i).Detalle.equals("COAXIAL")){
+                    viewHolder.progressBar.setProgress(100);
+                    viewHolder.Asignar.setBackgroundColor(Color.parseColor("#48C9B0"));
+                }
+            }
             if(dat4.get(i).children.size()!=0){
                 viewHolder.progressBar.setProgress(100);
                 viewHolder.Asignar.setBackgroundColor(Color.parseColor("#48C9B0"));
             }
+        }else{
+            viewHolder.Asignar.setText(dat4.get(i).Nombre);
         }
         int valida=0;
         for(int q=0;q<dat4.size(); q++){
             if(dat4.get(q).children.size()!=0){
                 valida=valida+1;
+            }else{
+                if(dat4.get(q).Clv_TipSer==1){
+                    valida=valida+1;
+                }
             }
         }
-        if(valida==dat4.size()){
+        if(valida>=dat4.size()){
             ServiciosAInstalar.aceptarAsignacion.setEnabled(true);
             ServiciosAInstalar.aceptarAsignacion.setTextColor(Color.WHITE);
-            if(DeepConsModel.STATUS.equals("E")){
+            /*if(DeepConsModel.STATUS.equals("E")){
                 ServiciosAInstalar.aceptarAsignacion.setEnabled(false);
                 ServiciosAInstalar.aceptarAsignacion.setTextColor(Color.GRAY);
-            }
+            }else{
+                ServiciosAInstalar.aceptarAsignacion.setEnabled(true);
+                ServiciosAInstalar.aceptarAsignacion.setTextColor(Color.WHITE);
+            }*/
         }
         viewHolder.Asignar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -126,6 +142,7 @@ public class ArbolAdapter extends RecyclerView.Adapter<ArbolAdapter.ArbolViewHol
 
                         if(ServiciosAInstalar.spinnerMedio.getSelectedItemPosition()!=0){
                         if(ServiciosAInstalar.todosLosMediosValidacion==true){
+                            pasa=true;
                         }else{
                             for(int a=0; a<dat4.size(); a++){
                                 dat4.get(a).setIdMedio(ServiciosAInstalar.idMedioSI);

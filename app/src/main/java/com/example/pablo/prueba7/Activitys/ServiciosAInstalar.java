@@ -117,17 +117,17 @@ public class ServiciosAInstalar extends AppCompatActivity {
 
             if(aceptarAsignacion.isEnabled()==false){
                 aceptarAsignacion.setTextColor(Color.GRAY);
-                if(DeepConsModel.STATUS.equals("E")){
+                /*if(DeepConsModel.STATUS.equals("E")){
                     aceptarAsignacion.setEnabled(false);
                     aceptarAsignacion.setTextColor(Color.GRAY);
-                }
+                }*/
             }else{
-                if(DeepConsModel.STATUS.equals("E")){
+               /* if(DeepConsModel.STATUS.equals("E")){
                     aceptarAsignacion.setEnabled(false);
                     aceptarAsignacion.setTextColor(Color.GRAY);
-                }else{
+                }else{*/
                     aceptarAsignacion.setTextColor(Color.WHITE);
-                }
+                //}
             }
 
 
@@ -163,6 +163,7 @@ public class ServiciosAInstalar extends AppCompatActivity {
             ServiciosAInstalar.spinnerMedio.setAdapter(adapter);
             ServiciosAInstalar.spinnerMedio.setEnabled(false);
         }else{
+            ServiciosAInstalar.layoutMedio.setVisibility(View.GONE);
 
         }
 
@@ -183,6 +184,37 @@ public class ServiciosAInstalar extends AppCompatActivity {
         if (dat.get(0).RequierePregunta == true) {
             checkBoxSi.setChecked(false);
             checkBoxNo.setChecked(false);
+            if (c != dat4.size()) {
+                layoutMedio.setVisibility(View.GONE);
+                int contador=0;
+                for(int b=0; b<dat4.size(); b++){
+                    try{
+                        if(dat4.get(b).IdMedio==dat4.get(b+1).IdMedio){
+                            contador=contador+1;
+                        }
+                    }catch (Exception e){}
+                }
+                if(contador==(dat4.size()-1)){
+                    if(dat4.size()==1){
+
+                        todosLosMedios=0;
+                        checkBoxSi.setChecked(false);
+                        checkBoxNo.setChecked(true);
+                    }else{
+                        todosLosMediosValidacion=true;
+                        todosLosMedios=1;
+                        checkBoxNo.setChecked(false);
+                        checkBoxSi.setChecked(true);
+                    }
+                }else{
+                    todosLosMedios=0;
+                }
+            }
+            if(c==dat4.size()){
+                todosLosMedios=0;
+                checkBoxSi.setChecked(false);
+                checkBoxNo.setChecked(true);
+            }
         }else{
             if (c != dat4.size()) {
                 layoutMedio.setVisibility(View.GONE);
@@ -196,6 +228,7 @@ public class ServiciosAInstalar extends AppCompatActivity {
                 }
                 if(contador==(dat4.size()-1)){
                     if(dat4.size()==1){
+
                         todosLosMedios=0;
                         checkBoxSi.setChecked(false);
                         checkBoxNo.setChecked(true);

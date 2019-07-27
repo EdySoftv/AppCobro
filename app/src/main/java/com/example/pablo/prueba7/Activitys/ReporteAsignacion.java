@@ -119,24 +119,39 @@ public class ReporteAsignacion extends AppCompatActivity {
             //si no tiene hijos habilitamos el spinner
             spinerMedio.setEnabled(true);
             //si no tiene hijos deshabilitamos el boton de guarda
+            agregarAparato.setText("Agregar aparato");
             guardarAparatos.setEnabled(false);
             guardarAparatos.setTextColor(Color.GRAY);
+            if(dat4.get(ArbolAdapter.posicionArbol).Clv_TipSer==1){
+                if(dat4.get(ArbolAdapter.posicionArbol).Detalle.equals("COAXIAL")){
+                    guardarAparatos.setEnabled(true);
+                    guardarAparatos.setTextColor(Color.WHITE);
+                    agregarAparato.setEnabled(false);
+                    agregarAparato.setTextColor(Color.GRAY);
+                }
+            }
         } else {
             //si tiene hijos habilitamos el boton de guarda
+            agregarAparato.setText("Agregar otro aparato");
             guardarAparatos.setEnabled(true);
             guardarAparatos.setTextColor(Color.WHITE);
             if(DeepConsModel.STATUS.equals("E")){
                 guardarAparatos.setEnabled(false);
                 guardarAparatos.setTextColor(Color.GRAY);
             }
-            //si tiene hijos bloqueamos el spinner porque no se puede cambiar el medio con hijos ya asignados
-            spinerMedio.setEnabled(false);
-            //si tiene hijos, llenamos lista
-            RecyclerView.LayoutManager layoutManager = new GridLayoutManager(this,1);
-            reporteAsignacion.setLayoutManager(layoutManager);
-            adapter = new EliminarAparatosAdapter(Array.children,getApplicationContext(),this,ArbolAdapter.posicionArbol,
-                    spinerMedio,guardarAparatos);
-            reporteAsignacion.setAdapter(adapter);
+            if(dat4.get(ArbolAdapter.posicionArbol).Detalle.equals("COAXIAL")){
+                guardarAparatos.setEnabled(true);
+                guardarAparatos.setTextColor(Color.WHITE);
+            }else{
+                //si tiene hijos bloqueamos el spinner porque no se puede cambiar el medio con hijos ya asignados
+                spinerMedio.setEnabled(false);
+                //si tiene hijos, llenamos lista
+                RecyclerView.LayoutManager layoutManager = new GridLayoutManager(this,1);
+                reporteAsignacion.setLayoutManager(layoutManager);
+                adapter = new EliminarAparatosAdapter(Array.children,getApplicationContext(),this,ArbolAdapter.posicionArbol,
+                        spinerMedio,guardarAparatos);
+                reporteAsignacion.setAdapter(adapter);
+            }
 
         }
 
