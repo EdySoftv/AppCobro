@@ -69,6 +69,7 @@ public class Inicio extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         barra = findViewById(R.id.nav_view);
         setSupportActionBar(toolbar);
+
         dialogInicio = new BarraCargar().showDialog(this);
         drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(

@@ -100,7 +100,7 @@
     <string name="exterior">Exterior</string>
     <string name="interior">Interior</string>
     <string name="fin">Fin</string>
-
+    <string name="title_activity_inicio">Inicio</string>
     <string name="login">Login</string>
 
     <string name="contrasenia">Contraseña</string>
