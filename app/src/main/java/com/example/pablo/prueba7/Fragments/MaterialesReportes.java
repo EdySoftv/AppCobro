@@ -179,6 +179,21 @@ public class MaterialesReportes extends Fragment {
                         EjecutarDescargaMaterial();
                     }
                 }
+
+                /////////////////////////////////
+                descripcionMatR.setSelection(0);
+                clasificacionMatR.setSelection(0);
+                //clasificacionMatR.setEnabled(false);
+                piezasMatR.setVisibility(View.GONE);
+                extMatR.setVisibility(View.GONE);
+                metrosMatR.setVisibility(View.GONE);
+                //piezaR,mIIR,mIER,mFIR,mFER;
+                piezaR.setText("");
+                mIIR.setText("");
+                mIER.setText("");
+                mFIR.setText("");
+                mFER.setText("");
+
             }
         });
 

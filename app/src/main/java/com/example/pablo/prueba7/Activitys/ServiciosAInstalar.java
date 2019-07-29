@@ -44,6 +44,7 @@ import java.util.Iterator;
 import java.util.List;
 
 
+import static com.example.pablo.prueba7.Activitys.MainActivity.mViewPager;
 import static java.util.Arrays.asList;
 
 
@@ -322,6 +323,7 @@ public class ServiciosAInstalar extends AppCompatActivity {
                     request.getValidaTrabajos(getApplicationContext(),jsonObject);
                 }catch (Exception e){}
                     finish();
+                mViewPager.setCurrentItem(2);
 
             }
         });

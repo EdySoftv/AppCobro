@@ -761,7 +761,6 @@ public class Request extends AppCompatActivity {
                     context.startActivity(intent1);
                 } else {
                     ErrorMensaje(context,"Error al conseguir lista ordenes "+response.message());
-
                 }
             }
 
@@ -2749,10 +2748,12 @@ try{
 
                     }
                     try {
+                        clasificacionMat.setEnabled(true);
                         ArrayAdapter arrayAdapter = new ArrayAdapter(context, android.R.layout.simple_list_item_1, array.descripcionArtBit);
                         MaterialesOrdenes.clasificacionMat.setAdapter(arrayAdapter);
                         clasificacionMat.setSelection(posClasMat);
                     }catch (Exception e){
+                        clasificacionMatR.setEnabled(true);
                         ArrayAdapter arrayAdapter = new ArrayAdapter(context, android.R.layout.simple_list_item_1, array.descripcionArtBit);
                         clasificacionMatR.setAdapter(arrayAdapter);
                         clasificacionMatR.setSelection(posClasMatR);

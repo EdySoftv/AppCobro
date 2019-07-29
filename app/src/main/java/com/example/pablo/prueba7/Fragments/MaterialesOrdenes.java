@@ -165,6 +165,18 @@ agragarDM.setOnClickListener(new View.OnClickListener() {
                EjecutarDescargaMaterial();
            }
         }
+        ///////////////////
+        descripcionMat.setSelection(0);
+        clasificacionMat.setSelection(0);
+        clasificacionMat.setEnabled(false);
+        piezasMat.setVisibility(View.GONE);
+        extMat.setVisibility(View.GONE);
+        metrosMat.setVisibility(View.GONE);
+        pieza.setText("");
+        mII.setText("");
+        mIE.setText("");
+        mFI.setText("");
+        mFE.setText("");
 }
 });
 
