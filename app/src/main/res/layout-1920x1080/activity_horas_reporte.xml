@@ -5,19 +5,26 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".Fragments.HorasReportes">
+<android.support.constraint.ConstraintLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
     <android.support.constraint.ConstraintLayout
         android:id="@+id/rb"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="0dp"
-        android:layout_marginTop="89dp">
+        android:layout_marginTop="90dp"
+        android:layout_marginEnd="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <RadioGroup
             android:id="@+id/grupo_dias"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:orientation="horizontal"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -27,7 +34,6 @@
                 android:id="@+id/ejutada1"
                 android:layout_width="95dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="80dp"
                 android:text="@string/visita"
                 android:textSize="22dp" />
 
@@ -39,14 +45,7 @@
                 android:textSize="22dp" />
         </RadioGroup>
     </android.support.constraint.ConstraintLayout>
-    <ScrollView
-        android:layout_width="fill_parent"
-        android:layout_height="match_parent"
-        android:layout_alignParentStart="true"
-        android:layout_marginStart="0dp"
-        android:layout_marginTop="120dp"
-        android:verticalScrollbarPosition="defaultPosition"
-        android:visibility="visible">
+
 
         <android.support.constraint.ConstraintLayout
             android:id="@+id/RV7"
@@ -121,5 +120,5 @@
                 app:layout_constraintTop_toBottomOf="@+id/obsTecReporte" />
 
         </android.support.constraint.ConstraintLayout>
-    </ScrollView>
+</android.support.constraint.ConstraintLayout>
 </FrameLayout>

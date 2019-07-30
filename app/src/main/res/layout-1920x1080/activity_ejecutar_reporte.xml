@@ -13,8 +13,8 @@
 
         <TextView
             android:id="@+id/textView45"
-            android:layout_width="350dp"
-            android:layout_height="25dp"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
             android:layout_below="@+id/RV1"
             android:layout_marginStart="4dp"
             android:layout_marginTop="16dp"
@@ -26,9 +26,9 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <Spinner
-            android:id="@+id/tecnicosecundario2"
-            android:layout_width="361dp"
-            android:layout_height="33dp"
+            android:id="@+id/tecnicosecundario4"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
             android:layout_below="@+id/textView3"
             android:layout_alignParentStart="true"
             android:layout_marginStart="4dp"
@@ -81,14 +81,15 @@
             android:layout_centerHorizontal="true"
             android:layout_marginStart="8dp"
             android:layout_marginTop="24dp"
+            android:layout_marginEnd="8dp"
             android:background="@drawable/boton"
             android:backgroundTint="@color/colorPrimary"
             android:text="@string/salir"
             android:textColor="#fff"
-            app:layout_constraintEnd_toEndOf="@+id/tecnicosecundario2"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.474"
-            app:layout_constraintStart_toStartOf="@+id/tecnicosecundario2"
-            app:layout_constraintTop_toBottomOf="@+id/tecnicosecundario2" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tecnicosecundario4" />
 
     </android.support.constraint.ConstraintLayout>
     </FrameLayout>

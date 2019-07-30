@@ -21,8 +21,6 @@ import android.widget.Toast;
 import com.example.pablo.prueba7.Activitys.Inicio;
 import com.example.pablo.prueba7.Dibujo.Firma;
 import com.example.pablo.prueba7.Listas.Array;
-import com.example.pablo.prueba7.Modelos.DeepConsModel;
-import com.example.pablo.prueba7.Modelos.ListadoQuejasAgendadas;
 import com.example.pablo.prueba7.R;
 import com.example.pablo.prueba7.Activitys.Reportes;
 import com.example.pablo.prueba7.Request.Request;
@@ -36,7 +34,6 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
-import static com.example.pablo.prueba7.Adapters.QuejasAdapter.clvReport;
 import static com.example.pablo.prueba7.Adapters.QuejasAdapter.statusQueja;
 import static com.example.pablo.prueba7.Fragments.TrabajosReportes.proble;
 import static com.example.pablo.prueba7.Request.Request.validaExisteFirmaBool;
@@ -84,7 +81,7 @@ public class EjecutarReportes extends Fragment {
         View view = inflater.inflate(R.layout.activity_ejecutar_reporte, container, false);
         eject = view.findViewById(R.id.ejecutarR);
         salir= view.findViewById(R.id.SalirR);
-        TecSecu = view.findViewById(R.id.tecnicosecundario);
+        TecSecu = view.findViewById(R.id.tecnicosecundario4);
         firmaRep = view.findViewById(R.id.firmarRep);
         solution = proble.getText().toString();
         final Calendar c = Calendar.getInstance();
@@ -95,7 +92,7 @@ public class EjecutarReportes extends Fragment {
         minutoE = c.get(Calendar.MINUTE);
 
         request.validaExisteFirmaBool=false;
-        request.getTecSecR(getContext());
+        request.getTecSecR(getContext(), TecSecu);
 
         if(statusQueja.equals("E")){
           eject.setEnabled(false);
@@ -124,6 +121,9 @@ public class EjecutarReportes extends Fragment {
         }else{
             minute=String.valueOf(minutoE);
         }
+
+
+
         TecSecu.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {

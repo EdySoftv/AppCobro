@@ -104,7 +104,7 @@
 
           <TextView
               android:id="@+id/tv_textTecSec"
-              android:layout_width="304dp"
+              android:layout_width="0dp"
               android:layout_height="wrap_content"
               android:layout_marginStart="8dp"
               android:layout_marginTop="16dp"
@@ -139,13 +139,14 @@
               android:layout_centerHorizontal="true"
               android:layout_marginStart="8dp"
               android:layout_marginTop="12dp"
+              android:layout_marginEnd="8dp"
               android:background="@drawable/boton"
               android:backgroundTint="@color/colorPrimary"
               android:text="@string/salir"
               android:textColor="#fff"
-              app:layout_constraintEnd_toEndOf="@+id/spinnerTecnicoSec"
+              app:layout_constraintEnd_toEndOf="parent"
               app:layout_constraintHorizontal_bias="0.542"
-              app:layout_constraintStart_toStartOf="@+id/spinnerTecnicoSec"
+              app:layout_constraintStart_toStartOf="parent"
               app:layout_constraintTop_toBottomOf="@+id/spinnerTecnicoSec" />
           <!--app:layout_constraintTop_toBottomOf="@+id/ejecutarLay" -->
 

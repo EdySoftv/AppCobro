@@ -1875,7 +1875,7 @@ public class Request extends AppCompatActivity {
         });
     }
 
-    public void getTecSecR(final Context context) {
+    public void getTecSecR(final Context context, final Spinner TecSec) {
         Array.Clv_TecSecR = new ArrayList<Integer>();
         Array.Clv_TecSecR.add(0, -1);
         Service service = null;
@@ -1903,8 +1903,8 @@ public class Request extends AppCompatActivity {
                             j = j + 1;
                         }
                         adapterTecSecR = new ArrayAdapter(context, android.R.layout.simple_spinner_dropdown_item, datos);
-                        TecSecu.setAdapter(adapterTecSecR);
-                        TecSecu.setSelection(TecSecSeleccion);
+                        TecSec.setAdapter(adapterTecSecR);
+
                     }
                 }else{
                     ErrorMensaje(context,"Error al conseguir datos del tecnico secundario "+response.message());
