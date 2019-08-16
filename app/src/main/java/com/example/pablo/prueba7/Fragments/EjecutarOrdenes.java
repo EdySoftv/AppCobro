@@ -83,7 +83,7 @@ public class EjecutarOrdenes extends Fragment {
         super.onCreate(savedInstanceState);
         setRetainInstance(true);
         dialogEjecutar = new BarraCargar().showDialog(getContext());
-        request.getTecSec(getContext());
+
         View view = inflater.inflate(R.layout.activity_ejecutar_orden, container, false);
         //reiniciar = view.findViewById(R.id.restart);
         eject = view.findViewById(R.id.ejec);
@@ -94,7 +94,7 @@ public class EjecutarOrdenes extends Fragment {
         TecSec = view.findViewById(R.id.spinnerTecnicoSec);
 //        reiniciar.setEnabled(false);
         salir = view.findViewById(R.id.salirEjecutarOrd);
-
+        request.getTecSec(getContext(),TecSec);
         if(horas.visita == 1){
             firmar.setVisibility(View.GONE);
             TecSec.setVisibility(View.GONE);

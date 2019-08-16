@@ -987,7 +987,7 @@ public class Request extends AppCompatActivity {
     }
 
     //TecnicoSecundario////
-    public void getTecSec(final Context context) {
+    public void getTecSec(final Context context,final Spinner spiner) {
         Array.clv_tecnicoSecundario = new ArrayList<Integer>();
         Array.clv_tecnicoSecundario.add(0, -1);
 
@@ -1017,8 +1017,8 @@ public class Request extends AppCompatActivity {
                             j = j + 1;
                         }
                         adapterTecSec = new ArrayAdapter<String>(context, android.R.layout.simple_spinner_dropdown_item, datos);
-                        TecSec.setAdapter(adapterTecSec);
-                        TecSec.setSelection(posTec);
+                        spiner.setAdapter(adapterTecSec);
+                        spiner.setSelection(posTec);
 
                         HorasOrdenes.Obs.setText(String.valueOf(DeepConsModel.Obs));
                     }
