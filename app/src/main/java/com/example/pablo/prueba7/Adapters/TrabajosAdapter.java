@@ -171,7 +171,7 @@ try{
                 Log.d("caracteres0",caracteres[0]);
                 Log.d("caracteres1",caracteres[1]);
                 Request request = new Request();
-
+                //Instalacion
                 if (caracteres[0].equals("ISTVA")) {
                     retiro = false;
                     dialogTrabajos.show();
@@ -191,6 +191,72 @@ try{
                     }catch (Exception e){}
                     isnet=1;
                 }
+                if (caracteres[0].equals("ISDIG")) {
+                    retiro = false;
+                    dialogTrabajos.show();
+                    try{
+                        JSONObject jsonObject = new JSONObject();
+                        jsonObject.put("clv_orden",  Util.getClvOrden(Util.preferences));
+                        request.PreguntaMedios(Cmcontext,jsonObject);
+                    }catch (Exception e){}
+                }
+                if (caracteres[0].equals("CTCTV")) {
+                    retiro = false;
+                    dialogTrabajos.show();
+                    try{
+                        JSONObject jsonObject = new JSONObject();
+                        jsonObject.put("clv_orden",  Util.getClvOrden(Util.preferences));
+                        request.PreguntaMedios(Cmcontext,jsonObject);
+                    }catch (Exception e){}
+                }
+                if (caracteres[0].equals("CTCIN")) {
+                    retiro = false;
+                    dialogTrabajos.show();
+                    try{
+                        JSONObject jsonObject = new JSONObject();
+                        jsonObject.put("clv_orden",  Util.getClvOrden(Util.preferences));
+                        request.PreguntaMedios(Cmcontext,jsonObject);
+                    }catch (Exception e){}
+                }
+                if (caracteres[0].equals("CTCDG")) {
+                    retiro = false;
+                    dialogTrabajos.show();
+                    try{
+                        JSONObject jsonObject = new JSONObject();
+                        jsonObject.put("clv_orden",  Util.getClvOrden(Util.preferences));
+                        request.PreguntaMedios(Cmcontext,jsonObject);
+                    }catch (Exception e){}
+                }
+                if (caracteres[0].equals("RSTVA")) {
+                    retiro = false;
+                    dialogTrabajos.show();
+                    try{
+                        JSONObject jsonObject = new JSONObject();
+                        jsonObject.put("clv_orden",  Util.getClvOrden(Util.preferences));
+                        request.PreguntaMedios(Cmcontext,jsonObject);
+                    }catch (Exception e){}
+                }
+                if (caracteres[0].equals("RSNET")) {
+                    retiro = false;
+                    dialogTrabajos.show();
+                    try{
+                        JSONObject jsonObject = new JSONObject();
+                        jsonObject.put("clv_orden",  Util.getClvOrden(Util.preferences));
+                        request.PreguntaMedios(Cmcontext,jsonObject);
+                    }catch (Exception e){}
+                }
+                if (caracteres[0].equals("RSDIG")) {
+                    retiro = false;
+                    dialogTrabajos.show();
+                    try{
+                        JSONObject jsonObject = new JSONObject();
+                        jsonObject.put("clv_orden",  Util.getClvOrden(Util.preferences));
+                        request.PreguntaMedios(Cmcontext,jsonObject);
+                    }catch (Exception e){}
+                }
+
+
+                //Cambio Aparato
                 if (caracteres[0].equals("CAPAG")) {
                     retiro = false;
                     dialogTrabajos.show();
@@ -198,11 +264,6 @@ try{
                     ftth=1;
                     intento.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                     Cmcontext.startActivity(intento);
-                }
-                if (caracteres[0].equals("CAMDO")) {
-                    retiro = false;
-                    dialogTrabajos.show();
-                    request.getCAMDO(Cmcontext);
                 }
                 if (caracteres[0].equals("CAPAT")) {
                     retiro = false;
@@ -212,6 +273,15 @@ try{
                     Cmcontext.startActivity(intento);
                     ftth=0;
                 }
+
+                //Cambio Domicilio
+                if (caracteres[0].equals("CAMDO")) {
+                    retiro = false;
+                    dialogTrabajos.show();
+                    request.getCAMDO(Cmcontext);
+                }
+
+                //Extenciones Adicionales
                 if (caracteres[0].equals("CONEX")) {
                     retiro = false;
                     dialogTrabajos.show();
