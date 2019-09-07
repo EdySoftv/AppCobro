@@ -47,7 +47,7 @@ public class TrabajosAdapter extends BaseAdapter {
     public static boolean stat;
     public static int ClaveTrabajo;
     public static int ftth=0;
-    public static  boolean retiro = false;
+    public static  boolean retiro = false, ISDIG;
     public static String descr;
     public static boolean rapg =false;
     public static ProgressDialog dialogTrabajos;
@@ -165,6 +165,7 @@ try{
             @Override
             public void onClick(View v) {
                 isnet=0;
+                ISDIG=false;
 
                 String palabra = holder.trabajo.getText().toString();
                 String[] caracteres = palabra.split(" ");
@@ -193,6 +194,7 @@ try{
                 }
                 if (caracteres[0].equals("ISDIG")) {
                     retiro = false;
+                    ISDIG=true;
                     dialogTrabajos.show();
                     try{
                         JSONObject jsonObject = new JSONObject();

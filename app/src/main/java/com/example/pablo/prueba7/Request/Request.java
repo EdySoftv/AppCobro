@@ -39,6 +39,7 @@ import com.example.pablo.prueba7.Adapters.EliminarMaterialAdapter;
 import com.example.pablo.prueba7.Adapters.GraficaAdapter;
 import com.example.pablo.prueba7.Adapters.OrdenesAdapter;
 import com.example.pablo.prueba7.Adapters.TablaAdapter;
+import com.example.pablo.prueba7.Adapters.TrabajosAdapter;
 import com.example.pablo.prueba7.Fragments.EjecutarOrdenes;
 import com.example.pablo.prueba7.Activitys.ExtensionesAdi;
 import com.example.pablo.prueba7.Fragments.EjecutarReportes;
@@ -1469,6 +1470,7 @@ public class Request extends AppCompatActivity {
             public void onResponse(Call<JSONTipoAparatos> call, Response<JSONTipoAparatos> response) {
                 if (response.code() == 200) {
                     array.tipoAparato.clear();
+                    array.tipoAparatoLetra.clear();
                     JSONTipoAparatos jsonResponse = response.body();
                     array.dataTipoAparatos = new ArrayList<List<GetMuestraTipoAparatoListResult>>(asList(jsonResponse.GetMuestraTipoAparatoListResult()));
                     Iterator<List<GetMuestraTipoAparatoListResult>> itData = array.dataTipoAparatos.iterator();
@@ -1477,6 +1479,7 @@ public class Request extends AppCompatActivity {
                         List<GetMuestraTipoAparatoListResult> dat = itData.next();
                         for (int i = 0; i < dat.size(); i++) {
                             array.tipoAparato.add(dat.get(i).getNombre());
+                            array.tipoAparatoLetra.add(dat.get(i).letra);
                         }
                     }
                     ArrayAdapter<String> adapter1 = new ArrayAdapter<String>(context, android.R.layout.simple_spinner_dropdown_item, array.tipoAparato);
@@ -1530,7 +1533,7 @@ public class Request extends AppCompatActivity {
     }
 
     //Servicios Aparatos//
-    public void getServiciosAparatos(final Context context, final JSONObject jsonObject, final ListView lista, final Button agregar) {
+    public void getServiciosAparatos(final Context context, final JSONObject jsonObject, final ListView lista, final String letra) {
         Call<JSONServiciosAparatos> call = services.RequestPost(context, jsonObject).getDataServiciosAparatos();
         call.enqueue(new Callback<JSONServiciosAparatos>() {
             @Override
@@ -1545,13 +1548,27 @@ public class Request extends AppCompatActivity {
                     Iterator<List<GetMuestraServiciosRelTipoAparatoListResult>> itData = array.dataserviciosAparatos.iterator();
                     while (itData.hasNext()) {
                         List<GetMuestraServiciosRelTipoAparatoListResult> dat = (List<GetMuestraServiciosRelTipoAparatoListResult>) itData.next();
-                        for (int i = 0; i < dat.size(); i++) {
-                            array.serviciosAparatos.add(dat.get(i).getNombre());
+                       if(TrabajosAdapter.ISDIG==true){
+                            if(letra.equals("T")||letra.equals("D")){
+                                for (int i = 0; i < dat.size(); i++) {
+                                    array.serviciosAparatos.add(dat.get(i).getNombre());
+                                    if(dat.get(i).clv_UnicaNet==ArbolAdapter.clv_unicaNet){
+                                        AsignarAparato.selectedStrings.add(dat.get(i).clv_UnicaNet);
+                                    }
+                                }
+                            }else{
+                                for (int i = 0; i < dat.size(); i++) {
+                                    array.serviciosAparatos.add(dat.get(i).getNombre());
+                                    AsignarAparato.selectedStrings.add(dat.get(i).clv_UnicaNet);
+                                }
+                            }
 
-                                AsignarAparato.selectedStrings.add(dat.get(i).clv_UnicaNet);
-
-
-                        }
+                       }else{
+                           for (int i = 0; i < dat.size(); i++) {
+                               array.serviciosAparatos.add(dat.get(i).getNombre());
+                               AsignarAparato.selectedStrings.add(dat.get(i).clv_UnicaNet);
+                           }
+                       }
                     }
                     ArrayAdapter arrayAdapter = new ArrayAdapter(context, android.R.layout.simple_list_item_checked, array.serviciosAparatos);
                     lista.setAdapter(arrayAdapter);

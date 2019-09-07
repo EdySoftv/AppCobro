@@ -142,6 +142,7 @@ public class AsignarAparato extends AppCompatActivity {
                 if (position != 0) {
                     Iterator<List<GetMuestraTipoAparatoListResult>> itdata = array.dataTipoAparatos.iterator();
                     List<GetMuestraTipoAparatoListResult> dat = itdata.next();
+
                     detalleSpinner = dat.get(position - 1).getCategoria();
 
                     //Request Aparatos Disponibles
@@ -157,7 +158,7 @@ public class AsignarAparato extends AppCompatActivity {
                     //Request Servicios
                     request.getServiciosAparatos(getApplicationContext(),
                             LlenarSpinnerTipoDeAparato(datos.getInt("Clv_UnicaNet"),datos.getInt("idMedio"),
-                                    dat.get(position-1).getIdArticulo()),serviciosAparato,agragar);
+                                    dat.get(position-1).getIdArticulo()),serviciosAparato,dat.get(position - 1).letra);
 
                     agragar.setEnabled(true);
                     agragar.setTextColor(Color.WHITE);

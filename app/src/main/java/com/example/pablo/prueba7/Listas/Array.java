@@ -66,6 +66,7 @@ public class Array {
     public static ArrayList <ArrayList<String>>children1=new ArrayList<ArrayList<String>>();
     public static ArrayList<String>medio=new ArrayList<>();
     public static ArrayList<String>tipoAparato=new ArrayList<>();
+    public static ArrayList<String>tipoAparatoLetra=new ArrayList<>();
     public static ArrayList<String>aparatoAsignacion=new ArrayList<>();
     public static ArrayList<String>aparatoDisponibles=new ArrayList<>();
     public static ArrayList<String>serviciosAparatos=new ArrayList<>();
