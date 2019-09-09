@@ -33,6 +33,7 @@
         <ImageView
             android:layout_width="50dp"
             android:layout_height="?attr/actionBarSize"
+            android:layout_marginEnd="8dp"
             android:src="@drawable/logo"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
