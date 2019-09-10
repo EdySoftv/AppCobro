@@ -9,6 +9,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,6 +24,8 @@ import com.example.pablo.prueba7.Activitys.Orden;
 import com.example.pablo.prueba7.Dibujo.Firma;
 import com.example.pablo.prueba7.Listas.Array;
 import com.example.pablo.prueba7.Modelos.DeepConsModel;
+import com.example.pablo.prueba7.Modelos.ObtieneNapModel;
+import com.example.pablo.prueba7.Modelos.ObtieneTapModel;
 import com.example.pablo.prueba7.R;
 import com.example.pablo.prueba7.Request.Request;
 import com.example.pablo.prueba7.sampledata.BarraCargar;
@@ -35,6 +38,8 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Iterator;
+import java.util.List;
 
 
 import static com.example.pablo.prueba7.Adapters.TrabajosAdapter.retiro;
@@ -53,11 +58,11 @@ public class EjecutarOrdenes extends Fragment {
     public static Button eject, firmar;
     public static String fechaHoy, horaHoy;
     public static View ejecutar;
-    public static TextView msgEjecutarOrd;
+    public static TextView msgEjecutarOrd,txtTap,txtNap;
     public static TextView tv_textTecSec;
     public static int añoE, mesE, diaE, horaE, minutoE;
     public static  int posTec,TecSecSelecc = -1;
-    public static Spinner TecSec;
+    public static Spinner TecSec,spinnerTap,spinnerNap;
     public HorasOrdenes horas = new HorasOrdenes();
     private Request request = new Request();
     public static ProgressDialog dialogEjecutar;
@@ -67,6 +72,10 @@ public class EjecutarOrdenes extends Fragment {
     Date objDate = new Date();
     DateFormat hourFormat = new SimpleDateFormat("HH:mm:ss");
     DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+
+    public static String ClavetecnicaN,ClavetecnicaT;
+    public static  int IdTapN,IdTapT;
+
 
     Inicio in;
     Button salir;
@@ -94,6 +103,11 @@ public class EjecutarOrdenes extends Fragment {
         TecSec = view.findViewById(R.id.spinnerTecnicoSec);
 //        reiniciar.setEnabled(false);
         salir = view.findViewById(R.id.salirEjecutarOrd);
+        spinnerNap = view.findViewById(R.id.spinnerNap);
+        spinnerTap = view.findViewById(R.id.spinnerTap);
+        txtNap = view.findViewById(R.id.txtNap);
+        txtTap = view.findViewById(R.id.txtTap);
+
         request.getTecSec(getContext(),TecSec);
         if(horas.visita == 1){
             firmar.setVisibility(View.GONE);
@@ -120,6 +134,47 @@ public class EjecutarOrdenes extends Fragment {
             firmar.setEnabled(true);
             firmar.setTextColor(Color.WHITE);
         }
+try{
+    request.getArbSerValidar(getContext(),spinnerTap,spinnerNap,txtNap,txtTap);
+}catch (Exception e){
+    Log.d("error","no hay instalacion");
+}
+try{
+    spinnerNap.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        @Override
+        public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+            Iterator<List<ObtieneNapModel>> itdatan = Array.dataNap.iterator();
+            List<ObtieneNapModel> datn = itdatan.next();
+            IdTapN=datn.get(position).getIdTap();
+            ClavetecnicaN=datn.get(position).getClavetecnica();
+        }
+
+        @Override
+        public void onNothingSelected(AdapterView<?> parent) {
+
+        }
+    });
+}catch (Exception e){}
+
+
+
+        try{
+            spinnerTap.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                @Override
+                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                    Iterator<List<ObtieneTapModel>> itdatat = Array.dataTap.iterator();
+                    List<ObtieneTapModel> datt = itdatat.next();
+                    IdTapT=datt.get(position).getIdTap();
+                    ClavetecnicaT=datt.get(position).getClavetecnica();
+                }
+
+                @Override
+                public void onNothingSelected(AdapterView<?> parent) {
+
+                }
+            });
+        }catch (Exception e){}
+
 
 
         fechaActual = (dateFormat.format(objDate)) + " " + (hourFormat.format(objDate));
@@ -267,12 +322,55 @@ public class EjecutarOrdenes extends Fragment {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 dialogEjecutar.show();
-                                Ejecutar();
+
+                                if(request.TAP==true){
+                                    if(spinnerTap.getSelectedItemPosition()!=0){
+                                        if(request.NAP==true){
+                                            if(spinnerNap.getSelectedItemPosition()!=0){
+                                                Ejecutar();
+                                                Intent intento = new Intent(getActivity(), Orden.class);
+                                                intento.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                                                startActivity(intento);
+                                                Toast.makeText(getActivity(), "Orden ejecutada.", Toast.LENGTH_LONG).show();
+                                            }else{
+                                                dialogEjecutar.dismiss();
+                                                Toast.makeText(getContext(),"Seleccione CTO", Toast.LENGTH_LONG).show();
+                                            }
+                                        }else{
+                                            Ejecutar();
+                                            Intent intento = new Intent(getActivity(), Orden.class);
+                                            intento.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                                            startActivity(intento);
+                                            Toast.makeText(getActivity(), "Orden ejecutada.", Toast.LENGTH_LONG).show();
+                                        }
+                                    }else{
+                                        dialogEjecutar.dismiss();
+                                        Toast.makeText(getContext(),"Seleccione Tap", Toast.LENGTH_LONG).show();
+                                    }
+                                }else{
+                                    if(request.NAP==true){
+                                        if(spinnerNap.getSelectedItemPosition()!=0){
+                                            Ejecutar();
+                                            Intent intento = new Intent(getActivity(), Orden.class);
+                                            intento.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                                            startActivity(intento);
+                                            Toast.makeText(getActivity(), "Orden ejecutada.", Toast.LENGTH_LONG).show();
+                                        }else{
+                                            dialogEjecutar.dismiss();
+                                            Toast.makeText(getContext(),"Seleccione CTO", Toast.LENGTH_LONG).show();
+                                        }
+                                    }else{
+                                        Ejecutar();
+                                        Intent intento = new Intent(getActivity(), Orden.class);
+                                        intento.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                                        startActivity(intento);
+                                        Toast.makeText(getActivity(), "Orden ejecutada.", Toast.LENGTH_LONG).show();
+                                    }
+                                }
+
+
                                 //request.getListOrd(getContext());
-                                Intent intento = new Intent(getActivity(), Orden.class);
-                                intento.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                                startActivity(intento);
-                                Toast.makeText(getActivity(), "Orden ejecutada.", Toast.LENGTH_LONG).show();
+
 
                             }
                         })
@@ -307,6 +405,33 @@ public class EjecutarOrdenes extends Fragment {
     public void Ejecutar(){
         JSONObject jsonObject = new JSONObject();
         JSONObject jsonObject1 = new JSONObject();
+
+        if(request.TAP==true){
+            try{
+                JSONObject jsonObject2 = new JSONObject();
+                JSONObject jsonObjectT = new JSONObject();
+                jsonObjectT.put("CONTRATO",request.ContratoReal);
+                jsonObjectT.put("TAP",ClavetecnicaT);
+                jsonObjectT.put("idtap",IdTapT);
+                jsonObject2.put("ObjTap",jsonObjectT);
+                request.guardaTap(getContext(),jsonObjectT);
+
+            }catch (Exception e){}
+        }
+        if(request.NAP==true){
+            try{
+                JSONObject jsonObject2 = new JSONObject();
+                JSONObject jsonObjectN = new JSONObject();
+                jsonObjectN.put("CONTRATO",request.ContratoReal);
+                jsonObjectN.put("TAP",ClavetecnicaN);
+                jsonObjectN.put("IDTAP",IdTapN);
+                jsonObject2.put("ObjNap",jsonObjectN);
+                request.guardaNap(getContext(),jsonObjectN);
+            }catch (Exception e){}
+        }
+
+
+
 
         if (horas.ejecutada == 1) {
 

@@ -167,6 +167,64 @@
               app:layout_constraintStart_toStartOf="@+id/salirEjecutarOrd"
               app:layout_constraintTop_toBottomOf="@+id/salirEjecutarOrd" />
 
+
+
+          <TextView
+              android:id="@+id/txtNap"
+              android:layout_width="0dp"
+              android:layout_height="wrap_content"
+              android:layout_marginStart="8dp"
+              android:layout_marginTop="16dp"
+              android:layout_marginEnd="8dp"
+              android:text="@string/NAP"
+              android:textSize="20dp"
+              android:textStyle="bold"
+              android:visibility="invisible"
+              app:layout_constraintEnd_toEndOf="parent"
+              app:layout_constraintHorizontal_bias="0.0"
+              app:layout_constraintStart_toStartOf="parent"
+              app:layout_constraintTop_toBottomOf="@+id/ejec" />
+
+          <Spinner
+              android:id="@+id/spinnerNap"
+              android:layout_width="0dp"
+              android:layout_height="wrap_content"
+              android:layout_marginStart="4dp"
+              android:layout_marginTop="8dp"
+              android:layout_marginEnd="8dp"
+              android:background="@drawable/disenio_spinner"
+              android:visibility="invisible"
+              app:layout_constraintEnd_toEndOf="@+id/txtNap"
+              app:layout_constraintStart_toStartOf="@+id/txtNap"
+              app:layout_constraintTop_toBottomOf="@+id/txtNap" />
+          <TextView
+              android:id="@+id/txtTap"
+              android:layout_width="0dp"
+              android:layout_height="wrap_content"
+              android:layout_marginStart="8dp"
+              android:layout_marginTop="16dp"
+              android:layout_marginEnd="8dp"
+              android:text="@string/TAP"
+              android:textSize="20dp"
+              android:textStyle="bold"
+              android:visibility="invisible"
+              app:layout_constraintEnd_toEndOf="parent"
+              app:layout_constraintHorizontal_bias="1.0"
+              app:layout_constraintStart_toStartOf="parent"
+              app:layout_constraintTop_toBottomOf="@+id/spinnerNap" />
+
+          <Spinner
+              android:id="@+id/spinnerTap"
+              android:layout_width="0dp"
+              android:layout_height="wrap_content"
+              android:layout_marginStart="4dp"
+              android:layout_marginTop="8dp"
+              android:layout_marginEnd="8dp"
+              android:background="@drawable/disenio_spinner"
+              android:visibility="invisible"
+              app:layout_constraintEnd_toEndOf="@+id/txtTap"
+              app:layout_constraintStart_toStartOf="@+id/txtTap"
+              app:layout_constraintTop_toBottomOf="@+id/txtTap" />
       </android.support.constraint.ConstraintLayout>
   </ScrollView>
 </FrameLayout>

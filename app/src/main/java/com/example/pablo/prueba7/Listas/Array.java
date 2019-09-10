@@ -25,6 +25,8 @@ import com.example.pablo.prueba7.Modelos.GetdameSerDELCliresumenResult;
 import com.example.pablo.prueba7.Modelos.GetuspBuscaContratoSeparado2ListResult;
 import com.example.pablo.prueba7.Modelos.ListadoQuejasAgendadas;
 import com.example.pablo.prueba7.Modelos.LlenaExtencionesModel;
+import com.example.pablo.prueba7.Modelos.ObtieneNapModel;
+import com.example.pablo.prueba7.Modelos.ObtieneTapModel;
 import com.example.pablo.prueba7.Modelos.OrdSer;
 import com.example.pablo.prueba7.Modelos.RequierePregunta;
 import com.example.pablo.prueba7.Modelos.dameTblPreDescargaMaterialResultModel;
@@ -117,7 +119,9 @@ public class Array {
     public static  ArrayList<List<RequierePregunta>> dataPregunta;
     public static ArrayList<String>medioPregunta=new ArrayList<>();
 
-
-
+    //TAP-NAP
+    public static  ArrayList<List<ObtieneNapModel>> dataNap;
+    public static  ArrayList<List<ObtieneTapModel>> dataTap;
+    public static ArrayList<String>ClvTenica=new ArrayList<>();
 
 }

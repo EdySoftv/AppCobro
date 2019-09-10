@@ -63,6 +63,7 @@ import com.example.pablo.prueba7.Listas.JSONCAMDO;
 import com.example.pablo.prueba7.Listas.JSONCLIAPA;
 import com.example.pablo.prueba7.Listas.JSONDescripcionArticulosBit;
 import com.example.pablo.prueba7.Listas.JSONDetalleBitacora;
+import com.example.pablo.prueba7.Listas.JSONGETNAP;
 import com.example.pablo.prueba7.Listas.JSONLlenaExtenciones;
 import com.example.pablo.prueba7.Listas.JSONMediosSer;
 import com.example.pablo.prueba7.Listas.JSONNombreTecnico;
@@ -75,6 +76,7 @@ import com.example.pablo.prueba7.Listas.JSONServicioAsignado;
 import com.example.pablo.prueba7.Listas.JSONServiciosAparatos;
 import com.example.pablo.prueba7.Listas.JSONSolucion;
 import com.example.pablo.prueba7.Listas.JSONStatusApa;
+import com.example.pablo.prueba7.Listas.JSONTAP;
 import com.example.pablo.prueba7.Listas.JSONTecSec;
 import com.example.pablo.prueba7.Listas.JSONTecSecReport;
 import com.example.pablo.prueba7.Listas.JSONTipoAparatos;
@@ -114,6 +116,8 @@ import com.example.pablo.prueba7.Modelos.GetuspBuscaContratoSeparado2ListResult;
 import com.example.pablo.prueba7.Modelos.InfoClienteModelo;
 import com.example.pablo.prueba7.Modelos.ListadoQuejasAgendadas;
 import com.example.pablo.prueba7.Modelos.LlenaExtencionesModel;
+import com.example.pablo.prueba7.Modelos.ObtieneNapModel;
+import com.example.pablo.prueba7.Modelos.ObtieneTapModel;
 import com.example.pablo.prueba7.Modelos.OrdSer;
 import com.example.pablo.prueba7.Modelos.RequierePregunta;
 import com.example.pablo.prueba7.Modelos.ValidaMACWAMMODEL;
@@ -214,15 +218,16 @@ import static com.example.pablo.prueba7.Services.Services.opcion;
 import static java.util.Arrays.asList;
 
 public class Request extends AppCompatActivity {
+    public static boolean NAP=false,TAP=false;
     Services services = new Services();
     Array array = new Array();
     public static String reintentarComando, contraroMA, obsMA, statusMA, extencionesE, Obs,ObsR, msgComando = "",problemaReal;
     public static boolean isnet, firma,MACWAM,validaExisteFirmaBool;
     public static Long abc;
-    public static int clvP, tecC, nExtenciones = 0,clvProblemarepo;
+    public static int clvP, tecC, nExtenciones = 0,clvProblemarepo,ContratoReal;
     public int reintentaB;
     public static String stringValidaTrabajos;
-    public static ArrayAdapter adapterTecSec, adapterTecSecR;
+    public static ArrayAdapter adapterTecSec, adapterTecSecR, adapterNap,adapterTap;
     public static boolean pieza = false, rapagejecutar = false, extencionesMat = false;
    public static int validFirma;
     public static String ciudadcmdo, localidadcmdo, coloniacmdo, callecmdo, numerocmdo, numeroicmdo, telefonocmdo, callencmdo, callescmdo, calleecmdo, calleocmdo, casacmdo;
@@ -231,7 +236,7 @@ public class Request extends AppCompatActivity {
     JsonObject jsonConsultaIp;
     String a = "Seleccione técnico secundario";
     String f = "Seleccione tipo de solución";
-    public static String datos[];
+    public static String datos[], datosTap[],datosNap[];
     BarraCargar barraCargar = new BarraCargar();
     public static boolean requierePregunta=false;
 
@@ -792,6 +797,9 @@ public class Request extends AppCompatActivity {
                         TryDeepConsulta1(userJson);
                     }
                     getTrabajos(context);
+
+                    ContratoReal= DeepConsModel.getContrato();
+
                     try {
                         contraroMA = (String.valueOf(DeepConsModel.getContatoCom()));
                     } catch (Exception e) {
@@ -1398,6 +1406,12 @@ public class Request extends AppCompatActivity {
                         List<GetMuestraArbolServiciosAparatosPorinstalarListResult> dat4 = (List<GetMuestraArbolServiciosAparatosPorinstalarListResult>) itData4.next();
                         for (int i = 0; i < dat4.size(); i++) {
                             array.nombreArbol.add(dat4.get(i).getNombre());
+                            if(dat4.get(i).IdMedio==1){
+                                TAP=true;
+                            }
+                            if(dat4.get(i).IdMedio==2){
+                                NAP=true;
+                            }
                         }
                     }
                     Intent intento25 = new Intent(context, ServiciosAInstalar.class);
@@ -1416,6 +1430,7 @@ public class Request extends AppCompatActivity {
             }
         });
     }
+    //Arbol Servicios//
 
     //Medios Servicios//
     public void getMedSer(final Context context, JSONObject jsonObject, final Spinner spinnerMedio,final int posicionArbol) {
@@ -3542,4 +3557,245 @@ try{
 
         });
     }
+
+    public void getArbSerValidar(final Context context,final Spinner spinnerTap,final Spinner spinnerNap, final TextView nap,final TextView tap) {
+        Service service = null;
+        try {
+            service = services.getArbolSerService(context);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        Call<JSONArbolServicios> call = service.getDataArbSer();
+        call.enqueue(new Callback<JSONArbolServicios>() {
+            @Override
+            public void onResponse(Call<JSONArbolServicios> call, Response<JSONArbolServicios> response) {
+                if (response.code() == 200) {
+
+                  try{
+                      array.nombreArbol.clear();
+                      JSONArbolServicios jsonResponse = response.body();
+                      array.dataArbSer = new ArrayList<List<GetMuestraArbolServiciosAparatosPorinstalarListResult>>(asList(jsonResponse.GetMuestraArbolServiciosAparatosPorinstalarListResult()));
+                      Iterator<List<GetMuestraArbolServiciosAparatosPorinstalarListResult>> itData4 = array.dataArbSer.iterator();
+                      while (itData4.hasNext()) {
+                          List<GetMuestraArbolServiciosAparatosPorinstalarListResult> dat4 = (List<GetMuestraArbolServiciosAparatosPorinstalarListResult>) itData4.next();
+                          for (int i = 0; i < dat4.size(); i++) {
+                              array.nombreArbol.add(dat4.get(i).getNombre());
+                              if(dat4.get(i).IdMedio==1){
+                                  TAP=true;
+                              }
+                              if(dat4.get(i).IdMedio==2){
+                                  NAP=true;
+                              }
+                          }
+                      }
+
+                      if(TAP==true){
+                          tap.setVisibility(View.VISIBLE);
+                          spinnerTap.setVisibility(View.VISIBLE);
+                          try{
+                              JSONObject jsonObject = new JSONObject();
+                              jsonObject.put("contrato",ContratoReal);
+                              getTap(context,jsonObject,spinnerTap);
+                          }catch (Exception e){}
+
+
+                      }else{
+                          tap.setVisibility(View.INVISIBLE);
+                          spinnerTap.setVisibility(View.INVISIBLE);
+                      }
+
+
+
+
+                      if(NAP==true){
+                          nap.setVisibility(View.VISIBLE);
+                          spinnerNap.setVisibility(View.VISIBLE);
+
+                          try{
+                              JSONObject jsonObject = new JSONObject();
+                              jsonObject.put("contrato",ContratoReal);
+                              getNapContrato(context,jsonObject,spinnerNap);
+                          }catch (Exception e){}
+
+
+                      }else{
+                          nap.setVisibility(View.INVISIBLE);
+                          spinnerNap.setVisibility(View.INVISIBLE);
+                      }
+                  }catch (Exception e){
+                      TAP=false;
+                      NAP=false;
+                  }
+                  } else {
+
+                        ErrorMensaje(context,"Error al conseguir datos de la instalacion "+response.message());
+                    }
+
+            }
+
+            @Override
+            public void onFailure(Call<JSONArbolServicios> call, Throwable t) {
+                ErrorMensaje(context,"Error "+t.getMessage());
+            }
+        });
+    }
+
+    public void getNap(final Context context, final JSONObject jsonObject, final Spinner spiner,final int Nap) {
+        Call<JSONGETNAP> call = services.RequestPost(context, jsonObject).getNAP();
+        call.enqueue(new Callback<JSONGETNAP>() {
+            @Override
+            public void onResponse(Call<JSONGETNAP> call, Response<JSONGETNAP> response) {
+                if (response.code() == 200) {
+
+                    JSONGETNAP jsonResponse = response.body();
+                    Array.dataNap = new ArrayList<>(asList(jsonResponse.obtieneNapModel()));
+                    Iterator<List<ObtieneNapModel>> itdata = Array.dataNap.iterator();
+                    List<ObtieneNapModel> dat = itdata.next();
+                    ArrayList<String>datos=new ArrayList<>();
+                        for (int i = 0; i < dat.size(); i++) {
+                            datos.add(dat.get(i).getClavetecnica());
+                        }
+                        adapterNap = new ArrayAdapter<String>(context, android.R.layout.simple_spinner_dropdown_item, datos);
+                        spiner.setAdapter(adapterNap);
+
+                        if(Nap==0){
+
+                        }else{
+                            int position=0;
+                            for(int i=0; i<dat.size(); i++){
+                                if(dat.get(i).IdTap==(Nap)){
+                                    position = i;
+                                }
+                            }
+                            spiner.setSelection(position);
+
+                        }
+
+                } else {
+                    ErrorMensaje(context,"Error al conseguir lista de técnicos secundarios "+response.message());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<JSONGETNAP> call, Throwable t) {
+                ErrorMensaje(context,"Error "+t.getMessage());
+            }
+        });
+    }
+
+    public void getTap(final Context context, final JSONObject jsonObject, final Spinner spiner) {
+        Call<JSONTAP> call = services.RequestPost(context, jsonObject).getTap();
+        call.enqueue(new Callback<JSONTAP>() {
+            @Override
+            public void onResponse(Call<JSONTAP> call, Response<JSONTAP> response) {
+                if (response.code() == 200) {
+                    JSONTAP jsonResponse = response.body();
+
+                    Array.dataTap = new ArrayList<>(asList(jsonResponse.obtieneTapModel()));
+                    Iterator<List<ObtieneTapModel>> itdata = Array.dataTap.iterator();
+                    ArrayList<String>datos=new ArrayList<>();
+                    while (itdata.hasNext()) {
+                        List<ObtieneTapModel> dat = itdata.next();
+
+                        for (int i = 0; i < dat.size(); i++) {
+                            datos.add(dat.get(i).getClavetecnica());
+                        }
+                        adapterTap = new ArrayAdapter<String>(context, android.R.layout.simple_spinner_dropdown_item, datos);
+                        spiner.setAdapter(adapterTap);
+
+
+                    }
+                } else {
+                    ErrorMensaje(context,"Error al conseguir lista de técnicos secundarios "+response.message());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<JSONTAP> call, Throwable t) {
+                ErrorMensaje(context,"Error "+t.getMessage());
+            }
+        });
+    }
+
+    public void getNapContrato(final Context context, final JSONObject jsonObject, final Spinner spiner) {
+        Call<JsonObject> call = services.RequestPost(context, jsonObject).getNapCpntrato();
+        call.enqueue(new Callback<JsonObject>() {
+            @Override
+            public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
+                if (response.code() == 200) {
+                    String dato;
+                    dato = String.valueOf(response.body().getAsJsonPrimitive("GetObtieneNapContratoResult"));
+                    if (dato.equals("0")) {
+                        try{
+                            JSONObject jsonObject = new JSONObject();
+                            jsonObject.put("contrato",ContratoReal);
+                            getNap(context,jsonObject,spiner,Integer.parseInt(dato));
+                        }catch (Exception e){}
+                    }else{
+                        try{
+                            JSONObject jsonObject = new JSONObject();
+                            jsonObject.put("contrato",ContratoReal);
+                            getNap(context,jsonObject,spiner,Integer.parseInt(dato));
+                        }catch (Exception e){}
+                    }
+                } else {
+                    ErrorMensaje(context,"Error al conseguir lista de técnicos secundarios "+response.message());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<JsonObject> call, Throwable t) {
+                ErrorMensaje(context,"Error "+t.getMessage());
+            }
+        });
+    }
+    public void guardaNap(final Context context, final JSONObject jsonObject) {
+        Call<JsonObject> call = services.RequestPost(context, jsonObject).guardaNAP();
+        call.enqueue(new Callback<JsonObject>() {
+            @Override
+            public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
+                if (response.code() == 200) {
+                    String dato="0";
+                    if (dato.equals("0")) {
+                        Log.d("guardo","si");
+                    }else{
+                        Log.d("guardo","no");
+                    }
+                } else {
+                    ErrorMensaje(context,"Error al conseguir lista de técnicos secundarios "+response.message());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<JsonObject> call, Throwable t) {
+                ErrorMensaje(context,"Error "+t.getMessage());
+            }
+        });
+    }
+
+    public void guardaTap(final Context context, final JSONObject jsonObject) {
+        Call<JsonObject> call = services.RequestPost(context, jsonObject).guardaNAP();
+        call.enqueue(new Callback<JsonObject>() {
+            @Override
+            public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
+                if (response.code() == 200) {
+                    String dato="0";
+                    if (dato.equals("0")) {
+                        Log.d("guardo","si");
+                    }else{
+                        Log.d("guardo","no");
+                    }
+                } else {
+                    ErrorMensaje(context,"Error al conseguir lista de técnicos secundarios "+response.message());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<JsonObject> call, Throwable t) {
+                ErrorMensaje(context,"Error "+t.getMessage());
+            }
+        });
+    }
+
+
 }

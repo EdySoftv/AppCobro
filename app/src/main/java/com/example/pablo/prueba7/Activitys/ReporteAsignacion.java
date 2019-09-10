@@ -51,6 +51,7 @@ public class ReporteAsignacion extends AppCompatActivity {
     public static ProgressDialog dialogReporteAsignacion;
     public static boolean guardarAparatosProgresBar=false;
 
+
     public static ArbolAdapter adapterReporte;
 
     @Override

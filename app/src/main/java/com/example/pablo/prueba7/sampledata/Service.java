@@ -14,6 +14,7 @@ import com.example.pablo.prueba7.Listas.JSONCLIAPA;
 import com.example.pablo.prueba7.Listas.JSONClasificacionProblm;
 import com.example.pablo.prueba7.Listas.JSONDescripcionArticulosBit;
 import com.example.pablo.prueba7.Listas.JSONDetalleBitacora;
+import com.example.pablo.prueba7.Listas.JSONGETNAP;
 import com.example.pablo.prueba7.Listas.JSONLlenaExtenciones;
 import com.example.pablo.prueba7.Listas.JSONMediosSer;
 import com.example.pablo.prueba7.Listas.JSONNombreTecnico;
@@ -27,6 +28,7 @@ import com.example.pablo.prueba7.Listas.JSONServicioAsignado;
 import com.example.pablo.prueba7.Listas.JSONServiciosAparatos;
 import com.example.pablo.prueba7.Listas.JSONSolucion;
 import com.example.pablo.prueba7.Listas.JSONStatusApa;
+import com.example.pablo.prueba7.Listas.JSONTAP;
 import com.example.pablo.prueba7.Listas.JSONTecSec;
 import com.example.pablo.prueba7.Listas.JSONTecSecReport;
 import com.example.pablo.prueba7.Listas.JSONTipoAparatos;
@@ -195,6 +197,21 @@ public interface Service {
     @POST(Constants.URL_VALIDA_EXISTE_FIRMA)
     Call<JsonObject> validaExisteFirma();
 
+
+    /////NAP///////
+    @POST(Constants.URL_GET_NAP)
+    Call<JSONGETNAP> getNAP();
+    @POST(Constants.URL_GET_NAP_CONTRATO)
+    Call<JsonObject> getNapCpntrato();
+    @POST(Constants.URL_GUARDA_NAP)
+    Call<JsonObject> guardaNAP();
+
+    //TAP
+    @POST(Constants.URL_GET_TAP)
+    Call<JSONTAP> getTap();
+
+    @POST(Constants.URL_GUARDA_TAP)
+    Call<JsonObject> guardaTap();
 
 }
 
