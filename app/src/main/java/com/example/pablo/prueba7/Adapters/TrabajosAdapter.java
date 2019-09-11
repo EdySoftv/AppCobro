@@ -44,10 +44,10 @@ public class TrabajosAdapter extends BaseAdapter {
     public static int Clave, isnet,clvTra;
     public String observacionesRwtiro;
     public static  int lugar;
-    public static boolean stat;
+    public static boolean stat, validarCoordenadas=false;
     public static int ClaveTrabajo;
     public static int ftth=0;
-    public static  boolean retiro = false, ISDIG;
+    public static  boolean retiro = false, ISDIG=false;
     public static String descr;
     public static boolean rapg =false;
     public static ProgressDialog dialogTrabajos;
@@ -138,6 +138,8 @@ try{
         List<GetBUSCADetOrdSerListResult> dat1 = (List<GetBUSCADetOrdSerListResult>) itData1.next();
 
 
+
+
         if(holder.recibi.isChecked()){
             dat1.get(position).setSeRealiza(true);
             recibixnew=new ArrayList<>();
@@ -174,6 +176,7 @@ try{
                 Request request = new Request();
                 //Instalacion
                 if (caracteres[0].equals("ISTVA")) {
+                    validarCoordenadas=true;
                     retiro = false;
                     dialogTrabajos.show();
                     try{
@@ -183,6 +186,7 @@ try{
                     }catch (Exception e){}
                 }
                 if (caracteres[0].equals("ISNET")) {
+                    validarCoordenadas=true;
                     retiro = false;
                     dialogTrabajos.show();
                     try{
@@ -193,6 +197,7 @@ try{
                     isnet=1;
                 }
                 if (caracteres[0].equals("ISDIG")) {
+                    validarCoordenadas=true;
                     retiro = false;
                     ISDIG=true;
                     dialogTrabajos.show();
@@ -203,6 +208,7 @@ try{
                     }catch (Exception e){}
                 }
                 if (caracteres[0].equals("CTCTV")) {
+                    validarCoordenadas=true;
                     retiro = false;
                     dialogTrabajos.show();
                     try{
@@ -212,6 +218,7 @@ try{
                     }catch (Exception e){}
                 }
                 if (caracteres[0].equals("CTCIN")) {
+                    validarCoordenadas=true;
                     retiro = false;
                     dialogTrabajos.show();
                     try{
@@ -221,6 +228,7 @@ try{
                     }catch (Exception e){}
                 }
                 if (caracteres[0].equals("CTCDG")) {
+                    validarCoordenadas=true;
                     retiro = false;
                     dialogTrabajos.show();
                     try{
@@ -230,6 +238,7 @@ try{
                     }catch (Exception e){}
                 }
                 if (caracteres[0].equals("RSTVA")) {
+                    validarCoordenadas=true;
                     retiro = false;
                     dialogTrabajos.show();
                     try{
@@ -239,6 +248,7 @@ try{
                     }catch (Exception e){}
                 }
                 if (caracteres[0].equals("RSNET")) {
+                    validarCoordenadas=true;
                     retiro = false;
                     dialogTrabajos.show();
                     try{
@@ -248,6 +258,7 @@ try{
                     }catch (Exception e){}
                 }
                 if (caracteres[0].equals("RSDIG")) {
+                    validarCoordenadas=true;
                     retiro = false;
                     dialogTrabajos.show();
                     try{
@@ -260,6 +271,7 @@ try{
 
                 //Cambio Aparato
                 if (caracteres[0].equals("CAPAG")) {
+                    validarCoordenadas=false;
                     retiro = false;
                     dialogTrabajos.show();
                     Intent intento = new Intent(Cmcontext, CambioAparato.class);
@@ -268,6 +280,7 @@ try{
                     Cmcontext.startActivity(intento);
                 }
                 if (caracteres[0].equals("CAPAT")) {
+                    validarCoordenadas=false;
                     retiro = false;
                     dialogTrabajos.show();
                     Intent intento = new Intent(Cmcontext, CambioAparato.class);
@@ -278,6 +291,7 @@ try{
 
                 //Cambio Domicilio
                 if (caracteres[0].equals("CAMDO")) {
+                    validarCoordenadas=true;
                     retiro = false;
                     dialogTrabajos.show();
                     request.getCAMDO(Cmcontext);
@@ -285,6 +299,7 @@ try{
 
                 //Extenciones Adicionales
                 if (caracteres[0].equals("CONEX")) {
+                    validarCoordenadas=false;
                     retiro = false;
                     dialogTrabajos.show();
                     request.getExtencionesAdicionales(Cmcontext);

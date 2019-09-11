@@ -21,6 +21,7 @@ import android.widget.Toast;
 
 import com.example.pablo.prueba7.Activitys.Inicio;
 import com.example.pablo.prueba7.Activitys.Orden;
+import com.example.pablo.prueba7.Adapters.TrabajosAdapter;
 import com.example.pablo.prueba7.Dibujo.Firma;
 import com.example.pablo.prueba7.Listas.Array;
 import com.example.pablo.prueba7.Modelos.DeepConsModel;
@@ -134,6 +135,15 @@ public class EjecutarOrdenes extends Fragment {
             firmar.setEnabled(true);
             firmar.setTextColor(Color.WHITE);
         }
+
+        try{
+            JSONObject jsonObject = new JSONObject();
+            jsonObject.put("clvOrden",DeepConsModel.Clv_Orden);
+            jsonObject.put("clvReporte",0);
+            request.validaExisteFirma(getContext(),jsonObject,getActivity());
+        }catch (Exception e){}
+
+
 try{
     request.getArbSerValidar(getContext(),spinnerTap,spinnerNap,txtNap,txtTap);
 }catch (Exception e){
@@ -206,13 +216,6 @@ try{
 
 
                 observacionesTecnico = obsTec.getText().toString();
-
-                try{
-                    JSONObject jsonObject = new JSONObject();
-                    jsonObject.put("clvOrden",DeepConsModel.Clv_Orden);
-                    jsonObject.put("clvReporte",0);
-                    request.validaExisteFirma(getContext(),jsonObject,getActivity());
-                }catch (Exception e){}
 
                             if(horas.ejecutada==1){
                                 if(request.firma==true){
@@ -323,50 +326,18 @@ try{
                             public void onClick(DialogInterface dialog, int which) {
                                 dialogEjecutar.show();
 
-                                if(request.TAP==true){
-                                    if(spinnerTap.getSelectedItemPosition()!=0){
-                                        if(request.NAP==true){
-                                            if(spinnerNap.getSelectedItemPosition()!=0){
-                                                Ejecutar();
-                                                Intent intento = new Intent(getActivity(), Orden.class);
-                                                intento.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                                                startActivity(intento);
-                                                Toast.makeText(getActivity(), "Orden ejecutada.", Toast.LENGTH_LONG).show();
-                                            }else{
-                                                dialogEjecutar.dismiss();
-                                                Toast.makeText(getContext(),"Seleccione CTO", Toast.LENGTH_LONG).show();
-                                            }
-                                        }else{
-                                            Ejecutar();
-                                            Intent intento = new Intent(getActivity(), Orden.class);
-                                            intento.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                                            startActivity(intento);
-                                            Toast.makeText(getActivity(), "Orden ejecutada.", Toast.LENGTH_LONG).show();
-                                        }
+                                if(TrabajosAdapter.validarCoordenadas==true){
+                                    if(HorasOrdenes.cordLat.getText().equals("---")||HorasOrdenes.cordLong.getText().equals("---")){
+                                        dialogoCoordenadas();
                                     }else{
-                                        dialogEjecutar.dismiss();
-                                        Toast.makeText(getContext(),"Seleccione Tap", Toast.LENGTH_LONG).show();
+                                        ValidarEjecutarTAPNAP();
                                     }
                                 }else{
-                                    if(request.NAP==true){
-                                        if(spinnerNap.getSelectedItemPosition()!=0){
-                                            Ejecutar();
-                                            Intent intento = new Intent(getActivity(), Orden.class);
-                                            intento.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                                            startActivity(intento);
-                                            Toast.makeText(getActivity(), "Orden ejecutada.", Toast.LENGTH_LONG).show();
-                                        }else{
-                                            dialogEjecutar.dismiss();
-                                            Toast.makeText(getContext(),"Seleccione CTO", Toast.LENGTH_LONG).show();
-                                        }
-                                    }else{
-                                        Ejecutar();
-                                        Intent intento = new Intent(getActivity(), Orden.class);
-                                        intento.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                                        startActivity(intento);
-                                        Toast.makeText(getActivity(), "Orden ejecutada.", Toast.LENGTH_LONG).show();
-                                    }
+                                    ValidarEjecutarTAPNAP();
                                 }
+
+
+
 
 
                                 //request.getListOrd(getContext());
@@ -382,7 +353,41 @@ try{
                             }
                         }).show();
     }
+    public void ValidarEjecutarTAPNAP(){
+        if(request.TAP==true){
+            if(spinnerTap.getSelectedItemPosition()!=0){
+                if(request.NAP==true){
+                    if(spinnerNap.getSelectedItemPosition()!=0){
+                        Ejecutar();
+                    }else{
+                        dialogEjecutar.dismiss();
+                        Toast.makeText(getContext(),"Seleccione CTO", Toast.LENGTH_LONG).show();
+                    }
+                }else{
+                    Ejecutar();
+                }
+            }else{
+                dialogEjecutar.dismiss();
+                Toast.makeText(getContext(),"Seleccione Tap", Toast.LENGTH_LONG).show();
+            }
+        }else{
+            if(request.NAP==true){
+                if(spinnerNap.getSelectedItemPosition()!=0){
+                    Ejecutar();
+                    Intent intento = new Intent(getActivity(), Orden.class);
+                    intento.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    startActivity(intento);
+                    Toast.makeText(getActivity(), "Orden ejecutada.", Toast.LENGTH_LONG).show();
+                }else{
+                    dialogEjecutar.dismiss();
+                    Toast.makeText(getContext(),"Seleccione CTO", Toast.LENGTH_LONG).show();
+                }
+            }else{
+                Ejecutar();
 
+            }
+        }
+    }
     private void dialogoRequiereFirma() {
         new AlertDialog.Builder(getContext())
                 .setTitle("ADVERTENCIA")
@@ -401,6 +406,27 @@ try{
                             }
                         }).show();
     }
+
+    private void dialogoCoordenadas() {
+        new AlertDialog.Builder(getContext())
+                .setTitle("ADVERTENCIA")
+                .setMessage("Las coordenadas no se han registrado ¿Desea seguir ejecutando?")
+                .setPositiveButton("Ejecutar",
+                        new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                ValidarEjecutarTAPNAP();
+                            }
+                        })
+                .setNegativeButton("NO Ejecutar",
+                        new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialogEjecutar.dismiss();
+                            }
+                        }).show();
+    }
+
 
     public void Ejecutar(){
         JSONObject jsonObject = new JSONObject();

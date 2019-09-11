@@ -112,57 +112,6 @@
                 app:layout_constraintEnd_toEndOf="@+id/tv_textTecSec"
                 app:layout_constraintStart_toStartOf="@+id/tv_textTecSec"
                 app:layout_constraintTop_toBottomOf="@+id/tv_textTecSec" />
-
-            <Button
-                android:id="@+id/salirEjecutarOrd"
-                android:layout_width="100dp"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/animado9"
-                android:layout_centerHorizontal="true"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="24dp"
-                android:layout_marginEnd="8dp"
-                android:background="@drawable/boton"
-                android:backgroundTint="@color/colorPrimary"
-                android:text="@string/salir"
-                android:textColor="#fff"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.49"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/spinnerTecnicoSec" />
-            <!--app:layout_constraintTop_toBottomOf="@+id/ejecutarLay" -->
-
-            <Button
-                android:id="@+id/firmarOrd"
-                android:layout_width="100dp"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/salirEjecutarOrd"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="16dp"
-                android:background="@drawable/boton"
-                android:backgroundTint="@color/colorPrimary"
-                android:text="@string/firmar"
-                android:textColor="#fff"
-                android:visibility="gone"
-                app:layout_constraintEnd_toEndOf="@+id/salirEjecutarOrd"
-                app:layout_constraintStart_toStartOf="@+id/salirEjecutarOrd"
-                app:layout_constraintTop_toBottomOf="@+id/salirEjecutarOrd" />
-            <Button
-                android:id="@+id/ejec"
-                android:layout_width="100dp"
-                android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="8dp"
-                android:background="@drawable/boton"
-                android:backgroundTint="@color/colorPrimary"
-                android:enabled="true"
-                android:text="@string/guardar"
-                android:textColor="#fff"
-                app:layout_constraintEnd_toEndOf="@+id/firmarOrd"
-                app:layout_constraintStart_toStartOf="@+id/firmarOrd"
-                app:layout_constraintTop_toBottomOf="@+id/firmarOrd" />
-
-
             <TextView
                 android:id="@+id/txtNap"
                 android:layout_width="0dp"
@@ -219,6 +168,57 @@
                 app:layout_constraintEnd_toEndOf="@+id/txtTap"
                 app:layout_constraintStart_toStartOf="@+id/txtTap"
                 app:layout_constraintTop_toBottomOf="@+id/txtTap" />
+            <Button
+                android:id="@+id/salirEjecutarOrd"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/animado9"
+                android:layout_centerHorizontal="true"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="24dp"
+                android:layout_marginEnd="8dp"
+                android:background="@drawable/boton"
+                android:backgroundTint="@color/colorPrimary"
+                android:text="@string/salir"
+                android:textColor="#fff"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.49"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/spinnerTecnicoSec" />
+            <!--app:layout_constraintTop_toBottomOf="@+id/ejecutarLay" -->
+
+            <Button
+                android:id="@+id/firmarOrd"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/salirEjecutarOrd"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/boton"
+                android:backgroundTint="@color/colorPrimary"
+                android:text="@string/firmar"
+                android:textColor="#fff"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="@+id/salirEjecutarOrd"
+                app:layout_constraintStart_toStartOf="@+id/salirEjecutarOrd"
+                app:layout_constraintTop_toBottomOf="@+id/salirEjecutarOrd" />
+            <Button
+                android:id="@+id/ejec"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/boton"
+                android:backgroundTint="@color/colorPrimary"
+                android:enabled="true"
+                android:text="@string/guardar"
+                android:textColor="#fff"
+                app:layout_constraintEnd_toEndOf="@+id/firmarOrd"
+                app:layout_constraintStart_toStartOf="@+id/firmarOrd"
+                app:layout_constraintTop_toBottomOf="@+id/firmarOrd" />
+
+
+
 
 
 
