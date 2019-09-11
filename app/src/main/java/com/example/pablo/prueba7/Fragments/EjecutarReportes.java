@@ -105,7 +105,12 @@ public class EjecutarReportes extends Fragment {
         if (HorasReportes.reporteEjecutada == 0) {
             firmaRep.setVisibility(View.GONE);
         }
-
+        try{
+            JSONObject jsonObject = new JSONObject();
+            jsonObject.put("clvOrden",0);
+            jsonObject.put("clvReporte", Util.getClvQueja(Util.preferences));
+            request.validaExisteFirma(getContext(),jsonObject,getActivity());
+        }catch (Exception e){}
 
 
        //final  String month;  //6565656fdgsdfg
@@ -145,12 +150,6 @@ public class EjecutarReportes extends Fragment {
         eject.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                try{
-                    JSONObject jsonObject = new JSONObject();
-                    jsonObject.put("clvOrden",0);
-                    jsonObject.put("clvReporte", Util.getClvQueja(Util.preferences));
-                    request.validaExisteFirma(getContext(),jsonObject,getActivity());
-                }catch (Exception e){}
 
                         if(validaExisteFirmaBool == true){
                             dialogoEjecutar(getContext());
