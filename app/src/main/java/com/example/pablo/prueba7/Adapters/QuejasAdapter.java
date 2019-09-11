@@ -39,7 +39,7 @@ public class QuejasAdapter extends RecyclerView.Adapter<QuejasAdapter.QuejaViewH
     public  Request request = new Request();
 
     public static  class QuejaViewHolder extends  RecyclerView.ViewHolder{
-        TextView statusq,contratoq,nombreq,direccion,quejaq,control,noOrden;
+        TextView statusq,contratoq,nombreq,direccion,quejaq,control,noOrden,txtnap,txttap,txttrabajo,napordenes,tapordenes,trabajoordenes;
         public QuejaViewHolder( View v) {
             super(v);
 
@@ -50,7 +50,12 @@ public class QuejasAdapter extends RecyclerView.Adapter<QuejasAdapter.QuejaViewH
             direccion=(TextView)itemView.findViewById(R.id.id_direccion);
             control=(TextView)itemView.findViewById(R.id.controla);
             noOrden=itemView.findViewById(R.id.noOrden);
-
+            txtnap = itemView.findViewById(R.id.txtNap);
+            txttap = itemView.findViewById(R.id.txtTap);
+            txttrabajo = itemView.findViewById(R.id.txtTrabajo);
+            napordenes = itemView.findViewById(R.id.id_NapOrdenes);
+            tapordenes = itemView.findViewById(R.id.id_TapOrdenes);
+            trabajoordenes = itemView.findViewById(R.id.id_TrabajoOrdenes);
 
         }
     }
@@ -74,6 +79,13 @@ public class QuejasAdapter extends RecyclerView.Adapter<QuejasAdapter.QuejaViewH
 
     @Override
     public void onBindViewHolder(QuejaViewHolder viewHolder, final int position) {
+
+        viewHolder.txtnap.setVisibility(View.GONE);
+        viewHolder.napordenes.setVisibility(View.GONE);
+        viewHolder.txttap.setVisibility(View.GONE);
+        viewHolder.tapordenes.setVisibility(View.GONE);
+        viewHolder.txttrabajo.setVisibility(View.GONE);
+        viewHolder.trabajoordenes.setVisibility(View.GONE);
 
         viewHolder.noOrden.setText("No. de Reporte");
         viewHolder.nombreq.setText(Array.nombreQ.get(position));
