@@ -33,8 +33,30 @@ public class GetDameListadoOrdenesAgendadasResult {
     @Expose
     private String colonia;
 
+    @SerializedName("Nap")
+    @Expose
+    private String Nap;
+
+    @SerializedName("Tab")
+    @Expose
+    private String Tab;
+
+    @SerializedName("descripcion")
+    @Expose
+    private String descripcion;
 
 
+    public String getNap() {
+        return Nap;
+    }
+
+    public String getTab() {
+        return Tab;
+    }
+
+    public String getDescripcion() {
+        return descripcion;
+    }
 
     public Integer getClvOrden() {
         return clvOrden;

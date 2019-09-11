@@ -156,7 +156,9 @@
     <string name="guardar">Guardar</string>
     <string name="NAP">CTO</string>
     <string name="TAP">TAP</string>
-
+    <string name="NAPdos">CTO:</string>
+    <string name="TAPdos">TAP:</string>
+    <string name="trabajodos">Trabajo:</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>

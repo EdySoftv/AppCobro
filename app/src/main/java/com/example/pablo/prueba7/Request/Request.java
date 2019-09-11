@@ -747,12 +747,18 @@ public class Request extends AppCompatActivity {
                         Array.nombresrc.clear();
                         Array.statusrc.clear();
                         Array.contratosrc.clear();
+                        Array.napsrc.clear();
+                        Array.tapsrc.clear();
+                        Array.trabajosrc.clear();
                         for (int i = 0; i < dat.size(); i++) {
                             Array.ordensrc.add(String.valueOf(dat.get(i).getClvOrden()));
                             Array.contratosrc.add(String.valueOf(dat.get(i).getContrato()));
                             Array.nombresrc.add(String.valueOf(dat.get(i).getNombre()));
                             Array.statusrc.add(String.valueOf(dat.get(i).getStatus()));
                             Array.direccionsrc.add(String.valueOf(dat.get(i).getCalle() + ", " + dat.get(i).getNumero() + ", " + dat.get(i).getColonia()));
+                            Array.napsrc.add(dat.get(i).getNap());
+                            Array.tapsrc.add(dat.get(i).getTab());
+                            Array.trabajosrc.add(dat.get(i).getDescripcion());
                         }
                     }
                     if (ordensrc.size() == 0 && statusBusquedaOrden == true){

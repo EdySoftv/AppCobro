@@ -63,8 +63,8 @@
 
         <TextView
             android:id="@+id/controla"
-            android:layout_width="399dp"
-            android:layout_height="160dp"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.473"
@@ -164,6 +164,101 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/txt"
             app:layout_constraintTop_toBottomOf="@+id/tv_Nombre" />
+
+
+        <TextView
+            android:id="@+id/txtNap"
+            android:layout_width="70dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:text="@string/NAPdos"
+            android:textSize="14dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/controla"
+            app:layout_constraintTop_toBottomOf="@+id/id_direccion"
+            tools:visibility="gone" />
+
+        <TextView
+            android:id="@+id/id_NapOrdenes"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:textSize="14dp"
+            app:layout_constraintEnd_toEndOf="@+id/controla"
+            app:layout_constraintStart_toEndOf="@+id/txt"
+            app:layout_constraintTop_toBottomOf="@+id/id_direccion"
+            tools:visibility="gone" />
+
+        <TextView
+            android:id="@+id/txtTap"
+            android:layout_width="70dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:text="@string/TAPdos"
+            android:textSize="14dp"
+            android:visibility="visible"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/controla"
+            app:layout_constraintTop_toBottomOf="@+id/id_NapOrdenes"
+            tools:visibility="gone" />
+
+        <TextView
+            android:id="@+id/id_TapOrdenes"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:textSize="14dp"
+            android:visibility="visible"
+            app:layout_constraintEnd_toEndOf="@+id/controla"
+            app:layout_constraintStart_toEndOf="@+id/txt"
+            app:layout_constraintTop_toBottomOf="@+id/id_NapOrdenes"
+            tools:visibility="gone" />
+
+        <TextView
+            android:id="@+id/txtTrabajo"
+            android:layout_width="70dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:text="@string/trabajodos"
+            android:textSize="14dp"
+            android:visibility="visible"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/controla"
+            app:layout_constraintTop_toBottomOf="@+id/id_TapOrdenes"
+            tools:visibility="gone" />
+
+        <TextView
+            android:id="@+id/id_TrabajoOrdenes"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:textSize="14dp"
+            android:visibility="visible"
+            app:layout_constraintEnd_toEndOf="@+id/controla"
+            app:layout_constraintStart_toEndOf="@+id/txt"
+            app:layout_constraintTop_toBottomOf="@+id/id_TapOrdenes"
+            tools:visibility="gone" />
 
     </android.support.constraint.ConstraintLayout>
 </android.support.v7.widget.CardView>

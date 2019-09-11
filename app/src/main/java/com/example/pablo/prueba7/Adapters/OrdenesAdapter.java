@@ -38,7 +38,7 @@ public class OrdenesAdapter extends RecyclerView.Adapter<OrdenesAdapter.ordensrc
 
 
     public static  class ordensrcViewHolder extends  RecyclerView.ViewHolder{
-        private TextView status,contrato1,nombre,direccionOrd,orden,control,noOrden;
+        private TextView status,contrato1,nombre,direccionOrd,orden,control,noOrden,txtnap,txttap,txttrabajo,napordenes,tapordenes,trabajoordenes;
         public ordensrcViewHolder( View v) {
             super(v);
             status=(TextView)itemView.findViewById(R.id.tv_estatus);
@@ -48,6 +48,12 @@ public class OrdenesAdapter extends RecyclerView.Adapter<OrdenesAdapter.ordensrc
             direccionOrd=(TextView)itemView.findViewById(R.id.id_direccion);
             control=(TextView)itemView.findViewById(R.id.controla);
             noOrden=itemView.findViewById(R.id.noOrden);
+            txtnap = itemView.findViewById(R.id.txtNap);
+            txttap = itemView.findViewById(R.id.txtTap);
+            txttrabajo = itemView.findViewById(R.id.txtTrabajo);
+            napordenes = itemView.findViewById(R.id.id_NapOrdenes);
+            tapordenes = itemView.findViewById(R.id.id_TapOrdenes);
+            trabajoordenes = itemView.findViewById(R.id.id_TrabajoOrdenes);
         }
     }
 
@@ -84,6 +90,27 @@ public class OrdenesAdapter extends RecyclerView.Adapter<OrdenesAdapter.ordensrc
         viewHolder.contrato1.setText(Array.contratosrc.get(position));
         viewHolder.status.setText(Array.statusrc.get(position));
         viewHolder.direccionOrd.setText(Array.direccionsrc.get(position));
+
+        viewHolder.trabajoordenes.setText(Array.trabajosrc.get(position));
+
+        if(Array.napsrc.get(position).equals("")||Array.napsrc.get(position).equals(null)){
+            viewHolder.txtnap.setVisibility(View.GONE);
+            viewHolder.napordenes.setVisibility(View.GONE);
+        }else{
+            viewHolder.txtnap.setVisibility(View.VISIBLE);
+            viewHolder.napordenes.setVisibility(View.VISIBLE);
+            viewHolder.napordenes.setText(Array.napsrc.get(position));
+        }
+
+        if(Array.tapsrc.get(position).equals("")||Array.tapsrc.get(position).equals(null)){
+            viewHolder.txttap.setVisibility(View.GONE);
+            viewHolder.tapordenes.setVisibility(View.GONE);
+        }else{
+            viewHolder.txttap.setVisibility(View.VISIBLE);
+            viewHolder.tapordenes.setVisibility(View.VISIBLE);
+            viewHolder.tapordenes.setText(Array.tapsrc.get(position));
+        }
+
         viewHolder.control.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
