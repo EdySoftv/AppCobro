@@ -26,6 +26,10 @@ public class Util {
         return preferences.getInt("clvQueja", 0);
     }
 
+    public static int getClvUsuario(SharedPreferences preferences){
+        return preferences.getInt("clvUsuario", 0);
+    }
+
     public static String getNombreTecnicoPreference(SharedPreferences preferences){
         return preferences.getString("nombre_Tecnico", "");
 

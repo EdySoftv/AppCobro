@@ -224,7 +224,7 @@ public class Request extends AppCompatActivity {
     public static String reintentarComando, contraroMA, obsMA, statusMA, extencionesE, Obs,ObsR, msgComando = "",problemaReal;
     public static boolean isnet, firma,MACWAM,validaExisteFirmaBool;
     public static Long abc;
-    public static int clvP, tecC, nExtenciones = 0,clvProblemarepo,ContratoReal;
+    public static int clvP, tecC, nExtenciones = 0,clvProblemarepo,ContratoReal,ClvUsuario;
     public int reintentaB;
     public static String stringValidaTrabajos;
     public static ArrayAdapter adapterTecSec, adapterTecSecR, adapterNap,adapterTap;
@@ -316,6 +316,8 @@ public class Request extends AppCompatActivity {
                             userJson.get("Codigo").getAsString(),
                             userJson.get("IdUsuario").getAsInt()
                     );
+
+                    Util.editor.putInt("clvUsuario",user.getId_Usuario());
                     Util.editor.putString("token", user.getCodigo());
                     Util.editor.commit();
                     try{
@@ -2044,7 +2046,7 @@ public class Request extends AppCompatActivity {
                             JSONObject jsonObject2 = new JSONObject();
                             JSONObject jsonObject3 = new JSONObject();
                             jsonObject2.put("ClvOrden",  Util.getClvOrden(Util.preferences));
-                            jsonObject2.put("ClvUsuario", UserModel.Id_Usuario);
+                            jsonObject2.put("ClvUsuario", Util.getClvUsuario(Util.preferences));
                             jsonObject2.put("Status", ejecutarStatus);
                             jsonObject3.put("objNueRelOrdenUsuario", jsonObject2);
                             getAddRelOrdUsu(context, jsonObject1,jsonObject3);

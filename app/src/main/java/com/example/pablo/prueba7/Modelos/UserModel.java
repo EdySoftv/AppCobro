@@ -19,6 +19,10 @@ public class UserModel {
         return Usuario;
     }
 
+    public int getId_Usuario() {
+        return Id_Usuario;
+    }
+
     public void setUsuario(String Usuario) {
         this.Usuario = Usuario;
     }

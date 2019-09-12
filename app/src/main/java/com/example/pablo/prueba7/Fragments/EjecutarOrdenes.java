@@ -71,7 +71,7 @@ public class EjecutarOrdenes extends Fragment {
     public static String fechaActual;
     public static String horaFin;
     Date objDate = new Date();
-    DateFormat hourFormat = new SimpleDateFormat("HH:mm:ss");
+    DateFormat hourFormat = new SimpleDateFormat("HH:mm");
     DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
 
     public static String ClavetecnicaN,ClavetecnicaT;
