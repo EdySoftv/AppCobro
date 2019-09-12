@@ -181,18 +181,7 @@ public class MaterialesReportes extends Fragment {
                 }
 
                 /////////////////////////////////
-                descripcionMatR.setSelection(0);
-                clasificacionMatR.setSelection(0);
-                //clasificacionMatR.setEnabled(false);
-                piezasMatR.setVisibility(View.GONE);
-                extMatR.setVisibility(View.GONE);
-                metrosMatR.setVisibility(View.GONE);
-                //piezaR,mIIR,mIER,mFIR,mFER;
-                piezaR.setText("");
-                mIIR.setText("");
-                mIER.setText("");
-                mFIR.setText("");
-                mFER.setText("");
+
 
             }
         });
@@ -212,7 +201,18 @@ public class MaterialesReportes extends Fragment {
                 EFDMR = 0;
                 if (cantidadDMR >= totalDMR) {
                     request.getValidaPreDesR(getActivity(), getContext());
-
+                    descripcionMatR.setSelection(0);
+                    clasificacionMatR.setSelection(0);
+                    //clasificacionMatR.setEnabled(false);
+                    piezasMatR.setVisibility(View.GONE);
+                    extMatR.setVisibility(View.GONE);
+                    metrosMatR.setVisibility(View.GONE);
+                    //piezaR,mIIR,mIER,mFIR,mFER;
+                    piezaR.setText("");
+                    mIIR.setText("");
+                    mIER.setText("");
+                    mFIR.setText("");
+                    mFER.setText("");
 
                 } else {
                     Toast.makeText(getContext(), "Cantidad incorrecta", Toast.LENGTH_SHORT).show();
@@ -233,7 +233,18 @@ public class MaterialesReportes extends Fragment {
                 totalDMR = metrosR;
                 if (cantidadDMR >= totalDMR) {
                     request.getValidaPreDesR(getActivity(), getContext());
-
+                    descripcionMatR.setSelection(0);
+                    clasificacionMatR.setSelection(0);
+                    //clasificacionMatR.setEnabled(false);
+                    piezasMatR.setVisibility(View.GONE);
+                    extMatR.setVisibility(View.GONE);
+                    metrosMatR.setVisibility(View.GONE);
+                    //piezaR,mIIR,mIER,mFIR,mFER;
+                    piezaR.setText("");
+                    mIIR.setText("");
+                    mIER.setText("");
+                    mFIR.setText("");
+                    mFER.setText("");
                 } else {
                     Toast.makeText(getContext(), "Cantidad incorrecta", Toast.LENGTH_SHORT).show();
                 }
