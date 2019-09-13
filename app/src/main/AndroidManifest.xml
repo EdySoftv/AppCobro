@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.Softv.Bolivia.prueba7">
+    package="com.Softv.SoftvApp.SoftvApp">
 
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
@@ -19,7 +19,7 @@
         android:usesCleartextTraffic="true"
         >
         <service
-            android:name="com.Softv.Bolivia.prueba7.MyFireBaseMessagingService"
+            android:name="com.Softv.SoftvApp.SoftvApp.MyFireBaseMessagingService"
             android:enabled="true"
             android:exported="true">
             <intent-filter>
@@ -29,68 +29,68 @@
         </service>
 
         <activity
-            android:name="com.Softv.Bolivia.prueba7.Dibujo.Firma"
+            android:name="com.Softv.SoftvApp.SoftvApp.Dibujo.Firma"
             android:screenOrientation="landscape" />
         <activity
-            android:name="com.Softv.Bolivia.prueba7.Activitys.Inicio"
+            android:name="com.Softv.SoftvApp.SoftvApp.Activitys.Inicio"
             android:configChanges="orientation|keyboardHidden|screenSize|screenLayout"
             android:label="Inicio"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name="com.Softv.Bolivia.prueba7.Activitys.Orden"
+            android:name="com.Softv.SoftvApp.SoftvApp.Activitys.Orden"
             android:configChanges="orientation|keyboardHidden|screenSize|screenLayout"
             android:label="@string/title_activity_orden"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name="com.Softv.Bolivia.prueba7.Activitys.Reportes"
+            android:name="com.Softv.SoftvApp.SoftvApp.Activitys.Reportes"
             android:label="@string/title_activity_reportes"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name="com.Softv.Bolivia.prueba7.Activitys.Configuracion"
+            android:name="com.Softv.SoftvApp.SoftvApp.Activitys.Configuracion"
             android:configChanges="orientation|keyboardHidden|screenSize|screenLayout"
             android:label="@string/title_activity_configuracion"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name="com.Softv.Bolivia.prueba7.Activitys.MainActivity"
+            android:name="com.Softv.SoftvApp.SoftvApp.Activitys.MainActivity"
             android:configChanges="screenSize|orientation|keyboardHidden|screenLayout"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.Softv.Bolivia.prueba7.Activitys.ServiciosAInstalar"
+            android:name="com.Softv.SoftvApp.SoftvApp.Activitys.ServiciosAInstalar"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name="com.Softv.Bolivia.prueba7.Activitys.AsignarAparato"
+            android:name="com.Softv.SoftvApp.SoftvApp.Activitys.AsignarAparato"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name="com.Softv.Bolivia.prueba7.Activitys.ExtensionesAdi"
+            android:name="com.Softv.SoftvApp.SoftvApp.Activitys.ExtensionesAdi"
             android:screenOrientation="portrait"
              />
         <activity
-            android:name="com.Softv.Bolivia.prueba7.Activitys.MainReportes"
+            android:name="com.Softv.SoftvApp.SoftvApp.Activitys.MainReportes"
             android:configChanges="screenSize|orientation"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.Softv.Bolivia.prueba7.Activitys.Login"
+            android:name="com.Softv.SoftvApp.SoftvApp.Activitys.Login"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name="com.Softv.Bolivia.prueba7.Activitys.CambioDom"
+            android:name="com.Softv.SoftvApp.SoftvApp.Activitys.CambioDom"
             android:configChanges="screenSize|orientation"
             />
         <activity
-            android:name="com.Softv.Bolivia.prueba7.Activitys.CambioAparato"
+            android:name="com.Softv.SoftvApp.SoftvApp.Activitys.CambioAparato"
             android:screenOrientation="portrait"
             />
-        <activity android:name="com.Softv.Bolivia.prueba7.Activitys.ReporteAsignacion"
+        <activity android:name="com.Softv.SoftvApp.SoftvApp.Activitys.ReporteAsignacion"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar"/>
         <activity
-            android:name="com.Softv.Bolivia.prueba7.sampledata.SplashActivity"
+            android:name="com.Softv.SoftvApp.SoftvApp.sampledata.SplashActivity"
             android:theme="@style/SplashScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -99,7 +99,7 @@
             </intent-filter>
         </activity>
 
-        <service android:name="com.Softv.Bolivia.prueba7.Notificaciones.InstanceIdService">
+        <service android:name="com.Softv.SoftvApp.SoftvApp.Notificaciones.InstanceIdService">
             <intent-filter>
                 <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
             </intent-filter>

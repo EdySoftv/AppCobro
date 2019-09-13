@@ -4,7 +4,7 @@ apply plugin: 'com.google.gms.google-services'
 android {
     compileSdkVersion 28
     defaultConfig {
-        applicationId "com.example.pablo.prueba7"
+        applicationId "com.Softv.SoftvApp.SoftvApp"
         minSdkVersion 21
         targetSdkVersion 28
         versionCode 1
@@ -28,6 +28,10 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+        Bolivia {
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.Bolivia
         }
     }
     packagingOptions {
