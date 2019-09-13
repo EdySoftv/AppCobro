@@ -11,6 +11,19 @@ android {
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
+    lintOptions {
+
+        checkReleaseBuilds false
+
+    }
+    signingConfigs {
+        Bolivia {
+            storeFile file('C:\\Users\\Pablo\\Documents\\Android\\KeyStoreAndroid\\Bolivia.jks')
+            storePassword 'Q^Z?\'5sg)77fA_6'
+            keyAlias = 'key0Bolivia'
+            keyPassword 'Q^Z?\'5sg)77fA_6'
+        }
+    }
     buildTypes {
         release {
             minifyEnabled false
