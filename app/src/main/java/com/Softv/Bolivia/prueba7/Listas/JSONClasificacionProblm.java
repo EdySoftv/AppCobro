@@ -14,4 +14,5 @@ public class JSONClasificacionProblm {
     public List<GetuspConsultaTblClasificacionProblemasListResult> getGetuspConsultaTblClasificacionProblemasListResult() {
         return getuspConsultaTblClasificacionProblemasListResult;
     }
-
+
+}

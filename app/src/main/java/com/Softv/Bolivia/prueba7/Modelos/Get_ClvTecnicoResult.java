@@ -1,4 +1,4 @@
-package com.Softv.pablo.prueba7.Modelos;
+package com.Softv.Bolivia.prueba7.Modelos;
 
 
 public class Get_ClvTecnicoResult {
