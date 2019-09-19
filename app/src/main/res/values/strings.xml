@@ -26,9 +26,9 @@
     <string name="estado_Aparato">Estado del aparato:</string>
     <string name="aparato_a_Asignar">Aparato a asignar</string>
     <string name="cambio_Domicilio">Cambio de domicilio</string>
-    <string name="ciudadDos">Provincia:</string>
-    <string name="localidadDos">Distrito:</string>
-    <string name="coloniaDos">Barrio:</string>
+    <string name="ciudadDos">Ciudad:</string>
+    <string name="localidadDos">Localidad:</string>
+    <string name="coloniaDos">Colonia:</string>
     <string name="calleDos">Calle:</string>
     <string name="numeroDos">Número:</string>
     <string name="numeroIDos">Número interior:</string>
@@ -145,7 +145,7 @@
     <string name="compania">Compañia</string>
     <string name="domicilio">Domicilio</string>
     <string name="tv_Nombre">Nombre</string>
-    <string name="ciudad">Provincia</string>
+    <string name="ciudad">Ciudad</string>
     <string name="servAsignados">Servicios asignados</string>
     <string name="fechaformato">dd/MM/AAAA</string>
     <string name="inicio">Inicio</string>
@@ -154,9 +154,9 @@
     <string name="MACWAM">MACWAN</string>
     <string name="agregarnuevo">Agregar aparato</string>
     <string name="guardar">Guardar</string>
-    <string name="NAP">CTO</string>
+    <string name="NAP">NAP</string>
     <string name="TAP">TAP</string>
-    <string name="NAPdos">CTO:</string>
+    <string name="NAPdos">NAP:</string>
     <string name="TAPdos">TAP:</string>
     <string name="trabajodos">Trabajo:</string>
 
