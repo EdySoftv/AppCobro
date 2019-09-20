@@ -3560,6 +3560,8 @@ try{
 
                   try{
                       array.nombreArbol.clear();
+                      TAP=false;
+                      NAP=false;
                       JSONArbolServicios jsonResponse = response.body();
                       array.dataArbSer = new ArrayList<List<GetMuestraArbolServiciosAparatosPorinstalarListResult>>(asList(jsonResponse.GetMuestraArbolServiciosAparatosPorinstalarListResult()));
                       Iterator<List<GetMuestraArbolServiciosAparatosPorinstalarListResult>> itData4 = array.dataArbSer.iterator();
@@ -3575,44 +3577,44 @@ try{
                               }
                           }
                       }
-
-                      if(TAP==true){
-                          tap.setVisibility(View.VISIBLE);
-                          spinnerTap.setVisibility(View.VISIBLE);
-                          try{
-                              JSONObject jsonObject = new JSONObject();
-                              jsonObject.put("contrato",ContratoReal);
-                              getTap(context,jsonObject,spinnerTap);
-                          }catch (Exception e){}
-
-
-                      }else{
-                          tap.setVisibility(View.INVISIBLE);
-                          spinnerTap.setVisibility(View.INVISIBLE);
-                      }
-
-
-
-
-                      if(NAP==true){
-                          nap.setVisibility(View.VISIBLE);
-                          spinnerNap.setVisibility(View.VISIBLE);
-
-                          try{
-                              JSONObject jsonObject = new JSONObject();
-                              jsonObject.put("contrato",ContratoReal);
-                              getNapContrato(context,jsonObject,spinnerNap);
-                          }catch (Exception e){}
-
-
-                      }else{
-                          nap.setVisibility(View.INVISIBLE);
-                          spinnerNap.setVisibility(View.INVISIBLE);
-                      }
                   }catch (Exception e){
                       TAP=false;
                       NAP=false;
                   }
+
+                    if(TAP==true){
+                        tap.setVisibility(View.VISIBLE);
+                        spinnerTap.setVisibility(View.VISIBLE);
+                        try{
+                            JSONObject jsonObject = new JSONObject();
+                            jsonObject.put("contrato",ContratoReal);
+                            getTap(context,jsonObject,spinnerTap);
+                        }catch (Exception e){}
+
+
+                    }else{
+                        tap.setVisibility(View.INVISIBLE);
+                        spinnerTap.setVisibility(View.INVISIBLE);
+                    }
+
+
+
+
+                    if(NAP==true){
+                        nap.setVisibility(View.VISIBLE);
+                        spinnerNap.setVisibility(View.VISIBLE);
+
+                        try{
+                            JSONObject jsonObject = new JSONObject();
+                            jsonObject.put("contrato",ContratoReal);
+                            getNapContrato(context,jsonObject,spinnerNap);
+                        }catch (Exception e){}
+
+
+                    }else{
+                        nap.setVisibility(View.INVISIBLE);
+                        spinnerNap.setVisibility(View.INVISIBLE);
+                    }
                   } else {
 
                         ErrorMensaje(context,"Error al conseguir datos de la instalacion "+response.message());
