@@ -731,6 +731,7 @@ public class Request extends AppCompatActivity {
                         Array.napsrc.clear();
                         Array.tapsrc.clear();
                         Array.trabajosrc.clear();
+                        Array.direccionsrc.clear();
                         for (int i = 0; i < dat.size(); i++) {
                             Array.ordensrc.add(String.valueOf(dat.get(i).getClvOrden()));
                             Array.contratosrc.add(String.valueOf(dat.get(i).getContrato()));
