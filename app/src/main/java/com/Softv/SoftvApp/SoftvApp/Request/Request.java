@@ -3662,7 +3662,7 @@ try{
                         }
 
                 } else {
-                    ErrorMensaje(context,"Error al conseguir lista de técnicos secundarios "+response.message());
+                    ErrorMensaje(context,"Error al conseguir lista de NAP "+response.message());
                 }
             }
 
@@ -3696,7 +3696,7 @@ try{
 
                     }
                 } else {
-                    ErrorMensaje(context,"Error al conseguir lista de técnicos secundarios "+response.message());
+                    ErrorMensaje(context,"Error al conseguir lista de TAP "+response.message());
                 }
             }
 
@@ -3729,7 +3729,7 @@ try{
                         }catch (Exception e){}
                     }
                 } else {
-                    ErrorMensaje(context,"Error al conseguir lista de técnicos secundarios "+response.message());
+                    ErrorMensaje(context,"Error al conseguir NAP por contrato "+response.message());
                 }
             }
 
@@ -3752,7 +3752,7 @@ try{
                         Log.d("guardo","no");
                     }
                 } else {
-                    ErrorMensaje(context,"Error al conseguir lista de técnicos secundarios "+response.message());
+                    ErrorMensaje(context,"Error al guardar NAP "+response.message());
                 }
             }
 
@@ -3776,7 +3776,7 @@ try{
                         Log.d("guardo","no");
                     }
                 } else {
-                    ErrorMensaje(context,"Error al conseguir lista de técnicos secundarios "+response.message());
+                    ErrorMensaje(context,"Error al guarda TAP "+response.message());
                 }
             }
 
