@@ -326,10 +326,10 @@ try{
                                     if(HorasOrdenes.cordLat.getText().equals("---")||HorasOrdenes.cordLong.getText().equals("---")){
                                         dialogoCoordenadas();
                                     }else{
-                                        ValidarEjecutarTAPNAP();
+                                        Ejecutar();
                                     }
                                 }else{
-                                    ValidarEjecutarTAPNAP();
+                                    Ejecutar();
                                 }
 
 
@@ -349,41 +349,7 @@ try{
                             }
                         }).show();
     }
-    public void ValidarEjecutarTAPNAP(){
-        if(request.TAP==true){
-            if(spinnerTap.getSelectedItemPosition()!=0){
-                if(request.NAP==true){
-                    if(spinnerNap.getSelectedItemPosition()!=0){
-                        Ejecutar();
-                    }else{
-                        dialogEjecutar.dismiss();
-                        Toast.makeText(getContext(),"Seleccione CTO", Toast.LENGTH_LONG).show();
-                    }
-                }else{
-                    Ejecutar();
-                }
-            }else{
-                dialogEjecutar.dismiss();
-                Toast.makeText(getContext(),"Seleccione Tap", Toast.LENGTH_LONG).show();
-            }
-        }else{
-            if(request.NAP==true){
-                if(spinnerNap.getSelectedItemPosition()!=0){
-                    Ejecutar();
-                    Intent intento = new Intent(getActivity(), Orden.class);
-                    intento.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                    startActivity(intento);
-                    Toast.makeText(getActivity(), "Orden ejecutada.", Toast.LENGTH_LONG).show();
-                }else{
-                    dialogEjecutar.dismiss();
-                    Toast.makeText(getContext(),"Seleccione CTO", Toast.LENGTH_LONG).show();
-                }
-            }else{
-                Ejecutar();
 
-            }
-        }
-    }
     private void dialogoRequiereFirma() {
         new AlertDialog.Builder(getContext())
                 .setTitle("ADVERTENCIA")
@@ -411,7 +377,7 @@ try{
                         new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-                                ValidarEjecutarTAPNAP();
+                                Ejecutar();
                             }
                         })
                 .setNegativeButton("NO Ejecutar",
