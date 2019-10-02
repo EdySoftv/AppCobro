@@ -22,6 +22,7 @@ import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.Softv.SoftvApp.SoftvApp.Adapters.TrabajosAdapter;
 import com.Softv.SoftvApp.SoftvApp.Fragments.HorasReportes;
 import com.Softv.SoftvApp.SoftvApp.Fragments.TrabajosOrdenes;
 import com.Softv.SoftvApp.SoftvApp.R;
@@ -340,41 +341,46 @@ public class MainActivity extends AppCompatActivity implements ActionBar.TabList
     }
 public void ValidaTrabajos(final int a, final Context context){
         try {
-            try{
-                JSONObject jsonObject= new JSONObject();
-                jsonObject.put("CLV_ORDEN",  Util.getClvOrden(Util.preferences));
-                jsonObject.put("Clv_Tecnico", Util.getClvTec(Util.preferences));
-                jsonObject.put("OP2", 0);
-                jsonObject.put("OPCION", "M");
-                jsonObject.put("STATUS", "E");
-                request.getValidaTrabajos(getApplicationContext(),jsonObject);
+         if(TrabajosOrdenes.ValidaRequiereTrabajo==true){
+             try{
+                 JSONObject jsonObject= new JSONObject();
+                 jsonObject.put("CLV_ORDEN",  Util.getClvOrden(Util.preferences));
+                 jsonObject.put("Clv_Tecnico", Util.getClvTec(Util.preferences));
+                 jsonObject.put("OP2", 0);
+                 jsonObject.put("OPCION", "M");
+                 jsonObject.put("STATUS", "E");
+                 request.getValidaTrabajos(getApplicationContext(),jsonObject);
 
 
-                if (stringValidaTrabajos.length() == 2 ||stringValidaTrabajos.equals("")||stringValidaTrabajos.equals(null) || stringValidaTrabajos==null) {
-                    if(a==1){
-                        cambio = true;
-                        if (cambio == false) {
-                            mViewPager.setCurrentItem(2);
-                            getSupportActionBar().setSelectedNavigationItem(2);
-                        } else if (cambio == true) {
-                            mViewPager.setCurrentItem(positionTab);
-                            getSupportActionBar().setSelectedNavigationItem(positionTab);
-                        }
-                    }else{
-                        Toast.makeText(getApplicationContext(), "Sección de trabajos completa", Toast.LENGTH_SHORT).show();
-                        cambio = true;
-                        mViewPager.setCurrentItem(positionTab);
-                        getSupportActionBar().setSelectedNavigationItem(positionTab);
-                    }
-                } else {
+                 if (stringValidaTrabajos.length() == 2 ||stringValidaTrabajos.equals("")||stringValidaTrabajos.equals(null) || stringValidaTrabajos==null) {
+                     if(a==1){
+                         cambio = true;
+                         if (cambio == false) {
+                             mViewPager.setCurrentItem(2);
+                             getSupportActionBar().setSelectedNavigationItem(2);
+                         } else if (cambio == true) {
+                             mViewPager.setCurrentItem(positionTab);
+                             getSupportActionBar().setSelectedNavigationItem(positionTab);
+                         }
+                     }else{
+                         Toast.makeText(getApplicationContext(), "Sección de trabajos completa", Toast.LENGTH_SHORT).show();
+                         cambio = true;
+                         mViewPager.setCurrentItem(positionTab);
+                         getSupportActionBar().setSelectedNavigationItem(positionTab);
+                     }
+                 } else {
 
-                    Toast.makeText(getApplicationContext(), "Error: " + stringValidaTrabajos, Toast.LENGTH_LONG).show();
-                    mViewPager.setCurrentItem(1);
-                    getSupportActionBar().setSelectedNavigationItem(1);
-                    //positionTab--;
-                }
+                     Toast.makeText(getApplicationContext(), "Error: " + stringValidaTrabajos, Toast.LENGTH_LONG).show();
+                     mViewPager.setCurrentItem(1);
+                     getSupportActionBar().setSelectedNavigationItem(1);
+                     //positionTab--;
+                 }
 
-            }catch (Exception e){}
+             }catch (Exception e){}
+         }else {
+             mViewPager.setCurrentItem(positionTab);
+             getSupportActionBar().setSelectedNavigationItem(positionTab);
+         }
 
 
 

@@ -116,13 +116,13 @@ try{
 
         }
 
-        if (caracteres[0].equals("RETLI")){
-            recibixnew.clear();
-            retiro = true;
-            holder.recibi.setChecked(true);
-            holder.recibi.setVisibility(View.INVISIBLE);
-            holder.recibitext.setVisibility(View.INVISIBLE);
-        }
+//        if (caracteres[0].equals("RETLI")){
+//            recibixnew.clear();
+//            retiro = true;
+//            holder.recibi.setChecked(true);
+//            holder.recibi.setVisibility(View.INVISIBLE);
+//            holder.recibitext.setVisibility(View.INVISIBLE);
+//        }
 
         holder.recibi.setChecked(Array.recibix.get(position));
         rapg=true;

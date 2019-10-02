@@ -23,6 +23,7 @@ import static com.Softv.SoftvApp.SoftvApp.Listas.Array.recibix;
 public class TrabajosOrdenes extends Fragment{
     public static TrabajosAdapter adaptertrabajos;
     public static ListView trabajos;
+    public static boolean ValidaRequiereTrabajo=false;
     Request request = new Request();
 
     public TrabajosOrdenes() {
@@ -44,47 +45,56 @@ public class TrabajosOrdenes extends Fragment{
             if (caracteres[0].equals("ISTVA")) {
                 TrabajosAdapter.validarCoordenadas=true;
                 TrabajosAdapter.retiro = false;
+                ValidaRequiereTrabajo=true;
 
             }
             if (caracteres[0].equals("ISNET")) {
                 TrabajosAdapter.validarCoordenadas=true;
                 TrabajosAdapter.retiro = false;
                 TrabajosAdapter.isnet=1;
+                ValidaRequiereTrabajo=true;
             }
             if (caracteres[0].equals("ISDIG")) {
                 TrabajosAdapter.validarCoordenadas=true;
                 TrabajosAdapter.retiro = false;
                 TrabajosAdapter.ISDIG=true;
+                ValidaRequiereTrabajo=true;
 
             }
             if (caracteres[0].equals("CTCTV")) {
                 TrabajosAdapter.validarCoordenadas=true;
                 TrabajosAdapter.retiro = false;
+                ValidaRequiereTrabajo=true;
 
             }
             if (caracteres[0].equals("CTCIN")) {
                 TrabajosAdapter.validarCoordenadas=true;
                 TrabajosAdapter.retiro = false;
+                ValidaRequiereTrabajo=true;
 
             }
             if (caracteres[0].equals("CTCDG")) {
                 TrabajosAdapter.validarCoordenadas=true;
                 TrabajosAdapter.retiro = false;
+                ValidaRequiereTrabajo=true;
 
             }
             if (caracteres[0].equals("RSTVA")) {
                 TrabajosAdapter.validarCoordenadas=true;
                 TrabajosAdapter.retiro = false;
+                ValidaRequiereTrabajo=true;
 
             }
             if (caracteres[0].equals("RSNET")) {
                 TrabajosAdapter.validarCoordenadas=true;
                 TrabajosAdapter.retiro = false;
+                ValidaRequiereTrabajo=true;
 
             }
             if (caracteres[0].equals("RSDIG")) {
                 TrabajosAdapter.validarCoordenadas=true;
                 TrabajosAdapter.retiro = false;
+                ValidaRequiereTrabajo=true;
 
             }
 
@@ -93,10 +103,12 @@ public class TrabajosOrdenes extends Fragment{
             if (caracteres[0].equals("CAPAG")) {
                 TrabajosAdapter.retiro = false;
                 TrabajosAdapter.ftth=1;
+                ValidaRequiereTrabajo=true;
 
             }
             if (caracteres[0].equals("CAPAT")) {
                 TrabajosAdapter.retiro = false;
+                ValidaRequiereTrabajo=true;
 
             }
 
