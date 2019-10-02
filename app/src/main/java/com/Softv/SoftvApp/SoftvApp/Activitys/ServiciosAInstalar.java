@@ -305,14 +305,15 @@ public class ServiciosAInstalar extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 JSONObject jsonObject = new JSONObject();
-                try{
-                    jsonObject.put("CLV_ORDEN",  Util.getClvOrden(Util.preferences));
-                    jsonObject.put("Clv_Tecnico", Util.getClvTec(Util.preferences));
-                    jsonObject.put("OP2", 0);
-                    jsonObject.put("OPCION", "M");
-                    jsonObject.put("STATUS", "E");
-                    request.getValidaTrabajos(getApplicationContext(),jsonObject);
-                }catch (Exception e){}
+//                try{
+//                    jsonObject.put("CLV_ORDEN",  Util.getClvOrden(Util.preferences));
+//                    jsonObject.put("Clv_Tecnico", Util.getClvTec(Util.preferences));
+//                    jsonObject.put("OP2", 0);
+//                    jsonObject.put("OPCION", "M");
+//                    jsonObject.put("STATUS", "E");
+//                    request.getValidaTrabajos(getApplicationContext(),jsonObject);
+//                }catch (Exception e){}
+                request.stringValidaTrabajos="";
                     finish();
                 mViewPager.setCurrentItem(2);
 

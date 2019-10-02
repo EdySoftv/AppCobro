@@ -58,7 +58,7 @@ public class EjecutarOrdenes extends Fragment {
     public static TextView msgEjecutarOrd,txtTap,txtNap;
     public static TextView tv_textTecSec;
     public static int añoE, mesE, diaE, horaE, minutoE;
-    public static  int posTec,TecSecSelecc = -1;
+    public static  int posTec=0,TecSecSelecc = -1;
     public static Spinner TecSec,spinnerTap,spinnerNap;
     public HorasOrdenes horas = new HorasOrdenes();
     private Request request = new Request();
@@ -302,6 +302,7 @@ try{
                         new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
+                                posTec=0;
                                 Intent intento = new Intent(getActivity(), Orden.class);
                                 intento.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                                 startActivity(intento);
@@ -391,6 +392,7 @@ try{
 
 
     public void Ejecutar(){
+
         JSONObject jsonObject = new JSONObject();
         JSONObject jsonObject1 = new JSONObject();
 
@@ -448,7 +450,7 @@ try{
                 jsonObject1.put("STATUS", "E");
 
                 request.getValidaOrdSer(getActivity(),jsonObject,jsonObject1);
-
+                posTec=0;
                 if (retiro == true){
                     request.send_aparat(getContext());
                 }

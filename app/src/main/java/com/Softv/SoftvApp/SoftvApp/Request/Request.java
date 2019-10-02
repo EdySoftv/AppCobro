@@ -3506,6 +3506,7 @@ try{
                                     //EjecutarReportes.dialogReportes.show();
                                     reporteStatus = "E";
                                     try {
+                                        EjecutarReportes.tecSecPosRepo=0;
                                         JSONObject jsonObject = new JSONObject();
                                         jsonObject.put("Clv_orden", Util.getClvQueja(Util.preferences));
                                         jsonObject.put("horaFin", horaEjecutar);
@@ -3787,5 +3788,26 @@ try{
         });
     }
 
-
+//    public String getValidaTrabajos(final Context context, final JSONObject jsonObject) {
+//        stringValidaTrabajos="";
+//        Call<JsonObject> call = services.RequestPost(context, jsonObject).getVALIOrdSer();
+//        call.enqueue(new Callback<JsonObject>() {
+//            @Override
+//            public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
+//                if (response.code() == 200) {
+//                    System.out.println("Entra");
+//                    stringValidaTrabajos = String.valueOf(response.body().getAsJsonPrimitive("GetSP_ValidaGuardaOrdSerAparatosResult"));
+//                }else{
+//                    ErrorMensaje(context,"Se ha producido un error, verifique su conexion e intente nuevamente");
+//
+//                }
+//            }
+//            @Override
+//            public void onFailure(Call<JsonObject> call, Throwable t) {
+//                ErrorMensaje(context,"Se ha producido un error, verifique su conexion e intente nuevamente");
+//            }
+//        });
+//        return stringValidaTrabajos;
+//
+//    }
 }

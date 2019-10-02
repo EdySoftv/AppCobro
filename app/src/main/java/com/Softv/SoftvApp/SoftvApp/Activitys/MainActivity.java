@@ -1,6 +1,7 @@
 package com.Softv.SoftvApp.SoftvApp.Activitys;
 
 import android.Manifest;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Build;
@@ -206,9 +207,9 @@ public class MainActivity extends AppCompatActivity implements ActionBar.TabList
 
                if (positionTab ==2 && retiro == true && recibixnew.size() > 0){
                    try{
-                       ValidaTrabajos(0);
+                       ValidaTrabajos(0,getApplicationContext());
                    }catch (Exception e){
-                       ValidaTrabajos(0);
+                       ValidaTrabajos(0,getApplicationContext());
                    }
 
                }else if (positionTab ==2 && retiro == true && recibixnew.size() == 0) {
@@ -218,9 +219,9 @@ public class MainActivity extends AppCompatActivity implements ActionBar.TabList
                }
                else if (positionTab == 2){
                    try{
-                       ValidaTrabajos(0);
+                       ValidaTrabajos(0,getApplicationContext());
                    }catch (Exception e){
-                       ValidaTrabajos(0);
+                       ValidaTrabajos(0,getApplicationContext());
                    }
                }
 
@@ -228,9 +229,9 @@ public class MainActivity extends AppCompatActivity implements ActionBar.TabList
 
             if(positionTab == 3){
                 try{
-                    ValidaTrabajos(1);
+                    ValidaTrabajos(1,getApplicationContext());
                 }catch (Exception e){
-                    ValidaTrabajos(1);
+                    ValidaTrabajos(1,getApplicationContext());
                 }
 
             } else{
@@ -337,31 +338,46 @@ public class MainActivity extends AppCompatActivity implements ActionBar.TabList
             }
         }
     }
-public void ValidaTrabajos(final int a){
+public void ValidaTrabajos(final int a, final Context context){
         try {
-            if (stringValidaTrabajos.length() == 2) {
-               if(a==1){
-                   cambio = true;
-                   if (cambio == false) {
-                       mViewPager.setCurrentItem(2);
-                       getSupportActionBar().setSelectedNavigationItem(2);
-                   } else if (cambio == true) {
-                       mViewPager.setCurrentItem(positionTab);
-                       getSupportActionBar().setSelectedNavigationItem(positionTab);
-                   }
-               }else{
-                   Toast.makeText(getApplicationContext(), "Sección de trabajos completa", Toast.LENGTH_SHORT).show();
-                   cambio = true;
-                   mViewPager.setCurrentItem(positionTab);
-                   getSupportActionBar().setSelectedNavigationItem(positionTab);
-               }
-            } else {
+            try{
+                JSONObject jsonObject= new JSONObject();
+                jsonObject.put("CLV_ORDEN",  Util.getClvOrden(Util.preferences));
+                jsonObject.put("Clv_Tecnico", Util.getClvTec(Util.preferences));
+                jsonObject.put("OP2", 0);
+                jsonObject.put("OPCION", "M");
+                jsonObject.put("STATUS", "E");
+                request.getValidaTrabajos(getApplicationContext(),jsonObject);
 
-                Toast.makeText(getApplicationContext(), "Error: " + stringValidaTrabajos, Toast.LENGTH_LONG).show();
-                mViewPager.setCurrentItem(1);
-                getSupportActionBar().setSelectedNavigationItem(1);
-                //positionTab--;
-            }
+
+                if (stringValidaTrabajos.length() == 2 ||stringValidaTrabajos.equals("")||stringValidaTrabajos.equals(null) || stringValidaTrabajos==null) {
+                    if(a==1){
+                        cambio = true;
+                        if (cambio == false) {
+                            mViewPager.setCurrentItem(2);
+                            getSupportActionBar().setSelectedNavigationItem(2);
+                        } else if (cambio == true) {
+                            mViewPager.setCurrentItem(positionTab);
+                            getSupportActionBar().setSelectedNavigationItem(positionTab);
+                        }
+                    }else{
+                        Toast.makeText(getApplicationContext(), "Sección de trabajos completa", Toast.LENGTH_SHORT).show();
+                        cambio = true;
+                        mViewPager.setCurrentItem(positionTab);
+                        getSupportActionBar().setSelectedNavigationItem(positionTab);
+                    }
+                } else {
+
+                    Toast.makeText(getApplicationContext(), "Error: " + stringValidaTrabajos, Toast.LENGTH_LONG).show();
+                    mViewPager.setCurrentItem(1);
+                    getSupportActionBar().setSelectedNavigationItem(1);
+                    //positionTab--;
+                }
+
+            }catch (Exception e){}
+
+
+
         }catch (Exception e){
             Toast.makeText(getApplicationContext(),"Error",Toast.LENGTH_SHORT).show();
         }

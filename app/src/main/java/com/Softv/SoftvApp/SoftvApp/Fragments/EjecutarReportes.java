@@ -57,7 +57,7 @@ public class EjecutarReportes extends Fragment {
     public static   String month,fechaEjecujtar, horaEjecutar;
     public static Spinner TecSecu;
     public static  int TecSecSeleccion = -1;
-    public static int tecSecPosRepo;
+    public static int tecSecPosRepo=0;
    public static  String minute;
     public static ProgressDialog dialogReportes;
    Inicio in;
@@ -186,6 +186,7 @@ public class EjecutarReportes extends Fragment {
                         new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
+                                tecSecPosRepo=0;
                                 Intent intento = new Intent(getActivity(), Reportes.class);
                                 intento.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                                 startActivity(intento);
