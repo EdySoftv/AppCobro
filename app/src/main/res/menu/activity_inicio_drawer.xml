@@ -22,6 +22,13 @@
             android:id="@+id/Configuraciones"
             android:icon="@drawable/ic_menu_manage"
             android:title="Configuraciones" />
+        <item android:title="Coordenadas" android:icon="@drawable/ic_location_on_black_24dp">
+            <menu>
+                <item android:id="@+id/MenuCoordenadasNAP"
+                    android:icon=""
+                    ></item>
+            </menu>
+        </item>
     </group>
 
 
