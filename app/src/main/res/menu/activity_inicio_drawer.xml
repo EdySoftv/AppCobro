@@ -25,7 +25,12 @@
         <item android:title="Coordenadas" android:icon="@drawable/ic_location_on_black_24dp">
             <menu>
                 <item android:id="@+id/MenuCoordenadasNAP"
-                    android:icon=""
+                    android:icon="@drawable/ic_device_hub_black_24dp"
+                    android:title="@string/NAP"
+                    ></item>
+                <item android:id="@+id/MenuCoordenadasTAP"
+                    android:icon="@drawable/ic_device_hub_black_24dp"
+                    android:title="@string/TAP"
                     ></item>
             </menu>
         </item>

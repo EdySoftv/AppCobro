@@ -47,7 +47,7 @@ public class TrabajosAdapter extends BaseAdapter {
     public static int ftth=0;
     public static  boolean retiro = false, ISDIG=false;
     public static String descr;
-    public static boolean rapg =false;
+    public static boolean rapg =false,validarFotografia=false;
     public static ProgressDialog dialogTrabajos;
     BarraCargar barraCargar = new BarraCargar();
 

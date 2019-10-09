@@ -216,7 +216,11 @@ public void EstatusInternet (Context ctx){
             intent1.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(intent1);
             finish();
-        }
+        } else if (id == R.id.MenuCoordenadasNAP) {
+            Toast.makeText(getApplicationContext(), "NAP", Toast.LENGTH_LONG).show();
+    } else if (id == R.id.MenuCoordenadasTAP) {
+            Toast.makeText(getApplicationContext(), "TAP", Toast.LENGTH_LONG).show();
+    }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
