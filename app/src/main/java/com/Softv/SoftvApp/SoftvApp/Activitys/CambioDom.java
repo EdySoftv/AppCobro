@@ -80,9 +80,6 @@ public class CambioDom extends AppCompatActivity {
         aceptar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intento1 = new Intent(CambioDom.this, Orden.class);
-                intento1.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                startActivity(intento1);
                 JSONObject jsonObject = new JSONObject();
                 try{
                     jsonObject.put("CLV_ORDEN",  Util.getClvOrden(Util.preferences));
@@ -97,5 +94,9 @@ public class CambioDom extends AppCompatActivity {
         });
 
 
+    }
+    @Override
+    public void onBackPressed() {
+  finish();
     }
 }
