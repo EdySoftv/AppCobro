@@ -3,6 +3,7 @@ package com.Softv.SoftvApp.SoftvApp.Activitys;
 import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -31,6 +32,7 @@ import android.widget.Toast;
 
 import com.Softv.SoftvApp.SoftvApp.R;
 import com.Softv.SoftvApp.SoftvApp.Request.Request;
+import com.Softv.SoftvApp.SoftvApp.sampledata.BarraCargar;
 import com.Softv.SoftvApp.SoftvApp.sampledata.Util;
 
 import org.json.JSONObject;
@@ -48,6 +50,7 @@ public class NAPTAP extends AppCompatActivity
     TextView titulo;
     public static String cordLatTN="", cordLongTN="";
     private LocationManager locationManager;
+    public static ProgressDialog dialogNAPTAP;
     Activity activity;
     RecyclerView lista;
 
@@ -62,11 +65,13 @@ public class NAPTAP extends AppCompatActivity
         lista = findViewById(R.id.listaNAPTAP);
         titulo = findViewById(R.id.NAPTAPTitulo);
         spinnerColonia = findViewById(R.id.spinnerColonia);
+        dialogNAPTAP = new BarraCargar().showDialog(this);
 
         request.getColonia(getApplicationContext());
 
         View barra1 = barra.getHeaderView(0);
         recuperamos_variable_string = getIntent().getStringExtra("dato");
+        dialogNAPTAP.show();
         if(recuperamos_variable_string.equals("NAP")) {
             titulo.setText(getResources().getString(R.string.NAP));
             spinnerColonia.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -76,6 +81,7 @@ public class NAPTAP extends AppCompatActivity
                         Toast.makeText(getApplicationContext(),"Seleccione una colonia",Toast.LENGTH_LONG).show();
                     }else{
                         try{
+
                             JSONObject jsonObject = new JSONObject();
                             jsonObject.put("op",0);
                             jsonObject.put("nombre_Colonia",spinnerColonia.getSelectedItem());
@@ -100,6 +106,7 @@ public class NAPTAP extends AppCompatActivity
                         Toast.makeText(getApplicationContext(),"Seleccione una colonia",Toast.LENGTH_LONG).show();
                     }else{
                         try{
+
                             JSONObject jsonObject = new JSONObject();
                             jsonObject.put("op",1);
                             jsonObject.put("nombre_Colonia",spinnerColonia.getSelectedItem());
@@ -210,24 +217,7 @@ public class NAPTAP extends AppCompatActivity
     }
 
 
-    @SuppressLint("MissingPermission")
-    private void setearCoordenadas() {
-        Location location = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
-        if (location == null) {
-            location = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
-        }
-        if (location != null) {
-            double latitude = location.getLatitude();
-            // editor.putFloat("latitud", (float) latitude).commit();
-            double longitud = location.getLongitude();
-            //editor.putFloat("longitud", (float) longitud).commit();
-            cordLatTN=String.valueOf(latitude);
-            cordLongTN=String.valueOf(longitud);
-            Toast.makeText(getApplicationContext(),"Coordenadas obtenidas",Toast.LENGTH_LONG).show();
-            isCoordenadas = true;
-        }
-    }
-
+   
     private void mostrarInformacionDeAlertaGPS() {
         new android.app.AlertDialog.Builder(activity)
                 .setTitle("Señal de GPS")
@@ -264,7 +254,7 @@ public class NAPTAP extends AppCompatActivity
                 //editor.putFloat("longitud", (float) longitud).commit();
                 cordLatTN=String.valueOf(latitude);
                 cordLongTN=String.valueOf(longitud);
-                Log.i("error", cordLatTN+"||||||"+cordLongTN);
+                dialogNAPTAP.dismiss();
                 isCoordenadas = true;
             }
         }
