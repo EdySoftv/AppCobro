@@ -86,7 +86,16 @@ public class OrdenesAdapter extends RecyclerView.Adapter<OrdenesAdapter.ordensrc
         viewHolder.status.setText(Array.statusrc.get(position));
         viewHolder.direccionOrd.setText(Array.direccionsrc.get(position));
 
-        viewHolder.trabajoordenes.setText(Array.trabajosrc.get(position));
+
+        if(Array.trabajosrc.get(position).equals("")||Array.trabajosrc.get(position).equals(null)){
+            viewHolder.txttrabajo.setVisibility(View.GONE);
+            viewHolder.trabajoordenes.setVisibility(View.GONE);
+        }else{
+            viewHolder.txttrabajo.setVisibility(View.VISIBLE);
+            viewHolder.trabajoordenes.setVisibility(View.VISIBLE);
+            viewHolder.trabajoordenes.setText(Array.trabajosrc.get(position));
+        }
+
 
         if(Array.napsrc.get(position).equals("")||Array.napsrc.get(position).equals(null)){
             viewHolder.txtnap.setVisibility(View.GONE);
