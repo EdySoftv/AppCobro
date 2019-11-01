@@ -71,7 +71,7 @@ public class EjecutarOrdenes extends Fragment {
     DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
 
     public static String ClavetecnicaN,ClavetecnicaT;
-    public static  int IdTapN,IdTapT;
+    public static  int IdTapN=0,IdTapT=0;
 
 
     Inicio in;
@@ -149,10 +149,16 @@ try{
     spinnerNap.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
         @Override
         public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-            Iterator<List<ObtieneNapModel>> itdatan = Array.dataNap.iterator();
-            List<ObtieneNapModel> datn = itdatan.next();
-            IdTapN=datn.get(position).getIdTap();
-            ClavetecnicaN=datn.get(position).getClavetecnica();
+            if(position!=0){
+                Iterator<List<ObtieneNapModel>> itdatan = Array.dataNap.iterator();
+                List<ObtieneNapModel> datn = itdatan.next();
+                IdTapN=datn.get(position).getIdTap();
+                ClavetecnicaN=datn.get(position).getClavetecnica();
+            }else{
+                IdTapN=0;
+                ClavetecnicaN="<Seleccionar>";
+            }
+
         }
 
         @Override
@@ -168,10 +174,16 @@ try{
             spinnerTap.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                 @Override
                 public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                    Iterator<List<ObtieneTapModel>> itdatat = Array.dataTap.iterator();
-                    List<ObtieneTapModel> datt = itdatat.next();
-                    IdTapT=datt.get(position).getIdTap();
-                    ClavetecnicaT=datt.get(position).getClavetecnica();
+                    if(position!=0){
+                        Iterator<List<ObtieneTapModel>> itdatat = Array.dataTap.iterator();
+                        List<ObtieneTapModel> datt = itdatat.next();
+                        IdTapT=datt.get(position).getIdTap();
+                        ClavetecnicaT=datt.get(position).getClavetecnica();
+                    }else{
+                        IdTapT=0;
+                        ClavetecnicaT="<Seleccionar>";
+                    }
+
                 }
 
                 @Override
@@ -396,29 +408,35 @@ try{
         JSONObject jsonObject = new JSONObject();
         JSONObject jsonObject1 = new JSONObject();
 
-        if(request.TAP==true){
-            try{
-                JSONObject jsonObject2 = new JSONObject();
-                JSONObject jsonObjectT = new JSONObject();
-                jsonObjectT.put("CONTRATO",request.ContratoReal);
-                jsonObjectT.put("TAP",ClavetecnicaT);
-                jsonObjectT.put("idtap",IdTapT);
-                jsonObject2.put("ObjTap",jsonObjectT);
-                request.guardaTap(getContext(),jsonObjectT);
 
-            }catch (Exception e){}
+        if(request.TAP==true){
+            if(IdTapT>0){
+                try{
+                    JSONObject jsonObject2 = new JSONObject();
+                    JSONObject jsonObjectT = new JSONObject();
+                    jsonObjectT.put("CONTRATO",request.ContratoReal);
+                    jsonObjectT.put("TAP",ClavetecnicaT);
+                    jsonObjectT.put("idtap",IdTapT);
+                    jsonObject2.put("ObjTap",jsonObjectT);
+                    request.guardaTap(getContext(),jsonObjectT);
+
+                }catch (Exception e){}
+            }
         }
         if(request.NAP==true){
-            try{
-                JSONObject jsonObject2 = new JSONObject();
-                JSONObject jsonObjectN = new JSONObject();
-                jsonObjectN.put("CONTRATO",request.ContratoReal);
-                jsonObjectN.put("TAP",ClavetecnicaN);
-                jsonObjectN.put("IDTAP",IdTapN);
-                jsonObject2.put("ObjNap",jsonObjectN);
-                request.guardaNap(getContext(),jsonObjectN);
-            }catch (Exception e){}
+            if(IdTapN>0){
+                try{
+                    JSONObject jsonObject2 = new JSONObject();
+                    JSONObject jsonObjectN = new JSONObject();
+                    jsonObjectN.put("CONTRATO",request.ContratoReal);
+                    jsonObjectN.put("TAP",ClavetecnicaN);
+                    jsonObjectN.put("IDTAP",IdTapN);
+                    jsonObject2.put("ObjNap",jsonObjectN);
+                    request.guardaNap(getContext(),jsonObjectN);
+                }catch (Exception e){}
+            }
         }
+
 
 
 
