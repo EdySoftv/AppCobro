@@ -1815,29 +1815,34 @@ public class Request extends AppCompatActivity {
                     while (itData.hasNext()) {
                         List<GetDameSerDelCliFacListResult> dat = (List<GetDameSerDelCliFacListResult>) itData.next();
                         for (int i = 0; i < dat.size(); ++i) {
-                            if(dat.get(i).getServicio().equals("-------------------------------------------------------------")){
+                            try{
+                                if(dat.get(i).getServicio().equals("-------------------------------------------------------------")){
 
-                            }else{
-                                String[] caracteres = dat.get(i).getServicio().split(" ");
-                                if(caracteres[0].equals("Servicios")){
-                                    a+="\n";
-                                    a+=dat.get(i).getServicio() + "\n";
                                 }else{
-                                    try{
-                                        if(caracteres[5].equals("*")){
-                                            a += caracteres[5]+" "+caracteres[6]+" "+caracteres[7]+" "+caracteres[8] + "\n";
-                                            for(int b=9; b<caracteres.length;b++){
-                                                a+= " "+caracteres[b];
+                                    String[] caracteres = dat.get(i).getServicio().split(" ");
+                                    if(caracteres[0].equals("Servicios")){
+                                        a+="\n";
+                                        a+=dat.get(i).getServicio() + "\n";
+                                    }else{
+                                        try{
+                                            if(caracteres[5].equals("*")){
+                                                a += caracteres[5]+" "+caracteres[6]+" "+caracteres[7]+" "+caracteres[8] + "\n";
+                                                for(int b=9; b<caracteres.length;b++){
+                                                    a+= " "+caracteres[b];
+                                                }
+                                                a+="\n";
+                                            }else{
+                                                a += dat.get(i).getServicio() + "\n";
                                             }
-                                            a+="\n";
-                                        }else{
+                                        }catch (Exception e){
                                             a += dat.get(i).getServicio() + "\n";
                                         }
-                                    }catch (Exception e){
-                                        a += dat.get(i).getServicio() + "\n";
                                     }
                                 }
+                            }catch(Exception e){
+
                             }
+
 
                             MainReportes.infoA.setText(a);
                         }
