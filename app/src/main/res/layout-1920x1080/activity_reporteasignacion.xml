@@ -56,10 +56,11 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/spinnerMedioFinal" />
+
         <android.support.v7.widget.RecyclerView
             android:id="@+id/eliminarAparatosList"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="400dp"
             android:layout_below="@+id/eliminarAparatos"
             android:layout_marginTop="8dp"
             android:visibility="visible"

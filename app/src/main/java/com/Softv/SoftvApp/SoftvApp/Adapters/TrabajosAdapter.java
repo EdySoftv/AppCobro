@@ -318,7 +318,7 @@ try{
             descr=String.valueOf(Array.trabajox.get(i));
 
 
-        if (stat==false && !observacionesRwtiro.equals("FTTH")){
+        if (stat==false ){
             System.out.println("statusx"+stat);
         try{
             jsonObject = new JSONObject();

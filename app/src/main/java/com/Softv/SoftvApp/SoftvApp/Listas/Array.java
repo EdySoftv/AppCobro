@@ -80,7 +80,10 @@ public class Array {
     public static ArrayList<List<GetBUSCADetOrdSerListResult>> dataTrabajos;
     public static ArrayList<List<GetMuestraRelOrdenesTecnicosListResult>> dataTecSec;
 
-    public static  ArrayList<Integer> clv_tecnicoSecundario;
+    public static  ArrayList<Integer> clv_tecnicoSecundario= new ArrayList<>();
+    public static  ArrayList<String> nom_tecnicoSecundarioQ= new ArrayList<>();
+
+    public static  ArrayList<String> nom_tecnicoSecundario= new ArrayList<>();
     public static ArrayList<List<GetListClienteAparatosResult>> dataCliApa;
     public static ArrayList<List<GetSP_StatusAparatosListResult>> dataStaApa;
     public static  ArrayList<List<GetListTipoAparatosByIdArticuloResult>> dataApaTipo;
