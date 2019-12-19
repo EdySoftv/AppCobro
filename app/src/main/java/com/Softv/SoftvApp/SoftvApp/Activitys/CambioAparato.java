@@ -225,45 +225,50 @@ if(DeepConsModel.STATUS.equals("E")){
                                 if(aparatoClienteValidar==false){
                                     Toast.makeText(getApplicationContext(),"Seleccione el aparato a asignar",Toast.LENGTH_SHORT).show();
                                 }else{
-                                    if (MACWAMTextCambioAparato.equals("") == true) {
-                                        Toast.makeText(getApplicationContext(), "Escriba MACWAN", Toast.LENGTH_LONG).show();
-                                    } else {
-                                        if (MACWAMTextCambioAparato.getText().toString().equals(nombreSpinnerCambioAparato) == false) {
-                                            if (MACWAMTextCambioAparato.length() == 12) {
-                                                try {
-                                                    JSONObject jsonObjectMACWAM = new JSONObject();
-                                                    jsonObjectMACWAM.put("Clv_Aparato", clvAparatoCAPAT);
-                                                    jsonObjectMACWAM.put("MacLan", nombreSpinnerCambioAparato);
-                                                    jsonObjectMACWAM.put("MacWan", MACWAMTextCambioAparato.getText());
-                                                    jsonObjectMACWAM.put("Clv_Orden",  Util.getClvOrden(Util.preferences));
+                                    if(request.MACWAM==true){
+                                        if (MACWAMTextCambioAparato.equals("") == true) {
+                                            Toast.makeText(getApplicationContext(), "Escriba MACWAN", Toast.LENGTH_LONG).show();
+                                        } else {
+                                            if (MACWAMTextCambioAparato.getText().toString().equals(nombreSpinnerCambioAparato) == false) {
+                                                if (MACWAMTextCambioAparato.length() == 12) {
+                                                    try {
+                                                        JSONObject jsonObjectMACWAM = new JSONObject();
+                                                        jsonObjectMACWAM.put("Clv_Aparato", clvAparatoCAPAT);
+                                                        jsonObjectMACWAM.put("MacLan", nombreSpinnerCambioAparato);
+                                                        jsonObjectMACWAM.put("MacWan", MACWAMTextCambioAparato.getText());
+                                                        jsonObjectMACWAM.put("Clv_Orden",  Util.getClvOrden(Util.preferences));
 
-                                                    jsonArrayMACCambioAparato.put(jsonObjectMACWAM);
-                                                    JSONObject jsonObject = new JSONObject();
-                                                    jsonObject.put("RelMacwanList",jsonArrayMACCambioAparato);
-                                                    request.AsignaMACWAM(getApplicationContext(),jsonObject);
-                                                } catch (Exception e) {
+                                                        jsonArrayMACCambioAparato.put(jsonObjectMACWAM);
+                                                        JSONObject jsonObject = new JSONObject();
+                                                        jsonObject.put("RelMacwanList",jsonArrayMACCambioAparato);
+                                                        request.AsignaMACWAM(getApplicationContext(),jsonObject);
+                                                    } catch (Exception e) {
+                                                    }
+
+                                                }else{
+                                                    Toast.makeText(getApplicationContext(), "La MACWAN debe de ser 12 caracteres", Toast.LENGTH_SHORT).show();
                                                 }
-
-
-                                                try{
-                                                    JSONObject jsonObject = new JSONObject();
-                                                    JSONObject jsonObject1 = new JSONObject();
-                                                    jsonObject.put("ClvAparato", clvAparatoCAPAT);
-                                                    jsonObject.put("ClvOrden",  Util.getClvOrden(Util.preferences));
-                                                    jsonObject.put("ContratoNet", contrato);
-                                                    jsonObject.put("Status", statusAparato);
-                                                    jsonObject.put("Trabajo", "CAPAT");
-                                                    jsonObject1.put("ObjCambioAparato", jsonObject);
-                                                    request.SetCambioAparato(getApplicationContext(), jsonObject1,CambioAparato.this);
-                                                    dialogCAPAT.show();
-                                                }catch (Exception e){}
                                             }else{
-                                                Toast.makeText(getApplicationContext(), "La MACWAN debe de ser 12 caracteres", Toast.LENGTH_SHORT).show();
+                                                Toast.makeText(getApplicationContext(), "La MACWAN no puede ser igual que la MacLan", Toast.LENGTH_SHORT).show();
                                             }
-                                        }else{
-                                            Toast.makeText(getApplicationContext(), "La MACWAN no puede ser igual que la MacLan", Toast.LENGTH_SHORT).show();
                                         }
+                                    }else{
+                                        try{
+                                            JSONObject jsonObject = new JSONObject();
+                                            JSONObject jsonObject1 = new JSONObject();
+                                            jsonObject.put("ClvAparato", clvAparatoCAPAT);
+                                            jsonObject.put("ClvOrden",  Util.getClvOrden(Util.preferences));
+                                            jsonObject.put("ContratoNet", contrato);
+                                            jsonObject.put("Status", statusAparato);
+                                            jsonObject.put("Trabajo", "CAPAT");
+                                            jsonObject1.put("ObjCambioAparato", jsonObject);
+                                            request.SetCambioAparato(getApplicationContext(), jsonObject1,CambioAparato.this);
+                                            dialogCAPAT.show();
+                                        }catch (Exception e){}
                                     }
+
+
+/*                                    */
                                 }
                             }
                         }else{
