@@ -195,6 +195,8 @@ import static com.Softv.SoftvApp.SoftvApp.Listas.Array.contratosrc;
 import static com.Softv.SoftvApp.SoftvApp.Listas.Array.ordensrc;
 import static com.Softv.SoftvApp.SoftvApp.Services.Services.ClvTrabajoRequest;
 import static java.util.Arrays.asList;
+import static com.Softv.SoftvAppP.SoftvAppP.Listas.Array.nom_tecnicoSecundario;
+import static com.Softv.SoftvAppP.SoftvAppP.Listas.Array.nom_tecnicoSecundarioQ;
 
 public class Request extends AppCompatActivity {
     public static boolean NAP=false,TAP=false;
@@ -1004,16 +1006,19 @@ public class Request extends AppCompatActivity {
                     Iterator<List<GetMuestraRelOrdenesTecnicosListResult>> itdata = Array.dataTecSec.iterator();
                     while (itdata.hasNext()) {
                         List<GetMuestraRelOrdenesTecnicosListResult> dat = itdata.next();
-                        datos = new String[dat.size() + 1];
-                        int j = 1;
-                        datos[0] = a;
+                        int abc=Util.getClvTec(Util.preferences);
+                        Array.nom_tecnicoSecundario.clear();
+                        Array.clv_tecnicoSecundario.clear();
+                        Array.nom_tecnicoSecundario.add(a);
+                        Array.clv_tecnicoSecundario.add(-1);
                         for (int i = 0; i < dat.size(); i++) {
-                            datos[j] = dat.get(i).getNOMBRE();
-                            Array.clv_tecnicoSecundario.add(j, dat.get(i).getCLV_TECNICO());
+                            if(abc!= dat.get(i).getCLV_TECNICO()){
+                                Array.nom_tecnicoSecundario.add(dat.get(i).getNOMBRE());
+                                Array.clv_tecnicoSecundario.add(dat.get(i).getCLV_TECNICO());
 
-                            j = j + 1;
+                            }
                         }
-                        adapterTecSec = new ArrayAdapter<String>(context, android.R.layout.simple_spinner_dropdown_item, datos);
+                        adapterTecSec = new ArrayAdapter<String>(context, android.R.layout.simple_spinner_dropdown_item, Array.nom_tecnicoSecundario);
                         spiner.setAdapter(adapterTecSec);
                         spiner.setSelection(posTec);
 
@@ -1903,6 +1908,7 @@ public class Request extends AppCompatActivity {
     public void getTecSecR(final Context context, final Spinner TecSec) {
         Array.Clv_TecSecR = new ArrayList<Integer>();
         Array.Clv_TecSecR.add(0, -1);
+        nom_tecnicoSecundarioQ = new ArrayList<String>();
         Service service = null;
         try {
             service = services.getTecSecRService(context);
@@ -1922,12 +1928,18 @@ public class Request extends AppCompatActivity {
                         datos = new String[dat.size() + 1];
                         int j = 1;
                         datos[0] = a;
+                        nom_tecnicoSecundarioQ.clear();
+                        Array.Clv_TecSecR.clear();
+                        Array.nom_tecnicoSecundarioQ.add(a);
+                        Array.Clv_TecSecR.add(-1);
                         for (int i = 0; i < dat.size(); i++) {
-                            datos[j] = dat.get(i).getNombre();
-                            Array.Clv_TecSecR.add(j, dat.get(i).getClvTecnico());
-                            j = j + 1;
+                            if(Util.getClvTec(Util.preferences)!= dat.get(i).getClvTecnico()){
+                                nom_tecnicoSecundarioQ .add(dat.get(i).getNombre());
+                                Array.Clv_TecSecR.add(j, dat.get(i).getClvTecnico());
+                                j = j + 1;
+                            }
                         }
-                        adapterTecSecR = new ArrayAdapter(context, android.R.layout.simple_spinner_dropdown_item, datos);
+                        adapterTecSecR = new ArrayAdapter(context, android.R.layout.simple_spinner_dropdown_item, nom_tecnicoSecundarioQ);
                         TecSec.setAdapter(adapterTecSecR);
 
                     }
