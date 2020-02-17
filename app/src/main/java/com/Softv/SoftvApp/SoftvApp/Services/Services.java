@@ -43,6 +43,8 @@ import retrofit2.converter.gson.GsonConverterFactory;
 import static com.Softv.SoftvApp.SoftvApp.Adapters.QuejasAdapter.contratoReport;
 import static com.Softv.SoftvApp.SoftvApp.Adapters.TrabajosAdapter.ClaveTrabajo;
 
+import static com.Softv.SoftvApp.SoftvApp.Fragments.EjecutarOrdenes.latitudeEjec;
+import static com.Softv.SoftvApp.SoftvApp.Fragments.EjecutarOrdenes.longitudEjec;
 import static com.Softv.SoftvApp.SoftvApp.Fragments.EjecutarReportes.horas12;
 
 import static com.Softv.SoftvApp.SoftvApp.Fragments.EjecutarReportes.solution;
@@ -1151,8 +1153,8 @@ public class Services {
         JSONObject jsonObject = new JSONObject();
         JSONObject jsonObject1 = new JSONObject();
         jsonObject.put("Contrato", DeepConsModel.Contrato);
-        jsonObject.put("Latitud", HorasOrdenes.cordLat.getText());
-        jsonObject.put("Longitud", HorasOrdenes.cordLong.getText());
+        jsonObject.put("Latitud", latitudeEjec);
+        jsonObject.put("Longitud", longitudEjec);
         jsonObject1.put("ObjCoorCli", jsonObject);
         MediaType JSON = MediaType.parse("application/json; charset=utf-8");
         final RequestBody body = RequestBody.create(JSON, jsonObject1.toString());

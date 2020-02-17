@@ -5,6 +5,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
+import android.location.LocationManager;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
@@ -41,6 +42,8 @@ import java.util.List;
 
 
 import static com.Softv.SoftvApp.SoftvApp.Adapters.TrabajosAdapter.retiro;
+import static com.Softv.SoftvApp.SoftvApp.Fragments.HorasOrdenes.cordLat;
+import static com.Softv.SoftvApp.SoftvApp.Fragments.HorasOrdenes.cordLong;
 import static com.Softv.SoftvApp.SoftvApp.Fragments.HorasOrdenes.obsTec;
 import static com.Softv.SoftvApp.SoftvApp.Fragments.HorasOrdenes.observacionesTecnico;
 import static com.Softv.SoftvApp.SoftvApp.Request.Request.validaExisteFirmaBool;
@@ -66,6 +69,9 @@ public class EjecutarOrdenes extends Fragment {
     public static String ejecutarStatus;
     public static String fechaActual;
     public static String horaFin;
+    public static double latitudeEjec;
+    public static double longitudEjec;
+    private LocationManager locationManager;
     Date objDate = new Date();
     DateFormat hourFormat = new SimpleDateFormat("HH:mm");
     DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
@@ -106,6 +112,13 @@ public class EjecutarOrdenes extends Fragment {
         txtTap = view.findViewById(R.id.txtTap);
 
         request.getTecSec(getContext(),TecSec);
+        latitudeEjec=0;
+        longitudEjec=0;
+        /////////////
+
+        HorasOrdenes.setearCoordenadas(latitudeEjec,longitudEjec);
+        Log.d("error", String.valueOf(latitudeEjec));
+        ///////////////
         if(horas.visita == 1){
             firmar.setVisibility(View.GONE);
             TecSec.setVisibility(View.GONE);
@@ -336,7 +349,7 @@ try{
                                 dialogEjecutar.show();
 
                                 if(TrabajosAdapter.validarCoordenadas==true){
-                                    if(HorasOrdenes.cordLat.getText().equals("---")||HorasOrdenes.cordLong.getText().equals("---")){
+                                    if(cordLat.getText().equals("---")|| cordLong.getText().equals("---")){
                                         dialogoCoordenadas();
                                     }else{
                                         Ejecutar();

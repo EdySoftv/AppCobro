@@ -62,7 +62,10 @@ public class HorasOrdenes extends Fragment implements View.OnClickListener, Loca
     public static ProgressDialog dialogVisitaOrd;
     public String valorObsTec = null;
     private ConstraintLayout todo;
-    private LocationManager locationManager;
+    public static LocationManager locationManager;
+    public static boolean isCoordenadas = false;
+    double latitude;
+    double longitud;
 
     public HorasOrdenes() {
         // Required empty public constructor
@@ -189,7 +192,7 @@ public class HorasOrdenes extends Fragment implements View.OnClickListener, Loca
                 //No hay señal de gps(esta desactivado)
                 mostrarInformacionDeAlertaGPS();
             } else {
-                setearCoordenadas();
+                setearCoordenadas(latitude,longitud);
                 return true;
             }
         } catch (Settings.SettingNotFoundException e) {
@@ -199,18 +202,30 @@ public class HorasOrdenes extends Fragment implements View.OnClickListener, Loca
     }
 
     @SuppressLint("MissingPermission")
-    private void setearCoordenadas() {
+    public static void setearCoordenadas(double latitude,double longitud) {
         Location location = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
         if (location == null) {
             location = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
         }
         if (location != null) {
-            double latitude = location.getLatitude();
+            latitude = location.getLatitude();
             // editor.putFloat("latitud", (float) latitude).commit();
-            double longitud = location.getLongitude();
+            longitud = location.getLongitude();
             //editor.putFloat("longitud", (float) longitud).commit();
-            cordLat.setText(String.valueOf(latitude));
-            cordLong.setText(String.valueOf(longitud));
+            try {
+                cordLat.setText(String.valueOf(latitude));
+                cordLong.setText(String.valueOf(longitud));
+            }catch (Exception e){}
+            try {
+                EjecutarOrdenes.latitudeEjec=location.getLatitude();
+
+                EjecutarOrdenes.longitudEjec=location.getLongitude();
+
+                cordLong.setText(String.valueOf(longitud));
+            }catch (Exception e){}
+
+            //cordLat.setText(String.valueOf(latitude));
+            //cordLong.setText(String.valueOf(longitud));
             isCoordenadas = true;
         }
     }
@@ -302,7 +317,7 @@ public class HorasOrdenes extends Fragment implements View.OnClickListener, Loca
 
     }
 
-    private boolean isCoordenadas = false;
+    //private boolean isCoordenadas = false;
 
     @Override
     public void onLocationChanged(Location location) {
@@ -311,7 +326,7 @@ public class HorasOrdenes extends Fragment implements View.OnClickListener, Loca
         }
 
         if (isCoordenadas == false) {
-            setearCoordenadas();
+            setearCoordenadas(latitude,longitud);
         }
     }
 
