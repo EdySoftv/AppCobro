@@ -2700,6 +2700,12 @@ try{
                         nExtenciones = user.BND;
 
                     } else {
+                        try{
+                            MaterialesOrdenes.extSer=0;
+                        }catch(Exception e){}
+                        try{
+                            MaterialesReportes.extSerR=0;
+                        }catch (Exception x){}
                         MuestraBit(context);
                         extencionesMat = false;
                     }
@@ -2835,11 +2841,11 @@ try{
                     try {
                         ArrayAdapter arrayAdapter = new ArrayAdapter(context, android.R.layout.simple_list_item_1, array.descripcionExt);
                         MaterialesOrdenes.spinnerExtMat.setAdapter(arrayAdapter);
-                        spinnerExtMat.setSelection(posExtMat);
+                        //spinnerExtMat.setSelection(posExtMat);
                     } catch (Exception e) {
                         ArrayAdapter arrayAdapter = new ArrayAdapter(context, android.R.layout.simple_list_item_1, array.descripcionExt);
                         spinnerExtMatR.setAdapter(arrayAdapter);
-                        spinnerExtMatR.setSelection(posExtMatR);
+                        //spinnerExtMatR.setSelection(posExtMatR);
                     }
                 }else{
                     ErrorMensaje(context,"Error al conseguir datos del materiales "+response1.message());
