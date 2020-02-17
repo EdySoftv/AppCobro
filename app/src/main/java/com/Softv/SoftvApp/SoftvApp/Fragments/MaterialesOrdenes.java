@@ -19,6 +19,7 @@ import com.Softv.SoftvApp.SoftvApp.Adapters.TablaAdapter;
 import com.Softv.SoftvApp.SoftvApp.Listas.Array;
 import com.Softv.SoftvApp.SoftvApp.Modelos.DescripcionArticuloModel;
 import com.Softv.SoftvApp.SoftvApp.Modelos.DetalleBitacoraModel;
+import com.Softv.SoftvApp.SoftvApp.Modelos.LlenaExtencionesModel;
 import com.Softv.SoftvApp.SoftvApp.R;
 import com.Softv.SoftvApp.SoftvApp.Request.Request;
 
@@ -37,7 +38,7 @@ public class MaterialesOrdenes extends Fragment {
     Request request = new Request();
     EditText pieza,mII,mIE,mFI,mFE;
     public static int clvTipoDescMat,idArticuloDM,cantidadDM,idInventarioMD,piezaSer, metros, totalDM,IIDM,IFDM,EIMD,EFDM;
-    public static int extSer=0;
+    public static int extSer;
     public static Spinner descripcionMat,clasificacionMat,spinnerExtMat;
     public static ConstraintLayout extMat, piezasMat,metrosMat;
     Button agragarDM;
@@ -77,7 +78,7 @@ public class MaterialesOrdenes extends Fragment {
         if(request.extencionesMat==true){
             spinnerExtMat.setVisibility(View.VISIBLE);
         }else{
-
+            extSer=0;
             Array.detalleBit.clear();
             Array.detalleBit.add(0, "---Seleccionar---");
             Array.detalleBit.add(1, "1");
@@ -95,6 +96,12 @@ public class MaterialesOrdenes extends Fragment {
                         List<DetalleBitacoraModel> dat = itData.next();
                         clvTipoDescMat=dat.get(position-1).catTipoArticuloClave;
                         request.DetalleBit(getContext());
+                    if(request.extencionesMat==true){
+                        spinnerExtMat.setVisibility(View.VISIBLE);
+                    }else{
+                        spinnerExtMat.setVisibility(View.GONE);
+                        //extSer=0;
+                    }
                 }
             }
 
@@ -131,8 +138,11 @@ public class MaterialesOrdenes extends Fragment {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 posExtMat=position;
                 if(position!=0){
-                    extSer=(position-1);
-                    seleccionExte=position;
+                    //extSer=(position-1);
+                    //seleccionExte=position;
+                    Iterator<List<LlenaExtencionesModel>> itData = Array.dataLlenaExt.iterator();
+                    List<LlenaExtencionesModel> dat = itData.next();
+                    extSer=dat.get(position-1).ID;
                     request.getPredescarga(getActivity(),getContext());
                 }else{
                     extSer=(position);
@@ -151,7 +161,7 @@ agragarDM.setOnClickListener(new View.OnClickListener() {
             Toast.makeText(getContext(),"Seleccione un articulo",Toast.LENGTH_SHORT).show();
         }else {
            if(extencionesMat==true){
-               if(seleccionExte==0){
+               if(spinnerExtMat.getSelectedItemPosition()==0){
                    Toast.makeText(getContext(),"Seleccione una extensión",Toast.LENGTH_SHORT).show();
                }else{
 
@@ -194,7 +204,7 @@ agragarDM.setOnClickListener(new View.OnClickListener() {
                     mIE.setText("");
                     mFI.setText("");
                     mFE.setText("");
-
+                    request.getChecaExt(getContext());
                 } else {
                     Toast.makeText(getContext(), "Cantidad incorrecta", Toast.LENGTH_SHORT).show();
                 }
@@ -225,6 +235,7 @@ agragarDM.setOnClickListener(new View.OnClickListener() {
                     mIE.setText("");
                     mFI.setText("");
                     mFE.setText("");
+                    request.getChecaExt(getContext());
                 } else {
                     Toast.makeText(getContext(), "Cantidad incorrecta", Toast.LENGTH_SHORT).show();
                 }

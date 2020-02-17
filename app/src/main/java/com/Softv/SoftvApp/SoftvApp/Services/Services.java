@@ -1883,7 +1883,7 @@ public class Services {
 
         try {
             jsonObject.put("clvOrden",  Util.getClvQueja(Util.preferences));
-            jsonObject.put("NoExt", extSer);
+            jsonObject.put("NoExt", extSerR);
         } catch (JSONException e) {
             e.printStackTrace();
         }

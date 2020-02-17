@@ -22,6 +22,7 @@ import android.widget.Toast;
 import com.Softv.SoftvApp.SoftvApp.Listas.Array;
 import com.Softv.SoftvApp.SoftvApp.Modelos.DescripcionArticuloModel;
 import com.Softv.SoftvApp.SoftvApp.Modelos.DetalleBitacoraModel;
+import com.Softv.SoftvApp.SoftvApp.Modelos.LlenaExtencionesModel;
 import com.Softv.SoftvApp.SoftvApp.R;
 import com.Softv.SoftvApp.SoftvApp.Request.Request;
 
@@ -113,6 +114,11 @@ public class MaterialesReportes extends Fragment {
                     List<DetalleBitacoraModel> dat = itData.next();
                     clvTipoDescMatR=dat.get(position-1).catTipoArticuloClave;
                     request.DetalleBitR(getContext());
+                    if(extencionesMat==true){
+                        spinnerExtMatR.setVisibility(View.VISIBLE);
+                    }else {
+                        spinnerExtMatR.setVisibility(View.GONE);
+                    }
                 }
             }
 
@@ -149,9 +155,12 @@ public class MaterialesReportes extends Fragment {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 posExtMatR=position;
                 if(position!=0){
-                    extSerR=(position-1);
-                    seleccionExteR=position;
+                    //extSerR=(position-1);
+                    //seleccionExteR=position;
                     request.getPredescargaR(getActivity(),getContext());
+                    Iterator<List<LlenaExtencionesModel>> itData = Array.dataLlenaExt.iterator();
+                    List<LlenaExtencionesModel> dat = itData.next();
+                    extSerR=dat.get(position-1).ID;
                 }else{
                     extSerR=(position);
                 }
@@ -169,7 +178,7 @@ public class MaterialesReportes extends Fragment {
                     Toast.makeText(getContext(),"Seleccione un articulo",Toast.LENGTH_SHORT).show();
                 }else {
                     if(extencionesMat==true){
-                        if(seleccionExteR==0){
+                        if(spinnerExtMatR.getSelectedItemPosition()==0){
                             Toast.makeText(getContext(),"Seleccione una extensión",Toast.LENGTH_SHORT).show();
                         }else{
                             EjecutarDescargaMaterial();
@@ -213,6 +222,7 @@ public class MaterialesReportes extends Fragment {
                     mFIR.setText("");
                     mFER.setText("");
 
+                    request.getChecaExt(getContext());
                 } else {
                     Toast.makeText(getContext(), "Cantidad incorrecta", Toast.LENGTH_SHORT).show();
                 }
@@ -244,6 +254,7 @@ public class MaterialesReportes extends Fragment {
                     mIER.setText("");
                     mFIR.setText("");
                     mFER.setText("");
+                    request.getChecaExt(getContext());
                 } else {
                     Toast.makeText(getContext(), "Cantidad incorrecta", Toast.LENGTH_SHORT).show();
                 }
