@@ -192,11 +192,11 @@ import static com.Softv.SoftvApp.SoftvApp.Listas.Array.Asigna1;
 import static com.Softv.SoftvApp.SoftvApp.Fragments.TrabajosReportes.solucion;
 import static com.Softv.SoftvApp.SoftvApp.Listas.Array.contratoQ;
 import static com.Softv.SoftvApp.SoftvApp.Listas.Array.contratosrc;
+import static com.Softv.SoftvApp.SoftvApp.Listas.Array.nom_tecnicoSecundarioQ;
 import static com.Softv.SoftvApp.SoftvApp.Listas.Array.ordensrc;
 import static com.Softv.SoftvApp.SoftvApp.Services.Services.ClvTrabajoRequest;
 import static java.util.Arrays.asList;
-import static com.Softv.SoftvAppP.SoftvAppP.Listas.Array.nom_tecnicoSecundario;
-import static com.Softv.SoftvAppP.SoftvAppP.Listas.Array.nom_tecnicoSecundarioQ;
+
 
 public class Request extends AppCompatActivity {
     public static boolean NAP=false,TAP=false;
@@ -1930,7 +1930,7 @@ public class Request extends AppCompatActivity {
                         datos[0] = a;
                         nom_tecnicoSecundarioQ.clear();
                         Array.Clv_TecSecR.clear();
-                        Array.nom_tecnicoSecundarioQ.add(a);
+                        nom_tecnicoSecundarioQ.add(a);
                         Array.Clv_TecSecR.add(-1);
                         for (int i = 0; i < dat.size(); i++) {
                             if(Util.getClvTec(Util.preferences)!= dat.get(i).getClvTecnico()){
