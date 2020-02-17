@@ -3,7 +3,7 @@ package com.Softv.SoftvApp.SoftvApp.Modelos;
 public class GetDameDatosCAMDOResult {
     public  String Casa;
     public  String Ciudad;
-    public  int NUMERO;
+    public  String NUMERO;
     public  String Num_int;
     public  String TELEFONO;
     public  String calle;
@@ -14,7 +14,7 @@ public class GetDameDatosCAMDOResult {
     public  String colonia;
     public  String localidad;
 
-    public GetDameDatosCAMDOResult(String casa, String ciudad, int numero, String num_int, String telefono, String calle, String calleEste
+    public GetDameDatosCAMDOResult(String casa, String ciudad, String numero, String num_int, String telefono, String calle, String calleEste
             , String calleNorte, String calleOeste, String calleSur, String colonia, String localidad){
         this.Casa = casa;
         this.Ciudad = ciudad;
