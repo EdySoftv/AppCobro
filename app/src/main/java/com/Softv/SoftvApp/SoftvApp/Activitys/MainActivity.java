@@ -25,6 +25,7 @@ import android.widget.Toast;
 import com.Softv.SoftvApp.SoftvApp.Adapters.TrabajosAdapter;
 import com.Softv.SoftvApp.SoftvApp.Fragments.HorasReportes;
 import com.Softv.SoftvApp.SoftvApp.Fragments.TrabajosOrdenes;
+import com.Softv.SoftvApp.SoftvApp.Listas.Array;
 import com.Softv.SoftvApp.SoftvApp.R;
 import com.Softv.SoftvApp.SoftvApp.Request.Request;
 import com.Softv.SoftvApp.SoftvApp.Fragments.EjecutarOrdenes;
@@ -32,6 +33,7 @@ import com.Softv.SoftvApp.SoftvApp.Fragments.HorasOrdenes;
 import com.Softv.SoftvApp.SoftvApp.Fragments.MaterialesOrdenes;
 import com.Softv.SoftvApp.SoftvApp.sampledata.Util;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 //import androidx.annotation.RequiresApi;
@@ -53,6 +55,7 @@ public class MainActivity extends AppCompatActivity implements ActionBar.TabList
     ConstraintLayout layoutAnimado;
     public static TextView NombreTec, Contrato, Status, Nombre, Direccion, InfoServicios;
     public static String Estatus;
+    public static boolean DescargaAgregar=false;
     int ValidaRegreso=0,ValidaHora=0;
 
     Request request = new Request();
@@ -235,9 +238,57 @@ public class MainActivity extends AppCompatActivity implements ActionBar.TabList
                     ValidaTrabajos(1,getApplicationContext());
                 }
 
+                DescargaAgregar=true;
+                if(MaterialesOrdenes.directa==true){
+                    if(Array.dataDescargaDirecta.get(0).size()!=0){
+                        try {
+                            JSONObject jsonObject = new JSONObject();
+                            JSONObject jsonObject2 = new JSONObject();
+                            JSONArray jsonArray = new JSONArray();
+                            jsonObject.put("IdTecnico",Util.getClvTec(Util.preferences) );
+                            jsonObject.put("ClvOrden",Util.getClvOrden(Util.preferences) );
+                            jsonObject.put("IdAlmacen", 0);
+                            jsonObject.put("Accion", "Modificar");
+                            jsonObject.put("IdBitacora", request.NoBitacora);
+                            jsonObject.put("TipoDescarga", Util.getTipoDescarga(Util.preferences));
+                            for(int i=0; i< Array.dataDescargaDirecta.get(0).size(); i++){
+                                JSONObject jsonObject1 = new JSONObject();
+                                jsonObject1.put("NoArticulo",Array.dataDescargaDirecta.get(0).get(i).NOARTICULO );
+                                jsonObject1.put("Cantidad",Array.dataDescargaDirecta.get(0).get(i).CANTIDADUTILIZADA);
+                                jsonObject1.put("EsCable", Array.dataDescargaDirecta.get(0).get(i).ESCABLE);
+                                jsonObject1.put("MetrajeInicio",Array.dataDescargaDirecta.get(0).get(i).METRAJEINICIO);
+                                jsonObject1.put("MetrajeFin", Array.dataDescargaDirecta.get(0).get(i).METRAJEFIN);
+                                jsonObject1.put("MetrajeInicioExt", Array.dataDescargaDirecta.get(0).get(i).METRAJEINICIOEXTERIOR);
+                                jsonObject1.put("MetrajeFinExt", Array.dataDescargaDirecta.get(0).get(i).METRAJEFINEXTERIOR);
+                                try {
+                                    jsonObject1.put("NumExt", Array.dataDescargaDirecta.get(0).get(i).NoExt);
+                                }catch (Exception e){
+                                    jsonObject1.put("NumExt", 0);
+                                }
+                                jsonArray.put(i,jsonObject1);
+                            }
+
+
+                            jsonObject2.put("ObjDescargaMat",jsonObject);
+                            jsonObject2.put("Articulos",jsonArray);
+
+                            request.addDescarga(getParent(),getApplicationContext(),jsonObject2);
+                        }catch (Exception e){}
+                    }
+
+
             } else{
                 mViewPager.setCurrentItem(positionTab);
                 }
+
+            if(positionTab == 4){
+
+                }
+
+
+            } else{
+                mViewPager.setCurrentItem(positionTab);
+            }
 
         } else {
             if(visita==1){

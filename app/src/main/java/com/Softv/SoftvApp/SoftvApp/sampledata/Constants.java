@@ -2,7 +2,7 @@ package com.Softv.SoftvApp.SoftvApp.sampledata;
 
 public class Constants {
     //public static final String NEW_URL="http://192.168.0.25:10000/SoftvWCFService.svc/";
-    public static final String NEW_URL="http://187.163.207.252:9160/SoftvWCFService.svc/";
+    public static final String NEW_URL="http://192.168.51.104:10000/SoftvWCFService.svc/";
     public static final String URL_GET_USER = "Usuario/LogOn";
     public static final String URL_GET_TECNICO = "AplicacionMovil/Get_ClvTecnico";
     public static final String URL_GET_PROX = "AplicacionMovil/GetDameSiguienteCita";
@@ -69,6 +69,11 @@ public class Constants {
     public static final String URL_GET_PREDESCARGA="AplicacionMovil/dameTblPreDescargaMaterial";
     public static final String URL_ADD_FIRMA="AplicacionMovil/InsertaTblFirmaCliente";
     public static final String URL_VALIDA_FIRMA = "AplicacionMovil/TrabajosFirma";
+    public static final String URL_ADD_DESCARGA_DIRECTA = "TblDescargaMaterial/GetAddDescargaMaterialArt";
+    public static final String URL_BITACORA_DIRECTA = "Softv_DimeSiTieneBitacora/GetchecaBitacoraTecnico";
+    public static final String URL_GET_DESCARGA_DIRECTA = "GetDescargaMaterialArticulosByIdClvOrden/GetGetDescargaMaterialArticulosByIdClvOrdenList";
+    //public static final String URL_GET_BITACORA_DIRECTA = "Softv_DimeSiTieneBitacora/GetchecaBitacoraTecnicoModel";
+
     ////////MACWAM////////////
     public static final String URL_VALIDA_MACWAM = "AsignaAparatosAlServicio/GetValidaRequiereMacWan";
     public static final String URL_GET_MACWAM = "AsignaAparatosAlServicio/ConMacWanbyClv_Aparato";

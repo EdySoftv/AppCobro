@@ -12,6 +12,7 @@ import com.Softv.SoftvApp.SoftvApp.Listas.JSONArbolServicios;
 import com.Softv.SoftvApp.SoftvApp.Listas.JSONCAMDO;
 import com.Softv.SoftvApp.SoftvApp.Listas.JSONCLIAPA;
 import com.Softv.SoftvApp.SoftvApp.Listas.JSONClasificacionProblm;
+import com.Softv.SoftvApp.SoftvApp.Listas.JSONDESCARGADIRECTA;
 import com.Softv.SoftvApp.SoftvApp.Listas.JSONDescripcionArticulosBit;
 import com.Softv.SoftvApp.SoftvApp.Listas.JSONDetalleBitacora;
 import com.Softv.SoftvApp.SoftvApp.Listas.JSONGETNAP;
@@ -209,6 +210,20 @@ public interface Service {
 
     @POST(Constants.URL_GUARDA_TAP)
     Call<JsonObject> guardaTap();
+
+    //Descarga
+    @POST(Constants.URL_ADD_DESCARGA_DIRECTA)
+    Call<JsonObject> addDescarga();
+
+    @POST(Constants.URL_BITACORA_DIRECTA)
+    Call<JsonObject> bitacoraDirecta();
+
+    @POST(Constants.URL_GET_DESCARGA_DIRECTA)
+    Call<JSONDESCARGADIRECTA> getDescargaDirecta();
+
+    /*@POST(Constants.URL_GET_BITACORA_DIRECTA)
+    Call<JsonObject> getBitacorsDirecta();*/
+
 
 }
 

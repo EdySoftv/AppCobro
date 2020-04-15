@@ -53,6 +53,7 @@ import com.Softv.SoftvApp.SoftvApp.Listas.JSONAparatosDisponibles;
 import com.Softv.SoftvApp.SoftvApp.Listas.JSONArbolServicios;
 import com.Softv.SoftvApp.SoftvApp.Listas.JSONCAMDO;
 import com.Softv.SoftvApp.SoftvApp.Listas.JSONCLIAPA;
+import com.Softv.SoftvApp.SoftvApp.Listas.JSONDESCARGADIRECTA;
 import com.Softv.SoftvApp.SoftvApp.Listas.JSONDescripcionArticulosBit;
 import com.Softv.SoftvApp.SoftvApp.Listas.JSONDetalleBitacora;
 import com.Softv.SoftvApp.SoftvApp.Listas.JSONGETNAP;
@@ -87,6 +88,7 @@ import com.Softv.SoftvApp.SoftvApp.Modelos.GetDameDatosCAMDOResult;
 import com.Softv.SoftvApp.SoftvApp.Modelos.GetDameListadoOrdenesAgendadasResult;
 import com.Softv.SoftvApp.SoftvApp.Modelos.GetDameSerDelCliFacListResult;
 import com.Softv.SoftvApp.SoftvApp.Modelos.GetDeepValidaQuejaCompaniaAdicModel;
+import com.Softv.SoftvApp.SoftvApp.Modelos.GetGetDescargaMaterialArticulosByIdClvOrdenListResult;
 import com.Softv.SoftvApp.SoftvApp.Modelos.GetListAparatosDisponiblesByIdArticuloResult;
 import com.Softv.SoftvApp.SoftvApp.Modelos.GetListClienteAparatosResult;
 import com.Softv.SoftvApp.SoftvApp.Modelos.GetListTipoAparatosByIdArticuloResult;
@@ -102,6 +104,7 @@ import com.Softv.SoftvApp.SoftvApp.Modelos.GetMuestraTipoAparatoListResult;
 import com.Softv.SoftvApp.SoftvApp.Modelos.GetQuejasListResult;
 import com.Softv.SoftvApp.SoftvApp.Modelos.GetSP_StatusAparatosListResult;
 import com.Softv.SoftvApp.SoftvApp.Modelos.Get_ClvTecnicoResult;
+import com.Softv.SoftvApp.SoftvApp.Modelos.GetchecaBitacoraTecnicoModel;
 import com.Softv.SoftvApp.SoftvApp.Modelos.GetdameSerDELCliresumenResult;
 import com.Softv.SoftvApp.SoftvApp.Modelos.GetuspBuscaContratoSeparado2ListResult;
 import com.Softv.SoftvApp.SoftvApp.Modelos.InfoClienteModelo;
@@ -134,6 +137,7 @@ import com.github.mikephil.charting.data.PieEntry;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -205,11 +209,11 @@ public class Request extends AppCompatActivity {
     public static String reintentarComando, contraroMA, obsMA, statusMA, extencionesE, Obs,ObsR, msgComando = "",problemaReal;
     public static boolean isnet, firma,MACWAM,validaExisteFirmaBool;
     public static Long abc;
-    public static int clvP, tecC, nExtenciones = 0,clvProblemarepo,ContratoReal,ClvUsuario;
+    public static int clvP, tecC, nExtenciones = 0,clvProblemarepo,ContratoReal,ClvUsuario,NoBitacora;
     public int reintentaB;
     public static String stringValidaTrabajos;
     public static ArrayAdapter adapterTecSec, adapterTecSecR, adapterNap,adapterTap;
-    public static boolean pieza = false, rapagejecutar = false, extencionesMat = false;
+    public static boolean pieza = false, rapagejecutar = false, extencionesMat = false,escable = false;;
    public static int validFirma;
     public static String ciudadcmdo, localidadcmdo, coloniacmdo, callecmdo, numerocmdo, numeroicmdo, telefonocmdo, callencmdo, callescmdo, calleecmdo, calleocmdo, casacmdo;
     public static String ejecutarStatus,reporteStatus,clasProblema;
@@ -3180,6 +3184,267 @@ try{
             }
         });
     }
+
+    ///////////////////////////////////
+
+    public void getDescargaDirecta(final Activity activity, final Context context, final JSONObject jsonObject) {
+        Call<JSONDESCARGADIRECTA> call = services.RequestPost(context, jsonObject).getDescargaDirecta();
+        call.enqueue(new Callback<JSONDESCARGADIRECTA>() {
+            @Override
+            public void onResponse(Call<JSONDESCARGADIRECTA> call, Response<JSONDESCARGADIRECTA> response) {
+
+                EliminarMaterialAdapter adapter;
+
+
+                try{
+                    array.listaTabla.clear();
+                }catch (Exception e){}
+
+
+
+                if (response.code() == 200) {
+                    JSONDESCARGADIRECTA jsonResponse = response.body();
+                    array.dataDescargaDirecta = new ArrayList<List<GetGetDescargaMaterialArticulosByIdClvOrdenListResult>>(asList(jsonResponse.GetGetDescargaMaterialArticulosByIdClvOrdenListResult()));
+                    Iterator<List<GetGetDescargaMaterialArticulosByIdClvOrdenListResult>> itdata = array.dataDescargaDirecta.iterator();
+                    while (itdata.hasNext()) {
+                        List<GetGetDescargaMaterialArticulosByIdClvOrdenListResult> dat = itdata.next();
+                        for (int i = 0; i < dat.size(); i++) {
+                            array.listaTabla.add(new ArrayList<String>());
+                            array.listaTabla.get(i).add(String.valueOf(dat.get(i).getDescripcion()));
+                            array.listaTabla.get(i).add(String.valueOf(dat.get(i).getCANTIDADUTILIZADA()));
+                            array.listaTabla.get(i).add(String.valueOf(dat.get(i).getNoExt()));
+                            array.listaTabla.get(i).add(String.valueOf(dat.get(i).getNOARTICULO()));
+                        }
+                    }
+                    try {
+                        if(array.listaTabla.size()!=0) {
+                            MaterialesOrdenes.elimarMaterialesList.setVisibility(View.VISIBLE);
+                            RecyclerView.LayoutManager layoutManager = new GridLayoutManager(context, 1);
+                            MaterialesOrdenes.elimarMaterialesList.setLayoutManager(layoutManager);
+                            adapter = new EliminarMaterialAdapter(array.listaTabla, context, activity);
+                            MaterialesOrdenes.elimarMaterialesList.setAdapter(adapter);
+                        }else{
+                            MaterialesOrdenes.elimarMaterialesList.setVisibility(View.GONE);
+                        }
+
+                    }catch (Exception e){
+                        Toast.makeText(context,"Error al cargar Tabla" ,Toast.LENGTH_SHORT ).show();
+                    }
+                }else{
+                    ErrorMensaje(context,"Error al conseguir datos del materiales "+response.message());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<JSONDESCARGADIRECTA> call, Throwable t) {
+                ErrorMensaje(context,"Error "+t.getMessage());
+            }
+        });
+    }
+
+    public void addDescarga(final Activity activity, final Context context, final JSONObject jsonObject) {
+        Call<JsonObject> call = services.RequestPost(context, jsonObject).addDescarga();
+        call.enqueue(new Callback<JsonObject>() {
+            @Override
+            public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
+                if (response.code() == 200) {
+                    if(MainActivity.DescargaAgregar==true){
+                        Toast.makeText(context, "Se agrego la descarga de material con el número de bitacora: " +NoBitacora, Toast.LENGTH_SHORT).show();
+                    }else{
+                        Toast.makeText(context, "Se agrego correctamente", Toast.LENGTH_SHORT).show();
+                        try {
+                            JSONObject jsonObject = new JSONObject();
+                            jsonObject.put("ClvOrdSer",Util.getClvOrden(Util.preferences) );
+                            jsonObject.put("TipoDescarga", Util.getTipoDescarga(Util.preferences));
+                            jsonObject.put("NoExt", 0);
+
+                            getDescargaDirecta(activity,context,jsonObject);
+                        }catch (Exception e){}
+                    }
+
+                } else {
+                    ErrorMensaje(context,"Error al agregar datos del materiales "+response.message());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<JsonObject> call, Throwable t) {
+                ErrorMensaje(context,"Error "+t.getMessage());
+            }
+        });
+    }
+    public void bitacoraDirecta(final Activity activity, final Context context, final JSONObject jsonObject) {
+        Call<JsonObject> call = services.RequestPost(context, jsonObject).bitacoraDirecta();
+        call.enqueue(new Callback<JsonObject>() {
+            @Override
+            public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
+                if (response.code() == 200) {
+                    try {
+                        JsonObject userJson = response.body().getAsJsonObject("GetchecaBitacoraTecnicoResult");
+                    //Introduccion de datos del request en el Modelo para poder usarlos
+
+                        GetchecaBitacoraTecnicoModel user = new GetchecaBitacoraTecnicoModel(
+                                userJson.get("idBitacora").getAsInt()
+                        );
+                        NoBitacora = user.idBitacora;
+                    }catch (Exception e){
+                        NoBitacora = 0;
+                    }
+                    String accion = "";
+                    if (pieza == true) {
+                        escable = false;
+                    } else {
+                        escable = true;
+                    }
+
+
+
+
+                        if (NoBitacora == 0) {
+                        accion = "Agregar";
+                        try {
+                            JSONObject jsonObject = new JSONObject();
+                            JSONObject jsonObject1 = new JSONObject();
+                            JSONObject jsonObject2 = new JSONObject();
+                            JSONArray jsonArray = new JSONArray();
+                            jsonObject.put("IdTecnico", Util.getClvTec(Util.preferences));
+                            jsonObject.put("ClvOrden", Util.getClvOrden(Util.preferences));
+                            jsonObject.put("IdAlmacen", 0);
+                            jsonObject.put("Accion", accion);
+                            jsonObject.put("IdBitacora", NoBitacora);
+                            jsonObject.put("TipoDescarga", Util.getTipoDescarga(Util.preferences));
+
+                            jsonObject1.put("NoArticulo", MaterialesOrdenes.idInventarioMD);
+                            jsonObject1.put("Cantidad", MaterialesOrdenes.totalDM);
+                            jsonObject1.put("EsCable", escable);
+                            jsonObject1.put("MetrajeInicio", MaterialesOrdenes.IIDM);
+                            jsonObject1.put("MetrajeFin", MaterialesOrdenes.IFDM);
+                            jsonObject1.put("MetrajeInicioExt", MaterialesOrdenes.EIMD);
+                            jsonObject1.put("MetrajeFinExt", MaterialesOrdenes.EFDM);
+                            try {
+                                jsonObject1.put("NumExt", MaterialesOrdenes.idInventarioMD);
+                            }catch (Exception e){
+                                jsonObject1.put("NumExt", 0);
+                            }
+                            jsonArray.put(0, jsonObject1);
+
+                            jsonObject2.put("ObjDescargaMat", jsonObject);
+                            jsonObject2.put("Articulos", jsonArray);
+
+                            addDescarga(activity, context, jsonObject2);
+                        } catch (Exception e) {
+                        }
+                    } else {
+
+                        accion = "Modificar";
+                       /* GetGetDescargaMaterialArticulosByIdClvOrdenListResult nuevo = new GetGetDescargaMaterialArticulosByIdClvOrdenListResult(
+                                ,,
+                                ,,,,,
+                                ,,,
+                                ,,0
+                        );*/
+                       GetGetDescargaMaterialArticulosByIdClvOrdenListResult nuevo = new GetGetDescargaMaterialArticulosByIdClvOrdenListResult();
+                       nuevo.setCANTIDADUTILIZADA(MaterialesOrdenes.totalDM);
+                       nuevo.setClvOrdSer(Util.getClvOrden(Util.preferences));
+                       nuevo.setDescripcion(MaterialesOrdenes.descripcionMaterial);
+                       nuevo.setESCABLE(escable);
+                       nuevo.setMETRAJEFIN(MaterialesOrdenes.IFDM);
+                       nuevo.setMETRAJEFINEXTERIOR(MaterialesOrdenes.EFDM);
+                       nuevo.setMETRAJEINICIO(MaterialesOrdenes.IIDM);
+                       nuevo.setMETRAJEINICIOEXTERIOR(MaterialesOrdenes.EIMD);
+                       nuevo.setNOARTICULO(MaterialesOrdenes.idInventarioMD);
+                       nuevo.setNoExt(MaterialesOrdenes.extSer);
+                       try{
+                           nuevo.setTecnico(Util.getNombreTecnicoPreference(Util.preferences));
+                       }catch (Exception e){
+                           nuevo.setTecnico("");
+                       }
+                       nuevo.setTipoDescarga(Util.getTipoDescarga(Util.preferences));
+                       nuevo.setIdDescarga(0);
+
+                       array.dataDescargaDirecta.get(0).add(nuevo);
+
+                            Iterator<List<GetGetDescargaMaterialArticulosByIdClvOrdenListResult>> itdata = array.dataDescargaDirecta.iterator();
+                                List<GetGetDescargaMaterialArticulosByIdClvOrdenListResult> dat = itdata.next();
+
+                            Log.d("asd",array.dataDescargaDirecta.toString());
+                            Log.d("asd",nuevo.toString());
+                            //array.dataDescargaDirecta.add((List<GetGetDescargaMaterialArticulosByIdClvOrdenListResult>) nuevo);
+
+                        array.listaTabla.add(new ArrayList<String>());
+                        array.listaTabla.get(array.listaTabla.size()-1).add(String.valueOf(MaterialesOrdenes.descripcionMaterial));
+                        array.listaTabla.get(array.listaTabla.size()-1).add(String.valueOf(MaterialesOrdenes.totalDM));
+                        array.listaTabla.get(array.listaTabla.size()-1).add(String.valueOf(MaterialesOrdenes.extSer));
+                        array.listaTabla.get(array.listaTabla.size()-1).add(String.valueOf(MaterialesOrdenes.idInventarioMD));
+
+                        EliminarMaterialAdapter adapter;
+                        MaterialesOrdenes.elimarMaterialesList.setVisibility(View.VISIBLE);
+                        RecyclerView.LayoutManager layoutManager = new GridLayoutManager(context, 1);
+                        MaterialesOrdenes.elimarMaterialesList.setLayoutManager(layoutManager);
+                        adapter = new EliminarMaterialAdapter(array.listaTabla, context, activity);
+                        MaterialesOrdenes.elimarMaterialesList.setAdapter(adapter);
+                    }
+
+
+
+
+                } else {
+                    ErrorMensaje(context,"Error al conseguir datos de bitacora "+response.message());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<JsonObject> call, Throwable t) {
+                ErrorMensaje(context,"Error "+t.getMessage());
+            }
+        });
+    }
+
+
+
+    public void DamebitacoraDirecta(final Context context, final JSONObject jsonObject) {
+        Call<JsonObject> call = services.RequestPost(context, jsonObject).bitacoraDirecta();
+        call.enqueue(new Callback<JsonObject>() {
+            @Override
+            public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
+                if (response.code() == 200) {
+                    try {
+                        JsonObject userJson = response.body().getAsJsonObject("GetchecaBitacoraTecnicoResult");
+                        //Introduccion de datos del request en el Modelo para poder usarlos
+
+                        GetchecaBitacoraTecnicoModel user = new GetchecaBitacoraTecnicoModel(
+                                userJson.get("idBitacora").getAsInt()
+                        );
+                        NoBitacora = user.idBitacora;
+                    }catch (Exception e){
+                        NoBitacora = 0;
+                    }
+                } else {
+                    ErrorMensaje(context,"Error al conseguir datos de bitacora "+response.message());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<JsonObject> call, Throwable t) {
+                ErrorMensaje(context,"Error "+t.getMessage());
+            }
+        });
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     //////////
     public void addFirma(final Context context, final JSONObject jsonObject) {
         Call<JsonObject> call = services.RequestPost(context, jsonObject).addFirma();

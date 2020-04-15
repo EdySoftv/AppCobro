@@ -22,6 +22,10 @@ import com.Softv.SoftvApp.SoftvApp.Modelos.DetalleBitacoraModel;
 import com.Softv.SoftvApp.SoftvApp.Modelos.LlenaExtencionesModel;
 import com.Softv.SoftvApp.SoftvApp.R;
 import com.Softv.SoftvApp.SoftvApp.Request.Request;
+import com.Softv.SoftvApp.SoftvApp.sampledata.Util;
+import com.google.gson.JsonObject;
+
+import org.json.JSONObject;
 
 import java.util.Iterator;
 import java.util.List;
@@ -39,9 +43,11 @@ public class MaterialesOrdenes extends Fragment {
     EditText pieza,mII,mIE,mFI,mFE;
     public static int clvTipoDescMat,idArticuloDM,cantidadDM,idInventarioMD,piezaSer, metros, totalDM,IIDM,IFDM,EIMD,EFDM;
     public static int extSer;
+    public static String descripcionMaterial="";
     public static Spinner descripcionMat,clasificacionMat,spinnerExtMat;
     public static ConstraintLayout extMat, piezasMat,metrosMat;
     Button agragarDM;
+    public static boolean directa=true;
 
     int seleccion,seleccionExte;
     public static int posDescMat,posClasMat,posExtMat;
@@ -86,6 +92,18 @@ public class MaterialesOrdenes extends Fragment {
             descripcionMat.setAdapter(arrayAdapter);
         }
 
+        if(directa==true){
+            try {
+                JSONObject jsonObject = new JSONObject();
+                jsonObject.put("ClvOrdSer",Util.getClvOrden(Util.preferences) );
+                jsonObject.put("TipoDescarga", Util.getTipoDescarga(Util.preferences));
+
+                request.DamebitacoraDirecta(getContext(),jsonObject);
+            }catch (Exception e){}
+        }else{
+            request.getPredescarga(getActivity(),getContext());
+        }
+
 
     descripcionMat.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -119,11 +137,24 @@ public class MaterialesOrdenes extends Fragment {
                         idArticuloDM=dat.get(position-1).IdArticulo;
                     cantidadDM=dat.get(position-1).Cantidad;
                     idInventarioMD=dat.get(position-1).IdInventario;
+                    descripcionMaterial=dat.get(position-1).Nombre;
                     request.getTipoMat(getContext());
                     seleccion=position;
                     posClasMat=position;
                     if(request.extencionesMat==false){
-                        request.getPredescarga(getActivity(),getContext());
+                        if(directa==true){
+                            try {
+                                JSONObject jsonObject = new JSONObject();
+                                jsonObject.put("ClvOrdSer",Util.getClvOrden(Util.preferences) );
+                                jsonObject.put("TipoDescarga", Util.getTipoDescarga(Util.preferences));
+                                jsonObject.put("NoExt", 0);
+
+                                request.getDescargaDirecta(getActivity(),getContext(),jsonObject);
+                            }catch (Exception e){}
+                        }else{
+                            request.getPredescarga(getActivity(),getContext());
+                        }
+
                     }
                 }
             }
@@ -143,7 +174,19 @@ public class MaterialesOrdenes extends Fragment {
                     Iterator<List<LlenaExtencionesModel>> itData = Array.dataLlenaExt.iterator();
                     List<LlenaExtencionesModel> dat = itData.next();
                     extSer=dat.get(position-1).ID;
-                    request.getPredescarga(getActivity(),getContext());
+                    if(directa==true){
+                        try {
+                            JSONObject jsonObject = new JSONObject();
+                            jsonObject.put("ClvOrdSer",Util.getClvOrden(Util.preferences) );
+                            jsonObject.put("TipoDescarga", Util.getTipoDescarga(Util.preferences));
+                            jsonObject.put("NoExt", extSer);
+
+                            request.getDescargaDirecta(getActivity(),getContext(),jsonObject);
+                        }catch (Exception e){}
+                    }else{
+                        request.getPredescarga(getActivity(),getContext());
+                    }
+
                 }else{
                     extSer=(position);
                 }
@@ -192,19 +235,40 @@ agragarDM.setOnClickListener(new View.OnClickListener() {
                 EIMD = 0;
                 EFDM = 0;
                 if (cantidadDM >= totalDM) {
-                    request.getValidaPreDes(getActivity(), getContext());
-                    descripcionMat.setSelection(0);
-                    clasificacionMat.setSelection(0);
-                    clasificacionMat.setEnabled(false);
-                    piezasMat.setVisibility(View.GONE);
-                    extMat.setVisibility(View.GONE);
-                    metrosMat.setVisibility(View.GONE);
-                    pieza.setText("");
-                    mII.setText("");
-                    mIE.setText("");
-                    mFI.setText("");
-                    mFE.setText("");
-                    request.getChecaExt(getContext());
+                    if(directa==false) {
+                        request.getValidaPreDes(getActivity(), getContext());
+                        descripcionMat.setSelection(0);
+                        clasificacionMat.setSelection(0);
+                        clasificacionMat.setEnabled(false);
+                        piezasMat.setVisibility(View.GONE);
+                        extMat.setVisibility(View.GONE);
+                        metrosMat.setVisibility(View.GONE);
+                        pieza.setText("");
+                        mII.setText("");
+                        mIE.setText("");
+                        mFI.setText("");
+                        mFE.setText("");
+                        request.getChecaExt(getContext());
+                    }else{
+                        try{
+                            JSONObject jsonObject = new JSONObject();
+                            jsonObject.put("ClvOrdSer", Util.getClvOrden(Util.preferences));
+                            jsonObject.put("TipoDescarga", Util.getTipoDescarga(Util.preferences));
+                            request.bitacoraDirecta(getActivity(),getContext(),jsonObject);
+                        }catch (Exception e){}
+                        descripcionMat.setSelection(0);
+                        clasificacionMat.setSelection(0);
+                        clasificacionMat.setEnabled(false);
+                        piezasMat.setVisibility(View.GONE);
+                        extMat.setVisibility(View.GONE);
+                        metrosMat.setVisibility(View.GONE);
+                        pieza.setText("");
+                        mII.setText("");
+                        mIE.setText("");
+                        mFI.setText("");
+                        mFE.setText("");
+                    }
+
                 } else {
                     Toast.makeText(getContext(), "Cantidad incorrecta", Toast.LENGTH_SHORT).show();
                 }
@@ -223,19 +287,39 @@ agragarDM.setOnClickListener(new View.OnClickListener() {
                 metros = (IFDM - IIDM) + (EFDM - EIMD);
                 totalDM = metros;
                 if (cantidadDM >= totalDM) {
-                    request.getValidaPreDes(getActivity(), getContext());
-                    descripcionMat.setSelection(0);
-                    clasificacionMat.setSelection(0);
-                    clasificacionMat.setEnabled(false);
-                    piezasMat.setVisibility(View.GONE);
-                    extMat.setVisibility(View.GONE);
-                    metrosMat.setVisibility(View.GONE);
-                    pieza.setText("");
-                    mII.setText("");
-                    mIE.setText("");
-                    mFI.setText("");
-                    mFE.setText("");
-                    request.getChecaExt(getContext());
+                    if(directa==false) {
+                        request.getValidaPreDes(getActivity(), getContext());
+                        descripcionMat.setSelection(0);
+                        clasificacionMat.setSelection(0);
+                        clasificacionMat.setEnabled(false);
+                        piezasMat.setVisibility(View.GONE);
+                        extMat.setVisibility(View.GONE);
+                        metrosMat.setVisibility(View.GONE);
+                        pieza.setText("");
+                        mII.setText("");
+                        mIE.setText("");
+                        mFI.setText("");
+                        mFE.setText("");
+                        request.getChecaExt(getContext());
+                    }else{
+                        try{
+                            JSONObject jsonObject = new JSONObject();
+                            jsonObject.put("ClvOrdSer", Util.getClvOrden(Util.preferences));
+                            jsonObject.put("TipoDescarga", Util.getTipoDescarga(Util.preferences));
+                            request.bitacoraDirecta(getActivity(),getContext(),jsonObject);
+                        }catch (Exception e){}
+                        descripcionMat.setSelection(0);
+                        clasificacionMat.setSelection(0);
+                        clasificacionMat.setEnabled(false);
+                        piezasMat.setVisibility(View.GONE);
+                        extMat.setVisibility(View.GONE);
+                        metrosMat.setVisibility(View.GONE);
+                        pieza.setText("");
+                        mII.setText("");
+                        mIE.setText("");
+                        mFI.setText("");
+                        mFE.setText("");
+                    }
                 } else {
                     Toast.makeText(getContext(), "Cantidad incorrecta", Toast.LENGTH_SHORT).show();
                 }

@@ -7,6 +7,7 @@ import com.Softv.SoftvApp.SoftvApp.Modelos.GetConTecnicoAgendaResult;
 import com.Softv.SoftvApp.SoftvApp.Modelos.GetDameDatosCAMDOResult;
 import com.Softv.SoftvApp.SoftvApp.Modelos.GetDameListadoOrdenesAgendadasResult;
 import com.Softv.SoftvApp.SoftvApp.Modelos.GetDameSerDelCliFacListResult;
+import com.Softv.SoftvApp.SoftvApp.Modelos.GetGetDescargaMaterialArticulosByIdClvOrdenListResult;
 import com.Softv.SoftvApp.SoftvApp.Modelos.GetListAparatosDisponiblesByIdArticuloResult;
 import com.Softv.SoftvApp.SoftvApp.Modelos.GetListClienteAparatosResult;
 import com.Softv.SoftvApp.SoftvApp.Modelos.GetListTipoAparatosByIdArticuloResult;
@@ -118,7 +119,9 @@ public class Array {
     public static ArrayList <List<dameTblPreDescargaMaterialResultModel>>dataPreDescarga;
     public static ArrayList<String> descripcionExt= new ArrayList<String>();
     public static ArrayList<ArrayList<String>> listaTabla= new ArrayList<ArrayList<String>>();
+    public static ArrayList<ArrayList<String>> listaTablaDircta= new ArrayList<ArrayList<String>>();
     public static  ArrayList<Integer> clv_Material;
+    public static ArrayList <List<GetGetDescargaMaterialArticulosByIdClvOrdenListResult>>dataDescargaDirecta;
 
     /////////////////
     public static ArrayList<List<mediosPregunta>> dataMediosPregunta;

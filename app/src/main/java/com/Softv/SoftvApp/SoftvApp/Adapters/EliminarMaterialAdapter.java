@@ -6,12 +6,14 @@ import android.graphics.Paint;
 import android.graphics.Rect;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
+import com.Softv.SoftvApp.SoftvApp.Fragments.MaterialesOrdenes;
 import com.Softv.SoftvApp.SoftvApp.Listas.Array;
 import com.Softv.SoftvApp.SoftvApp.R;
 import com.Softv.SoftvApp.SoftvApp.Request.Request;
@@ -128,19 +130,8 @@ public class EliminarMaterialAdapter extends RecyclerView.Adapter<EliminarMateri
             materialesViewHolder.elimarMaterial.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-
-                    try{
-                        JSONObject jsonObject = new JSONObject();
-
-                        if(Util.getTipoDescarga(Util.preferences).equals("Q")){
-                            jsonObject.put("clvOrden", Util.getClvQueja(Util.preferences));
-                        }else if(Util.getTipoDescarga(Util.preferences).equals("O")){
-                            jsonObject.put("clvOrden", Util.getClvOrden(Util.preferences));
-                        }
-                        jsonObject.put("noArticulo",Array.listaTabla.get(position-1).get(3) );
-                        request.eliminarPreDescarga(context,jsonObject,activity );
-                    }catch (Exception e) {
-                        /*try {
+                    if(MaterialesOrdenes.directa==false) {
+                        try {
                             JSONObject jsonObject = new JSONObject();
 
                             if (Util.getTipoDescarga(Util.preferences).equals("Q")) {
@@ -148,11 +139,18 @@ public class EliminarMaterialAdapter extends RecyclerView.Adapter<EliminarMateri
                             } else if (Util.getTipoDescarga(Util.preferences).equals("O")) {
                                 jsonObject.put("clvOrden", Util.getClvOrden(Util.preferences));
                             }
-                            jsonObject.put("noArticulo", Array.listaTabla.get(0).get(3));
+                            jsonObject.put("noArticulo", Array.listaTabla.get(position - 1).get(3));
                             request.eliminarPreDescarga(context, jsonObject, activity);
-                        }catch (Exception x){}*/
-                    }
+                        } catch (Exception e) {
 
+                        }
+                    }else{
+
+                        Array.listaTabla.remove(position-1);
+                        Array.dataDescargaDirecta.get(0).remove(position-1);
+                        notifyDataSetChanged();
+
+                    }
 
                 }
             });

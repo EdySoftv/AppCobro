@@ -59,7 +59,11 @@ public class Orden extends AppCompatActivity implements NavigationView.OnNavigat
         barra = findViewById(R.id.nav_view);
         View barra1 = barra.getHeaderView(0);
         nombreTec=barra1.findViewById(R.id.tv_NombreTecnico);
-        nombreTec.setText(Util.getNombreTecnicoPreference(Util.preferences));
+        try {
+            nombreTec.setText(Util.getNombreTecnicoPreference(Util.preferences));
+        }catch (Exception e){
+            nombreTec.setText("");
+        }
         clvorden=0;
         opcion=1;
         cont="";
