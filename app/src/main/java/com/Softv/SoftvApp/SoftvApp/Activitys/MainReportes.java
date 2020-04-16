@@ -17,6 +17,8 @@ import android.widget.Toast;
 
 //import androidx.annotation.StyleableRes;
 
+import com.Softv.SoftvApp.SoftvApp.Fragments.MaterialesOrdenes;
+import com.Softv.SoftvApp.SoftvApp.Listas.Array;
 import com.Softv.SoftvApp.SoftvApp.R;
 import com.Softv.SoftvApp.SoftvApp.Request.Request;
 import com.Softv.SoftvApp.SoftvApp.Fragments.EjecutarReportes;
@@ -24,6 +26,9 @@ import com.Softv.SoftvApp.SoftvApp.Fragments.HorasReportes;
 import com.Softv.SoftvApp.SoftvApp.Fragments.MaterialesReportes;
 import com.Softv.SoftvApp.SoftvApp.Fragments.TrabajosReportes;
 import com.Softv.SoftvApp.SoftvApp.sampledata.Util;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 import static com.Softv.SoftvApp.SoftvApp.Adapters.QuejasAdapter.statusQueja;
 import static com.Softv.SoftvApp.SoftvApp.Fragments.TrabajosReportes.posSolucionRepo;
@@ -39,6 +44,7 @@ public class MainReportes extends AppCompatActivity implements ActionBar.TabList
     private boolean cambioRepo = false;
      public static  int position;
     public static TextView Nombre1, Direccion1,NombreTec1,infoA,contrato1,ciudad1;
+    public static boolean DescargaAgregarR=false;
     Request request = new Request();
     boolean visitaValidaReporte=false;
 
@@ -164,6 +170,48 @@ public class MainReportes extends AppCompatActivity implements ActionBar.TabList
                 if (positionTab == 3 && cambioRepo == false) {
                     mViewPager.setCurrentItem(1);
                 }
+                if(positionTab==3) {
+                    DescargaAgregarR = true;
+                    if (MaterialesOrdenes.directa == true) {
+                        if (Array.dataDescargaDirecta.get(0).size() != 0) {
+                            try {
+                                JSONObject jsonObject = new JSONObject();
+                                JSONObject jsonObject2 = new JSONObject();
+                                JSONArray jsonArray = new JSONArray();
+                                jsonObject.put("IdTecnico", Util.getClvTec(Util.preferences));
+                                jsonObject.put("ClvOrden", Util.getClvOrden(Util.preferences));
+                                jsonObject.put("IdAlmacen", 0);
+                                jsonObject.put("Accion", "Modificar");
+                                jsonObject.put("IdBitacora", request.NoBitacora);
+                                jsonObject.put("TipoDescarga", Util.getTipoDescarga(Util.preferences));
+                                for (int i = 0; i < Array.dataDescargaDirecta.get(0).size(); i++) {
+                                    JSONObject jsonObject1 = new JSONObject();
+                                    jsonObject1.put("NoArticulo", Array.dataDescargaDirecta.get(0).get(i).NOARTICULO);
+                                    jsonObject1.put("Cantidad", Array.dataDescargaDirecta.get(0).get(i).CANTIDADUTILIZADA);
+                                    jsonObject1.put("EsCable", Array.dataDescargaDirecta.get(0).get(i).ESCABLE);
+                                    jsonObject1.put("MetrajeInicio", Array.dataDescargaDirecta.get(0).get(i).METRAJEINICIO);
+                                    jsonObject1.put("MetrajeFin", Array.dataDescargaDirecta.get(0).get(i).METRAJEFIN);
+                                    jsonObject1.put("MetrajeInicioExt", Array.dataDescargaDirecta.get(0).get(i).METRAJEINICIOEXTERIOR);
+                                    jsonObject1.put("MetrajeFinExt", Array.dataDescargaDirecta.get(0).get(i).METRAJEFINEXTERIOR);
+                                    try {
+                                        jsonObject1.put("NumExt", Array.dataDescargaDirecta.get(0).get(i).NoExt);
+                                    } catch (Exception e) {
+                                        jsonObject1.put("NumExt", 0);
+                                    }
+                                    jsonArray.put(i, jsonObject1);
+                                }
+
+
+                                jsonObject2.put("ObjDescargaMat", jsonObject);
+                                jsonObject2.put("Articulos", jsonArray);
+
+                                request.addDescargaR(getParent(), getApplicationContext(), jsonObject2);
+                            } catch (Exception e) {
+                            }
+                        }
+                    }
+                }
+
             } else if (HorasReportes.repotteVisita == 1) {
                 mViewPager.setCurrentItem(0);
             }
