@@ -2,7 +2,7 @@ package com.Softv.SoftvApp.SoftvApp.sampledata;
 
 public class Constants {
     //public static final String NEW_URL="http://192.168.0.25:10000/SoftvWCFService.svc/";
-    public static final String NEW_URL="http://192.168.51.104:10000/SoftvWCFService.svc/";
+    public static final String NEW_URL="http://192.168.150.1:8000/SoftvWCFService.svc/";
     public static final String URL_GET_USER = "Usuario/LogOn";
     public static final String URL_GET_TECNICO = "AplicacionMovil/Get_ClvTecnico";
     public static final String URL_GET_PROX = "AplicacionMovil/GetDameSiguienteCita";
@@ -72,7 +72,7 @@ public class Constants {
     public static final String URL_ADD_DESCARGA_DIRECTA = "TblDescargaMaterial/GetAddDescargaMaterialArt";
     public static final String URL_BITACORA_DIRECTA = "Softv_DimeSiTieneBitacora/GetchecaBitacoraTecnico";
     public static final String URL_GET_DESCARGA_DIRECTA = "GetDescargaMaterialArticulosByIdClvOrden/GetGetDescargaMaterialArticulosByIdClvOrdenList";
-    //public static final String URL_GET_BITACORA_DIRECTA = "Softv_DimeSiTieneBitacora/GetchecaBitacoraTecnicoModel";
+    public static final String URL_GET_PERMISO_DIRECTA = "TblDescargaMaterial/Muestra_TecnicosDescargaMaterial";
 
     ////////MACWAM////////////
     public static final String URL_VALIDA_MACWAM = "AsignaAparatosAlServicio/GetValidaRequiereMacWan";

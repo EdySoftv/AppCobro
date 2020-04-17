@@ -172,7 +172,7 @@ public class MainReportes extends AppCompatActivity implements ActionBar.TabList
                 }
                 if(positionTab==3) {
                     DescargaAgregarR = true;
-                    if (MaterialesOrdenes.directa == true) {
+                    if (Util.getPermisisDescarga(Util.preferences) == true) {
                         if (Array.dataDescargaDirecta.get(0).size() != 0) {
                             try {
                                 JSONObject jsonObject = new JSONObject();

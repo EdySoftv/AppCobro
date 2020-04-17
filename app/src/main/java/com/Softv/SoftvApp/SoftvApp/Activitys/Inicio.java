@@ -73,6 +73,15 @@ public class Inicio extends AppCompatActivity
 
         }else{
             try{
+                JSONObject jsonObjectDirecta = new JSONObject();
+                JSONObject jsonObjectDirecta1 = new JSONObject();
+                jsonObjectDirecta.put("Op",3);
+                jsonObjectDirecta.put("idcompania",3);
+                jsonObjectDirecta.put("ClvTecnicoMandar",Util.getClvTec(Util.preferences));
+                jsonObjectDirecta1.put("obj",jsonObjectDirecta);
+                request.getPermisosDirecta(getApplicationContext(),jsonObjectDirecta1);
+            }catch (Exception e){}
+            try{
                 JSONObject jsonObject = new JSONObject();
                 jsonObject.put("clv_tecnico", Util.getClvTec(Util.preferences));
                 request.getProximaCita(getApplicationContext(),jsonObject,view,dialogInicio,this);

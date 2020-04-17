@@ -47,7 +47,7 @@ public class MaterialesOrdenes extends Fragment {
     public static Spinner descripcionMat,clasificacionMat,spinnerExtMat;
     public static ConstraintLayout extMat, piezasMat,metrosMat;
     Button agragarDM;
-    public static boolean directa=true;
+
 
     int seleccion,seleccionExte;
     public static int posDescMat,posClasMat,posExtMat;
@@ -92,7 +92,7 @@ public class MaterialesOrdenes extends Fragment {
             descripcionMat.setAdapter(arrayAdapter);
         }
 
-        if(directa==true){
+        if(Util.getPermisisDescarga(Util.preferences)==true){
             try {
                 JSONObject jsonObject = new JSONObject();
                 jsonObject.put("ClvOrdSer",Util.getClvOrden(Util.preferences) );
@@ -142,7 +142,7 @@ public class MaterialesOrdenes extends Fragment {
                     seleccion=position;
                     posClasMat=position;
                     if(request.extencionesMat==false){
-                        if(directa==true){
+                        if(Util.getPermisisDescarga(Util.preferences)==true){
                             try {
                                 JSONObject jsonObject = new JSONObject();
                                 jsonObject.put("ClvOrdSer",Util.getClvOrden(Util.preferences) );
@@ -174,7 +174,7 @@ public class MaterialesOrdenes extends Fragment {
                     Iterator<List<LlenaExtencionesModel>> itData = Array.dataLlenaExt.iterator();
                     List<LlenaExtencionesModel> dat = itData.next();
                     extSer=dat.get(position-1).ID;
-                    if(directa==true){
+                    if(Util.getPermisisDescarga(Util.preferences)==true){
                         try {
                             JSONObject jsonObject = new JSONObject();
                             jsonObject.put("ClvOrdSer",Util.getClvOrden(Util.preferences) );
@@ -235,7 +235,7 @@ agragarDM.setOnClickListener(new View.OnClickListener() {
                 EIMD = 0;
                 EFDM = 0;
                 if (cantidadDM >= totalDM) {
-                    if(directa==false) {
+                    if(Util.getPermisisDescarga(Util.preferences)==false) {
                         request.getValidaPreDes(getActivity(), getContext());
                         descripcionMat.setSelection(0);
                         clasificacionMat.setSelection(0);
@@ -287,7 +287,7 @@ agragarDM.setOnClickListener(new View.OnClickListener() {
                 metros = (IFDM - IIDM) + (EFDM - EIMD);
                 totalDM = metros;
                 if (cantidadDM >= totalDM) {
-                    if(directa==false) {
+                    if(Util.getPermisisDescarga(Util.preferences)==false) {
                         request.getValidaPreDes(getActivity(), getContext());
                         descripcionMat.setSelection(0);
                         clasificacionMat.setSelection(0);

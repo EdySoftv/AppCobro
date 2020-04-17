@@ -2054,9 +2054,9 @@ public class Services {
 
                 return chain.proceed(newRequest);
             }
-        })      .connectTimeout(30, TimeUnit.SECONDS)
-                .readTimeout(30, TimeUnit.SECONDS)
-                .writeTimeout(30, TimeUnit.SECONDS).build();
+        })      .connectTimeout(30, TimeUnit.MINUTES)
+                .readTimeout(30, TimeUnit.MINUTES)
+                .writeTimeout(30, TimeUnit.MINUTES).build();
 
 
         Retrofit retrofit = new Retrofit.Builder()

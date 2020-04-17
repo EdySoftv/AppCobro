@@ -19,6 +19,7 @@ import com.Softv.SoftvApp.SoftvApp.Listas.JSONGETNAP;
 import com.Softv.SoftvApp.SoftvApp.Listas.JSONLlenaExtenciones;
 import com.Softv.SoftvApp.SoftvApp.Listas.JSONMediosSer;
 import com.Softv.SoftvApp.SoftvApp.Listas.JSONNombreTecnico;
+import com.Softv.SoftvApp.SoftvApp.Listas.JSONPERMISOSDIRECTA;
 import com.Softv.SoftvApp.SoftvApp.Listas.JSONPreDescarga;
 import com.Softv.SoftvApp.SoftvApp.Listas.JSONPregunta;
 import com.Softv.SoftvApp.SoftvApp.Listas.JSONPrioridad;
@@ -221,8 +222,8 @@ public interface Service {
     @POST(Constants.URL_GET_DESCARGA_DIRECTA)
     Call<JSONDESCARGADIRECTA> getDescargaDirecta();
 
-    /*@POST(Constants.URL_GET_BITACORA_DIRECTA)
-    Call<JsonObject> getBitacorsDirecta();*/
+    @POST(Constants.URL_GET_PERMISO_DIRECTA)
+    Call<JSONPERMISOSDIRECTA> getPermisosDirecta();
 
 
 }

@@ -86,7 +86,7 @@ public class MaterialesReportes extends Fragment {
 
         elimarMaterialesListR = view.findViewById(R.id.eliminarMaterialesListR);
 
-        if(MaterialesOrdenes.directa==true){
+        if(Util.getPermisisDescarga(Util.preferences)==true){
             try {
                 JSONObject jsonObject = new JSONObject();
                 jsonObject.put("ClvOrdSer", Util.getClvOrden(Util.preferences) );
@@ -155,7 +155,7 @@ public class MaterialesReportes extends Fragment {
                     seleccionR=position;
                     posClasMatR=position;
                     if(extencionesMat==false){
-                        if(MaterialesOrdenes.directa==true){
+                        if(Util.getPermisisDescarga(Util.preferences)==true){
                             try {
                                 JSONObject jsonObject = new JSONObject();
                                 jsonObject.put("ClvOrdSer",Util.getClvOrden(Util.preferences) );
@@ -188,7 +188,7 @@ public class MaterialesReportes extends Fragment {
                     List<LlenaExtencionesModel> dat = itData.next();
                     extSerR=dat.get(position-1).ID;
 
-                    if(MaterialesOrdenes.directa==true){
+                    if(Util.getPermisisDescarga(Util.preferences)==true){
                         try {
                             JSONObject jsonObject = new JSONObject();
                             jsonObject.put("ClvOrdSer",Util.getClvOrden(Util.preferences) );
@@ -248,7 +248,7 @@ public class MaterialesReportes extends Fragment {
                 EIMDR = 0;
                 EFDMR = 0;
                 if (cantidadDMR >= totalDMR) {
-                    if(MaterialesOrdenes.directa==false) {
+                    if(Util.getPermisisDescarga(Util.preferences)==false) {
                     request.getValidaPreDesR(getActivity(), getContext());
                     descripcionMatR.setSelection(0);
                     clasificacionMatR.setSelection(0);
@@ -301,7 +301,7 @@ public class MaterialesReportes extends Fragment {
                 metrosR = (IFDMR - IIDMR) + (EFDMR - EIMDR);
                 totalDMR = metrosR;
                 if (cantidadDMR >= totalDMR) {
-                    if(MaterialesOrdenes.directa==false) {
+                    if(Util.getPermisisDescarga(Util.preferences)==false) {
                     request.getValidaPreDesR(getActivity(), getContext());
                     descripcionMatR.setSelection(0);
                     clasificacionMatR.setSelection(0);

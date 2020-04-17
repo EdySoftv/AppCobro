@@ -130,7 +130,7 @@ public class EliminarMaterialAdapter extends RecyclerView.Adapter<EliminarMateri
             materialesViewHolder.elimarMaterial.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    if(MaterialesOrdenes.directa==false) {
+                    if(Util.getPermisisDescarga(Util.preferences)==false) {
                         try {
                             JSONObject jsonObject = new JSONObject();
 

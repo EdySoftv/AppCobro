@@ -26,6 +26,7 @@ import com.Softv.SoftvApp.SoftvApp.Modelos.GetdameSerDELCliresumenResult;
 import com.Softv.SoftvApp.SoftvApp.Modelos.GetuspBuscaContratoSeparado2ListResult;
 import com.Softv.SoftvApp.SoftvApp.Modelos.ListadoQuejasAgendadas;
 import com.Softv.SoftvApp.SoftvApp.Modelos.LlenaExtencionesModel;
+import com.Softv.SoftvApp.SoftvApp.Modelos.Muestra_TecnicosDescargaMaterialResult;
 import com.Softv.SoftvApp.SoftvApp.Modelos.ObtieneNapModel;
 import com.Softv.SoftvApp.SoftvApp.Modelos.ObtieneTapModel;
 import com.Softv.SoftvApp.SoftvApp.Modelos.OrdSer;
@@ -122,6 +123,7 @@ public class Array {
     public static ArrayList<ArrayList<String>> listaTablaDircta= new ArrayList<ArrayList<String>>();
     public static  ArrayList<Integer> clv_Material;
     public static ArrayList <List<GetGetDescargaMaterialArticulosByIdClvOrdenListResult>>dataDescargaDirecta;
+    public static ArrayList <List<Muestra_TecnicosDescargaMaterialResult>>dataPermisosDirecta;
 
     /////////////////
     public static ArrayList<List<mediosPregunta>> dataMediosPregunta;

@@ -41,4 +41,7 @@ public class Util {
     public static String getTipoDescarga(SharedPreferences preferences){
         return preferences.getString("TipoDescarga", "");}
 
+    public static boolean getPermisisDescarga(SharedPreferences preferences){
+        return preferences.getBoolean("PermisisDescarga", false);}
+
 }

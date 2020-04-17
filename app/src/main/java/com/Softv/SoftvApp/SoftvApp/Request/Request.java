@@ -60,6 +60,7 @@ import com.Softv.SoftvApp.SoftvApp.Listas.JSONGETNAP;
 import com.Softv.SoftvApp.SoftvApp.Listas.JSONLlenaExtenciones;
 import com.Softv.SoftvApp.SoftvApp.Listas.JSONMediosSer;
 import com.Softv.SoftvApp.SoftvApp.Listas.JSONNombreTecnico;
+import com.Softv.SoftvApp.SoftvApp.Listas.JSONPERMISOSDIRECTA;
 import com.Softv.SoftvApp.SoftvApp.Listas.JSONPreDescarga;
 import com.Softv.SoftvApp.SoftvApp.Listas.JSONPregunta;
 import com.Softv.SoftvApp.SoftvApp.Listas.JSONReporteCliente;
@@ -110,6 +111,7 @@ import com.Softv.SoftvApp.SoftvApp.Modelos.GetuspBuscaContratoSeparado2ListResul
 import com.Softv.SoftvApp.SoftvApp.Modelos.InfoClienteModelo;
 import com.Softv.SoftvApp.SoftvApp.Modelos.ListadoQuejasAgendadas;
 import com.Softv.SoftvApp.SoftvApp.Modelos.LlenaExtencionesModel;
+import com.Softv.SoftvApp.SoftvApp.Modelos.Muestra_TecnicosDescargaMaterialResult;
 import com.Softv.SoftvApp.SoftvApp.Modelos.ObtieneNapModel;
 import com.Softv.SoftvApp.SoftvApp.Modelos.ObtieneTapModel;
 import com.Softv.SoftvApp.SoftvApp.Modelos.OrdSer;
@@ -616,6 +618,17 @@ public class Request extends AppCompatActivity {
                             nombre.add("Reportes");
                         }
                     }
+
+                    try{
+                        JSONObject jsonObjectDirecta = new JSONObject();
+                        JSONObject jsonObjectDirecta1 = new JSONObject();
+                        jsonObjectDirecta.put("Op",3);
+                        jsonObjectDirecta.put("idcompania",3);
+                        jsonObjectDirecta.put("ClvTecnicoMandar",Util.getClvTec(Util.preferences));
+                        jsonObjectDirecta1.put("obj",jsonObjectDirecta);
+                        getPermisosDirecta(context,jsonObjectDirecta1);
+                    }catch (Exception e){}
+
 
 
                     adapter = new GraficaAdapter(context,nombre,color);
@@ -3321,7 +3334,7 @@ try{
                             jsonObject1.put("MetrajeInicioExt", MaterialesOrdenes.EIMD);
                             jsonObject1.put("MetrajeFinExt", MaterialesOrdenes.EFDM);
                             try {
-                                jsonObject1.put("NumExt", MaterialesOrdenes.idInventarioMD);
+                                jsonObject1.put("NumExt", MaterialesOrdenes.extSer);
                             }catch (Exception e){
                                 jsonObject1.put("NumExt", 0);
                             }
@@ -3671,7 +3684,41 @@ try{
 
 
 
+    public void getPermisosDirecta(final Context context, final JSONObject jsonObject) {
+        Call<JSONPERMISOSDIRECTA> call = services.RequestPost(context, jsonObject).getPermisosDirecta();
+        call.enqueue(new Callback<JSONPERMISOSDIRECTA>() {
+            @Override
+            public void onResponse(Call<JSONPERMISOSDIRECTA> call, Response<JSONPERMISOSDIRECTA> response) {
 
+
+                if (response.code() == 200) {
+                    Util.preferences = context.getSharedPreferences("credenciales", Context.MODE_PRIVATE);
+                    Util.editor = Util.preferences.edit();
+                    JSONPERMISOSDIRECTA jsonResponse = response.body();
+                    array.dataPermisosDirecta = new ArrayList<List<Muestra_TecnicosDescargaMaterialResult>>(asList(jsonResponse.Muestra_TecnicosDescargaMaterialResult()));
+                    Iterator<List<Muestra_TecnicosDescargaMaterialResult>> itdata = array.dataPermisosDirecta.iterator();
+                    while (itdata.hasNext()) {
+                        List<Muestra_TecnicosDescargaMaterialResult> dat = itdata.next();
+                        for (int i = 0; i < dat.size(); i++) {
+                            if(dat.get(i).Existe==1){
+                                Util.editor.putBoolean("PermisisDescarga",true);
+                            }else{
+                                Util.editor.putBoolean("PermisisDescarga",false);
+                            }
+                        }
+                    }
+                    Util.editor.commit();
+                }else{
+                    ErrorMensaje(context,"Error "+response.message());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<JSONPERMISOSDIRECTA> call, Throwable t) {
+                ErrorMensaje(context,"Error "+t.getMessage());
+            }
+        });
+    }
 
 
 

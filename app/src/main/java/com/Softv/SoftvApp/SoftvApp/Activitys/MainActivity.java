@@ -239,8 +239,8 @@ public class MainActivity extends AppCompatActivity implements ActionBar.TabList
                 }
 
                 DescargaAgregar=true;
-                if(MaterialesOrdenes.directa==true){
-                    if(Array.dataDescargaDirecta.get(0).size()!=0){
+                if(Util.getPermisisDescarga(Util.preferences)==true){
+                    if(Array.dataDescargaDirecta.get(0).size()!=0 && request.NoBitacora!=0){
                         try {
                             JSONObject jsonObject = new JSONObject();
                             JSONObject jsonObject2 = new JSONObject();
@@ -274,6 +274,9 @@ public class MainActivity extends AppCompatActivity implements ActionBar.TabList
 
                             request.addDescarga(getParent(),getApplicationContext(),jsonObject2);
                         }catch (Exception e){}
+                    }else{
+                        Toast.makeText(getApplicationContext(),"Necesita agregar un articulo ya que la orden cuanta con una bitacora",Toast.LENGTH_LONG).show();
+                        mViewPager.setCurrentItem(2);
                     }
 
 
