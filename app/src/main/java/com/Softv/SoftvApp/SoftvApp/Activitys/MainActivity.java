@@ -239,7 +239,7 @@ public class MainActivity extends AppCompatActivity implements ActionBar.TabList
                 }
 
                 DescargaAgregar=true;
-                if(Util.getPermisisDescarga(Util.preferences)==true){
+/*                if(Util.getPermisisDescarga(Util.preferences)==true){
                     if(Array.dataDescargaDirecta.get(0).size()!=0 && request.NoBitacora!=0){
                         try {
                             JSONObject jsonObject = new JSONObject();
@@ -251,6 +251,8 @@ public class MainActivity extends AppCompatActivity implements ActionBar.TabList
                             jsonObject.put("Accion", "Modificar");
                             jsonObject.put("IdBitacora", request.NoBitacora);
                             jsonObject.put("TipoDescarga", Util.getTipoDescarga(Util.preferences));
+                            jsonObject.put("Usuario",Util.getClvTec(Util.preferences));
+                            jsonObject.put("Fecha", Util.getTipoDescarga(Util.preferences));
                             for(int i=0; i< Array.dataDescargaDirecta.get(0).size(); i++){
                                 JSONObject jsonObject1 = new JSONObject();
                                 jsonObject1.put("NoArticulo",Array.dataDescargaDirecta.get(0).get(i).NOARTICULO );
@@ -282,7 +284,7 @@ public class MainActivity extends AppCompatActivity implements ActionBar.TabList
 
             } else{
                 mViewPager.setCurrentItem(positionTab);
-                }
+                }*/
 
             if(positionTab == 4){
 

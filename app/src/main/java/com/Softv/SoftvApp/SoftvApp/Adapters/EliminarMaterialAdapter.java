@@ -130,7 +130,23 @@ public class EliminarMaterialAdapter extends RecyclerView.Adapter<EliminarMateri
             materialesViewHolder.elimarMaterial.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    if(Util.getPermisisDescarga(Util.preferences)==false) {
+                    try {
+                        JSONObject jsonObject = new JSONObject();
+                        ///lista a mandar
+                        Array.dataDescargaDirecta.get(0).remove(position-1);
+                        ////
+
+                        if (Util.getTipoDescarga(Util.preferences).equals("Q")) {
+                            jsonObject.put("clvOrden", Util.getClvQueja(Util.preferences));
+                        } else if (Util.getTipoDescarga(Util.preferences).equals("O")) {
+                            jsonObject.put("clvOrden", Util.getClvOrden(Util.preferences));
+                        }
+                        jsonObject.put("noArticulo", Array.listaTabla.get(position - 1).get(3));
+                        request.eliminarPreDescarga(context, jsonObject, activity);
+                    } catch (Exception e) {
+
+                    }
+/*                    if(Util.getPermisisDescarga(Util.preferences)==false) {
                         try {
                             JSONObject jsonObject = new JSONObject();
 
@@ -150,7 +166,7 @@ public class EliminarMaterialAdapter extends RecyclerView.Adapter<EliminarMateri
                         Array.dataDescargaDirecta.get(0).remove(position-1);
                         notifyDataSetChanged();
 
-                    }
+                    }*/
 
                 }
             });

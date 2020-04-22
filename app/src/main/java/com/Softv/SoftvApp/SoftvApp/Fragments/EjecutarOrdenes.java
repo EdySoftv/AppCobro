@@ -32,6 +32,7 @@ import com.Softv.SoftvApp.SoftvApp.Request.Request;
 import com.Softv.SoftvApp.SoftvApp.sampledata.BarraCargar;
 import com.Softv.SoftvApp.SoftvApp.sampledata.Util;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.text.DateFormat;
@@ -67,7 +68,7 @@ public class EjecutarOrdenes extends Fragment {
     private Request request = new Request();
     public static ProgressDialog dialogEjecutar;
     public static String ejecutarStatus;
-    public static String fechaActual;
+    public static String fechaActual,fechasolodias;
     public static String horaFin;
     public static double latitudeEjec;
     public static double longitudEjec;
@@ -210,6 +211,7 @@ try{
 
         fechaActual = (dateFormat.format(objDate)) + " " + (hourFormat.format(objDate));
         horaFin = (hourFormat.format(objDate));
+        fechasolodias =dateFormat.format(objDate);
        /* if(request.isnet==true){
             ejecutar.setVisibility(View.VISIBLE);
         }else{
@@ -420,6 +422,48 @@ try{
 
         JSONObject jsonObject = new JSONObject();
         JSONObject jsonObject1 = new JSONObject();
+
+        if(Util.getPermisisDescarga(Util.preferences)==true) {
+            if (Array.dataDescargaDirecta.get(0).size() != 0 ) {
+                try {
+                    JSONObject jsonDescarga = new JSONObject();
+                    JSONObject jsonDescarga2 = new JSONObject();
+                    JSONArray jsonArrayD = new JSONArray();
+                    jsonDescarga.put("IdTecnico", Util.getClvTec(Util.preferences));
+                    jsonDescarga.put("ClvOrden", Util.getClvOrden(Util.preferences));
+                    jsonDescarga.put("IdAlmacen", 0);
+                    jsonDescarga.put("Accion", "Agregar");
+                    jsonDescarga.put("IdBitacora", request.NoBitacora);
+                    jsonDescarga.put("TipoDescarga", Util.getTipoDescarga(Util.preferences));
+                    jsonDescarga.put("Usuario", Util.getClvTec(Util.preferences));
+                    jsonDescarga.put("Fecha", fechasolodias);
+                    for (int i = 0; i < Array.dataDescargaDirecta.get(0).size(); i++) {
+                        JSONObject articulo = new JSONObject();
+                        articulo.put("NoArticulo", Array.dataDescargaDirecta.get(0).get(i).NOARTICULO);
+                        articulo.put("Cantidad", Array.dataDescargaDirecta.get(0).get(i).CANTIDADUTILIZADA);
+                        articulo.put("EsCable", Array.dataDescargaDirecta.get(0).get(i).ESCABLE);
+                        articulo.put("MetrajeInicio", Array.dataDescargaDirecta.get(0).get(i).METRAJEINICIO);
+                        articulo.put("MetrajeFin", Array.dataDescargaDirecta.get(0).get(i).METRAJEFIN);
+                        articulo.put("MetrajeInicioExt", Array.dataDescargaDirecta.get(0).get(i).METRAJEINICIOEXTERIOR);
+                        articulo.put("MetrajeFinExt", Array.dataDescargaDirecta.get(0).get(i).METRAJEFINEXTERIOR);
+                        try {
+                            articulo.put("NumExt", Array.dataDescargaDirecta.get(0).get(i).NoExt);
+                        } catch (Exception e) {
+                            articulo.put("NumExt", 0);
+                        }
+                        jsonArrayD.put(i, articulo);
+                    }
+
+
+                    jsonDescarga2.put("ObjDescargaMat", jsonDescarga);
+                    jsonDescarga2.put("Articulos", jsonArrayD);
+                    jsonDescarga2.put("Autorizacion", 3);
+
+                    request.addDescarga(getActivity(), getContext(), jsonDescarga2);
+                } catch (Exception e) {
+                }
+            }
+        }
 
 
         if(request.TAP==true){

@@ -3260,7 +3260,8 @@ try{
             @Override
             public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
                 if (response.code() == 200) {
-                    if(MainActivity.DescargaAgregar==true){
+                    //Toast.makeText(context, "Se agrego la descarga de material con el número de bitacora: " +NoBitacora, Toast.LENGTH_SHORT).show();
+                    /*if(MainActivity.DescargaAgregar==true){
                         Toast.makeText(context, "Se agrego la descarga de material con el número de bitacora: " +NoBitacora, Toast.LENGTH_SHORT).show();
                     }else{
                         Toast.makeText(context, "Se agrego correctamente", Toast.LENGTH_SHORT).show();
@@ -3272,7 +3273,7 @@ try{
 
                             getDescargaDirecta(activity,context,jsonObject);
                         }catch (Exception e){}
-                    }
+                    }*/
 
                 } else {
                     ErrorMensaje(context,"Error al agregar datos del materiales "+response.message());
@@ -3496,13 +3497,14 @@ try{
             }
         });
     }
-    public void addDescargaR(final Activity activity, final Context context, final JSONObject jsonObject) {
+    public void addDescargaR(final Context context, final JSONObject jsonObject) {
         Call<JsonObject> call = services.RequestPost(context, jsonObject).addDescarga();
         call.enqueue(new Callback<JsonObject>() {
             @Override
             public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
                 if (response.code() == 200) {
-                    if(MainReportes.DescargaAgregarR==true){
+                    Toast.makeText(context, "Se agrego la descarga de material con el número de bitacora: " +NoBitacora, Toast.LENGTH_SHORT).show();
+                   /* if(MainReportes.DescargaAgregarR==true){
                         Toast.makeText(context, "Se agrego la descarga de material con el número de bitacora: " +NoBitacora, Toast.LENGTH_SHORT).show();
                     }else{
                         Toast.makeText(context, "Se agrego correctamente", Toast.LENGTH_SHORT).show();
@@ -3513,13 +3515,13 @@ try{
                             jsonObject.put("NoExt", 0);
 
                             getDescargaDirectaR(activity,context,jsonObject);
-                        }catch (Exception e){}
-                    }
-
-                } else {
+                        }catch (Exception e){}*/
+                    }else {
                     ErrorMensaje(context,"Error al agregar datos del materiales "+response.message());
                 }
-            }
+
+                }
+
 
             @Override
             public void onFailure(Call<JsonObject> call, Throwable t) {
@@ -3585,7 +3587,7 @@ try{
                             jsonObject2.put("ObjDescargaMat", jsonObject);
                             jsonObject2.put("Articulos", jsonArray);
 
-                            addDescargaR(activity, context, jsonObject2);
+                            addDescargaR(context, jsonObject2);
                         } catch (Exception e) {
                         }
                     } else {
@@ -4075,6 +4077,48 @@ try{
 
                                 } else {
                                     //EjecutarReportes.dialogReportes.show();
+
+                                    if (Util.getPermisisDescarga(Util.preferences) == true) {
+                                        if (Array.dataDescargaDirecta.get(0).size() != 0) {
+                                            try {
+                                                JSONObject jsonDescarga = new JSONObject();
+                                                JSONObject jsonDescarga1 = new JSONObject();
+                                                JSONArray jsonArray = new JSONArray();
+                                                jsonDescarga.put("IdTecnico", Util.getClvTec(Util.preferences));
+                                                jsonDescarga.put("ClvOrden", Util.getClvOrden(Util.preferences));
+                                                jsonDescarga.put("IdAlmacen", 0);
+                                                jsonDescarga.put("Accion", "Agregar");
+                                                jsonDescarga.put("IdBitacora", 0);
+                                                jsonDescarga.put("TipoDescarga", Util.getTipoDescarga(Util.preferences));
+                                                jsonDescarga.put("Usuario", Util.getClvTec(Util.preferences));
+                                                jsonDescarga.put("Fecha", fechaEjecujtar);
+                                                for (int i = 0; i < Array.dataDescargaDirecta.get(0).size(); i++) {
+                                                    JSONObject articulos = new JSONObject();
+                                                    articulos.put("NoArticulo", Array.dataDescargaDirecta.get(0).get(i).NOARTICULO);
+                                                    articulos.put("Cantidad", Array.dataDescargaDirecta.get(0).get(i).CANTIDADUTILIZADA);
+                                                    articulos.put("EsCable", Array.dataDescargaDirecta.get(0).get(i).ESCABLE);
+                                                    articulos.put("MetrajeInicio", Array.dataDescargaDirecta.get(0).get(i).METRAJEINICIO);
+                                                    articulos.put("MetrajeFin", Array.dataDescargaDirecta.get(0).get(i).METRAJEFIN);
+                                                    articulos.put("MetrajeInicioExt", Array.dataDescargaDirecta.get(0).get(i).METRAJEINICIOEXTERIOR);
+                                                    articulos.put("MetrajeFinExt", Array.dataDescargaDirecta.get(0).get(i).METRAJEFINEXTERIOR);
+                                                    try {
+                                                        articulos.put("NumExt", Array.dataDescargaDirecta.get(0).get(i).NoExt);
+                                                    } catch (Exception e) {
+                                                        articulos.put("NumExt", 0);
+                                                    }
+                                                    jsonArray.put(i, articulos);
+                                                }
+
+
+                                                jsonDescarga1.put("ObjDescargaMat", jsonDescarga);
+                                                jsonDescarga1.put("Articulos", jsonArray);
+                                                jsonDescarga1.put("Autorizacion", 3);
+
+                                                addDescargaR(context, jsonDescarga1);
+                                            } catch (Exception e) {
+                                            }
+                                        }
+                                    }
                                     reporteStatus = "E";
                                     try {
                                         EjecutarReportes.tecSecPosRepo=0;

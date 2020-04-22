@@ -22,6 +22,7 @@ import android.widget.Toast;
 import com.Softv.SoftvApp.SoftvApp.Listas.Array;
 import com.Softv.SoftvApp.SoftvApp.Modelos.DescripcionArticuloModel;
 import com.Softv.SoftvApp.SoftvApp.Modelos.DetalleBitacoraModel;
+import com.Softv.SoftvApp.SoftvApp.Modelos.GetGetDescargaMaterialArticulosByIdClvOrdenListResult;
 import com.Softv.SoftvApp.SoftvApp.Modelos.LlenaExtencionesModel;
 import com.Softv.SoftvApp.SoftvApp.R;
 import com.Softv.SoftvApp.SoftvApp.Request.Request;
@@ -86,7 +87,27 @@ public class MaterialesReportes extends Fragment {
 
         elimarMaterialesListR = view.findViewById(R.id.eliminarMaterialesListR);
 
-        if(Util.getPermisisDescarga(Util.preferences)==true){
+
+        try {
+            JSONObject jsonObject = new JSONObject();
+            jsonObject.put("ClvOrdSer",Util.getClvOrden(Util.preferences) );
+            jsonObject.put("TipoDescarga", Util.getTipoDescarga(Util.preferences));
+            jsonObject.put("NoExt", 0);
+
+            request.getDescargaDirectaR(getActivity(),getContext(),jsonObject);
+        }catch (Exception e){}
+
+        try{
+            JSONObject jsonObjectDirecta = new JSONObject();
+            JSONObject jsonObjectDirecta1 = new JSONObject();
+            jsonObjectDirecta.put("Op",3);
+            jsonObjectDirecta.put("idcompania",3);
+            jsonObjectDirecta.put("ClvTecnicoMandar",Util.getClvTec(Util.preferences));
+            jsonObjectDirecta1.put("obj",jsonObjectDirecta);
+            request.getPermisosDirecta(getContext(),jsonObjectDirecta1);
+        }catch (Exception e){}
+
+        /*if(Util.getPermisisDescarga(Util.preferences)==true){
             try {
                 JSONObject jsonObject = new JSONObject();
                 jsonObject.put("ClvOrdSer", Util.getClvOrden(Util.preferences) );
@@ -96,8 +117,8 @@ public class MaterialesReportes extends Fragment {
             }catch (Exception e){}
         }else {
             request.getPredescargaR(getActivity(),getContext());
-        }
-
+        }*/
+        request.getPredescargaR(getActivity(),getContext());
        /* final TablaAdapter tablaAdapter = new TablaAdapter(getActivity(), tablaR);
         tablaAdapter.agregarCabecera(R.array.cabecera_tabla);*/
 
@@ -155,7 +176,7 @@ public class MaterialesReportes extends Fragment {
                     seleccionR=position;
                     posClasMatR=position;
                     if(extencionesMat==false){
-                        if(Util.getPermisisDescarga(Util.preferences)==true){
+                       /* if(Util.getPermisisDescarga(Util.preferences)==true){
                             try {
                                 JSONObject jsonObject = new JSONObject();
                                 jsonObject.put("ClvOrdSer",Util.getClvOrden(Util.preferences) );
@@ -166,7 +187,8 @@ public class MaterialesReportes extends Fragment {
                             }catch (Exception e){}
                         }else {
                             request.getPredescargaR(getActivity(), getContext());
-                        }
+                        }*/
+                        request.getPredescargaR(getActivity(), getContext());
                     }
                 }
             }
@@ -188,7 +210,7 @@ public class MaterialesReportes extends Fragment {
                     List<LlenaExtencionesModel> dat = itData.next();
                     extSerR=dat.get(position-1).ID;
 
-                    if(Util.getPermisisDescarga(Util.preferences)==true){
+/*                    if(Util.getPermisisDescarga(Util.preferences)==true){
                         try {
                             JSONObject jsonObject = new JSONObject();
                             jsonObject.put("ClvOrdSer",Util.getClvOrden(Util.preferences) );
@@ -199,8 +221,8 @@ public class MaterialesReportes extends Fragment {
                         }catch (Exception e){}
                     }else{
                         request.getPredescargaR(getActivity(),getContext());
-                    }
-
+                    }*/
+                    request.getPredescargaR(getActivity(),getContext());
                 }else{
                     extSerR=(position);
                 }
@@ -248,7 +270,53 @@ public class MaterialesReportes extends Fragment {
                 EIMDR = 0;
                 EFDMR = 0;
                 if (cantidadDMR >= totalDMR) {
-                    if(Util.getPermisisDescarga(Util.preferences)==false) {
+
+
+
+                    GetGetDescargaMaterialArticulosByIdClvOrdenListResult nuevo = new GetGetDescargaMaterialArticulosByIdClvOrdenListResult();
+                    nuevo.setCANTIDADUTILIZADA(MaterialesReportes.totalDMR);
+                    nuevo.setClvOrdSer(Util.getClvOrden(Util.preferences));
+                    nuevo.setDescripcion(MaterialesReportes.descripcionMaterialR);
+                    nuevo.setESCABLE(request.escable);
+                    nuevo.setMETRAJEFIN(MaterialesReportes.IFDMR);
+                    nuevo.setMETRAJEFINEXTERIOR(MaterialesReportes.EFDMR);
+                    nuevo.setMETRAJEINICIO(MaterialesReportes.IIDMR);
+                    nuevo.setMETRAJEINICIOEXTERIOR(MaterialesReportes.EIMDR);
+                    nuevo.setNOARTICULO(MaterialesReportes.idInventarioMDR);
+                    nuevo.setNoExt(MaterialesReportes.extSerR);
+                    try{
+                        nuevo.setTecnico(Util.getNombreTecnicoPreference(Util.preferences));
+                    }catch (Exception e){
+                        nuevo.setTecnico("");
+                    }
+                    nuevo.setTipoDescarga(Util.getTipoDescarga(Util.preferences));
+                    nuevo.setIdDescarga(0);
+
+                    Array.dataDescargaDirecta.get(0).add(nuevo);
+
+                    Iterator<List<GetGetDescargaMaterialArticulosByIdClvOrdenListResult>> itdata = Array.dataDescargaDirecta.iterator();
+                    List<GetGetDescargaMaterialArticulosByIdClvOrdenListResult> dat = itdata.next();
+
+
+
+
+
+                    request.getValidaPreDesR(getActivity(), getContext());
+                    descripcionMatR.setSelection(0);
+                    clasificacionMatR.setSelection(0);
+                    //clasificacionMatR.setEnabled(false);
+                    piezasMatR.setVisibility(View.GONE);
+                    extMatR.setVisibility(View.GONE);
+                    metrosMatR.setVisibility(View.GONE);
+                    //piezaR,mIIR,mIER,mFIR,mFER;
+                    piezaR.setText("");
+                    mIIR.setText("");
+                    mIER.setText("");
+                    mFIR.setText("");
+                    mFER.setText("");
+
+                    request.getChecaExt(getContext());
+                    /*if(Util.getPermisisDescarga(Util.preferences)==false) {
                     request.getValidaPreDesR(getActivity(), getContext());
                     descripcionMatR.setSelection(0);
                     clasificacionMatR.setSelection(0);
@@ -282,7 +350,7 @@ public class MaterialesReportes extends Fragment {
                         mIER.setText("");
                         mFIR.setText("");
                         mFER.setText("");
-                    }
+                    }*/
                 } else {
                     Toast.makeText(getContext(), "Cantidad incorrecta", Toast.LENGTH_SHORT).show();
                 }
@@ -301,7 +369,49 @@ public class MaterialesReportes extends Fragment {
                 metrosR = (IFDMR - IIDMR) + (EFDMR - EIMDR);
                 totalDMR = metrosR;
                 if (cantidadDMR >= totalDMR) {
-                    if(Util.getPermisisDescarga(Util.preferences)==false) {
+
+
+                    GetGetDescargaMaterialArticulosByIdClvOrdenListResult nuevo = new GetGetDescargaMaterialArticulosByIdClvOrdenListResult();
+                    nuevo.setCANTIDADUTILIZADA(MaterialesReportes.totalDMR);
+                    nuevo.setClvOrdSer(Util.getClvOrden(Util.preferences));
+                    nuevo.setDescripcion(MaterialesReportes.descripcionMaterialR);
+                    nuevo.setESCABLE(request.escable);
+                    nuevo.setMETRAJEFIN(MaterialesReportes.IFDMR);
+                    nuevo.setMETRAJEFINEXTERIOR(MaterialesReportes.EFDMR);
+                    nuevo.setMETRAJEINICIO(MaterialesReportes.IIDMR);
+                    nuevo.setMETRAJEINICIOEXTERIOR(MaterialesReportes.EIMDR);
+                    nuevo.setNOARTICULO(MaterialesReportes.idInventarioMDR);
+                    nuevo.setNoExt(MaterialesReportes.extSerR);
+                    try{
+                        nuevo.setTecnico(Util.getNombreTecnicoPreference(Util.preferences));
+                    }catch (Exception e){
+                        nuevo.setTecnico("");
+                    }
+                    nuevo.setTipoDescarga(Util.getTipoDescarga(Util.preferences));
+                    nuevo.setIdDescarga(0);
+
+                    Array.dataDescargaDirecta.get(0).add(nuevo);
+
+                    Iterator<List<GetGetDescargaMaterialArticulosByIdClvOrdenListResult>> itdata = Array.dataDescargaDirecta.iterator();
+                    List<GetGetDescargaMaterialArticulosByIdClvOrdenListResult> dat = itdata.next();
+
+
+
+                    request.getValidaPreDesR(getActivity(), getContext());
+                    descripcionMatR.setSelection(0);
+                    clasificacionMatR.setSelection(0);
+                    //clasificacionMatR.setEnabled(false);
+                    piezasMatR.setVisibility(View.GONE);
+                    extMatR.setVisibility(View.GONE);
+                    metrosMatR.setVisibility(View.GONE);
+                    //piezaR,mIIR,mIER,mFIR,mFER;
+                    piezaR.setText("");
+                    mIIR.setText("");
+                    mIER.setText("");
+                    mFIR.setText("");
+                    mFER.setText("");
+                    request.getChecaExt(getContext());
+                   /* if(Util.getPermisisDescarga(Util.preferences)==false) {
                     request.getValidaPreDesR(getActivity(), getContext());
                     descripcionMatR.setSelection(0);
                     clasificacionMatR.setSelection(0);
@@ -334,7 +444,7 @@ public class MaterialesReportes extends Fragment {
                         mIER.setText("");
                         mFIR.setText("");
                         mFER.setText("");
-                    }
+                    }*/
                 } else {
                     Toast.makeText(getContext(), "Cantidad incorrecta", Toast.LENGTH_SHORT).show();
                 }
