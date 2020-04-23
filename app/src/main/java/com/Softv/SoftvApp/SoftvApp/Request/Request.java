@@ -1565,6 +1565,7 @@ public class Request extends AppCompatActivity {
             public void onResponse(Call<JSONServiciosAparatos> call, Response<JSONServiciosAparatos> response) {
                 if (response.code() == 200) {
                     array.serviciosAparatos.clear();
+                    AsignarAparato.selectedStrings.clear();
                     JSONServiciosAparatos jsonResponse = response.body();
                     final Iterator<List<GetMuestraArbolServiciosAparatosPorinstalarListResult>> itData4 = array.dataArbSer.iterator();
                     final List<GetMuestraArbolServiciosAparatosPorinstalarListResult> dat4 = (List<GetMuestraArbolServiciosAparatosPorinstalarListResult>) itData4.next();
@@ -1573,7 +1574,7 @@ public class Request extends AppCompatActivity {
                     Iterator<List<GetMuestraServiciosRelTipoAparatoListResult>> itData = array.dataserviciosAparatos.iterator();
                     while (itData.hasNext()) {
                         List<GetMuestraServiciosRelTipoAparatoListResult> dat = (List<GetMuestraServiciosRelTipoAparatoListResult>) itData.next();
-                       if(TrabajosAdapter.ISDIG==true){
+                        if(TrabajosAdapter.ISDIG==true){
                             if(letra.equals("T")||letra.equals("D")){
                                 for (int i = 0; i < dat.size(); i++) {
                                     array.serviciosAparatos.add(dat.get(i).getNombre());
