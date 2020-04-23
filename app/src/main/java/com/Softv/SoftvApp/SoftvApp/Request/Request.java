@@ -2898,6 +2898,15 @@ try{
                         MaterialesOrdenes.metrosMat.setVisibility(View.VISIBLE);
                         MaterialesOrdenes.piezasMat.setVisibility(View.INVISIBLE);
                         pieza = false;
+                        if(extencionesMat == true){
+                            MaterialesOrdenes.mIE.setVisibility(View.GONE);
+                            MaterialesOrdenes.mFE.setVisibility(View.GONE);
+                            MaterialesOrdenes.tvExterior.setVisibility(View.GONE);
+                        }else{
+                            MaterialesOrdenes.mIE.setVisibility(View.VISIBLE);
+                            MaterialesOrdenes.mFE.setVisibility(View.VISIBLE);
+                            MaterialesOrdenes.tvExterior.setVisibility(View.VISIBLE);
+                        }
                     }
                 }else{
                     ErrorMensaje(context,"Error al conseguir datos del materiales "+response.message());
