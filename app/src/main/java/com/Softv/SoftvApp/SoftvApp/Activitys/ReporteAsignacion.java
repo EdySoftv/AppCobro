@@ -121,12 +121,14 @@ public class ReporteAsignacion extends AppCompatActivity {
             guardarAparatos.setEnabled(false);
             guardarAparatos.setTextColor(Color.GRAY);
             if(dat4.get(ArbolAdapter.posicionArbol).Clv_TipSer==1){
-                if(dat4.get(ArbolAdapter.posicionArbol).Detalle.equals("COAXIAL")){
-                    guardarAparatos.setEnabled(true);
-                    guardarAparatos.setTextColor(Color.WHITE);
-                    agregarAparato.setEnabled(false);
-                    agregarAparato.setTextColor(Color.GRAY);
-                }
+                try {
+                    if (dat4.get(ArbolAdapter.posicionArbol).Detalle.equals("COAXIAL")) {
+                        guardarAparatos.setEnabled(true);
+                        guardarAparatos.setTextColor(Color.WHITE);
+                        agregarAparato.setEnabled(false);
+                        agregarAparato.setTextColor(Color.GRAY);
+                    }
+                }catch (Exception e){}
             }
         } else {
             //si tiene hijos habilitamos el boton de guarda
