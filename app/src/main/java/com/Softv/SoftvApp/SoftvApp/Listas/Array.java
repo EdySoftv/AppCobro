@@ -31,6 +31,7 @@ import com.Softv.SoftvApp.SoftvApp.Modelos.ObtieneNapModel;
 import com.Softv.SoftvApp.SoftvApp.Modelos.ObtieneTapModel;
 import com.Softv.SoftvApp.SoftvApp.Modelos.OrdSer;
 import com.Softv.SoftvApp.SoftvApp.Modelos.RequierePregunta;
+import com.Softv.SoftvApp.SoftvApp.Modelos.SelectRelTecnicoCuadrillaResult;
 import com.Softv.SoftvApp.SoftvApp.Modelos.dameTblPreDescargaMaterialResultModel;
 import com.Softv.SoftvApp.SoftvApp.Modelos.Queja;
 import com.Softv.SoftvApp.SoftvApp.Modelos.mediosPregunta;
@@ -134,5 +135,9 @@ public class Array {
     public static  ArrayList<List<ObtieneNapModel>> dataNap;
     public static  ArrayList<List<ObtieneTapModel>> dataTap;
     public static ArrayList<String>ClvTenica=new ArrayList<>();
+
+    //hotel
+
+    public static  ArrayList<List<SelectRelTecnicoCuadrillaResult>> dataCuadrilla;
 
 }

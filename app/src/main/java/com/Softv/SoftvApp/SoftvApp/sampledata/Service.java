@@ -11,6 +11,7 @@ import com.Softv.SoftvApp.SoftvApp.Listas.JSONAparatosDisponibles;
 import com.Softv.SoftvApp.SoftvApp.Listas.JSONArbolServicios;
 import com.Softv.SoftvApp.SoftvApp.Listas.JSONCAMDO;
 import com.Softv.SoftvApp.SoftvApp.Listas.JSONCLIAPA;
+import com.Softv.SoftvApp.SoftvApp.Listas.JSONCUADRILLA;
 import com.Softv.SoftvApp.SoftvApp.Listas.JSONClasificacionProblm;
 import com.Softv.SoftvApp.SoftvApp.Listas.JSONDESCARGADIRECTA;
 import com.Softv.SoftvApp.SoftvApp.Listas.JSONDescripcionArticulosBit;
@@ -224,6 +225,13 @@ public interface Service {
 
     @POST(Constants.URL_GET_PERMISO_DIRECTA)
     Call<JSONPERMISOSDIRECTA> getPermisosDirecta();
+
+    //Hotel
+    @POST(Constants.URL_ADD_CUADRILLA)
+    Call<JsonObject> addCuadrilla();
+
+    @POST(Constants.URL_GET_CUADRILLA)
+    Call<JSONCUADRILLA> getCuadrilla();
 
 
 }

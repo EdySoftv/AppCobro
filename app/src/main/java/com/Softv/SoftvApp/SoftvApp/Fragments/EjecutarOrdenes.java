@@ -21,6 +21,7 @@ import android.widget.Toast;
 
 import com.Softv.SoftvApp.SoftvApp.Activitys.Inicio;
 import com.Softv.SoftvApp.SoftvApp.Activitys.Orden;
+import com.Softv.SoftvApp.SoftvApp.Activitys.TecnicosSecundarios;
 import com.Softv.SoftvApp.SoftvApp.Adapters.TrabajosAdapter;
 import com.Softv.SoftvApp.SoftvApp.Dibujo.Firma;
 import com.Softv.SoftvApp.SoftvApp.Listas.Array;
@@ -56,7 +57,7 @@ import static com.Softv.SoftvApp.SoftvApp.Request.Request.validaExisteFirmaBool;
 public class EjecutarOrdenes extends Fragment {
 
     public static Button reiniciar;
-    public static Button eject, firmar;
+    public static Button eject, firmar,cuadrilla;
     public static String fechaHoy, horaHoy;
     public static View ejecutar;
     public static TextView msgEjecutarOrd,txtTap,txtNap;
@@ -111,6 +112,7 @@ public class EjecutarOrdenes extends Fragment {
         spinnerTap = view.findViewById(R.id.spinnerTap);
         txtNap = view.findViewById(R.id.txtNap);
         txtTap = view.findViewById(R.id.txtTap);
+        cuadrilla = view.findViewById(R.id.tecCuadrilla);
 
         request.getTecSec(getContext(),TecSec);
         latitudeEjec=0;
@@ -302,6 +304,19 @@ try{
             }
         });
 
+        cuadrilla.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                try{
+                    JSONObject jsonObject = new JSONObject();
+                    jsonObject.put("ClvOrden", Util.getClvOrden(Util.preferences));
+                    request.getCuadrilla(getContext(),jsonObject);
+
+                }catch(Exception e){}
+
+            }
+        });
 
         salir.setOnClickListener(new View.OnClickListener() {
             @Override

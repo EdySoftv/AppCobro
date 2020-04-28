@@ -29,6 +29,7 @@ import com.Softv.SoftvApp.SoftvApp.Activitys.CambioDom;
 import com.Softv.SoftvApp.SoftvApp.Activitys.CambioAparato;
 import com.Softv.SoftvApp.SoftvApp.Activitys.ReporteAsignacion;
 import com.Softv.SoftvApp.SoftvApp.Activitys.Reportes;
+import com.Softv.SoftvApp.SoftvApp.Activitys.TecnicosSecundarios;
 import com.Softv.SoftvApp.SoftvApp.Adapters.ArbolAdapter;
 import com.Softv.SoftvApp.SoftvApp.Adapters.EliminarMaterialAdapter;
 import com.Softv.SoftvApp.SoftvApp.Adapters.GraficaAdapter;
@@ -53,6 +54,7 @@ import com.Softv.SoftvApp.SoftvApp.Listas.JSONAparatosDisponibles;
 import com.Softv.SoftvApp.SoftvApp.Listas.JSONArbolServicios;
 import com.Softv.SoftvApp.SoftvApp.Listas.JSONCAMDO;
 import com.Softv.SoftvApp.SoftvApp.Listas.JSONCLIAPA;
+import com.Softv.SoftvApp.SoftvApp.Listas.JSONCUADRILLA;
 import com.Softv.SoftvApp.SoftvApp.Listas.JSONDESCARGADIRECTA;
 import com.Softv.SoftvApp.SoftvApp.Listas.JSONDescripcionArticulosBit;
 import com.Softv.SoftvApp.SoftvApp.Listas.JSONDetalleBitacora;
@@ -116,6 +118,7 @@ import com.Softv.SoftvApp.SoftvApp.Modelos.ObtieneNapModel;
 import com.Softv.SoftvApp.SoftvApp.Modelos.ObtieneTapModel;
 import com.Softv.SoftvApp.SoftvApp.Modelos.OrdSer;
 import com.Softv.SoftvApp.SoftvApp.Modelos.RequierePregunta;
+import com.Softv.SoftvApp.SoftvApp.Modelos.SelectRelTecnicoCuadrillaResult;
 import com.Softv.SoftvApp.SoftvApp.Modelos.ValidaMACWAMMODEL;
 import com.Softv.SoftvApp.SoftvApp.Modelos.ValidacionFirma;
 import com.Softv.SoftvApp.SoftvApp.Modelos.dameTblPreDescargaMaterialResultModel;
@@ -4408,6 +4411,64 @@ try{
 
             @Override
             public void onFailure(Call<JsonObject> call, Throwable t) {
+                ErrorMensaje(context,"Error "+t.getMessage());
+            }
+        });
+    }
+
+    public void addCuadrilla(final Context context, final JSONObject jsonObject, final Activity activity) {
+        Call<JsonObject> call = services.RequestPost(context, jsonObject).addCuadrilla();
+        call.enqueue(new Callback<JsonObject>() {
+            @Override
+            public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
+                if (response.code() == 200) {
+                    activity.finish();
+                    ErrorMensaje(context,"Se agrego a los tecnicos cuadrilla correctamente");
+                } else {
+                    ErrorMensaje(context,"Error al guarda Cuadrilla "+response.message());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<JsonObject> call, Throwable t) {
+                ErrorMensaje(context,"Error "+t.getMessage());
+            }
+        });
+    }
+
+    public void getCuadrilla(final Context context, final JSONObject jsonObject) {
+        Call<JSONCUADRILLA> call = services.RequestPost(context, jsonObject).getCuadrilla();
+        call.enqueue(new Callback<JSONCUADRILLA>() {
+            @Override
+            public void onResponse(Call<JSONCUADRILLA> call, Response<JSONCUADRILLA> response) {
+                if (response.code() == 200) {
+                    JSONCUADRILLA jsonResponse = response.body();
+
+                    Array.dataCuadrilla = new ArrayList<>(asList(jsonResponse.SelectRelTecnicoCuadrillaResult()));
+                    Iterator<List<SelectRelTecnicoCuadrillaResult>> itdata = Array.dataCuadrilla.iterator();
+                    ArrayList<String>datos=new ArrayList<>();
+                    while (itdata.hasNext()) {
+                        List<SelectRelTecnicoCuadrillaResult> dat = itdata.next();
+
+                       /* for (int i = 0; i < dat.size(); i++) {
+                            datos.add(dat.get(i).getClavetecnica());
+                        }
+                        adapterTap = new ArrayAdapter<String>(context, android.R.layout.simple_spinner_dropdown_item, datos);
+                        spiner.setAdapter(adapterTap);*/
+
+
+                    }
+
+                    Intent intent = new Intent(context, TecnicosSecundarios.class);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    context.startActivity(intent);
+                } else {
+                    ErrorMensaje(context,"Error al conseguir lista de cuadrilla "+response.message());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<JSONCUADRILLA> call, Throwable t) {
                 ErrorMensaje(context,"Error "+t.getMessage());
             }
         });
