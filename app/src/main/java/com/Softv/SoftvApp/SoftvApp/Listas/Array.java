@@ -4,6 +4,7 @@ import com.Softv.SoftvApp.SoftvApp.Modelos.DescripcionArticuloModel;
 import com.Softv.SoftvApp.SoftvApp.Modelos.DetalleBitacoraModel;
 import com.Softv.SoftvApp.SoftvApp.Modelos.GetBUSCADetOrdSerListResult;
 import com.Softv.SoftvApp.SoftvApp.Modelos.GetConTecnicoAgendaResult;
+import com.Softv.SoftvApp.SoftvApp.Modelos.GetConsultaClientesListResult;
 import com.Softv.SoftvApp.SoftvApp.Modelos.GetDameDatosCAMDOResult;
 import com.Softv.SoftvApp.SoftvApp.Modelos.GetDameListadoOrdenesAgendadasResult;
 import com.Softv.SoftvApp.SoftvApp.Modelos.GetDameSerDelCliFacListResult;
@@ -139,5 +140,6 @@ public class Array {
     //hotel
 
     public static  ArrayList<List<SelectRelTecnicoCuadrillaResult>> dataCuadrilla;
+    public static  ArrayList<List<GetConsultaClientesListResult>> dataClientes;
 
 }

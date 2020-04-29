@@ -76,7 +76,12 @@ implements AdapterView.OnItemClickListener {
             }else{
                 Iterator<List<SelectRelTecnicoCuadrillaResult>> itdata = Array.dataCuadrilla.iterator();
                     List<SelectRelTecnicoCuadrillaResult> dat = itdata.next();
-
+                for(int a=0;a<dat.size();a++){
+                    if(Array.clv_tecnicoSecundario.get(position)==dat.get(a).ClvTecnico){
+                        viewHolder.selecion.setChecked(true);
+                        tecnicosSelect.add(Array.clv_tecnicoSecundario.get(position));
+                    }
+                }
                 viewHolder.selecion.setText(Array.nom_tecnicoSecundario.get(position));
             }
 

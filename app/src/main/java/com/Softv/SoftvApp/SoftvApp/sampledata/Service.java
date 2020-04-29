@@ -13,6 +13,7 @@ import com.Softv.SoftvApp.SoftvApp.Listas.JSONCAMDO;
 import com.Softv.SoftvApp.SoftvApp.Listas.JSONCLIAPA;
 import com.Softv.SoftvApp.SoftvApp.Listas.JSONCUADRILLA;
 import com.Softv.SoftvApp.SoftvApp.Listas.JSONClasificacionProblm;
+import com.Softv.SoftvApp.SoftvApp.Listas.JSONDATOSCLIENTE;
 import com.Softv.SoftvApp.SoftvApp.Listas.JSONDESCARGADIRECTA;
 import com.Softv.SoftvApp.SoftvApp.Listas.JSONDescripcionArticulosBit;
 import com.Softv.SoftvApp.SoftvApp.Listas.JSONDetalleBitacora;
@@ -232,6 +233,9 @@ public interface Service {
 
     @POST(Constants.URL_GET_CUADRILLA)
     Call<JSONCUADRILLA> getCuadrilla();
+
+    @POST(Constants.URL_GET_DATOS_CLIENTE)
+    Call<JSONDATOSCLIENTE> getDatoscliente();
 
 
 }

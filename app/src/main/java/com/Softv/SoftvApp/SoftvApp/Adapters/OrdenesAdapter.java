@@ -16,6 +16,8 @@ import com.Softv.SoftvApp.SoftvApp.R;
 import com.Softv.SoftvApp.SoftvApp.Request.Request;
 import com.Softv.SoftvApp.SoftvApp.sampledata.Util;
 
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 
 
@@ -126,6 +128,7 @@ public class OrdenesAdapter extends RecyclerView.Adapter<OrdenesAdapter.ordensrc
 
                 request.getDeepCons(mContext);
                 request.getValidaFirma(mContext);
+
             }
         });
 

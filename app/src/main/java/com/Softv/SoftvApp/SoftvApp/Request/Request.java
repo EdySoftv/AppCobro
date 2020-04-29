@@ -55,6 +55,7 @@ import com.Softv.SoftvApp.SoftvApp.Listas.JSONArbolServicios;
 import com.Softv.SoftvApp.SoftvApp.Listas.JSONCAMDO;
 import com.Softv.SoftvApp.SoftvApp.Listas.JSONCLIAPA;
 import com.Softv.SoftvApp.SoftvApp.Listas.JSONCUADRILLA;
+import com.Softv.SoftvApp.SoftvApp.Listas.JSONDATOSCLIENTE;
 import com.Softv.SoftvApp.SoftvApp.Listas.JSONDESCARGADIRECTA;
 import com.Softv.SoftvApp.SoftvApp.Listas.JSONDescripcionArticulosBit;
 import com.Softv.SoftvApp.SoftvApp.Listas.JSONDetalleBitacora;
@@ -87,6 +88,7 @@ import com.Softv.SoftvApp.SoftvApp.Modelos.DetalleBitacoraModel;
 import com.Softv.SoftvApp.SoftvApp.Modelos.GetBUSCADetOrdSerListResult;
 import com.Softv.SoftvApp.SoftvApp.Modelos.GetCheca_si_tiene_CAMDOModel;
 import com.Softv.SoftvApp.SoftvApp.Modelos.GetConTecnicoAgendaResult;
+import com.Softv.SoftvApp.SoftvApp.Modelos.GetConsultaClientesListResult;
 import com.Softv.SoftvApp.SoftvApp.Modelos.GetDameDatosCAMDOResult;
 import com.Softv.SoftvApp.SoftvApp.Modelos.GetDameListadoOrdenesAgendadasResult;
 import com.Softv.SoftvApp.SoftvApp.Modelos.GetDameSerDelCliFacListResult;
@@ -809,6 +811,12 @@ public class Request extends AppCompatActivity {
                     getTrabajos(context);
 
                     ContratoReal= DeepConsModel.getContrato();
+
+                    try{
+                        JSONObject jsonObject = new JSONObject();
+                        jsonObject.put("CONTRATO",ContratoReal);
+                        getDatoscliente(context,jsonObject);
+                    }catch (Exception e){}
 
                     try {
                         contraroMA = (String.valueOf(DeepConsModel.getContatoCom()));
@@ -1577,6 +1585,34 @@ public class Request extends AppCompatActivity {
                     Iterator<List<GetMuestraServiciosRelTipoAparatoListResult>> itData = array.dataserviciosAparatos.iterator();
                     while (itData.hasNext()) {
                         List<GetMuestraServiciosRelTipoAparatoListResult> dat = (List<GetMuestraServiciosRelTipoAparatoListResult>) itData.next();
+
+                        /*if(Util.getTipodeCliente(Util.preferences)==3){
+                            cuadrilla.setVisibility(View.VISIBLE);
+
+                        }else{
+                            if(TrabajosAdapter.ISDIG==true){
+                                if(letra.equals("T")||letra.equals("D")){
+                                    for (int i = 0; i < dat.size(); i++) {
+                                        array.serviciosAparatos.add(dat.get(i).getNombre());
+                                        if(dat.get(i).clv_UnicaNet==ArbolAdapter.clv_unicaNet){
+                                            AsignarAparato.selectedStrings.add(dat.get(i).clv_UnicaNet);
+                                        }
+                                    }
+                                }else{
+                                    for (int i = 0; i < dat.size(); i++) {
+                                        array.serviciosAparatos.add(dat.get(i).getNombre());
+                                        AsignarAparato.selectedStrings.add(dat.get(i).clv_UnicaNet);
+                                    }
+                                }
+
+                            }else{
+                                for (int i = 0; i < dat.size(); i++) {
+                                    array.serviciosAparatos.add(dat.get(i).getNombre());
+                                    AsignarAparato.selectedStrings.add(dat.get(i).clv_UnicaNet);
+                                }
+                            }
+                        }*/
+
                         if(TrabajosAdapter.ISDIG==true){
                             if(letra.equals("T")||letra.equals("D")){
                                 for (int i = 0; i < dat.size(); i++) {
@@ -4469,6 +4505,47 @@ try{
 
             @Override
             public void onFailure(Call<JSONCUADRILLA> call, Throwable t) {
+                ErrorMensaje(context,"Error "+t.getMessage());
+            }
+        });
+    }
+
+
+    public void getDatoscliente(final Context context, final JSONObject jsonObject) {
+        Call<JSONDATOSCLIENTE> call = services.RequestPost(context, jsonObject).getDatoscliente();
+        call.enqueue(new Callback<JSONDATOSCLIENTE>() {
+            @Override
+            public void onResponse(Call<JSONDATOSCLIENTE> call, Response<JSONDATOSCLIENTE> response) {
+                if (response.code() == 200) {
+                    JSONDATOSCLIENTE jsonResponse = response.body();
+
+                    Array.dataClientes = new ArrayList<>(asList(jsonResponse.GetConsultaClientesListResult()));
+                    Iterator<List<GetConsultaClientesListResult>> itdata = Array.dataClientes.iterator();
+                    ArrayList<String>datos=new ArrayList<>();
+                    while (itdata.hasNext()) {
+                        List<GetConsultaClientesListResult> dat = itdata.next();
+                        Util.preferences = context.getSharedPreferences("credenciales", Context.MODE_PRIVATE);
+                        Util.editor = Util.preferences.edit();
+                        Util.editor.putInt("tipoDeCliente",dat.get(0).getTipoCliente());
+                        Util.editor.commit();
+
+                       /* for (int i = 0; i < dat.size(); i++) {
+                            datos.add(dat.get(i).getClavetecnica());
+                        }
+                        adapterTap = new ArrayAdapter<String>(context, android.R.layout.simple_spinner_dropdown_item, datos);
+                        spiner.setAdapter(adapterTap);*/
+
+
+                    }
+
+
+                } else {
+                    ErrorMensaje(context,"Error al conseguir lista de cuadrilla "+response.message());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<JSONDATOSCLIENTE> call, Throwable t) {
                 ErrorMensaje(context,"Error "+t.getMessage());
             }
         });
