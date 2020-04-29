@@ -2106,7 +2106,7 @@ public class Services {
         return retrofit.create(Service.class);
 
     }
-    public Service getGuardaCoordenadasRService(final Context context) throws JSONException {
+   /* public Service getGuardaCoordenadasRService(final Context context) throws JSONException {
         //POST Body Json
         JSONObject jsonObject = new JSONObject();
         JSONObject jsonObject1 = new JSONObject();
@@ -2140,7 +2140,7 @@ public class Services {
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         return retrofit.create(Service.class);
-    }
+    }*/
 
     public Service getColonia(final Context context) {
         OkHttpClient client = new OkHttpClient.Builder()

@@ -4138,45 +4138,47 @@ try{
                                     //EjecutarReportes.dialogReportes.show();
 
                                     if (Util.getPermisisDescarga(Util.preferences) == true) {
-                                        if (Array.dataDescargaDirecta.get(0).size() != 0) {
-                                            try {
-                                                JSONObject jsonDescarga = new JSONObject();
-                                                JSONObject jsonDescarga1 = new JSONObject();
-                                                JSONArray jsonArray = new JSONArray();
-                                                jsonDescarga.put("IdTecnico", Util.getClvTec(Util.preferences));
-                                                jsonDescarga.put("ClvOrden", Util.getClvOrden(Util.preferences));
-                                                jsonDescarga.put("IdAlmacen", 0);
-                                                jsonDescarga.put("Accion", "Agregar");
-                                                jsonDescarga.put("IdBitacora", 0);
-                                                jsonDescarga.put("TipoDescarga", Util.getTipoDescarga(Util.preferences));
-                                                jsonDescarga.put("Usuario", Util.getClvTec(Util.preferences));
-                                                jsonDescarga.put("Fecha", fechaEjecujtar);
-                                                for (int i = 0; i < Array.dataDescargaDirecta.get(0).size(); i++) {
-                                                    JSONObject articulos = new JSONObject();
-                                                    articulos.put("NoArticulo", Array.dataDescargaDirecta.get(0).get(i).NOARTICULO);
-                                                    articulos.put("Cantidad", Array.dataDescargaDirecta.get(0).get(i).CANTIDADUTILIZADA);
-                                                    articulos.put("EsCable", Array.dataDescargaDirecta.get(0).get(i).ESCABLE);
-                                                    articulos.put("MetrajeInicio", Array.dataDescargaDirecta.get(0).get(i).METRAJEINICIO);
-                                                    articulos.put("MetrajeFin", Array.dataDescargaDirecta.get(0).get(i).METRAJEFIN);
-                                                    articulos.put("MetrajeInicioExt", Array.dataDescargaDirecta.get(0).get(i).METRAJEINICIOEXTERIOR);
-                                                    articulos.put("MetrajeFinExt", Array.dataDescargaDirecta.get(0).get(i).METRAJEFINEXTERIOR);
-                                                    try {
-                                                        articulos.put("NumExt", Array.dataDescargaDirecta.get(0).get(i).NoExt);
-                                                    } catch (Exception e) {
-                                                        articulos.put("NumExt", 0);
+                                        try{
+                                            if (Array.dataDescargaDirecta.get(0).size() != 0) {
+                                                try {
+                                                    JSONObject jsonDescarga = new JSONObject();
+                                                    JSONObject jsonDescarga1 = new JSONObject();
+                                                    JSONArray jsonArray = new JSONArray();
+                                                    jsonDescarga.put("IdTecnico", Util.getClvTec(Util.preferences));
+                                                    jsonDescarga.put("ClvOrden", Util.getClvOrden(Util.preferences));
+                                                    jsonDescarga.put("IdAlmacen", 0);
+                                                    jsonDescarga.put("Accion", "Agregar");
+                                                    jsonDescarga.put("IdBitacora", 0);
+                                                    jsonDescarga.put("TipoDescarga", Util.getTipoDescarga(Util.preferences));
+                                                    jsonDescarga.put("Usuario", Util.getClvTec(Util.preferences));
+                                                    jsonDescarga.put("Fecha", fechaEjecujtar);
+                                                    for (int i = 0; i < Array.dataDescargaDirecta.get(0).size(); i++) {
+                                                        JSONObject articulos = new JSONObject();
+                                                        articulos.put("NoArticulo", Array.dataDescargaDirecta.get(0).get(i).NOARTICULO);
+                                                        articulos.put("Cantidad", Array.dataDescargaDirecta.get(0).get(i).CANTIDADUTILIZADA);
+                                                        articulos.put("EsCable", Array.dataDescargaDirecta.get(0).get(i).ESCABLE);
+                                                        articulos.put("MetrajeInicio", Array.dataDescargaDirecta.get(0).get(i).METRAJEINICIO);
+                                                        articulos.put("MetrajeFin", Array.dataDescargaDirecta.get(0).get(i).METRAJEFIN);
+                                                        articulos.put("MetrajeInicioExt", Array.dataDescargaDirecta.get(0).get(i).METRAJEINICIOEXTERIOR);
+                                                        articulos.put("MetrajeFinExt", Array.dataDescargaDirecta.get(0).get(i).METRAJEFINEXTERIOR);
+                                                        try {
+                                                            articulos.put("NumExt", Array.dataDescargaDirecta.get(0).get(i).NoExt);
+                                                        } catch (Exception e) {
+                                                            articulos.put("NumExt", 0);
+                                                        }
+                                                        jsonArray.put(i, articulos);
                                                     }
-                                                    jsonArray.put(i, articulos);
+
+
+                                                    jsonDescarga1.put("ObjDescargaMat", jsonDescarga);
+                                                    jsonDescarga1.put("Articulos", jsonArray);
+                                                    jsonDescarga1.put("Autorizacion", 3);
+
+                                                    addDescargaR(context, jsonDescarga1);
+                                                } catch (Exception e) {
                                                 }
-
-
-                                                jsonDescarga1.put("ObjDescargaMat", jsonDescarga);
-                                                jsonDescarga1.put("Articulos", jsonArray);
-                                                jsonDescarga1.put("Autorizacion", 3);
-
-                                                addDescargaR(context, jsonDescarga1);
-                                            } catch (Exception e) {
                                             }
-                                        }
+                                        }catch (Exception oas){}
                                     }
                                     reporteStatus = "E";
                                     try {
@@ -4604,7 +4606,7 @@ try{
             }
         });
     }*/
-    public void GuardaCoordenadasR(final Context context) {
+   /* public void GuardaCoordenadasR(final Context context) {
 
         Service service = null;
         try {
@@ -4638,7 +4640,7 @@ try{
                 ErrorMensaje(context,"Se ha producido un error al guardar coordenadas");
             }
         });
-    }
+    }*/
 
     public void getColonia(final Context context) {
         Call<JSONColonia> call = services.getColonia(context).getColonia();
