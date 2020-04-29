@@ -221,9 +221,7 @@ public interface Service {
     @POST(Constants.URL_ADD_DESCARGA_DIRECTA)
     Call<JsonObject> addDescarga();
     //@Multipart
-    @POST(Constants.imagen)
-    Call<JsonObject> imagen();
-    }
+
     @GET(Constants.URL_GET_COLONIA)
     Call<JSONColonia> getColonia();
 

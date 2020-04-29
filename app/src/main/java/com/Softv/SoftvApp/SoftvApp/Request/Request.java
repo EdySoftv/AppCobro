@@ -230,7 +230,6 @@ public class Request extends AppCompatActivity {
     public int reintentaB;
     public static String stringValidaTrabajos;
     public static ArrayAdapter adapterTecSec, adapterTecSecR, adapterNap,adapterTap,adapterColonia,adapterTAPNAPCAMDO;
-    public static boolean pieza = false, rapagejecutar = false, extencionesMat = false;
     public static boolean pieza = false, rapagejecutar = false, extencionesMat = false,escable = false;;
    public static int validFirma;
     public static String ciudadcmdo, localidadcmdo, coloniacmdo, callecmdo, numerocmdo, numeroicmdo, telefonocmdo, callencmdo, callescmdo, calleecmdo, calleocmdo, casacmdo;
