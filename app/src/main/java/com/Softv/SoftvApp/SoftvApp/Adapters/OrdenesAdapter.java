@@ -31,7 +31,7 @@ public class OrdenesAdapter extends RecyclerView.Adapter<OrdenesAdapter.ordensrc
     private ArrayList<String>statusrc;
     private ArrayList<String>direccionsrc;
     private Request request=new Request();
-
+    public static ArrayList<Integer> tecnicosSelect=new ArrayList<>();
 
 
     public static  class ordensrcViewHolder extends  RecyclerView.ViewHolder{
@@ -120,6 +120,9 @@ public class OrdenesAdapter extends RecyclerView.Adapter<OrdenesAdapter.ordensrc
         viewHolder.control.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                tecnicosSelect.clear();
+
                 Util.preferences = mContext.getSharedPreferences("credenciales", Context.MODE_PRIVATE);
                 Util.editor = Util.preferences.edit();
                 Util.editor.putInt("clvOrden", Integer.valueOf(ordensrc.get(position)));

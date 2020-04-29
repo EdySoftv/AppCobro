@@ -4452,14 +4452,13 @@ try{
         });
     }
 
-    public void addCuadrilla(final Context context, final JSONObject jsonObject, final Activity activity) {
+    public void addCuadrilla(final Context context, final JSONObject jsonObject) {
         Call<JsonObject> call = services.RequestPost(context, jsonObject).addCuadrilla();
         call.enqueue(new Callback<JsonObject>() {
             @Override
             public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
                 if (response.code() == 200) {
-                    activity.finish();
-                    ErrorMensaje(context,"Se agrego a los tecnicos cuadrilla correctamente");
+
                 } else {
                     ErrorMensaje(context,"Error al guarda Cuadrilla "+response.message());
                 }

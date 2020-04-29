@@ -40,7 +40,7 @@ public class TecnicosSecundarios extends AppCompatActivity {
         dialogTecCuadrilla = new BarraCargar().showDialog(this);
 
         dialogTecCuadrilla.show();
-        TecnicosSecundariosAdapter.tecnicosSelect.clear();
+
 
 
         RecyclerView.LayoutManager layoutManager = new GridLayoutManager(getApplicationContext(),1);
@@ -52,20 +52,7 @@ public class TecnicosSecundarios extends AppCompatActivity {
         aceptar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                try {
-                    JSONArray jsonArray = new JSONArray();
-
-                    JSONObject jsonObject1 = new JSONObject();
-                    for (int i = 0; i < TecnicosSecundariosAdapter.tecnicosSelect.size(); i++) {
-                        JSONObject jsonObject = new JSONObject();
-                        jsonObject.put("ClvOrden",Util.getClvOrden(Util.preferences));
-                        jsonObject.put("ClvTecnico",TecnicosSecundariosAdapter.tecnicosSelect.get(i));
-                        jsonArray.put(i,jsonObject);
-                    }
-                    jsonObject1.put("xml",jsonArray);
-
-                        request.addCuadrilla(getApplicationContext(),jsonObject1,activity);
-                }catch (Exception e){}
+                finish();
             }
         });
 

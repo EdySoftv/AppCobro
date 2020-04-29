@@ -22,6 +22,8 @@ import android.widget.Toast;
 import com.Softv.SoftvApp.SoftvApp.Activitys.Inicio;
 import com.Softv.SoftvApp.SoftvApp.Activitys.Orden;
 import com.Softv.SoftvApp.SoftvApp.Activitys.TecnicosSecundarios;
+import com.Softv.SoftvApp.SoftvApp.Adapters.OrdenesAdapter;
+import com.Softv.SoftvApp.SoftvApp.Adapters.TecnicosSecundariosAdapter;
 import com.Softv.SoftvApp.SoftvApp.Adapters.TrabajosAdapter;
 import com.Softv.SoftvApp.SoftvApp.Dibujo.Firma;
 import com.Softv.SoftvApp.SoftvApp.Listas.Array;
@@ -441,6 +443,23 @@ try{
 
 
     public void Ejecutar(){
+
+
+        try {
+            JSONArray jsonArrayTecnicoCuadrilla = new JSONArray();
+
+            JSONObject jsonObject1TecnicoCuadrilla = new JSONObject();
+            for (int i = 0; i < OrdenesAdapter.tecnicosSelect.size(); i++) {
+                JSONObject jsonObjectTecnicoCuadrilla = new JSONObject();
+                jsonObjectTecnicoCuadrilla.put("ClvOrden",Util.getClvOrden(Util.preferences));
+                jsonObjectTecnicoCuadrilla.put("ClvTecnico",OrdenesAdapter.tecnicosSelect.get(i));
+                jsonArrayTecnicoCuadrilla.put(i,jsonObjectTecnicoCuadrilla);
+            }
+            jsonObject1TecnicoCuadrilla.put("xml",jsonArrayTecnicoCuadrilla);
+
+            request.addCuadrilla(getContext(),jsonObject1TecnicoCuadrilla);
+        }catch (Exception e){}
+
 
         JSONObject jsonObject = new JSONObject();
         JSONObject jsonObject1 = new JSONObject();

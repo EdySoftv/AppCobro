@@ -33,7 +33,7 @@ implements AdapterView.OnItemClickListener {
     private LayoutInflater inflater;
     private Context mContext;
     private Request request=new Request();
-    public static ArrayList<Integer> tecnicosSelect=new ArrayList<>();
+
     Activity activity;
     //String Nombre="";
 
@@ -74,12 +74,12 @@ implements AdapterView.OnItemClickListener {
             if(position==0){
                 viewHolder.selecion.setVisibility(View.GONE);
             }else{
-                Iterator<List<SelectRelTecnicoCuadrillaResult>> itdata = Array.dataCuadrilla.iterator();
-                    List<SelectRelTecnicoCuadrillaResult> dat = itdata.next();
-                for(int a=0;a<dat.size();a++){
-                    if(Array.clv_tecnicoSecundario.get(position)==dat.get(a).ClvTecnico){
+                //Iterator<List<SelectRelTecnicoCuadrillaResult>> itdata = Array.dataCuadrilla.iterator();
+                //    List<SelectRelTecnicoCuadrillaResult> dat = itdata.next();
+                for(int a=0;a<OrdenesAdapter.tecnicosSelect.size();a++){
+                    if(Array.clv_tecnicoSecundario.get(position)==OrdenesAdapter.tecnicosSelect.get(a)){
                         viewHolder.selecion.setChecked(true);
-                        tecnicosSelect.add(Array.clv_tecnicoSecundario.get(position));
+                        //OrdenesAdapter.tecnicosSelect.add(Array.clv_tecnicoSecundario.get(position));
                     }
                 }
                 viewHolder.selecion.setText(Array.nom_tecnicoSecundario.get(position));
@@ -89,9 +89,9 @@ implements AdapterView.OnItemClickListener {
                 @Override
                 public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                     if(isChecked){
-                        tecnicosSelect.add(Array.clv_tecnicoSecundario.get(position));
+                        OrdenesAdapter.tecnicosSelect.add(Array.clv_tecnicoSecundario.get(position));
                     }else{
-                        tecnicosSelect.remove(Array.clv_tecnicoSecundario.get(position));
+                        OrdenesAdapter.tecnicosSelect.remove(Array.clv_tecnicoSecundario.get(position));
                     }
                 }
             });
