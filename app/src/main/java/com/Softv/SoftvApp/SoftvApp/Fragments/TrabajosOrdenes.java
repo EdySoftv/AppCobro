@@ -23,7 +23,7 @@ import static com.Softv.SoftvApp.SoftvApp.Listas.Array.recibix;
 public class TrabajosOrdenes extends Fragment{
     public static TrabajosAdapter adaptertrabajos;
     public static ListView trabajos;
-    public static boolean ValidaRequiereTrabajo=false;
+    public static boolean ValidaRequiereTrabajo=false,validaCAMDO=false;
     Request request = new Request();
 
     public TrabajosOrdenes() {
@@ -114,6 +114,7 @@ public class TrabajosOrdenes extends Fragment{
 
             //Cambio Domicilio
             if (caracteres[0].equals("CAMDO")) {
+                validaCAMDO=true;
                 TrabajosAdapter.validarCoordenadas=true;
                 TrabajosAdapter.retiro = false;
 

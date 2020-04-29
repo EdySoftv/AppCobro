@@ -43,7 +43,7 @@ public class NAPTAP extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener  {
     NavigationView barra;
     private Request request = new Request();
-    Spinner spinnerColonia;
+    public static Spinner spinnerColonia;
     String recuperamos_variable_string;
     TextView titulo;
     public static String cordLatTN="", cordLongTN="";
@@ -63,7 +63,7 @@ public class NAPTAP extends AppCompatActivity
         titulo = findViewById(R.id.NAPTAPTitulo);
         spinnerColonia = findViewById(R.id.spinnerColonia);
 
-        request.getColonia(getApplicationContext(),spinnerColonia);
+        request.getColonia(getApplicationContext());
 
         View barra1 = barra.getHeaderView(0);
         recuperamos_variable_string = getIntent().getStringExtra("dato");

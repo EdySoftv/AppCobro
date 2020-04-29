@@ -23,6 +23,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.Softv.SoftvApp.SoftvApp.Activitys.AsignarAparato;
+import com.Softv.SoftvApp.SoftvApp.Activitys.NAPTAP;
 import com.Softv.SoftvApp.SoftvApp.Activitys.Orden;
 import com.Softv.SoftvApp.SoftvApp.Activitys.CambioDom;
 
@@ -76,6 +77,7 @@ import com.Softv.SoftvApp.SoftvApp.Listas.JSONReportes;
 import com.Softv.SoftvApp.SoftvApp.Listas.JSONResponseTecnico;
 import com.Softv.SoftvApp.SoftvApp.Listas.JSONServicioAsignado;
 import com.Softv.SoftvApp.SoftvApp.Listas.JSONServiciosAparatos;
+import com.Softv.SoftvApp.SoftvApp.Listas.JSONServiciosCAMDO;
 import com.Softv.SoftvApp.SoftvApp.Listas.JSONSolucion;
 import com.Softv.SoftvApp.SoftvApp.Listas.JSONStatusApa;
 import com.Softv.SoftvApp.SoftvApp.Listas.JSONTAP;
@@ -115,6 +117,7 @@ import com.Softv.SoftvApp.SoftvApp.Modelos.GetMuestraTecnicosAlmacenListResult;
 import com.Softv.SoftvApp.SoftvApp.Modelos.GetMuestraTipoAparatoListResult;
 import com.Softv.SoftvApp.SoftvApp.Modelos.GetQuejasListResult;
 import com.Softv.SoftvApp.SoftvApp.Modelos.GetSP_StatusAparatosListResult;
+import com.Softv.SoftvApp.SoftvApp.Modelos.GetServiciosResult;
 import com.Softv.SoftvApp.SoftvApp.Modelos.Get_ClvTecnicoResult;
 import com.Softv.SoftvApp.SoftvApp.Modelos.GetchecaBitacoraTecnicoModel;
 import com.Softv.SoftvApp.SoftvApp.Modelos.GetdameSerDELCliresumenResult;
@@ -217,7 +220,7 @@ import static java.util.Arrays.asList;
 
 
 public class Request extends AppCompatActivity {
-    public static boolean NAP=false,TAP=false;
+    public static boolean NAP=false,TAP=false,NAPCAMDO=false,TAPCAMDO=false;
     Services services = new Services();
     Array array = new Array();
     public static String reintentarComando, contraroMA, obsMA, statusMA, extencionesE, Obs,ObsR, msgComando = "",problemaReal;
@@ -226,7 +229,7 @@ public class Request extends AppCompatActivity {
     public static int clvP, tecC, nExtenciones = 0,clvProblemarepo,ContratoReal,ClvUsuario,NoBitacora;
     public int reintentaB;
     public static String stringValidaTrabajos;
-    public static ArrayAdapter adapterTecSec, adapterTecSecR, adapterNap,adapterTap,adapterColonia;
+    public static ArrayAdapter adapterTecSec, adapterTecSecR, adapterNap,adapterTap,adapterColonia,adapterTAPNAPCAMDO;
     public static boolean pieza = false, rapagejecutar = false, extencionesMat = false;
     public static boolean pieza = false, rapagejecutar = false, extencionesMat = false,escable = false;;
    public static int validFirma;
@@ -4638,7 +4641,7 @@ try{
         });
     }
 
-    public void getColonia(final Context context, final Spinner spiner) {
+    public void getColonia(final Context context) {
         Call<JSONColonia> call = services.getColonia(context).getColonia();
         call.enqueue(new Callback<JSONColonia>() {
             @Override
@@ -4657,7 +4660,7 @@ try{
                             Array.datosSpinnerColonia.add(dat.get(i).getNombre());
                         }
                         adapterColonia = new ArrayAdapter<String>(context, android.R.layout.simple_spinner_dropdown_item, Array.datosSpinnerColonia);
-                        spiner.setAdapter(adapterColonia);
+                        NAPTAP.spinnerColonia.setAdapter(adapterColonia);
 
 
                     }
@@ -4772,6 +4775,167 @@ try{
             }
         });
     }
+    public void getServiciosCAMDO(final Context context, final JSONObject jsonObject,final Spinner spinnerTap,final Spinner spinnerNap, final TextView napCAMDO,final TextView tapCAMDO) {
+        Call<JSONServiciosCAMDO> call = services.RequestPost(context, jsonObject).getServiciosCAMDO();
+        call.enqueue(new Callback<JSONServiciosCAMDO>() {
+            @Override
+            public void onResponse(Call<JSONServiciosCAMDO> call, Response<JSONServiciosCAMDO> response) {
+                if (response.code() == 200) {
 
+                    TAPCAMDO=false;
+                    NAPCAMDO=false;
+
+                    JSONServiciosCAMDO jsonResponse = response.body();
+                    Array.serviciosCAMDO = new ArrayList<>(asList(jsonResponse.getServiciosResult()));
+                    Iterator<List<GetServiciosResult>> itdata = Array.serviciosCAMDO.iterator();
+                    ArrayList<String>datos=new ArrayList<>();
+                    while (itdata.hasNext()) {
+                        List<GetServiciosResult> dat = itdata.next();
+
+                        for (int i = 0; i < dat.size(); i++) {
+                           if(dat.get(i).getStatus().equals("I")||dat.get(i).getStatus().equals("C")){
+                               if(dat.get(i).getIdMedio()==1){
+                                   TAPCAMDO=true;
+                               }
+                               if(dat.get(i).getIdMedio()==2){
+                                   NAPCAMDO=true;
+                               }
+                           }
+                        }
+
+                        if(TAPCAMDO==true){
+                           tapCAMDO.setVisibility(View.VISIBLE);
+                            spinnerTap.setVisibility(View.VISIBLE);
+//                            try{
+//                                JSONObject jsonObject = new JSONObject();
+//                                jsonObject.put("contrato",ContratoReal);
+//                                getTap(context,jsonObject,spinnerTap);
+//                            }catch (Exception e){}
+                            getDeepCAMDOTAPNAP(context,"TAP",spinnerTap);
+
+
+
+                        }else{
+                            tapCAMDO.setVisibility(View.INVISIBLE);
+                            spinnerTap.setVisibility(View.INVISIBLE);
+                        }
+
+
+
+
+                        if(NAPCAMDO==true){
+                           napCAMDO.setVisibility(View.VISIBLE);
+                            spinnerNap.setVisibility(View.VISIBLE);
+//
+//                            try{
+//                                JSONObject jsonObject = new JSONObject();
+//                                jsonObject.put("contrato",ContratoReal);
+//                                getNapContrato(context,jsonObject,spinnerNap);
+//                            }catch (Exception e){}
+
+                            getDeepCAMDOTAPNAP(context,"NAP",spinnerNap);
+                        }else{
+                            napCAMDO.setVisibility(View.INVISIBLE);
+                            spinnerNap.setVisibility(View.INVISIBLE);
+                        }
+
+                    }
+                } else {
+                    ErrorMensaje(context,"Error "+response.message());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<JSONServiciosCAMDO> call, Throwable t) {
+                ErrorMensaje(context,"Error "+t.getMessage());
+            }
+        });
+    }
+    public void getDeepCAMDOTAPNAP(final Context context, final String napotap,final Spinner spinner) {
+        Service service = null;
+        try {
+            service = services.getCAMODOService(context);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        Call<JSONCAMDO> call = service.getDataCAMDO();
+        call.enqueue(new Callback<JSONCAMDO>() {
+            @Override
+            public void onResponse(Call<JSONCAMDO> call, Response<JSONCAMDO> response) {
+                if (response.code() == 200) {
+                    try {
+                        JSONCAMDO jsonResponse = response.body();
+                        array.dataCAMDO = new ArrayList<List<GetDameDatosCAMDOResult>>(asList(jsonResponse.getDameDatosCAMDOResult()));
+                        Iterator<List<GetDameDatosCAMDOResult>> itdata = array.dataCAMDO.iterator();
+                        while (itdata.hasNext()) {
+                            List<GetDameDatosCAMDOResult> dat = itdata.next();
+                            String datos[] = new String[dat.size()];
+                            coloniacmdo = dat.get(0).colonia;
+                        }
+                        if(napotap.equals("NAP")){
+                            try{
+                                JSONObject jsonObject = new JSONObject();
+                                jsonObject.put("op",0);
+                                jsonObject.put("nombre_Colonia",coloniacmdo);
+                                getNAPTAPCAMDO(context,jsonObject,spinner);
+                            }catch (Exception e){}
+                        }
+                        if(napotap.equals("TAP")){
+                            try{
+                                JSONObject jsonObject = new JSONObject();
+                                jsonObject.put("op",1);
+                                jsonObject.put("nombre_Colonia",coloniacmdo);
+                                getNAPTAPCAMDO(context,jsonObject,spinner);
+                            }catch (Exception e){}
+                        }
+
+                    } catch (Exception e) {
+                        coloniacmdo = "";
+                        ErrorMensaje(context,"Error");
+                    }
+                } else {
+                    ErrorMensaje(context,"Error "+response.message());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<JSONCAMDO> call, Throwable t) {
+                ErrorMensaje(context,"Error "+t.getMessage());
+            }
+        });
+    }
+    public void getNAPTAPCAMDO(final Context context, final JSONObject jsonObject,final Spinner spinner) {
+        Call<JSONAPTAP> call = services.RequestPost(context,jsonObject).getNAPTAP();
+        call.enqueue(new Callback<JSONAPTAP>() {
+            @Override
+            public void onResponse(Call<JSONAPTAP> call, Response<JSONAPTAP> response) {
+                if (response.code() == 200) {
+                    JSONAPTAP jsonResponse = response.body();
+                    Array.tapFiltrado.clear();
+                    Array.tapFiltrado.add("<Seleccionar>");
+                    Array.tapnap = new ArrayList<>(asList(jsonResponse.GetListaNapTapResult()));
+                    Iterator<List<GetListaNapTapResult>> itdata = Array.tapnap.iterator();
+                    while (itdata.hasNext()) {
+                        List<GetListaNapTapResult> dat = itdata.next();
+
+                        for (int i = 0; i < dat.size(); i++) {
+                            Array.tapFiltrado.add(dat.get(i).getNapTap());
+                        }
+                        adapterTAPNAPCAMDO = new ArrayAdapter<String>(context, android.R.layout.simple_spinner_dropdown_item, Array.tapFiltrado);
+                        spinner.setAdapter(adapterTAPNAPCAMDO);
+
+
+                    }
+                } else {
+                    ErrorMensaje(context,"Error al conseguir lista filtrada "+response.message());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<JSONAPTAP> call, Throwable t) {
+                ErrorMensaje(context,"Error "+t.getMessage());
+            }
+        });
+    }
 
 }

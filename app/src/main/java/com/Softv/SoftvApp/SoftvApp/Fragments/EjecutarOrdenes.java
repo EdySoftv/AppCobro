@@ -28,6 +28,7 @@ import com.Softv.SoftvApp.SoftvApp.Adapters.TrabajosAdapter;
 import com.Softv.SoftvApp.SoftvApp.Dibujo.Firma;
 import com.Softv.SoftvApp.SoftvApp.Listas.Array;
 import com.Softv.SoftvApp.SoftvApp.Modelos.DeepConsModel;
+import com.Softv.SoftvApp.SoftvApp.Modelos.GetListaNapTapResult;
 import com.Softv.SoftvApp.SoftvApp.Modelos.ObtieneNapModel;
 import com.Softv.SoftvApp.SoftvApp.Modelos.ObtieneTapModel;
 import com.Softv.SoftvApp.SoftvApp.R;
@@ -170,6 +171,16 @@ try{
 }catch (Exception e){
     Log.d("error","no hay instalacion");
 }
+
+if(TrabajosOrdenes.validaCAMDO==true){
+    try{
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("Contrato",request.ContratoReal);
+        request.getServiciosCAMDO(getContext(),jsonObject,spinnerTap,spinnerNap,txtNap,txtTap);
+    }catch (Exception e){}
+
+}
+
 try{
     spinnerNap.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
         @Override
@@ -186,11 +197,45 @@ try{
 
         }
 
-        @Override
-        public void onNothingSelected(AdapterView<?> parent) {
+    if(TrabajosOrdenes.validaCAMDO==true){
+        spinnerNap.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                if(position!=0){
+                    Iterator<List<GetListaNapTapResult>> itdataNAPCAMDO = Array.tapnap.iterator();
+                    List<GetListaNapTapResult> datNAPCAMDO = itdataNAPCAMDO.next();
+                    IdTapN=datNAPCAMDO.get(position-1).getIdNapTap();
+                    ClavetecnicaN=datNAPCAMDO.get(position-1).getNapTap();
+                }else{
+                    IdTapN=0;
+                    ClavetecnicaN="<Seleccionar>";
+                }
 
-        }
-    });
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+    }else{
+        spinnerNap.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                Iterator<List<ObtieneNapModel>> itdatan = Array.dataNap.iterator();
+                List<ObtieneNapModel> datn = itdatan.next();
+                IdTapN=datn.get(position).getIdTap();
+                ClavetecnicaN=datn.get(position).getClavetecnica();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+    }
+
+
 }catch (Exception e){}
 
 
@@ -211,11 +256,29 @@ try{
 
                 }
 
-                @Override
-                public void onNothingSelected(AdapterView<?> parent) {
+                    }
 
-                }
-            });
+                    @Override
+                    public void onNothingSelected(AdapterView<?> parent) {
+
+                    }
+                });
+            }else{
+                spinnerTap.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                    @Override
+                    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                        Iterator<List<ObtieneTapModel>> itdatat = Array.dataTap.iterator();
+                        List<ObtieneTapModel> datt = itdatat.next();
+                        IdTapT=datt.get(position).getIdTap();
+                        ClavetecnicaT=datt.get(position).getClavetecnica();
+                    }
+
+                    @Override
+                    public void onNothingSelected(AdapterView<?> parent) {
+
+                    }
+                });
+            }
         }catch (Exception e){}
 
 

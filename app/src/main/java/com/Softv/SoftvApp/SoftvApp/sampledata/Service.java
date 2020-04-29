@@ -32,6 +32,7 @@ import com.Softv.SoftvApp.SoftvApp.Listas.JSONReportes;
 import com.Softv.SoftvApp.SoftvApp.Listas.JSONResponseTecnico;
 import com.Softv.SoftvApp.SoftvApp.Listas.JSONServicioAsignado;
 import com.Softv.SoftvApp.SoftvApp.Listas.JSONServiciosAparatos;
+import com.Softv.SoftvApp.SoftvApp.Listas.JSONServiciosCAMDO;
 import com.Softv.SoftvApp.SoftvApp.Listas.JSONSolucion;
 import com.Softv.SoftvApp.SoftvApp.Listas.JSONStatusApa;
 import com.Softv.SoftvApp.SoftvApp.Listas.JSONTAP;
@@ -254,6 +255,9 @@ public interface Service {
 
     @POST(Constants.URL_ADD_TAPC)
     Call<JsonObject> getTapCoo();
+
+    @POST(Constants.URL_GET_SERVICIOSCAMDO)
+    Call<JSONServiciosCAMDO> getServiciosCAMDO();
 
 }
 

@@ -24,6 +24,7 @@ import com.Softv.SoftvApp.SoftvApp.Modelos.GetMuestraTecnicosAlmacenListResult;
 import com.Softv.SoftvApp.SoftvApp.Modelos.GetMuestraTipoAparatoListResult;
 import com.Softv.SoftvApp.SoftvApp.Modelos.GetQuejasListResult;
 import com.Softv.SoftvApp.SoftvApp.Modelos.GetSP_StatusAparatosListResult;
+import com.Softv.SoftvApp.SoftvApp.Modelos.GetServiciosResult;
 import com.Softv.SoftvApp.SoftvApp.Modelos.Get_ClvTecnicoResult;
 import com.Softv.SoftvApp.SoftvApp.Modelos.GetdameSerDELCliresumenResult;
 import com.Softv.SoftvApp.SoftvApp.Modelos.GetuspBuscaContratoSeparado2ListResult;
@@ -149,6 +150,7 @@ public class Array {
 
 
     public static ArrayList<List<GetListaNapTapResult>>tapnap;
+    public static ArrayList<List<GetServiciosResult>>serviciosCAMDO;
     public static ArrayList<String>tapFiltrado=new ArrayList<>();
     public static ArrayList<String>tapFiltradoPoste=new ArrayList<>();
     public static ArrayList<Integer>idTapCoordenadas=new ArrayList<>();

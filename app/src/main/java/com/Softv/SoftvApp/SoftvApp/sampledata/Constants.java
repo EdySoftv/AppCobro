@@ -98,6 +98,8 @@ public class Constants {
     public static final String URL_ADD_NAPC = "AplicacionMovil/AddRelNapCoordenadas";
     public static final String URL_ADD_TAPC = "AplicacionMovil/AddRelTapCoordenadas";
 
+    public static final String URL_GET_SERVICIOSCAMDO = "AplicacionMovil/GetServicios";
+
 
 
 
