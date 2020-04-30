@@ -444,21 +444,23 @@ try{
 
     public void Ejecutar(){
 
+        if(OrdenesAdapter.tecnicosSelect.size()!=0){
+            try {
+                JSONArray jsonArrayTecnicoCuadrilla = new JSONArray();
 
-        try {
-            JSONArray jsonArrayTecnicoCuadrilla = new JSONArray();
+                JSONObject jsonObject1TecnicoCuadrilla = new JSONObject();
+                for (int i = 0; i < OrdenesAdapter.tecnicosSelect.size(); i++) {
+                    JSONObject jsonObjectTecnicoCuadrilla = new JSONObject();
+                    jsonObjectTecnicoCuadrilla.put("ClvOrden",Util.getClvOrden(Util.preferences));
+                    jsonObjectTecnicoCuadrilla.put("ClvTecnico",OrdenesAdapter.tecnicosSelect.get(i));
+                    jsonArrayTecnicoCuadrilla.put(i,jsonObjectTecnicoCuadrilla);
+                }
+                jsonObject1TecnicoCuadrilla.put("xml",jsonArrayTecnicoCuadrilla);
 
-            JSONObject jsonObject1TecnicoCuadrilla = new JSONObject();
-            for (int i = 0; i < OrdenesAdapter.tecnicosSelect.size(); i++) {
-                JSONObject jsonObjectTecnicoCuadrilla = new JSONObject();
-                jsonObjectTecnicoCuadrilla.put("ClvOrden",Util.getClvOrden(Util.preferences));
-                jsonObjectTecnicoCuadrilla.put("ClvTecnico",OrdenesAdapter.tecnicosSelect.get(i));
-                jsonArrayTecnicoCuadrilla.put(i,jsonObjectTecnicoCuadrilla);
-            }
-            jsonObject1TecnicoCuadrilla.put("xml",jsonArrayTecnicoCuadrilla);
+                request.addCuadrilla(getContext(),jsonObject1TecnicoCuadrilla);
+            }catch (Exception e){}
+        }
 
-            request.addCuadrilla(getContext(),jsonObject1TecnicoCuadrilla);
-        }catch (Exception e){}
 
 
         JSONObject jsonObject = new JSONObject();
