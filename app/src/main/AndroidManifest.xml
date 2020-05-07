@@ -50,6 +50,10 @@
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
+            android:name="com.Softv.SoftvApp.SoftvApp.Activitys.NAPTAP"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
             android:name="com.Softv.SoftvApp.SoftvApp.Activitys.Configuracion"
             android:configChanges="orientation|keyboardHidden|screenSize|screenLayout"
             android:label="@string/title_activity_configuracion"

@@ -140,6 +140,18 @@ public class Configuracion extends AppCompatActivity
                 drawer.closeDrawer(GravityCompat.START);
             }
 
+        }else if (id == R.id.MenuCoordenadasNAP) {
+            Intent intent1 = new Intent(Configuracion.this, NAPTAP.class);
+            intent1.putExtra("dato", "NAP");
+            intent1.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(intent1);
+            finish();
+        } else if (id == R.id.MenuCoordenadasTAP) {
+            Intent intent1 = new Intent(Configuracion.this, NAPTAP.class);
+            intent1.putExtra("dato", "TAP");
+            intent1.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(intent1);
+            finish();
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

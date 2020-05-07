@@ -57,6 +57,7 @@ import com.Softv.SoftvApp.SoftvApp.Listas.JSONCLIAPA;
 import com.Softv.SoftvApp.SoftvApp.Listas.JSONCUADRILLA;
 import com.Softv.SoftvApp.SoftvApp.Listas.JSONDATOSCLIENTE;
 import com.Softv.SoftvApp.SoftvApp.Listas.JSONDESCARGADIRECTA;
+import com.Softv.SoftvApp.SoftvApp.Listas.JSONColonia;
 import com.Softv.SoftvApp.SoftvApp.Listas.JSONDescripcionArticulosBit;
 import com.Softv.SoftvApp.SoftvApp.Listas.JSONDetalleBitacora;
 import com.Softv.SoftvApp.SoftvApp.Listas.JSONGETNAP;
@@ -87,6 +88,7 @@ import com.Softv.SoftvApp.SoftvApp.Modelos.DescripcionArticuloModel;
 import com.Softv.SoftvApp.SoftvApp.Modelos.DetalleBitacoraModel;
 import com.Softv.SoftvApp.SoftvApp.Modelos.GetBUSCADetOrdSerListResult;
 import com.Softv.SoftvApp.SoftvApp.Modelos.GetCheca_si_tiene_CAMDOModel;
+import com.Softv.SoftvApp.SoftvApp.Modelos.GetColoniaResult;
 import com.Softv.SoftvApp.SoftvApp.Modelos.GetConTecnicoAgendaResult;
 import com.Softv.SoftvApp.SoftvApp.Modelos.GetConsultaClientesListResult;
 import com.Softv.SoftvApp.SoftvApp.Modelos.GetDameDatosCAMDOResult;
@@ -219,7 +221,8 @@ public class Request extends AppCompatActivity {
     public static int clvP, tecC, nExtenciones = 0,clvProblemarepo,ContratoReal,ClvUsuario,NoBitacora;
     public int reintentaB;
     public static String stringValidaTrabajos;
-    public static ArrayAdapter adapterTecSec, adapterTecSecR, adapterNap,adapterTap;
+    public static ArrayAdapter adapterTecSec, adapterTecSecR, adapterNap,adapterTap,adapterColonia;
+    public static boolean pieza = false, rapagejecutar = false, extencionesMat = false;
     public static boolean pieza = false, rapagejecutar = false, extencionesMat = false,escable = false;;
    public static int validFirma;
     public static String ciudadcmdo, localidadcmdo, coloniacmdo, callecmdo, numerocmdo, numeroicmdo, telefonocmdo, callencmdo, callescmdo, calleecmdo, calleocmdo, casacmdo;
@@ -4572,4 +4575,98 @@ try{
 //        return stringValidaTrabajos;
 //
 //    }
+
+   /* public void imagen(final Context context, final JSONObject jsonObject, final Activity activity,final ProgressDialog progressDialog) {
+
+
+        Call<JsonObject> call = services.RequestImagen(context, jsonObject).imagen();
+        call.enqueue(new Callback<JsonObject>() {
+            @Override
+            public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
+                if (response.code() == 200) {
+                    progressDialog.dismiss();
+                    activity.finish();
+                } else {
+                    ErrorMensaje(context,"Error al mandar fotografias");
+                }
+            }
+
+            @Override
+            public void onFailure(Call<JsonObject> call, Throwable t) {
+                ErrorMensaje(context,"Error al mandar fotografias");
+            }
+        });
+    }*/
+    public void GuardaCoordenadasR(final Context context) {
+
+        Service service = null;
+        try {
+            service = services.getGuardaCoordenadasRService(context);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        Call<JsonObject> call = service.getGuardaCoordenadas();
+        call.enqueue(new Callback<JsonObject>() {
+
+
+            @Override
+            public void onResponse(Call<JsonObject> call, Response<JsonObject> response1) {
+                reintentaB = 0;
+
+                if (response1.code() == 200) {
+                    dialogVisitaRepo.dismiss();
+                    Toast.makeText(context, "Reporte guardado correctamente", Toast.LENGTH_LONG).show();
+                    getListQuejas(context);
+
+                } else {
+                    ErrorMensaje(context,"Se ha producido un error al guardar coordenadas");
+                    dialogVisitaRepo.dismiss();
+
+                }
+            }
+
+            @Override
+            public void onFailure(Call<JsonObject> call, Throwable t) {
+                ErrorMensaje(context,"Se ha producido un error al guardar coordenadas");
+            }
+        });
+    }
+
+    public void getColonia(final Context context, final Spinner spiner) {
+        Call<JSONColonia> call = services.getColonia(context).getColonia();
+        call.enqueue(new Callback<JSONColonia>() {
+            @Override
+            public void onResponse(Call<JSONColonia> call, Response<JSONColonia> response) {
+                if (response.code() == 200) {
+                    JSONColonia jsonResponse = response.body();
+
+                    Array.dataColonia = new ArrayList<>(asList(jsonResponse.getColoniaResult()));
+                    Iterator<List<GetColoniaResult>> itdata = Array.dataColonia.iterator();
+                    ArrayList<String>datos=new ArrayList<>();
+                    datos.add("Seleccione colonia");
+                    while (itdata.hasNext()) {
+                        List<GetColoniaResult> dat = itdata.next();
+
+                        for (int i = 0; i < dat.size(); i++) {
+                            datos.add(dat.get(i).getNombre());
+                        }
+                        adapterColonia = new ArrayAdapter<String>(context, android.R.layout.simple_spinner_dropdown_item, datos);
+                        spiner.setAdapter(adapterColonia);
+
+
+                    }
+                } else {
+                    ErrorMensaje(context,"Error al conseguir lista de colonias "+response.message());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<JSONColonia> call, Throwable t) {
+                ErrorMensaje(context,"Error "+t.getMessage());
+            }
+        });
+    }
+
+
 }

@@ -91,6 +91,9 @@ public class Constants {
     public static final String URL_GET_TAP = "Ordser/GetObtieneTap";
     public static final String URL_GUARDA_TAP = "Ordser/GetGuardarRelClienteTap";
 
+
+    public static final String URL_GET_COLONIA = "AplicacionMovil/GetColonia";
+
     //Hotel
 
     public static final String URL_ADD_CUADRILLA = "AplicacionMovil/InsertRelTecnicoCuadrilla";

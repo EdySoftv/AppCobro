@@ -200,7 +200,19 @@ public class Orden extends AppCompatActivity implements NavigationView.OnNavigat
             Intent intent1 = new Intent(Orden.this, Configuracion.class);
             intent1.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(intent1);
-        }
+        } else if (id == R.id.MenuCoordenadasNAP) {
+        Intent intent1 = new Intent(Orden.this, NAPTAP.class);
+        intent1.putExtra("dato", "NAP");
+        intent1.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent1);
+        finish();
+    } else if (id == R.id.MenuCoordenadasTAP) {
+        Intent intent1 = new Intent(Orden.this, NAPTAP.class);
+        intent1.putExtra("dato", "TAP");
+        intent1.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent1);
+        finish();
+    }
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;

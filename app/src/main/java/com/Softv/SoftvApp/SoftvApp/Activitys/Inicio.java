@@ -217,9 +217,17 @@ public void EstatusInternet (Context ctx){
             startActivity(intent1);
             finish();
         } else if (id == R.id.MenuCoordenadasNAP) {
-            Toast.makeText(getApplicationContext(), "NAP", Toast.LENGTH_LONG).show();
+            Intent intent1 = new Intent(Inicio.this, NAPTAP.class);
+            intent1.putExtra("dato", "NAP");
+            intent1.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(intent1);
+            finish();
     } else if (id == R.id.MenuCoordenadasTAP) {
-            Toast.makeText(getApplicationContext(), "TAP", Toast.LENGTH_LONG).show();
+            Intent intent1 = new Intent(Inicio.this, NAPTAP.class);
+            intent1.putExtra("dato", "TAP");
+            intent1.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(intent1);
+            finish();
     }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

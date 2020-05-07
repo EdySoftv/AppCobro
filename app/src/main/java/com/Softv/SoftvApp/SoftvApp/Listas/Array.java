@@ -3,6 +3,7 @@ package com.Softv.SoftvApp.SoftvApp.Listas;
 import com.Softv.SoftvApp.SoftvApp.Modelos.DescripcionArticuloModel;
 import com.Softv.SoftvApp.SoftvApp.Modelos.DetalleBitacoraModel;
 import com.Softv.SoftvApp.SoftvApp.Modelos.GetBUSCADetOrdSerListResult;
+import com.Softv.SoftvApp.SoftvApp.Modelos.GetColoniaResult;
 import com.Softv.SoftvApp.SoftvApp.Modelos.GetConTecnicoAgendaResult;
 import com.Softv.SoftvApp.SoftvApp.Modelos.GetConsultaClientesListResult;
 import com.Softv.SoftvApp.SoftvApp.Modelos.GetDameDatosCAMDOResult;
@@ -141,5 +142,7 @@ public class Array {
 
     public static  ArrayList<List<SelectRelTecnicoCuadrillaResult>> dataCuadrilla;
     public static  ArrayList<List<GetConsultaClientesListResult>> dataClientes;
+
+    public static ArrayList<List<GetColoniaResult>>dataColonia;
 
 }

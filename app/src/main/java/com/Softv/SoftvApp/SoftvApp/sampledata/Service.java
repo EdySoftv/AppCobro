@@ -13,6 +13,7 @@ import com.Softv.SoftvApp.SoftvApp.Listas.JSONCAMDO;
 import com.Softv.SoftvApp.SoftvApp.Listas.JSONCLIAPA;
 import com.Softv.SoftvApp.SoftvApp.Listas.JSONCUADRILLA;
 import com.Softv.SoftvApp.SoftvApp.Listas.JSONClasificacionProblm;
+import com.Softv.SoftvApp.SoftvApp.Listas.JSONColonia;
 import com.Softv.SoftvApp.SoftvApp.Listas.JSONDATOSCLIENTE;
 import com.Softv.SoftvApp.SoftvApp.Listas.JSONDESCARGADIRECTA;
 import com.Softv.SoftvApp.SoftvApp.Listas.JSONDescripcionArticulosBit;
@@ -217,6 +218,12 @@ public interface Service {
     //Descarga
     @POST(Constants.URL_ADD_DESCARGA_DIRECTA)
     Call<JsonObject> addDescarga();
+    //@Multipart
+    @POST(Constants.imagen)
+    Call<JsonObject> imagen();
+    }
+    @GET(Constants.URL_GET_COLONIA)
+    Call<JSONColonia> getColonia();
 
     @POST(Constants.URL_BITACORA_DIRECTA)
     Call<JsonObject> bitacoraDirecta();
