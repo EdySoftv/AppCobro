@@ -94,6 +94,13 @@ public class Constants {
 
     public static final String URL_GET_COLONIA = "AplicacionMovil/GetColonia";
 
+    public static final String URL_GET_NAPTAP = "AplicacionMovil/GetListaNapTap";
+    public static final String URL_ADD_NAPC = "AplicacionMovil/AddRelNapCoordenadas";
+    public static final String URL_ADD_TAPC = "AplicacionMovil/AddRelTapCoordenadas";
+
+
+
+
     //Hotel
 
     public static final String URL_ADD_CUADRILLA = "AplicacionMovil/InsertRelTecnicoCuadrilla";

@@ -5,6 +5,7 @@ import com.Softv.SoftvApp.SoftvApp.Listas.Example;
 import com.Softv.SoftvApp.SoftvApp.Listas.Example1;
 import com.Softv.SoftvApp.SoftvApp.Listas.Example2;
 import com.Softv.SoftvApp.SoftvApp.Listas.Example3;
+import com.Softv.SoftvApp.SoftvApp.Listas.JSONAPTAP;
 import com.Softv.SoftvApp.SoftvApp.Listas.JSONApaTipDis;
 import com.Softv.SoftvApp.SoftvApp.Listas.JSONApaTipo;
 import com.Softv.SoftvApp.SoftvApp.Listas.JSONAparatosDisponibles;
@@ -244,6 +245,15 @@ public interface Service {
     @POST(Constants.URL_GET_DATOS_CLIENTE)
     Call<JSONDATOSCLIENTE> getDatoscliente();
 
+
+    @POST(Constants.URL_GET_NAPTAP)
+    Call<JSONAPTAP> getNAPTAP();
+
+    @POST(Constants.URL_ADD_NAPC)
+    Call<JsonObject> getNapCoo();
+
+    @POST(Constants.URL_ADD_TAPC)
+    Call<JsonObject> getTapCoo();
 
 }
 

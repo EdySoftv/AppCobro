@@ -19,10 +19,12 @@ import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -30,6 +32,8 @@ import android.widget.Toast;
 import com.Softv.SoftvApp.SoftvApp.R;
 import com.Softv.SoftvApp.SoftvApp.Request.Request;
 import com.Softv.SoftvApp.SoftvApp.sampledata.Util;
+
+import org.json.JSONObject;
 
 import static com.Softv.SoftvApp.SoftvApp.Services.Services.clavequeja;
 import static com.Softv.SoftvApp.SoftvApp.Services.Services.clvorden;
@@ -45,6 +49,7 @@ public class NAPTAP extends AppCompatActivity
     public static String cordLatTN="", cordLongTN="";
     private LocationManager locationManager;
     Activity activity;
+    RecyclerView lista;
 
     @Override
     protected void onCreate(Bundle onSaveInstanceState) {
@@ -54,6 +59,7 @@ public class NAPTAP extends AppCompatActivity
         activity = this;
         setSupportActionBar(toolbar);
         barra = findViewById(R.id.nav_view);
+        lista = findViewById(R.id.listaNAPTAP);
         titulo = findViewById(R.id.NAPTAPTitulo);
         spinnerColonia = findViewById(R.id.spinnerColonia);
 
@@ -63,8 +69,52 @@ public class NAPTAP extends AppCompatActivity
         recuperamos_variable_string = getIntent().getStringExtra("dato");
         if(recuperamos_variable_string.equals("NAP")) {
             titulo.setText(getResources().getString(R.string.NAP));
+            spinnerColonia.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                @Override
+                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                    if(position==0){
+                        Toast.makeText(getApplicationContext(),"Seleccione una colonia",Toast.LENGTH_LONG).show();
+                    }else{
+                        try{
+                            JSONObject jsonObject = new JSONObject();
+                            jsonObject.put("op",0);
+                            jsonObject.put("nombre_Colonia",spinnerColonia.getSelectedItem());
+                            request.getNAPTAP(getApplicationContext(),jsonObject,lista,getResources().getString(R.string.NAP),activity);
+                        }catch (Exception e){}
+                    }
+
+                }
+
+                @Override
+                public void onNothingSelected(AdapterView<?> parent) {
+                }
+            });
+
+
         }else if(recuperamos_variable_string.equals("TAP")) {
             titulo.setText(getResources().getString(R.string.TAP));
+            spinnerColonia.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                @Override
+                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                    if(position==0){
+                        Toast.makeText(getApplicationContext(),"Seleccione una colonia",Toast.LENGTH_LONG).show();
+                    }else{
+                        try{
+                            JSONObject jsonObject = new JSONObject();
+                            jsonObject.put("op",1);
+                            jsonObject.put("nombre_Colonia",spinnerColonia.getSelectedItem());
+                            request.getNAPTAP(getApplicationContext(),jsonObject,lista,getResources().getString(R.string.TAP),activity);
+                        }catch (Exception e){}
+                    }
+                }
+
+                @Override
+                public void onNothingSelected(AdapterView<?> parent) {
+
+                }
+            });
+
+
         }
 
 
@@ -173,7 +223,7 @@ public class NAPTAP extends AppCompatActivity
             //editor.putFloat("longitud", (float) longitud).commit();
             cordLatTN=String.valueOf(latitude);
             cordLongTN=String.valueOf(longitud);
-            Log.i("error", String.valueOf(longitud));
+            Toast.makeText(getApplicationContext(),"Coordenadas obtenidas",Toast.LENGTH_LONG).show();
             isCoordenadas = true;
         }
     }

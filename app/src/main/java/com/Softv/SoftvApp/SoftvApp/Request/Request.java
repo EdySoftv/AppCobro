@@ -31,8 +31,11 @@ import com.Softv.SoftvApp.SoftvApp.Activitys.ReporteAsignacion;
 import com.Softv.SoftvApp.SoftvApp.Activitys.Reportes;
 import com.Softv.SoftvApp.SoftvApp.Activitys.TecnicosSecundarios;
 import com.Softv.SoftvApp.SoftvApp.Adapters.ArbolAdapter;
+import com.Softv.SoftvApp.SoftvApp.Adapters.EliminarAparatosAdapter;
 import com.Softv.SoftvApp.SoftvApp.Adapters.EliminarMaterialAdapter;
 import com.Softv.SoftvApp.SoftvApp.Adapters.GraficaAdapter;
+import com.Softv.SoftvApp.SoftvApp.Adapters.NAPAdapter;
+import com.Softv.SoftvApp.SoftvApp.Adapters.TAPAdapter;
 import com.Softv.SoftvApp.SoftvApp.Adapters.TrabajosAdapter;
 import com.Softv.SoftvApp.SoftvApp.Fragments.EjecutarOrdenes;
 import com.Softv.SoftvApp.SoftvApp.Activitys.ExtensionesAdi;
@@ -48,6 +51,7 @@ import com.Softv.SoftvApp.SoftvApp.Listas.Example;
 import com.Softv.SoftvApp.SoftvApp.Listas.Example1;
 import com.Softv.SoftvApp.SoftvApp.Listas.Example2;
 import com.Softv.SoftvApp.SoftvApp.Listas.Example3;
+import com.Softv.SoftvApp.SoftvApp.Listas.JSONAPTAP;
 import com.Softv.SoftvApp.SoftvApp.Listas.JSONApaTipDis;
 import com.Softv.SoftvApp.SoftvApp.Listas.JSONApaTipo;
 import com.Softv.SoftvApp.SoftvApp.Listas.JSONAparatosDisponibles;
@@ -99,6 +103,7 @@ import com.Softv.SoftvApp.SoftvApp.Modelos.GetGetDescargaMaterialArticulosByIdCl
 import com.Softv.SoftvApp.SoftvApp.Modelos.GetListAparatosDisponiblesByIdArticuloResult;
 import com.Softv.SoftvApp.SoftvApp.Modelos.GetListClienteAparatosResult;
 import com.Softv.SoftvApp.SoftvApp.Modelos.GetListTipoAparatosByIdArticuloResult;
+import com.Softv.SoftvApp.SoftvApp.Modelos.GetListaNapTapResult;
 import com.Softv.SoftvApp.SoftvApp.Modelos.GetMACWAMModel;
 import com.Softv.SoftvApp.SoftvApp.Modelos.GetMUESTRATRABAJOSQUEJASListResult;
 import com.Softv.SoftvApp.SoftvApp.Modelos.GetMuestraAparatosDisponiblesListResult;
@@ -4643,15 +4648,15 @@ try{
 
                     Array.dataColonia = new ArrayList<>(asList(jsonResponse.getColoniaResult()));
                     Iterator<List<GetColoniaResult>> itdata = Array.dataColonia.iterator();
-                    ArrayList<String>datos=new ArrayList<>();
-                    datos.add("Seleccione colonia");
+                    Array.datosSpinnerColonia.clear();
+                    Array.datosSpinnerColonia.add("Seleccione colonia");
                     while (itdata.hasNext()) {
                         List<GetColoniaResult> dat = itdata.next();
 
                         for (int i = 0; i < dat.size(); i++) {
-                            datos.add(dat.get(i).getNombre());
+                            Array.datosSpinnerColonia.add(dat.get(i).getNombre());
                         }
-                        adapterColonia = new ArrayAdapter<String>(context, android.R.layout.simple_spinner_dropdown_item, datos);
+                        adapterColonia = new ArrayAdapter<String>(context, android.R.layout.simple_spinner_dropdown_item, Array.datosSpinnerColonia);
                         spiner.setAdapter(adapterColonia);
 
 
@@ -4663,6 +4668,106 @@ try{
 
             @Override
             public void onFailure(Call<JSONColonia> call, Throwable t) {
+                ErrorMensaje(context,"Error "+t.getMessage());
+            }
+        });
+    }
+
+    public void getNAPTAP(final Context context, final JSONObject jsonObject,final RecyclerView recyclerView, final String taponap, final Activity activity) {
+        Call<JSONAPTAP> call = services.RequestPost(context,jsonObject).getNAPTAP();
+        call.enqueue(new Callback<JSONAPTAP>() {
+            @Override
+            public void onResponse(Call<JSONAPTAP> call, Response<JSONAPTAP> response) {
+                if (response.code() == 200) {
+                    NAPAdapter adapterNap;
+                    TAPAdapter adapterTap;
+                    JSONAPTAP jsonResponse = response.body();
+                    Array.tapFiltrado.clear();
+                    Array.tapFiltradoPoste.clear();
+                    Array.idTapCoordenadas.clear();
+                    Array.tapnap = new ArrayList<>(asList(jsonResponse.GetListaNapTapResult()));
+                    Iterator<List<GetListaNapTapResult>> itdata = Array.tapnap.iterator();
+                    while (itdata.hasNext()) {
+                        List<GetListaNapTapResult> dat = itdata.next();
+
+                        for (int i = 0; i < dat.size(); i++) {
+                            Array.tapFiltrado.add(dat.get(i).getNapTap());
+                            Array.tapFiltradoPoste.add(dat.get(i).getPoste());
+                            Array.idTapCoordenadas.add(dat.get(i).getIdNapTap());
+                        }
+
+                        RecyclerView.LayoutManager layoutManager = new GridLayoutManager(context,1);
+                        recyclerView.setLayoutManager(layoutManager);
+                        if(taponap.equals("NAP")){
+                            adapterNap = new NAPAdapter(context,activity,"NAP");
+                            recyclerView.setAdapter(adapterNap);
+                        }
+                        if(taponap.equals("CTO")){
+                            adapterNap = new NAPAdapter(context,activity,"CTO");
+                            recyclerView.setAdapter(adapterNap);
+                        }
+                        if(taponap.equals("TAP")){
+                            adapterTap = new TAPAdapter(context,activity,"TAP");
+                            recyclerView.setAdapter(adapterTap);
+                        }
+
+
+                    }
+                } else {
+                    ErrorMensaje(context,"Error al conseguir lista filtrada "+response.message());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<JSONAPTAP> call, Throwable t) {
+                ErrorMensaje(context,"Error "+t.getMessage());
+            }
+        });
+    }
+
+    public void setTAPCoo(final Context context, final JSONObject jsonObject) {
+        Call<JsonObject> call = services.RequestPost(context,jsonObject).getTapCoo();
+        call.enqueue(new Callback<JsonObject>() {
+            @Override
+            public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
+                if (response.code() == 200) {
+
+                    Toast.makeText(context,"Se han guardado correctamente las coordenadas",Toast.LENGTH_SHORT).show();
+                    Intent intento = new Intent(context, Inicio.class);
+                    intento.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                    context.startActivity(intento);
+
+                } else {
+                    ErrorMensaje(context,"Error al guardar coordenadas "+response.message());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<JsonObject> call, Throwable t) {
+                ErrorMensaje(context,"Error "+t.getMessage());
+            }
+        });
+    }
+
+    public void setNAPCoo(final Context context, final JSONObject jsonObject) {
+        Call<JsonObject> call = services.RequestPost(context,jsonObject).getNapCoo();
+        call.enqueue(new Callback<JsonObject>() {
+            @Override
+            public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
+                if (response.code() == 200) {
+
+                    Toast.makeText(context,"Se han guardado correctamente las coordenadas",Toast.LENGTH_SHORT).show();
+                    Intent intento = new Intent(context, Inicio.class);
+                    intento.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                    context.startActivity(intento);
+
+                } else {
+                    ErrorMensaje(context,"Error al guardar coordenadas "+response.message());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<JsonObject> call, Throwable t) {
                 ErrorMensaje(context,"Error "+t.getMessage());
             }
         });

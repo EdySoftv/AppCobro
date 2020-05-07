@@ -13,6 +13,7 @@ import com.Softv.SoftvApp.SoftvApp.Modelos.GetGetDescargaMaterialArticulosByIdCl
 import com.Softv.SoftvApp.SoftvApp.Modelos.GetListAparatosDisponiblesByIdArticuloResult;
 import com.Softv.SoftvApp.SoftvApp.Modelos.GetListClienteAparatosResult;
 import com.Softv.SoftvApp.SoftvApp.Modelos.GetListTipoAparatosByIdArticuloResult;
+import com.Softv.SoftvApp.SoftvApp.Modelos.GetListaNapTapResult;
 import com.Softv.SoftvApp.SoftvApp.Modelos.GetMUESTRATRABAJOSQUEJASListResult;
 import com.Softv.SoftvApp.SoftvApp.Modelos.GetMuestraAparatosDisponiblesListResult;
 import com.Softv.SoftvApp.SoftvApp.Modelos.GetMuestraArbolServiciosAparatosPorinstalarListResult;
@@ -144,5 +145,15 @@ public class Array {
     public static  ArrayList<List<GetConsultaClientesListResult>> dataClientes;
 
     public static ArrayList<List<GetColoniaResult>>dataColonia;
+    public static ArrayList<String>datosSpinnerColonia=new ArrayList<>();
+
+
+    public static ArrayList<List<GetListaNapTapResult>>tapnap;
+    public static ArrayList<String>tapFiltrado=new ArrayList<>();
+    public static ArrayList<String>tapFiltradoPoste=new ArrayList<>();
+    public static ArrayList<Integer>idTapCoordenadas=new ArrayList<>();
+//    public static ArrayList<String>napFiltrado=new ArrayList<>();
+//    public static ArrayList<String>napFiltradoPoste=new ArrayList<>();
+//    public static ArrayList<Integer>idNapCoordenadas=new ArrayList<>();
 
 }

@@ -162,6 +162,8 @@
     <string name="cuadrilla">Cuadrilla</string>
     <string name="teccuadrilla">Tecnicos Cuadrilla</string>
 
+    <string name="clvtecnicados">Clave Tecnica:</string>
+    <string name="postedos">Poste:</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
