@@ -157,12 +157,12 @@ public class EjecutarOrdenes extends Fragment {
             request.validaExisteFirma(getContext(),jsonObject,getActivity());
         }catch (Exception e){}
 
-        /*if(Util.getTipodeCliente(Util.preferences)==3){
+        if(Util.getTipodeCliente(Util.preferences)==3){
             cuadrilla.setVisibility(View.VISIBLE);
 
         }else{
             cuadrilla.setVisibility(View.GONE);
-        }*/
+        }
 
 
 try{
