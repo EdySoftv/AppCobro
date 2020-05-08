@@ -1,8 +1,8 @@
 package com.Softv.SoftvApp.SoftvApp.sampledata;
 
 public class Constants {
-    //public static final String NEW_URL="http://192.168.0.25:10000/SoftvWCFService.svc/";
-    public static final String NEW_URL="http://187.163.207.252:18102/SoftvWCFService.svc/";
+    public static final String NEW_URL="http://192.168.1.80:8000/SoftvWCFService.svc/";
+    //public static final String NEW_URL="http://187.163.207.252:18102/SoftvWCFService.svc/";
     public static final String URL_GET_USER = "Usuario/LogOn";
     public static final String URL_GET_TECNICO = "AplicacionMovil/Get_ClvTecnico";
     public static final String URL_GET_PROX = "AplicacionMovil/GetDameSiguienteCita";

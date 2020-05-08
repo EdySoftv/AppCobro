@@ -154,6 +154,8 @@ public class Array {
     public static ArrayList<String>tapFiltrado=new ArrayList<>();
     public static ArrayList<String>tapFiltradoPoste=new ArrayList<>();
     public static ArrayList<Integer>idTapCoordenadas=new ArrayList<>();
+    public static ArrayList<String>tapLatitud=new ArrayList<>();
+    public static ArrayList<String>tapLongitud=new ArrayList<>();
 //    public static ArrayList<String>napFiltrado=new ArrayList<>();
 //    public static ArrayList<String>napFiltradoPoste=new ArrayList<>();
 //    public static ArrayList<Integer>idNapCoordenadas=new ArrayList<>();

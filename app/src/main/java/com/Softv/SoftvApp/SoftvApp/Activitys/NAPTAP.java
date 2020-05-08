@@ -3,6 +3,7 @@ package com.Softv.SoftvApp.SoftvApp.Activitys;
 import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -12,6 +13,8 @@ import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
+import android.os.CountDownTimer;
+import android.os.Handler;
 import android.os.Looper;
 import android.provider.Settings;
 import android.support.design.widget.NavigationView;
@@ -26,6 +29,7 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -36,6 +40,11 @@ import com.Softv.SoftvApp.SoftvApp.sampledata.BarraCargar;
 import com.Softv.SoftvApp.SoftvApp.sampledata.Util;
 
 import org.json.JSONObject;
+
+import java.util.Locale;
+import java.util.Timer;
+import java.util.TimerTask;
+import java.util.concurrent.TimeUnit;
 
 import static com.Softv.SoftvApp.SoftvApp.Services.Services.clavequeja;
 import static com.Softv.SoftvApp.SoftvApp.Services.Services.clvorden;
@@ -53,6 +62,12 @@ public class NAPTAP extends AppCompatActivity
     public static ProgressDialog dialogNAPTAP;
     Activity activity;
     RecyclerView lista;
+    private TextView nombreTec;
+
+    private static final int MILLISECONDS_PER_SECOND = 1000;
+    private static final long UPDATE_INTERVAL = MILLISECONDS_PER_SECOND * 2;
+    private static final int FASTEST_INTERVAL_IN_SECONDS = 1;
+    private static final long FASTEST_INTERVAL = MILLISECONDS_PER_SECOND * FASTEST_INTERVAL_IN_SECONDS;
 
     @Override
     protected void onCreate(Bundle onSaveInstanceState) {
@@ -66,10 +81,13 @@ public class NAPTAP extends AppCompatActivity
         titulo = findViewById(R.id.NAPTAPTitulo);
         spinnerColonia = findViewById(R.id.spinnerColonia);
         dialogNAPTAP = new BarraCargar().showDialog(this);
-
         request.getColonia(getApplicationContext());
 
         View barra1 = barra.getHeaderView(0);
+        nombreTec = barra1.findViewById(R.id.tv_NombreTecnico);
+        nombreTec.setText(Util.getNombreTecnicoPreference(Util.preferences));
+
+
         recuperamos_variable_string = getIntent().getStringExtra("dato");
         dialogNAPTAP.show();
         if(recuperamos_variable_string.equals("NAP")) {
@@ -146,7 +164,7 @@ public class NAPTAP extends AppCompatActivity
             // for ActivityCompat#requestPermissions for more details.
             ActivityCompat.requestPermissions(activity, new String[]{Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION}, 225);
         } else {
-            locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 1000, 0, locListener, Looper.getMainLooper());
+            locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 1, 0, locListener, Looper.getMainLooper());
         }
 
 
@@ -225,8 +243,9 @@ public class NAPTAP extends AppCompatActivity
                 .setPositiveButton("Activar", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
-                        startActivity(intent);
+                        /*Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+                        startActivity(intent);*/
+                        mostrarInformacionDeGPSAltaPresision();
                     }
                 })
                 .setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
@@ -238,30 +257,67 @@ public class NAPTAP extends AppCompatActivity
                 .show();
     }
 
-    private boolean isCoordenadas = false;
+    private void mostrarInformacionDeGPSAltaPresision() {
+        // Hide after some seconds
+
+        ImageView imageView = new ImageView(getApplicationContext());
+        imageView.setImageResource(R.drawable.gps);
+        final AlertDialog dialog = new android.app.AlertDialog.Builder(activity)
+                .setTitle("El GPS Solo Dispositivo")
+                .setMessage("Recuerde tener el GPS en modo Solo Dispositivo")
+                /*.setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        mostrarInformacionDeAlertaGPS();
+                    }
+                })*/
+                .setView(imageView)
+                .show();
+
+                dialog.show();
+        final Timer t = new Timer();
+        t.schedule(new TimerTask() {
+            public void run() {
+                dialog.dismiss(); // when the task active then close the dialog
+                t.cancel(); // also just top the timer thread, otherwise, you may receive a crash report
+                Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+                startActivity(intent);
+            }
+        }, 5000);
+
+    }
+
+
+    //private boolean isCoordenadas = false;
 
 
     public LocationListener locListener = new LocationListener() {
         public void onLocationChanged(Location location) {
-            if (cordLatTN.equals("") | cordLongTN.equals("")) {
+           /* if (cordLatTN.equals("") | cordLongTN.equals("")) {
                 isCoordenadas = false;
             }
 
-            if (isCoordenadas == false) {
+            if (isCoordenadas == false) {*/
                 double latitude = location.getLatitude();
                 // editor.putFloat("latitud", (float) latitude).commit();
                 double longitud = location.getLongitude();
                 //editor.putFloat("longitud", (float) longitud).commit();
                 cordLatTN=String.valueOf(latitude);
                 cordLongTN=String.valueOf(longitud);
+            Log.i("latitud", String.valueOf(latitude));
+            Log.i("latitud", String.valueOf(location.getLatitude()));
+            Log.i("logitud", String.valueOf(longitud));
+            Log.i("logitud", String.valueOf(location.getLongitude()));
                 dialogNAPTAP.dismiss();
-                isCoordenadas = true;
-            }
+              /*  isCoordenadas = true;
+            }*/
         }
 
         public void onProviderDisabled(String provider) {
             Log.i("error", "onProviderDisabled()");
-            mostrarInformacionDeAlertaGPS();
+            try {
+                mostrarInformacionDeAlertaGPS();
+            }catch (Exception e){}
         }
 
         public void onProviderEnabled(String provider) {

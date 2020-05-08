@@ -38,12 +38,17 @@ public class TAPAdapter extends RecyclerView.Adapter<TAPAdapter.datoscoloniaView
 
 
     public static  class datoscoloniaViewHolder extends  RecyclerView.ViewHolder{
-        private TextView clvTecnica,poste,controlaNAPTAP;
+        private TextView clvTecnica,poste,controlaNAPTAP,txtLatitud,txtLongitud,latitud,logitud;
         public datoscoloniaViewHolder( View v) {
             super(v);
             clvTecnica=(TextView)itemView.findViewById(R.id.tv_ClvTecnica);
             poste=(TextView)itemView.findViewById(R.id.tv_Poste);
             controlaNAPTAP= (TextView)itemView.findViewById(R.id.controlaNAPTAP);
+
+            txtLatitud=(TextView)itemView.findViewById(R.id.textview81);
+            txtLongitud=(TextView)itemView.findViewById(R.id.textview82);
+            latitud= (TextView)itemView.findViewById(R.id.tv_LatitudNapTap);
+            logitud= (TextView)itemView.findViewById(R.id.tv_LogitudNapTap);
 
         }
     }
@@ -77,13 +82,40 @@ public class TAPAdapter extends RecyclerView.Adapter<TAPAdapter.datoscoloniaView
             viewHolder.clvTecnica.setText(Array.tapFiltrado.get(position));
             viewHolder.poste.setText(Array.tapFiltradoPoste.get(position));
 
+            if(Array.tapLatitud.get(position)=="0"){
+                viewHolder.txtLatitud.setVisibility(View.GONE);
+                viewHolder.latitud.setVisibility(View.GONE);
+                //viewHolder.latitud.setText("No cuenta con latitud");
+            }else{
+                viewHolder.txtLatitud.setVisibility(View.VISIBLE);
+                viewHolder.latitud.setVisibility(View.VISIBLE);
+                viewHolder.latitud.setText(Array.tapLatitud.get(position));
+            }
+
+
+
+            if(Array.tapLongitud.get(position)=="0"){
+                viewHolder.txtLongitud.setVisibility(View.GONE);
+                viewHolder.logitud.setVisibility(View.GONE);
+                //viewHolder.logitud.setText("No cuenta con longitud");
+            }else{
+                viewHolder.txtLongitud.setVisibility(View.VISIBLE);
+                viewHolder.logitud.setVisibility(View.VISIBLE);
+                viewHolder.logitud.setText(Array.tapLongitud.get(position));
+            }
+
             viewHolder.controlaNAPTAP.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     if(NAPTAP.cordLatTN.equals("")||NAPTAP.cordLatTN.equals(null)||NAPTAP.cordLongTN.equals("")||NAPTAP.cordLongTN.equals(null)){
                         dialogocoordenadas(activity);
                     }else{
-                        dialogomandarCoordenadas(mContext,activity,Array.tapFiltrado.get(position), Integer.valueOf(Array.idTapCoordenadas.get(position)));
+                        if(Array.tapLatitud.get(position)=="0" && Array.tapLongitud.get(position)=="0"){
+                            dialogomandarCoordenadas(mContext,activity,Array.tapFiltrado.get(position), Integer.valueOf(Array.idTapCoordenadas.get(position)));
+                        }else{
+                            dialogoactualizarCoordenadas(mContext,activity,Array.tapFiltrado.get(position), Integer.valueOf(Array.idTapCoordenadas.get(position)));
+                        }
+
                     }
                 }
             });
@@ -116,9 +148,13 @@ public class TAPAdapter extends RecyclerView.Adapter<TAPAdapter.datoscoloniaView
     }
 
     public void dialogomandarCoordenadas(final Context context,final Activity activity,final String clvTecnica,final Integer idtap) {
+
+        final String Latitud = NAPTAP.cordLatTN;
+        final String Logitud = NAPTAP.cordLongTN;
+
         new AlertDialog.Builder(activity,R.style.InvitationDialog)
-                .setTitle("Coordenadas")
-                .setMessage("Desea mandar las coordenadas para el "+Nombre+" "+clvTecnica)
+                .setTitle("Agregar Coordenadas")
+                .setMessage("Desea agregar las coordenadas ( Latitud: "+Latitud + " Logitud: "+ Logitud+" ) para el "+Nombre+" "+clvTecnica)
                 .setPositiveButton("Confirmar",
                         new DialogInterface.OnClickListener() {
                             @Override
@@ -126,8 +162,39 @@ public class TAPAdapter extends RecyclerView.Adapter<TAPAdapter.datoscoloniaView
                                 try{
                                     JSONObject jsonObject = new JSONObject();
                                     jsonObject.put("idTap",idtap);
-                                    jsonObject.put("latitud",NAPTAP.cordLatTN);
-                                    jsonObject.put("longitud",NAPTAP.cordLongTN);
+                                    jsonObject.put("latitud",Latitud);
+                                    jsonObject.put("longitud",Logitud);
+                                    request.setTAPCoo(context,jsonObject);
+                                }catch (Exception e){}
+
+                            }
+                        })
+                .setNegativeButton("Negar",
+                        new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+
+                            }
+                        }).show();
+    }
+
+    public void dialogoactualizarCoordenadas(final Context context,final Activity activity,final String clvTecnica,final Integer idtap) {
+
+        final String Latitud = NAPTAP.cordLatTN;
+        final String Logitud = NAPTAP.cordLongTN;
+
+        new AlertDialog.Builder(activity,R.style.InvitationDialog)
+                .setTitle("Actualizar Coordenadas")
+                .setMessage("Desea actualizar las coordenadas (Nuevas coordenadas Latitud: "+Latitud + " Logitud: "+ Logitud+" ) para el "+Nombre+" "+clvTecnica)
+                .setPositiveButton("Confirmar",
+                        new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                try{
+                                    JSONObject jsonObject = new JSONObject();
+                                    jsonObject.put("idTap",idtap);
+                                    jsonObject.put("latitud",Latitud);
+                                    jsonObject.put("longitud",Logitud);
                                     request.setTAPCoo(context,jsonObject);
                                 }catch (Exception e){}
 

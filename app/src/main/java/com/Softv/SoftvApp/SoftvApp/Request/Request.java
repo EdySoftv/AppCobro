@@ -4689,6 +4689,8 @@ try{
                     Array.tapFiltrado.clear();
                     Array.tapFiltradoPoste.clear();
                     Array.idTapCoordenadas.clear();
+                    Array.tapLatitud.clear();
+                    Array.tapLongitud.clear();
                     Array.tapnap = new ArrayList<>(asList(jsonResponse.GetListaNapTapResult()));
                     Iterator<List<GetListaNapTapResult>> itdata = Array.tapnap.iterator();
                     while (itdata.hasNext()) {
@@ -4698,6 +4700,8 @@ try{
                             Array.tapFiltrado.add(dat.get(i).getNapTap());
                             Array.tapFiltradoPoste.add(dat.get(i).getPoste());
                             Array.idTapCoordenadas.add(dat.get(i).getIdNapTap());
+                            Array.tapLatitud.add(dat.get(i).getLatitud());
+                            Array.tapLongitud.add(dat.get(i).getLongitud());
                         }
 
                         RecyclerView.LayoutManager layoutManager = new GridLayoutManager(context,1);

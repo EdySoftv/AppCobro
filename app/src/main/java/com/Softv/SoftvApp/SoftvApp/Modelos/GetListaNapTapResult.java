@@ -13,6 +13,12 @@ public class GetListaNapTapResult {
     @SerializedName("IdNapTap")
     @Expose
     private Integer IdNapTap;
+    @SerializedName("Latitud")
+    @Expose
+    private String Latitud;
+    @SerializedName("Longitud")
+    @Expose
+    private String Longitud;
 
     public String getNapTap() {
         return NapTap;
@@ -24,5 +30,13 @@ public class GetListaNapTapResult {
 
     public Integer getIdNapTap() {
         return IdNapTap;
+    }
+
+    public String getLatitud() {
+        return Latitud;
+    }
+
+    public String getLongitud() {
+        return Longitud;
     }
 }
