@@ -105,7 +105,7 @@ public class NAPAdapter extends RecyclerView.Adapter<NAPAdapter.datoscoloniaNVie
                         dialogocoordenadas(activity);
                     }else{
 
-                        if(Array.tapLatitud.get(position)=="0" && Array.tapLongitud.get(position)=="0"){
+                        if(Array.tapLatitud.get(position).equals("0") && Array.tapLongitud.get(position).equals("0")){
                             dialogomandarCoordenadas(mContext,activity,Array.tapFiltrado.get(position), Integer.valueOf(Array.idTapCoordenadas.get(position)));
                         }else{
                             dialogoactualizarCoordenadas(mContext,activity,Array.tapFiltrado.get(position), Integer.valueOf(Array.idTapCoordenadas.get(position)));
