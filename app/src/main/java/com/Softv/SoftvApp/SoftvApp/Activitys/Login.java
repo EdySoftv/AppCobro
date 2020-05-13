@@ -84,7 +84,7 @@ public class Login extends AppCompatActivity {
                             //se manda el campo usuario y enco para guardarlos en el SharedPreferences
                             guardarPre(usurio.getText().toString(), enco);
                             //manda request del login
-                            request.getReviews(Login.this,dialogLogin,view);
+                            request.getReviews(Login.this,dialogLogin,view,true,Login.this);
                             //inicia el dialog de carga
                             dialogLogin.show();
                             /////////////

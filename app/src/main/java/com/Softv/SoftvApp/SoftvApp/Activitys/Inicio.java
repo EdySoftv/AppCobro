@@ -81,12 +81,13 @@ public class Inicio extends AppCompatActivity
                 jsonObjectDirecta1.put("obj",jsonObjectDirecta);
                 request.getPermisosDirecta(getApplicationContext(),jsonObjectDirecta1);
             }catch (Exception e){}
-            try{
+            /*try{
                 JSONObject jsonObject = new JSONObject();
                 jsonObject.put("clv_tecnico", Util.getClvTec(Util.preferences));
                 request.getProximaCita(getApplicationContext(),jsonObject,view,dialogInicio,this);
                 request.getOrdenes(getApplicationContext(),jsonObject,view,dialogInicio,this);
-            }catch (Exception x){dialogInicio.dismiss();}
+            }catch (Exception x){dialogInicio.dismiss();}*/
+            request.getReviews(Inicio.this,dialogInicio,view,false,this);
         }
 
 

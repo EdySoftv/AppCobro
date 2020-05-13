@@ -23,6 +23,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.Softv.SoftvApp.SoftvApp.Activitys.AsignarAparato;
+import com.Softv.SoftvApp.SoftvApp.Activitys.Login;
 import com.Softv.SoftvApp.SoftvApp.Activitys.NAPTAP;
 import com.Softv.SoftvApp.SoftvApp.Activitys.Orden;
 import com.Softv.SoftvApp.SoftvApp.Activitys.CambioDom;
@@ -262,6 +263,28 @@ public class Request extends AppCompatActivity {
             SplashActivity.LoginShare = false;
         }catch (Exception e){}
     }
+    public void ErrorInicioNoCoincide(final Context context,ProgressDialog dialogInicio, View view) {
+        /*EditText usurio, contraseña;
+        Button entrar;
+        usurio = view.findViewById(R.id.usuario);
+        contraseña = view.findViewById(R.id.contrasenia);
+        entrar = view.findViewById(R.id.btnLogin);
+        //si el error pasa al momento de hacer el login se borran todos los datos del preference para que
+        //el usuario tenga que volver a iniciar sesion
+        Toast.makeText(context, "Usuario y/o Contraseña incorrecto", Toast.LENGTH_LONG).show();
+        usurio.setEnabled(true);
+        contraseña.setEnabled(true);
+        entrar.setEnabled(true);*/
+        dialogInicio.dismiss();
+
+        try {
+            Util.preferences.edit().clear().commit();
+            SplashActivity.LoginShare = false;
+            Intent intento = new Intent(context, Login.class);
+            intento.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            context.startActivity(intento);
+        }catch (Exception e){}
+    }
     public void ErrorInicioDeSesion(final Context context, ProgressDialog dialogInicio,final Activity activity) {
             //en caso de que el erro sea al momento de abrir la aplicacion con el usuario logeado se manda un
             //mensaje de error
@@ -293,7 +316,7 @@ public class Request extends AppCompatActivity {
 
 
     //Token///
-    public void getReviews(final Context context, final ProgressDialog dialogLogin, final View view) {
+    public void getReviews(final Context context, final ProgressDialog dialogLogin, final View view, final boolean Login, final Activity activity) {
         //se inicializa la clase Service y le declaras en donde vas a guardar los datos y de que link
         //se van a obtener con los servicios 'Services'
         Services restApiAdapter = new Services();
@@ -326,24 +349,34 @@ public class Request extends AppCompatActivity {
                         //terminando el proceso de obtener token es hora de obtener la clvtecnico
                         JSONObject jsonObject = new JSONObject();
                         jsonObject.put("Clv_Usuario",Util.getUsuarioPreference(Util.preferences));
-                        getClv_tecnico(context,jsonObject,dialogLogin,view);
+                        getClv_tecnico(context,jsonObject,dialogLogin,view,Login,activity);
                     }catch (Exception e){}
                 } else {
                     //en caso de ser diferente de 200 el codigo de respuesta, mandar al metodo de error
-                    ErrorLogin(context,dialogLogin,view);
+                    if(Login==true){
+                        ErrorLogin(context,dialogLogin,view);
+                    }else{
+                        ErrorInicioNoCoincide(context,dialogLogin,view);
+                    }
+
                 }
             }
 
             @Override
             public void onFailure(Call<JsonObject> call, Throwable t) {
                 //en caso que no se pueda ejecturar el request mandar al metodo de error
-                ErrorLogin(context,dialogLogin,view);
+                if(Login==true){
+                    ErrorLogin(context,dialogLogin,view);
+                }else{
+                    ErrorInicioNoCoincide(context,dialogLogin,view);
+                }
+
             }
         });
     }
 
     //Clave Tecnico//
-    public void getClv_tecnico(final Context context, final JSONObject jsonObject, final ProgressDialog dialogLogin, final View view) {
+    public void getClv_tecnico(final Context context, final JSONObject jsonObject, final ProgressDialog dialogLogin, final View view, final boolean Login, final Activity activity) {
         Call<JSONResponseTecnico> call = services.RequestPost(context, jsonObject).getDataTec();
         call.enqueue(new Callback<JSONResponseTecnico>() {
             @Override
@@ -365,25 +398,48 @@ public class Request extends AppCompatActivity {
                             Util.editor.putString("nombre_Tecnico", data.get(0).getNombre_tec());
                             Util.editor.commit();
                         }
-                        Intent intento = new Intent(context, Inicio.class);
-                        intento.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                        context.startActivity(intento);
-                        dialogLogin.dismiss();
+
+                        if(Login==true){
+                            Intent intento = new Intent(context, Inicio.class);
+                            intento.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                            context.startActivity(intento);
+                            dialogLogin.dismiss();
+                        }else{
+                            try{
+                                JSONObject jsonObject = new JSONObject();
+                                jsonObject.put("clv_tecnico", Util.getClvTec(Util.preferences));
+                                getProximaCita(context,jsonObject,view,dialogLogin,activity);
+                                getOrdenes(context,jsonObject,view,dialogLogin,activity);
+                            }catch (Exception x){dialogLogin.dismiss();}
+                        }
                     }catch (Exception e){
-                        ErrorLogin(context,dialogLogin,view);
-                        Toast.makeText(context, "Error al conseguir clave técnico", Toast.LENGTH_LONG).show();
+                        if(Login==true){
+                            ErrorLogin(context,dialogLogin,view);
+                            Toast.makeText(context, "Error al conseguir clave técnico", Toast.LENGTH_LONG).show();
+                        }else{
+                            ErrorInicioNoCoincide(context,dialogLogin,view);
+                        }
+
                     }
 
                 } else {
-                    ErrorLogin(context,dialogLogin,view);
-                    Toast.makeText(context, "Error al conseguir clave técnico", Toast.LENGTH_LONG).show();
+                    if(Login==true){
+                        ErrorLogin(context,dialogLogin,view);
+                        Toast.makeText(context, "Error al conseguir clave técnico", Toast.LENGTH_LONG).show();
+                    }else{
+                        ErrorInicioNoCoincide(context,dialogLogin,view);
+                    }
                 }
             }
 
             @Override
             public void onFailure(Call<JSONResponseTecnico> call, Throwable t) {
-                ErrorLogin(context,dialogLogin,view);
-                Toast.makeText(context, "Error al conseguir clave técnico", Toast.LENGTH_LONG).show();
+                if(Login==true){
+                    ErrorLogin(context,dialogLogin,view);
+                    Toast.makeText(context, "Error al conseguir clave técnico", Toast.LENGTH_LONG).show();
+                }else{
+                    ErrorInicioNoCoincide(context,dialogLogin,view);
+                }
             }
         });
     }
