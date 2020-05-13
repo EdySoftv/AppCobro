@@ -234,7 +234,20 @@ public class NAPTAP extends AppCompatActivity
         return true;
     }
 
-
+    private String checkIfLocationOpened() {
+        String provider = Settings.Secure.getString(getContentResolver(), Settings.Secure.LOCATION_PROVIDERS_ALLOWED);
+        Log.i("Provider contains=> ", provider);
+        if (provider.contains("gps") ){
+            return provider;
+        }
+        if (provider.contains("gps") || provider.contains("network")){
+            return provider;
+        }
+        if (provider.contains("gps") || provider.contains("network")){
+            return provider;
+        }
+        return provider;
+    }
    
     private void mostrarInformacionDeAlertaGPS() {
         new android.app.AlertDialog.Builder(activity)
@@ -308,6 +321,7 @@ public class NAPTAP extends AppCompatActivity
             Log.i("latitud", String.valueOf(location.getLatitude()));
             Log.i("logitud", String.valueOf(longitud));
             Log.i("logitud", String.valueOf(location.getLongitude()));
+
                 dialogNAPTAP.dismiss();
               /*  isCoordenadas = true;
             }*/
@@ -315,6 +329,7 @@ public class NAPTAP extends AppCompatActivity
 
         public void onProviderDisabled(String provider) {
             Log.i("error", "onProviderDisabled()");
+           Log.i("gps", checkIfLocationOpened());
             try {
                 mostrarInformacionDeAlertaGPS();
             }catch (Exception e){}
@@ -322,10 +337,14 @@ public class NAPTAP extends AppCompatActivity
 
         public void onProviderEnabled(String provider) {
             Log.i("error", "onProviderEnabled()");
+            Log.i("gps", checkIfLocationOpened());
+            checkIfLocationOpened();
         }
 
         public void onStatusChanged(String provider, int status, Bundle extras) {
             Log.i("error", "onStatusChanged()");
+            Log.i("gps", checkIfLocationOpened());
+            checkIfLocationOpened();
         }
     };
 
