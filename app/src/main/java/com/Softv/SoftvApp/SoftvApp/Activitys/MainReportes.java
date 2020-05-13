@@ -228,8 +228,15 @@ public class MainReportes extends AppCompatActivity implements ActionBar.TabList
         regresar();
     }
     public void regresar(){
-        if((position-1)>=0){
-            mViewPager.setCurrentItem(position-1);}
+        if((position-1)>=0) {
+            if (layoutAnimado.getVisibility() == View.VISIBLE) {
+                layoutAnimado.setVisibility(View.GONE);
+                hzScrollView.setVisibility(View.GONE);
+                info.setText("Datos Cliente");
+            } else {
+                mViewPager.setCurrentItem(position - 1);
+            }
+        }
         else{
 
             if(layoutAnimado.getVisibility()==View.VISIBLE){

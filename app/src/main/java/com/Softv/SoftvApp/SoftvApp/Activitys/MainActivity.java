@@ -350,7 +350,13 @@ public class MainActivity extends AppCompatActivity implements ActionBar.TabList
 
     public void regresar(){
         if((positionTab-1)>=0){
-            mViewPager.setCurrentItem(positionTab-1);
+            if(layoutAnimado.getVisibility()==View.VISIBLE){
+                layoutAnimado.setVisibility(View.GONE);
+                hzScrollView.setVisibility(View.GONE);
+                info.setText("Datos Cliente");
+            }else {
+                mViewPager.setCurrentItem(positionTab - 1);
+            }
         }
             else{
                 if(layoutAnimado.getVisibility()==View.VISIBLE){
