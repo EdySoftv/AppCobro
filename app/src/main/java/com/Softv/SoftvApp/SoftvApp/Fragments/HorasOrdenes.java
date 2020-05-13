@@ -124,7 +124,12 @@ public class HorasOrdenes extends Fragment implements View.OnClickListener, Loca
         locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 1000, 0, this);
 
         fechaActualVisita = (dateFormat.format(objDate)) + " " + (hourFormat.format(objDate));
-        Obs.setText(request.obsMA);
+        if(request.obsMA.equals("null")){
+            Obs.setText("");
+        }else{
+            Obs.setText(request.obsMA);
+        }
+
         bt2.setOnClickListener(this);
         btn1.setOnClickListener(this);
         ejecVisita.setOnClickListener(this);
