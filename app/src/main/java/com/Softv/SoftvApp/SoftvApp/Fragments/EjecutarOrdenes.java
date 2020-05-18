@@ -59,7 +59,7 @@ import static com.Softv.SoftvApp.SoftvApp.Request.Request.validaExisteFirmaBool;
 public class EjecutarOrdenes extends Fragment {
 
     public static Button reiniciar;
-    public static Button eject, firmar,cuadrilla;
+    public static Button eject, firmar;
     public static String fechaHoy, horaHoy;
     public static View ejecutar;
     public static TextView msgEjecutarOrd,txtTap,txtNap;
@@ -114,7 +114,7 @@ public class EjecutarOrdenes extends Fragment {
         spinnerTap = view.findViewById(R.id.spinnerTap);
         txtNap = view.findViewById(R.id.txtNap);
         txtTap = view.findViewById(R.id.txtTap);
-        cuadrilla = view.findViewById(R.id.tecCuadrilla);
+        //cuadrilla = view.findViewById(R.id.tecCuadrilla);
 
         request.getTecSec(getContext(),TecSec);
         latitudeEjec=0;
@@ -157,12 +157,7 @@ public class EjecutarOrdenes extends Fragment {
             request.validaExisteFirma(getContext(),jsonObject,getActivity());
         }catch (Exception e){}
 
-        if(Util.getTipodeCliente(Util.preferences)==3){
-            cuadrilla.setVisibility(View.VISIBLE);
 
-        }else{
-            cuadrilla.setVisibility(View.GONE);
-        }
 
 
         try{
@@ -313,19 +308,7 @@ public class EjecutarOrdenes extends Fragment {
             }
         });
 
-        cuadrilla.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
 
-                try{
-                    JSONObject jsonObject = new JSONObject();
-                    jsonObject.put("ClvOrden", Util.getClvOrden(Util.preferences));
-                    request.getCuadrilla(getContext(),jsonObject);
-
-                }catch(Exception e){}
-
-            }
-        });
 
         salir.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -444,22 +427,7 @@ public class EjecutarOrdenes extends Fragment {
 
     public void Ejecutar(){
 
-        if(OrdenesAdapter.tecnicosSelect.size()!=0){
-            try {
-                JSONArray jsonArrayTecnicoCuadrilla = new JSONArray();
 
-                JSONObject jsonObject1TecnicoCuadrilla = new JSONObject();
-                for (int i = 0; i < OrdenesAdapter.tecnicosSelect.size(); i++) {
-                    JSONObject jsonObjectTecnicoCuadrilla = new JSONObject();
-                    jsonObjectTecnicoCuadrilla.put("ClvOrden",Util.getClvOrden(Util.preferences));
-                    jsonObjectTecnicoCuadrilla.put("ClvTecnico",OrdenesAdapter.tecnicosSelect.get(i));
-                    jsonArrayTecnicoCuadrilla.put(i,jsonObjectTecnicoCuadrilla);
-                }
-                jsonObject1TecnicoCuadrilla.put("xml",jsonArrayTecnicoCuadrilla);
-
-                request.addCuadrilla(getContext(),jsonObject1TecnicoCuadrilla);
-            }catch (Exception e){}
-        }
 
 
 

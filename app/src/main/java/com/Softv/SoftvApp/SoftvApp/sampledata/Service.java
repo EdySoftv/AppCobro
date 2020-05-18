@@ -234,7 +234,7 @@ public interface Service {
     @POST(Constants.URL_GET_PERMISO_DIRECTA)
     Call<JSONPERMISOSDIRECTA> getPermisosDirecta();
 
-    //Hotel
+   /* //Hotel
     @POST(Constants.URL_ADD_CUADRILLA)
     Call<JsonObject> addCuadrilla();
 
@@ -242,7 +242,7 @@ public interface Service {
     Call<JSONCUADRILLA> getCuadrilla();
 
     @POST(Constants.URL_GET_DATOS_CLIENTE)
-    Call<JSONDATOSCLIENTE> getDatoscliente();
+    Call<JSONDATOSCLIENTE> getDatoscliente();*/
 
 
     @POST(Constants.URL_GET_NAPTAP)

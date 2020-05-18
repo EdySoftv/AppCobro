@@ -1,7 +1,7 @@
 package com.Softv.SoftvApp.SoftvApp.sampledata;
 
 public class Constants {
-    public static final String NEW_URL="http://192.168.1.80:8000/SoftvWCFService.svc/";
+    public static final String NEW_URL="http://192.168.1.92:8000/SoftvWCFService.svc/";
     //public static final String NEW_URL="http://187.163.207.252:18102/SoftvWCFService.svc/";
     public static final String URL_GET_USER = "Usuario/LogOn";
     public static final String URL_GET_TECNICO = "AplicacionMovil/Get_ClvTecnico";
@@ -105,7 +105,7 @@ public class Constants {
 
     //Hotel
 
-    public static final String URL_ADD_CUADRILLA = "AplicacionMovil/InsertRelTecnicoCuadrilla";
+   /* public static final String URL_ADD_CUADRILLA = "AplicacionMovil/InsertRelTecnicoCuadrilla";
     public static final String URL_GET_CUADRILLA  = "AplicacionMovil/SelectRelTecnicoCuadrilla";
-    public static final String URL_GET_DATOS_CLIENTE  = "CLIENTES_New/GetConsultaClientesList";
+    public static final String URL_GET_DATOS_CLIENTE  = "CLIENTES_New/GetConsultaClientesList";*/
 }

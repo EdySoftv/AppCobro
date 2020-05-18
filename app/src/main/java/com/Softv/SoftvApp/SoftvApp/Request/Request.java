@@ -878,11 +878,7 @@ public class Request extends AppCompatActivity {
 
                     ContratoReal= DeepConsModel.getContrato();
 
-                    try{
-                        JSONObject jsonObject = new JSONObject();
-                        jsonObject.put("CONTRATO",ContratoReal);
-                        getDatoscliente(context,jsonObject);
-                    }catch (Exception e){}
+
 
                     try {
                         contraroMA = (String.valueOf(DeepConsModel.getContatoCom()));
@@ -4520,103 +4516,9 @@ try{
         });
     }
 
-    public void addCuadrilla(final Context context, final JSONObject jsonObject) {
-        Call<JsonObject> call = services.RequestPost(context, jsonObject).addCuadrilla();
-        call.enqueue(new Callback<JsonObject>() {
-            @Override
-            public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
-                if (response.code() == 200) {
-
-                } else {
-                    ErrorMensaje(context,"Error al guarda Cuadrilla "+response.message());
-                }
-            }
-
-            @Override
-            public void onFailure(Call<JsonObject> call, Throwable t) {
-                ErrorMensaje(context,"Error "+t.getMessage());
-            }
-        });
-    }
-
-    public void getCuadrilla(final Context context, final JSONObject jsonObject) {
-        Call<JSONCUADRILLA> call = services.RequestPost(context, jsonObject).getCuadrilla();
-        call.enqueue(new Callback<JSONCUADRILLA>() {
-            @Override
-            public void onResponse(Call<JSONCUADRILLA> call, Response<JSONCUADRILLA> response) {
-                if (response.code() == 200) {
-                    JSONCUADRILLA jsonResponse = response.body();
-
-                    Array.dataCuadrilla = new ArrayList<>(asList(jsonResponse.SelectRelTecnicoCuadrillaResult()));
-                    Iterator<List<SelectRelTecnicoCuadrillaResult>> itdata = Array.dataCuadrilla.iterator();
-                    ArrayList<String>datos=new ArrayList<>();
-                    while (itdata.hasNext()) {
-                        List<SelectRelTecnicoCuadrillaResult> dat = itdata.next();
-
-                       /* for (int i = 0; i < dat.size(); i++) {
-                            datos.add(dat.get(i).getClavetecnica());
-                        }
-                        adapterTap = new ArrayAdapter<String>(context, android.R.layout.simple_spinner_dropdown_item, datos);
-                        spiner.setAdapter(adapterTap);*/
 
 
-                    }
 
-                    Intent intent = new Intent(context, TecnicosSecundarios.class);
-                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                    context.startActivity(intent);
-                } else {
-                    ErrorMensaje(context,"Error al conseguir lista de cuadrilla "+response.message());
-                }
-            }
-
-            @Override
-            public void onFailure(Call<JSONCUADRILLA> call, Throwable t) {
-                ErrorMensaje(context,"Error "+t.getMessage());
-            }
-        });
-    }
-
-
-    public void getDatoscliente(final Context context, final JSONObject jsonObject) {
-        Call<JSONDATOSCLIENTE> call = services.RequestPost(context, jsonObject).getDatoscliente();
-        call.enqueue(new Callback<JSONDATOSCLIENTE>() {
-            @Override
-            public void onResponse(Call<JSONDATOSCLIENTE> call, Response<JSONDATOSCLIENTE> response) {
-                if (response.code() == 200) {
-                    JSONDATOSCLIENTE jsonResponse = response.body();
-
-                    Array.dataClientes = new ArrayList<>(asList(jsonResponse.GetConsultaClientesListResult()));
-                    Iterator<List<GetConsultaClientesListResult>> itdata = Array.dataClientes.iterator();
-                    ArrayList<String>datos=new ArrayList<>();
-                    while (itdata.hasNext()) {
-                        List<GetConsultaClientesListResult> dat = itdata.next();
-                        Util.preferences = context.getSharedPreferences("credenciales", Context.MODE_PRIVATE);
-                        Util.editor = Util.preferences.edit();
-                        Util.editor.putInt("tipoDeCliente",dat.get(0).getTipoCliente());
-                        Util.editor.commit();
-
-                       /* for (int i = 0; i < dat.size(); i++) {
-                            datos.add(dat.get(i).getClavetecnica());
-                        }
-                        adapterTap = new ArrayAdapter<String>(context, android.R.layout.simple_spinner_dropdown_item, datos);
-                        spiner.setAdapter(adapterTap);*/
-
-
-                    }
-
-
-                } else {
-                    ErrorMensaje(context,"Error al conseguir lista de cuadrilla "+response.message());
-                }
-            }
-
-            @Override
-            public void onFailure(Call<JSONDATOSCLIENTE> call, Throwable t) {
-                ErrorMensaje(context,"Error "+t.getMessage());
-            }
-        });
-    }
 
 //    public String getValidaTrabajos(final Context context, final JSONObject jsonObject) {
 //        stringValidaTrabajos="";

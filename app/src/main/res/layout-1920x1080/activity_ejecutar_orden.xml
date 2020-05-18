@@ -175,6 +175,7 @@
           android:background="@drawable/boton"
           android:backgroundTint="@color/colorPrimary"
           android:text="@string/cuadrilla"
+          android:visibility="gone"
           android:textColor="#fff"
           app:layout_constraintEnd_toEndOf="@+id/salirEjecutarOrd"
           app:layout_constraintStart_toStartOf="@+id/salirEjecutarOrd"

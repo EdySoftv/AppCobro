@@ -44,9 +44,6 @@ public class Util {
     public static boolean getPermisisDescarga(SharedPreferences preferences){
         return preferences.getBoolean("PermisisDescarga", false);}
 
-    public static int getTipodeCliente(SharedPreferences preferences){
-        return preferences.getInt("tipoDeCliente", 0);
 
-    }
 
 }
