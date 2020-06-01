@@ -470,11 +470,12 @@ public class EjecutarOrdenes extends Fragment {
                     jsonDescarga2.put("Articulos", jsonArrayD);
                     jsonDescarga2.put("Autorizacion", 3);
 
-                    request.addDescarga(getActivity(), getContext(), jsonDescarga2);
+                            request.addDescarga(getActivity(), getContext(), jsonDescarga2);
                 } catch (Exception e) {
                 }
             }
         }
+
 
 
         if(request.TAP==true){

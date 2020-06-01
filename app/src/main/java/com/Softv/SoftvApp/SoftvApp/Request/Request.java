@@ -4197,7 +4197,7 @@ try{
                                                     JSONObject jsonDescarga1 = new JSONObject();
                                                     JSONArray jsonArray = new JSONArray();
                                                     jsonDescarga.put("IdTecnico", Util.getClvTec(Util.preferences));
-                                                    jsonDescarga.put("ClvOrden", Util.getClvOrden(Util.preferences));
+                                                    jsonDescarga.put("ClvOrden", Util.getClvQueja(Util.preferences));
                                                     jsonDescarga.put("IdAlmacen", 0);
                                                     jsonDescarga.put("Accion", "Agregar");
                                                     jsonDescarga.put("IdBitacora", 0);
