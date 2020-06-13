@@ -28,7 +28,7 @@
     <string name="cambio_Domicilio">Cambio de domicilio</string>
     <string name="ciudadDos">Ciudad:</string>
     <string name="localidadDos">Localidad:</string>
-    <string name="coloniaDos">Barrio:</string>
+    <string name="coloniaDos">Colonia:</string>
     <string name="calleDos">Calle:</string>
     <string name="numeroDos">Número:</string>
     <string name="numeroIDos">Número interior:</string>
@@ -140,7 +140,7 @@
     <string name="hora">Hora:</string>
     <string name="calle">Calle:</string>
     <string name="numero">Número:</string>
-    <string name="colonia">Barrio:</string>
+    <string name="colonia">Colonia:</string>
     <string name="nombre">Nombre:</string>
     <string name="compania">Compañia</string>
     <string name="domicilio">Domicilio</string>
