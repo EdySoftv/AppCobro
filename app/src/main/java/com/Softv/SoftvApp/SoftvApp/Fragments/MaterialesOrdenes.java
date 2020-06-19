@@ -50,9 +50,9 @@ public class MaterialesOrdenes extends Fragment {
     public static RecyclerView elimarMaterialesList;
     Request request = new Request();
     public static EditText pieza, mII, mIE, mFI, mFE;
-    public static TextView tvExterior;
+    public static TextView tvExterior, tvInterior;
     public static int clvTipoDescMat, idArticuloDM, cantidadDM, idInventarioMD, piezaSer, metros, totalDM, IIDM, IFDM, EIMD, EFDM;
-    public static int extSer;
+    public static int extSer, esFibra;
     public static String descripcionMaterial = "";
     public static Spinner descripcionMat, clasificacionMat, spinnerExtMat;
     public static ConstraintLayout extMat, piezasMat, metrosMat;
@@ -87,7 +87,7 @@ public class MaterialesOrdenes extends Fragment {
         mIE = view.findViewById(R.id.InicialEDM);
         mFE = view.findViewById(R.id.FinalEDM);
         tvExterior = view.findViewById(R.id.textView16);
-
+        tvInterior = view.findViewById(R.id.textView15);
 
         //scrollViewM = view.findViewById(R.id.scrollhorizontal);
         try {
@@ -144,6 +144,7 @@ public class MaterialesOrdenes extends Fragment {
                     Iterator<List<DetalleBitacoraModel>> itData = Array.dataDetBit.iterator();
                     List<DetalleBitacoraModel> dat = itData.next();
                     clvTipoDescMat = dat.get(position - 1).catTipoArticuloClave;
+                    esFibra = dat.get(position -1).esFibra;
                     request.DetalleBit(getContext());
                     if (request.extencionesMat == true) {
                         spinnerExtMat.setVisibility(View.VISIBLE);

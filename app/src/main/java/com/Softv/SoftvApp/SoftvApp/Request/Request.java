@@ -3008,6 +3008,15 @@ try{
                             MaterialesOrdenes.mFE.setVisibility(View.VISIBLE);
                             MaterialesOrdenes.tvExterior.setVisibility(View.VISIBLE);
                         }
+                        if( MaterialesOrdenes.esFibra==1){
+                            MaterialesOrdenes.mII.setVisibility(View.GONE);
+                            MaterialesOrdenes.mFI.setVisibility(View.GONE);
+                            MaterialesOrdenes.tvInterior.setVisibility(View.INVISIBLE);
+                        }else{
+                            MaterialesOrdenes.mII.setVisibility(View.VISIBLE);
+                            MaterialesOrdenes.mFI.setVisibility(View.VISIBLE);
+                            MaterialesOrdenes.tvInterior.setVisibility(View.VISIBLE);
+                        }
                     }
                 }else{
                     ErrorMensaje(context,"Error al conseguir datos del materiales "+response.message());

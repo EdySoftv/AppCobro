@@ -7,7 +7,7 @@ import com.google.gson.annotations.SerializedName;
 import java.util.List;
 
 public class JSONDetalleBitacora {
-    @SerializedName("GetMuestra_Detalle_Bitacora_2ListResult")
+    @SerializedName("Muestra_Detalle_Bitacora_2_esfibraListResult")
     @Expose
     private List<DetalleBitacoraModel> DetalleBitacoraModel = null;
 
