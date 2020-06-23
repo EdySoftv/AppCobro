@@ -17,6 +17,7 @@ import android.widget.HorizontalScrollView;
 import android.widget.ImageButton;
 import android.widget.Spinner;
 import android.widget.TableLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.Softv.SoftvApp.SoftvApp.Listas.Array;
@@ -47,10 +48,12 @@ public class MaterialesReportes extends Fragment {
     public static TableLayout tablaR;
     public static RecyclerView elimarMaterialesListR;
     Request request = new Request();
-    EditText piezaR,mIIR,mIER,mFIR,mFER;
+    public static EditText piezaR,mIIR,mIER,mFIR,mFER;
     public static int clvTipoDescMatR,idArticuloDMR,cantidadDMR,idInventarioMDR,piezaSerR, metrosR, totalDMR,IIDMR,IFDMR,EIMDR,EFDMR;
     public static int extSerR;
     public static String descripcionMaterialR="";
+    public static TextView  tvInteriorR;
+    public static int esFibraR;
     public static Spinner descripcionMatR,clasificacionMatR,spinnerExtMatR;
     public static ConstraintLayout extMatR, piezasMatR,metrosMatR;
     Button agragarDMR;
@@ -84,7 +87,7 @@ public class MaterialesReportes extends Fragment {
         mFIR = view.findViewById(R.id.FinalIDMR);
         mIER = view.findViewById(R.id.InicialEDMR);
         mFER=view.findViewById(R.id.FinalEDMR);
-
+        tvInteriorR = view.findViewById(R.id.textView15);
         elimarMaterialesListR = view.findViewById(R.id.eliminarMaterialesListR);
 
 
@@ -149,6 +152,7 @@ public class MaterialesReportes extends Fragment {
                     Iterator<List<DetalleBitacoraModel>> itData = Array.dataDetBit.iterator();
                     List<DetalleBitacoraModel> dat = itData.next();
                     clvTipoDescMatR=dat.get(position-1).catTipoArticuloClave;
+                    esFibraR = dat.get(position -1).esFibra;
                     request.DetalleBitR(getContext());
                     if(extencionesMat==true){
                         spinnerExtMatR.setVisibility(View.VISIBLE);
@@ -358,14 +362,26 @@ public class MaterialesReportes extends Fragment {
             }
 
         } else {
-            if(mIIR.getText().toString().length()==0||mFIR.getText().toString().length()==0||mIER.getText().toString().length()==0||mFER.getText().toString().length()==0){
+            if(ValidacionDescarga()== true){
                 Toast.makeText(getContext(),"Seleccione metraje",Toast.LENGTH_SHORT).show();
 
             }else {
-                IIDMR = Integer.parseInt(String.valueOf(mIIR.getText()));
-                IFDMR = Integer.parseInt(String.valueOf(mFIR.getText()));
-                EIMDR = Integer.parseInt(String.valueOf(mIER.getText()));
-                EFDMR = Integer.parseInt(String.valueOf(mFER.getText()));
+                try{
+                    IIDMR = Integer.parseInt(String.valueOf(mIIR.getText()));
+                    IFDMR = Integer.parseInt(String.valueOf(mFIR.getText()));
+                }catch (Exception e){
+                    IIDMR=0;
+                    IFDMR=0;
+                }
+                try{
+                    EIMDR = Integer.parseInt(String.valueOf(mIER.getText()));
+                    EFDMR = Integer.parseInt(String.valueOf(mFER.getText()));
+                }catch (Exception r){
+                    EIMDR=0;
+                    EFDMR=0;
+                }
+
+
                 metrosR = (IFDMR - IIDMR) + (EFDMR - EIMDR);
                 totalDMR = metrosR;
                 if (cantidadDMR >= totalDMR) {
@@ -451,5 +467,25 @@ public class MaterialesReportes extends Fragment {
             }
 
         }
+    }
+    public boolean ValidacionDescarga() {
+        boolean ok=false;
+         if(esFibraR==1){
+            if(mIER.getText().toString().length() == 0 || mFER.getText().toString().length() == 0){
+                IIDMR=0;
+                IFDMR=0;
+                ok=true;
+            }else{
+                ok=false;
+            }
+        } else{
+            if(mIIR.getText().toString().length() == 0 || mFIR.getText().toString().length() == 0 || mIER.getText().toString().length() == 0 || mFER.getText().toString().length() == 0){
+                ok=true;
+            }else{
+                ok=false;
+            }
+        }
+
+        return ok;
     }
 }

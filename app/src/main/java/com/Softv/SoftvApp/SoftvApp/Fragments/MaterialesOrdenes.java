@@ -360,8 +360,13 @@ public class MaterialesOrdenes extends Fragment {
                 Toast.makeText(getContext(), "Seleccione metraje", Toast.LENGTH_SHORT).show();
 
             } else {
+                try {
                 IIDM = Integer.parseInt(String.valueOf(mII.getText()));
                 IFDM = Integer.parseInt(String.valueOf(mFI.getText()));
+                }catch (Exception e){
+                    EIMD = 0;
+                    EFDM = 0;
+                }
                 try {
                     EIMD = Integer.parseInt(String.valueOf(mIE.getText()));
                     EFDM = Integer.parseInt(String.valueOf(mFE.getText()));
@@ -471,7 +476,15 @@ public class MaterialesOrdenes extends Fragment {
             }else{
                 ok=false;
             }
-        }else{
+        }else if(esFibra==1){
+            if(mIE.getText().toString().length() == 0 || mFE.getText().toString().length() == 0){
+                IIDM=0;
+                IFDM=0;
+                ok=true;
+            }else{
+                ok=false;
+            }
+        } else{
             if(mII.getText().toString().length() == 0 || mFI.getText().toString().length() == 0 || mIE.getText().toString().length() == 0 || mFE.getText().toString().length() == 0){
                 ok=true;
             }else{

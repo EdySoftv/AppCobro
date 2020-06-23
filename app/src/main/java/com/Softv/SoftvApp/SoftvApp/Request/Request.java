@@ -3201,6 +3201,16 @@ try{
                         MaterialesReportes.metrosMatR.setVisibility(View.VISIBLE);
                         MaterialesReportes.piezasMatR.setVisibility(View.INVISIBLE);
                         pieza = false;
+
+                        if( MaterialesReportes.esFibraR==1){
+                            MaterialesReportes.mIIR.setVisibility(View.GONE);
+                            MaterialesReportes.mFIR.setVisibility(View.GONE);
+                            MaterialesReportes.tvInteriorR.setVisibility(View.INVISIBLE);
+                        }else{
+                            MaterialesReportes.mIIR.setVisibility(View.VISIBLE);
+                            MaterialesReportes.mFIR.setVisibility(View.VISIBLE);
+                            MaterialesReportes.tvInteriorR.setVisibility(View.VISIBLE);
+                        }
                     }
                 }else{
                     ErrorMensaje(context,"Error al conseguir datos del materiales "+response.message());
