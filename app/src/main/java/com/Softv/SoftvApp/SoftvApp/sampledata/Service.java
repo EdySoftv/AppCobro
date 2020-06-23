@@ -244,6 +244,8 @@ public interface Service {
     @POST(Constants.URL_GET_DATOS_CLIENTE)
     Call<JSONDATOSCLIENTE> getDatoscliente();*/
 
+    @POST(Constants.URL_GET_DATOS_CLIENTE)
+    Call<JSONDATOSCLIENTE> getDatosclienteNum();
 
     @POST(Constants.URL_GET_NAPTAP)
     Call<JSONAPTAP> getNAPTAP();

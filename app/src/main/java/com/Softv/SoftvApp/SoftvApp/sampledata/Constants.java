@@ -100,7 +100,7 @@ public class Constants {
 
     public static final String URL_GET_SERVICIOSCAMDO = "AplicacionMovil/GetServicios";
 
-
+    public static final String URL_GET_DATOS_CLIENTE  = "CLIENTES_New/GetConsultaClientesList";
 
 
     //Hotel

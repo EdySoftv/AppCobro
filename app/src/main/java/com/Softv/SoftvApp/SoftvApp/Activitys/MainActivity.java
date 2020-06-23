@@ -26,6 +26,7 @@ import com.Softv.SoftvApp.SoftvApp.Adapters.TrabajosAdapter;
 import com.Softv.SoftvApp.SoftvApp.Fragments.HorasReportes;
 import com.Softv.SoftvApp.SoftvApp.Fragments.TrabajosOrdenes;
 import com.Softv.SoftvApp.SoftvApp.Listas.Array;
+import com.Softv.SoftvApp.SoftvApp.Modelos.DeepConsModel;
 import com.Softv.SoftvApp.SoftvApp.R;
 import com.Softv.SoftvApp.SoftvApp.Request.Request;
 import com.Softv.SoftvApp.SoftvApp.Fragments.EjecutarOrdenes;
@@ -53,7 +54,7 @@ public class MainActivity extends AppCompatActivity implements ActionBar.TabList
     private Boolean cambio = false;
     public  int positionTab;
     ConstraintLayout layoutAnimado;
-    public static TextView NombreTec, Contrato, Status, Nombre, Direccion, InfoServicios;
+    public static TextView NombreTec, Contrato, Status, Nombre, Direccion, InfoServicios,TelyCel;
     public static String Estatus;
     public static boolean DescargaAgregar=false;
     int ValidaRegreso=0,ValidaHora=0;
@@ -75,6 +76,7 @@ public class MainActivity extends AppCompatActivity implements ActionBar.TabList
         Nombre= findViewById(R.id.infonombre);
         Direccion= findViewById(R.id.infodireccion);
         InfoServicios= findViewById(R.id.infoservicios);
+        TelyCel=findViewById(R.id.TelyCel);
         setTitle("No. de Orden: " +  Util.getClvOrden(Util.preferences));
 
         ejecutada = 0;
@@ -99,6 +101,12 @@ public class MainActivity extends AppCompatActivity implements ActionBar.TabList
             public void onClick(View v) {
                 request.getInfoCliente(getApplicationContext());
                     request.getServicios(getApplicationContext());
+                try{
+                    JSONObject jsonObject = new JSONObject();
+                    jsonObject.put("CONTRATO",DeepConsModel.Contrato);
+                    request.getDatosclienteNum(getApplicationContext(),jsonObject);
+                }catch (Exception e){}
+
                 if(layoutAnimado.getVisibility()==View.GONE) {
                     layoutAnimado.setVisibility(View.VISIBLE);
                     hzScrollView.setVisibility(View.VISIBLE);

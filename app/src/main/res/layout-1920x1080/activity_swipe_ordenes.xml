@@ -160,8 +160,8 @@
                 android:layout_alignParentStart="true"
                 android:layout_alignParentTop="true"
                 android:layout_marginTop="8dp"
-                android:textColor="#fff"
                 android:text="@string/info_Usuario"
+                android:textColor="#fff"
                 android:textSize="20dp"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -191,8 +191,8 @@
                 android:layout_alignParentStart="true"
                 android:layout_marginTop="8dp"
                 android:hint="---"
-                android:textSize="20dp"
                 android:textColor="#fff"
+                android:textSize="20dp"
                 app:layout_constraintEnd_toEndOf="@+id/asd"
                 app:layout_constraintStart_toStartOf="@+id/asd"
                 app:layout_constraintTop_toBottomOf="@+id/as" />
@@ -220,17 +220,46 @@
                 android:layout_alignParentStart="true"
                 android:layout_marginTop="8dp"
                 android:text="---"
-                android:textSize="20dp"
                 android:textColor="#fff"
+                android:textSize="20dp"
                 app:layout_constraintEnd_toEndOf="@+id/asd"
                 app:layout_constraintStart_toStartOf="@+id/asd"
                 app:layout_constraintTop_toBottomOf="@+id/wre" />
 
             <TextView
+                android:id="@+id/qqqqq"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/infodireccion"
+                android:layout_alignParentStart="true"
+                android:layout_marginTop="16dp"
+                android:text="@string/contactodos"
+                android:textColor="#fff"
+                android:textSize="20dp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="@+id/asd"
+                app:layout_constraintStart_toStartOf="@+id/asd"
+                app:layout_constraintTop_toBottomOf="@+id/infodireccion" />
+
+            <TextView
+                android:id="@+id/TelyCel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/qqqqq"
+                android:layout_alignParentStart="true"
+                android:layout_marginTop="8dp"
+                android:text="---"
+                android:textColor="#fff"
+                android:textSize="20dp"
+                app:layout_constraintEnd_toEndOf="@+id/asd"
+                app:layout_constraintStart_toStartOf="@+id/asd"
+                app:layout_constraintTop_toBottomOf="@+id/qqqqq" />
+
+            <TextView
                 android:id="@+id/jkl"
                 android:layout_width="wrap_content"
                 android:layout_height="36dp"
-                android:layout_below="@+id/infodireccion"
+                android:layout_below="@+id/TelyCel"
                 android:layout_alignParentStart="true"
                 android:layout_marginTop="16dp"
                 android:text="@string/servicios_Asignados"
@@ -239,7 +268,7 @@
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="@+id/asd"
                 app:layout_constraintStart_toStartOf="@+id/asd"
-                app:layout_constraintTop_toBottomOf="@+id/infodireccion" />
+                app:layout_constraintTop_toBottomOf="@+id/TelyCel" />
 
             <TextView
                 android:id="@+id/infoservicios"
