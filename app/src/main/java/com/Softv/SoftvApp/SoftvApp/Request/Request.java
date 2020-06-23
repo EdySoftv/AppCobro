@@ -4910,4 +4910,95 @@ try{
         });
     }
 
+    public void getDatosclienteNum(final Context context, final JSONObject jsonObject) {
+        Call<JSONDATOSCLIENTE> call = services.RequestPost(context, jsonObject).getDatosclienteNum();
+        call.enqueue(new Callback<JSONDATOSCLIENTE>() {
+            @Override
+            public void onResponse(Call<JSONDATOSCLIENTE> call, Response<JSONDATOSCLIENTE> response) {
+                if (response.code() == 200) {
+                    JSONDATOSCLIENTE jsonResponse = response.body();
+
+                    Array.dataClientes = new ArrayList<>(asList(jsonResponse.GetConsultaClientesListResult()));
+                    Iterator<List<GetConsultaClientesListResult>> itdata = Array.dataClientes.iterator();
+                    ArrayList<String>datos=new ArrayList<>();
+                    while (itdata.hasNext()) {
+                        List<GetConsultaClientesListResult> dat = itdata.next();
+
+                            if(dat.get(0).getCELULAR()!=null && dat.get(0).getTELEFONO()!=null){
+                                MainActivity.TelyCel.setText("Celular: "+ String.valueOf(dat.get(0).getCELULAR()) +
+                                        "\n"+ "Telefono: "+String.valueOf(dat.get(0).getTELEFONO()));
+                            }
+                           else if(dat.get(0).getCELULAR()!=null && dat.get(0).getTELEFONO()==null){
+                                MainActivity.TelyCel.setText("Celular: "+ String.valueOf(dat.get(0).getCELULAR()));
+                            }
+                           else if(dat.get(0).getCELULAR()==null && dat.get(0).getTELEFONO()!=null){
+                            MainActivity.TelyCel.setText("Telefono: "+String.valueOf(dat.get(0).getTELEFONO()));
+                            }
+                            else if(dat.get(0).getCELULAR()!=null && dat.get(0).getTELEFONO()!=null){
+                                MainActivity.TelyCel.setText("Celular: Sin celular, Telefono: Sin telefono ");
+                            }
+
+
+
+
+                    }
+
+
+                } else {
+                    ErrorMensaje(context,"Error al conseguir "+response.message());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<JSONDATOSCLIENTE> call, Throwable t) {
+                ErrorMensaje(context,"Error "+t.getMessage());
+            }
+        });
+    }
+
+    public void getDatosclienteNumR(final Context context, final JSONObject jsonObject) {
+        Call<JSONDATOSCLIENTE> call = services.RequestPost(context, jsonObject).getDatosclienteNum();
+        call.enqueue(new Callback<JSONDATOSCLIENTE>() {
+            @Override
+            public void onResponse(Call<JSONDATOSCLIENTE> call, Response<JSONDATOSCLIENTE> response) {
+                if (response.code() == 200) {
+                    JSONDATOSCLIENTE jsonResponse = response.body();
+
+                    Array.dataClientes = new ArrayList<>(asList(jsonResponse.GetConsultaClientesListResult()));
+                    Iterator<List<GetConsultaClientesListResult>> itdata = Array.dataClientes.iterator();
+                    ArrayList<String>datos=new ArrayList<>();
+                    while (itdata.hasNext()) {
+                        List<GetConsultaClientesListResult> dat = itdata.next();
+
+                        if(dat.get(0).getCELULAR()!=null && dat.get(0).getTELEFONO()!=null){
+                            MainReportes.TelyCelR.setText("Celular: "+ String.valueOf(dat.get(0).getCELULAR()) +
+                                    "\n"+ "Telefono: "+String.valueOf(dat.get(0).getTELEFONO()));
+                        }
+                        else if(dat.get(0).getCELULAR()!=null && dat.get(0).getTELEFONO()==null){
+                            MainReportes.TelyCelR.setText("Celular: "+ String.valueOf(dat.get(0).getCELULAR()));
+                        }
+                        else if(dat.get(0).getCELULAR()==null && dat.get(0).getTELEFONO()!=null){
+                            MainReportes.TelyCelR.setText("Telefono: "+String.valueOf(dat.get(0).getTELEFONO()));
+                        }
+                        else if(dat.get(0).getCELULAR()!=null && dat.get(0).getTELEFONO()!=null){
+                            MainReportes.TelyCelR.setText("Celular: Sin celular, Telefono: Sin telefono ");
+                        }
+
+
+
+
+                    }
+
+
+                } else {
+                    ErrorMensaje(context,"Error al conseguir "+response.message());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<JSONDATOSCLIENTE> call, Throwable t) {
+                ErrorMensaje(context,"Error "+t.getMessage());
+            }
+        });
+    }
 }

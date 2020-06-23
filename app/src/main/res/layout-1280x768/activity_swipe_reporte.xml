@@ -230,6 +230,38 @@
                 app:layout_constraintStart_toStartOf="@+id/textView55"
                 app:layout_constraintTop_toBottomOf="@+id/textView58" />
 
+
+            <TextView
+                android:id="@+id/textView581"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginTop="8dp"
+                android:text="@string/contactodos"
+                android:textColor="#fff"
+                android:textSize="20dp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="@+id/textView55"
+                app:layout_constraintStart_toStartOf="@+id/textView55"
+                app:layout_constraintTop_toBottomOf="@+id/infodireccion1" />
+
+            <TextView
+                android:id="@+id/TelyCelR"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="10dp"
+                android:text="---"
+                android:textColor="#fff"
+                android:textSize="20dp"
+                app:layout_constraintEnd_toEndOf="@+id/textView55"
+                app:layout_constraintStart_toStartOf="@+id/textView55"
+                app:layout_constraintTop_toBottomOf="@+id/textView581" />
+
             <TextView
                 android:id="@+id/textView59"
                 android:layout_width="wrap_content"
@@ -243,7 +275,7 @@
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="@+id/textView55"
                 app:layout_constraintStart_toStartOf="@+id/textView55"
-                app:layout_constraintTop_toBottomOf="@+id/infodireccion1" />
+                app:layout_constraintTop_toBottomOf="@+id/TelyCelR" />
 
             <TextView
                 android:id="@+id/infoservicios1"

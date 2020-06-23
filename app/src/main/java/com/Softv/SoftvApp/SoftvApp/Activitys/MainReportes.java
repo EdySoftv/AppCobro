@@ -19,6 +19,7 @@ import android.widget.Toast;
 
 import com.Softv.SoftvApp.SoftvApp.Fragments.MaterialesOrdenes;
 import com.Softv.SoftvApp.SoftvApp.Listas.Array;
+import com.Softv.SoftvApp.SoftvApp.Modelos.DeepConsModel;
 import com.Softv.SoftvApp.SoftvApp.R;
 import com.Softv.SoftvApp.SoftvApp.Request.Request;
 import com.Softv.SoftvApp.SoftvApp.Fragments.EjecutarReportes;
@@ -30,9 +31,11 @@ import com.Softv.SoftvApp.SoftvApp.sampledata.Util;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import static com.Softv.SoftvApp.SoftvApp.Adapters.QuejasAdapter.contratoReport;
 import static com.Softv.SoftvApp.SoftvApp.Adapters.QuejasAdapter.statusQueja;
 import static com.Softv.SoftvApp.SoftvApp.Fragments.TrabajosReportes.posSolucionRepo;
 import static com.Softv.SoftvApp.SoftvApp.Fragments.TrabajosReportes.proble;
+import static com.Softv.SoftvApp.SoftvApp.Request.Request.abc;
 
 public class MainReportes extends AppCompatActivity implements ActionBar.TabListener, ViewPager.OnPageChangeListener {
     public static ViewPager mViewPager;
@@ -43,7 +46,7 @@ public class MainReportes extends AppCompatActivity implements ActionBar.TabList
     public String valorProblema;
     private boolean cambioRepo = false;
      public static  int position;
-    public static TextView Nombre1, Direccion1,NombreTec1,infoA,contrato1,ciudad1;
+    public static TextView Nombre1, Direccion1,NombreTec1,infoA,contrato1,ciudad1,TelyCelR;
     public static boolean DescargaAgregarR=false;
     Request request = new Request();
     boolean visitaValidaReporte=false;
@@ -61,11 +64,19 @@ public class MainReportes extends AppCompatActivity implements ActionBar.TabList
         infoA = findViewById(R.id.infoservicios1);
         contrato1=findViewById(R.id.contrato1);
         ciudad1=findViewById(R.id.infoempresa1);
+        TelyCelR=findViewById(R.id.TelyCelR);
         setTitle("No. de Reporte: " + Util.getClvQueja(Util.preferences));
 //* Boton de informacion
         info.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                try{
+                    JSONObject jsonObject = new JSONObject();
+                    jsonObject.put("CONTRATO", abc);
+                    request.getDatosclienteNumR(getApplicationContext(),jsonObject);
+                }catch (Exception e){}
+
+
                 if(layoutAnimado.getVisibility()==View.GONE) {
                     layoutAnimado.setVisibility(View.VISIBLE);
                     hzScrollView.setVisibility(View.VISIBLE);

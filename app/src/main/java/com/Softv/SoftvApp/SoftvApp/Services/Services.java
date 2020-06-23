@@ -612,7 +612,7 @@ public class Services {
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("ContratoCom", contratoReport);
         jsonObject.put("IdUsuario", 1);
-        jsonObject.put("TipoSer", 1);
+        jsonObject.put("TipoSer", 0);
         jsonObject.put("Op", 0);
         MediaType JSON = MediaType.parse("application/json; charset=utf-8");
         final RequestBody body = RequestBody.create(JSON, jsonObject.toString());
