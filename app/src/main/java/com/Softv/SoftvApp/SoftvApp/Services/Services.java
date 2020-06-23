@@ -1829,7 +1829,7 @@ public class Services {
             escable = 1;
         }
         try {
-            jsonObject.put("contrato", DeepConsModel.Contrato);
+            jsonObject.put("contrato", com.Softv.SoftvApp.SoftvApp.Request.Request.abc);
             jsonObject.put("clvOrden",  Util.getClvQueja(Util.preferences));
             jsonObject.put("noArticulo", idInventarioMDR);
             jsonObject.put("cantidadUtilizada", totalDMR);
