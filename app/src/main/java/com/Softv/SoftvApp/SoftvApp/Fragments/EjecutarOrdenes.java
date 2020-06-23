@@ -1,12 +1,19 @@
 package com.Softv.SoftvApp.SoftvApp.Fragments;
 
+import android.Manifest;
+import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.graphics.Color;
+import android.location.Location;
+import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
 import android.util.Log;
@@ -45,6 +52,7 @@ import java.util.Iterator;
 import java.util.List;
 
 
+import static android.content.Context.LOCATION_SERVICE;
 import static com.Softv.SoftvApp.SoftvApp.Adapters.TrabajosAdapter.retiro;
 import static com.Softv.SoftvApp.SoftvApp.Fragments.HorasOrdenes.cordLat;
 import static com.Softv.SoftvApp.SoftvApp.Fragments.HorasOrdenes.cordLong;
@@ -56,7 +64,7 @@ import static com.Softv.SoftvApp.SoftvApp.Request.Request.validaExisteFirmaBool;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class EjecutarOrdenes extends Fragment {
+public class EjecutarOrdenes extends Fragment implements LocationListener {
 
     public static Button reiniciar;
     public static Button eject, firmar;
@@ -73,15 +81,21 @@ public class EjecutarOrdenes extends Fragment {
     public static String ejecutarStatus;
     public static String fechaActual,fechasolodias;
     public static String horaFin;
-    public static double latitudeEjec;
-    public static double longitudEjec;
-    private LocationManager locationManager;
+    public static double latitudeEjec=0;
+    public static double longitudEjec=0;
+    public static boolean isCoordenadas = false;
+    public static LocationManager locationManagerEjecutar;
     Date objDate = new Date();
     DateFormat hourFormat = new SimpleDateFormat("HH:mm");
     DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
 
+    private static final int MILLISECONDS_PER_SECOND = 1000;
+    private static final long UPDATE_INTERVAL = MILLISECONDS_PER_SECOND * 2;
+    private static final int FASTEST_INTERVAL_IN_SECONDS = 1;
+    private static final long FASTEST_INTERVAL = MILLISECONDS_PER_SECOND * FASTEST_INTERVAL_IN_SECONDS;
     public static String ClavetecnicaN,ClavetecnicaT;
     public static  int IdTapN=0,IdTapT=0;
+    Activity activity;
 
 
     Inicio in;
@@ -120,8 +134,9 @@ public class EjecutarOrdenes extends Fragment {
         latitudeEjec=0;
         longitudEjec=0;
         /////////////
+        activity = getActivity();
 
-        HorasOrdenes.setearCoordenadas(latitudeEjec,longitudEjec);
+
         Log.d("error", String.valueOf(latitudeEjec));
         ///////////////
         if(horas.visita == 1){
@@ -158,6 +173,20 @@ public class EjecutarOrdenes extends Fragment {
         }catch (Exception e){}
 
 
+
+        locationManagerEjecutar = (LocationManager)
+                getActivity().getSystemService(LOCATION_SERVICE);
+        if (ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            // TODO: Consider calling
+            //    ActivityCompat#requestPermissions
+            // here to request the missing permissions, and then overriding
+            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+            //                                          int[] grantResults)
+            // to handle the case where the user grants the permission. See the documentation
+            // for ActivityCompat#requestPermissions for more details.
+            return null;
+        }
+        locationManagerEjecutar.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 10, 0, this);
 
 
         try{
@@ -511,7 +540,7 @@ public class EjecutarOrdenes extends Fragment {
 
 
         if (horas.ejecutada == 1) {
-
+            setearCoordenadas(latitudeEjec,longitudEjec);
             ejecutarStatus="E";
             eject.setEnabled(false);
             try {
@@ -547,6 +576,60 @@ public class EjecutarOrdenes extends Fragment {
         }
 
 
+    }
+    @SuppressLint("MissingPermission")
+    public static void setearCoordenadas(double latitude,double longitud) {
+
+        Location location = locationManagerEjecutar.getLastKnownLocation(LocationManager.PASSIVE_PROVIDER);
+        if (location == null) {
+            location = locationManagerEjecutar.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
+        }
+        if (location != null) {
+            latitude = location.getLatitude();
+            // editor.putFloat("latitud", (float) latitude).commit();
+            longitud = location.getLongitude();
+            //editor.putFloat("longitud", (float) longitud).commit();
+            try {
+                cordLat.setText(String.valueOf(latitude));
+                cordLong.setText(String.valueOf(longitud));
+            }catch (Exception e){}
+            try {
+                EjecutarOrdenes.latitudeEjec=location.getLatitude();
+
+                EjecutarOrdenes.longitudEjec=location.getLongitude();
+
+                cordLong.setText(String.valueOf(longitud));
+            }catch (Exception e){}
+
+            //cordLat.setText(String.valueOf(latitude));
+            //cordLong.setText(String.valueOf(longitud));
+            isCoordenadas = true;
+        }
+    }
+
+    @Override
+    public void onLocationChanged(Location location) {
+        if (cordLat.getText().equals("") | cordLong.getText().equals("")) {
+            isCoordenadas = false;
+        }
+
+        if (isCoordenadas == false) {
+            setearCoordenadas(latitudeEjec,longitudEjec);
+        }
+    }
+
+    @Override
+    public void onStatusChanged(String provider, int status, Bundle extras) {
+
+    }
+
+    @Override
+    public void onProviderEnabled(String provider) {
+
+    }
+
+    @Override
+    public void onProviderDisabled(String provider) {
     }
 }
 

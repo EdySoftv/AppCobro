@@ -208,7 +208,7 @@ public class HorasOrdenes extends Fragment implements View.OnClickListener, Loca
 
     @SuppressLint("MissingPermission")
     public static void setearCoordenadas(double latitude,double longitud) {
-        Location location = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+        Location location = locationManager.getLastKnownLocation(LocationManager.PASSIVE_PROVIDER);
         if (location == null) {
             location = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
         }
