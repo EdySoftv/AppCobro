@@ -941,7 +941,7 @@ public class Request extends AppCompatActivity {
                         );
                     } catch (Exception e) {
                     }
-                    MainActivity.Direccion.setText(InfoClienteModelo.CALLE + " " + InfoClienteModelo.NUMERO + " " + InfoClienteModelo.COLONIA);
+
                     MainActivity.Nombre.setText(InfoClienteModelo.NOMBRE);
                 } else {
                     ErrorMensaje(context,"Error al conseguir información del cliente "+response.message());
@@ -2003,7 +2003,7 @@ public class Request extends AppCompatActivity {
                         List<GetuspBuscaContratoSeparado2ListResult> dat = (List<GetuspBuscaContratoSeparado2ListResult>) itData.next();
                         for (int i = 0; i < dat.size(); ++i) {
                             MainReportes.Nombre1.setText(dat.get(i).getNombre() + "  " + dat.get(i).getApellidoPaterno() + "  " + dat.get(i).getApellidoMaterno());
-                            MainReportes.Direccion1.setText(dat.get(i).getCALLE() + "  " + dat.get(i).getNUMERO() + "  " + dat.get(i).getCOLONIA());
+                            //MainReportes.Direccion1.setText(dat.get(i).getCALLE() + "  " + dat.get(i).getNUMERO() + "  " + dat.get(i).getCOLONIA());
                             MainReportes.contrato1.setText(dat.get(i).getCONTRATO());
                             MainReportes.ciudad1.setText(dat.get(i).getCIUDAD());
                             abc = dat.get(i).contratoBueno;
@@ -4947,6 +4947,15 @@ try{
                             else if(dat.get(0).getCELULAR()!=null && dat.get(0).getTELEFONO()!=null){
                                 MainActivity.TelyCel.setText("Celular: Sin celular, Telefono: Sin telefono ");
                             }
+                            try {
+                                if (!dat.get(0).getNumInt().equals(null)) {
+                                    MainActivity.Direccion.setText(dat.get(0).getCalle() + ", Num Ext:" + dat.get(0).getNUMERO() + ", Num Int:" + dat.get(0).getNumInt() + ", " + dat.get(0).getCol());
+                                } else {
+                                    MainActivity.Direccion.setText(dat.get(0).getCalle() + ", Num Ext:" + dat.get(0).getNUMERO() + " " + dat.get(0).getCol());
+                                }
+                            }catch (Exception e){
+                                MainActivity.Direccion.setText(dat.get(0).getCalle() + ", Num Ext:" + dat.get(0).getNUMERO() + " " + dat.get(0).getCol());
+                            }
 
 
 
@@ -4994,7 +5003,15 @@ try{
                             MainReportes.TelyCelR.setText("Celular: Sin celular, Telefono: Sin telefono ");
                         }
 
-
+                        try {
+                            if (!dat.get(0).getNumInt().equals(null)) {
+                                MainReportes.Direccion1.setText(dat.get(0).getCalle() + ", Num Ext:" + dat.get(0).getNUMERO() + ", Num Int:" + dat.get(0).getNumInt() + ", " + dat.get(0).getCol());
+                            } else {
+                                MainReportes.Direccion1.setText(dat.get(0).getCalle() + ", Num Ext:" + dat.get(0).getNUMERO() + " " + dat.get(0).getCol());
+                            }
+                        }catch (Exception e){
+                            MainReportes.Direccion1.setText(dat.get(0).getCalle() + ", Num Ext:" + dat.get(0).getNUMERO() + " " + dat.get(0).getCol());
+                        }
 
 
                     }

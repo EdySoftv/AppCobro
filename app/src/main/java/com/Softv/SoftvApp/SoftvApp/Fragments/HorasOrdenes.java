@@ -15,6 +15,7 @@ import android.provider.Settings;
 import android.support.constraint.ConstraintLayout;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -271,9 +272,7 @@ public class HorasOrdenes extends Fragment implements View.OnClickListener, Loca
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 EjecutarVisita();
-                                Intent intento = new Intent(getActivity(), Orden.class);
-                                intento.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                                startActivity(intento);
+
 
                               //  Toast.makeText(getActivity(), "Orden enviada como visita.", Toast.LENGTH_LONG).show();
                             }
@@ -314,7 +313,6 @@ public class HorasOrdenes extends Fragment implements View.OnClickListener, Loca
                 jsonObject1.put("OP2", 0);
                 jsonObject1.put("OPCION", "M");
                 jsonObject1.put("STATUS", "E");
-
                 request.getValidaOrdSer(getActivity(),jsonObject,jsonObject1);
             }catch (Exception e){}
 

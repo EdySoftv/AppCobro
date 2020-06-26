@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -208,35 +209,45 @@ public class HorasReportes extends Fragment  implements View.OnClickListener {
             objQuejas.put("Status", "V");
             objQuejas.put("Visita", false);
             ////////////////////
-             if (request.reporteVisita1 == null) {
+            if (request.reporteVisita1==null || request.reporteVisita1.equals(" ")){
                 objQuejas.put("HV1", horaVisitaR);
                 objQuejas.put("HV2", "");
                 objQuejas.put("HV3", "");
                 objQuejas.put("Visita1", fechaVisitaR);
                 objQuejas.put("Visita2", "");
                 objQuejas.put("Visita3", "");
+            }else{
+                if (request.reporteVisita2==null ||request.reporteVisita2.equals(" ")) {
+                    objQuejas.put("HV1", request.reporteHora1);
+                    objQuejas.put("HV2", horaVisitaR);
+                    objQuejas.put("HV3", "");
+                    objQuejas.put("Visita1", request.reporteVisita1);
+                    objQuejas.put("Visita2", fechaVisitaR);
+                    objQuejas.put("Visita3", "");
+                    request.reporteHora1=null;
+                    request.reporteVisita1=null;
+                }
+                else  {
+                    objQuejas.put("HV1", request.reporteHora1);
+                    objQuejas.put("HV2", request.reporteHora2);
+                    objQuejas.put("HV3", horaVisitaR);
+                    objQuejas.put("Visita1", request.reporteVisita1);
+                    objQuejas.put("Visita2", request.reporteVisita2);
+                    objQuejas.put("Visita3", fechaVisitaR);
+                    request.reporteHora1=null;
+                    request.reporteVisita1=null;
+                    request.reporteHora2=null;
+                    request.reporteVisita2=null;
+                }
             }
-             if (request.reporteVisita2 == null) {
-                 objQuejas.put("HV1", request.reporteHora1);
-                 objQuejas.put("HV2", horaVisitaR);
-                 objQuejas.put("HV3", "");
-                 objQuejas.put("Visita1", request.reporteVisita1);
-                 objQuejas.put("Visita2", fechaVisitaR);
-                 objQuejas.put("Visita3", "");
-             }
-            else  {
-                objQuejas.put("HV1", request.reporteHora1);
-                objQuejas.put("HV2", request.reporteHora2);
-                objQuejas.put("HV3", horaVisitaR);
-                objQuejas.put("Visita1", request.reporteVisita1);
-                objQuejas.put("Visita2", request.reporteVisita2);
-                objQuejas.put("Visita3", fechaVisitaR);
-            }
+
             ////////////////////
             objQuejas.put("clvPrioridadQueja", clvP);//error
             objQuejas.put("clvProblema",0 );
             objQuejas.put("clvProblema2", 3);//error
             jsonObject1.put("objQuejas", objQuejas);
+
+            Log.d("visita",jsonObject1.toString());
             request.getGuardaCampos(context,jsonObject1);
 
         }catch (Exception e){}
