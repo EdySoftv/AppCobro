@@ -259,5 +259,8 @@ public interface Service {
     @POST(Constants.URL_GET_SERVICIOSCAMDO)
     Call<JSONServiciosCAMDO> getServiciosCAMDO();
 
+    @POST(Constants.URL_GET_DATOS_CALLES)
+    Call<JsonObject> getCalles();
+
 }
 

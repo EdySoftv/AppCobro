@@ -46,7 +46,7 @@ public class MainReportes extends AppCompatActivity implements ActionBar.TabList
     public String valorProblema;
     private boolean cambioRepo = false;
      public static  int position;
-    public static TextView Nombre1, Direccion1,NombreTec1,infoA,contrato1,ciudad1,TelyCelR;
+    public static TextView Nombre1, Direccion1,NombreTec1,infoA,contrato1,ciudad1,TelyCelR,EntrecallesR,referenciastxtR,referenciasR;
     public static boolean DescargaAgregarR=false;
     Request request = new Request();
     boolean visitaValidaReporte=false;
@@ -65,6 +65,9 @@ public class MainReportes extends AppCompatActivity implements ActionBar.TabList
         contrato1=findViewById(R.id.contrato1);
         ciudad1=findViewById(R.id.infoempresa1);
         TelyCelR=findViewById(R.id.TelyCelR);
+        EntrecallesR=findViewById(R.id.entrecallesR);
+        referenciastxtR=findViewById(R.id.referenciastxtR);
+        referenciasR=findViewById(R.id.referenciasR);
         setTitle("No. de Reporte: " + Util.getClvQueja(Util.preferences));
 //* Boton de informacion
         info.setOnClickListener(new View.OnClickListener() {
@@ -74,6 +77,11 @@ public class MainReportes extends AppCompatActivity implements ActionBar.TabList
                     JSONObject jsonObject = new JSONObject();
                     jsonObject.put("CONTRATO", abc);
                     request.getDatosclienteNumR(getApplicationContext(),jsonObject);
+                }catch (Exception e){}
+                try{
+                    JSONObject jsonObject = new JSONObject();
+                    jsonObject.put("contrato",abc);
+                    request.getCalles(getApplicationContext(),jsonObject,EntrecallesR,referenciastxtR,referenciasR);
                 }catch (Exception e){}
 
 

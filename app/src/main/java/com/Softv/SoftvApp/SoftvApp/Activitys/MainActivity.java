@@ -54,7 +54,7 @@ public class MainActivity extends AppCompatActivity implements ActionBar.TabList
     private Boolean cambio = false;
     public  int positionTab;
     ConstraintLayout layoutAnimado;
-    public static TextView NombreTec, Contrato, Status, Nombre, Direccion, InfoServicios,TelyCel;
+    public static TextView NombreTec, Contrato, Status, Nombre, Direccion, InfoServicios,TelyCel,Entrecalles,referenciastxt,referencias;
     public static String Estatus;
     public static boolean DescargaAgregar=false;
     int ValidaRegreso=0,ValidaHora=0;
@@ -77,6 +77,9 @@ public class MainActivity extends AppCompatActivity implements ActionBar.TabList
         Direccion= findViewById(R.id.infodireccion);
         InfoServicios= findViewById(R.id.infoservicios);
         TelyCel=findViewById(R.id.TelyCel);
+        Entrecalles=findViewById(R.id.entrecalles);
+        referenciastxt=findViewById(R.id.referenciastxt);
+        referencias=findViewById(R.id.referencias);
         setTitle("No. de Orden: " +  Util.getClvOrden(Util.preferences));
 
         ejecutada = 0;
@@ -105,6 +108,11 @@ public class MainActivity extends AppCompatActivity implements ActionBar.TabList
                     JSONObject jsonObject = new JSONObject();
                     jsonObject.put("CONTRATO",DeepConsModel.Contrato);
                     request.getDatosclienteNum(getApplicationContext(),jsonObject);
+                }catch (Exception e){}
+                try{
+                    JSONObject jsonObject = new JSONObject();
+                    jsonObject.put("contrato",DeepConsModel.Contrato);
+                    request.getCalles(getApplicationContext(),jsonObject,Entrecalles,referenciastxt,referencias);
                 }catch (Exception e){}
 
                 if(layoutAnimado.getVisibility()==View.GONE) {

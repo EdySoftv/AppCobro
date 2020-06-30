@@ -167,6 +167,8 @@
     <string name="latituddos">Latitud:</string>
     <string name="longituddos">Longitud:</string>
     <string name="contactodos">Contacto:</string>
+    <string name="entrecalles">EntreCalles:</string>
+    <string name="referencias">Referencias:</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 

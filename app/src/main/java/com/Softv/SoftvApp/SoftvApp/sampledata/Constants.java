@@ -108,4 +108,6 @@ public class Constants {
    /* public static final String URL_ADD_CUADRILLA = "AplicacionMovil/InsertRelTecnicoCuadrilla";
     public static final String URL_GET_CUADRILLA  = "AplicacionMovil/SelectRelTecnicoCuadrilla";
     public static final String URL_GET_DATOS_CLIENTE  = "CLIENTES_New/GetConsultaClientesList";*/
+
+    public static final String URL_GET_DATOS_CALLES  = "CLIENTES_New/GetSoftvWEb_DameEntrecalles";
 }

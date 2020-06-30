@@ -119,6 +119,7 @@ import com.Softv.SoftvApp.SoftvApp.Modelos.GetMuestraTipoAparatoListResult;
 import com.Softv.SoftvApp.SoftvApp.Modelos.GetQuejasListResult;
 import com.Softv.SoftvApp.SoftvApp.Modelos.GetSP_StatusAparatosListResult;
 import com.Softv.SoftvApp.SoftvApp.Modelos.GetServiciosResult;
+import com.Softv.SoftvApp.SoftvApp.Modelos.GetSoftvWEb_DameEntrecalles;
 import com.Softv.SoftvApp.SoftvApp.Modelos.Get_ClvTecnicoResult;
 import com.Softv.SoftvApp.SoftvApp.Modelos.GetchecaBitacoraTecnicoModel;
 import com.Softv.SoftvApp.SoftvApp.Modelos.GetdameSerDELCliresumenResult;
@@ -5024,6 +5025,161 @@ try{
 
             @Override
             public void onFailure(Call<JSONDATOSCLIENTE> call, Throwable t) {
+                ErrorMensaje(context,"Error "+t.getMessage());
+            }
+        });
+    }
+
+
+    public void getCalles(final Context context, final JSONObject jsonObject, final TextView Entrecalles, final TextView referenciastxt, final TextView referencias) {
+        Call<JsonObject> call = services.RequestPost(context, jsonObject).getCalles();
+        call.enqueue(new Callback<JsonObject>() {
+            @Override
+            public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
+                if (response.code() == 200) {
+                    JsonObject userJson = response.body().getAsJsonObject("GetSoftvWEb_DameEntrecallesResult");
+                    String jsonToString = String.valueOf(userJson);
+                    GetSoftvWEb_DameEntrecalles calles = new GetSoftvWEb_DameEntrecalles();
+                    Gson gson = new Gson();
+                    calles = gson.fromJson(jsonToString,GetSoftvWEb_DameEntrecalles.class);
+                    if(calles.getCasa().equals("N")){
+                        if(calles.getSur().equals("")){
+                            if(calles.getEste().equals("")){
+                                if(calles.getOeste().equals("")){
+                                    Entrecalles.setText("");
+                                }else{
+                                    Entrecalles.setText(calles.getOeste());
+                                }
+                            }else{
+                                if(calles.getOeste().equals("")){
+                                    Entrecalles.setText(calles.getEste());
+                                }else{
+                                    Entrecalles.setText(calles.getEste()+", "+calles.getOeste());
+                                }
+                            }
+                        }else{
+                            if(calles.getEste().equals("")){
+                                if(calles.getOeste().equals("")){
+                                    Entrecalles.setText(calles.getSur());
+                                }else{
+                                    Entrecalles.setText(calles.getSur()+", "+calles.getOeste());
+                                }
+                            }else{
+                                if(calles.getOeste().equals("")){
+                                    Entrecalles.setText(calles.getSur()+", "+calles.getEste());
+                                }else{
+                                    Entrecalles.setText(calles.getSur()+", "+calles.getEste()+", "+calles.getOeste());
+                                }
+                            }
+                        }
+                    }else if(calles.getCasa().equals("S")){
+                        if(calles.getNorte().equals("")){
+                            if(calles.getEste().equals("")){
+                                if(calles.getOeste().equals("")){
+                                    Entrecalles.setText("");
+                                }else{
+                                    Entrecalles.setText(calles.getOeste());
+                                }
+                            }else{
+                                if(calles.getOeste().equals("")){
+                                    Entrecalles.setText(calles.getEste());
+                                }else{
+                                    Entrecalles.setText(calles.getEste()+", "+calles.getOeste());
+                                }
+                            }
+                        }else{
+                            if(calles.getEste().equals("")){
+                                if(calles.getOeste().equals("")){
+                                    Entrecalles.setText(calles.getNorte());
+                                }else{
+                                    Entrecalles.setText(calles.getNorte()+", "+calles.getOeste());
+                                }
+                            }else{
+                                if(calles.getOeste().equals("")){
+                                    Entrecalles.setText(calles.getNorte()+", "+calles.getEste());
+                                }else{
+                                    Entrecalles.setText(calles.getNorte()+", "+calles.getEste()+", "+calles.getOeste());
+                                }
+                            }
+                        }
+                    }else if(calles.getCasa().equals("E")){
+                        if(calles.getNorte().equals("")){
+                            if(calles.getSur().equals("")){
+                                if(calles.getOeste().equals("")){
+                                    Entrecalles.setText("");
+                                }else{
+                                    Entrecalles.setText(calles.getOeste());
+                                }
+                            }else{
+                                if(calles.getOeste().equals("")){
+                                    Entrecalles.setText(calles.getSur());
+                                }else{
+                                    Entrecalles.setText(calles.getSur()+", "+calles.getOeste());
+                                }
+                            }
+                        }else{
+                            if(calles.getSur().equals("")){
+                                if(calles.getOeste().equals("")){
+                                    Entrecalles.setText(calles.getNorte());
+                                }else{
+                                    Entrecalles.setText(calles.getNorte()+", "+calles.getOeste());
+                                }
+                            }else{
+                                if(calles.getOeste().equals("")){
+                                    Entrecalles.setText(calles.getNorte()+", "+calles.getSur());
+                                }else{
+                                    Entrecalles.setText(calles.getNorte()+", "+calles.getSur()+", "+calles.getOeste());
+                                }
+                            }
+                        }
+                    }else if(calles.getCasa().equals("O")){
+                        if(calles.getNorte().equals("")){
+                            if(calles.getSur().equals("")){
+                                if(calles.getEste().equals("")){
+                                    Entrecalles.setText("");
+                                }else{
+                                    Entrecalles.setText(calles.getEste());
+                                }
+                            }else{
+                                if(calles.getEste().equals("")){
+                                    Entrecalles.setText(calles.getSur());
+                                }else{
+                                    Entrecalles.setText(calles.getSur()+", "+calles.getEste());
+                                }
+                            }
+                        }else{
+                            if(calles.getSur().equals("")){
+                                if(calles.getEste().equals("")){
+                                    Entrecalles.setText(calles.getNorte());
+                                }else{
+                                    Entrecalles.setText(calles.getNorte()+", "+calles.getEste());
+                                }
+                            }else{
+                                if(calles.getEste().equals("")){
+                                    Entrecalles.setText(calles.getNorte()+", "+calles.getSur());
+                                }else{
+                                    Entrecalles.setText(calles.getNorte()+", "+calles.getSur()+", "+calles.getEste());
+                                }
+                            }
+                        }
+                    }
+
+                    if(calles.getReferencia().equals("")){
+                        referenciastxt.setVisibility(View.GONE);
+                        referencias.setVisibility(View.GONE);
+                    }else{
+                        referenciastxt.setVisibility(View.VISIBLE);
+                        referencias.setVisibility(View.VISIBLE);
+                        referencias.setText(calles.getReferencia());
+                    }
+
+                }else{
+                    ErrorMensaje(context,"Error al conseguir datos del calles "+response.message());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<JsonObject> call, Throwable t) {
                 ErrorMensaje(context,"Error "+t.getMessage());
             }
         });

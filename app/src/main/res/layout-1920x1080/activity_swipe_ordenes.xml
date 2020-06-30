@@ -159,7 +159,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentTop="true"
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="4dp"
                 android:text="@string/info_Usuario"
                 android:textColor="#fff"
                 android:textSize="20dp"
@@ -174,7 +174,7 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/asd"
                 android:layout_alignParentStart="true"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="8dp"
                 android:text="@string/nombreDos"
                 android:textColor="#fff"
                 android:textSize="20dp"
@@ -203,7 +203,7 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/infonombre"
                 android:layout_alignParentStart="true"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="8dp"
                 android:text="@string/direccionDos"
                 android:textColor="#fff"
                 android:textSize="20dp"
@@ -225,21 +225,77 @@
                 app:layout_constraintEnd_toEndOf="@+id/asd"
                 app:layout_constraintStart_toStartOf="@+id/asd"
                 app:layout_constraintTop_toBottomOf="@+id/wre" />
-
             <TextView
-                android:id="@+id/qqqqq"
+                android:id="@+id/entrecallestxt"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/infodireccion"
                 android:layout_alignParentStart="true"
-                android:layout_marginTop="16dp"
-                android:text="@string/contactodos"
+                android:layout_marginTop="8dp"
+                android:text="@string/entrecalles"
                 android:textColor="#fff"
                 android:textSize="20dp"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="@+id/asd"
                 app:layout_constraintStart_toStartOf="@+id/asd"
                 app:layout_constraintTop_toBottomOf="@+id/infodireccion" />
+
+            <TextView
+                android:id="@+id/entrecalles"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/entrecallestxt"
+                android:layout_alignParentStart="true"
+                android:layout_marginTop="8dp"
+                android:text="---"
+                android:textColor="#fff"
+                android:textSize="20dp"
+                app:layout_constraintEnd_toEndOf="@+id/asd"
+                app:layout_constraintStart_toStartOf="@+id/asd"
+                app:layout_constraintTop_toBottomOf="@+id/entrecallestxt" />
+
+            <TextView
+                android:id="@+id/referenciastxt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/entrecalles"
+                android:layout_alignParentStart="true"
+                android:layout_marginTop="8dp"
+                android:text="@string/referencias"
+                android:textColor="#fff"
+                android:textSize="20dp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="@+id/asd"
+                app:layout_constraintStart_toStartOf="@+id/asd"
+                app:layout_constraintTop_toBottomOf="@+id/entrecalles" />
+
+            <TextView
+                android:id="@+id/referencias"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/referenciastxt"
+                android:layout_alignParentStart="true"
+                android:layout_marginTop="8dp"
+                android:text="---"
+                android:textColor="#fff"
+                android:textSize="20dp"
+                app:layout_constraintEnd_toEndOf="@+id/asd"
+                app:layout_constraintStart_toStartOf="@+id/asd"
+                app:layout_constraintTop_toBottomOf="@+id/referenciastxt" />
+            <TextView
+                android:id="@+id/qqqqq"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/referencias"
+                android:layout_alignParentStart="true"
+                android:layout_marginTop="8dp"
+                android:text="@string/contactodos"
+                android:textColor="#fff"
+                android:textSize="20dp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="@+id/asd"
+                app:layout_constraintStart_toStartOf="@+id/asd"
+                app:layout_constraintTop_toBottomOf="@+id/referencias" />
 
             <TextView
                 android:id="@+id/TelyCel"
