@@ -37,7 +37,7 @@ public class GetQuejasListResult {
     private Object clvTecnico;
     @SerializedName("Clv_TipSer")
     @Expose
-    private Long clvTipSer;
+    private int clvTipSer;
     @SerializedName("Clv_TipoQueja")
     @Expose
     private Object clvTipoQueja;
@@ -240,4 +240,7 @@ public class GetQuejasListResult {
         this.visita = visita;
     }
 
-   }
+    public int getClvTipSer() {
+        return clvTipSer;
+    }
+}

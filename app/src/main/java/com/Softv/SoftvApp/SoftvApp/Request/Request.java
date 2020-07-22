@@ -228,7 +228,7 @@ public class Request extends AppCompatActivity {
     public static String reintentarComando, contraroMA, obsMA, statusMA, extencionesE, Obs,ObsR, msgComando = "",problemaReal;
     public static boolean isnet, firma,MACWAM,validaExisteFirmaBool;
     public static Long abc;
-    public static int clvP, tecC, nExtenciones = 0,clvProblemarepo,ContratoReal,ClvUsuario,NoBitacora;
+    public static int clvP, tecC, nExtenciones = 0,clvProblemarepo,ContratoReal,ClvUsuario,NoBitacora,ClvTipSerReportes;
     public int reintentaB;
     public static String stringValidaTrabajos;
     public static ArrayAdapter adapterTecSec, adapterTecSecR, adapterNap,adapterTap,adapterColonia,adapterTAPNAPCAMDO;
@@ -1755,17 +1755,11 @@ public class Request extends AppCompatActivity {
 
     //INFO CLIENTE Reportes///
 //TIPO DE SOLUCION///
-    public void getSolucuion(final Context context) {
+    public void getSolucuion(final Context context, final JSONObject jsonObjet) {
         Array.clv_Soluc = new ArrayList<Integer>();
         Array.clv_Soluc.add(0, -1);
 
-        Service service = null;
-        try {
-            service = services.getSolocionService(context);
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-        Call<JSONSolucion> call = service.getSolut();
+        Call<JSONSolucion> call = services.RequestPost(context, jsonObjet).getSolut();
         call.enqueue(new Callback<JSONSolucion>() {
             @Override
             public void onResponse(Call<JSONSolucion> call, Response<JSONSolucion> response) {
@@ -1785,7 +1779,7 @@ public class Request extends AppCompatActivity {
                         }
                         ArrayAdapter adapter = new ArrayAdapter(context, android.R.layout.simple_spinner_dropdown_item, datos);
                         solucion.setAdapter(adapter);
-                        solucion.setSelection(posSolucionRepo);
+                        //solucion.setSelection(posSolucionRepo);
                     }
                 } else {
                     ErrorMensaje(context,"Error al conseguir soluciones "+response.message());
@@ -1828,6 +1822,8 @@ public class Request extends AppCompatActivity {
                             clvProblemarepo =  dat.get(i).clvProblema;
                             problemaReal = dat.get(i).solucion;
                             clasProblema = dat.get(i).getClasificacionProblema();
+                            ClvTipSerReportes = dat.get(i).getClvTipSer();
+
                             try {
                                 TrabajosReportes.prioridad.setText(String.valueOf(dat.get(i).getPrioridad()));
                                 TrabajosReportes.clasific.setText(String.valueOf(dat.get(i).getClasificacionProblema()));
@@ -1870,8 +1866,13 @@ public class Request extends AppCompatActivity {
                                 reporteHora3=hora;
                             }
                             String a="";
+                            try{
+                                JSONObject clv = new JSONObject();
+                                clv.put("TipSer",ClvTipSerReportes);
+                                getSolucuion(context,clv);
+                            }catch (Exception e){}
 
-                            ClvTrabajoRequest=dat.get(i).getClvTrabajo();
+                            //ClvTrabajoRequest=dat.get(i).clvProblema();
                         }
                     }
                 }else{
@@ -2480,8 +2481,8 @@ try{
                                 objQuejas.put("Visita2", "");
                                 objQuejas.put("Visita3", "");
                                 objQuejas.put("clvPrioridadQueja", clvP);
-                                objQuejas.put("clvProblema",ClvTrabajoRequest );
-                                objQuejas.put("clvProblema2", Clv_Sol);
+                                objQuejas.put("clvProblema", Clv_Sol);
+                                objQuejas.put("clvProblema2", clvProblemarepo);
                                 jsonObject1.put("objQuejas", objQuejas);
                                 getGuardaCampos(context,jsonObject1);
                             }catch (Exception e){}

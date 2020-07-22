@@ -39,7 +39,7 @@ public class TrabajosReportes extends Fragment implements View.OnClickListener {
         setRetainInstance(true);
         View view = inflater.inflate(R.layout.activity_trabajos_reportes, container, false);
         request.getnombretec(getContext());
-        request.getSolucuion(getContext());
+
         request.getReportesC(getContext());
         request.getReportes(getContext());
         proble=view.findViewById(R.id.problema);

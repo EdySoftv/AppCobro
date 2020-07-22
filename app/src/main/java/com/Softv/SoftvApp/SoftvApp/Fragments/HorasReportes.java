@@ -34,6 +34,7 @@ import java.util.Date;
 import static com.Softv.SoftvApp.SoftvApp.Adapters.QuejasAdapter.statusQueja;
 import static com.Softv.SoftvApp.SoftvApp.Fragments.TrabajosReportes.Clv_Sol;
 import static com.Softv.SoftvApp.SoftvApp.Request.Request.clvP;
+import static com.Softv.SoftvApp.SoftvApp.Request.Request.clvProblemarepo;
 import static com.Softv.SoftvApp.SoftvApp.Services.Services.ClvTrabajoRequest;
 
 
@@ -308,8 +309,8 @@ public class HorasReportes extends Fragment  implements View.OnClickListener {
 
 
             objQuejas.put("clvPrioridadQueja", clvP);
-            objQuejas.put("clvProblema",ClvTrabajoRequest );
-            objQuejas.put("clvProblemaS", Clv_Sol);
+            objQuejas.put("clvProblema",Clv_Sol );
+            objQuejas.put("clvProblemaS",clvProblemarepo );
             jsonObject1.put("objQuejas", objQuejas);
             request.getGuardaCampos(context,jsonObject1);
             Toast.makeText(getContext(), "Reporte guardado correctamente", Toast.LENGTH_LONG).show();

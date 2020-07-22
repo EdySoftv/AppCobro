@@ -72,6 +72,7 @@ import static com.Softv.SoftvApp.SoftvApp.Fragments.MaterialesReportes.totalDMR;
 import static com.Softv.SoftvApp.SoftvApp.Fragments.TrabajosReportes.Clv_Sol;
 import static com.Softv.SoftvApp.SoftvApp.Request.Request.Obs;
 import static com.Softv.SoftvApp.SoftvApp.Request.Request.clvP;
+import static com.Softv.SoftvApp.SoftvApp.Request.Request.clvProblemarepo;
 
 
 public class Services {
@@ -643,7 +644,7 @@ public class Services {
     //solucion///
     public Service getSolocionService(final Context context) throws JSONException {
         JSONObject jsonObject = new JSONObject();
-        jsonObject.put("TipoSer", 1);
+        jsonObject.put("TipoSer", com.Softv.SoftvApp.SoftvApp.Request.Request.ClvTipSerReportes);
         MediaType JSON = MediaType.parse("application/json; charse=utf-8");
         final RequestBody body = RequestBody.create(JSON, jsonObject.toString());
         final OkHttpClient client = new OkHttpClient.Builder().addInterceptor(new Interceptor() {
@@ -1087,8 +1088,8 @@ public class Services {
         objQuejas.put("Visita2", "");
         objQuejas.put("Visita3", "");
         objQuejas.put("clvPrioridadQueja", clvP);
-        objQuejas.put("clvProblema",ClvTrabajoRequest );
-        objQuejas.put("clvProblemaS", Clv_Sol);
+        objQuejas.put("clvProblema", Clv_Sol);
+        objQuejas.put("clvProblemaS", clvProblemarepo);
         jsonObject.put("objQuejas", objQuejas);
         MediaType JSON = MediaType.parse("application/json; charset=utf-8");
         final RequestBody body = RequestBody.create(JSON, jsonObject.toString());

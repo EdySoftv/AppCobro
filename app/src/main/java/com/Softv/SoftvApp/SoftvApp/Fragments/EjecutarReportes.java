@@ -10,6 +10,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -35,7 +36,11 @@ import java.util.Calendar;
 import java.util.Date;
 
 import static com.Softv.SoftvApp.SoftvApp.Adapters.QuejasAdapter.statusQueja;
+import static com.Softv.SoftvApp.SoftvApp.Fragments.TrabajosReportes.Clv_Sol;
 import static com.Softv.SoftvApp.SoftvApp.Fragments.TrabajosReportes.proble;
+import static com.Softv.SoftvApp.SoftvApp.Request.Request.Obs;
+import static com.Softv.SoftvApp.SoftvApp.Request.Request.clvP;
+import static com.Softv.SoftvApp.SoftvApp.Request.Request.clvProblemarepo;
 import static com.Softv.SoftvApp.SoftvApp.Request.Request.validaExisteFirmaBool;
 
 
@@ -223,6 +228,7 @@ public class EjecutarReportes extends Fragment {
                                         jsonObject.put("clvReporte", Util.getClvQueja(Util.preferences));
                                         request.validaExisteFirmaReporte(getContext(),jsonObject);
                                     }catch (Exception e){}
+
                                 }
                             }).show();
 
