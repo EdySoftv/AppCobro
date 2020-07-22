@@ -142,6 +142,13 @@ public class ReporteAsignacion extends AppCompatActivity {
             if(dat4.get(ArbolAdapter.posicionArbol).Detalle.equals("COAXIAL")){
                 guardarAparatos.setEnabled(true);
                 guardarAparatos.setTextColor(Color.WHITE);
+                if(dat4.get(ArbolAdapter.posicionArbol).Clv_TipSer!=1){
+                    RecyclerView.LayoutManager layoutManager = new GridLayoutManager(this,1);
+                    reporteAsignacion.setLayoutManager(layoutManager);
+                    adapter = new EliminarAparatosAdapter(Array.children,getApplicationContext(),this,ArbolAdapter.posicionArbol,
+                            spinerMedio,guardarAparatos);
+                    reporteAsignacion.setAdapter(adapter);
+                }
             }else{
                 //si tiene hijos bloqueamos el spinner porque no se puede cambiar el medio con hijos ya asignados
                 spinerMedio.setEnabled(false);
