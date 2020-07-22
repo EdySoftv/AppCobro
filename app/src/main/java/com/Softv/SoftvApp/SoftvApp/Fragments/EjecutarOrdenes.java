@@ -244,8 +244,9 @@ public class EjecutarOrdenes extends Fragment implements LocationListener {
 
 
 
-        fechaActual = (dateFormat.format(objDate)) + " " + (hourFormat.format(objDate));
-        horaFin = (hourFormat.format(objDate));
+        //fechaActual = (dateFormat.format(objDate)) + " " + (hourFormat.format(objDate));
+        fechaActual = (dateFormat.format(objDate));
+
         fechasolodias =dateFormat.format(objDate);
        /* if(request.isnet==true){
             ejecutar.setVisibility(View.VISIBLE);
@@ -540,7 +541,8 @@ public class EjecutarOrdenes extends Fragment implements LocationListener {
 
 
         if (horas.ejecutada == 1) {
-            setearCoordenadas(latitudeEjec,longitudEjec);
+                 setearCoordenadas(latitudeEjec,longitudEjec);
+            horaFin = (hourFormat.format(objDate));
             ejecutarStatus="E";
             eject.setEnabled(false);
             try {
