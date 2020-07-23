@@ -111,6 +111,14 @@ if(DeepConsModel.STATUS.equals("E")){
                             Iterator<List<GetListClienteAparatosResult>> itdata = array.dataCliApa.iterator();
                             List<GetListClienteAparatosResult> dat = itdata.next();
                             if(TrabajosAdapter.ftth==1){
+                                try {
+                                    JSONObject jsonObject = new JSONObject();
+                                    JSONObject jsonObject1 = new JSONObject();
+                                    jsonObject.put("Letra", dat.get(position - 1).Letra);
+                                    jsonObject1.put("ObjRelMacwan", jsonObject);
+                                    request.ValidaMACWAM(getApplicationContext(), jsonObject1);
+                                } catch (Exception e) {
+                                }
                                 idArticulo2 = dat.get(position-1).getIdArticulo();
                                 contrato = dat.get(position-1).getControNet();
                                 request.getApaTipDis(getApplicationContext());
@@ -162,16 +170,7 @@ if(DeepConsModel.STATUS.equals("E")){
                     layoutParams.height=aparato.getHeight();
                     MACWAMTextCambioAparato.setLayoutParams(layoutParams);
 
-                    try {
-                        Iterator<List<GetListClienteAparatosResult>> itdata1 = array.dataCliApa.iterator();
-                        List<GetListClienteAparatosResult> dat1 = itdata1.next();
-                        JSONObject jsonObject = new JSONObject();
-                        JSONObject jsonObject1 = new JSONObject();
-                        jsonObject.put("Letra", dat1.get(position - 1).Letra);
-                        jsonObject1.put("ObjRelMacwan", jsonObject);
-                        request.ValidaMACWAM(getApplicationContext(), jsonObject1);
-                    } catch (Exception e) {
-                    }
+
                 }else{
                     tipoAparatoClienteValidar=false;
                 }
@@ -261,6 +260,7 @@ if(DeepConsModel.STATUS.equals("E")){
                                             jsonObject.put("ContratoNet", contrato);
                                             jsonObject.put("Status", statusAparato);
                                             jsonObject.put("Trabajo", "CAPAT");
+                                            jsonObject.put("Clave", TrabajosAdapter.ClaveTrabajo);
                                             jsonObject1.put("ObjCambioAparato", jsonObject);
                                             request.SetCambioAparato(getApplicationContext(), jsonObject1,CambioAparato.this);
                                             dialogCAPAT.show();

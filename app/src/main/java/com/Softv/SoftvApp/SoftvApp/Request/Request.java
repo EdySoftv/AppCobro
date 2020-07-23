@@ -4031,7 +4031,13 @@ try{
                         }
                     }else {
                         MACWAM=false;
+                        try{
                         constraintLayoutMACWAM.setVisibility(View.GONE);
+                        }catch (Exception e){}
+                        try{
+                            CambioAparato.textView35.setVisibility(View.GONE);
+                           CambioAparato.MACWAMTextCambioAparato.setVisibility(View.GONE);
+                        }catch (Exception e){}
                     }
                 } else {
                     ErrorMensaje(context,"Error al validar MACWAN "+response.message());
