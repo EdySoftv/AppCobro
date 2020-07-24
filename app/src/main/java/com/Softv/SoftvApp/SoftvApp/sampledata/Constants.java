@@ -2,7 +2,7 @@ package com.Softv.SoftvApp.SoftvApp.sampledata;
 
 public class Constants {
     //public static final String NEW_URL="http://192.168.51.100:10000/SoftvWCFService.svc/";
-    public static final String NEW_URL="http://187.163.207.252:4300/SoftvWCFService.svc/";
+    public static final String NEW_URL="http://201.151.157.252:9000/SoftvWCFService.svc/";
     public static final String URL_GET_USER = "Usuario/LogOn";
     public static final String URL_GET_TECNICO = "AplicacionMovil/Get_ClvTecnico";
     public static final String URL_GET_PROX = "AplicacionMovil/GetDameSiguienteCita";
