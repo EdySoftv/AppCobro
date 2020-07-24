@@ -283,6 +283,7 @@ if(DeepConsModel.STATUS.equals("E")){
                                     jsonObject.put("ContratoNet", contrato);
                                     jsonObject.put("Status", statusAparato);
                                     jsonObject.put("Trabajo", "CAPAT");
+                                    jsonObject.put("Clave", TrabajosAdapter.ClaveTrabajo);
                                     jsonObject1.put("ObjCambioAparato", jsonObject);
                                     request.SetCambioAparato(getApplicationContext(), jsonObject1,CambioAparato.this);
                                     dialogCAPAT.show();
