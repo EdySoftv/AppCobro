@@ -4111,6 +4111,25 @@ try{
         });
     }
 
+    public void AsignaMACWAMCA(final Context context, final JSONObject jsonObject) {
+        Call<JsonObject> call = services.RequestPost(context, jsonObject).asignaMACWAM();
+        call.enqueue(new Callback<JsonObject>() {
+            @Override
+            public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
+                if (response.code() == 200) {
+
+                } else {
+                    ErrorMensaje(context,"Error al asignar MACWAN "+response.message());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<JsonObject> call, Throwable t) {
+                ErrorMensaje(context,"Error "+t.getMessage());
+            }
+        });
+    }
+
     public void PreguntaMedios(final Context context, final JSONObject jsonObject) {
         Call<JSONPregunta> call = services.RequestPost(context, jsonObject).getPregunta();
         call.enqueue(new Callback<JSONPregunta>() {

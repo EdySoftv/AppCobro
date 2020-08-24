@@ -240,9 +240,22 @@ if(DeepConsModel.STATUS.equals("E")){
                                                         jsonArrayMACCambioAparato.put(jsonObjectMACWAM);
                                                         JSONObject jsonObject = new JSONObject();
                                                         jsonObject.put("RelMacwanList",jsonArrayMACCambioAparato);
-                                                        request.AsignaMACWAM(getApplicationContext(),jsonObject);
+                                                        request.AsignaMACWAMCA(getApplicationContext(),jsonObject);
                                                     } catch (Exception e) {
                                                     }
+                                                    try{
+                                                        JSONObject jsonObject = new JSONObject();
+                                                        JSONObject jsonObject1 = new JSONObject();
+                                                        jsonObject.put("ClvAparato", clvAparatoCAPAT);
+                                                        jsonObject.put("ClvOrden",  Util.getClvOrden(Util.preferences));
+                                                        jsonObject.put("ContratoNet", contrato);
+                                                        jsonObject.put("Status", statusAparato);
+                                                        jsonObject.put("Trabajo", "CAPAT");
+                                                        jsonObject.put("Clave", TrabajosAdapter.ClaveTrabajo);
+                                                        jsonObject1.put("ObjCambioAparato", jsonObject);
+                                                        request.SetCambioAparato(getApplicationContext(), jsonObject1,CambioAparato.this);
+                                                        dialogCAPAT.show();
+                                                    }catch (Exception e){}
 
                                                 }else{
                                                     Toast.makeText(getApplicationContext(), "La MACWAN debe de ser 12 caracteres", Toast.LENGTH_SHORT).show();
