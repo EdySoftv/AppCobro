@@ -460,6 +460,7 @@ public class Services {
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("Clv_Tecnico", Util.getClvTec(Util.preferences));
         jsonObject.put("Id_Articulo", CambioAparato.idArticulo2);
+        jsonObject.put("Clv_Orden", Util.getClvOrden(Util.preferences));
         MediaType JSON = MediaType.parse("application/json; charse=utf-8");
         final RequestBody body = RequestBody.create(JSON, jsonObject.toString());
         final OkHttpClient client = new OkHttpClient.Builder().addInterceptor(new Interceptor() {
