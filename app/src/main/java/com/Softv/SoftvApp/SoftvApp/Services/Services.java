@@ -429,7 +429,7 @@ public class Services {
     ///Tipo de Aparato//
     public Service getApaTipoService(final Context context) throws JSONException {
         JSONObject jsonObject = new JSONObject();
-        jsonObject.put("ContratoNet", CambioAparato.contrato);
+        jsonObject.put("ContratoNet", CambioAparato.contratoNetCam);
         jsonObject.put("Id_Articulo", CambioAparato.idArticulo);
         MediaType JSON = MediaType.parse("application/json; charse=utf-8");
         final RequestBody body = RequestBody.create(JSON, jsonObject.toString());

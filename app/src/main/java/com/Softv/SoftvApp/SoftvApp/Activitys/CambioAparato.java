@@ -43,7 +43,7 @@ import java.util.regex.Pattern;
 public class CambioAparato extends AppCompatActivity {
 
     public static Spinner aparato, estado,tipoAparato, aparatoAsignar;
-    public static int idArticulo, contrato, idArticulo2, clvAparatoCAPAT;
+    public static int idArticulo, contratoNetCam, idArticulo2, clvAparatoCAPAT;
     public static String statusAparato,nombreSpinnerCambioAparato;
     private Request request = new Request();
     ConstraintLayout aa;
@@ -120,11 +120,11 @@ if(DeepConsModel.STATUS.equals("E")){
                                 } catch (Exception e) {
                                 }
                                 idArticulo2 = dat.get(position-1).getIdArticulo();
-                                contrato = dat.get(position-1).getControNet();
+                                contratoNetCam = dat.get(position-1).getControNet();
                                 request.getApaTipDis(getApplicationContext());
                             }else{
                                 idArticulo = dat.get(position-1).getIdArticulo();
-                                contrato = dat.get(position-1).getControNet();
+                                contratoNetCam = dat.get(position-1).getControNet();
                                 request.getApaTipo(getApplicationContext());
                             }
 
@@ -248,7 +248,7 @@ if(DeepConsModel.STATUS.equals("E")){
                                                         JSONObject jsonObject1 = new JSONObject();
                                                         jsonObject.put("ClvAparato", clvAparatoCAPAT);
                                                         jsonObject.put("ClvOrden",  Util.getClvOrden(Util.preferences));
-                                                        jsonObject.put("ContratoNet", contrato);
+                                                        jsonObject.put("ContratoNet", contratoNetCam);
                                                         jsonObject.put("Status", statusAparato);
                                                         jsonObject.put("Trabajo", "CAPAT");
                                                         jsonObject.put("Clave", TrabajosAdapter.ClaveTrabajo);
@@ -270,7 +270,7 @@ if(DeepConsModel.STATUS.equals("E")){
                                             JSONObject jsonObject1 = new JSONObject();
                                             jsonObject.put("ClvAparato", clvAparatoCAPAT);
                                             jsonObject.put("ClvOrden",  Util.getClvOrden(Util.preferences));
-                                            jsonObject.put("ContratoNet", contrato);
+                                            jsonObject.put("ContratoNet", contratoNetCam);
                                             jsonObject.put("Status", statusAparato);
                                             jsonObject.put("Trabajo", "CAPAT");
                                             jsonObject.put("Clave", TrabajosAdapter.ClaveTrabajo);
@@ -312,7 +312,7 @@ if(DeepConsModel.STATUS.equals("E")){
                                                     JSONObject jsonObject1 = new JSONObject();
                                                     jsonObject.put("ClvAparato", clvAparatoCAPAT);
                                                     jsonObject.put("ClvOrden",  Util.getClvOrden(Util.preferences));
-                                                    jsonObject.put("ContratoNet", contrato);
+                                                    jsonObject.put("ContratoNet", contratoNetCam);
                                                     jsonObject.put("Status", statusAparato);
                                                     jsonObject.put("Trabajo", "CAPAT");
                                                     jsonObject.put("Clave", TrabajosAdapter.ClaveTrabajo);
@@ -334,7 +334,7 @@ if(DeepConsModel.STATUS.equals("E")){
                                         JSONObject jsonObject1 = new JSONObject();
                                         jsonObject.put("ClvAparato", clvAparatoCAPAT);
                                         jsonObject.put("ClvOrden",  Util.getClvOrden(Util.preferences));
-                                        jsonObject.put("ContratoNet", contrato);
+                                        jsonObject.put("ContratoNet", contratoNetCam);
                                         jsonObject.put("Status", statusAparato);
                                         jsonObject.put("Trabajo", "CAPAT");
                                         jsonObject.put("Clave", TrabajosAdapter.ClaveTrabajo);

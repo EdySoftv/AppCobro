@@ -1185,14 +1185,19 @@ public class Request extends AppCompatActivity {
                         ArrayAdapter<String> adapter = new ArrayAdapter<String>(context, android.R.layout.simple_spinner_dropdown_item, datos);
                         CambioAparato.aparato.setAdapter(adapter);
                         try {
-                            CambioAparato.aparato.setSelection(CambioAparato.obtenerPosicionAC(CambioAparatoDeepModel.AparatoCliente));
-                            try{
-                                JSONObject jsonObject = new JSONObject();
-                                JSONObject jsonObject1 = new JSONObject();
-                                jsonObject.put("Letra", dat.get(CambioAparato.obtenerPosicionAC(CambioAparatoDeepModel.AparatoCliente)).Letra);
-                                jsonObject1.put("ObjRelMacwan", jsonObject);
-                                ValidaMACWAM(getApplicationContext(), jsonObject1);
-                            }catch (Exception e){}
+                            if(CambioAparatoDeepModel.AparatoCliente==0){
+
+                            }else{
+                                CambioAparato.aparato.setSelection(CambioAparato.obtenerPosicionAC(CambioAparatoDeepModel.AparatoCliente));
+                                try{
+                                    JSONObject jsonObject = new JSONObject();
+                                    JSONObject jsonObject1 = new JSONObject();
+                                    jsonObject.put("Letra", dat.get(CambioAparato.obtenerPosicionAC(CambioAparatoDeepModel.AparatoCliente)).Letra);
+                                    jsonObject1.put("ObjRelMacwan", jsonObject);
+                                    ValidaMACWAM(getApplicationContext(), jsonObject1);
+                                }catch (Exception e){}
+
+                            }
                             getStatusApa(context);
                         } catch (Exception e) {
                             dialogTrabajos.dismiss();
@@ -1233,8 +1238,13 @@ public class Request extends AppCompatActivity {
                         ArrayAdapter<String> adapter = new ArrayAdapter<String>(context, android.R.layout.simple_spinner_dropdown_item, datos);
                         CambioAparato.estado.setAdapter(adapter);
                         try {
-                            CambioAparato.estado.setSelection(CambioAparato.obtenerPosicionSA(CambioAparatoDeepModel.StatusEntrega));
-                            getApaTipo(context);
+                            if(CambioAparatoDeepModel.StatusEntrega.equals("")){
+
+                            }else {
+                                CambioAparato.estado.setSelection(CambioAparato.obtenerPosicionSA(CambioAparatoDeepModel.StatusEntrega));
+                                getApaTipo(context);
+                            }
+
                         } catch (Exception e) {
 
                         }
@@ -1267,8 +1277,13 @@ public class Request extends AppCompatActivity {
                     try {
                         Iterator<List<GetListClienteAparatosResult>> itdata1 = Array.dataCliApa.iterator();
                         List<GetListClienteAparatosResult> dat1 = itdata1.next();
-                        CambioAparato.idArticulo = dat1.get(CambioAparato.obtenerPosicionTA(CambioAparatoDeepModel.TipoAparatoAsignar)).getIdArticulo();
-                        CambioAparato.contrato = dat1.get(CambioAparato.obtenerPosicionTA(CambioAparatoDeepModel.TipoAparatoAsignar)).getControNet();
+                        if(CambioAparatoDeepModel.TipoAparatoAsignar==0){
+
+                        }else{
+                            CambioAparato.idArticulo = dat1.get(CambioAparato.obtenerPosicionTA(CambioAparatoDeepModel.TipoAparatoAsignar)).getIdArticulo();
+                            CambioAparato.contratoNetCam = dat1.get(CambioAparato.obtenerPosicionTA(CambioAparatoDeepModel.TipoAparatoAsignar)).getControNet();
+                        }
+
 
                     } catch (Exception e) {
 
@@ -1289,11 +1304,17 @@ public class Request extends AppCompatActivity {
                         try {
                             Iterator<List<GetListClienteAparatosResult>> itdata1 = Array.dataCliApa.iterator();
                             List<GetListClienteAparatosResult> dat1 = itdata1.next();
-                            CambioAparato.tipoAparato.setSelection(CambioAparato.obtenerPosicionTA(CambioAparatoDeepModel.TipoAparatoAsignar));
-                            CambioAparato.idArticulo = dat1.get(CambioAparato.obtenerPosicionTA(CambioAparatoDeepModel.TipoAparatoAsignar)).getIdArticulo();
-                            CambioAparato.contrato = dat1.get(CambioAparato.obtenerPosicionTA(CambioAparatoDeepModel.TipoAparatoAsignar)).getControNet();
+                            if(CambioAparatoDeepModel.TipoAparatoAsignar==0){
 
-                            getApaTipDis(context);
+                            }else{
+                                CambioAparato.tipoAparato.setSelection(CambioAparato.obtenerPosicionTA(CambioAparatoDeepModel.TipoAparatoAsignar));
+                                CambioAparato.idArticulo = dat1.get(CambioAparato.obtenerPosicionTA(CambioAparatoDeepModel.TipoAparatoAsignar)).getIdArticulo();
+                                CambioAparato.contratoNetCam = dat1.get(CambioAparato.obtenerPosicionTA(CambioAparatoDeepModel.TipoAparatoAsignar)).getControNet();
+                                getApaTipDis(context);
+                            }
+
+
+
                         } catch (Exception e) {
 
                         }
@@ -1327,7 +1348,13 @@ public class Request extends AppCompatActivity {
                     try {
                         Iterator<List<GetListTipoAparatosByIdArticuloResult>> itdata1 = Array.dataApaTipo.iterator();
                         List<GetListTipoAparatosByIdArticuloResult> dat1 = itdata1.next();
-                        CambioAparato.idArticulo2 = dat1.get(CambioAparato.obtenerPosicionA(CambioAparatoDeepModel.AparatoAsignar)).getIdArticulo();
+                        if(CambioAparatoDeepModel.AparatoAsignar==0){
+
+                        }else{
+                            CambioAparato.idArticulo2 = dat1.get(CambioAparato.obtenerPosicionA(CambioAparatoDeepModel.AparatoAsignar)).getIdArticulo();
+                        }
+
+
                     } catch (Exception e) {
                     }
                     JSONApaTipDis jsonResponse = response.body();
@@ -1345,7 +1372,12 @@ public class Request extends AppCompatActivity {
                         ArrayAdapter<String> adapter = new ArrayAdapter<String>(context, android.R.layout.simple_spinner_dropdown_item, datos);
                         CambioAparato.aparatoAsignar.setAdapter(adapter);
                         try {
-                            CambioAparato.aparatoAsignar.setSelection(CambioAparato.obtenerPosicionA(CambioAparatoDeepModel.AparatoAsignar));
+                            if(CambioAparatoDeepModel.AparatoAsignar==0){
+
+                            }else{
+                                CambioAparato.aparatoAsignar.setSelection(CambioAparato.obtenerPosicionA(CambioAparatoDeepModel.AparatoAsignar));
+                            }
+
                             dialogTrabajos.dismiss();
                         } catch (Exception e) {
                         }
