@@ -369,7 +369,7 @@ public class AsignarAparato extends AppCompatActivity {
                 jsonObject.put("Id",idArticuloasignado);
                 jsonObject1.put("obj",jsonObject);
                 jsonObject1.put("Lst",jsonArray);
-
+                jsonObject1.put("IdEntidad",Util.getClvTec(Util.preferences));
             }catch (Exception e){}
         }
         //Se manda solo una ClvUnicaNet para mostrar solo un servicio
@@ -388,7 +388,7 @@ public class AsignarAparato extends AppCompatActivity {
                 jsonObject.put("Id",idArticuloasignado);
                 jsonObject1.put("obj",jsonObject);
                 jsonObject1.put("Lst",jsonArray);
-
+                jsonObject1.put("IdEntidad",Util.getClvTec(Util.preferences));
             }catch (Exception e){}
         }
 
