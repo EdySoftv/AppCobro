@@ -3033,23 +3033,26 @@ try{
                         MaterialesOrdenes.metrosMat.setVisibility(View.VISIBLE);
                         MaterialesOrdenes.piezasMat.setVisibility(View.INVISIBLE);
                         pieza = false;
-                        if(extencionesMat == true){
-                            MaterialesOrdenes.mIE.setVisibility(View.GONE);
-                            MaterialesOrdenes.mFE.setVisibility(View.GONE);
-                            MaterialesOrdenes.tvExterior.setVisibility(View.GONE);
-                        }else{
-                            MaterialesOrdenes.mIE.setVisibility(View.VISIBLE);
-                            MaterialesOrdenes.mFE.setVisibility(View.VISIBLE);
-                            MaterialesOrdenes.tvExterior.setVisibility(View.VISIBLE);
-                        }
+//                        if(extencionesMat == true){
+//                            MaterialesOrdenes.mIE.setVisibility(View.GONE);
+//                            MaterialesOrdenes.mFE.setVisibility(View.GONE);
+//                            MaterialesOrdenes.tvExterior.setVisibility(View.GONE);
+//                        }else{
+//                            MaterialesOrdenes.mIE.setVisibility(View.VISIBLE);
+//                            MaterialesOrdenes.mFE.setVisibility(View.VISIBLE);
+//                            MaterialesOrdenes.tvExterior.setVisibility(View.VISIBLE);
+//                        }
                         if( MaterialesOrdenes.esFibra==1){
                             MaterialesOrdenes.mII.setVisibility(View.GONE);
                             MaterialesOrdenes.mFI.setVisibility(View.GONE);
                             MaterialesOrdenes.tvInterior.setVisibility(View.INVISIBLE);
+                            MaterialesOrdenes.tvExterior.setVisibility(View.INVISIBLE);
+
                         }else{
                             MaterialesOrdenes.mII.setVisibility(View.VISIBLE);
                             MaterialesOrdenes.mFI.setVisibility(View.VISIBLE);
                             MaterialesOrdenes.tvInterior.setVisibility(View.VISIBLE);
+                            MaterialesOrdenes.tvExterior.setVisibility(View.VISIBLE);
                         }
                     }
                 }else{
@@ -3236,15 +3239,15 @@ try{
                         MaterialesReportes.piezasMatR.setVisibility(View.INVISIBLE);
                         pieza = false;
 
-                        if( MaterialesReportes.esFibraR==1){
-                            MaterialesReportes.mIIR.setVisibility(View.GONE);
-                            MaterialesReportes.mFIR.setVisibility(View.GONE);
-                            MaterialesReportes.tvInteriorR.setVisibility(View.INVISIBLE);
-                        }else{
-                            MaterialesReportes.mIIR.setVisibility(View.VISIBLE);
-                            MaterialesReportes.mFIR.setVisibility(View.VISIBLE);
-                            MaterialesReportes.tvInteriorR.setVisibility(View.VISIBLE);
-                        }
+//                        if( MaterialesReportes.esFibraR==1){
+//                            MaterialesReportes.mIIR.setVisibility(View.GONE);
+//                            MaterialesReportes.mFIR.setVisibility(View.GONE);
+//                            MaterialesReportes.tvInteriorR.setVisibility(View.INVISIBLE);
+//                        }else{
+//                            MaterialesReportes.mIIR.setVisibility(View.VISIBLE);
+//                            MaterialesReportes.mFIR.setVisibility(View.VISIBLE);
+//                            MaterialesReportes.tvInteriorR.setVisibility(View.VISIBLE);
+//                        }
                     }
                 }else{
                     ErrorMensaje(context,"Error al conseguir datos del materiales "+response.message());

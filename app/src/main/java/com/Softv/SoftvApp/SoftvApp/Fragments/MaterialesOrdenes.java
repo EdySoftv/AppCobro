@@ -50,7 +50,7 @@ public class MaterialesOrdenes extends Fragment {
     public static RecyclerView elimarMaterialesList;
     Request request = new Request();
     public static EditText pieza, mII, mIE, mFI, mFE;
-    public static TextView tvExterior, tvInterior;
+    public static TextView tvExterior, tvInterior,textViewInicioTitulo,textViewFinTitulo;
     public static int clvTipoDescMat, idArticuloDM, cantidadDM, idInventarioMD, piezaSer, metros, totalDM, IIDM, IFDM, EIMD, EFDM;
     public static int extSer, esFibra;
     public static String descripcionMaterial = "";
@@ -88,6 +88,8 @@ public class MaterialesOrdenes extends Fragment {
         mFE = view.findViewById(R.id.FinalEDM);
         tvExterior = view.findViewById(R.id.textView16);
         tvInterior = view.findViewById(R.id.textView15);
+        textViewInicioTitulo= view.findViewById(R.id.textViewInicioTitulo);
+        textViewFinTitulo= view.findViewById(R.id.textViewFinTitulo);
 
         //scrollViewM = view.findViewById(R.id.scrollhorizontal);
         try {
@@ -144,7 +146,8 @@ public class MaterialesOrdenes extends Fragment {
                     Iterator<List<DetalleBitacoraModel>> itData = Array.dataDetBit.iterator();
                     List<DetalleBitacoraModel> dat = itData.next();
                     clvTipoDescMat = dat.get(position - 1).catTipoArticuloClave;
-                    esFibra = dat.get(position -1).esFibra;
+                    //esFibra = dat.get(position -1).esFibra;
+                    esFibra = 0;
                     request.DetalleBit(getContext());
                     if (request.extencionesMat == true) {
                         spinnerExtMat.setVisibility(View.VISIBLE);
@@ -206,6 +209,37 @@ public class MaterialesOrdenes extends Fragment {
                     Iterator<List<LlenaExtencionesModel>> itData = Array.dataLlenaExt.iterator();
                     List<LlenaExtencionesModel> dat = itData.next();
                     extSer = dat.get(position - 1).ID;
+
+                    if(esFibra!=1){
+                        if((position-1)!=0){
+                            mIE.setVisibility(View.GONE);
+                            mFE.setVisibility(View.GONE);
+                            EIMD = 0;
+                            EFDM = 0;
+                            tvExterior.setVisibility(View.INVISIBLE);
+                        }else{
+                            mIE.setVisibility(View.VISIBLE);
+                            mFE.setVisibility(View.VISIBLE);
+                            tvExterior.setVisibility(View.VISIBLE);
+
+                        }
+                    }else{
+                        if((position-1)!=0){
+                            mIE.setVisibility(View.GONE);
+                            mFE.setVisibility(View.GONE);
+                            EIMD = 0;
+                            EFDM = 0;
+                            tvExterior.setVisibility(View.INVISIBLE);
+                            textViewFinTitulo.setVisibility(View.INVISIBLE);
+                            textViewInicioTitulo.setVisibility(View.INVISIBLE);
+                        }else{
+                            mIE.setVisibility(View.VISIBLE);
+                            mFE.setVisibility(View.VISIBLE);
+                            textViewFinTitulo.setVisibility(View.VISIBLE);
+                            textViewInicioTitulo.setVisibility(View.VISIBLE);
+
+                        }
+                    }
                 /*    if(Util.getPermisisDescarga(Util.preferences)==true){
                         try {
                             JSONObject jsonObject = new JSONObject();
@@ -469,13 +503,22 @@ public class MaterialesOrdenes extends Fragment {
     public boolean ValidacionDescarga() {
         boolean ok=false;
         if(request.extencionesMat == true){
-            if(mII.getText().toString().length() == 0 || mFI.getText().toString().length() == 0){
-                EIMD = 0;
-                EFDM = 0;
-                ok=true;
+            if((posExtMat-1)!=0){
+                if(mII.getText().toString().length() == 0 || mFI.getText().toString().length() == 0){
+                    EIMD = 0;
+                    EFDM = 0;
+                    ok=true;
+                }else{
+                    ok=false;
+                }
             }else{
-                ok=false;
+                if(mII.getText().toString().length() == 0 || mFI.getText().toString().length() == 0 || mIE.getText().toString().length() == 0 || mFE.getText().toString().length() == 0){
+                    ok=true;
+                }else{
+                    ok=false;
+                }
             }
+
         }else if(esFibra==1){
             if(mIE.getText().toString().length() == 0 || mFE.getText().toString().length() == 0){
                 IIDM=0;

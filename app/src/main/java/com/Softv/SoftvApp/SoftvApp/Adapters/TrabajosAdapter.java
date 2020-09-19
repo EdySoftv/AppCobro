@@ -158,7 +158,6 @@ try{
 
     }
 });
-        ClaveTrabajo = Array.clavex.get(position);
 
         holder.control.setOnClickListener(new View.OnClickListener() {
 
@@ -166,6 +165,7 @@ try{
             public void onClick(View v) {
                 isnet=0;
                 ISDIG=false;
+                ClaveTrabajo = Array.clavex.get(position);
 
                 String palabra = holder.trabajo.getText().toString();
                 String[] caracteres = palabra.split(" ");

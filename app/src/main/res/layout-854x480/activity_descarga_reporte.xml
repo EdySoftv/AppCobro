@@ -220,7 +220,7 @@
                     app:layout_constraintTop_toTopOf="@+id/InicialIDMR" />
 
                 <TextView
-                    android:id="@+id/textView16"
+                    android:id="@+id/textViewExternoR"
                     android:layout_width="60dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"

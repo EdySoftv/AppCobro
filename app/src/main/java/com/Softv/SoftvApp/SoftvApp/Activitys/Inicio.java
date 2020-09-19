@@ -104,7 +104,7 @@ public class Inicio extends AppCompatActivity
             jsonTokenFirebase = new JSONObject();
             jsonTokenFirebase.put("clv_tecnico",Util.getClvTec(Util.preferences));
             jsonTokenFirebase.put("token",FirebaseInstanceId.getInstance().getToken());
-            rqs.envioTokenTecnicoRequest(this,jsonTokenFirebase);
+            //rqs.envioTokenTecnicoRequest(this,jsonTokenFirebase);
         }
         catch (JSONException e) { }
 

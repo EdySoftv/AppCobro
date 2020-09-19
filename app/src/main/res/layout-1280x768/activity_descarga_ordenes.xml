@@ -180,7 +180,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/constrain_Extenciones">
 
                 <TextView
-                    android:id="@+id/textView13"
+                    android:id="@+id/textViewInicioTitulo"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="50dp"
@@ -192,7 +192,7 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
-                    android:id="@+id/textView14"
+                    android:id="@+id/textViewFinTitulo"
                     android:layout_width="50dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
@@ -235,9 +235,9 @@
                     android:layout_marginTop="20dp"
                     android:inputType="number"
                     android:textSize="20dp"
-                    app:layout_constraintEnd_toEndOf="@+id/textView13"
-                    app:layout_constraintStart_toStartOf="@+id/textView13"
-                    app:layout_constraintTop_toBottomOf="@+id/textView13" />
+                    app:layout_constraintEnd_toEndOf="@+id/textViewInicioTitulo"
+                    app:layout_constraintStart_toStartOf="@+id/textViewInicioTitulo"
+                    app:layout_constraintTop_toBottomOf="@+id/textViewInicioTitulo" />
 
                 <EditText
                     android:id="@+id/FinalIDM"
@@ -246,9 +246,9 @@
                     android:layout_marginTop="20dp"
                     android:inputType="number"
                     android:textSize="20dp"
-                    app:layout_constraintEnd_toEndOf="@+id/textView14"
-                    app:layout_constraintStart_toStartOf="@+id/textView14"
-                    app:layout_constraintTop_toBottomOf="@+id/textView14" />
+                    app:layout_constraintEnd_toEndOf="@+id/textViewFinTitulo"
+                    app:layout_constraintStart_toStartOf="@+id/textViewFinTitulo"
+                    app:layout_constraintTop_toBottomOf="@+id/textViewFinTitulo" />
 
                 <EditText
                     android:id="@+id/InicialEDM"
@@ -259,8 +259,8 @@
                     android:inputType="number"
                     android:textSize="20dp"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="@+id/textView13"
-                    app:layout_constraintStart_toStartOf="@+id/textView13"
+                    app:layout_constraintEnd_toEndOf="@+id/textViewInicioTitulo"
+                    app:layout_constraintStart_toStartOf="@+id/textViewInicioTitulo"
                     app:layout_constraintTop_toBottomOf="@+id/InicialIDM" />
 
                 <EditText
@@ -272,8 +272,8 @@
                     android:inputType="number"
                     android:textSize="20dp"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="@+id/textView14"
-                    app:layout_constraintStart_toStartOf="@+id/textView14"
+                    app:layout_constraintEnd_toEndOf="@+id/textViewFinTitulo"
+                    app:layout_constraintStart_toStartOf="@+id/textViewFinTitulo"
                     app:layout_constraintTop_toBottomOf="@+id/FinalIDM" />
             </android.support.constraint.ConstraintLayout>
 

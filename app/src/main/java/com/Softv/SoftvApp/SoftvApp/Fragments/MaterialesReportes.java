@@ -52,7 +52,7 @@ public class MaterialesReportes extends Fragment {
     public static int clvTipoDescMatR,idArticuloDMR,cantidadDMR,idInventarioMDR,piezaSerR, metrosR, totalDMR,IIDMR,IFDMR,EIMDR,EFDMR;
     public static int extSerR;
     public static String descripcionMaterialR="";
-    public static TextView  tvInteriorR;
+    public static TextView  tvInteriorR,tvExteriorR;
     public static int esFibraR;
     public static Spinner descripcionMatR,clasificacionMatR,spinnerExtMatR;
     public static ConstraintLayout extMatR, piezasMatR,metrosMatR;
@@ -89,6 +89,7 @@ public class MaterialesReportes extends Fragment {
         mFER=view.findViewById(R.id.FinalEDMR);
         tvInteriorR = view.findViewById(R.id.textView15);
         elimarMaterialesListR = view.findViewById(R.id.eliminarMaterialesListR);
+        tvExteriorR = view.findViewById(R.id.textViewExternoR);
 
 
         try {
@@ -213,6 +214,19 @@ public class MaterialesReportes extends Fragment {
                     Iterator<List<LlenaExtencionesModel>> itData = Array.dataLlenaExt.iterator();
                     List<LlenaExtencionesModel> dat = itData.next();
                     extSerR=dat.get(position-1).ID;
+
+                    if((position-1)!=0){
+                        mIER.setVisibility(View.GONE);
+                        mFER.setVisibility(View.GONE);
+                        EIMDR = 0;
+                        EFDMR = 0;
+                        tvExteriorR.setVisibility(View.INVISIBLE);
+
+                    }else{
+                        mIER.setVisibility(View.VISIBLE);
+                        mFER.setVisibility(View.VISIBLE);
+                        tvExteriorR.setVisibility(View.VISIBLE);
+                    }
 
 /*                    if(Util.getPermisisDescarga(Util.preferences)==true){
                         try {
@@ -470,7 +484,24 @@ public class MaterialesReportes extends Fragment {
     }
     public boolean ValidacionDescarga() {
         boolean ok=false;
-         if(esFibraR==1){
+        if(request.extencionesMat == true){
+            if((posExtMatR-1)!=0){
+                if(mIIR.getText().toString().length() == 0 || mFIR.getText().toString().length() == 0){
+                    EIMDR = 0;
+                    EFDMR = 0;
+                    ok=true;
+                }else{
+                    ok=false;
+                }
+            }else{
+                if(mIIR.getText().toString().length() == 0 || mFIR.getText().toString().length() == 0 || mIER.getText().toString().length() == 0 || mFER.getText().toString().length() == 0){
+                    ok=true;
+                }else{
+                    ok=false;
+                }
+            }
+
+        }else if(esFibraR==1){
             if(mIER.getText().toString().length() == 0 || mFER.getText().toString().length() == 0){
                 IIDMR=0;
                 IFDMR=0;
