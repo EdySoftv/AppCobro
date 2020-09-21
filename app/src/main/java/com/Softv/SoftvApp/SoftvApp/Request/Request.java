@@ -2902,9 +2902,13 @@ try{
                         descripcionMat.setAdapter(arrayAdapter);
                         descripcionMat.setSelection(posDescMat);
                     }catch (Exception e){
+                    }
+                    try{
                         ArrayAdapter arrayAdapter = new ArrayAdapter(context, android.R.layout.simple_list_item_1, array.detalleBit);
                         descripcionMatR.setAdapter(arrayAdapter);
                         descripcionMatR.setSelection(MaterialesReportes.posDescMatR);
+                    }catch (Exception e){
+
                     }
 
                 }else{
@@ -2976,7 +2980,12 @@ try{
             @Override
             public void onResponse(Call<JSONLlenaExtenciones> call, Response<JSONLlenaExtenciones> response1) {
                 if (response1.code() == 200) {
-                    MaterialesOrdenes.extMat.setVisibility(View.VISIBLE);
+                    try {
+                        MaterialesOrdenes.extMat.setVisibility(View.VISIBLE);
+                    }catch (Exception e){}
+                    try {
+                        MaterialesReportes.extMatR.setVisibility(View.VISIBLE);
+                    }catch (Exception e){}
                     array.descripcionExt.clear();
                     array.descripcionExt.add(0, "---Seleccionar---");
                     int j = 1;
@@ -3042,18 +3051,18 @@ try{
 //                            MaterialesOrdenes.mFE.setVisibility(View.VISIBLE);
 //                            MaterialesOrdenes.tvExterior.setVisibility(View.VISIBLE);
 //                        }
-                        if( MaterialesOrdenes.esFibra==1){
-                            MaterialesOrdenes.mII.setVisibility(View.GONE);
-                            MaterialesOrdenes.mFI.setVisibility(View.GONE);
-                            MaterialesOrdenes.tvInterior.setVisibility(View.INVISIBLE);
-                            MaterialesOrdenes.tvExterior.setVisibility(View.INVISIBLE);
-
-                        }else{
-                            MaterialesOrdenes.mII.setVisibility(View.VISIBLE);
-                            MaterialesOrdenes.mFI.setVisibility(View.VISIBLE);
-                            MaterialesOrdenes.tvInterior.setVisibility(View.VISIBLE);
-                            MaterialesOrdenes.tvExterior.setVisibility(View.VISIBLE);
-                        }
+//                        if( MaterialesOrdenes.esFibra==1){
+//                            MaterialesOrdenes.mII.setVisibility(View.GONE);
+//                            MaterialesOrdenes.mFI.setVisibility(View.GONE);
+//                            MaterialesOrdenes.tvInterior.setVisibility(View.INVISIBLE);
+//                            MaterialesOrdenes.tvExterior.setVisibility(View.INVISIBLE);
+//
+//                        }else{
+//                            MaterialesOrdenes.mII.setVisibility(View.VISIBLE);
+//                            MaterialesOrdenes.mFI.setVisibility(View.VISIBLE);
+//                            MaterialesOrdenes.tvInterior.setVisibility(View.VISIBLE);
+//                            MaterialesOrdenes.tvExterior.setVisibility(View.VISIBLE);
+//                        }
                     }
                 }else{
                     ErrorMensaje(context,"Error al conseguir datos del materiales "+response.message());
