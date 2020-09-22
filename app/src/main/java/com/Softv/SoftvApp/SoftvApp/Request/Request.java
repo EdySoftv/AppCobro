@@ -2415,7 +2415,7 @@ try{
             String[] caracteres = palabra.split(" ");
             Log.d("caracteres0",caracteres[0]);
             Log.d("caracteres1",caracteres[1]);
-            if (caracteres[0].equals("ISNET") || caracteres[0].equals("ISDIG") || caracteres[0].equals("ISTVA")|| caracteres[0].equals("CAPAG")) {
+            if (caracteres[0].equals("CAMDO") || caracteres[0].equals("ISNET") || caracteres[0].equals("ISDIG") || caracteres[0].equals("ISTVA")|| caracteres[0].equals("CAPAG")) {
                 IS = 1;
             }
         }
