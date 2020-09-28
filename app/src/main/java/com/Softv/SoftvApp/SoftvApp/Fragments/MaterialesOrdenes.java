@@ -211,7 +211,8 @@ public class MaterialesOrdenes extends Fragment {
                     extSer = dat.get(position - 1).ID;
 
                     //if(esFibra!=1){
-                        if((position-1)!=0){
+
+                        if(extSer!=0){
                             mIE.setVisibility(View.GONE);
                             mFE.setVisibility(View.GONE);
                             EIMD = 0;
@@ -503,7 +504,7 @@ public class MaterialesOrdenes extends Fragment {
     public boolean ValidacionDescarga() {
         boolean ok=false;
         if(request.extencionesMat == true){
-            if((posExtMat-1)!=0){
+            if(extSer!=0){
                 if(mII.getText().toString().length() == 0 || mFI.getText().toString().length() == 0){
                     EIMD = 0;
                     EFDM = 0;
