@@ -4427,6 +4427,7 @@ try{
                               }
                               if(dat4.get(i).IdMedio==2){
                                   NAP=true;
+                                  Placa=true;
                               }
                           }
                       }
