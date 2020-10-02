@@ -515,7 +515,7 @@ public class EjecutarOrdenes extends Fragment implements LocationListener {
                     JSONObject jsonObjectT = new JSONObject();
                     jsonObjectT.put("CONTRATO",request.ContratoReal);
                     jsonObjectT.put("TAP",ClavetecnicaT);
-                    jsonObjectT.put("IDTAP",IdTapT);
+                    jsonObjectT.put("idtap",IdTapT);
                     jsonObject2.put("ObjTap",jsonObjectT);
                     request.guardaTap(getContext(),jsonObjectT);
 
