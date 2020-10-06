@@ -19,7 +19,7 @@ import org.json.JSONObject;
 
 public class CambioDom extends AppCompatActivity {
     private Button aceptar,  regresar;
-    public static TextView Ciudad, Localidad, Colonia, Calle, Numero, Numero_i, Telefono, CalleN, CalleS, CallleE, CalleO;
+    public static TextView Ciudad, Localidad, Colonia, Calle, Numero, Numero_i, Telefono, CalleN, CalleS, CallleE, CalleO,ReferenciasCamdo;
     public static ImageView CasaNorte, CasaSur, CasaEste, CasaOeste;
     Request request = new Request();
 
@@ -45,7 +45,7 @@ public class CambioDom extends AppCompatActivity {
         CasaEste = findViewById(R.id.casaeste);
         CasaOeste = findViewById(R.id.casaoeste);
         regresar=findViewById(R.id.regresa);
-
+        ReferenciasCamdo = findViewById(R.id.referenciasCAMDO);
         setTitle("No. de Orden: " +  Util.getClvOrden(Util.preferences));
 
         Ciudad.setText(Request.ciudadcmdo);
@@ -59,6 +59,8 @@ public class CambioDom extends AppCompatActivity {
         CalleS.setText(Request.callescmdo);
         CallleE.setText(Request.calleecmdo);
         CalleO.setText(Request.calleocmdo);
+        ReferenciasCamdo.setText(Request.referenciascmd);
+
         if (Request.casacmdo.equals("N")) {
             CasaNorte.setVisibility(View.VISIBLE);
         }

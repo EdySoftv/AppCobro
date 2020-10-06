@@ -234,7 +234,7 @@ public class Request extends AppCompatActivity {
     public static ArrayAdapter adapterTecSec, adapterTecSecR, adapterNap,adapterTap,adapterColonia,adapterTAPNAPCAMDO;
     public static boolean pieza = false, rapagejecutar = false, extencionesMat = false,escable = false;;
    public static int validFirma;
-    public static String ciudadcmdo, localidadcmdo, coloniacmdo, callecmdo, numerocmdo, numeroicmdo, telefonocmdo, callencmdo, callescmdo, calleecmdo, calleocmdo, casacmdo;
+    public static String ciudadcmdo, localidadcmdo, coloniacmdo, callecmdo, numerocmdo, numeroicmdo, telefonocmdo, callencmdo, callescmdo, calleecmdo, calleocmdo, casacmdo,referenciascmd;
     public static String ejecutarStatus,reporteStatus,clasProblema;
     public static String reporteVisita1,reporteVisita2,reporteVisita3,reporteHora1,reporteHora2,reporteHora3;
     JsonObject jsonConsultaIp;
@@ -1464,6 +1464,7 @@ public class Request extends AppCompatActivity {
                             calleecmdo = dat.get(0).calleEste;
                             calleocmdo = dat.get(0).calleOeste;
                             casacmdo = dat.get(0).Casa;
+                            referenciascmd = dat.get(0).Referencia;
                             Intent intento = new Intent(context, CambioDom.class);
                             intento.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                             context.startActivity(intento);

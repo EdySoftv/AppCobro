@@ -13,9 +13,10 @@ public class GetDameDatosCAMDOResult {
     public  String calleSur;
     public  String colonia;
     public  String localidad;
+    public  String Referencia;
 
     public GetDameDatosCAMDOResult(String casa, String ciudad, String numero, String num_int, String telefono, String calle, String calleEste
-            , String calleNorte, String calleOeste, String calleSur, String colonia, String localidad){
+            , String calleNorte, String calleOeste, String calleSur, String colonia, String localidad,String referencias){
         this.Casa = casa;
         this.Ciudad = ciudad;
         this.NUMERO = numero;
@@ -28,7 +29,13 @@ public class GetDameDatosCAMDOResult {
         this.calleSur = calleSur;
         this.colonia = colonia;
         this.localidad = localidad;
+        this.Referencia = referencias;
     }
+
+    public String getReferencias() {
+        return Referencia;
+    }
+
     public  String getCalle() {
         return calle;
     }
