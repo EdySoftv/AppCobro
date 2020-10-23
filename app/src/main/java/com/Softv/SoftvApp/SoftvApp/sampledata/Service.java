@@ -24,6 +24,7 @@ import com.Softv.SoftvApp.SoftvApp.Listas.JSONLlenaExtenciones;
 import com.Softv.SoftvApp.SoftvApp.Listas.JSONMediosSer;
 import com.Softv.SoftvApp.SoftvApp.Listas.JSONNombreTecnico;
 import com.Softv.SoftvApp.SoftvApp.Listas.JSONPERMISOSDIRECTA;
+import com.Softv.SoftvApp.SoftvApp.Listas.JSONPlaca;
 import com.Softv.SoftvApp.SoftvApp.Listas.JSONPreDescarga;
 import com.Softv.SoftvApp.SoftvApp.Listas.JSONPregunta;
 import com.Softv.SoftvApp.SoftvApp.Listas.JSONPrioridad;
@@ -261,6 +262,12 @@ public interface Service {
 
     @POST(Constants.URL_GET_DATOS_CALLES)
     Call<JsonObject> getCalles();
+
+    @POST(Constants.URL_GET_PLACA)
+    Call<JsonObject> getPlaca();
+
+    @POST(Constants.URL_ADD_PLACA)
+    Call<JsonObject> addPlaca();
 
 }
 

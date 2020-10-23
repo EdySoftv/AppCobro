@@ -72,6 +72,7 @@ import com.Softv.SoftvApp.SoftvApp.Listas.JSONLlenaExtenciones;
 import com.Softv.SoftvApp.SoftvApp.Listas.JSONMediosSer;
 import com.Softv.SoftvApp.SoftvApp.Listas.JSONNombreTecnico;
 import com.Softv.SoftvApp.SoftvApp.Listas.JSONPERMISOSDIRECTA;
+import com.Softv.SoftvApp.SoftvApp.Listas.JSONPlaca;
 import com.Softv.SoftvApp.SoftvApp.Listas.JSONPreDescarga;
 import com.Softv.SoftvApp.SoftvApp.Listas.JSONPregunta;
 import com.Softv.SoftvApp.SoftvApp.Listas.JSONReporteCliente;
@@ -97,6 +98,7 @@ import com.Softv.SoftvApp.SoftvApp.Modelos.DetalleBitacoraModel;
 import com.Softv.SoftvApp.SoftvApp.Modelos.GetBUSCADetOrdSerListResult;
 import com.Softv.SoftvApp.SoftvApp.Modelos.GetCheca_si_tiene_CAMDOModel;
 import com.Softv.SoftvApp.SoftvApp.Modelos.GetColoniaResult;
+import com.Softv.SoftvApp.SoftvApp.Modelos.GetConRelCtePlacabyContrato;
 import com.Softv.SoftvApp.SoftvApp.Modelos.GetConTecnicoAgendaResult;
 import com.Softv.SoftvApp.SoftvApp.Modelos.GetConsultaClientesListResult;
 import com.Softv.SoftvApp.SoftvApp.Modelos.GetDameDatosCAMDOResult;
@@ -223,7 +225,7 @@ import static java.util.Arrays.asList;
 
 
 public class Request extends AppCompatActivity {
-    public static boolean NAP=false,TAP=false,NAPCAMDO=false,TAPCAMDO=false;
+    public static boolean NAP=false,TAP=false,NAPCAMDO=false,TAPCAMDO=false,Placa=false;
     Services services = new Services();
     Array array = new Array();
     public static String reintentarComando, contraroMA, obsMA, statusMA, extencionesE, Obs,ObsR, msgComando = "",problemaReal;
@@ -4393,7 +4395,8 @@ try{
         });
     }
 
-    public void getArbSerValidar(final Context context,final Spinner spinnerTap,final Spinner spinnerNap, final TextView nap,final TextView tap) {
+    public void getArbSerValidar(final Context context,final Spinner spinnerTap,final Spinner spinnerNap, final TextView nap,final TextView tap,
+                                 final TextView txtPlaca, final EditText EtxtPlaca) {
         Service service = null;
         try {
             service = services.getArbolSerService(context);
@@ -4410,6 +4413,7 @@ try{
                       array.nombreArbol.clear();
                       TAP=false;
                       NAP=false;
+                      Placa=false;
                       JSONArbolServicios jsonResponse = response.body();
                       array.dataArbSer = new ArrayList<List<GetMuestraArbolServiciosAparatosPorinstalarListResult>>(asList(jsonResponse.GetMuestraArbolServiciosAparatosPorinstalarListResult()));
                       Iterator<List<GetMuestraArbolServiciosAparatosPorinstalarListResult>> itData4 = array.dataArbSer.iterator();
@@ -4419,6 +4423,7 @@ try{
                               array.nombreArbol.add(dat4.get(i).getNombre());
                               if(dat4.get(i).IdMedio==1){
                                   TAP=true;
+                                  Placa=true;
                               }
                               if(dat4.get(i).IdMedio==2){
                                   NAP=true;
@@ -4429,6 +4434,21 @@ try{
                       TAP=false;
                       NAP=false;
                   }
+
+                    if(Placa==true){
+                        txtPlaca.setVisibility(View.VISIBLE);
+                        EtxtPlaca.setVisibility(View.VISIBLE);
+                        try{
+                            JSONObject jsonObject = new JSONObject();
+                            jsonObject.put("Contrato", ContratoReal);
+                            getPlaca(context,jsonObject,EtxtPlaca);
+                        }catch (Exception e){}
+
+
+                    }else{
+                        txtPlaca.setVisibility(View.GONE);
+                        EtxtPlaca.setVisibility(View.GONE);
+                    }
 
                     if(TAP==true){
                         tap.setVisibility(View.VISIBLE);
@@ -4441,8 +4461,8 @@ try{
 
 
                     }else{
-                        tap.setVisibility(View.INVISIBLE);
-                        spinnerTap.setVisibility(View.INVISIBLE);
+                        tap.setVisibility(View.GONE);
+                        spinnerTap.setVisibility(View.GONE);
                     }
 
 
@@ -4460,8 +4480,8 @@ try{
 
 
                     }else{
-                        nap.setVisibility(View.INVISIBLE);
-                        spinnerNap.setVisibility(View.INVISIBLE);
+                        nap.setVisibility(View.GONE);
+                        spinnerNap.setVisibility(View.GONE);
                     }
                   } else {
 
@@ -5273,6 +5293,52 @@ try{
 
                 }else{
                     ErrorMensaje(context,"Error al conseguir datos del calles "+response.message());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<JsonObject> call, Throwable t) {
+                ErrorMensaje(context,"Error "+t.getMessage());
+            }
+        });
+    }
+
+
+
+    public void addPlaca(final Context context, final JSONObject jsonObject) {
+        Call<JsonObject> call = services.RequestPost(context,jsonObject).addPlaca();
+        call.enqueue(new Callback<JsonObject>() {
+            @Override
+            public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
+                if (response.code() == 200) {
+
+                } else {
+                    ErrorMensaje(context,"Error al guardar Placa "+response.message());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<JsonObject> call, Throwable t) {
+                ErrorMensaje(context,"Error "+t.getMessage());
+            }
+        });
+    }
+
+    public void getPlaca(final Context context, final JSONObject jsonObject, final EditText EtxtPlaca) {
+        Call<JsonObject> call = services.RequestPost(context,jsonObject).getPlaca();
+        call.enqueue(new Callback<JsonObject>() {
+            @Override
+            public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
+                if (response.code() == 200) {
+                    JsonObject userJson = response.body().getAsJsonObject("GetConRelCtePlacabyContratoResult");
+                    String jsonToString = String.valueOf(userJson);
+                    GetConRelCtePlacabyContrato getConRelCtePlacabyContrato;
+                    Gson gson = new Gson();
+                    getConRelCtePlacabyContrato = gson.fromJson(jsonToString,GetConRelCtePlacabyContrato.class);
+                    EtxtPlaca.setText(getConRelCtePlacabyContrato.Placa);
+
+                }else{
+                    ErrorMensaje(context,"Error al conseguir datos placa "+response.message());
                 }
             }
 

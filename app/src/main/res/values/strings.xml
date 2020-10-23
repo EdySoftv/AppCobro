@@ -170,6 +170,7 @@
     <string name="entrecalles">EntreCalles:</string>
     <string name="referencias">Referencias:</string>
     <string name="fecha">Fecha:</string>
+    <string name="placa">Placa:</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 

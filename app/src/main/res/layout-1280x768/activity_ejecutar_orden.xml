@@ -181,11 +181,41 @@
           app:layout_constraintTop_toBottomOf="@+id/firmarOrd" />
 
       <TextView
-          android:id="@+id/txtNap"
+          android:id="@+id/txtPlaca"
           android:layout_width="0dp"
           android:layout_height="wrap_content"
           android:layout_marginStart="4dp"
           android:layout_marginTop="16dp"
+          android:layout_marginEnd="4dp"
+          android:text="@string/placa"
+          android:textSize="21dp"
+          android:textStyle="bold"
+          android:visibility="visible"
+          app:layout_constraintEnd_toEndOf="parent"
+          app:layout_constraintHorizontal_bias="0.0"
+          app:layout_constraintStart_toStartOf="parent"
+          app:layout_constraintTop_toBottomOf="@+id/ejec" />
+
+      <EditText
+          android:id="@+id/placa"
+          android:layout_width="0dp"
+          android:layout_height="wrap_content"
+          android:layout_marginStart="4dp"
+          android:layout_marginTop="4dp"
+          android:layout_marginEnd="4dp"
+          android:digits="0123456789-,qQwWeErRtTzZuUiIoOpPaAsSdDfFgGhHjJkKlLyYxXcCvVbBnNmM"
+          android:textSize="20dp"
+          android:visibility="visible"
+          app:layout_constraintEnd_toEndOf="parent"
+          app:layout_constraintStart_toStartOf="parent"
+          app:layout_constraintTop_toBottomOf="@+id/txtPlaca" />
+
+      <TextView
+          android:id="@+id/txtNap"
+          android:layout_width="0dp"
+          android:layout_height="wrap_content"
+          android:layout_marginStart="4dp"
+          android:layout_marginTop="8dp"
           android:layout_marginEnd="4dp"
           android:text="@string/NAP"
           android:textSize="21dp"
@@ -194,7 +224,7 @@
           app:layout_constraintEnd_toEndOf="parent"
           app:layout_constraintHorizontal_bias="0.0"
           app:layout_constraintStart_toStartOf="parent"
-          app:layout_constraintTop_toBottomOf="@+id/ejec" />
+          app:layout_constraintTop_toBottomOf="@+id/placa" />
 
       <Spinner
           android:id="@+id/spinnerNap"
@@ -214,7 +244,7 @@
           android:layout_width="0dp"
           android:layout_height="wrap_content"
           android:layout_marginStart="4dp"
-          android:layout_marginTop="16dp"
+          android:layout_marginTop="8dp"
           android:layout_marginEnd="4dp"
           android:text="@string/TAP"
           android:textSize="21dp"

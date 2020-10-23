@@ -103,6 +103,8 @@ public class Constants {
 
     public static final String URL_GET_DATOS_CLIENTE  = "CLIENTES_New/GetConsultaClientesList";
 
+    public static final String URL_GET_PLACA = "OrdSer/GetConRelCtePlacabyContrato";
+    public static final String URL_ADD_PLACA = "OrdSer/GetInsertRelCtePlacabyContrato";
 
     //Hotel
 
