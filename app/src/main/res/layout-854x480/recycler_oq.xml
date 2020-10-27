@@ -247,5 +247,33 @@
             app:layout_constraintEnd_toEndOf="@+id/controla"
             app:layout_constraintStart_toEndOf="@+id/txt"
             app:layout_constraintTop_toBottomOf="@+id/id_TapOrdenes" />
+
+        <TextView
+            android:id="@+id/txtFechaListado"
+            android:layout_width="70dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:text="@string/fecha"
+            android:textSize="14dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/controla"
+            app:layout_constraintTop_toBottomOf="@+id/id_TrabajoOrdenes" />
+
+        <TextView
+            android:id="@+id/id_FechaListado"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:textSize="14dp"
+            app:layout_constraintEnd_toEndOf="@+id/controla"
+            app:layout_constraintStart_toEndOf="@+id/txt"
+            app:layout_constraintTop_toBottomOf="@+id/id_TrabajoOrdenes" />
     </android.support.constraint.ConstraintLayout>
 </android.support.v7.widget.CardView>

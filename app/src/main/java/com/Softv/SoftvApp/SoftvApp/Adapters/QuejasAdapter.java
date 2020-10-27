@@ -33,7 +33,7 @@ public class QuejasAdapter extends RecyclerView.Adapter<QuejasAdapter.QuejaViewH
     public  Request request = new Request();
 
     public static  class QuejaViewHolder extends  RecyclerView.ViewHolder{
-        TextView statusq,contratoq,nombreq,direccion,quejaq,control,noOrden,txtnap,txttap,txttrabajo,napordenes,tapordenes,trabajoordenes;
+        TextView statusq,contratoq,nombreq,direccion,quejaq,control,noOrden,txtnap,txttap,txttrabajo,napordenes,tapordenes,trabajoordenes,fecha;
         public QuejaViewHolder( View v) {
             super(v);
 
@@ -50,6 +50,7 @@ public class QuejasAdapter extends RecyclerView.Adapter<QuejasAdapter.QuejaViewH
             napordenes = itemView.findViewById(R.id.id_NapOrdenes);
             tapordenes = itemView.findViewById(R.id.id_TapOrdenes);
             trabajoordenes = itemView.findViewById(R.id.id_TrabajoOrdenes);
+            fecha = itemView.findViewById(R.id.id_FechaListado);
 
         }
     }
@@ -87,6 +88,7 @@ public class QuejasAdapter extends RecyclerView.Adapter<QuejasAdapter.QuejaViewH
         viewHolder.contratoq.setText(Array.contratoQ.get(position));
         viewHolder.statusq.setText(Array.statusQ.get(position));
         viewHolder.direccion.setText(Array.Direccion.get(position));
+        viewHolder.fecha.setText(Array.fechaQ.get(position));
         viewHolder.control.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

@@ -1,5 +1,6 @@
 package com.Softv.SoftvApp.SoftvApp.Dibujo;
 
+import android.app.ProgressDialog;
 import android.graphics.Bitmap;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -10,6 +11,7 @@ import android.view.MenuItem;
 
 import com.Softv.SoftvApp.SoftvApp.R;
 import com.Softv.SoftvApp.SoftvApp.Request.Request;
+import com.Softv.SoftvApp.SoftvApp.sampledata.BarraCargar;
 import com.Softv.SoftvApp.SoftvApp.sampledata.Util;
 
 import org.json.JSONException;
@@ -22,6 +24,7 @@ public class Firma extends AppCompatActivity {
     public static String imagenAEnviar="";
     public static String firma1;
     Request request = new Request();
+    public ProgressDialog dialogFirma;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,7 +33,7 @@ public class Firma extends AppCompatActivity {
         setContentView(R.layout.activity_firma);
         dibujar= (Dibujar) findViewById(R.id.FirmaLayout);
         Toolbar toolbar;
-
+        dialogFirma = new BarraCargar().showDialog(Firma.this);
     setTitle("Firma Cliente");
     }
 
@@ -47,9 +50,16 @@ public class Firma extends AppCompatActivity {
               dibujar.NuevoDibujo();
                 break;
             case R.id.guardarDibujo:
+
                 recortar(Screenshot.TakeScreenshot(dibujar.getRootView()));
-                finish();
+                //finish();
                 if(Util.getTipoDescarga(Util.preferences).equals("O")){
+                    try {
+                        dialogFirma.show();
+                    }catch (Exception e){
+                        e.getCause();
+                        e.getMessage();
+                    }
                     try {
                         JSONObject jsonObject = new JSONObject();
                         JSONObject jsonObject1 = new JSONObject();
@@ -58,7 +68,7 @@ public class Firma extends AppCompatActivity {
                         jsonObject.put("Tipo",1);
                         jsonObject.put("FirmaCliente",Firma.imagenAEnviar);
                         jsonObject1.put("ObjLista",jsonObject);
-                        request.addFirma(getApplicationContext(),jsonObject1);
+                        request.addFirma(getApplicationContext(),jsonObject1,dialogFirma);
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
@@ -73,7 +83,7 @@ public class Firma extends AppCompatActivity {
                         jsonObject.put("Tipo",0);
                         jsonObject.put("FirmaCliente",Firma.imagenAEnviar);
                         jsonObject1.put("ObjLista",jsonObject);
-                        request.addFirma(getApplicationContext(),jsonObject1);
+                        request.addFirma(getApplicationContext(),jsonObject1,dialogFirma);
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
@@ -101,6 +111,11 @@ public class Firma extends AppCompatActivity {
         imagenAEnviar = ConvertirImgString(resizedbitmap1);
         //System.out.println(imagenAEnviar);
 
+
+    }
+
+    @Override
+    public void onBackPressed() {
 
     }
     }

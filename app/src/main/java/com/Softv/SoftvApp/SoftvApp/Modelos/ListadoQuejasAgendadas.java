@@ -28,7 +28,13 @@ public class ListadoQuejasAgendadas {
     @SerializedName("Colonia")
     @Expose
     private String Colonia;
+    @SerializedName("Fecha")
+    @Expose
+    private String Fecha;
 
+    public String getFecha() {
+        return Fecha;
+    }
 
     public Integer getClvQueja() {
         return clvQueja;

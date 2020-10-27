@@ -39,6 +39,7 @@ import com.Softv.SoftvApp.SoftvApp.Adapters.GraficaAdapter;
 import com.Softv.SoftvApp.SoftvApp.Adapters.NAPAdapter;
 import com.Softv.SoftvApp.SoftvApp.Adapters.TAPAdapter;
 import com.Softv.SoftvApp.SoftvApp.Adapters.TrabajosAdapter;
+import com.Softv.SoftvApp.SoftvApp.Dibujo.Firma;
 import com.Softv.SoftvApp.SoftvApp.Fragments.EjecutarOrdenes;
 import com.Softv.SoftvApp.SoftvApp.Activitys.ExtensionesAdi;
 import com.Softv.SoftvApp.SoftvApp.Fragments.EjecutarReportes;
@@ -764,12 +765,16 @@ public class Request extends AppCompatActivity {
                         Array.statusQ.clear();
                         Array.contratoQ.clear();
                         Array.Direccion.clear();
+                        Array.fechaQ.clear();
                         for (int i = 0; i < dat.size(); i++) {
                             Array.Queja.add(String.valueOf(dat.get(i).getClvQueja()));
                             Array.contratoQ.add(String.valueOf(dat.get(i).getContrato()));
                             Array.nombreQ.add(String.valueOf(dat.get(i).getNombre()));
                             Array.statusQ.add(String.valueOf(dat.get(i).getStatus()));
                             Array.Direccion.add(String.valueOf(dat.get(i).getCalle() + ", " + dat.get(i).getNUMERO() + ", " + dat.get(i).getColonia()));
+
+                            String[] caracteres = dat.get(i).getFecha().split(" ");
+                            Array.fechaQ.add(caracteres[0]);
 
                         }
                     }
@@ -823,6 +828,7 @@ public class Request extends AppCompatActivity {
                         Array.tapsrc.clear();
                         Array.trabajosrc.clear();
                         Array.direccionsrc.clear();
+                        Array.fechasrc.clear();
                         for (int i = 0; i < dat.size(); i++) {
                             Array.ordensrc.add(String.valueOf(dat.get(i).getClvOrden()));
                             Array.contratosrc.add(String.valueOf(dat.get(i).getContrato()));
@@ -832,6 +838,8 @@ public class Request extends AppCompatActivity {
                             Array.napsrc.add(dat.get(i).getNap());
                             Array.tapsrc.add(dat.get(i).getTab());
                             Array.trabajosrc.add(dat.get(i).getDescripcion());
+                            String[] caracteres = dat.get(i).getFecha().split(" ");
+                            Array.fechasrc.add(caracteres[0]);
                         }
                     }
                     if (ordensrc.size() == 0 && statusBusquedaOrden == true){
@@ -2425,8 +2433,14 @@ try{
             GuardaCoordenadas(context);
         } else {
             Toast.makeText(context, "Se ha guardado correctamente", Toast.LENGTH_LONG).show();
-            getListOrd(context);
             dialogVisitaOrd.dismiss();
+            if(firma==true) {
+                Intent intent = new Intent(context, Firma.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                context.startActivity(intent);
+            }else{
+                getListOrd(context);
+            }
         }
     }
     if (ejecutarStatus.equals("V")) {
@@ -2639,7 +2653,13 @@ try{
                 if (response1.code() == 200) {
                     dialogEjecutar.dismiss();
                     Toast.makeText(context, "Orden guardado correctamente", Toast.LENGTH_LONG);
-                    getListOrd(context);
+                    if(firma==true) {
+                        Intent intent = new Intent(context, Firma.class);
+                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                        context.startActivity(intent);
+                    }else{
+                        getListOrd(context);
+                    }
                 } else {
                     ErrorMensaje(context,"Se ha producido un error, verifique su conexion e intente nuevamente");
                     dialogEjecutar.dismiss();
@@ -3908,7 +3928,7 @@ try{
 
 
     //////////
-    public void addFirma(final Context context, final JSONObject jsonObject) {
+    public void addFirma(final Context context, final JSONObject jsonObject, final ProgressDialog progressDialog) {
         Call<JsonObject> call = services.RequestPost(context, jsonObject).addFirma();
         call.enqueue(new Callback<JsonObject>() {
             @Override
@@ -3916,7 +3936,14 @@ try{
                 Log.d("asd","asd");
                 if (response.code() == 200) {
                     Toast.makeText(context, "Se agrego correctamente", Toast.LENGTH_SHORT).show();
-                    validaExisteFirmaBool = true;
+                    if(Util.getTipoDescarga(Util.preferences).equals("Q")){
+                        validaExisteFirmaBool = true;
+                    }else if(Util.getTipoDescarga(Util.preferences).equals("O")){
+                        progressDialog.dismiss();
+                        validaExisteFirmaBool = true;
+                        getListOrd(context);
+                    }
+
                 } else {
                     ErrorMensaje(context,"Error al agregar firma "+response.message());
                 }

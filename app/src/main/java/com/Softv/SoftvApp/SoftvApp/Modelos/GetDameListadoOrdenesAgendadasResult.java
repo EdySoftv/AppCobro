@@ -45,6 +45,14 @@ public class GetDameListadoOrdenesAgendadasResult {
     @Expose
     private String descripcion;
 
+    @SerializedName("Fecha")
+    @Expose
+    private String Fecha;
+
+    public String getFecha() {
+        return Fecha;
+    }
+
 
     public String getNap() {
         return Nap;

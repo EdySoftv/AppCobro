@@ -145,7 +145,7 @@ public class EjecutarOrdenes extends Fragment implements LocationListener {
             tv_textTecSec.setVisibility(View.GONE);
         } else {
             if (request.firma == true) {
-                firmar.setVisibility(View.VISIBLE);
+            //    firmar.setVisibility(View.VISIBLE);
                 TecSec.setVisibility(View.VISIBLE);
                 tv_textTecSec.setVisibility(View.VISIBLE);
 
@@ -277,20 +277,20 @@ public class EjecutarOrdenes extends Fragment implements LocationListener {
                 observacionesTecnico = obsTec.getText().toString();
 
                 if(horas.ejecutada==1){
-                    if(request.firma==true){
-                        request.ejecutarStatus="E";
+                    //if(request.firma==true){
+                    //    request.ejecutarStatus="E";
 
-                        if(validaExisteFirmaBool == true){
-                            dialogoEjecutar1();
-                            validaExisteFirmaBool = true;
+                    //    if(validaExisteFirmaBool == true){
+                    //        dialogoEjecutar1();
+                    //        validaExisteFirmaBool = true;
 
-                        }else if (validaExisteFirmaBool == false ){
-                            dialogoRequiereFirma();
-                        }
-                    }else if (request.firma == false){
+                    //    }else if (validaExisteFirmaBool == false ){
+                    //        dialogoRequiereFirma();
+                    //    }
+                    //}else if (request.firma == false){
                         request.ejecutarStatus="E";
                         dialogoEjecutar1();
-                    }
+                    //}
 
                 }
                 dialogEjecutar.dismiss();

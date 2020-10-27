@@ -35,7 +35,7 @@ public class OrdenesAdapter extends RecyclerView.Adapter<OrdenesAdapter.ordensrc
 
 
     public static  class ordensrcViewHolder extends  RecyclerView.ViewHolder{
-        private TextView status,contrato1,nombre,direccionOrd,orden,control,noOrden,txtnap,txttap,txttrabajo,napordenes,tapordenes,trabajoordenes;
+        private TextView status,contrato1,nombre,direccionOrd,orden,control,noOrden,txtnap,txttap,txttrabajo,napordenes,tapordenes,trabajoordenes,fecha;
         public ordensrcViewHolder( View v) {
             super(v);
             status=(TextView)itemView.findViewById(R.id.tv_estatus);
@@ -51,6 +51,7 @@ public class OrdenesAdapter extends RecyclerView.Adapter<OrdenesAdapter.ordensrc
             napordenes = itemView.findViewById(R.id.id_NapOrdenes);
             tapordenes = itemView.findViewById(R.id.id_TapOrdenes);
             trabajoordenes = itemView.findViewById(R.id.id_TrabajoOrdenes);
+            fecha  = itemView.findViewById(R.id.id_FechaListado);
         }
     }
 
@@ -87,6 +88,7 @@ public class OrdenesAdapter extends RecyclerView.Adapter<OrdenesAdapter.ordensrc
         viewHolder.contrato1.setText(Array.contratosrc.get(position));
         viewHolder.status.setText(Array.statusrc.get(position));
         viewHolder.direccionOrd.setText(Array.direccionsrc.get(position));
+        viewHolder.fecha.setText(Array.fechasrc.get(position));
 
 
         if(Array.trabajosrc.get(position).equals("")||Array.trabajosrc.get(position).equals(null)){

@@ -57,6 +57,7 @@ public class Array {
     public static ArrayList<String>napsrc=new ArrayList<>();
     public static ArrayList<String>tapsrc=new ArrayList<>();
     public static ArrayList<String>trabajosrc=new ArrayList<>();
+    public static ArrayList<String>fechasrc=new ArrayList<>();
     //----ARRAY QUEJAS----//
     public static ArrayList<List<ListadoQuejasAgendadas>> dataquejas;
     public static ArrayList<String>contratoQ=new ArrayList<>();
@@ -64,6 +65,7 @@ public class Array {
     public static ArrayList<String>nombreQ=new ArrayList<>();
     public static ArrayList<String>statusQ=new ArrayList<>();
     public static ArrayList<String> Direccion= new ArrayList<String>();
+    public static ArrayList<String>fechaQ=new ArrayList<>();
     ///////////////////////ARRAY TRABAJOS///////////////////
     public static ArrayList <String>trabajox=new ArrayList<>();
     public static ArrayList <String>observacionesx=new ArrayList<>();

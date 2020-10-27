@@ -210,7 +210,7 @@ public class MaterialesOrdenes extends Fragment {
                     List<LlenaExtencionesModel> dat = itData.next();
                     extSer = dat.get(position - 1).ID;
 
-                    //if(esFibra!=1){
+                    if(esFibra!=1){
 
                         if(extSer!=0){
                             mIE.setVisibility(View.GONE);
@@ -224,23 +224,24 @@ public class MaterialesOrdenes extends Fragment {
                             tvExterior.setVisibility(View.VISIBLE);
 
                         }
-//                    }else{
-//                        if((position-1)!=0){
-//                            mIE.setVisibility(View.GONE);
-//                            mFE.setVisibility(View.GONE);
-//                            EIMD = 0;
-//                            EFDM = 0;
-//                            tvExterior.setVisibility(View.INVISIBLE);
-//                            textViewFinTitulo.setVisibility(View.INVISIBLE);
-//                            textViewInicioTitulo.setVisibility(View.INVISIBLE);
-//                        }else{
-//                            mIE.setVisibility(View.VISIBLE);
-//                            mFE.setVisibility(View.VISIBLE);
-//                            textViewFinTitulo.setVisibility(View.VISIBLE);
-//                            textViewInicioTitulo.setVisibility(View.VISIBLE);
-//
-//                        }
-//                    }
+                    }else{
+                        //if((position-1)!=0){
+                            mIE.setVisibility(View.GONE);
+                            mFE.setVisibility(View.GONE);
+                            EIMD = 0;
+                            EFDM = 0;
+                            tvExterior.setVisibility(View.INVISIBLE);
+                            tvInterior.setVisibility(View.INVISIBLE);
+                            //textViewFinTitulo.setVisibility(View.VISIBLE);
+                            //textViewInicioTitulo.setVisibility(View.INVISIBLE);
+                        /*}else{
+                            mIE.setVisibility(View.VISIBLE);
+                            mFE.setVisibility(View.VISIBLE);
+                            textViewFinTitulo.setVisibility(View.VISIBLE);
+                            textViewInicioTitulo.setVisibility(View.VISIBLE);
+
+                        }*/
+                    }
                 /*    if(Util.getPermisisDescarga(Util.preferences)==true){
                         try {
                             JSONObject jsonObject = new JSONObject();
