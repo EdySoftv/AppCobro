@@ -177,6 +177,23 @@ public class MaterialesOrdenes extends Fragment {
                     seleccion = position;
                     posClasMat = position;
                     if (request.extencionesMat == false) {
+
+
+                        if(esFibra!=1){
+                                mIE.setVisibility(View.VISIBLE);
+                                mFE.setVisibility(View.VISIBLE);
+                                tvExterior.setVisibility(View.VISIBLE);
+                        }else{
+                            mII.setVisibility(View.GONE);
+                            mFI.setVisibility(View.GONE);
+                            IIDM = 0;
+                            IFDM = 0;
+                            tvExterior.setVisibility(View.INVISIBLE);
+                            tvInterior.setVisibility(View.INVISIBLE);
+
+                        }
+
+
 /*                        if(Util.getPermisisDescarga(Util.preferences)==true){
                             try {
                                 JSONObject jsonObject = new JSONObject();

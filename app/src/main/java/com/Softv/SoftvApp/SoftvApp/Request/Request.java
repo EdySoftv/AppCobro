@@ -87,11 +87,13 @@ import com.Softv.SoftvApp.SoftvApp.Listas.JSONTAP;
 import com.Softv.SoftvApp.SoftvApp.Listas.JSONTecSec;
 import com.Softv.SoftvApp.SoftvApp.Listas.JSONTecSecReport;
 import com.Softv.SoftvApp.SoftvApp.Listas.JSONTipoAparatos;
+import com.Softv.SoftvApp.SoftvApp.Listas.JSONValidaNodo;
 import com.Softv.SoftvApp.SoftvApp.Listas.QuejasList;
 import com.Softv.SoftvApp.SoftvApp.Activitys.MainActivity;
 import com.Softv.SoftvApp.SoftvApp.Activitys.MainReportes;
 import com.Softv.SoftvApp.SoftvApp.Modelos.CambioAparatoDeepModel;
 import com.Softv.SoftvApp.SoftvApp.Modelos.ChecaSiExtencionesModel;
+import com.Softv.SoftvApp.SoftvApp.Modelos.ConsultaIpModel;
 import com.Softv.SoftvApp.SoftvApp.Modelos.DeepConsModel;
 import com.Softv.SoftvApp.SoftvApp.Modelos.DescripcionArticuloModel;
 import com.Softv.SoftvApp.SoftvApp.Modelos.DetalleBitacoraModel;
@@ -123,6 +125,7 @@ import com.Softv.SoftvApp.SoftvApp.Modelos.GetQuejasListResult;
 import com.Softv.SoftvApp.SoftvApp.Modelos.GetSP_StatusAparatosListResult;
 import com.Softv.SoftvApp.SoftvApp.Modelos.GetServiciosResult;
 import com.Softv.SoftvApp.SoftvApp.Modelos.GetSoftvWEb_DameEntrecalles;
+import com.Softv.SoftvApp.SoftvApp.Modelos.GetSoftvWebValidaNodo;
 import com.Softv.SoftvApp.SoftvApp.Modelos.Get_ClvTecnicoResult;
 import com.Softv.SoftvApp.SoftvApp.Modelos.GetchecaBitacoraTecnicoModel;
 import com.Softv.SoftvApp.SoftvApp.Modelos.GetdameSerDELCliresumenResult;
@@ -185,8 +188,11 @@ import static com.Softv.SoftvApp.SoftvApp.Activitys.AsignarAparato.jsonArrayMAC;
 
 import static com.Softv.SoftvApp.SoftvApp.Adapters.QuejasAdapter.statusQueja;
 import static com.Softv.SoftvApp.SoftvApp.Adapters.TrabajosAdapter.dialogTrabajos;
+import static com.Softv.SoftvApp.SoftvApp.Fragments.EjecutarOrdenes.Status;
 import static com.Softv.SoftvApp.SoftvApp.Fragments.EjecutarOrdenes.dialogEjecutar;
+import static com.Softv.SoftvApp.SoftvApp.Fragments.EjecutarOrdenes.msgEjecutarOrd;
 import static com.Softv.SoftvApp.SoftvApp.Fragments.EjecutarOrdenes.posTec;
+import static com.Softv.SoftvApp.SoftvApp.Fragments.EjecutarOrdenes.reiniciar;
 import static com.Softv.SoftvApp.SoftvApp.Fragments.EjecutarReportes.TecSecSeleccion;
 import static com.Softv.SoftvApp.SoftvApp.Fragments.EjecutarReportes.dialogReportes;
 import static com.Softv.SoftvApp.SoftvApp.Fragments.EjecutarReportes.fechaEjecujtar;
@@ -235,7 +241,7 @@ public class Request extends AppCompatActivity {
     public int reintentaB;
     public static String stringValidaTrabajos;
     public static ArrayAdapter adapterTecSec, adapterTecSecR, adapterNap,adapterTap,adapterColonia,adapterTAPNAPCAMDO;
-    public static boolean pieza = false, rapagejecutar = false, extencionesMat = false,escable = false;;
+    public static boolean pieza = false, rapagejecutar = false, extencionesMat = false,escable = false, validanodo=false;
    public static int validFirma;
     public static String ciudadcmdo, localidadcmdo, coloniacmdo, callecmdo, numerocmdo, numeroicmdo, telefonocmdo, callencmdo, callescmdo, calleecmdo, calleocmdo, casacmdo,referenciascmd;
     public static String ejecutarStatus,reporteStatus,clasProblema;
@@ -2434,15 +2440,22 @@ try{
 
             GuardaCoordenadas(context);
         } else {
-            Toast.makeText(context, "Se ha guardado correctamente", Toast.LENGTH_LONG).show();
-            dialogVisitaOrd.dismiss();
-            if(firma==true) {
-                Intent intent = new Intent(context, Firma.class);
-                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                context.startActivity(intent);
-            }else{
-                getListOrd(context);
-            }
+            //if(firma==true) {
+                try {
+                    JSONObject jsonValidaNodo = new JSONObject();
+                    jsonValidaNodo.put("clv_orden",Util.getClvOrden(Util.preferences));
+                    getValidaNodo(context,jsonValidaNodo);
+                }catch (Exception e){}
+            //}else{
+            //    Toast.makeText(context, "Se ha guardado correctamente", Toast.LENGTH_LONG).show();
+            //    try{
+            //        dialogVisitaOrd.dismiss();
+            //    }catch (Exception e){}
+            //    try{
+            //        dialogEjecutar.dismiss();
+            //    }catch (Exception e){}
+            //    getListOrd(context);
+            // }
         }
     }
     if (ejecutarStatus.equals("V")) {
@@ -2653,15 +2666,23 @@ try{
                 reintentaB = 0;
 
                 if (response1.code() == 200) {
-                    dialogEjecutar.dismiss();
-                    Toast.makeText(context, "Orden guardado correctamente", Toast.LENGTH_LONG);
-                    if(firma==true) {
-                        Intent intent = new Intent(context, Firma.class);
-                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                        context.startActivity(intent);
+                    try {
+                        JSONObject jsonValidaNodo = new JSONObject();
+                        jsonValidaNodo.put("clv_orden",Util.getClvOrden(Util.preferences));
+                        getValidaNodo(context,jsonValidaNodo);
+                    }catch (Exception e){}
+
+                    /*if(firma==true) {
+                        try {
+                            JSONObject jsonValidaNodo = new JSONObject();
+                            jsonValidaNodo.put("clv_orden",Util.getClvOrden(Util.preferences));
+                            getValidaNodo(context,jsonValidaNodo);
+                        }catch (Exception e){}
                     }else{
+                        Toast.makeText(context, "Orden guardado correctamente", Toast.LENGTH_LONG);
+                        dialogEjecutar.dismiss();
                         getListOrd(context);
-                    }
+                    }*/
                 } else {
                     ErrorMensaje(context,"Se ha producido un error, verifique su conexion e intente nuevamente");
                     dialogEjecutar.dismiss();
@@ -2676,7 +2697,9 @@ try{
         });
     }
 
-  /*  public void ConsultaIp(final Context context) {
+
+
+    public void ConsultaIp(final Context context) {
         Service service = null;
         try {
             service = services.getConsultaIpService(context);
@@ -2698,22 +2721,27 @@ try{
                     msgComando = user.Msg;
                     for (int a = 0; a < 1; a++) {
                         if (reintentarComando.equals("true")) {
+                            dialogEjecutar.dismiss();
                             reiniciar.setEnabled(true);
-                            msgEjecutarOrd.setText(Request.msgComando);
+                            Status.setText(Request.msgComando);
                         } else {
                             if (msgComando.length() > 3) {
-
-                                msgEjecutarOrd.setText(msgComando);
+                                Status.setText(msgComando);
                                 dialogEjecutar.dismiss();
-                                ((Activity) context).finish();
+
+                                    Login.esperar(3);
+                                    Intent intent = new Intent(context, Firma.class);
+                                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                                    context.startActivity(intent);
+
                             } else {
-                                Login.esperar(3);
+                                Login.esperar(5);
                                 retry(call);
                             }
                         }
                     }
                 }else{
-                    dialogEjecutar.dismiss();
+                    //dialogEjecutar.dismiss();
                 }
             }
 
@@ -2741,7 +2769,7 @@ try{
             public void onResponse(Call<JsonObject> call, Response<JsonObject> response1) {
                 if (response1.code() == 200) {
                     ConsultaIp(context);
-                    msgEjecutarOrd.setText("");
+                    Status.setText("Espera");
                     reiniciar.setEnabled(true);
                   //  dialogEjecutar.dismiss();
                 }else{
@@ -2754,7 +2782,57 @@ try{
 
             }
         });
-    }*/
+    }
+
+    public void getValidaNodo(final Context context, final JSONObject jsonObject) {
+        Call<JSONValidaNodo> call = services.RequestPost(context, jsonObject).getValidaNodo();
+        call.enqueue(new Callback<JSONValidaNodo>() {
+            @Override
+            public void onResponse(Call<JSONValidaNodo> call, Response<JSONValidaNodo> response1) {
+                if (response1.code() == 200) {
+                    JSONValidaNodo jsonResponse = response1.body();
+                    array.dataValidaNodo = new ArrayList<List<GetSoftvWebValidaNodo>>(asList(jsonResponse.GetSoftvWebValidaNodo()));
+                    Iterator<List<GetSoftvWebValidaNodo>> itData = array.dataValidaNodo.iterator();
+                    while (itData.hasNext()) {
+                        List<GetSoftvWebValidaNodo> dat = itData.next();
+                        for (int a=0; a<dat.size();a++){
+                            if(dat.get(a).Clv_TipSer==2 && (dat.get(a).idMedio==2 || dat.get(a).idMedio==4)){
+                                validanodo=true;
+                            }
+                        }
+                    }
+
+                    if(validanodo==true){
+                        reiniciar.setVisibility(View.VISIBLE);
+                        msgEjecutarOrd.setVisibility(View.VISIBLE);
+                        EjecutarOrdenes.Esttuscomando.setVisibility(View.VISIBLE);
+                        Status.setVisibility(View.VISIBLE);
+                        ConsultaIp(context);
+                    }else{
+                        Toast.makeText(context, "Orden guardado correctamente", Toast.LENGTH_LONG);
+                        dialogEjecutar.dismiss();
+                        if(firma==true){
+                            Intent intent = new Intent(context, Firma.class);
+                            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                            context.startActivity(intent);
+                        }else{
+                            getListOrd(context);
+                        }
+
+                    }
+
+                }else{
+                    ErrorMensaje(context,"Error al validar nodo "+response1.message());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<JSONValidaNodo> call, Throwable t) {
+                ErrorMensaje(context,"Error "+t.getMessage());
+            }
+
+        });
+    }
 
     public void SetCambioAparato(final Context context, final JSONObject jsonObject, final Activity activity) {
         Call<JsonObject> call = services.RequestPost(context, jsonObject).getCAPAT();

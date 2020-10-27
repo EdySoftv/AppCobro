@@ -48,6 +48,7 @@ public class Constants {
     public static final String URL_ADD_LLENA_BITACORA_ORD="SP_LLena_Bitacora_Ordenes/AddSP_LLena_Bitacora_Ordenes";
     public static final String URL_GET_CONSULTA_IP="OrdSer/GetConsultaIpPorContrato";
     public static final String URL_GET_REINTENTA_COMANDO="OrdSer/GetReintentarComando";
+    public static final String URL_GET_VALIDA_NODO="OrdSer/GetSoftvWebValidaNodo";
     ///////////////////////////////////////EjecutarReportes/////////////////
     public static final String URL_Get_HIHF="OrdSer/GetGuardaHoraOrden";
     public static final String URL_GET_UPDATE="Quejas/UpdateQuejas";

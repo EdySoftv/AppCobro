@@ -25,6 +25,7 @@ import com.Softv.SoftvApp.SoftvApp.Modelos.GetMuestraTipoAparatoListResult;
 import com.Softv.SoftvApp.SoftvApp.Modelos.GetQuejasListResult;
 import com.Softv.SoftvApp.SoftvApp.Modelos.GetSP_StatusAparatosListResult;
 import com.Softv.SoftvApp.SoftvApp.Modelos.GetServiciosResult;
+import com.Softv.SoftvApp.SoftvApp.Modelos.GetSoftvWebValidaNodo;
 import com.Softv.SoftvApp.SoftvApp.Modelos.Get_ClvTecnicoResult;
 import com.Softv.SoftvApp.SoftvApp.Modelos.GetdameSerDELCliresumenResult;
 import com.Softv.SoftvApp.SoftvApp.Modelos.GetuspBuscaContratoSeparado2ListResult;
@@ -119,6 +120,7 @@ public class Array {
     public static ArrayList<String> Asigna1= new ArrayList<String>();
     public static ArrayList<String> Asigna2= new ArrayList<String>();
     /////////
+    public static ArrayList<List<GetSoftvWebValidaNodo>>dataValidaNodo;
     public static ArrayList<List<DetalleBitacoraModel>>dataDetBit;
     public static ArrayList<String> detalleBit= new ArrayList<String>();
     public static ArrayList<List<DescripcionArticuloModel>>dataDetArtBit;

@@ -84,6 +84,7 @@ public class Firma extends AppCompatActivity {
                         jsonObject.put("FirmaCliente",Firma.imagenAEnviar);
                         jsonObject1.put("ObjLista",jsonObject);
                         request.addFirma(getApplicationContext(),jsonObject1,dialogFirma);
+                        finish();
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }

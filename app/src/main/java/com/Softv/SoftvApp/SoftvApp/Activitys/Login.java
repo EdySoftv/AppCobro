@@ -123,4 +123,13 @@ public class Login extends AppCompatActivity {
 
     }
 
+    //Metodo para hacer detener el codigo
+    public static void esperar(int segundos){
+        try {
+            Thread.sleep(segundos * 1000);
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
+
 }

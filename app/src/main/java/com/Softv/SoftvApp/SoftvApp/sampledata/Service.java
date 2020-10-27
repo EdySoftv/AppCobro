@@ -40,6 +40,7 @@ import com.Softv.SoftvApp.SoftvApp.Listas.JSONTAP;
 import com.Softv.SoftvApp.SoftvApp.Listas.JSONTecSec;
 import com.Softv.SoftvApp.SoftvApp.Listas.JSONTecSecReport;
 import com.Softv.SoftvApp.SoftvApp.Listas.JSONTipoAparatos;
+import com.Softv.SoftvApp.SoftvApp.Listas.JSONValidaNodo;
 import com.Softv.SoftvApp.SoftvApp.Listas.QuejasList;
 import com.google.gson.JsonObject;
 
@@ -143,6 +144,8 @@ public interface Service {
     Call<JsonObject> getConsultaIp();
     @POST(Constants.URL_GET_REINTENTA_COMANDO)
     Call<JsonObject> getReintentaComando();
+    @POST(Constants.URL_GET_VALIDA_NODO)
+    Call<JSONValidaNodo> getValidaNodo();
     /////////////////////EjecutarReportes/////////////////
     @POST(Constants.URL_Get_HIHF)
     Call<JsonObject>getHiHf();
