@@ -71,7 +71,7 @@ public class EjecutarOrdenes extends Fragment implements LocationListener {
     public static Button eject, firmar;
     public static String fechaHoy, horaHoy;
     public static View ejecutar;
-    public static TextView msgEjecutarOrd,txtTap,txtNap,txtPlaca,Esttuscomando,Status,zas;
+    public static TextView msgEjecutarOrd,txtTap,txtNap,txtPlaca;
     public static TextView tv_textTecSec;
     public static int añoE, mesE, diaE, horaE, minutoE;
     public static  int posTec=0,TecSecSelecc = -1;
@@ -117,18 +117,18 @@ public class EjecutarOrdenes extends Fragment implements LocationListener {
         dialogEjecutar = new BarraCargar().showDialog(getContext());
 
         View view = inflater.inflate(R.layout.activity_ejecutar_orden, container, false);
-        reiniciar = view.findViewById(R.id.restart);
+        //reiniciar = view.findViewById(R.id.restart);
         eject = view.findViewById(R.id.ejec);
         tv_textTecSec =view.findViewById(R.id.tv_textTecSec);
-        msgEjecutarOrd = view.findViewById(R.id.msgEjecutarOrd);
+        //msgEjecutarOrd = view.findViewById(R.id.msgEjecutarOrd);
         //ejecutar = view.findViewById(R.id.ejecutarLay);
-        Esttuscomando = view.findViewById(R.id.eqwe);
+        /*Esttuscomando = view.findViewById(R.id.eqwe);
         Status = view.findViewById(R.id.status);
-        zas = view.findViewById(R.id.zas);
+        zas = view.findViewById(R.id.zas);*/
 
         firmar = view.findViewById(R.id.firmarOrd);
         TecSec = view.findViewById(R.id.spinnerTecnicoSec);
-        reiniciar.setEnabled(false);
+        //reiniciar.setEnabled(false);
         salir = view.findViewById(R.id.salirEjecutarOrd);
         spinnerNap = view.findViewById(R.id.spinnerNap);
         spinnerTap = view.findViewById(R.id.spinnerTap);
@@ -147,11 +147,11 @@ public class EjecutarOrdenes extends Fragment implements LocationListener {
         Log.d("error", String.valueOf(latitudeEjec));
         ///////////////
 
-        reiniciar.setVisibility(View.GONE);
+/*        reiniciar.setVisibility(View.GONE);
         msgEjecutarOrd.setVisibility(View.GONE);
         EjecutarOrdenes.Esttuscomando.setVisibility(View.GONE);
         Status.setVisibility(View.GONE);
-        zas.setVisibility(View.GONE);
+        zas.setVisibility(View.GONE);*/
 
         if(horas.visita == 1){
             firmar.setVisibility(View.GONE);
@@ -159,7 +159,7 @@ public class EjecutarOrdenes extends Fragment implements LocationListener {
             tv_textTecSec.setVisibility(View.GONE);
         } else {
             if (request.firma == true) {
-            //    firmar.setVisibility(View.VISIBLE);
+                firmar.setVisibility(View.VISIBLE);
                 TecSec.setVisibility(View.VISIBLE);
                 tv_textTecSec.setVisibility(View.VISIBLE);
 
@@ -291,20 +291,20 @@ public class EjecutarOrdenes extends Fragment implements LocationListener {
                 observacionesTecnico = obsTec.getText().toString();
 
                 if(horas.ejecutada==1){
-                    //if(request.firma==true){
-                    //    request.ejecutarStatus="E";
+                    if(request.firma==true){
+                        request.ejecutarStatus="E";
 
-                    //    if(validaExisteFirmaBool == true){
-                    //        dialogoEjecutar1();
-                    //        validaExisteFirmaBool = true;
+                        if(validaExisteFirmaBool == true){
+                            dialogoEjecutar1();
+                            validaExisteFirmaBool = true;
 
-                    //    }else if (validaExisteFirmaBool == false ){
-                    //        dialogoRequiereFirma();
-                    //    }
-                    //}else if (request.firma == false){
+                        }else if (validaExisteFirmaBool == false ){
+                            dialogoRequiereFirma();
+                        }
+                    }else if (request.firma == false){
                         request.ejecutarStatus="E";
                         dialogoEjecutar1();
-                    //}
+                    }
 
                 }
                 dialogEjecutar.dismiss();
@@ -333,14 +333,14 @@ public class EjecutarOrdenes extends Fragment implements LocationListener {
             }*/
 
         });
-        reiniciar.setOnClickListener(new View.OnClickListener() {
+        /*reiniciar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 dialogEjecutar.show();
                 request.ReintentarComando(getActivity());
                 reiniciar.setEnabled(false);
             }
-        });
+        });*/
         firmar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -479,7 +479,7 @@ public class EjecutarOrdenes extends Fragment implements LocationListener {
 
 
     public void Ejecutar(){
-        request.validanodo=false;
+        //request.validanodo=false;
         if(request.Placa==true){
             try{
                 JSONObject jsonPlaca = new JSONObject();

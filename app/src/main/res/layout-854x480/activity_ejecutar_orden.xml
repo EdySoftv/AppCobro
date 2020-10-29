@@ -16,7 +16,7 @@
           android:layout_height="match_parent">
 
 
-          <TextView
+          <!--<TextView
               android:id="@+id/eqwe"
               android:layout_width="wrap_content"
               android:layout_height="wrap_content"
@@ -88,7 +88,7 @@
               app:layout_constraintStart_toStartOf="parent"
               app:layout_constraintTop_toBottomOf="@+id/msgEjecutarOrd"
               tools:visibility="gone" />
-
+-->
 
 
           <Button
@@ -204,7 +204,7 @@
               app:layout_constraintEnd_toEndOf="parent"
               app:layout_constraintHorizontal_bias="0.0"
               app:layout_constraintStart_toStartOf="parent"
-              app:layout_constraintTop_toBottomOf="@+id/restart"
+              app:layout_constraintTop_toBottomOf="@+id/ejec"
               tools:visibility="visible" />
 
           <EditText
@@ -252,7 +252,7 @@
               app:layout_constraintEnd_toEndOf="@+id/txtNap"
               app:layout_constraintStart_toStartOf="@+id/txtNap"
               app:layout_constraintTop_toBottomOf="@+id/txtNap"
-              tools:visibility="invisible" />
+               />
 
           <TextView
               android:id="@+id/txtTap"
@@ -269,7 +269,7 @@
               app:layout_constraintHorizontal_bias="1.0"
               app:layout_constraintStart_toStartOf="parent"
               app:layout_constraintTop_toBottomOf="@+id/spinnerNap"
-              tools:visibility="invisible" />
+               />
 
           <Spinner
               android:id="@+id/spinnerTap"
@@ -283,7 +283,7 @@
               app:layout_constraintEnd_toEndOf="@+id/txtTap"
               app:layout_constraintStart_toStartOf="@+id/txtTap"
               app:layout_constraintTop_toBottomOf="@+id/txtTap"
-              tools:visibility="invisible" />
+               />
       </android.support.constraint.ConstraintLayout>
   </ScrollView>
 </FrameLayout>

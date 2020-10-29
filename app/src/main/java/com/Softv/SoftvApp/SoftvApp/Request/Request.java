@@ -188,7 +188,7 @@ import static com.Softv.SoftvApp.SoftvApp.Activitys.AsignarAparato.jsonArrayMAC;
 
 import static com.Softv.SoftvApp.SoftvApp.Adapters.QuejasAdapter.statusQueja;
 import static com.Softv.SoftvApp.SoftvApp.Adapters.TrabajosAdapter.dialogTrabajos;
-import static com.Softv.SoftvApp.SoftvApp.Fragments.EjecutarOrdenes.Status;
+//import static com.Softv.SoftvApp.SoftvApp.Fragments.EjecutarOrdenes.Status;
 import static com.Softv.SoftvApp.SoftvApp.Fragments.EjecutarOrdenes.dialogEjecutar;
 import static com.Softv.SoftvApp.SoftvApp.Fragments.EjecutarOrdenes.msgEjecutarOrd;
 import static com.Softv.SoftvApp.SoftvApp.Fragments.EjecutarOrdenes.posTec;
@@ -2440,22 +2440,9 @@ try{
 
             GuardaCoordenadas(context);
         } else {
-            //if(firma==true) {
-                try {
-                    JSONObject jsonValidaNodo = new JSONObject();
-                    jsonValidaNodo.put("clv_orden",Util.getClvOrden(Util.preferences));
-                    getValidaNodo(context,jsonValidaNodo);
-                }catch (Exception e){}
-            //}else{
-            //    Toast.makeText(context, "Se ha guardado correctamente", Toast.LENGTH_LONG).show();
-            //    try{
-            //        dialogVisitaOrd.dismiss();
-            //    }catch (Exception e){}
-            //    try{
-            //        dialogEjecutar.dismiss();
-            //    }catch (Exception e){}
-            //    getListOrd(context);
-            // }
+            Toast.makeText(context, "Se ha guardado correctamente", Toast.LENGTH_LONG).show();
+            dialogEjecutar.dismiss();
+            getListOrd(context);
         }
     }
     if (ejecutarStatus.equals("V")) {
@@ -2666,23 +2653,9 @@ try{
                 reintentaB = 0;
 
                 if (response1.code() == 200) {
-                    try {
-                        JSONObject jsonValidaNodo = new JSONObject();
-                        jsonValidaNodo.put("clv_orden",Util.getClvOrden(Util.preferences));
-                        getValidaNodo(context,jsonValidaNodo);
-                    }catch (Exception e){}
-
-                    /*if(firma==true) {
-                        try {
-                            JSONObject jsonValidaNodo = new JSONObject();
-                            jsonValidaNodo.put("clv_orden",Util.getClvOrden(Util.preferences));
-                            getValidaNodo(context,jsonValidaNodo);
-                        }catch (Exception e){}
-                    }else{
-                        Toast.makeText(context, "Orden guardado correctamente", Toast.LENGTH_LONG);
-                        dialogEjecutar.dismiss();
-                        getListOrd(context);
-                    }*/
+                    dialogEjecutar.dismiss();
+                    Toast.makeText(context, "Orden guardado correctamente", Toast.LENGTH_LONG);
+                    getListOrd(context);
                 } else {
                     ErrorMensaje(context,"Se ha producido un error, verifique su conexion e intente nuevamente");
                     dialogEjecutar.dismiss();
@@ -2699,7 +2672,7 @@ try{
 
 
 
-    public void ConsultaIp(final Context context) {
+    /*public void ConsultaIp(final Context context) {
         Service service = null;
         try {
             service = services.getConsultaIpService(context);
@@ -2832,7 +2805,7 @@ try{
             }
 
         });
-    }
+    }*/
 
     public void SetCambioAparato(final Context context, final JSONObject jsonObject, final Activity activity) {
         Call<JsonObject> call = services.RequestPost(context, jsonObject).getCAPAT();
@@ -4008,7 +3981,7 @@ try{
 
 
     //////////
-    public void addFirma(final Context context, final JSONObject jsonObject, final ProgressDialog progressDialog) {
+    public void addFirma(final Context context, final JSONObject jsonObject) {
         Call<JsonObject> call = services.RequestPost(context, jsonObject).addFirma();
         call.enqueue(new Callback<JsonObject>() {
             @Override
@@ -4016,13 +3989,7 @@ try{
                 Log.d("asd","asd");
                 if (response.code() == 200) {
                     Toast.makeText(context, "Se agrego correctamente", Toast.LENGTH_SHORT).show();
-                    if(Util.getTipoDescarga(Util.preferences).equals("Q")){
-                        validaExisteFirmaBool = true;
-                    }else if(Util.getTipoDescarga(Util.preferences).equals("O")){
-                        progressDialog.dismiss();
-                        validaExisteFirmaBool = true;
-                        getListOrd(context);
-                    }
+                    validaExisteFirmaBool = true;
 
                 } else {
                     ErrorMensaje(context,"Error al agregar firma "+response.message());

@@ -16,7 +16,7 @@
             android:layout_height="match_parent">
 
 
-            <TextView
+           <!-- <TextView
                 android:id="@+id/eqwe"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -86,7 +86,7 @@
                 app:layout_constraintEnd_toEndOf="@+id/msgEjecutarOrd"
                 app:layout_constraintStart_toStartOf="@+id/msgEjecutarOrd"
                 app:layout_constraintTop_toBottomOf="@+id/msgEjecutarOrd"
-                tools:visibility="gone" />
+                tools:visibility="gone" />-->
 
 
             <TextView
@@ -131,7 +131,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/restart" />
+                app:layout_constraintTop_toBottomOf="@+id/ejec" />
 
             <EditText
                 android:id="@+id/placa"
@@ -157,7 +157,7 @@
                 android:text="@string/NAP"
                 android:textSize="18dp"
                 android:textStyle="bold"
-                android:visibility="visible"
+                android:visibility="invisible"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
@@ -171,7 +171,7 @@
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="4dp"
                 android:background="@drawable/disenio_spinner"
-                android:visibility="visible"
+                android:visibility="invisible"
                 app:layout_constraintEnd_toEndOf="@+id/txtNap"
                 app:layout_constraintStart_toStartOf="@+id/txtNap"
                 app:layout_constraintTop_toBottomOf="@+id/txtNap" />
