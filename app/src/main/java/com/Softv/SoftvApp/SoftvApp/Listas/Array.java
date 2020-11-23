@@ -59,6 +59,7 @@ public class Array {
     public static ArrayList<String>tapsrc=new ArrayList<>();
     public static ArrayList<String>trabajosrc=new ArrayList<>();
     public static ArrayList<String>fechasrc=new ArrayList<>();
+    public static ArrayList<String>precintosrc=new ArrayList<>();
     //----ARRAY QUEJAS----//
     public static ArrayList<List<ListadoQuejasAgendadas>> dataquejas;
     public static ArrayList<String>contratoQ=new ArrayList<>();

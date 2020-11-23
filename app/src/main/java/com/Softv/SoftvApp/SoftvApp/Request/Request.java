@@ -178,6 +178,7 @@ import retrofit2.Response;
 import static com.Softv.SoftvApp.SoftvApp.Activitys.CambioAparato.dialogCAPAT;
 import static com.Softv.SoftvApp.SoftvApp.Activitys.Orden.statusBusquedaContrato;
 import static com.Softv.SoftvApp.SoftvApp.Activitys.Orden.statusBusquedaOrden;
+import static com.Softv.SoftvApp.SoftvApp.Activitys.Orden.statusBusquedaPresinto;
 import static com.Softv.SoftvApp.SoftvApp.Activitys.Reportes.statusBusquedaContRepo;
 import static com.Softv.SoftvApp.SoftvApp.Activitys.Reportes.statusBusquedaReporte;
 import static com.Softv.SoftvApp.SoftvApp.Activitys.ServiciosAInstalar.dialogAsignacion;
@@ -226,6 +227,7 @@ import static com.Softv.SoftvApp.SoftvApp.Listas.Array.contratoQ;
 import static com.Softv.SoftvApp.SoftvApp.Listas.Array.contratosrc;
 import static com.Softv.SoftvApp.SoftvApp.Listas.Array.nom_tecnicoSecundarioQ;
 import static com.Softv.SoftvApp.SoftvApp.Listas.Array.ordensrc;
+import static com.Softv.SoftvApp.SoftvApp.Listas.Array.precintosrc;
 import static com.Softv.SoftvApp.SoftvApp.Services.Services.ClvTrabajoRequest;
 import static java.util.Arrays.asList;
 
@@ -837,6 +839,7 @@ public class Request extends AppCompatActivity {
                         Array.trabajosrc.clear();
                         Array.direccionsrc.clear();
                         Array.fechasrc.clear();
+                        Array.precintosrc.clear();
                         for (int i = 0; i < dat.size(); i++) {
                             Array.ordensrc.add(String.valueOf(dat.get(i).getClvOrden()));
                             Array.contratosrc.add(String.valueOf(dat.get(i).getContrato()));
@@ -848,6 +851,7 @@ public class Request extends AppCompatActivity {
                             Array.trabajosrc.add(dat.get(i).getDescripcion());
                             String[] caracteres = dat.get(i).getFecha().split(" ");
                             Array.fechasrc.add(caracteres[0]);
+                            Array.precintosrc.add(String.valueOf(dat.get(i).getPrecinto()));
                         }
                     }
                     if (ordensrc.size() == 0 && statusBusquedaOrden == true){
@@ -856,6 +860,9 @@ public class Request extends AppCompatActivity {
                     }else if (contratosrc.size() == 0 && statusBusquedaContrato == true){
                         ErrorMensaje(context,"Contrato no encontrado ");
                         statusBusquedaContrato = false;
+                    }else if (precintosrc.size() == 0 && statusBusquedaPresinto == true){
+                        ErrorMensaje(context,"Presinto no encontrado ");
+                        statusBusquedaPresinto = false;
                     }
                     Intent intent1 = new Intent(context, Orden.class);
                     intent1.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);

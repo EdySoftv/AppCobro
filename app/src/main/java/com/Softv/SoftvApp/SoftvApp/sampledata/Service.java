@@ -76,7 +76,7 @@ public interface Service {
     @POST(Constants.URL_GET_SERVICIOS)
     Call<Example2> getDataServicios();
 
-    @POST(Constants.URL_GET_ORDENES)
+    @POST(value = Constants.URL_GET_ORDENES)
     Call<Example3> getDataTrabajos();
 
     @POST(Constants.URL_GET_TEC_SEC)

@@ -81,6 +81,7 @@ public class Services {
     public static int clvorden = 0;
     public static int clavequeja = 0;
     public static String cont;
+    public static String precinto;
     public static JSONObject jsonObject = new JSONObject();
     JSONObject jsonObject20 = new JSONObject();
     public static long ClvTrabajoRequest;
@@ -157,6 +158,7 @@ public class Services {
         jsonObject.put("op", opcion);
         jsonObject.put("clv_orden", clvorden);
         jsonObject.put("contratoCom", cont);
+        jsonObject.put("placa", precinto);
         jsonObject2.put("ObjLista", jsonObject);
         MediaType JSON = MediaType.parse("application/json; charset=utf-8");
         final RequestBody body = RequestBody.create(JSON, String.valueOf(jsonObject2));

@@ -49,10 +49,21 @@ public class GetDameListadoOrdenesAgendadasResult {
     @Expose
     private String Fecha;
 
+    @SerializedName("Precinto")
+    @Expose
+    private String Precinto;
+
     public String getFecha() {
         return Fecha;
     }
 
+    public String getPrecinto() {
+        return Precinto;
+    }
+
+    public void setPrecinto(String Precinto) {
+        this.Precinto = Precinto;
+    }
 
     public String getNap() {
         return Nap;
@@ -69,6 +80,7 @@ public class GetDameListadoOrdenesAgendadasResult {
     public Integer getClvOrden() {
         return clvOrden;
     }
+
     public String getContrato() {
         return contrato;
     }

@@ -31,14 +31,15 @@ import static com.Softv.SoftvApp.SoftvApp.Services.Services.clavequeja;
 import static com.Softv.SoftvApp.SoftvApp.Services.Services.clvorden;
 import static com.Softv.SoftvApp.SoftvApp.Services.Services.cont;
 import static com.Softv.SoftvApp.SoftvApp.Services.Services.opcion;
+import static com.Softv.SoftvApp.SoftvApp.Services.Services.precinto;
 
 public class Orden extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     private Request request = new Request();
     private OrdenesAdapter adapterord;
-    private Button ordenb,contratob;
+    private Button ordenb,contratob,precintob;
     public static RecyclerView ordenes;
-    public static boolean statusBusquedaOrden = false,statusBusquedaContrato = false;
-    private EditText ordsearch,contsearch;
+    public static boolean statusBusquedaOrden = false, statusBusquedaContrato = false, statusBusquedaPresinto = false;
+    private EditText ordsearch,contsearch,presearch;
     NavigationView barra;
     TextView nombreTec;
     public static ProgressDialog dialogOrdenes;
@@ -54,8 +55,10 @@ public class Orden extends AppCompatActivity implements NavigationView.OnNavigat
         ordenes=findViewById(R.id.listorden);
         ordenb=findViewById(R.id.borden);
         contratob=findViewById(R.id.bcontrato);
+        precintob=findViewById(R.id.bprecinto);
         ordsearch=findViewById(R.id.ordsearch);
         contsearch=findViewById(R.id.contsearch);
+        presearch=findViewById(R.id.presearch);
         barra = findViewById(R.id.nav_view);
         View barra1 = barra.getHeaderView(0);
         nombreTec=barra1.findViewById(R.id.tv_NombreTecnico);
@@ -71,7 +74,7 @@ public class Orden extends AppCompatActivity implements NavigationView.OnNavigat
         barraCargar.terminarBarra();
         ////////////////
         //////////////////
-        adapterord=new OrdenesAdapter(Orden.this,Array.ordensrc,Array.nombresrc, statusrc,Array.contratosrc,Array.direccionsrc);
+        adapterord=new OrdenesAdapter(Orden.this,Array.ordensrc,Array.nombresrc, statusrc,Array.contratosrc,Array.direccionsrc,Array.precintosrc);
         RecyclerView.LayoutManager layoutManager = new GridLayoutManager(getApplicationContext(),1);
         ordenes.setLayoutManager(layoutManager);
         ordenes.setAdapter(adapterord);    //Asignacion del adapatador a la listView
@@ -79,13 +82,12 @@ public class Orden extends AppCompatActivity implements NavigationView.OnNavigat
         //if(ordenes.getAdapter()!=null){
         //    progressBarOrdenes.setVisibility(View.INVISIBLE);
        // }
-        //Busqueda de orden////
+ //Busqueda de orden////
         ordenb.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 statusBusquedaOrden = true;
-                 if (ordsearch.getText().toString().trim().equalsIgnoreCase("")){
+                if (ordsearch.getText().toString().trim().equalsIgnoreCase("")){
                     Array.ordensrc.clear();
                     Array.nombresrc.clear();
                     statusrc.clear();
@@ -100,18 +102,18 @@ public class Orden extends AppCompatActivity implements NavigationView.OnNavigat
                     ordenes.setLayoutManager(layoutManager);
                     ordenes.setAdapter(adapterord);
                 } else {
-                     Array.ordensrc.clear();
-                     Array.nombresrc.clear();
-                     statusrc.clear();
-                     Array.contratosrc.clear();
-                     Array.direccionsrc.clear();
-                     opcion = 2;
-                     clvorden = Integer.parseInt(ordsearch.getText().toString().toLowerCase().trim());
-                     rqs.getListOrd(getApplicationContext());
-                     RecyclerView.LayoutManager layoutManager = new GridLayoutManager(getApplicationContext(), 1);
-                     ordenes.setLayoutManager(layoutManager);
-                     ordenes.setAdapter(adapterord);
-                 }
+                    Array.ordensrc.clear();
+                    Array.nombresrc.clear();
+                    statusrc.clear();
+                    Array.contratosrc.clear();
+                    Array.direccionsrc.clear();
+                    opcion = 2;
+                    clvorden = Integer.parseInt(ordsearch.getText().toString().toLowerCase().trim());
+                    rqs.getListOrd(getApplicationContext());
+                    RecyclerView.LayoutManager layoutManager = new GridLayoutManager(getApplicationContext(), 1);
+                    ordenes.setLayoutManager(layoutManager);
+                    ordenes.setAdapter(adapterord);
+                }
             }
         });
 //Busqueda de Contrato//
@@ -146,6 +148,39 @@ public class Orden extends AppCompatActivity implements NavigationView.OnNavigat
                    // Toast toast1 = Toast.makeText(getApplicationContext(), "Contrato encontrado", Toast.LENGTH_SHORT);toast1.show();
                     ordenes.setAdapter(adapterord);
 
+                }
+            }
+        });
+//Busqueda de precinto//
+        precintob.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                statusBusquedaPresinto = true;
+                if (presearch.getText().toString().trim().equalsIgnoreCase("")){
+                    Array.ordensrc.clear();
+                    Array.nombresrc.clear();
+                    statusrc.clear();
+                    Array.contratosrc.clear();
+                    Array.direccionsrc.clear();
+                    Toast toast1 = Toast.makeText(getApplicationContext(), "Campo de precinto vacío", Toast.LENGTH_SHORT);
+                    clvorden=0;
+                    opcion=1;
+                    request.getListOrd(getApplicationContext());
+                    toast1.show();
+                    RecyclerView.LayoutManager layoutManager = new GridLayoutManager(getApplicationContext(),1);
+                    ordenes.setLayoutManager(layoutManager);
+                    ordenes.setAdapter(adapterord);
+                } else {
+                    Array.ordensrc.clear();
+                    Array.nombresrc.clear();
+                    statusrc.clear();
+                    Array.contratosrc.clear();
+                    Array.direccionsrc.clear();
+                    opcion=4;
+                    cont=(contsearch.getText().toString().toLowerCase().trim());
+                    precinto=(presearch.getText().toString().toLowerCase().trim());
+                    rqs.getListOrd(getApplicationContext());
+                    ordenes.setAdapter(adapterord);
                 }
             }
         });

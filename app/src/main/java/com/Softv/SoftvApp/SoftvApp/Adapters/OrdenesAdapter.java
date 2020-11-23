@@ -30,12 +30,13 @@ public class OrdenesAdapter extends RecyclerView.Adapter<OrdenesAdapter.ordensrc
     private ArrayList<String>nombresrc;
     private ArrayList<String>statusrc;
     private ArrayList<String>direccionsrc;
+    private ArrayList<String>precintosrc;
     private Request request=new Request();
     public static ArrayList<Integer> tecnicosSelect=new ArrayList<>();
 
 
     public static  class ordensrcViewHolder extends  RecyclerView.ViewHolder{
-        private TextView status,contrato1,nombre,direccionOrd,orden,control,noOrden,txtnap,txttap,txttrabajo,napordenes,tapordenes,trabajoordenes,fecha;
+        private TextView status,contrato1,nombre,direccionOrd,orden,control,noOrden,txtnap,txttap,txttrabajo,napordenes,tapordenes,trabajoordenes,fecha, precinto;
         public ordensrcViewHolder( View v) {
             super(v);
             status=(TextView)itemView.findViewById(R.id.tv_estatus);
@@ -52,15 +53,17 @@ public class OrdenesAdapter extends RecyclerView.Adapter<OrdenesAdapter.ordensrc
             tapordenes = itemView.findViewById(R.id.id_TapOrdenes);
             trabajoordenes = itemView.findViewById(R.id.id_TrabajoOrdenes);
             fecha  = itemView.findViewById(R.id.id_FechaListado);
+            precinto  = itemView.findViewById(R.id.id_PrecintoListado);
         }
     }
 
-    public OrdenesAdapter(Context mContext, ArrayList<String>ordensrc, ArrayList<String>nombrex, ArrayList<String>contratosrc, ArrayList<String>statusrc, ArrayList<String>direccionsrc){
+    public OrdenesAdapter(Context mContext, ArrayList<String>ordensrc, ArrayList<String>nombrex, ArrayList<String>contratosrc, ArrayList<String>statusrc, ArrayList<String>direccionsrc, ArrayList<String>precintosrc){
         this.ordensrc=ordensrc;
         this.contratosrc=contratosrc;
         this.nombresrc=nombrex;
         this.statusrc=statusrc;
         this.direccionsrc=direccionsrc;
+        this.precintosrc=precintosrc;
         this.mContext=mContext;
     }
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -89,6 +92,7 @@ public class OrdenesAdapter extends RecyclerView.Adapter<OrdenesAdapter.ordensrc
         viewHolder.status.setText(Array.statusrc.get(position));
         viewHolder.direccionOrd.setText(Array.direccionsrc.get(position));
         viewHolder.fecha.setText(Array.fechasrc.get(position));
+        viewHolder.precinto.setText(Array.precintosrc.get(position));
 
 
         if(Array.trabajosrc.get(position).equals("")||Array.trabajosrc.get(position).equals(null)){

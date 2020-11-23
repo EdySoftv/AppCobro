@@ -27,9 +27,8 @@
 
     <TextView
         android:id="@+id/textView39"
-        android:layout_width="200dp"
+        android:layout_width="138dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:text="@string/orden"
@@ -43,9 +42,8 @@
 
     <EditText
         android:id="@+id/ordsearch"
-        android:layout_width="150dp"
+        android:layout_width="111dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:inputType="number"
@@ -67,14 +65,27 @@
 
     <EditText
         android:id="@+id/contsearch"
-        android:layout_width="150dp"
+        android:layout_width="111dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:inputType="text|number"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.9"
+        app:layout_constraintHorizontal_bias="0.45"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView61" />
+
+    <EditText
+        android:id="@+id/presearch"
+        android:layout_width="111dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:inputType="text"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.929"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView61" />
 
@@ -88,14 +99,40 @@
         app:layout_constraintStart_toEndOf="@+id/contsearch"
         app:layout_constraintTop_toTopOf="@+id/contsearch" />
 
+    <Button
+        android:id="@+id/bprecinto"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:layout_marginStart="136dp"
+        android:background="@drawable/busqueda"
+        android:gravity="center_vertical"
+        app:layout_constraintBottom_toBottomOf="@+id/contsearch"
+        app:layout_constraintStart_toEndOf="@+id/contsearch"
+        app:layout_constraintTop_toTopOf="@+id/contsearch" />
+
     <TextView
         android:id="@+id/textView61"
-        android:layout_width="200dp"
+        android:layout_width="140dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:text="@string/n_Contrato"
+        android:textAlignment="center"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.509"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textView66"
+        android:layout_width="133dp"
+        android:layout_height="26dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="@string/precinto"
         android:textAlignment="center"
         android:textSize="20dp"
         android:textStyle="bold"

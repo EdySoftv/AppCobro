@@ -67,6 +67,7 @@
     <string name="proximo_TrabajoDos">Próximo trabajo:</string>
     <string name="orden">Orden</string>
     <string name="n_Contrato">No. de contrato</string>
+    <string name="precinto">Precinto</string>
     <string name="trabajosARealizar">Trabajos a realizar</string>
     <string name="n_Orden"># de orden</string>
     <string name="estatus">Estatus</string>
