@@ -8,10 +8,10 @@
 
     >
 
-<ScrollView
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:layout_marginTop="100dp">
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="100dp">
         <android.support.constraint.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -26,7 +26,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:visibility="visible"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
@@ -92,7 +91,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:visibility="gone"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="1.0"
                 app:layout_constraintStart_toStartOf="parent"
@@ -132,7 +130,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:visibility="gone"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
@@ -140,7 +137,7 @@
 
                 <TextView
                     android:id="@+id/textView12"
-                    android:layout_width="0dp"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
                     android:layout_marginTop="8dp"
@@ -154,7 +151,7 @@
 
                 <EditText
                     android:id="@+id/piezaMD"
-                    android:layout_width="0dp"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
                     android:layout_marginTop="8dp"
@@ -173,7 +170,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textSize="20dp"
-                android:visibility="invisible"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
@@ -183,12 +179,12 @@
                     android:id="@+id/textViewInicioTitulo"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="50dp"
+                    android:layout_marginStart="120dp"
                     android:layout_marginTop="8dp"
                     android:text="@string/inicio"
                     android:textSize="20dp"
                     android:textStyle="bold"
-                    app:layout_constraintStart_toEndOf="@+id/textView15"
+                    app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
@@ -277,21 +273,23 @@
                     app:layout_constraintTop_toBottomOf="@+id/FinalIDM" />
             </android.support.constraint.ConstraintLayout>
 
+            <!---->
             <Button
                 android:id="@+id/agregarMaterial"
                 android:layout_width="88dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="100dp"
                 android:layout_marginEnd="8dp"
-                android:textColor="#fff"
                 android:background="@drawable/boton"
                 android:backgroundTint="@color/colorPrimary"
                 android:text="@string/agregar"
+                android:textColor="#fff"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/constrain_Metraje" />
-            <!---->
+                app:layout_constraintTop_toBottomOf="@+id/constrain_Metraje"
+                tools:ignore="MissingConstraints" />
+
             <HorizontalScrollView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -301,14 +299,14 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/agregarMaterial">
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/eliminarMaterialesList"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                />
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/eliminarMaterialesList"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    />
             </HorizontalScrollView>
         </android.support.constraint.ConstraintLayout>
-</ScrollView>
+    </ScrollView>
 
 
 

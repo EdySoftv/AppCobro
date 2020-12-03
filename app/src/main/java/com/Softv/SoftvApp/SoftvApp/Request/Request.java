@@ -3116,12 +3116,12 @@ try{
                             userJson.get("Tipo").getAsString()
                     );
                     if (user.Tipo.equals("Piezas")) {
-                        MaterialesOrdenes.piezasMat.setVisibility(View.VISIBLE);
-                        MaterialesOrdenes.metrosMat.setVisibility(View.INVISIBLE);
+                        //MaterialesOrdenes.piezasMat.setVisibility(View.VISIBLE);
+                        //MaterialesOrdenes.metrosMat.setVisibility(View.INVISIBLE);
                         pieza = true;
                     } else {
-                        MaterialesOrdenes.metrosMat.setVisibility(View.VISIBLE);
-                        MaterialesOrdenes.piezasMat.setVisibility(View.INVISIBLE);
+                        //MaterialesOrdenes.metrosMat.setVisibility(View.VISIBLE);
+                        //MaterialesOrdenes.piezasMat.setVisibility(View.INVISIBLE);
                         pieza = false;
 //                        if(extencionesMat == true){
 //                            MaterialesOrdenes.mIE.setVisibility(View.GONE);

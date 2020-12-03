@@ -12,12 +12,10 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="100dp">
-
         <android.support.constraint.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:paddingBottom="8dp"
-
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -28,7 +26,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:visibility="visible"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
@@ -40,7 +37,7 @@
                     android:layout_marginStart="4dp"
                     android:layout_marginEnd="8dp"
                     android:text="@string/descripArticu"
-                    android:textSize="@dimen/mediano"
+                    android:textSize="20dp"
                     android:textStyle="bold"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -67,7 +64,7 @@
                     android:layout_marginTop="16dp"
                     android:layout_marginEnd="8dp"
                     android:text="@string/clasificacionMate"
-                    android:textSize="@dimen/mediano"
+                    android:textSize="20dp"
                     android:textStyle="bold"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -94,7 +91,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:visibility="gone"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="1.0"
                 app:layout_constraintStart_toStartOf="parent"
@@ -105,10 +101,11 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="4dp"
+
                     android:layout_marginTop="8dp"
                     android:layout_marginEnd="8dp"
                     android:text="@string/seleccionExt"
-                    android:textSize="15dp"
+                    android:textSize="20dp"
                     android:textStyle="bold"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -117,10 +114,9 @@
                 <Spinner
                     android:id="@+id/extencionesDescarga"
                     android:layout_width="0dp"
-                    android:layout_height="24dp"
+                    android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
                     android:layout_marginTop="8dp"
-                    android:layout_marginEnd="8dp"
                     android:layout_marginBottom="8dp"
                     android:background="@drawable/disenio_spinner"
                     app:layout_constraintBottom_toBottomOf="parent"
@@ -134,7 +130,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:visibility="gone"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
@@ -142,13 +137,13 @@
 
                 <TextView
                     android:id="@+id/textView12"
-                    android:layout_width="0dp"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
                     android:layout_marginTop="8dp"
                     android:layout_marginEnd="8dp"
                     android:text="@string/cantidad"
-                    android:textSize="15dp"
+                    android:textSize="20dp"
                     android:textStyle="bold"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -156,14 +151,14 @@
 
                 <EditText
                     android:id="@+id/piezaMD"
-                    android:layout_width="0dp"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
                     android:layout_marginTop="8dp"
                     android:layout_marginEnd="8dp"
                     android:layout_marginBottom="8dp"
                     android:inputType="number"
-                    android:textSize="15dp"
+                    android:textSize="20dp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -174,10 +169,7 @@
                 android:id="@+id/constrain_Metraje"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginEnd="8dp"
                 android:textSize="20dp"
-                android:visibility="invisible"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
@@ -185,35 +177,35 @@
 
                 <TextView
                     android:id="@+id/textViewInicioTitulo"
-                    android:layout_width="50dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="50dp"
+                    android:layout_marginStart="120dp"
                     android:layout_marginTop="8dp"
                     android:text="@string/inicio"
-                    android:textSize="15dp"
+                    android:textSize="20dp"
                     android:textStyle="bold"
-                    app:layout_constraintStart_toEndOf="@+id/textView15"
+                    app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
                     android:id="@+id/textViewFinTitulo"
-                    android:layout_width="30dp"
+                    android:layout_width="50dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
                     android:layout_marginEnd="50dp"
                     android:text="@string/fin"
-                    android:textSize="15dp"
+                    android:textSize="20dp"
                     android:textStyle="bold"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
                     android:id="@+id/textView15"
-                    android:layout_width="60dp"
+                    android:layout_width="75dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
                     android:text="@string/interior"
-                    android:textSize="15dp"
+                    android:textSize="20dp"
                     android:textStyle="bold"
                     app:layout_constraintBottom_toBottomOf="@+id/InicialIDM"
                     app:layout_constraintStart_toStartOf="parent"
@@ -221,12 +213,12 @@
 
                 <TextView
                     android:id="@+id/textView16"
-                    android:layout_width="60dp"
+                    android:layout_width="75dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
                     android:layout_marginBottom="8dp"
                     android:text="@string/exterior"
-                    android:textSize="15dp"
+                    android:textSize="20dp"
                     android:textStyle="bold"
                     app:layout_constraintBottom_toBottomOf="@+id/InicialEDM"
                     app:layout_constraintStart_toStartOf="parent"
@@ -234,34 +226,34 @@
 
                 <EditText
                     android:id="@+id/InicialIDM"
-                    android:layout_width="70dp"
+                    android:layout_width="100dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
+                    android:layout_marginTop="20dp"
                     android:inputType="number"
-                    android:textSize="15dp"
+                    android:textSize="20dp"
                     app:layout_constraintEnd_toEndOf="@+id/textViewInicioTitulo"
                     app:layout_constraintStart_toStartOf="@+id/textViewInicioTitulo"
                     app:layout_constraintTop_toBottomOf="@+id/textViewInicioTitulo" />
 
                 <EditText
                     android:id="@+id/FinalIDM"
-                    android:layout_width="70dp"
+                    android:layout_width="100dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
+                    android:layout_marginTop="20dp"
                     android:inputType="number"
-                    android:textSize="15dp"
+                    android:textSize="20dp"
                     app:layout_constraintEnd_toEndOf="@+id/textViewFinTitulo"
                     app:layout_constraintStart_toStartOf="@+id/textViewFinTitulo"
                     app:layout_constraintTop_toBottomOf="@+id/textViewFinTitulo" />
 
                 <EditText
                     android:id="@+id/InicialEDM"
-                    android:layout_width="70dp"
+                    android:layout_width="100dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
                     android:layout_marginBottom="8dp"
                     android:inputType="number"
-                    android:textSize="15dp"
+                    android:textSize="20dp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="@+id/textViewInicioTitulo"
                     app:layout_constraintStart_toStartOf="@+id/textViewInicioTitulo"
@@ -269,22 +261,25 @@
 
                 <EditText
                     android:id="@+id/FinalEDM"
-                    android:layout_width="70dp"
+                    android:layout_width="100dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
+                    android:layout_marginBottom="8dp"
                     android:inputType="number"
-                    android:textSize="15dp"
+                    android:textSize="20dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="@+id/textViewFinTitulo"
                     app:layout_constraintStart_toStartOf="@+id/textViewFinTitulo"
                     app:layout_constraintTop_toBottomOf="@+id/FinalIDM" />
             </android.support.constraint.ConstraintLayout>
 
+            <!---->
             <Button
                 android:id="@+id/agregarMaterial"
                 android:layout_width="88dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
-                android:layout_marginTop="12dp"
+                android:layout_marginTop="100dp"
                 android:layout_marginEnd="8dp"
                 android:background="@drawable/boton"
                 android:backgroundTint="@color/colorPrimary"
@@ -292,8 +287,9 @@
                 android:textColor="#fff"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/constrain_Metraje" />
-            <!---->
+                app:layout_constraintTop_toBottomOf="@+id/constrain_Metraje"
+                tools:ignore="MissingConstraints" />
+
             <HorizontalScrollView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -303,14 +299,15 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/agregarMaterial">
-
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/eliminarMaterialesList"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                />
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/eliminarMaterialesList"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    />
             </HorizontalScrollView>
-
         </android.support.constraint.ConstraintLayout>
     </ScrollView>
+
+
+
 </RelativeLayout>

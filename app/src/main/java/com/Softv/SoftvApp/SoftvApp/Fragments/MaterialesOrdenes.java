@@ -50,7 +50,7 @@ public class MaterialesOrdenes extends Fragment {
     public static RecyclerView elimarMaterialesList;
     Request request = new Request();
     public static EditText pieza, mII, mIE, mFI, mFE;
-    public static TextView tvExterior, tvInterior,textViewInicioTitulo,textViewFinTitulo;
+    public static TextView tvExterior, tvInterior,textViewInicioTitulo,textViewFinTitulo, txtclas;
     public static int clvTipoDescMat, idArticuloDM, cantidadDM, idInventarioMD, piezaSer, metros, totalDM, IIDM, IFDM, EIMD, EFDM;
     public static int extSer, esFibra;
     public static String descripcionMaterial = "";
@@ -68,30 +68,43 @@ public class MaterialesOrdenes extends Fragment {
     }
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-
         super.onCreate(savedInstanceState);
         setRetainInstance(true);
         View view = inflater.inflate(R.layout.activity_descarga_ordenes, container, false);
         request.getChecaExt(getContext());
+
         descripcionMat = view.findViewById(R.id.descripcionArticuloDesc);
+        txtclas = view.findViewById(R.id.textView9);
         clasificacionMat = view.findViewById(R.id.clasificacionMatDesc);
-        extMat = view.findViewById(R.id.constrain_Extenciones);
-        piezasMat = view.findViewById(R.id.constrain_Cantidad);
-        metrosMat = view.findViewById(R.id.constrain_Metraje);
+
+        extMat = view.findViewById(R.id.constrain_Extenciones); // Area Extenciones
+        piezasMat = view.findViewById(R.id.constrain_Cantidad); // Area Cantidad
+        metrosMat = view.findViewById(R.id.constrain_Metraje); // Area Metricas
+
+        /*Area de metricas - Inicio*/
+        tvExterior = view.findViewById(R.id.textView16);
+        tvInterior = view.findViewById(R.id.textView15);
+        mII = view.findViewById(R.id.InicialIDM);
+        mIE = view.findViewById(R.id.InicialEDM);
+        mFI = view.findViewById(R.id.FinalIDM);
+        mFE = view.findViewById(R.id.FinalEDM);
+        /*Area de metricas - Fin*/
+
+        pieza = view.findViewById(R.id.piezaMD);
+
         spinnerExtMat = view.findViewById(R.id.extencionesDescarga);
         elimarMaterialesList = view.findViewById(R.id.eliminarMaterialesList);
         agragarDM = view.findViewById(R.id.agregarMaterial);
-        pieza = view.findViewById(R.id.piezaMD);
-        mII = view.findViewById(R.id.InicialIDM);
-        mFI = view.findViewById(R.id.FinalIDM);
-        mIE = view.findViewById(R.id.InicialEDM);
-        mFE = view.findViewById(R.id.FinalEDM);
-        tvExterior = view.findViewById(R.id.textView16);
-        tvInterior = view.findViewById(R.id.textView15);
         textViewInicioTitulo= view.findViewById(R.id.textViewInicioTitulo);
         textViewFinTitulo= view.findViewById(R.id.textViewFinTitulo);
 
-        //scrollViewM = view.findViewById(R.id.scrollhorizontal);
+        //Escondemos lo que no se ocupa
+        extMat.setVisibility(View.GONE);
+        piezasMat.setVisibility(View.GONE);
+        txtclas.setVisibility(View.GONE);
+        clasificacionMat.setVisibility(View.GONE);
+        metrosMat.setVisibility(View.GONE);
+
         try {
             JSONObject jsonObject = new JSONObject();
             jsonObject.put("ClvOrdSer", Util.getClvOrden(Util.preferences));
@@ -101,7 +114,6 @@ public class MaterialesOrdenes extends Fragment {
             request.getDescargaDirecta(getActivity(), getContext(), jsonObject);
         } catch (Exception e) {
         }
-
 
         try {
             JSONObject jsonObjectDirecta = new JSONObject();
@@ -114,9 +126,7 @@ public class MaterialesOrdenes extends Fragment {
         } catch (Exception e) {
         }
 
-        if (request.extencionesMat == true) {
-            spinnerExtMat.setVisibility(View.VISIBLE);
-        } else {
+        if (request.extencionesMat == false) {
             extSer = 0;
             Array.detalleBit.clear();
             Array.detalleBit.add(0, "---Seleccionar---");
@@ -125,17 +135,6 @@ public class MaterialesOrdenes extends Fragment {
             descripcionMat.setAdapter(arrayAdapter);
         }
 
-     /*    if(Util.getPermisisDescarga(Util.preferences)==true){
-           try {
-                JSONObject jsonObject = new JSONObject();
-                jsonObject.put("ClvOrdSer",Util.getClvOrden(Util.preferences) );
-                jsonObject.put("TipoDescarga", Util.getTipoDescarga(Util.preferences));
-
-                request.DamebitacoraDirecta(getContext(),jsonObject);
-            }catch (Exception e){}
-        }else{
-            request.getPredescarga(getActivity(),getContext());
-        }*/
         request.getPredescarga(getActivity(), getContext());
 
         descripcionMat.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -146,15 +145,32 @@ public class MaterialesOrdenes extends Fragment {
                     Iterator<List<DetalleBitacoraModel>> itData = Array.dataDetBit.iterator();
                     List<DetalleBitacoraModel> dat = itData.next();
                     clvTipoDescMat = dat.get(position - 1).catTipoArticuloClave;
-                    esFibra = dat.get(position -1).esFibra;
-                    //esFibra = 0;
                     request.DetalleBit(getContext());
-                    if (request.extencionesMat == true) {
-                        spinnerExtMat.setVisibility(View.VISIBLE);
-                    } else {
-                        spinnerExtMat.setVisibility(View.GONE);
-                        //extSer=0;
+                    if (clvTipoDescMat == 3) {
+                        extMat.setVisibility(View.VISIBLE);
+                        piezasMat.setVisibility(View.GONE);
+                        txtclas.setVisibility(View.VISIBLE);
+                        clasificacionMat.setVisibility(View.VISIBLE);
+                        metrosMat.setVisibility(View.GONE);
+                    }else if (clvTipoDescMat == 4) {
+                        extMat.setVisibility(View.GONE);
+                        piezasMat.setVisibility(View.VISIBLE);
+                        txtclas.setVisibility(View.VISIBLE);
+                        clasificacionMat.setVisibility(View.VISIBLE);
+                        metrosMat.setVisibility(View.GONE);
+                    }else{
+                        extMat.setVisibility(View.VISIBLE);
+                        piezasMat.setVisibility(View.GONE);
+                        txtclas.setVisibility(View.VISIBLE);
+                        clasificacionMat.setVisibility(View.VISIBLE);
+                        metrosMat.setVisibility(View.GONE);
                     }
+                }else{
+                    txtclas.setVisibility(View.GONE);
+                    clasificacionMat.setVisibility(View.GONE);
+                    extMat.setVisibility(View.GONE);
+                    piezasMat.setVisibility(View.GONE);
+                    metrosMat.setVisibility(View.GONE);
                 }
             }
 
@@ -163,9 +179,12 @@ public class MaterialesOrdenes extends Fragment {
 
             }
         });
+
+
         clasificacionMat.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                posClasMat = position;
                 if (position != 0) {
                     Iterator<List<DescripcionArticuloModel>> itData = Array.dataDetArtBit.iterator();
                     List<DescripcionArticuloModel> dat = itData.next();
@@ -176,41 +195,8 @@ public class MaterialesOrdenes extends Fragment {
                     request.getTipoMat(getContext());
                     seleccion = position;
                     posClasMat = position;
-                    if (request.extencionesMat == false) {
-
-
-                        if(esFibra!=1){
-                                mIE.setVisibility(View.VISIBLE);
-                                mFE.setVisibility(View.VISIBLE);
-                                tvExterior.setVisibility(View.VISIBLE);
-                        }else{
-                            mII.setVisibility(View.GONE);
-                            mFI.setVisibility(View.GONE);
-                            IIDM = 0;
-                            IFDM = 0;
-                            tvExterior.setVisibility(View.INVISIBLE);
-                            tvInterior.setVisibility(View.INVISIBLE);
-
-                        }
-
-
-/*                        if(Util.getPermisisDescarga(Util.preferences)==true){
-                            try {
-                                JSONObject jsonObject = new JSONObject();
-                                jsonObject.put("ClvOrdSer",Util.getClvOrden(Util.preferences) );
-                                jsonObject.put("TipoDescarga", Util.getTipoDescarga(Util.preferences));
-                                jsonObject.put("NoExt", 0);
-
-                                request.getDescargaDirecta(getActivity(),getContext(),jsonObject);
-                            }catch (Exception e){}
-                        }else{
-                            request.getPredescarga(getActivity(),getContext());
-                        }*/
-                        request.getPredescarga(getActivity(), getContext());
-                    }
                 }
             }
-
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
 
@@ -221,58 +207,35 @@ public class MaterialesOrdenes extends Fragment {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 posExtMat = position;
                 if (position != 0) {
-                    //extSer=(position-1);
-                    //seleccionExte=position;
                     Iterator<List<LlenaExtencionesModel>> itData = Array.dataLlenaExt.iterator();
                     List<LlenaExtencionesModel> dat = itData.next();
                     extSer = dat.get(position - 1).ID;
-
-                    if(esFibra!=1){
-
-                        if(extSer!=0){
-                            mIE.setVisibility(View.GONE);
-                            mFE.setVisibility(View.GONE);
-                            EIMD = 0;
-                            EFDM = 0;
-                            tvExterior.setVisibility(View.INVISIBLE);
-                        }else{
-                            mIE.setVisibility(View.VISIBLE);
-                            mFE.setVisibility(View.VISIBLE);
-                            tvExterior.setVisibility(View.VISIBLE);
-
-                        }
-                    }else{
-                        //if((position-1)!=0){
-                            mIE.setVisibility(View.GONE);
-                            mFE.setVisibility(View.GONE);
-                            EIMD = 0;
-                            EFDM = 0;
-                            tvExterior.setVisibility(View.INVISIBLE);
-                            tvInterior.setVisibility(View.INVISIBLE);
-                            //textViewFinTitulo.setVisibility(View.VISIBLE);
-                            //textViewInicioTitulo.setVisibility(View.INVISIBLE);
-                        /*}else{
-                            mIE.setVisibility(View.VISIBLE);
-                            mFE.setVisibility(View.VISIBLE);
-                            textViewFinTitulo.setVisibility(View.VISIBLE);
-                            textViewInicioTitulo.setVisibility(View.VISIBLE);
-
-                        }*/
+                    metrosMat.setVisibility(View.VISIBLE);
+                    if(extSer == 0 && clvTipoDescMat==3){
+                        tvExterior.setVisibility(View.VISIBLE);
+                        tvInterior.setVisibility(View.GONE);
+                        mII.setVisibility(View.GONE);
+                        mIE.setVisibility(View.VISIBLE);
+                        mFI.setVisibility(View.GONE);
+                        mFE.setVisibility(View.VISIBLE);
+                    }else if(extSer == 0 && clvTipoDescMat!=3){
+                        tvExterior.setVisibility(View.VISIBLE);
+                        tvInterior.setVisibility(View.VISIBLE);
+                        mII.setVisibility(View.VISIBLE);
+                        mIE.setVisibility(View.VISIBLE);
+                        mFI.setVisibility(View.VISIBLE);
+                        mFE.setVisibility(View.VISIBLE);
+                    }else if(extSer != 0){
+                        tvExterior.setVisibility(View.GONE);
+                        tvInterior.setVisibility(View.VISIBLE);
+                        mII.setVisibility(View.VISIBLE);
+                        mIE.setVisibility(View.GONE);
+                        mFI.setVisibility(View.VISIBLE);
+                        mFE.setVisibility(View.GONE);
                     }
-                /*    if(Util.getPermisisDescarga(Util.preferences)==true){
-                        try {
-                            JSONObject jsonObject = new JSONObject();
-                            jsonObject.put("ClvOrdSer",Util.getClvOrden(Util.preferences) );
-                            jsonObject.put("TipoDescarga", Util.getTipoDescarga(Util.preferences));
-                            jsonObject.put("NoExt", extSer);
-
-                            request.getDescargaDirecta(getActivity(),getContext(),jsonObject);
-                        }catch (Exception e){}
-                    }else{
-                        request.getPredescarga(getActivity(),getContext());
-                    }*/
                     request.getPredescarga(getActivity(), getContext());
-                } else {
+                }else{
+                    metrosMat.setVisibility(View.GONE);
                     extSer = (position);
                 }
             }
@@ -285,275 +248,143 @@ public class MaterialesOrdenes extends Fragment {
         agragarDM.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (seleccion == 0) {
-                    Toast.makeText(getContext(), "Seleccione un articulo", Toast.LENGTH_SHORT).show();
-                } else {
-                    if (extencionesMat == true) {
-                        if (spinnerExtMat.getSelectedItemPosition() == 0) {
-                            Toast.makeText(getContext(), "Seleccione una extensión", Toast.LENGTH_SHORT).show();
-                        } else {
-
-
-                            EjecutarDescargaMaterial();
-                        }
-                    } else {
-                        EjecutarDescargaMaterial();
-                    }
+                if(posDescMat==0){
+                    Toast.makeText(getContext(), "Seleccione artículo", Toast.LENGTH_SHORT).show();
+                }else if(posClasMat==0){
+                    Toast.makeText(getContext(), "Seleccione clasificación", Toast.LENGTH_SHORT).show();
+                }else if(clvTipoDescMat!=4 && posExtMat==0){
+                    Toast.makeText(getContext(), "Seleccione extensión", Toast.LENGTH_SHORT).show();
+                }else if(clvTipoDescMat!=4 && extSer == 0 && clvTipoDescMat==3 && (mIE.getText().toString().length() == 0 || mFE.getText().toString().length() == 0)){
+                    Toast.makeText(getContext(), "Ingrese la métrica exterior", Toast.LENGTH_SHORT).show();
+                }else if(clvTipoDescMat!=4 && extSer == 0 && clvTipoDescMat!=3 &&(mII.getText().toString().length() == 0 || mFI.getText().toString().length() == 0 || mIE.getText().toString().length() == 0 || mFE.getText().toString().length() == 0)){
+                    Toast.makeText(getContext(), "Ingrese las métricas", Toast.LENGTH_SHORT).show();
+                }else if(clvTipoDescMat!=4 && extSer != 0 && (mII.getText().toString().length() == 0 || mFI.getText().toString().length() == 0)){
+                    Toast.makeText(getContext(), "Ingrese la métrica interior", Toast.LENGTH_SHORT).show();
+                }else if(clvTipoDescMat==4 && pieza.getText().length()==0){
+                    Toast.makeText(getContext(), "Ingrese cantidad", Toast.LENGTH_SHORT).show();
+                }else{
+                    Toast.makeText(getContext(), "Todo bien", Toast.LENGTH_SHORT).show();
+                    EjecutarDescargaMaterial();
                 }
-                ///////////////////
-
             }
         });
-
 
         return view;
     }
 
     public void EjecutarDescargaMaterial() {
         if (request.pieza == true) {
-            if (pieza.getText().toString().length() == 0) {
-                Toast.makeText(getContext(), "Seleccione cantidad", Toast.LENGTH_SHORT).show();
-            } else {
-                piezaSer = Integer.parseInt(String.valueOf(pieza.getText()));
-                totalDM = piezaSer;
-                IIDM = 0;
-                IFDM = 0;
-                EIMD = 0;
-                EFDM = 0;
-                if (cantidadDM >= totalDM) {
-
-                    GetGetDescargaMaterialArticulosByIdClvOrdenListResult nuevo = new GetGetDescargaMaterialArticulosByIdClvOrdenListResult();
-                    nuevo.setCANTIDADUTILIZADA(MaterialesOrdenes.totalDM);
-                    nuevo.setClvOrdSer(Util.getClvOrden(Util.preferences));
-                    nuevo.setDescripcion(MaterialesOrdenes.descripcionMaterial);
-                    nuevo.setESCABLE(request.escable);
-                    nuevo.setMETRAJEFIN(MaterialesOrdenes.IFDM);
-                    nuevo.setMETRAJEFINEXTERIOR(MaterialesOrdenes.EFDM);
-                    nuevo.setMETRAJEINICIO(MaterialesOrdenes.IIDM);
-                    nuevo.setMETRAJEINICIOEXTERIOR(MaterialesOrdenes.EIMD);
-                    nuevo.setNOARTICULO(MaterialesOrdenes.idInventarioMD);
-                    nuevo.setNoExt(MaterialesOrdenes.extSer);
-                    try {
-                        nuevo.setTecnico(Util.getNombreTecnicoPreference(Util.preferences));
-                    } catch (Exception e) {
-                        nuevo.setTecnico("");
-                    }
-                    nuevo.setTipoDescarga(Util.getTipoDescarga(Util.preferences));
-                    nuevo.setIdDescarga(0);
-                    /*if (Array.dataDescargaDirecta.size()==0){
-                        Array.dataDescargaDirecta.add(nuevolista);
-                        Array.dataDescargaDirecta.get(0).add(nuevo);
-                    }else{*/
-                    Array.dataDescargaDirecta.get(0).add(nuevo);
-                    //}
-
-
-                    Iterator<List<GetGetDescargaMaterialArticulosByIdClvOrdenListResult>> itdata = Array.dataDescargaDirecta.iterator();
-                    List<GetGetDescargaMaterialArticulosByIdClvOrdenListResult> dat = itdata.next();
-
-                    Log.d("asd", Array.dataDescargaDirecta.toString());
-                    Log.d("asd", nuevo.toString());
-
-
-                    request.getValidaPreDes(getActivity(), getContext());
-                    descripcionMat.setSelection(0);
-                    clasificacionMat.setSelection(0);
-                    clasificacionMat.setEnabled(false);
-                    piezasMat.setVisibility(View.GONE);
-                    extMat.setVisibility(View.GONE);
-                    metrosMat.setVisibility(View.GONE);
-                    pieza.setText("");
-                    mII.setText("");
-                    mIE.setText("");
-                    mFI.setText("");
-                    mFE.setText("");
-                    request.getChecaExt(getContext());
-                    /*if(Util.getPermisisDescarga(Util.preferences)==false) {
-                        request.getValidaPreDes(getActivity(), getContext());
-                        descripcionMat.setSelection(0);
-                        clasificacionMat.setSelection(0);
-                        clasificacionMat.setEnabled(false);
-                        piezasMat.setVisibility(View.GONE);
-                        extMat.setVisibility(View.GONE);
-                        metrosMat.setVisibility(View.GONE);
-                        pieza.setText("");
-                        mII.setText("");
-                        mIE.setText("");
-                        mFI.setText("");
-                        mFE.setText("");
-                        request.getChecaExt(getContext());
-                    }else{
-                        try{
-                            JSONObject jsonObject = new JSONObject();
-                            jsonObject.put("ClvOrdSer", Util.getClvOrden(Util.preferences));
-                            jsonObject.put("TipoDescarga", Util.getTipoDescarga(Util.preferences));
-                            request.bitacoraDirecta(getActivity(),getContext(),jsonObject);
-                        }catch (Exception e){}
-                        descripcionMat.setSelection(0);
-                        clasificacionMat.setSelection(0);
-                        clasificacionMat.setEnabled(false);
-                        piezasMat.setVisibility(View.GONE);
-                        extMat.setVisibility(View.GONE);
-                        metrosMat.setVisibility(View.GONE);
-                        pieza.setText("");
-                        mII.setText("");
-                        mIE.setText("");
-                        mFI.setText("");
-                        mFE.setText("");
-                    }
-*/
-                } else {
-                    Toast.makeText(getContext(), "Cantidad incorrecta", Toast.LENGTH_SHORT).show();
-                }
-
-            }
-
-        } else {
-            if (ValidacionDescarga()== true) {
-                Toast.makeText(getContext(), "Seleccione metraje", Toast.LENGTH_SHORT).show();
-
-            } else {
+            piezaSer = Integer.parseInt(String.valueOf(pieza.getText()));
+            totalDM = piezaSer;
+            IIDM = 0;
+            IFDM = 0;
+            EIMD = 0;
+            EFDM = 0;
+            if (cantidadDM >= totalDM) {
+                GetGetDescargaMaterialArticulosByIdClvOrdenListResult nuevo = new GetGetDescargaMaterialArticulosByIdClvOrdenListResult();
+                nuevo.setCANTIDADUTILIZADA(MaterialesOrdenes.totalDM);
+                nuevo.setClvOrdSer(Util.getClvOrden(Util.preferences));
+                nuevo.setDescripcion(MaterialesOrdenes.descripcionMaterial);//Descripcion de articulo
+                nuevo.setESCABLE(request.escable);
+                nuevo.setMETRAJEFIN(MaterialesOrdenes.IFDM);
+                nuevo.setMETRAJEFINEXTERIOR(MaterialesOrdenes.EFDM);
+                nuevo.setMETRAJEINICIO(MaterialesOrdenes.IIDM);
+                nuevo.setMETRAJEINICIOEXTERIOR(MaterialesOrdenes.EIMD);
+                nuevo.setNOARTICULO(MaterialesOrdenes.idInventarioMD);
+                nuevo.setNoExt(MaterialesOrdenes.extSer);
                 try {
+                    nuevo.setTecnico(Util.getNombreTecnicoPreference(Util.preferences));
+                } catch (Exception e) {
+                    nuevo.setTecnico("");
+                }
+                nuevo.setTipoDescarga(Util.getTipoDescarga(Util.preferences));
+                nuevo.setIdDescarga(0);
+
+                Array.dataDescargaDirecta.get(0).add(nuevo);
+
+                Iterator<List<GetGetDescargaMaterialArticulosByIdClvOrdenListResult>> itdata = Array.dataDescargaDirecta.iterator();
+                List<GetGetDescargaMaterialArticulosByIdClvOrdenListResult> dat = itdata.next();
+
+                Log.d("asd", Array.dataDescargaDirecta.toString());
+                Log.d("asd", nuevo.toString());
+
+                request.getValidaPreDes(getActivity(), getContext());
+                descripcionMat.setSelection(0);
+                clasificacionMat.setSelection(0);
+                clasificacionMat.setEnabled(false);
+                piezasMat.setVisibility(View.GONE);
+                extMat.setVisibility(View.GONE);
+                metrosMat.setVisibility(View.GONE);
+                pieza.setText("");
+                mII.setText("");
+                mIE.setText("");
+                mFI.setText("");
+                mFE.setText("");
+                request.getChecaExt(getContext());
+            } else {
+                Toast.makeText(getContext(), "Cantidad incorrecta", Toast.LENGTH_SHORT).show();
+            }
+        } else {
+
+            try {
                 IIDM = Integer.parseInt(String.valueOf(mII.getText()));
                 IFDM = Integer.parseInt(String.valueOf(mFI.getText()));
-                }catch (Exception e){
-                    EIMD = 0;
-                    EFDM = 0;
-                }
+            }catch (Exception e){
+                EIMD = 0;
+                EFDM = 0;
+            }
+            try {
+                EIMD = Integer.parseInt(String.valueOf(mIE.getText()));
+                EFDM = Integer.parseInt(String.valueOf(mFE.getText()));
+            }catch (Exception e){
+                EIMD = 0;
+                EFDM = 0;
+            }
+            metros = (IFDM - IIDM) + (EFDM - EIMD);
+            totalDM = metros;
+            if (cantidadDM >= totalDM) {
+                GetGetDescargaMaterialArticulosByIdClvOrdenListResult nuevo = new GetGetDescargaMaterialArticulosByIdClvOrdenListResult();
+                nuevo.setCANTIDADUTILIZADA(MaterialesOrdenes.totalDM);
+                nuevo.setClvOrdSer(Util.getClvOrden(Util.preferences));
+                nuevo.setDescripcion(MaterialesOrdenes.descripcionMaterial);
+                nuevo.setESCABLE(request.escable);
+                nuevo.setMETRAJEFIN(MaterialesOrdenes.IFDM);
+                nuevo.setMETRAJEFINEXTERIOR(MaterialesOrdenes.EFDM);
+                nuevo.setMETRAJEINICIO(MaterialesOrdenes.IIDM);
+                nuevo.setMETRAJEINICIOEXTERIOR(MaterialesOrdenes.EIMD);
+                nuevo.setNOARTICULO(MaterialesOrdenes.idInventarioMD);
+                nuevo.setNoExt(MaterialesOrdenes.extSer);
                 try {
-                    EIMD = Integer.parseInt(String.valueOf(mIE.getText()));
-                    EFDM = Integer.parseInt(String.valueOf(mFE.getText()));
-                }catch (Exception e){
-                    EIMD = 0;
-                    EFDM = 0;
+                    nuevo.setTecnico(Util.getNombreTecnicoPreference(Util.preferences));
+                } catch (Exception e) {
+                    nuevo.setTecnico("");
                 }
-                metros = (IFDM - IIDM) + (EFDM - EIMD);
-                totalDM = metros;
-                if (cantidadDM >= totalDM) {
+                nuevo.setTipoDescarga(Util.getTipoDescarga(Util.preferences));
+                nuevo.setIdDescarga(0);
+                Array.dataDescargaDirecta.get(0).add(nuevo);
 
+                Iterator<List<GetGetDescargaMaterialArticulosByIdClvOrdenListResult>> itdata = Array.dataDescargaDirecta.iterator();
+                List<GetGetDescargaMaterialArticulosByIdClvOrdenListResult> dat = itdata.next();
 
-                    GetGetDescargaMaterialArticulosByIdClvOrdenListResult nuevo = new GetGetDescargaMaterialArticulosByIdClvOrdenListResult();
-                    nuevo.setCANTIDADUTILIZADA(MaterialesOrdenes.totalDM);
-                    nuevo.setClvOrdSer(Util.getClvOrden(Util.preferences));
-                    nuevo.setDescripcion(MaterialesOrdenes.descripcionMaterial);
-                    nuevo.setESCABLE(request.escable);
-                    nuevo.setMETRAJEFIN(MaterialesOrdenes.IFDM);
-                    nuevo.setMETRAJEFINEXTERIOR(MaterialesOrdenes.EFDM);
-                    nuevo.setMETRAJEINICIO(MaterialesOrdenes.IIDM);
-                    nuevo.setMETRAJEINICIOEXTERIOR(MaterialesOrdenes.EIMD);
-                    nuevo.setNOARTICULO(MaterialesOrdenes.idInventarioMD);
-                    nuevo.setNoExt(MaterialesOrdenes.extSer);
-                    try {
-                        nuevo.setTecnico(Util.getNombreTecnicoPreference(Util.preferences));
-                    } catch (Exception e) {
-                        nuevo.setTecnico("");
-                    }
-                    nuevo.setTipoDescarga(Util.getTipoDescarga(Util.preferences));
-                    nuevo.setIdDescarga(0);
-                    /*if (Array.dataDescargaDirecta.size()==0){
-                        Array.dataDescargaDirecta.add(nuevolista);
-                        Array.dataDescargaDirecta.get(0).add(nuevo);
-                    }else{*/
-                    Array.dataDescargaDirecta.get(0).add(nuevo);
-                    //}
+                Log.d("asd", Array.dataDescargaDirecta.toString());
+                Log.d("asd", nuevo.toString());
 
-
-                    Iterator<List<GetGetDescargaMaterialArticulosByIdClvOrdenListResult>> itdata = Array.dataDescargaDirecta.iterator();
-                    List<GetGetDescargaMaterialArticulosByIdClvOrdenListResult> dat = itdata.next();
-
-                    Log.d("asd", Array.dataDescargaDirecta.toString());
-                    Log.d("asd", nuevo.toString());
-
-
-                    request.getValidaPreDes(getActivity(), getContext());
-                    descripcionMat.setSelection(0);
-                    clasificacionMat.setSelection(0);
-                    clasificacionMat.setEnabled(false);
-                    piezasMat.setVisibility(View.GONE);
-                    extMat.setVisibility(View.GONE);
-                    metrosMat.setVisibility(View.GONE);
-                    pieza.setText("");
-                    mII.setText("");
-                    mIE.setText("");
-                    mFI.setText("");
-                    mFE.setText("");
-                    request.getChecaExt(getContext());
-                /*}else{
-                    if(Util.getPermisisDescarga(Util.preferences)==false) {
-                        request.getValidaPreDes(getActivity(), getContext());
-                        descripcionMat.setSelection(0);
-                        clasificacionMat.setSelection(0);
-                        clasificacionMat.setEnabled(false);
-                        piezasMat.setVisibility(View.GONE);
-                        extMat.setVisibility(View.GONE);
-                        metrosMat.setVisibility(View.GONE);
-                        pieza.setText("");
-                        mII.setText("");
-                        mIE.setText("");
-                        mFI.setText("");
-                        mFE.setText("");
-                        request.getChecaExt(getContext());
-                    }else{
-                        try{
-                            JSONObject jsonObject = new JSONObject();
-                            jsonObject.put("ClvOrdSer", Util.getClvOrden(Util.preferences));
-                            jsonObject.put("TipoDescarga", Util.getTipoDescarga(Util.preferences));
-                            request.bitacoraDirecta(getActivity(),getContext(),jsonObject);
-                        }catch (Exception e){}
-                        descripcionMat.setSelection(0);
-                        clasificacionMat.setSelection(0);
-                        clasificacionMat.setEnabled(false);
-                        piezasMat.setVisibility(View.GONE);
-                        extMat.setVisibility(View.GONE);
-                        metrosMat.setVisibility(View.GONE);
-                        pieza.setText("");
-                        mII.setText("");
-                        mIE.setText("");
-                        mFI.setText("");
-                        mFE.setText("");
-                    }*/
-                } else {
-                    Toast.makeText(getContext(), "Cantidad incorrecta", Toast.LENGTH_SHORT).show();
-                }
-            }
-
-        }
-    }
-    public boolean ValidacionDescarga() {
-        boolean ok=false;
-        if(request.extencionesMat == true){
-            if(extSer!=0){
-                if(mII.getText().toString().length() == 0 || mFI.getText().toString().length() == 0){
-                    EIMD = 0;
-                    EFDM = 0;
-                    ok=true;
-                }else{
-                    ok=false;
-                }
-            }else{
-                if(mII.getText().toString().length() == 0 || mFI.getText().toString().length() == 0 || mIE.getText().toString().length() == 0 || mFE.getText().toString().length() == 0){
-                    ok=true;
-                }else{
-                    ok=false;
-                }
-            }
-
-        }else if(esFibra==1){
-            if(mIE.getText().toString().length() == 0 || mFE.getText().toString().length() == 0){
-                IIDM=0;
-                IFDM=0;
-                ok=true;
-            }else{
-                ok=false;
-            }
-        } else{
-            if(mII.getText().toString().length() == 0 || mFI.getText().toString().length() == 0 || mIE.getText().toString().length() == 0 || mFE.getText().toString().length() == 0){
-                ok=true;
-            }else{
-                ok=false;
+                request.getValidaPreDes(getActivity(), getContext());
+                descripcionMat.setSelection(0);
+                clasificacionMat.setSelection(0);
+                clasificacionMat.setEnabled(false);
+                piezasMat.setVisibility(View.GONE);
+                extMat.setVisibility(View.GONE);
+                metrosMat.setVisibility(View.GONE);
+                pieza.setText("");
+                mII.setText("");
+                mIE.setText("");
+                mFI.setText("");
+                mFE.setText("");
+                request.getChecaExt(getContext());
+            } else {
+                Toast.makeText(getContext(), "Cantidad incorrecta", Toast.LENGTH_SHORT).show();
             }
         }
-
-        return ok;
     }
 }
