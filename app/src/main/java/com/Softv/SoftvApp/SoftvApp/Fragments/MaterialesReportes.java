@@ -1,6 +1,5 @@
 package com.Softv.SoftvApp.SoftvApp.Fragments;
 
-
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.constraint.ConstraintLayout;
@@ -37,11 +36,8 @@ import java.util.List;
 import static com.Softv.SoftvApp.SoftvApp.Adapters.QuejasAdapter.statusQueja;
 import static com.Softv.SoftvApp.SoftvApp.Request.Request.extencionesMat;
 
-
-/**
- * A simple {@link Fragment} subclass.
- */
 public class MaterialesReportes extends Fragment {
+
     private LayoutInflater inflater;
     private ViewGroup container;
     public static HorizontalScrollView horizontalScrollViewR;
@@ -111,26 +107,11 @@ public class MaterialesReportes extends Fragment {
             request.getPermisosDirecta(getContext(),jsonObjectDirecta1);
         }catch (Exception e){}
 
-        /*if(Util.getPermisisDescarga(Util.preferences)==true){
-            try {
-                JSONObject jsonObject = new JSONObject();
-                jsonObject.put("ClvOrdSer", Util.getClvOrden(Util.preferences) );
-                jsonObject.put("TipoDescarga", Util.getTipoDescarga(Util.preferences));
-
-                request.DamebitacoraDirectaR(getContext(),jsonObject);
-            }catch (Exception e){}
-        }else {
-            request.getPredescargaR(getActivity(),getContext());
-        }*/
         request.getPredescargaR(getActivity(),getContext());
-       /* final TablaAdapter tablaAdapter = new TablaAdapter(getActivity(), tablaR);
-        tablaAdapter.agregarCabecera(R.array.cabecera_tabla);*/
-
             if(statusQueja.equals("E")){
                 agragarDMR.setEnabled(false);
                 descripcionMatR.setEnabled(false);
                 agragarDMR.setTextColor(Color.GRAY);
-
         }
 
         if(extencionesMat==true){
@@ -168,6 +149,7 @@ public class MaterialesReportes extends Fragment {
 
             }
         });
+
         clasificacionMatR.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -203,6 +185,7 @@ public class MaterialesReportes extends Fragment {
 
             }
         });
+
         spinnerExtMatR.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -251,6 +234,7 @@ public class MaterialesReportes extends Fragment {
 
             }
         });
+
         agragarDMR.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -267,10 +251,6 @@ public class MaterialesReportes extends Fragment {
                         EjecutarDescargaMaterial();
                     }
                 }
-
-                /////////////////////////////////
-
-
             }
         });
 

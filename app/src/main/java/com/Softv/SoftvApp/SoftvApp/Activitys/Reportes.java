@@ -37,9 +37,9 @@ public class Reportes extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
    private Request request = new Request();
    private RecyclerView reportes;
-   private Button breporte,bcontrato;
-   private EditText reportesearch,contratosearch;
-    public static boolean statusBusquedaReporte = false,statusBusquedaContRepo = false;
+   private Button breporte,bcontrato,bprecinto;
+   private EditText reportesearch,contratosearch,presearch;
+    public static boolean statusBusquedaReporte = false,statusBusquedaContRepo = false, statusBusquedaPresinto = false;
    private QuejasAdapter adapterqueja;
     NavigationView barra;
     TextView nombreTec;
@@ -55,8 +55,10 @@ public class Reportes extends AppCompatActivity
         reportes=findViewById(R.id.listreporte);
         breporte=findViewById(R.id.breporte);
         bcontrato=findViewById(R.id.bcontrato);
+        bprecinto=findViewById(R.id.bprecinto);
         reportesearch=findViewById(R.id.reportesearch);
         contratosearch=findViewById(R.id.contsearch);
+        presearch=findViewById(R.id.presearch);
         barra = findViewById(R.id.nav_view);
         View barra1 = barra.getHeaderView(0);
         nombreTec=barra1.findViewById(R.id.tv_NombreTecnico);
@@ -72,6 +74,7 @@ public class Reportes extends AppCompatActivity
         reportes.setAdapter(adapterqueja);    //Asignacion del adapatador a la listView
         dialogReportes= new BarraCargar().showDialog(this);
         barraCargar.terminarBarra();
+        //Busqueda de reporte//
         breporte.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -134,6 +137,38 @@ public class Reportes extends AppCompatActivity
                     RecyclerView.LayoutManager layoutManager = new GridLayoutManager(getApplicationContext(),1);
                     reportes.setLayoutManager(layoutManager);
                     reportes.setAdapter(adapterqueja);
+                }
+            }
+        });
+        //Busqueda por precinto//
+        bprecinto.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                statusBusquedaPresinto = true;
+                if (presearch.getText().toString().trim().equalsIgnoreCase("")){
+                    Toast toast1 = Toast.makeText(getApplicationContext(), "Campo de precinto vacío", Toast.LENGTH_SHORT);
+                    Array.Queja.clear();
+                    Array.nombreQ.clear();
+                    statusQ.clear();
+                    Array.contratoQ.clear();
+                    Array.Direccion.clear();
+                    clavequeja=0;
+                    opcion=1;
+                    RecyclerView.LayoutManager layoutManager = new GridLayoutManager(getApplicationContext(),1);
+                    reportes.setLayoutManager(layoutManager);
+                    request.getListQuejas(getApplicationContext());
+                    toast1.show();
+                } else {
+                    /*Array.ordensrc.clear();
+                    Array.nombresrc.clear();
+                    statusrc.clear();
+                    Array.contratosrc.clear();
+                    Array.direccionsrc.clear();
+                    opcion=4;
+                    cont=(contsearch.getText().toString().toLowerCase().trim());
+                    precinto=(presearch.getText().toString().toLowerCase().trim());
+                    rqs.getListOrd(getApplicationContext());
+                    ordenes.setAdapter(adapterord);*/
                 }
             }
         });
