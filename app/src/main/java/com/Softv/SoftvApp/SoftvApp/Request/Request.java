@@ -1,3 +1,4 @@
+
 package com.Softv.SoftvApp.SoftvApp.Request;
 
 import android.app.Activity;
@@ -29,17 +30,17 @@ import com.Softv.SoftvApp.SoftvApp.Activitys.Orden;
 import com.Softv.SoftvApp.SoftvApp.Activitys.CambioDom;
 
 import com.Softv.SoftvApp.SoftvApp.Activitys.CambioAparato;
+import com.Softv.SoftvApp.SoftvApp.Activitys.PDF;
 import com.Softv.SoftvApp.SoftvApp.Activitys.ReporteAsignacion;
 import com.Softv.SoftvApp.SoftvApp.Activitys.Reportes;
-import com.Softv.SoftvApp.SoftvApp.Activitys.TecnicosSecundarios;
-import com.Softv.SoftvApp.SoftvApp.Adapters.ArbolAdapter;
-import com.Softv.SoftvApp.SoftvApp.Adapters.EliminarAparatosAdapter;
+import com.Softv.SoftvApp.SoftvApp.Activitys.Saldo;
+import com.Softv.SoftvApp.SoftvApp.Activitys.ServiciosSaldo;
+import com.Softv.SoftvApp.SoftvApp.Adapters.ClientesAdapter;
 import com.Softv.SoftvApp.SoftvApp.Adapters.EliminarMaterialAdapter;
 import com.Softv.SoftvApp.SoftvApp.Adapters.GraficaAdapter;
 import com.Softv.SoftvApp.SoftvApp.Adapters.NAPAdapter;
 import com.Softv.SoftvApp.SoftvApp.Adapters.TAPAdapter;
 import com.Softv.SoftvApp.SoftvApp.Adapters.TrabajosAdapter;
-import com.Softv.SoftvApp.SoftvApp.Dibujo.Firma;
 import com.Softv.SoftvApp.SoftvApp.Fragments.EjecutarOrdenes;
 import com.Softv.SoftvApp.SoftvApp.Activitys.ExtensionesAdi;
 import com.Softv.SoftvApp.SoftvApp.Fragments.EjecutarReportes;
@@ -50,6 +51,7 @@ import com.Softv.SoftvApp.SoftvApp.Fragments.HorasOrdenes;
 import com.Softv.SoftvApp.SoftvApp.Fragments.MaterialesOrdenes;
 import com.Softv.SoftvApp.SoftvApp.Fragments.MaterialesReportes;
 import com.Softv.SoftvApp.SoftvApp.Listas.Array;
+import com.Softv.SoftvApp.SoftvApp.Listas.DetallesList;
 import com.Softv.SoftvApp.SoftvApp.Listas.Example;
 import com.Softv.SoftvApp.SoftvApp.Listas.Example1;
 import com.Softv.SoftvApp.SoftvApp.Listas.Example2;
@@ -61,7 +63,6 @@ import com.Softv.SoftvApp.SoftvApp.Listas.JSONAparatosDisponibles;
 import com.Softv.SoftvApp.SoftvApp.Listas.JSONArbolServicios;
 import com.Softv.SoftvApp.SoftvApp.Listas.JSONCAMDO;
 import com.Softv.SoftvApp.SoftvApp.Listas.JSONCLIAPA;
-import com.Softv.SoftvApp.SoftvApp.Listas.JSONCUADRILLA;
 import com.Softv.SoftvApp.SoftvApp.Listas.JSONDATOSCLIENTE;
 import com.Softv.SoftvApp.SoftvApp.Listas.JSONDESCARGADIRECTA;
 import com.Softv.SoftvApp.SoftvApp.Listas.JSONColonia;
@@ -72,7 +73,6 @@ import com.Softv.SoftvApp.SoftvApp.Listas.JSONLlenaExtenciones;
 import com.Softv.SoftvApp.SoftvApp.Listas.JSONMediosSer;
 import com.Softv.SoftvApp.SoftvApp.Listas.JSONNombreTecnico;
 import com.Softv.SoftvApp.SoftvApp.Listas.JSONPERMISOSDIRECTA;
-import com.Softv.SoftvApp.SoftvApp.Listas.JSONPlaca;
 import com.Softv.SoftvApp.SoftvApp.Listas.JSONPreDescarga;
 import com.Softv.SoftvApp.SoftvApp.Listas.JSONPregunta;
 import com.Softv.SoftvApp.SoftvApp.Listas.JSONReporteCliente;
@@ -87,13 +87,14 @@ import com.Softv.SoftvApp.SoftvApp.Listas.JSONTAP;
 import com.Softv.SoftvApp.SoftvApp.Listas.JSONTecSec;
 import com.Softv.SoftvApp.SoftvApp.Listas.JSONTecSecReport;
 import com.Softv.SoftvApp.SoftvApp.Listas.JSONTipoAparatos;
-import com.Softv.SoftvApp.SoftvApp.Listas.JSONValidaNodo;
+import com.Softv.SoftvApp.SoftvApp.Listas.ListaClientesSaldos;
 import com.Softv.SoftvApp.SoftvApp.Listas.QuejasList;
 import com.Softv.SoftvApp.SoftvApp.Activitys.MainActivity;
 import com.Softv.SoftvApp.SoftvApp.Activitys.MainReportes;
+import com.Softv.SoftvApp.SoftvApp.Listas.ServiciosList;
 import com.Softv.SoftvApp.SoftvApp.Modelos.CambioAparatoDeepModel;
 import com.Softv.SoftvApp.SoftvApp.Modelos.ChecaSiExtencionesModel;
-import com.Softv.SoftvApp.SoftvApp.Modelos.ConsultaIpModel;
+import com.Softv.SoftvApp.SoftvApp.Modelos.DatosClientesSaldoList;
 import com.Softv.SoftvApp.SoftvApp.Modelos.DeepConsModel;
 import com.Softv.SoftvApp.SoftvApp.Modelos.DescripcionArticuloModel;
 import com.Softv.SoftvApp.SoftvApp.Modelos.DetalleBitacoraModel;
@@ -125,7 +126,6 @@ import com.Softv.SoftvApp.SoftvApp.Modelos.GetQuejasListResult;
 import com.Softv.SoftvApp.SoftvApp.Modelos.GetSP_StatusAparatosListResult;
 import com.Softv.SoftvApp.SoftvApp.Modelos.GetServiciosResult;
 import com.Softv.SoftvApp.SoftvApp.Modelos.GetSoftvWEb_DameEntrecalles;
-import com.Softv.SoftvApp.SoftvApp.Modelos.GetSoftvWebValidaNodo;
 import com.Softv.SoftvApp.SoftvApp.Modelos.Get_ClvTecnicoResult;
 import com.Softv.SoftvApp.SoftvApp.Modelos.GetchecaBitacoraTecnicoModel;
 import com.Softv.SoftvApp.SoftvApp.Modelos.GetdameSerDELCliresumenResult;
@@ -133,12 +133,13 @@ import com.Softv.SoftvApp.SoftvApp.Modelos.GetuspBuscaContratoSeparado2ListResul
 import com.Softv.SoftvApp.SoftvApp.Modelos.InfoClienteModelo;
 import com.Softv.SoftvApp.SoftvApp.Modelos.ListadoQuejasAgendadas;
 import com.Softv.SoftvApp.SoftvApp.Modelos.LlenaExtencionesModel;
+import com.Softv.SoftvApp.SoftvApp.Modelos.ModelDetallesList;
+import com.Softv.SoftvApp.SoftvApp.Modelos.ModelServiciosList;
 import com.Softv.SoftvApp.SoftvApp.Modelos.Muestra_TecnicosDescargaMaterialResult;
 import com.Softv.SoftvApp.SoftvApp.Modelos.ObtieneNapModel;
 import com.Softv.SoftvApp.SoftvApp.Modelos.ObtieneTapModel;
 import com.Softv.SoftvApp.SoftvApp.Modelos.OrdSer;
 import com.Softv.SoftvApp.SoftvApp.Modelos.RequierePregunta;
-import com.Softv.SoftvApp.SoftvApp.Modelos.SelectRelTecnicoCuadrillaResult;
 import com.Softv.SoftvApp.SoftvApp.Modelos.ValidaMACWAMMODEL;
 import com.Softv.SoftvApp.SoftvApp.Modelos.ValidacionFirma;
 import com.Softv.SoftvApp.SoftvApp.Modelos.dameTblPreDescargaMaterialResultModel;
@@ -152,6 +153,7 @@ import com.Softv.SoftvApp.SoftvApp.Services.Services;
 import com.Softv.SoftvApp.SoftvApp.Fragments.TrabajosReportes;
 import com.Softv.SoftvApp.SoftvApp.Activitys.ServiciosAInstalar;
 import com.Softv.SoftvApp.SoftvApp.sampledata.BarraCargar;
+import com.Softv.SoftvApp.SoftvApp.sampledata.Constants;
 import com.Softv.SoftvApp.SoftvApp.sampledata.Service;
 import com.Softv.SoftvApp.SoftvApp.sampledata.SplashActivity;
 import com.Softv.SoftvApp.SoftvApp.sampledata.Util;
@@ -166,6 +168,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
@@ -191,9 +194,7 @@ import static com.Softv.SoftvApp.SoftvApp.Adapters.QuejasAdapter.statusQueja;
 import static com.Softv.SoftvApp.SoftvApp.Adapters.TrabajosAdapter.dialogTrabajos;
 //import static com.Softv.SoftvApp.SoftvApp.Fragments.EjecutarOrdenes.Status;
 import static com.Softv.SoftvApp.SoftvApp.Fragments.EjecutarOrdenes.dialogEjecutar;
-import static com.Softv.SoftvApp.SoftvApp.Fragments.EjecutarOrdenes.msgEjecutarOrd;
 import static com.Softv.SoftvApp.SoftvApp.Fragments.EjecutarOrdenes.posTec;
-import static com.Softv.SoftvApp.SoftvApp.Fragments.EjecutarOrdenes.reiniciar;
 import static com.Softv.SoftvApp.SoftvApp.Fragments.EjecutarReportes.TecSecSeleccion;
 import static com.Softv.SoftvApp.SoftvApp.Fragments.EjecutarReportes.dialogReportes;
 import static com.Softv.SoftvApp.SoftvApp.Fragments.EjecutarReportes.fechaEjecujtar;
@@ -206,19 +207,13 @@ import static com.Softv.SoftvApp.SoftvApp.Fragments.HorasReportes.reporteEjecuta
 import static com.Softv.SoftvApp.SoftvApp.Fragments.HorasReportes.repotteVisita;
 import static com.Softv.SoftvApp.SoftvApp.Fragments.MaterialesOrdenes.clasificacionMat;
 import static com.Softv.SoftvApp.SoftvApp.Fragments.MaterialesOrdenes.descripcionMat;
-import static com.Softv.SoftvApp.SoftvApp.Fragments.MaterialesOrdenes.posClasMat;
 import static com.Softv.SoftvApp.SoftvApp.Fragments.MaterialesOrdenes.posDescMat;
-import static com.Softv.SoftvApp.SoftvApp.Fragments.MaterialesOrdenes.posExtMat;
-import static com.Softv.SoftvApp.SoftvApp.Fragments.MaterialesOrdenes.spinnerExtMat;
 import static com.Softv.SoftvApp.SoftvApp.Fragments.MaterialesReportes.clasificacionMatR;
 import static com.Softv.SoftvApp.SoftvApp.Fragments.MaterialesReportes.descripcionMatR;
-import static com.Softv.SoftvApp.SoftvApp.Fragments.MaterialesReportes.posClasMatR;
-import static com.Softv.SoftvApp.SoftvApp.Fragments.MaterialesReportes.posExtMatR;
 import static com.Softv.SoftvApp.SoftvApp.Fragments.MaterialesReportes.spinnerExtMatR;
 import static com.Softv.SoftvApp.SoftvApp.Fragments.TrabajosOrdenes.adaptertrabajos;
 import static com.Softv.SoftvApp.SoftvApp.Fragments.TrabajosOrdenes.trabajos;
 import static com.Softv.SoftvApp.SoftvApp.Fragments.TrabajosReportes.Clv_Sol;
-import static com.Softv.SoftvApp.SoftvApp.Fragments.TrabajosReportes.posSolucionRepo;
 import static com.Softv.SoftvApp.SoftvApp.Fragments.TrabajosReportes.proble;
 import static com.Softv.SoftvApp.SoftvApp.Listas.Array.Asigna;
 import static com.Softv.SoftvApp.SoftvApp.Listas.Array.Asigna1;
@@ -228,32 +223,39 @@ import static com.Softv.SoftvApp.SoftvApp.Listas.Array.contratosrc;
 import static com.Softv.SoftvApp.SoftvApp.Listas.Array.nom_tecnicoSecundarioQ;
 import static com.Softv.SoftvApp.SoftvApp.Listas.Array.ordensrc;
 import static com.Softv.SoftvApp.SoftvApp.Listas.Array.precintosrc;
-import static com.Softv.SoftvApp.SoftvApp.Services.Services.ClvTrabajoRequest;
 import static java.util.Arrays.asList;
 
 
 public class Request extends AppCompatActivity {
-    public static boolean NAP=false,TAP=false,NAPCAMDO=false,TAPCAMDO=false,Placa=false;
+    public static boolean NAP=false,TAP=false,NAPCAMDO=false,TAPCAMDO=false,Placa=false,Desc=false, SeGuarda = false;
     Services services = new Services();
     Array array = new Array();
-    public static String reintentarComando, contraroMA, obsMA, statusMA, extencionesE, Obs,ObsR, msgComando = "",problemaReal;
+    public static String reintentarComando, contraroMA, obsMA, statusMA,PlacaMA, extencionesE, Obs,ObsR, msgComando = "",problemaReal;
     public static boolean isnet, firma,MACWAM,validaExisteFirmaBool;
+    public static boolean PermPlaca = false, PermVamra = false, PermBolivia = false, PermVallarta = false, PermCobro=false, PermCableCentro=false;
+    public static String VENTA, RENTA;
     public static Long abc;
-    public static int clvP, tecC, nExtenciones = 0,clvProblemarepo,ContratoReal,ClvUsuario,NoBitacora,ClvTipSerReportes;
+    public static int clvP, tecC, nExtenciones = 0,clvProblemarepo,ContratoReal,ClvUsuario,NoBitacora,ClvTipSerReportes, Cambio;
     public int reintentaB;
     public static String stringValidaTrabajos;
     public static ArrayAdapter adapterTecSec, adapterTecSecR, adapterNap,adapterTap,adapterColonia,adapterTAPNAPCAMDO;
     public static boolean pieza = false, rapagejecutar = false, extencionesMat = false,escable = false, validanodo=false;
    public static int validFirma;
-    public static String ciudadcmdo, localidadcmdo, coloniacmdo, callecmdo, numerocmdo, numeroicmdo, telefonocmdo, callencmdo, callescmdo, calleecmdo, calleocmdo, casacmdo,referenciascmd;
+    public static String ciudadcmdo, localidadcmdo, coloniacmdo, callecmdo, numerocmdo, numeroicmdo, telefonocmdo, callencmdo, callescmdo, calleecmdo, calleocmdo, casacmdo,referenciascmd,entrecallescmd;
     public static String ejecutarStatus,reporteStatus,clasProblema;
-    public static String reporteVisita1,reporteVisita2,reporteVisita3,reporteHora1,reporteHora2,reporteHora3;
+    public static String reporteVisita1,reporteVisita2,reporteVisita3,reporteHora1,reporteHora2,reporteHora3, titul;
+    public static String ContratoCompuestoSaldo,NombreSaldo,TelefonoSaldo,Calle_NumeroSaldo,ColoniaSaldo,ContratoSaldo, FechaCosultaSaldo, TotalSaldo;
+    public static  String GetTicketResult = Constants.URL_REPORTES, NombreGeneral;
+    public static float Monto;
+    public static Integer Session = 0, CLV_FACTURA = 0 ;
+
     JsonObject jsonConsultaIp;
     String a = "Seleccione técnico secundario";
     String f = "Seleccione tipo de solución";
     public static String datos[], datosTap[],datosNap[];
     BarraCargar barraCargar = new BarraCargar();
     public static boolean requierePregunta=false;
+    public List<GetMuestraServiciosRelTipoAparatoListResult> ServDig;
 
     //Metodo por si existe un error en el login o inicio de sesion
     public void ErrorLogin(final Context context,ProgressDialog dialogLogin, View view) {
@@ -308,7 +310,7 @@ public class Request extends AppCompatActivity {
                         new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-                                Intent intento = new Intent(context, Inicio.class);
+                                Intent intento = new Intent(context, Saldo.class);
                                 intento.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                                 context.startActivity(intento);
                             }
@@ -412,7 +414,7 @@ public class Request extends AppCompatActivity {
                         }
 
                         if(Login==true){
-                            Intent intento = new Intent(context, Inicio.class);
+                            Intent intento = new Intent(context, Saldo.class);
                             intento.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                             context.startActivity(intento);
                             dialogLogin.dismiss();
@@ -420,8 +422,8 @@ public class Request extends AppCompatActivity {
                             try{
                                 JSONObject jsonObject = new JSONObject();
                                 jsonObject.put("clv_tecnico", Util.getClvTec(Util.preferences));
-                                getProximaCita(context,jsonObject,view,dialogLogin,activity);
-                                getOrdenes(context,jsonObject,view,dialogLogin,activity);
+                                //getProximaCita(context,jsonObject,view,dialogLogin,activity);
+                                //getOrdenes(context,jsonObject,view,dialogLogin,activity);
                             }catch (Exception x){dialogLogin.dismiss();}
                         }
                     }catch (Exception e){
@@ -463,6 +465,9 @@ public class Request extends AppCompatActivity {
             @Override
             public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
                 if (response.code() == 200) {
+                    //Verifica los permisos
+                    Permisos(context, jsonObject);
+
                     TextView tipoTrabajo, contratoTrabajo, horaTrabajo, calleDireccion, numeroDireccion, coloniaDireccion;
                     JsonObject userJson = response.body().getAsJsonObject("GetDameSiguienteCitaResult");
                     String jsonToString = String.valueOf(userJson);
@@ -781,7 +786,11 @@ public class Request extends AppCompatActivity {
                             Array.contratoQ.add(String.valueOf(dat.get(i).getContrato()));
                             Array.nombreQ.add(String.valueOf(dat.get(i).getNombre()));
                             Array.statusQ.add(String.valueOf(dat.get(i).getStatus()));
-                            Array.Direccion.add(String.valueOf(dat.get(i).getCalle() + ", " + dat.get(i).getNUMERO() + ", " + dat.get(i).getColonia()));
+                            if(PermCableCentro == true)
+                                Array.Direccion.add(String.valueOf(dat.get(i).getCalle() + ", " + dat.get(i).getColonia()));
+                            else
+                                Array.Direccion.add(String.valueOf(dat.get(i).getCalle() + ", " + dat.get(i).getNUMERO() + ", " + dat.get(i).getColonia()));
+
 
                             String[] caracteres = dat.get(i).getFecha().split(" ");
                             Array.fechaQ.add(caracteres[0]);
@@ -825,6 +834,8 @@ public class Request extends AppCompatActivity {
             public void onResponse(Call<Example1> call, Response<Example1> response) {
                 Log.d("asd","asd");
                 if (response.code() == 200) {
+                    RENTA = null;
+                    VENTA = null;
                     Example1 jsonResponse = response.body();
                     array.dataagenda = new ArrayList<List<GetDameListadoOrdenesAgendadasResult>>(asList(jsonResponse.getGetDameListadoOrdenesAgendadasResult()));
                     Iterator<List<GetDameListadoOrdenesAgendadasResult>> itData = array.dataagenda.iterator();
@@ -845,7 +856,10 @@ public class Request extends AppCompatActivity {
                             Array.contratosrc.add(String.valueOf(dat.get(i).getContrato()));
                             Array.nombresrc.add(String.valueOf(dat.get(i).getNombre()));
                             Array.statusrc.add(String.valueOf(dat.get(i).getStatus()));
-                            Array.direccionsrc.add(String.valueOf(dat.get(i).getCalle() + ", " + dat.get(i).getNumero() + ", " + dat.get(i).getColonia()));
+                            if(PermCableCentro == true)
+                                Array.direccionsrc.add(String.valueOf(dat.get(i).getCalle() + ", " + dat.get(i).getColonia()));
+                            else
+                                Array.direccionsrc.add(String.valueOf(dat.get(i).getCalle() + ", " + dat.get(i).getNumero() + ", " + dat.get(i).getColonia()));
                             Array.napsrc.add(dat.get(i).getNap());
                             Array.tapsrc.add(dat.get(i).getTab());
                             Array.trabajosrc.add(dat.get(i).getDescripcion());
@@ -928,6 +942,11 @@ public class Request extends AppCompatActivity {
                     } catch (Exception e) {
                         ErrorMensaje(context,"Error al conseguir datos de la orden");
                     }
+                    try {
+                        PlacaMA=userJson.get("Placa").getAsString();
+                    } catch (Exception e) {
+                        PlacaMA="---";
+                    }
                 } else {
                     ErrorMensaje(context,"Error al conseguir datos de la orden "+response.message());
                 }
@@ -966,7 +985,7 @@ public class Request extends AppCompatActivity {
                     } catch (Exception e) {
                     }
 
-                    MainActivity.Nombre.setText(InfoClienteModelo.NOMBRE);
+                    //MainActivity.Nombre.setText(InfoClienteModelo.NOMBRE);
                 } else {
                     ErrorMensaje(context,"Error al conseguir información del cliente "+response.message());
                 }
@@ -981,13 +1000,14 @@ public class Request extends AppCompatActivity {
 
     //ServiciosdelCliente//
     public void getServicios(final Context context) {
-        Service service = null;
+        JSONObject jsonObject = new JSONObject();
         try {
-            service = services.getServiciosService(context);
+
+            jsonObject.put("Contrato", DeepConsModel.Contrato);
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        Call<Example2> call = service.getDataServicios();
+        Call<Example2> call = services.RequestPost(context, jsonObject).getDataServicios();
         call.enqueue(new Callback<Example2>() {
             @Override
             public void onResponse(Call<Example2> call, Response<Example2> response) {
@@ -1307,9 +1327,8 @@ public class Request extends AppCompatActivity {
                             CambioAparato.contratoNetCam = dat1.get(CambioAparato.obtenerPosicionTA(CambioAparatoDeepModel.TipoAparatoAsignar)).getControNet();
                         }
 
-
                     } catch (Exception e) {
-
+                        //ErrorMensaje(context,"Error al conseguir tipo de aparato " + e.toString());
                     }
                     JSONApaTipo jsonResponse = response.body();
                     array.dataApaTipo = new ArrayList<List<GetListTipoAparatosByIdArticuloResult>>(asList(jsonResponse.GetListTipoAparatosByIdArticuloResult()));
@@ -1488,6 +1507,16 @@ public class Request extends AppCompatActivity {
                             calleocmdo = dat.get(0).calleOeste;
                             casacmdo = dat.get(0).Casa;
                             referenciascmd = dat.get(0).Referencia;
+                            // Entre calles
+                            String aux="";
+                            if(callencmdo.length() != 0) aux = aux + "N: " + callencmdo +  "\n";
+                            if(callescmdo.length() != 0) aux = aux + "S: " + callescmdo +  "\n";
+                            if(calleecmdo.length() != 0) aux = aux + "E: " + calleecmdo +  "\n";
+                            if(calleocmdo.length() != 0) aux = aux + "O: " + calleocmdo +  "\n";
+
+                            //entrecallescmd = "N:"+callencmdo + "    S:" + callescmdo + "\nE:" + calleecmdo + "  O:" + calleocmdo;
+                            entrecallescmd = aux;
+
                             Intent intento = new Intent(context, CambioDom.class);
                             intento.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                             context.startActivity(intento);
@@ -1506,6 +1535,7 @@ public class Request extends AppCompatActivity {
                         calleecmdo = "";
                         calleocmdo = "";
                         casacmdo = "";
+                        entrecallescmd="--";
                         Intent intento = new Intent(context, CambioDom.class);
                         intento.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                         context.startActivity(intento);
@@ -1618,7 +1648,7 @@ public class Request extends AppCompatActivity {
     }
 
     //Tipo de Aparatos//
-    public void getTipoAparatos(final Context context, final JSONObject jsonObject, final Spinner spinner) {
+    public void getTipoAparatos(final Context context, final JSONObject jsonObject, final Spinner spinnerapa) {
         Call<JSONTipoAparatos> call = services.RequestPost(context, jsonObject).getDataTipoAparatos();
         call.enqueue(new Callback<JSONTipoAparatos>() {
             @Override
@@ -1634,11 +1664,11 @@ public class Request extends AppCompatActivity {
                         List<GetMuestraTipoAparatoListResult> dat = itData.next();
                         for (int i = 0; i < dat.size(); i++) {
                             array.tipoAparato.add(dat.get(i).getNombre());
-                            array.tipoAparatoLetra.add(dat.get(i).letra);
+                            array.tipoAparatoLetra.add(dat.get(i).getLetra());
                         }
                     }
                     ArrayAdapter<String> adapter1 = new ArrayAdapter<String>(context, android.R.layout.simple_spinner_dropdown_item, array.tipoAparato);
-                    spinner.setAdapter(adapter1);
+                    spinnerapa.setAdapter(adapter1);
                 } else {
                     ErrorMensaje(context,"Error al conseguir tipos de aparatos "+response.message());
                 }
@@ -1669,6 +1699,7 @@ public class Request extends AppCompatActivity {
                         for (int i = 0; i < dat.size(); i++) {
                             array.aparatoDisponibles.add(dat.get(i).getDescripcion());
                             array.aparatoAsignacion.add(dat.get(i).getDescripcion());
+
 
                         }
                     }
@@ -1702,9 +1733,10 @@ public class Request extends AppCompatActivity {
 
                     array.dataserviciosAparatos = new ArrayList<List<GetMuestraServiciosRelTipoAparatoListResult>>(asList(jsonResponse.GetMuestraServiciosRelTipoAparatoListResult()));
                     Iterator<List<GetMuestraServiciosRelTipoAparatoListResult>> itData = array.dataserviciosAparatos.iterator();
+                    ServDig=null;
                     while (itData.hasNext()) {
                         List<GetMuestraServiciosRelTipoAparatoListResult> dat = (List<GetMuestraServiciosRelTipoAparatoListResult>) itData.next();
-
+                        ServDig = dat;
                         /*if(Util.getTipodeCliente(Util.preferences)==3){
                             cuadrilla.setVisibility(View.VISIBLE);
 
@@ -1735,10 +1767,13 @@ public class Request extends AppCompatActivity {
                         if(TrabajosAdapter.ISDIG==true){
                             if(letra.equals("T")||letra.equals("D")){
                                 for (int i = 0; i < dat.size(); i++) {
-                                    array.serviciosAparatos.add(dat.get(i).getNombre());
-                                    if(dat.get(i).clv_UnicaNet==ArbolAdapter.clv_unicaNet){
+                                    String titu = titul;
+                                    if(dat.get(i).getNombre().contains(titu) || titu.contains(dat.get(i).getNombre())){
+                                        array.serviciosAparatos.add(dat.get(i).getNombre());
                                         AsignarAparato.selectedStrings.add(dat.get(i).clv_UnicaNet);
                                     }
+                                    //if(dat.get(i).clv_UnicaNet == ArbolAdapter.clv_unicaNet){}
+                                    //AsignarAparato.selectedServ.add(dat.get(i).nombre);
                                 }
                             }else{
                                 for (int i = 0; i < dat.size(); i++) {
@@ -1753,6 +1788,9 @@ public class Request extends AppCompatActivity {
                                AsignarAparato.selectedStrings.add(dat.get(i).clv_UnicaNet);
                            }
                        }
+                        for (int i = 0; i < dat.size(); i++) {
+                            AsignarAparato.selectedServ.add(dat.get(i).nombre);
+                        }
                     }
                     ArrayAdapter arrayAdapter = new ArrayAdapter(context, android.R.layout.simple_list_item_checked, array.serviciosAparatos);
                     lista.setAdapter(arrayAdapter);
@@ -1777,7 +1815,12 @@ public class Request extends AppCompatActivity {
     }
 
     public void getAceptatAsignacino(final Context context, final JSONObject jsonObject) {
-        Call<JsonObject> call = services.RequestPost(context, jsonObject).getDataAceptarAsig();
+        Call<JsonObject> call;
+        if(PermCableCentro == true && SeGuarda == true){
+            call = services.RequestPost(context, jsonObject).getDataAceptarAsig2();
+        }else{
+            call = services.RequestPost(context, jsonObject).getDataAceptarAsig();
+        }
         call.enqueue(new Callback<JsonObject>() {
             @Override
             public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
@@ -1879,6 +1922,11 @@ public class Request extends AppCompatActivity {
                             problemaReal = dat.get(i).solucion;
                             clasProblema = dat.get(i).getClasificacionProblema();
                             ClvTipSerReportes = dat.get(i).getClvTipSer();
+                            try{
+                                PlacaMA=dat.get(i).getPlaca();
+                            }catch (Exception e){
+                                PlacaMA="---";
+                            }
 
                             try {
                                 TrabajosReportes.prioridad.setText(String.valueOf(dat.get(i).getPrioridad()));
@@ -2060,10 +2108,11 @@ public class Request extends AppCompatActivity {
                     while (itData.hasNext()) {
                         List<GetuspBuscaContratoSeparado2ListResult> dat = (List<GetuspBuscaContratoSeparado2ListResult>) itData.next();
                         for (int i = 0; i < dat.size(); ++i) {
-                            MainReportes.Nombre1.setText(dat.get(i).getNombre() + "  " + dat.get(i).getApellidoPaterno() + "  " + dat.get(i).getApellidoMaterno());
+                            //MainReportes.Nombre1.setText(dat.get(i).getNombre() + "  " + dat.get(i).getApellidoPaterno() + "  " + dat.get(i).getApellidoMaterno());
                             //MainReportes.Direccion1.setText(dat.get(i).getCALLE() + "  " + dat.get(i).getNUMERO() + "  " + dat.get(i).getCOLONIA());
                             MainReportes.contrato1.setText(dat.get(i).getCONTRATO());
                             MainReportes.ciudad1.setText(dat.get(i).getCIUDAD());
+                            MainReportes.placa1.setText(PlacaMA);
                             abc = dat.get(i).contratoBueno;
                             getServiciosAsignados(context);
                             abc = dat.get(i).contratoBueno;
@@ -2158,7 +2207,7 @@ public class Request extends AppCompatActivity {
                         EjecutarOrdenes.eject.setEnabled(true);
                     }*/
                 }else{
-                    ErrorMensaje(context,"Se ha producido un error, verifique su conexion e intente nuevamente");
+                    ErrorMensaje(context,"Se ha producido un error, verifique su conexion e intente nuevamente 1");
                     if(visita == 1){
                         dialogVisitaOrd.dismiss();
                     }else if (ejecutada == 1){
@@ -2171,7 +2220,7 @@ public class Request extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<JsonObject> call, Throwable t) {
-                ErrorMensaje(context,"Se ha producido un error, verifique su conexion e intente nuevamente");
+                ErrorMensaje(context,"Se ha producido un error, verifique su conexion e intente nuevamente 2");
                 dialogEjecutar.dismiss();
                 EjecutarOrdenes.eject.setEnabled(true);
             }
@@ -2188,13 +2237,13 @@ public class Request extends AppCompatActivity {
                      stringValidaTrabajos = String.valueOf(response.body().getAsJsonPrimitive("GetSP_ValidaGuardaOrdSerAparatosResult"));
 
                 }else{
-                    ErrorMensaje(context,"Se ha producido un error, verifique su conexion e intente nuevamente");
+                    ErrorMensaje(context,"Se ha producido un error, verifique su conexion e intente nuevamente 3");
                 }
             }
 
             @Override
             public void onFailure(Call<JsonObject> call, Throwable t) {
-                ErrorMensaje(context,"Se ha producido un error, verifique su conexion e intente nuevamente");
+                ErrorMensaje(context,"Se ha producido un error, verifique su conexion e intente nuevamente 4");
             }
         });
     }
@@ -2232,7 +2281,7 @@ public class Request extends AppCompatActivity {
                         Toast.makeText(context, "Error: " + checa.Error, Toast.LENGTH_LONG).show();
                     }
                 }else{
-                    ErrorMensaje(context,"Se ha producido un error, verifique su conexion e intente nuevamente");
+                    ErrorMensaje(context,"Se ha producido un error, verifique su conexion e intente nuevamente 5");
                     if(visita == 1){
                         dialogVisitaOrd.dismiss();
                     }else if (ejecutada == 1){
@@ -2243,7 +2292,7 @@ public class Request extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<JsonObject> call, Throwable t) {
-                ErrorMensaje(context,"Se ha producido un error, verifique su conexion e intente nuevamente");
+                ErrorMensaje(context,"Se ha producido un error, verifique su conexion e intente nuevamente 6");
             }
         });
     }
@@ -2270,7 +2319,7 @@ public class Request extends AppCompatActivity {
                         }*/
                     }
                 } else {
-                    ErrorMensaje(context,"Se ha producido un error, verifique su conexion e intente nuevamente");
+                    ErrorMensaje(context,"Se ha producido un error, verifique su conexion e intente nuevamente 7");
                     if(visita == 1){
                         dialogVisitaOrd.dismiss();
                     }else if (ejecutada == 1){
@@ -2282,7 +2331,7 @@ public class Request extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<JsonObject> call, Throwable t) {
-                ErrorMensaje(context,"Se ha producido un error, verifique su conexion e intente nuevamente");
+                ErrorMensaje(context,"Se ha producido un error, verifique su conexion e intente nuevamente 8");
                 dialogEjecutar.dismiss();
                 EjecutarOrdenes.eject.setEnabled(true);
             }
@@ -2305,7 +2354,7 @@ public class Request extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<JsonObject> call, Throwable t) {
-                ErrorMensaje(context,"Se ha producido un error, verifique su conexion e intente nuevamente");
+                ErrorMensaje(context,"Se ha producido un error, verifique su conexion e intente nuevamente 9");
                 dialogEjecutar.dismiss();
                 EjecutarOrdenes.eject.setEnabled(true);
             }
@@ -2343,7 +2392,7 @@ public class Request extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<JsonObject> call, Throwable t) {
-                ErrorMensaje(context,"Se ha producido un error, verifique su conexion e intente nuevamente");
+                ErrorMensaje(context,"Se ha producido un error, verifique su conexion e intente nuevamente 10");
                 dialogEjecutar.dismiss();
                 EjecutarOrdenes.eject.setEnabled(true);
             }
@@ -2379,7 +2428,7 @@ public class Request extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<JsonObject> call, Throwable t) {
-                ErrorMensaje(context,"Se ha producido un error, verifique su conexion e intente nuevamente");
+                ErrorMensaje(context,"Se ha producido un error, verifique su conexion e intente nuevamente 11");
                 dialogEjecutar.dismiss();
                 EjecutarOrdenes.eject.setEnabled(true);
             }
@@ -2395,7 +2444,7 @@ public class Request extends AppCompatActivity {
 
                     addLlenaBitacora(context);
                 } else {
-                    ErrorMensaje(context,"Se ha producido un error, verifique su conexion e intente nuevamente");
+                    ErrorMensaje(context,"Se ha producido un error, verifique su conexion e intente nuevamente 12");
                     if(visita == 1){
                         dialogVisitaOrd.dismiss();
                     }else if (ejecutada == 1){
@@ -2407,7 +2456,7 @@ public class Request extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<JsonObject> call, Throwable t) {
-                ErrorMensaje(context,"Se ha producido un error, verifique su conexion e intente nuevamente");
+                ErrorMensaje(context,"Se ha producido un error, verifique su conexion e intente nuevamente 13");
                 dialogEjecutar.dismiss();
                 EjecutarOrdenes.eject.setEnabled(true);
             }
@@ -2496,7 +2545,7 @@ try{
 
             @Override
             public void onFailure(Call<JsonObject> call, Throwable t) {
-                ErrorMensaje(context,"Se ha producido un error, verifique su conexion e intente nuevamente");
+                ErrorMensaje(context,"Se ha producido un error, verifique su conexion e intente nuevamente 14");
                 dialogEjecutar.dismiss();
                 EjecutarOrdenes.eject.setEnabled(true);
             }
@@ -2527,7 +2576,7 @@ try{
                                 objQuejas.put("HV1", "");
                                 objQuejas.put("HV2", "");
                                 objQuejas.put("HV3", "");
-                                objQuejas.put("IdUsuario", 1);
+                                objQuejas.put("IdUsuario", Util.getClvUsuario(Util.preferences));
                                 objQuejas.put("Observaciones", Obs);
                                 objQuejas.put("Solucion", proble.getText());
                                 objQuejas.put("Status", "E");
@@ -2539,6 +2588,7 @@ try{
                                 objQuejas.put("clvPrioridadQueja", clvP);
                                 objQuejas.put("clvProblema", Clv_Sol);
                                 objQuejas.put("clvProblema2", clvProblemarepo);
+                                objQuejas.put("COMENTARIO", "MOVIL");
                                 jsonObject1.put("objQuejas", objQuejas);
                                 getGuardaCampos(context,jsonObject1);
                             }catch (Exception e){}
@@ -2548,7 +2598,7 @@ try{
                 } else{
 
                     dialogReportes.dismiss();
-                    ErrorMensaje(context,"Se ha producido un error, verifique su conexion e intente nuevamente");
+                    ErrorMensaje(context,"Se ha producido un error, verifique su conexion e intente nuevamente 15");
                 }
             }
 
@@ -2556,7 +2606,7 @@ try{
             public void onFailure(Call<JsonObject> call, Throwable t) {
 
                 dialogReportes.dismiss();
-                ErrorMensaje(context,"Se ha producido un error, verifique su conexion e intente nuevamente");
+                ErrorMensaje(context,"Se ha producido un error, verifique su conexion e intente nuevamente 16");
             }
         });
     }
@@ -2573,21 +2623,21 @@ try{
 try{
     JSONObject jsonObject = new JSONObject();
     jsonObject.put("ClvQueja", Util.getClvQueja(Util.preferences));
-    jsonObject.put("IdUsuario", 1);
+    jsonObject.put("IdUsuario", Util.getClvUsuario(Util.preferences));
     getValidaReporte(context,jsonObject,fecha,hora);
 }catch (Exception e){}
 
                     }
                 }else{
                     dialogReportes.dismiss();
-                    ErrorMensaje(context,"Se ha producido un error, verifique su conexion e intente nuevamente");
+                    ErrorMensaje(context,"Se ha producido un error, verifique su conexion e intente nuevamente 17");
                 }
             }
 
             @Override
             public void onFailure(Call<JsonObject> call, Throwable t) {
                 dialogReportes.dismiss();
-                ErrorMensaje(context,"Se ha producido un error, verifique su conexion e intente nuevamente");
+                ErrorMensaje(context,"Se ha producido un error, verifique su conexion e intente nuevamente 18");
             }
         });
     }
@@ -2623,7 +2673,7 @@ try{
 
                 }else
                     {
-                        ErrorMensaje(context,"Se ha producido un error, verifique su conexión e intente nuevamente");
+                        ErrorMensaje(context,"Se ha producido un error, verifique su conexión e intente nuevamente Uni2");
                         getListQuejas(context);
 
                         if(repotteVisita==1){
@@ -2637,7 +2687,7 @@ try{
             @Override
             public void onFailure(Call<JsonObject> call, Throwable t) {
                 dialogReportes.dismiss();
-                ErrorMensaje(context,"Se ha producido un error, verifique su conexion e intente nuevamente");
+                ErrorMensaje(context,"Se ha producido un error, verifique su conexion e intente nuevamente 19");
             }
         });
     }
@@ -2664,7 +2714,7 @@ try{
                     Toast.makeText(context, "Orden guardado correctamente", Toast.LENGTH_LONG);
                     getListOrd(context);
                 } else {
-                    ErrorMensaje(context,"Se ha producido un error, verifique su conexion e intente nuevamente");
+                    ErrorMensaje(context,"Se ha producido un error, verifique su conexion e intente nuevamente 20");
                     dialogEjecutar.dismiss();
                     EjecutarOrdenes.eject.setEnabled(true);
                 }
@@ -2672,7 +2722,7 @@ try{
 
             @Override
             public void onFailure(Call<JsonObject> call, Throwable t) {
-                ErrorMensaje(context,"Se ha producido un error, verifique su conexion e intente nuevamente");
+                ErrorMensaje(context,"Se ha producido un error, verifique su conexion e intente nuevamente 21");
             }
         });
     }
@@ -3062,10 +3112,10 @@ try{
             public void onResponse(Call<JSONLlenaExtenciones> call, Response<JSONLlenaExtenciones> response1) {
                 if (response1.code() == 200) {
                     try {
-                        MaterialesOrdenes.extMat.setVisibility(View.VISIBLE);
+                        //MaterialesOrdenes.extMat.setVisibility(View.VISIBLE);
                     }catch (Exception e){}
                     try {
-                        MaterialesReportes.extMatR.setVisibility(View.VISIBLE);
+                        //MaterialesReportes.extMatR.setVisibility(View.VISIBLE);
                     }catch (Exception e){}
                     array.descripcionExt.clear();
                     array.descripcionExt.add(0, "---Seleccionar---");
@@ -3092,6 +3142,7 @@ try{
                     }
                 }else{
                     ErrorMensaje(context,"Error al conseguir datos del materiales "+response1.message());
+                    MaterialesReportes.extMatR.setVisibility(View.GONE);
                 }
             }
 
@@ -3111,39 +3162,15 @@ try{
             @Override
             public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
                 if (response.code() == 200) {
+                    pieza = false;
                     JsonObject userJson = response.body().getAsJsonObject("GetSoftv_ObtenTipoMaterialResult");
                     TipoMaterialModel user = new TipoMaterialModel(
                             userJson.get("Tipo").getAsString()
                     );
-                    if (user.Tipo.equals("Piezas")) {
-                        MaterialesOrdenes.piezasMat.setVisibility(View.VISIBLE);
-                        MaterialesOrdenes.metrosMat.setVisibility(View.INVISIBLE);
+                    if (user.Tipo.equals("Piezas") || user.Tipo.equals("UND")) {
                         pieza = true;
                     } else {
-                        MaterialesOrdenes.metrosMat.setVisibility(View.VISIBLE);
-                        MaterialesOrdenes.piezasMat.setVisibility(View.INVISIBLE);
                         pieza = false;
-//                        if(extencionesMat == true){
-//                            MaterialesOrdenes.mIE.setVisibility(View.GONE);
-//                            MaterialesOrdenes.mFE.setVisibility(View.GONE);
-//                            MaterialesOrdenes.tvExterior.setVisibility(View.GONE);
-//                        }else{
-//                            MaterialesOrdenes.mIE.setVisibility(View.VISIBLE);
-//                            MaterialesOrdenes.mFE.setVisibility(View.VISIBLE);
-//                            MaterialesOrdenes.tvExterior.setVisibility(View.VISIBLE);
-//                        }
-//                        if( MaterialesOrdenes.esFibra==1){
-//                            MaterialesOrdenes.mII.setVisibility(View.GONE);
-//                            MaterialesOrdenes.mFI.setVisibility(View.GONE);
-//                            MaterialesOrdenes.tvInterior.setVisibility(View.INVISIBLE);
-//                            MaterialesOrdenes.tvExterior.setVisibility(View.INVISIBLE);
-//
-//                        }else{
-//                            MaterialesOrdenes.mII.setVisibility(View.VISIBLE);
-//                            MaterialesOrdenes.mFI.setVisibility(View.VISIBLE);
-//                            MaterialesOrdenes.tvInterior.setVisibility(View.VISIBLE);
-//                            MaterialesOrdenes.tvExterior.setVisibility(View.VISIBLE);
-//                        }
                     }
                 }else{
                     ErrorMensaje(context,"Error al conseguir datos del materiales "+response.message());
@@ -3320,7 +3347,7 @@ try{
                     TipoMaterialModel user = new TipoMaterialModel(
                             userJson.get("Tipo").getAsString()
                     );
-                    if (user.Tipo.equals("Piezas")) {
+                    if (user.Tipo.equals("Piezas") || user.Tipo.equals("UND")) {
                         MaterialesReportes.piezasMatR.setVisibility(View.VISIBLE);
                         MaterialesReportes.metrosMatR.setVisibility(View.INVISIBLE);
                         pieza = true;
@@ -3329,15 +3356,15 @@ try{
                         MaterialesReportes.piezasMatR.setVisibility(View.INVISIBLE);
                         pieza = false;
 
-//                        if( MaterialesReportes.esFibraR==1){
-//                            MaterialesReportes.mIIR.setVisibility(View.GONE);
-//                            MaterialesReportes.mFIR.setVisibility(View.GONE);
-//                            MaterialesReportes.tvInteriorR.setVisibility(View.INVISIBLE);
-//                        }else{
-//                            MaterialesReportes.mIIR.setVisibility(View.VISIBLE);
-//                            MaterialesReportes.mFIR.setVisibility(View.VISIBLE);
-//                            MaterialesReportes.tvInteriorR.setVisibility(View.VISIBLE);
-//                        }
+                        if( MaterialesReportes.esFibraR==1){
+                            MaterialesReportes.mIIR.setVisibility(View.GONE);
+                            MaterialesReportes.mFIR.setVisibility(View.GONE);
+                            MaterialesReportes.tvInteriorR.setVisibility(View.INVISIBLE);
+                        }else{
+                            MaterialesReportes.mIIR.setVisibility(View.VISIBLE);
+                            MaterialesReportes.mFIR.setVisibility(View.VISIBLE);
+                            MaterialesReportes.tvInteriorR.setVisibility(View.VISIBLE);
+                        }
                     }
                 }else{
                     ErrorMensaje(context,"Error al conseguir datos del materiales "+response.message());
@@ -4434,7 +4461,7 @@ try{
 
                     }
                 }else{
-                    ErrorMensaje(context,"Se ha producido un error, verifique su conexión e intente nuevamente");
+                    ErrorMensaje(context,"Se ha producido un error, verifique su conexión e intente nuevamente Un1");
                     EjecutarOrdenes.dialogEjecutar.dismiss();
                 }
             }
@@ -4481,26 +4508,29 @@ try{
                                   NAP=true;
                                   Placa=true;
                               }
+
                           }
+                      }
+                      if(Desc == true){
+                          Placa=true;
                       }
                   }catch (Exception e){
                       TAP=false;
                       NAP=false;
                   }
+                    if(PermPlaca) {
+                        if(Placa==true){
+                            txtPlaca.setVisibility(View.VISIBLE);
+                            EtxtPlaca.setVisibility(View.VISIBLE);
 
-                    if(Placa==true){
-                        txtPlaca.setVisibility(View.VISIBLE);
-                        EtxtPlaca.setVisibility(View.VISIBLE);
-                        try{
-                            JSONObject jsonObject = new JSONObject();
-                            jsonObject.put("Contrato", ContratoReal);
-                            getPlaca(context,jsonObject,EtxtPlaca);
-                        }catch (Exception e){}
+                            EtxtPlaca.setText(PlacaMA);
 
-
+                        }else{
+                            txtPlaca.setVisibility(View.GONE);
+                            EtxtPlaca.setVisibility(View.GONE);
+                        }
                     }else{
-                        txtPlaca.setVisibility(View.GONE);
-                        EtxtPlaca.setVisibility(View.GONE);
+
                     }
 
                     if(TAP==true){
@@ -4890,7 +4920,7 @@ try{
                 if (response.code() == 200) {
 
                     Toast.makeText(context,"Se han guardado correctamente las coordenadas",Toast.LENGTH_SHORT).show();
-                    Intent intento = new Intent(context, Inicio.class);
+                    Intent intento = new Intent(context, Saldo.class);
                     intento.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                     context.startActivity(intento);
 
@@ -4914,7 +4944,7 @@ try{
                 if (response.code() == 200) {
 
                     Toast.makeText(context,"Se han guardado correctamente las coordenadas",Toast.LENGTH_SHORT).show();
-                    Intent intento = new Intent(context, Inicio.class);
+                    Intent intento = new Intent(context, Saldo.class);
                     intento.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                     context.startActivity(intento);
 
@@ -5120,11 +5150,14 @@ try{
                                 MainActivity.TelyCel.setText("Celular: Sin celular, Telefono: Sin telefono ");
                             }
                             try {
-                                if (!dat.get(0).getNumInt().equals(null)) {
-                                    MainActivity.Direccion.setText(dat.get(0).getCalle() + ", Num Ext:" + dat.get(0).getNUMERO() + ", Num Int:" + dat.get(0).getNumInt() + ", " + dat.get(0).getCol());
-                                } else {
-                                    MainActivity.Direccion.setText(dat.get(0).getCalle() + ", Num Ext:" + dat.get(0).getNUMERO() + " " + dat.get(0).getCol());
-                                }
+                                if(PermCableCentro == true)
+                                    MainActivity.Direccion.setText(dat.get(0).getCol());
+                                else
+                                    if (!dat.get(0).getNumInt().equals(null)) {
+                                        MainActivity.Direccion.setText(dat.get(0).getCalle() + ", Num Ext:" + dat.get(0).getNUMERO() + ", Num Int:" + dat.get(0).getNumInt() + ", " + dat.get(0).getCol());
+                                    } else {
+                                        MainActivity.Direccion.setText(dat.get(0).getCalle() + ", Num Ext:" + dat.get(0).getNUMERO() + " " + dat.get(0).getCol());
+                                    }
                             }catch (Exception e){
                                 MainActivity.Direccion.setText(dat.get(0).getCalle() + ", Num Ext:" + dat.get(0).getNUMERO() + " " + dat.get(0).getCol());
                             }
@@ -5176,11 +5209,14 @@ try{
                         }
 
                         try {
-                            if (!dat.get(0).getNumInt().equals(null)) {
-                                MainReportes.Direccion1.setText(dat.get(0).getCalle() + ", Num Ext:" + dat.get(0).getNUMERO() + ", Num Int:" + dat.get(0).getNumInt() + ", " + dat.get(0).getCol());
-                            } else {
-                                MainReportes.Direccion1.setText(dat.get(0).getCalle() + ", Num Ext:" + dat.get(0).getNUMERO() + " " + dat.get(0).getCol());
-                            }
+                            if(PermCableCentro==true)
+                                MainReportes.Direccion1.setText(dat.get(0).getCol());
+                            else
+                                if (!dat.get(0).getNumInt().equals(null)) {
+                                    MainReportes.Direccion1.setText(dat.get(0).getCalle() + ", Num Ext:" + dat.get(0).getNUMERO() + ", Num Int:" + dat.get(0).getNumInt() + ", " + dat.get(0).getCol());
+                                } else {
+                                    MainReportes.Direccion1.setText(dat.get(0).getCalle() + ", Num Ext:" + dat.get(0).getNUMERO() + " " + dat.get(0).getCol());
+                                }
                         }catch (Exception e){
                             MainReportes.Direccion1.setText(dat.get(0).getCalle() + ", Num Ext:" + dat.get(0).getNUMERO() + " " + dat.get(0).getCol());
                         }
@@ -5364,7 +5400,7 @@ try{
             @Override
             public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
                 if (response.code() == 200) {
-
+                    ErrorMensaje(context,"Placa guardada "+response.message());
                 } else {
                     ErrorMensaje(context,"Error al guardar Placa "+response.message());
                 }
@@ -5392,6 +5428,425 @@ try{
 
                 }else{
                     ErrorMensaje(context,"Error al conseguir datos placa "+response.message());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<JsonObject> call, Throwable t) {
+                ErrorMensaje(context,"Error "+t.getMessage());
+            }
+        });
+    }
+
+    public void Permisos(final Context context, final JSONObject jsonObject) {
+        Call<JsonObject> call = services.RequestPost(context,jsonObject).getPermisos();
+        call.enqueue(new Callback<JsonObject>() {
+            @Override
+            public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
+                if (response.code() == 200) {
+                    try {
+                        JSONObject jsonObject = new JSONObject(new Gson().toJson(response.body()));
+                        JSONObject Result = new JSONObject(jsonObject.getString("ConsultaPermisosResult"));
+                        /*PermBolivia = true;
+                        PermVamra = true;
+                        PermPlaca = false;*/
+                        if(Integer.parseInt(Result.getString("Bolivia"))==1){
+                            PermBolivia = true;
+                        }
+                        if(Integer.parseInt(Result.getString("Vamra"))==1){
+                            PermVamra = true;
+                        }
+                        if(Integer.parseInt(Result.getString("Placa"))==1){
+                            PermPlaca = true;
+                        }
+                        if(Integer.parseInt(Result.getString("Vallarta"))==1){
+                            PermVallarta = false;
+                        }
+                        if(Integer.parseInt(Result.getString("Cobro"))==1){
+                            PermCobro = true;
+                            Toast toast1 = Toast.makeText(context, "Activado el cobro", Toast.LENGTH_SHORT);toast1.show();
+                        }
+                        if(Integer.parseInt(Result.getString("CableCentro"))==1){
+                            PermCableCentro = true;
+                        }
+                    } catch (JSONException e) {
+                        PermBolivia = false;
+                        PermVamra = false;
+                        PermPlaca = true;
+                        PermVallarta = false;
+                        PermCobro = false;
+                        PermCableCentro = false;
+                    }
+
+                }else{
+                    ErrorMensaje(context,"Error al conseguir los permisos "+response.message());
+                    PermBolivia = true;
+                    PermPlaca = true;
+                }
+            }
+
+            @Override
+            public void onFailure(Call<JsonObject> call, Throwable t) {
+                ErrorMensaje(context,"Error "+t.getMessage());
+            }
+        });
+    }
+
+    public void DameCodigo(final Context context, final JSONObject jsonObject, final EditText codreg) {
+        Call<JsonObject> call = services.RequestPost(context,jsonObject).CodReg();
+        call.enqueue(new Callback<JsonObject>() {
+            @Override
+            public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
+                if (response.code() == 200) {
+                    try {
+                        JSONObject jsonObject = new JSONObject(new Gson().toJson(response.body()));
+                        codreg.setText(jsonObject.getString("GetCodigoRegistroResult"));
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+
+                }else{
+                    ErrorMensaje(context,"Error al conseguir el código registro "+response.message());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<JsonObject> call, Throwable t) {
+                ErrorMensaje(context,"Error "+t.getMessage());
+            }
+        });
+    }
+    public void ValidaCodigo(final Context context, final JSONObject jsonObject, final EditText codreg) {
+        Call<JsonObject> call = services.RequestPost(context,jsonObject).VCodReg();
+        call.enqueue(new Callback<JsonObject>() {
+            @Override
+            public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
+                if (response.code() == 200) {
+                    try {
+                        JSONObject jsonObject = new JSONObject(new Gson().toJson(response.body()));
+                        if(Integer.parseInt(jsonObject.getString("ValidarCodigoRegistroResult"))==1){
+                            AsignarAparato.valido = 1;
+                        }else{
+                            AsignarAparato.valido = 0;
+                        }
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+
+                }else{
+                    ErrorMensaje(context,"Error al conseguir el código registro "+response.message());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<JsonObject> call, Throwable t) {
+                ErrorMensaje(context,"Error "+t.getMessage());
+            }
+        });
+    }
+    public void SetCodigoRegistro(final Context context, final JSONObject jsonObject, final EditText codreg) {
+        Call<JsonObject> call = services.RequestPost(context,jsonObject).SCodReg();
+        call.enqueue(new Callback<JsonObject>() {
+            @Override
+            public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
+                if (response.code() == 200) {
+                    try {
+                        JSONObject jsonObject = new JSONObject(new Gson().toJson(response.body()));
+                        codreg.setText(jsonObject.getString("GetCodigoRegistroResult"));
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                    ErrorMensaje(context,"Guardado código de registro");
+                }else{
+                    ErrorMensaje(context,"Error al conseguir el código registro "+response.message());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<JsonObject> call, Throwable t) {
+                ErrorMensaje(context,"Error "+t.getMessage());
+            }
+        });
+    }
+
+    public void getListClientesSaldo(final Context applicationContext, final int i, String text) {
+        Service service = null;
+        try {
+            service = services.getListClientesSaldoService(applicationContext, i, text);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        Call<ListaClientesSaldos> call = service.getDataListClSal();
+        call.enqueue(new Callback<ListaClientesSaldos>() {
+            @Override
+            public void onResponse(Call<ListaClientesSaldos> call, Response<ListaClientesSaldos> response) {
+                if (response.code() == 200){
+                    ListaClientesSaldos jsonResponse = response.body();
+                    Array.DataClientes = new ArrayList<List<DatosClientesSaldoList>>(asList(jsonResponse.DatosClientesSaldoListResult()));
+                    Iterator<List<DatosClientesSaldoList>> itData = Array.DataClientes.iterator();
+                    while (itData.hasNext()) {
+                        List<DatosClientesSaldoList> dat = (List<DatosClientesSaldoList>) itData.next();
+                        Array.ContratoCompuestoList.clear();
+                        Array.NombreList.clear();
+                        Array.TelefonoList.clear();
+                        Array.CalleNumeroList.clear();
+                        Array.ColoniaList.clear();
+                        Array.ContratoList.clear();
+                        for (int i = 0; i < dat.size(); i++){
+                            Array.ContratoCompuestoList.add(String.valueOf(dat.get(i).getContratoCompuesto()));
+                            Array.NombreList.add(String.valueOf(dat.get(i).getNombre()));
+                            Array.TelefonoList.add(String.valueOf(dat.get(i).getTelefono()));
+                            Array.CalleNumeroList.add(String.valueOf(dat.get(i).getCalle()) + " #" + String.valueOf(dat.get(i).getNumero()));
+                            Array.ColoniaList.add(String.valueOf(dat.get(i).getColonia()));
+                            Array.ContratoList.add(String.valueOf(dat.get(i).getContrato()));
+                        }
+                        if (Array.ContratoCompuestoList.size() == 0 && i==1){
+                            ErrorMensaje(applicationContext,"Contrato no encontrada ");
+                            statusBusquedaOrden = false;
+                        }else if (Array.NombreList.size() == 0 && i==2){
+                            ErrorMensaje(applicationContext,"Nombre no encontrado ");
+                            statusBusquedaContrato = false;
+                        }else if (Array.NombreList.size() == 0 && i==3){
+                            ErrorMensaje(applicationContext,"Placa no encontrado ");
+                            statusBusquedaPresinto = false;
+                        }
+
+                    }
+                    Saldo.adaptercl = new ClientesAdapter(applicationContext, Array.ContratoCompuestoList, Array.NombreList, Array.TelefonoList, Array.CalleNumeroList, Array.ColoniaList, Array.ContratoList);
+                    Saldo.clientList.setAdapter(Saldo.adaptercl);
+                } else {
+                    ErrorMensaje(applicationContext,"Error al conseguir lista de clientes "+response.message());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ListaClientesSaldos> call, Throwable t) {
+                ErrorMensaje(applicationContext,"Error "+t.getMessage());
+            }
+        });
+    }
+
+    public void getServiciosSaldos(final Context context, final String ContratoSaldo) {
+        Service service = null;
+        service = services.getServiciosSaldos(context, ContratoSaldo);
+        Call<ServiciosList> call = service.getDataServiciosSaldos();
+        call.enqueue(new Callback<ServiciosList>() {
+            @Override
+            public void onResponse(Call<ServiciosList> call, Response<ServiciosList> response) {
+                if (response.code() == 200) {
+                    ServiciosList jsonResponse = response.body();
+                    array.DataServicios = new ArrayList<List<ModelServiciosList>>(asList(jsonResponse.GetClienteServiciosResult()));
+                    Iterator<List<ModelServiciosList>> itData = array.DataServicios.iterator();
+                    while (itData.hasNext()){
+                        List<ModelServiciosList> dat = (List<ModelServiciosList>) itData.next();
+                        Array.ServicioSaldo.clear();
+                        Array.StatusSaldo.clear();
+                        Array.TipServSaldo.clear();
+                        for (int i = 0; i < dat.size(); i++){
+                            Array.ServicioSaldo.add(String.valueOf(dat.get(i).getServicio()));
+                            Array.StatusSaldo.add(String.valueOf(dat.get(i).getStatus()));
+                            Array.TipServSaldo.add(String.valueOf(dat.get(i).getTipServ()));
+                        }
+                    }
+                    try{
+                        JSONObject jsonObject = new JSONObject();
+                        jsonObject.put("Contrato", ContratoSaldo);
+                        getDetallesSaldos(context, ContratoSaldo);
+                    }catch (Exception x){
+                        Toast toast1 = Toast.makeText(context, "Error al conseguir el saldo", Toast.LENGTH_SHORT);toast1.show();
+                    }
+                }else {
+                    ErrorMensaje(context,"Error al conseguir lista de servicios "+response.message());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ServiciosList> call, Throwable t) {
+
+            }
+        });
+    }
+
+    public void getDetallesSaldos(final Context context, final String ContratoSaldo) {
+        Service service = null;
+        service = services.getDetallesSaldos(context, ContratoSaldo);
+        Call<DetallesList> call = service.getDataDetallesSaldosSession();
+        call.enqueue(new Callback<DetallesList>() {
+            @Override
+            public void onResponse(Call<DetallesList> call, Response<DetallesList> response) {
+                if (response.code() == 200) {
+                    Monto = 0;
+                    Session = 0;
+                    CLV_FACTURA = 0 ;
+                    DetallesList jsonResponse = response.body();
+                    array.DataDetalles = new ArrayList<List<ModelDetallesList>>(asList(jsonResponse.GetClienteCobroClienteSessionResult()));
+                    Iterator<List<ModelDetallesList>> itData = array.DataDetalles.iterator();
+                    while (itData.hasNext()){
+                        List<ModelDetallesList> dat = (List<ModelDetallesList>) itData.next();
+                        Array.DescripcionSaldo.clear();
+                        Array.FechaConsultaSaldo.clear();
+                        Array.MontoSaldo.clear();
+                        Array.OperacionSaldo.clear();
+
+                        for (int i = 0; i < dat.size(); i++){
+                            Array.DescripcionSaldo.add(String.valueOf(dat.get(i).getDescripcion()));
+                            Array.FechaConsultaSaldo.add(String.valueOf(dat.get(i).getFechaConsulta()));
+                            Array.MontoSaldo.add(dat.get(i).getMonto());
+                            Array.OperacionSaldo.add(String.valueOf(dat.get(i).getOperacion()));
+                            if(String.valueOf(dat.get(i).getOperacion()).equals("+"))
+                                Monto = Monto + dat.get(i).getMonto();
+                            else Monto = Monto - dat.get(i).getMonto();
+                            FechaCosultaSaldo = String.valueOf(dat.get(i).getFechaConsulta());
+                            Session = Integer.valueOf(dat.get(i).getSession());
+                        }
+                    }
+                    DecimalFormat formato = new DecimalFormat("$0.00");
+                    TotalSaldo = formato.format(Monto);
+
+                    Intent intent1 = new Intent(context, ServiciosSaldo.class);
+                    intent1.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    context.startActivity(intent1);
+                }else {
+                    ErrorMensaje(context,"Error al conseguir lista de servicios "+response.message());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<DetallesList> call, Throwable t) {
+
+            }
+
+        });
+    }
+
+    public void GuardarPago(final Context context, final JSONObject jsonObject){
+        Call<JsonObject> call = services.RequestPost(context,jsonObject).GuardarPago();
+        call.enqueue(new Callback<JsonObject>() {
+            @Override
+            public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
+                if (response.code() == 200) {
+                    try {
+                        JSONObject jsonObject1 = new JSONObject(new Gson().toJson(response.body()));
+                        if(jsonObject1.getInt("GuardaPagoMOVILResult")!=0){
+                            CLV_FACTURA=jsonObject1.getInt("GuardaPagoMOVILResult");
+                            try{
+                                JSONObject jsonObject = new JSONObject();
+                                jsonObject.put("Clv_Factura", CLV_FACTURA);
+                                GetTicketNom(context, jsonObject);
+                            }catch (Exception x){
+                                Toast toast2 = Toast.makeText(context, "Error al registrar el pago", Toast.LENGTH_SHORT);
+                                toast2.show();
+                            }
+
+                        }else{
+                            Toast toast1 = Toast.makeText(context, "Pago NO registrado", Toast.LENGTH_SHORT);toast1.show();
+                        }
+                    } catch (JSONException e) {
+                        ErrorMensaje(context,"Error al recibir la respuesta "+response.message());
+                    }
+
+                }else{
+                    ErrorMensaje(context,"Error al conseguir el código registro "+response.message());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<JsonObject> call, Throwable t) {
+                ErrorMensaje(context,"Error "+t.getMessage());
+            }
+        });
+    }
+
+
+
+    public void GetTicketNom(final Context context, final JSONObject jsonObject) {
+        Call<JsonObject> call = services.RequestPost(context,jsonObject).GetTicketNombre();
+        call.enqueue(new Callback<JsonObject>() {
+            @Override
+            public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
+                if (response.code() == 200) {
+                    GetTicketResult = Constants.URL_REPORTES;
+                    try {
+                        JSONObject jsonObject1 = new JSONObject(new Gson().toJson(response.body()));
+                        String x = jsonObject1.getString("GetTicketResult");
+                        GetTicketResult = GetTicketResult + x;
+
+                        Intent intent1 = new Intent(context, PDF.class);
+                        intent1.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                        context.startActivity(intent1);
+
+                    } catch (JSONException e) {
+                        ErrorMensaje(context,"Error al recibir la respuesta GetTicketNom"+response.message());
+                    }
+
+                }else{
+                    ErrorMensaje(context,"Error al conseguir el ticket "+response.message());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<JsonObject> call, Throwable t) {
+                ErrorMensaje(context,"Error "+t.getMessage());
+            }
+        });
+    }
+
+
+    public void VentaRenta(final Context context, final int clvOrden) {
+        JSONObject jsonObject = new JSONObject();
+        try{
+            jsonObject.put("Contrato", clvOrden);
+        }catch (Exception x){
+        }
+        Call<JsonObject> call = services.RequestPost(context,jsonObject).GetVENTARENTA();
+        call.enqueue(new Callback<JsonObject>() {
+            @Override
+            public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
+                if (response.code() == 200) {
+
+                    try {
+                        JSONObject jsonObject = new JSONObject(new Gson().toJson(response.body()));
+                        JSONObject Result = new JSONObject(jsonObject.getString("VentaRentaResult"));
+                        if(RENTA == null && VENTA==null){
+                            RENTA = Result.getString("Renta");
+                            VENTA = Result.getString("Venta");
+                        }
+                    } catch (JSONException e) {
+                        ErrorMensaje(context,"Error al conseguir la cantidad de aparatos en venta y renta "+response.message());
+                    }
+
+                }else{
+                    ErrorMensaje(context,"Error al conseguir la cantidad de aparatos en venta y renta "+response.message());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<JsonObject> call, Throwable t) {
+                ErrorMensaje(context,"Error "+t.getMessage());
+            }
+        });
+    }
+
+    public void DatosCambio(final TextView anterior, final TextView nuevo, final JSONObject jsonObject, final Context context) {
+        Call<JsonObject> call = services.RequestPost(context,jsonObject).GetDireccionesCAMDO();
+        call.enqueue(new Callback<JsonObject>() {
+            @Override
+            public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
+                if (response.code() == 200) {
+
+                    try {
+                        JSONObject jsonObject = new JSONObject(new Gson().toJson(response.body()));
+                        JSONObject Result = new JSONObject(jsonObject.getString("DireccionesCAMDOResult"));
+                        anterior.setText(Result.getString("Antigua"));
+                        nuevo.setText(Result.getString("Nueva"));
+                    } catch (JSONException e) {
+                        anterior.setText("Direccion anterior");
+                        nuevo.setText("Direccion nueva");
+                        ErrorMensaje(context,"Error al mostrar direcciones "+response.message());
+                    }
+                    Cambio=0;
+                }else{
+                    ErrorMensaje(context,"Error al conseguir direcciones "+response.message());
                 }
             }
 

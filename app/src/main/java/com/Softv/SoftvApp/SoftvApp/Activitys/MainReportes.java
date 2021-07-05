@@ -46,7 +46,7 @@ public class MainReportes extends AppCompatActivity implements ActionBar.TabList
     public String valorProblema;
     private boolean cambioRepo = false;
      public static  int position;
-    public static TextView Nombre1, Direccion1,NombreTec1,infoA,contrato1,ciudad1,TelyCelR,EntrecallesR,referenciastxtR,referenciasR;
+    public static TextView Nombre1, Direccion1,NombreTec1,infoA,contrato1,placa1,ciudad1,TelyCelR,EntrecallesR,referenciastxtR,referenciasR, txtdireccion, txtentreca;
     public static boolean DescargaAgregarR=false;
     Request request = new Request();
     boolean visitaValidaReporte=false;
@@ -63,12 +63,28 @@ public class MainReportes extends AppCompatActivity implements ActionBar.TabList
         NombreTec1= findViewById(R.id.tecnico1);
         infoA = findViewById(R.id.infoservicios1);
         contrato1=findViewById(R.id.contrato1);
+        placa1=findViewById(R.id.placa1);
         ciudad1=findViewById(R.id.infoempresa1);
         TelyCelR=findViewById(R.id.TelyCelR);
         EntrecallesR=findViewById(R.id.entrecallesR);
         referenciastxtR=findViewById(R.id.referenciastxtR);
         referenciasR=findViewById(R.id.referenciasR);
+
+        txtdireccion = findViewById(R.id.textView58);
+        txtentreca = findViewById(R.id.entrecallestxtR);
+
+        if(request.PermCableCentro == true){
+            txtdireccion.setText("Colonia");
+            txtentreca.setVisibility(View.GONE);
+            EntrecallesR.setVisibility(View.GONE);
+        }else{
+            txtdireccion.setText("Dirección:");
+            txtentreca.setVisibility(View.GONE);
+            EntrecallesR.setVisibility(View.GONE);
+        }
+
         setTitle("No. de Reporte: " + Util.getClvQueja(Util.preferences));
+        Nombre1.setText(request.NombreGeneral);
 //* Boton de informacion
         info.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -83,7 +99,6 @@ public class MainReportes extends AppCompatActivity implements ActionBar.TabList
                     jsonObject.put("contrato",abc);
                     request.getCalles(getApplicationContext(),jsonObject,EntrecallesR,referenciastxtR,referenciasR);
                 }catch (Exception e){}
-
 
                 if(layoutAnimado.getVisibility()==View.GONE) {
                     layoutAnimado.setVisibility(View.VISIBLE);

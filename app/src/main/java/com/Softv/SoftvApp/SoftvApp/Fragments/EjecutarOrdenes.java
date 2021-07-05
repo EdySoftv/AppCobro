@@ -97,7 +97,7 @@ public class EjecutarOrdenes extends Fragment implements LocationListener {
     public static String ClavetecnicaN,ClavetecnicaT;
     public static  int IdTapN=0,IdTapT=0;
     Activity activity;
-    EditText placa;
+    static EditText placa;
 
 
     Inicio in;
@@ -134,8 +134,11 @@ public class EjecutarOrdenes extends Fragment implements LocationListener {
         spinnerTap = view.findViewById(R.id.spinnerTap);
         txtNap = view.findViewById(R.id.txtNap);
         txtTap = view.findViewById(R.id.txtTap);
-        placa = view.findViewById(R.id.placa);
-        txtPlaca = view.findViewById(R.id.txtPlaca);
+
+        //Placa
+            placa = view.findViewById(R.id.placa);
+            txtPlaca = view.findViewById(R.id.txtPlaca);
+            placa.setText(request.PlacaMA);
 
         request.getTecSec(getContext(),TecSec);
         latitudeEjec=0;
@@ -391,6 +394,11 @@ public class EjecutarOrdenes extends Fragment implements LocationListener {
 
     }
 
+    public static void ActualizarPlaca(){
+        placa.setVisibility(View.GONE);
+        txtPlaca.setVisibility(View.GONE);
+    }
+
     private void dialogoEjecutar1() {
         new AlertDialog.Builder(getContext())
                 .setTitle("Ejecutar Orden")
@@ -405,18 +413,29 @@ public class EjecutarOrdenes extends Fragment implements LocationListener {
                                     if(cordLat.getText().equals("---")|| cordLong.getText().equals("---")){
                                         dialogoCoordenadas();
                                     }else{
+
+                                        if(request.PermPlaca){
+                                            if(ValidaPlaca()==true){
+                                                Ejecutar();
+                                            }else{
+                                                Toast.makeText(getActivity(), "Llene el campo Placa", Toast.LENGTH_LONG).show();
+                                                dialogEjecutar.dismiss();
+                                            }
+                                        }else{
+                                            Ejecutar();
+                                        }
+
+                                    }
+                                }else{
+                                    if(request.PermPlaca){
                                         if(ValidaPlaca()==true){
                                             Ejecutar();
                                         }else{
                                             Toast.makeText(getActivity(), "Llene el campo Placa", Toast.LENGTH_LONG).show();
                                             dialogEjecutar.dismiss();
                                         }
-                                    }
-                                }else{
-                                    if(ValidaPlaca()==true){
-                                        Ejecutar();
                                     }else{
-                                        dialogEjecutar.dismiss();
+                                        Ejecutar();
                                     }
                                 }
 
@@ -480,7 +499,7 @@ public class EjecutarOrdenes extends Fragment implements LocationListener {
 
     public void Ejecutar(){
         //request.validanodo=false;
-        if(request.Placa==true){
+        if(request.Placa==true && request.PermPlaca==true){
             try{
                 JSONObject jsonPlaca = new JSONObject();
                 jsonPlaca.put("Contrato", request.ContratoReal);

@@ -1,5 +1,6 @@
 package com.Softv.SoftvApp.SoftvApp.Fragments;
 
+
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.constraint.ConstraintLayout;
@@ -36,8 +37,11 @@ import java.util.List;
 import static com.Softv.SoftvApp.SoftvApp.Adapters.QuejasAdapter.statusQueja;
 import static com.Softv.SoftvApp.SoftvApp.Request.Request.extencionesMat;
 
-public class MaterialesReportes extends Fragment {
 
+/**
+ * A simple {@link Fragment} subclass.
+ */
+public class MaterialesReportes extends Fragment {
     private LayoutInflater inflater;
     private ViewGroup container;
     public static HorizontalScrollView horizontalScrollViewR;
@@ -48,7 +52,7 @@ public class MaterialesReportes extends Fragment {
     public static int clvTipoDescMatR,idArticuloDMR,cantidadDMR,idInventarioMDR,piezaSerR, metrosR, totalDMR,IIDMR,IFDMR,EIMDR,EFDMR;
     public static int extSerR;
     public static String descripcionMaterialR="";
-    public static TextView  tvInteriorR,tvExteriorR;
+    public static TextView  tvInteriorR,tvExteriorR, Clasifi;
     public static int esFibraR;
     public static Spinner descripcionMatR,clasificacionMatR,spinnerExtMatR;
     public static ConstraintLayout extMatR, piezasMatR,metrosMatR;
@@ -71,22 +75,35 @@ public class MaterialesReportes extends Fragment {
         // Inflate the layout for this fragment
         View view= inflater.inflate(R.layout.activity_descarga_reporte, container, false);
         request.getChecaExt(getContext());
-        descripcionMatR = view.findViewById(R.id.descripcionArticuloDescR);
-        clasificacionMatR = view.findViewById(R.id.clasificacionMatDescR);
+
         extMatR = view.findViewById(R.id.constrain_ExtencionesR);
-        piezasMatR = view.findViewById(R.id.constrain_CantidadR);
-        metrosMatR = view.findViewById(R.id.constrain_MetrajeR);
         spinnerExtMatR = view.findViewById(R.id.extencionesDescargaR);
-        agragarDMR=view.findViewById(R.id.agregarMaterialR);
-        piezaR = view.findViewById(R.id.piezaMDR);
+
+        metrosMatR = view.findViewById(R.id.constrain_MetrajeR);
         mIIR = view.findViewById(R.id.InicialIDMR);
         mFIR = view.findViewById(R.id.FinalIDMR);
         mIER = view.findViewById(R.id.InicialEDMR);
         mFER=view.findViewById(R.id.FinalEDMR);
         tvInteriorR = view.findViewById(R.id.textView15);
-        elimarMaterialesListR = view.findViewById(R.id.eliminarMaterialesListR);
         tvExteriorR = view.findViewById(R.id.textViewExternoR);
 
+        piezasMatR = view.findViewById(R.id.constrain_CantidadR);
+        piezaR = view.findViewById(R.id.piezaMDR);
+
+        descripcionMatR = view.findViewById(R.id.descripcionArticuloDescR);
+
+        clasificacionMatR = view.findViewById(R.id.clasificacionMatDescR);
+        Clasifi = view.findViewById(R.id.textView9);
+
+        agragarDMR=view.findViewById(R.id.agregarMaterialR);
+        elimarMaterialesListR = view.findViewById(R.id.eliminarMaterialesListR);
+
+        ///Ocultar
+        piezasMatR.setVisibility(View.GONE);
+        extMatR.setVisibility(View.GONE);
+        metrosMatR.setVisibility(View.GONE);
+        clasificacionMatR.setVisibility(View.GONE);
+        Clasifi.setVisibility(View.GONE);
 
         try {
             JSONObject jsonObject = new JSONObject();
@@ -107,11 +124,26 @@ public class MaterialesReportes extends Fragment {
             request.getPermisosDirecta(getContext(),jsonObjectDirecta1);
         }catch (Exception e){}
 
+        /*if(Util.getPermisisDescarga(Util.preferences)==true){
+            try {
+                JSONObject jsonObject = new JSONObject();
+                jsonObject.put("ClvOrdSer", Util.getClvOrden(Util.preferences) );
+                jsonObject.put("TipoDescarga", Util.getTipoDescarga(Util.preferences));
+
+                request.DamebitacoraDirectaR(getContext(),jsonObject);
+            }catch (Exception e){}
+        }else {
+            request.getPredescargaR(getActivity(),getContext());
+        }*/
         request.getPredescargaR(getActivity(),getContext());
+       /* final TablaAdapter tablaAdapter = new TablaAdapter(getActivity(), tablaR);
+        tablaAdapter.agregarCabecera(R.array.cabecera_tabla);*/
+
             if(statusQueja.equals("E")){
                 agragarDMR.setEnabled(false);
                 descripcionMatR.setEnabled(false);
                 agragarDMR.setTextColor(Color.GRAY);
+
         }
 
         if(extencionesMat==true){
@@ -135,12 +167,20 @@ public class MaterialesReportes extends Fragment {
                     List<DetalleBitacoraModel> dat = itData.next();
                     clvTipoDescMatR=dat.get(position-1).catTipoArticuloClave;
                     esFibraR = dat.get(position -1).esFibra;
+                    clasificacionMatR.setVisibility(View.VISIBLE);
+                    Clasifi.setVisibility(View.VISIBLE);
                     request.DetalleBitR(getContext());
                     if(extencionesMat==true){
                         spinnerExtMatR.setVisibility(View.VISIBLE);
                     }else {
                         spinnerExtMatR.setVisibility(View.GONE);
                     }
+                }else{
+                    piezasMatR.setVisibility(View.GONE);
+                    extMatR.setVisibility(View.GONE);
+                    metrosMatR.setVisibility(View.GONE);
+                    clasificacionMatR.setVisibility(View.GONE);
+                    Clasifi.setVisibility(View.GONE);
                 }
             }
 
@@ -149,7 +189,6 @@ public class MaterialesReportes extends Fragment {
 
             }
         });
-
         clasificacionMatR.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -185,7 +224,6 @@ public class MaterialesReportes extends Fragment {
 
             }
         });
-
         spinnerExtMatR.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -234,23 +272,52 @@ public class MaterialesReportes extends Fragment {
 
             }
         });
-
         agragarDMR.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(seleccionR==0){
-                    Toast.makeText(getContext(),"Seleccione un articulo",Toast.LENGTH_SHORT).show();
-                }else {
-                    if(extencionesMat==true){
-                        if(spinnerExtMatR.getSelectedItemPosition()==0){
-                            Toast.makeText(getContext(),"Seleccione una extensión",Toast.LENGTH_SHORT).show();
+                /*
+                mIIR = view.findViewById(R.id.InicialIDMR);
+                mFIR = view.findViewById(R.id.FinalIDMR);
+                mIER = view.findViewById(R.id.InicialEDMR);
+                mFER=view.findViewById(R.id.FinalEDMR);
+                 */
+                int IIR, FIR, IER, FER;
+                String sIIR=mIIR.getText().toString(), sFIR=mIIR.getText().toString(), sIER=mIER.getText().toString(), sFER=mFER.getText().toString();
+
+                try{
+                    IIR = Integer.parseInt(sIIR);
+                    FIR = Integer.parseInt(sFIR);
+                }catch (Exception e){
+                    IIR = 0;
+                    FIR = 0;
+                }
+
+                try{
+                    IER = Integer.parseInt(sIER);
+                    FER = Integer.parseInt(sFER);
+                }catch (Exception e){
+                    IER = 0;
+                    FER = 0;
+                }
+
+                if( IIR > FIR ||
+                        IER > FER ){
+                    Toast.makeText(getContext(),"El metraje inicial no puede ser mayor al final",Toast.LENGTH_SHORT).show();
+                }else
+                    if(seleccionR==0){
+                        Toast.makeText(getContext(),"Seleccione un articulo",Toast.LENGTH_SHORT).show();
+                    }else {
+                        if(extencionesMat==true){
+                            if(spinnerExtMatR.getSelectedItemPosition()==0){
+                                Toast.makeText(getContext(),"Seleccione una extensión",Toast.LENGTH_SHORT).show();
+                            }else{
+                                EjecutarDescargaMaterial();
+                            }
                         }else{
                             EjecutarDescargaMaterial();
                         }
-                    }else{
-                        EjecutarDescargaMaterial();
                     }
-                }
+
             }
         });
 

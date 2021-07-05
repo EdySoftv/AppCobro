@@ -74,6 +74,7 @@ public class Configuracion extends AppCompatActivity
         toggle.syncState();
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        navigationView.getMenu().setGroupVisible(R.id.Cobro,Request.PermCobro);
         navigationView.setNavigationItemSelectedListener(this);
     }
 
@@ -115,10 +116,13 @@ public class Configuracion extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.Inicio) {
+            DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
             Intent intento = new Intent(getApplicationContext(), Inicio.class);
             intento.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
             startActivity(intento);
-
+            if (drawer.isDrawerOpen(GravityCompat.START)) {
+                drawer.closeDrawer(GravityCompat.START);
+            }
 
         } else if (id == R.id.Ordenes_menu) {
             clvorden = 0;
@@ -126,6 +130,7 @@ public class Configuracion extends AppCompatActivity
             Util.editor.putString("TipoDescarga", "O");
             Util.editor.commit();
             request.getListOrd(getApplicationContext());
+
 
         } else if (id == R.id.Reportes) {
             clavequeja = 0;
@@ -135,12 +140,11 @@ public class Configuracion extends AppCompatActivity
             request.getListQuejas(getApplicationContext());
 
         } else if (id == R.id.Configuraciones) {
-            DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-            if (drawer.isDrawerOpen(GravityCompat.START)) {
-                drawer.closeDrawer(GravityCompat.START);
-            }
-
-        }else if (id == R.id.MenuCoordenadasNAP) {
+            Intent intent1 = new Intent(Configuracion.this, Configuracion.class);
+            intent1.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(intent1);
+            finish();
+        } else if (id == R.id.MenuCoordenadasNAP) {
             Intent intent1 = new Intent(Configuracion.this, NAPTAP.class);
             intent1.putExtra("dato", "NAP");
             intent1.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -148,6 +152,12 @@ public class Configuracion extends AppCompatActivity
             finish();
         } else if (id == R.id.MenuCoordenadasTAP) {
             Intent intent1 = new Intent(Configuracion.this, NAPTAP.class);
+            intent1.putExtra("dato", "TAP");
+            intent1.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(intent1);
+            finish();
+        }else if (id == R.id.Saldo) {
+            Intent intent1 = new Intent(Configuracion.this, Saldo.class);
             intent1.putExtra("dato", "TAP");
             intent1.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(intent1);

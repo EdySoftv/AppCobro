@@ -1,6 +1,7 @@
 package com.Softv.SoftvApp.SoftvApp.sampledata;
 
 
+import com.Softv.SoftvApp.SoftvApp.Listas.DetallesList;
 import com.Softv.SoftvApp.SoftvApp.Listas.Example;
 import com.Softv.SoftvApp.SoftvApp.Listas.Example1;
 import com.Softv.SoftvApp.SoftvApp.Listas.Example2;
@@ -12,7 +13,6 @@ import com.Softv.SoftvApp.SoftvApp.Listas.JSONAparatosDisponibles;
 import com.Softv.SoftvApp.SoftvApp.Listas.JSONArbolServicios;
 import com.Softv.SoftvApp.SoftvApp.Listas.JSONCAMDO;
 import com.Softv.SoftvApp.SoftvApp.Listas.JSONCLIAPA;
-import com.Softv.SoftvApp.SoftvApp.Listas.JSONCUADRILLA;
 import com.Softv.SoftvApp.SoftvApp.Listas.JSONClasificacionProblm;
 import com.Softv.SoftvApp.SoftvApp.Listas.JSONColonia;
 import com.Softv.SoftvApp.SoftvApp.Listas.JSONDATOSCLIENTE;
@@ -24,7 +24,6 @@ import com.Softv.SoftvApp.SoftvApp.Listas.JSONLlenaExtenciones;
 import com.Softv.SoftvApp.SoftvApp.Listas.JSONMediosSer;
 import com.Softv.SoftvApp.SoftvApp.Listas.JSONNombreTecnico;
 import com.Softv.SoftvApp.SoftvApp.Listas.JSONPERMISOSDIRECTA;
-import com.Softv.SoftvApp.SoftvApp.Listas.JSONPlaca;
 import com.Softv.SoftvApp.SoftvApp.Listas.JSONPreDescarga;
 import com.Softv.SoftvApp.SoftvApp.Listas.JSONPregunta;
 import com.Softv.SoftvApp.SoftvApp.Listas.JSONPrioridad;
@@ -41,7 +40,10 @@ import com.Softv.SoftvApp.SoftvApp.Listas.JSONTecSec;
 import com.Softv.SoftvApp.SoftvApp.Listas.JSONTecSecReport;
 import com.Softv.SoftvApp.SoftvApp.Listas.JSONTipoAparatos;
 import com.Softv.SoftvApp.SoftvApp.Listas.JSONValidaNodo;
+import com.Softv.SoftvApp.SoftvApp.Listas.ListaClientesSaldos;
 import com.Softv.SoftvApp.SoftvApp.Listas.QuejasList;
+import com.Softv.SoftvApp.SoftvApp.Listas.ServiciosList;
+import com.Softv.SoftvApp.SoftvApp.Modelos.DatosClientesSaldoList;
 import com.google.gson.JsonObject;
 
 import retrofit2.Call;
@@ -103,6 +105,8 @@ public interface Service {
     Call<JSONServiciosAparatos> getDataServiciosAparatos();
     @POST(Constants.URL_ACEPTAR_ASIG)
     Call<JsonObject> getDataAceptarAsig();
+    @POST(Constants.URL_ACEPTAR_ASIG2)
+    Call<JsonObject> getDataAceptarAsig2();
 
     @POST(Constants.URL_GET_QUEJAS_AGENDADAS)
     Call<QuejasList>getQuejasAgendadas();
@@ -272,5 +276,43 @@ public interface Service {
     @POST(Constants.URL_ADD_PLACA)
     Call<JsonObject> addPlaca();
 
+    @POST(Constants.URL_PERMISOS)
+    Call<JsonObject> getPermisos();
+
+    @POST(Constants.URL_COD_REG)
+    Call<JsonObject> CodReg();
+
+    @POST(Constants.URL_VCOD_REG)
+    Call<JsonObject> VCodReg();
+
+    @POST(Constants.URL_SCOD_REG)
+    Call<JsonObject> SCodReg();
+
+    @POST(Constants.URL_CL_SL)
+    Call<JsonObject> getDataClSal();
+
+    @POST(Constants.URL_LCL_SL)
+    Call<ListaClientesSaldos> getDataListClSal();
+
+    @POST(Constants.URL_CL_SR)
+    Call<ServiciosList> getDataServiciosSaldos();
+
+    @POST(Constants.URL_CL_DT)
+    Call<DetallesList> getDataDetallesSaldos();
+
+    @POST(Constants.URL_CL_DTS)
+    Call<DetallesList> getDataDetallesSaldosSession();
+
+    @POST(Constants.URL_GR_PG)
+    Call<JsonObject> GuardarPago();
+
+    @POST(Constants.URL_GT_TK)
+    Call<JsonObject> GetTicketNombre();
+
+    @POST(Constants.URL_VEN_REN)
+    Call<JsonObject> GetVENTARENTA();
+
+    @POST(Constants.URL_DIR)
+    Call<JsonObject> GetDireccionesCAMDO();
 }
 

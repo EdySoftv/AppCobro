@@ -1,11 +1,17 @@
-package com.Softv.SoftvApp.SoftvApp.sampledata;
+ package com.Softv.SoftvApp.SoftvApp.sampledata;
 
 public class Constants {
-    //public static final String NEW_URL="http://192.168.1.69:1998/SoftvWCFService.svc/";
-    public static final String NEW_URL="http://187.163.207.252:7160/SoftvWCFService.svc/"; //Pruebas
-    //public static final String NEW_URL="http://186.179.68.50:5600/SoftvWCFService.svc/"; //produccion
+    //////////NUEVA IP PUBLICA 187.190.125.85
+
+    //public static final String URL="http://192.168.0.4:1160/";
+
+    //public static final String URL="http://915009d10274.sn.mynetname.net:1560/"; // Fresnill
+    public static final String URL="http://177.229.197.2:5600/"; //
+
+    public static final String NEW_URL = URL + "SoftvWCFService.svc/";
     public static final String URL_GET_USER = "Usuario/LogOn";
     public static final String URL_GET_TECNICO = "AplicacionMovil/Get_ClvTecnico";
+    //public static final String URL_GET_TECNICO = "AplicacionMovil/Get_ClvCajero";
     public static final String URL_GET_PROX = "AplicacionMovil/GetDameSiguienteCita";
     public static final String URL_GET_ORDQUE="AplicacionMovil/GetDameOrdenesQuejasTotales";
     public static final String URL_GET_LIST_ORD="AplicacionMovil/GetDameListadoOrdenesAgendadas";
@@ -25,6 +31,7 @@ public class Constants {
     public static final String URL_GET_APARATOS_DISPONIBLES="MuestraAparatosDisponibles/GetMuestraAparatosDisponiblesList";
     public static final String URL_GET_SERVICIOS_APARATOS = "MuestraServiciosRelTipoAparato/GetMuestraServiciosRelTipoAparatoList";
     public static final String URL_ACEPTAR_ASIG = "AsignaAparatosAlServicio/GetAsignaAparatosAlServicioList";
+    public static final String URL_ACEPTAR_ASIG2 = "AsignaAparatosAlServicio/GetAsignaAparatosAlServicioList2";
     public static final String URL_GET_QUEJAS_AGENDADAS = "AplicacionMovil/GetDameListadoQuejasAgendadas";
     public static final String URL_GET_CONCON = "OrdSer/GetCONCONEX";
     //////////////////////////////////////////////////////////////Reportes////////////////////////////////////////////////////////////////
@@ -55,7 +62,7 @@ public class Constants {
     public static final String URL_GET_VALIDA="ValidaQuejaCompaniaAdic/GetDeepValidaQuejaCompaniaAdic";
     /////////////////////////////////////////////////
     public static final String URL_GET_CAPAT="MuestraAparatosDisponibles/GetSetCambioAparato";
-    public static final String URL_GET_DEEP_CAPAT="MuestraAparatosDisponibles/GetCambioAparatoDeep";
+    public static final String URL_GET_DEEP_CAPAT="MuestraAparatosDisponibles/GetAparatoCambioDeep";
     public static final String URL_SEND_NOENTREGADOS="SP_InsertaTbl_NoEntregados/GetSP_InsertaTbl_NoEntregados";
     public static final String URL_ENVIO_TOKENFIREBASE="AplicacionMovil/AnadirToken";
 
@@ -79,7 +86,7 @@ public class Constants {
     ////////MACWAM////////////
     public static final String URL_VALIDA_MACWAM = "AsignaAparatosAlServicio/GetValidaRequiereMacWan";
     public static final String URL_GET_MACWAM = "AsignaAparatosAlServicio/ConMacWanbyClv_Aparato";
-    public static final String URL_ASIGNA_MACWAM = "AsignaAparatosAlServicio/GetSaveRelMacsTemp";
+    public static final String URL_ASIGNA_MACWAM = "AsignaAparatosAlServicio/GetSaveRelMacsTemp";//---
 
     public static final String URL_GET_PREGUNTA = "AplicacionMovil/GetDamePreguntaMedioPorOrden";
     public static final String URL_VALIDA_EXISTE_FIRMA = "AplicacionMovil/ValidaExisteTblFirmaCliente";
@@ -114,4 +121,21 @@ public class Constants {
     public static final String URL_GET_DATOS_CLIENTE  = "CLIENTES_New/GetConsultaClientesList";*/
 
     public static final String URL_GET_DATOS_CALLES  = "CLIENTES_New/GetSoftvWEb_DameEntrecalles";
+    public static final String URL_PERMISOS = "AplicacionMovil/ConsultaPermisos";
+    public static final String URL_COD_REG = "AplicacionMovil/GetCodigoRegistro";
+    public static final String URL_VCOD_REG = "AplicacionMovil/ValidarCodigoRegistro";
+    public static final String URL_SCOD_REG = "AplicacionMovil/SetCodigoRegistro"; 
+
+    public static final String URL_CL_SL = "AplicacionMovil/DatosClientesSaldo";
+    public static final String URL_LCL_SL = "AplicacionMovil/DatosClientesSaldoList";
+    public static final String URL_CL_SR = "AplicacionMovil/ClienteServiciosSaldo";
+    public static final String URL_CL_DT = "AplicacionMovil/ClienteCobroClienteSaldo";
+    public static final String URL_CL_DTS = "AplicacionMovil/ClienteCobroClienteSaldoSession";
+    public static final String URL_GR_PG = "AplicacionMovil/GuardaPagoMOVIL";
+    public static final String URL_DIR = "AplicacionMovil/DireccionesCAMDO";
+    public static final String URL_GT_TK = "CrearTicketTable/GetTicket";
+    public static final String URL_VEN_REN = "AplicacionMovil/VentaRenta";
+    public static final String URL_REPORTES = URL + "Reportes/";
+
+
 }

@@ -1,5 +1,6 @@
 package com.Softv.SoftvApp.SoftvApp.Adapters;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.Paint;
@@ -12,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.Softv.SoftvApp.SoftvApp.Fragments.MaterialesOrdenes;
 import com.Softv.SoftvApp.SoftvApp.Listas.Array;
@@ -54,12 +56,6 @@ public class EliminarMaterialAdapter extends RecyclerView.Adapter<EliminarMateri
                 hext = itemView.findViewById(R.id.txtNoExt);
                 view_type=0;
             }
-
-
-
-            //anchoA = TextoGetTextSize("Acción", (int) haccion.getTextSize());
-            //baccion=true;
-
 
             for(int i=0; i<Array.listaTabla.size();i++){
                 if(anchoD<=obtenerLargoPixelesTexto(Array.listaTabla.get(i).get(0))){
@@ -107,14 +103,10 @@ public class EliminarMaterialAdapter extends RecyclerView.Adapter<EliminarMateri
     }
 
     @Override
-    public void onBindViewHolder(materialesViewHolder viewHolder, final int position) {
+    public void onBindViewHolder(materialesViewHolder viewHolder, @SuppressLint("RecyclerView") final int position) {
 
 
         if(viewHolder.view_type==type_list){
-
-            /*ConstraintLayout.LayoutParams layoutParams = (ConstraintLayout.LayoutParams) materialesViewHolder.elimarMaterial.getLayoutParams();
-            layoutParams.width=anchoA;
-            materialesViewHolder.elimarMaterial.setLayoutParams(layoutParams);*/
 
             materialesViewHolder.descripcion.setText(Array.listaTabla.get(position-1).get(0));
             materialesViewHolder.descripcion.setWidth(anchoD);
@@ -125,17 +117,11 @@ public class EliminarMaterialAdapter extends RecyclerView.Adapter<EliminarMateri
             materialesViewHolder.ext.setText(Array.listaTabla.get(position-1).get(2));
             materialesViewHolder.ext.setWidth((anchoE));
 
-
-
             materialesViewHolder.elimarMaterial.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     try {
                         JSONObject jsonObject = new JSONObject();
-                        ///lista a mandar
-                        Array.dataDescargaDirecta.get(0).remove(position-1);
-                        ////
-
                         if (Util.getTipoDescarga(Util.preferences).equals("Q")) {
                             jsonObject.put("clvOrden", Util.getClvQueja(Util.preferences));
                         } else if (Util.getTipoDescarga(Util.preferences).equals("O")) {
@@ -144,30 +130,8 @@ public class EliminarMaterialAdapter extends RecyclerView.Adapter<EliminarMateri
                         jsonObject.put("noArticulo", Array.listaTabla.get(position - 1).get(3));
                         request.eliminarPreDescarga(context, jsonObject, activity);
                     } catch (Exception e) {
-
+                        Toast.makeText(context,"Error al cargar Tabla" ,Toast.LENGTH_SHORT ).show();
                     }
-/*                    if(Util.getPermisisDescarga(Util.preferences)==false) {
-                        try {
-                            JSONObject jsonObject = new JSONObject();
-
-                            if (Util.getTipoDescarga(Util.preferences).equals("Q")) {
-                                jsonObject.put("clvOrden", Util.getClvQueja(Util.preferences));
-                            } else if (Util.getTipoDescarga(Util.preferences).equals("O")) {
-                                jsonObject.put("clvOrden", Util.getClvOrden(Util.preferences));
-                            }
-                            jsonObject.put("noArticulo", Array.listaTabla.get(position - 1).get(3));
-                            request.eliminarPreDescarga(context, jsonObject, activity);
-                        } catch (Exception e) {
-
-                        }
-                    }else{
-
-                        Array.listaTabla.remove(position-1);
-                        Array.dataDescargaDirecta.get(0).remove(position-1);
-                        notifyDataSetChanged();
-
-                    }*/
-
                 }
             });
         }else if(viewHolder.view_type==type_head){
@@ -184,15 +148,7 @@ public class EliminarMaterialAdapter extends RecyclerView.Adapter<EliminarMateri
                 anchoE=obtenerLargoPixelesTexto("No.--Ext");
             }
             materialesViewHolder.hext.setWidth(anchoE);
-          /*  ConstraintLayout.LayoutParams layoutParams = (ConstraintLayout.LayoutParams) materialesViewHolder.haccion.getLayoutParams();
-            Log.d("with", String.valueOf(materialesViewHolder.haccion.getWidth()));
-
-            anchoA=materialesViewHolder.haccion.getWidth();*/
-
         }
-
-
-
 
     }
     public static int obtenerLargoPixelesTexto(String texto)

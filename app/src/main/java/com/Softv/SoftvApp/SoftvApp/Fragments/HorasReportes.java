@@ -204,8 +204,8 @@ public class HorasReportes extends Fragment  implements View.OnClickListener {
             objQuejas.put("FechaProceso", "");
             objQuejas.put("Fecha_Ejecucion", "");
             objQuejas.put("HP", "");
-            objQuejas.put("IdUsuario", 2);
-            objQuejas.put("Observaciones", request.ObsR + " " + observacionesTecReportes);
+            objQuejas.put("IdUsuario", Util.getClvUsuario(Util.preferences));
+            objQuejas.put("Observaciones", request.ObsR + "; " + observacionesTecReportes);
             objQuejas.put("Solucion", "");
             objQuejas.put("Status", "V");
             objQuejas.put("Visita", false);

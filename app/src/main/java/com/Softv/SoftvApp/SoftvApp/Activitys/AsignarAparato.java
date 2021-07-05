@@ -3,6 +3,7 @@ package com.Softv.SoftvApp.SoftvApp.Activitys;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.support.annotation.IntegerRes;
 import android.support.annotation.Nullable;
 import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AppCompatActivity;
@@ -13,6 +14,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
@@ -21,11 +23,13 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.Softv.SoftvApp.SoftvApp.Adapters.ArbolAdapter;
+import com.Softv.SoftvApp.SoftvApp.Adapters.TrabajosAdapter;
 import com.Softv.SoftvApp.SoftvApp.Listas.Array;
 import com.Softv.SoftvApp.SoftvApp.Modelos.GetMuestraAparatosDisponiblesListResult;
 import com.Softv.SoftvApp.SoftvApp.Modelos.GetMuestraArbolServiciosAparatosPorinstalarListResult;
 import com.Softv.SoftvApp.SoftvApp.Modelos.GetMuestraServiciosRelTipoAparatoListResult;
 import com.Softv.SoftvApp.SoftvApp.Modelos.GetMuestraTipoAparatoListResult;
+import com.Softv.SoftvApp.SoftvApp.Modelos.ListaOnusVallarta;
 import com.Softv.SoftvApp.SoftvApp.Modelos.children;
 import com.Softv.SoftvApp.SoftvApp.R;
 import com.Softv.SoftvApp.SoftvApp.Request.Request;
@@ -41,23 +45,30 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.regex.Pattern;
 
+import static com.Softv.SoftvApp.SoftvApp.Fragments.MaterialesOrdenes.descripcionMat;
+import static com.Softv.SoftvApp.SoftvApp.Listas.Array.OnuValla;
 
 
 public class AsignarAparato extends AppCompatActivity {
 
     private Button escanear, agragar, cancelar;
-    private TextView codigo,textView18,textView24;
+    private TextView codigo,textView18,textView24, txtVentaRenta;
     private String contents;
     public static ListView serviciosAparato;
-    public static Spinner spinnerAparato, spinneraparatoDisponible;
+    public static Spinner spinnerAparato, spinneraparatoDisponible,spinnerVentaRenta;
     private Request request = new Request();
     private Array array = new Array();
     public static int idArticuloasignado, clveAparatoSpinner;
-    public static String detalleSpinner, nombreSpinner;
+    public static String detalleSpinner, nombreSpinner, tipoSpinner;
     public static ArrayList<Integer> selectedStrings = new ArrayList<Integer>();
+    public static ArrayList<String> selectedServ = new ArrayList<String>();
     public static ConstraintLayout constraintLayoutMACWAM;
-    public static EditText MACWAMText;
+    public static EditText MACWAMText, codreg;
     public static JSONArray jsonArrayMAC= new JSONArray();
+    public static int bandera = 0, rentvent;// F o S
+    public static String onu="", letra = "";
+    public static int valido=0;
+    public long Clv_Aparato=0;
     String clvMACWAM = "";
 
     public static ArrayList<Integer> listaDeMac = new ArrayList<Integer>();
@@ -67,8 +78,8 @@ public class AsignarAparato extends AppCompatActivity {
         super.onCreate(onSaveInstanceState);
         setContentView(R.layout.activity_asignar_aparato);
         Toolbar toolbar = (Toolbar) findViewById(R.id.includeAsignarAparatos);
-        spinnerAparato = findViewById(R.id.tipo_aparato);
-        spinneraparatoDisponible = findViewById(R.id.aparatoDisponible);
+        spinnerAparato = findViewById(R.id.tipo_aparato);//--
+        spinneraparatoDisponible = findViewById(R.id.aparatoDisponible);//--
         serviciosAparato = findViewById(R.id.Servicios123);
         agragar = findViewById(R.id.agregarAsignacionAparato);
         cancelar = findViewById(R.id.cancelarAsignacionAparato);
@@ -76,6 +87,14 @@ public class AsignarAparato extends AppCompatActivity {
         textView24 = findViewById(R.id.textView24);
         textView18 = findViewById(R.id.textView18);
 
+        txtVentaRenta = findViewById(R.id.txtVentaRenta);
+        spinnerVentaRenta = findViewById(R.id.spinnerVentaRenta);
+
+        codigo = findViewById(R.id.CogReg);
+        codreg = findViewById(R.id.txt);
+
+        codigo.setVisibility(View.GONE);
+        codreg.setVisibility(View.GONE);
 
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -164,10 +183,20 @@ public class AsignarAparato extends AppCompatActivity {
                         JSONObject jsonObject = new JSONObject();
                         JSONObject jsonObject1 = new JSONObject();
                         jsonObject.put("Letra", dat.get(position - 1).letra);
+                        if(dat.get(position - 1).letra.equals("F") || dat.get(position - 1).letra.equals("S")){
+                            bandera = 1;
+                            //onu = dat.get(position - 1).getNombre();
+                        }
+                        else{
+                            bandera = 0;
+                            //onu="";
+                        }
                         jsonObject1.put("ObjRelMacwan", jsonObject);
                         request.ValidaMACWAM(getApplicationContext(), jsonObject1);
                     } catch (Exception e) {
                     }
+
+                    //selectedStrings.add(datos.getInt("Clv_UnicaNet"));
                     /*serviciosAparato.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
                     serviciosAparato.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                         @Override
@@ -199,6 +228,7 @@ public class AsignarAparato extends AppCompatActivity {
 
                     });*/
                     textView18.setVisibility(View.VISIBLE);
+
                             //textView24.setVisibility(View.VISIBLE);
                 }else{
                     agragar.setEnabled(false);
@@ -221,12 +251,48 @@ public class AsignarAparato extends AppCompatActivity {
                     List<GetMuestraAparatosDisponiblesListResult> dat1 = itData1.next();
                     clveAparatoSpinner = dat1.get(position1 - 1).getClv_Aparato();
                     nombreSpinner = dat1.get(position1 - 1).getDescripcion();
-                    serviciosAparato.setEnabled(true);
+                    tipoSpinner = dat1.get(position1 - 1).getDescripcion();
+                    //serviciosAparato.setEnabled(true);
+                    if (bandera == 1){
+                        onu = dat1.get(position1 - 1).getDescripcion();
+                        ListaOnusVallarta x = new ListaOnusVallarta();
+                        x.setOnu(onu);
+                        x.setInt(0);
+                        x.setTel(0);
+                        OnuValla.add(x);
+                    } else
+                        onu="";
+                    if(TrabajosAdapter.ASIG==true && request.PermVamra == true){
+                        try{
+                            JSONObject jsonObject = new JSONObject();
+                            Clv_Aparato = dat1.get(position1 - 1).getClv_Aparato();
+                            jsonObject.put( "Clv_Aparato", dat1.get(position1 - 1).getClv_Aparato());
+                            request.DameCodigo(getApplicationContext(),jsonObject,codreg);
+                        }catch (Exception e){}
+                        codigo.setVisibility(View.VISIBLE);
+                        codreg.setVisibility(View.VISIBLE);
+                    }
+                    letra = dat1.get(position1 - 1).getLetra();
+                    if(request.PermCableCentro == true && letra.equals("D")){
+                        //VentaRentaDag
+                        //rentvent = 1;
+                        array.VentaRentaDag.clear();
+                        array.VentaRentaDag.add(0, "---Seleccionar---");
+                        array.VentaRentaDag.add(1, "RENTA");
+                        array.VentaRentaDag.add(2, "VENTA");
+                        ArrayAdapter arrayAdapter = new ArrayAdapter(getApplicationContext(), android.R.layout.simple_list_item_1, array.VentaRentaDag);
+                        spinnerVentaRenta.setAdapter(arrayAdapter);
+
+                        txtVentaRenta.setVisibility(View.VISIBLE);
+                        spinnerVentaRenta.setVisibility(View.VISIBLE);
+                    }
                 } else {
                     clveAparatoSpinner = 0;
                     nombreSpinner = "";
                     Toast.makeText(getApplicationContext(), "Seleccione un aparato", Toast.LENGTH_LONG).show();
                     serviciosAparato.setEnabled(false);
+                    codigo.setVisibility(View.GONE);
+                    codreg.setVisibility(View.GONE);
                 }
             }
 
@@ -237,58 +303,52 @@ public class AsignarAparato extends AppCompatActivity {
         });
 
 
+        spinnerVentaRenta.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position2, long id) {
+                rentvent = position2;
+            }
 
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+                rentvent = 0;
+            }
+        });
 
 
         agragar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 clvMACWAM = String.valueOf(MACWAMText.getText());
-
-                if (clveAparatoSpinner == 0) {
-                    Toast.makeText(getApplicationContext(), "Seleccione un aparato", Toast.LENGTH_LONG).show();
-                } else {
-                    if (selectedStrings.size() == 0) {
-                        Toast.makeText(getApplicationContext(), "No se ha seleccionado nigun servicio", Toast.LENGTH_LONG).show();
-                    } else {
-                        if (request.MACWAM == true) {
-                            if (clvMACWAM.equals("") == true) {
-                                Toast.makeText(getApplicationContext(), "Escriba MACWAN", Toast.LENGTH_LONG).show();
-                            } else {
-                                if (clvMACWAM.equals(nombreSpinner) == false) {
-                                    if (clvMACWAM.length() == 12) {
-                                        JSONObject jsonObjectMACWAM = new JSONObject();
-                                        listaDeMac.add(clveAparatoSpinner);
-                                        try {
-                                            jsonObjectMACWAM.put("Clv_Aparato", clveAparatoSpinner);
-                                            jsonObjectMACWAM.put("MacLan", nombreSpinner);
-                                            jsonObjectMACWAM.put("MacWan", MACWAMText.getText());
-                                            jsonObjectMACWAM.put("Clv_Orden",  Util.getClvOrden(Util.preferences));
-
-
-                                        } catch (Exception e) {
-                                        }
-                                        jsonArrayMAC.put(jsonObjectMACWAM);
-                                        EjecutarAsignacion();
-
-                                    }
-                                    else{
-                                        Toast.makeText(getApplicationContext(), "La MACWAN debe de ser 12 caracteres", Toast.LENGTH_SHORT).show();
-                                    }
-                                }else {
-                                    Toast.makeText(getApplicationContext(), "La MACWAN no puede ser igual que la MacLan", Toast.LENGTH_SHORT).show();
-                                }
-
+                if(letra.equals("D") && request.PermCableCentro == true)
+                    if(rentvent > 0) {
+                        int auxRenta = Integer.parseInt(request.RENTA);
+                        int auxVenta = Integer.parseInt(request.VENTA);
+                        if(rentvent == 1)
+                            if(auxRenta < 1){
+                                Toast.makeText(getApplicationContext(), "No se puede asignar mas aparatos en Renta", Toast.LENGTH_SHORT).show();
+                            }else{
+                                auxRenta--;
+                                request.RENTA = String.valueOf(auxRenta);
+                                request.SeGuarda = true;
+                                Toast.makeText(getApplicationContext(), "Aparatos en renta restantes: "+request.RENTA, Toast.LENGTH_SHORT).show();
+                                BotonAgregar();
                             }
-                        } else {
-                            EjecutarAsignacion();
-                        }
-
-
+                        if(rentvent == 2)
+                            if(auxVenta < 1){
+                                Toast.makeText(getApplicationContext(), "No se puede asignar mas aparatos en Venta", Toast.LENGTH_SHORT).show();
+                            }else{
+                                auxVenta--;
+                                request.VENTA = String.valueOf(auxVenta);
+                                request.SeGuarda = true;
+                                Toast.makeText(getApplicationContext(), "Aparatos en venta restantes: "+request.VENTA, Toast.LENGTH_SHORT).show();
+                                BotonAgregar();
+                            }
+                    }else {
+                        Toast.makeText(getApplicationContext(), "Seleccione si el aparato es de Venta o Renta", Toast.LENGTH_SHORT).show();
                     }
-                }
-
-
+                else
+                    BotonAgregar();
             }
         });
       /*  escanear.setOnClickListener(new View.OnClickListener() {
@@ -311,7 +371,83 @@ public class AsignarAparato extends AppCompatActivity {
         }
     }
 
+    public void BotonAgregar(){
+        if (clveAparatoSpinner == 0) {
+            Toast.makeText(getApplicationContext(), "Seleccione un aparato", Toast.LENGTH_LONG).show();
+        } else {
+            if (selectedStrings.size() == 0) {
+                Toast.makeText(getApplicationContext(), "No se ha seleccionado nigun servicio", Toast.LENGTH_LONG).show();
+            } else {
+                if (request.MACWAM == true) {
+                    if (clvMACWAM.equals("") == true) {
+                        Toast.makeText(getApplicationContext(), "Escriba MACWAN", Toast.LENGTH_LONG).show();
+                    } else {
+                        if (clvMACWAM.equals(nombreSpinner) == false) {
+                            if (clvMACWAM.length() == 12) {
+                                JSONObject jsonObjectMACWAM = new JSONObject();
+                                listaDeMac.add(clveAparatoSpinner);
+                                try {
+                                    jsonObjectMACWAM.put("Clv_Aparato", clveAparatoSpinner);
+                                    jsonObjectMACWAM.put("MacLan", nombreSpinner);
+                                    jsonObjectMACWAM.put("MacWan", MACWAMText.getText());
+                                    jsonObjectMACWAM.put("Clv_Orden",  Util.getClvOrden(Util.preferences));
 
+
+                                } catch (Exception e) {
+                                }
+                                jsonArrayMAC.put(jsonObjectMACWAM);
+
+                                if(TrabajosAdapter.ASIG==true && request.PermVamra == true)
+                                    EjecutarConAD();
+                                else
+                                    EjecutarAsignacion();
+
+                            }
+                            else{
+                                Toast.makeText(getApplicationContext(), "La MACWAN debe de ser 12 caracteres", Toast.LENGTH_SHORT).show();
+                            }
+                        }else {
+                            Toast.makeText(getApplicationContext(), "La MACWAN no puede ser igual que la MacLan", Toast.LENGTH_SHORT).show();
+                        }
+
+                    }
+                } else {
+                    if(TrabajosAdapter.ASIG==true && request.PermVamra == true)
+                        EjecutarConAD();
+                    else
+                        EjecutarAsignacion();
+                }
+
+
+            }
+        }
+    }
+
+    public void EjecutarConAD(){
+        String CD = codreg.getText().toString();
+        if(CD.equals("")){
+            Toast.makeText(getApplicationContext(), "Error, ingrese código de registro", Toast.LENGTH_SHORT).show();
+        }else {
+            JSONObject jsonObject = new JSONObject();
+            try {
+                jsonObject.put("Codigo", codreg.getText());
+                jsonObject.put("Clv_Aparato", Clv_Aparato);
+                request.ValidaCodigo(getApplicationContext(), jsonObject, codreg);
+            } catch (Exception e) {
+            }
+            if (valido == 1) {
+                if (TrabajosAdapter.ISDIG == true && bandera == 0) {
+                    request.SetCodigoRegistro(getApplicationContext(), jsonObject, codreg);
+                    EjecutarAsignacionDig((String) getTitle());
+                } else {
+                    request.SetCodigoRegistro(getApplicationContext(), jsonObject, codreg);
+                    EjecutarAsignacion();
+                }
+            } else {
+                Toast.makeText(getApplicationContext(), "Ya existe este código registrado", Toast.LENGTH_SHORT).show();
+            }
+        }
+    }
 
     public void EjecutarAsignacion() {
         Iterator<List<GetMuestraArbolServiciosAparatosPorinstalarListResult>> itData4 = Array.dataArbSer.iterator();
@@ -326,7 +462,48 @@ public class AsignarAparato extends AppCompatActivity {
                         dataChild.setBaseIdUser(0);
                         dataChild.setBaseRemoteIp(null);
                         dataChild.setClv_Aparato(clveAparatoSpinner);
-                        dataChild.setClv_UnicaNet(null);
+                        dataChild.setClv_UnicaNet(asd);
+                        dataChild.setContratoNet(0);
+                        dataChild.setDetalle(detalleSpinner);
+                        dataChild.setNombre(nombreSpinner);
+                        dataChild.setTipo("A");
+                        dataChild.setType("file");
+                        if(request.PermCableCentro == true){
+                            if(rentvent == 1) {
+                                dataChild.setVenta(0);
+                            }else {
+                                dataChild.setVenta(1);
+                            }
+                        }
+                        dat4.get(c).children.add(dataChild);
+                        selectedStrings.remove(d);
+                    }
+                }
+                catch (Exception e){}
+
+
+            }
+        }
+        Intent intento = new Intent(AsignarAparato.this, ReporteAsignacion.class);
+        intento.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intento);
+        finish();
+    }
+
+    public void EjecutarAsignacionDig(String Servicio) {
+        Iterator<List<GetMuestraArbolServiciosAparatosPorinstalarListResult>> itData4 = Array.dataArbSer.iterator();
+        List<GetMuestraArbolServiciosAparatosPorinstalarListResult> dat4 = itData4.next();
+        for (int c = 0; c < dat4.size(); c++) {
+            int asd=dat4.get(c).getClv_UnicaNet();
+            for (int d = 0; d <= selectedStrings.size()-1; d++ ) {
+                int abc ;
+                try{
+                    if (dat4.get(c).Nombre == Servicio) {
+                        children dataChild = new children();
+                        dataChild.setBaseIdUser(0);
+                        dataChild.setBaseRemoteIp(null);
+                        dataChild.setClv_Aparato(clveAparatoSpinner);
+                        dataChild.setClv_UnicaNet(asd);
                         dataChild.setContratoNet(0);
                         dataChild.setDetalle(detalleSpinner);
                         dataChild.setNombre(nombreSpinner);
@@ -334,14 +511,14 @@ public class AsignarAparato extends AppCompatActivity {
                         dataChild.setType("file");
                         dat4.get(c).children.add(dataChild);
                         selectedStrings.remove(d);
-                }
+                    }
                 }
                 catch (Exception e){}
 
 
             }
         }
-          Intent intento = new Intent(AsignarAparato.this, ReporteAsignacion.class);
+        Intent intento = new Intent(AsignarAparato.this, ReporteAsignacion.class);
         intento.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intento);
         finish();

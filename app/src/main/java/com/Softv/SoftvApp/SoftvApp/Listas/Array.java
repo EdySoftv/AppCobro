@@ -1,5 +1,6 @@
 package com.Softv.SoftvApp.SoftvApp.Listas;
 
+import com.Softv.SoftvApp.SoftvApp.Modelos.DatosClientesSaldoList;
 import com.Softv.SoftvApp.SoftvApp.Modelos.DescripcionArticuloModel;
 import com.Softv.SoftvApp.SoftvApp.Modelos.DetalleBitacoraModel;
 import com.Softv.SoftvApp.SoftvApp.Modelos.GetBUSCADetOrdSerListResult;
@@ -29,8 +30,11 @@ import com.Softv.SoftvApp.SoftvApp.Modelos.GetSoftvWebValidaNodo;
 import com.Softv.SoftvApp.SoftvApp.Modelos.Get_ClvTecnicoResult;
 import com.Softv.SoftvApp.SoftvApp.Modelos.GetdameSerDELCliresumenResult;
 import com.Softv.SoftvApp.SoftvApp.Modelos.GetuspBuscaContratoSeparado2ListResult;
+import com.Softv.SoftvApp.SoftvApp.Modelos.ListaOnusVallarta;
 import com.Softv.SoftvApp.SoftvApp.Modelos.ListadoQuejasAgendadas;
 import com.Softv.SoftvApp.SoftvApp.Modelos.LlenaExtencionesModel;
+import com.Softv.SoftvApp.SoftvApp.Modelos.ModelDetallesList;
+import com.Softv.SoftvApp.SoftvApp.Modelos.ModelServiciosList;
 import com.Softv.SoftvApp.SoftvApp.Modelos.Muestra_TecnicosDescargaMaterialResult;
 import com.Softv.SoftvApp.SoftvApp.Modelos.ObtieneNapModel;
 import com.Softv.SoftvApp.SoftvApp.Modelos.ObtieneTapModel;
@@ -161,8 +165,33 @@ public class Array {
     public static ArrayList<Integer>idTapCoordenadas=new ArrayList<>();
     public static ArrayList<String>tapLatitud=new ArrayList<>();
     public static ArrayList<String>tapLongitud=new ArrayList<>();
+
+    public static ArrayList<ListaOnusVallarta> OnuValla=new ArrayList<ListaOnusVallarta>();
 //    public static ArrayList<String>napFiltrado=new ArrayList<>();
 //    public static ArrayList<String>napFiltradoPoste=new ArrayList<>();
 //    public static ArrayList<Integer>idNapCoordenadas=new ArrayList<>();
+
+    public static ArrayList<List<ModelServiciosList>> DataServicios;
+    public static ArrayList<String>ServicioSaldo=new ArrayList<>();
+    public static ArrayList<String>StatusSaldo=new ArrayList<>();
+    public static ArrayList<String>TipServSaldo=new ArrayList<>();
+
+    public static ArrayList<List<ModelDetallesList>> DataDetalles;
+    public static ArrayList<String>DescripcionSaldo=new ArrayList<>();
+    public static ArrayList<String>FechaConsultaSaldo=new ArrayList<>();
+    public static ArrayList<Float>MontoSaldo=new ArrayList<>();
+    public static ArrayList<String>OperacionSaldo=new ArrayList<>();
+
+    public static ArrayList<Integer>SessionSaldo=new ArrayList<>();
+
+    public static ArrayList<List<DatosClientesSaldoList>> DataClientes;
+    public static ArrayList<String>ContratoCompuestoList=new ArrayList<>();
+    public static ArrayList<String>NombreList=new ArrayList<>();
+    public static ArrayList<String>TelefonoList=new ArrayList<>();
+    public static ArrayList<String>CalleNumeroList=new ArrayList<>();
+    public static ArrayList<String>ColoniaList=new ArrayList<>();
+    public static ArrayList<String>ContratoList=new ArrayList<>();
+
+    public static ArrayList<String> VentaRentaDag= new ArrayList<String>();
 
 }

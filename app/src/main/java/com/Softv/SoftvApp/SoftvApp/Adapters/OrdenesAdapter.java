@@ -1,6 +1,7 @@
 package com.Softv.SoftvApp.SoftvApp.Adapters;
 
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
@@ -36,7 +37,8 @@ public class OrdenesAdapter extends RecyclerView.Adapter<OrdenesAdapter.ordensrc
 
 
     public static  class ordensrcViewHolder extends  RecyclerView.ViewHolder{
-        private TextView status,contrato1,nombre,direccionOrd,orden,control,noOrden,txtnap,txttap,txttrabajo,napordenes,tapordenes,trabajoordenes,fecha, precinto;
+        private TextView status,contrato1,nombre,direccionOrd,orden,control,noOrden,txtnap,txttap,txttrabajo,napordenes,tapordenes,trabajoordenes,fecha, precinto, txtpre;
+
         public ordensrcViewHolder( View v) {
             super(v);
             status=(TextView)itemView.findViewById(R.id.tv_estatus);
@@ -54,6 +56,7 @@ public class OrdenesAdapter extends RecyclerView.Adapter<OrdenesAdapter.ordensrc
             trabajoordenes = itemView.findViewById(R.id.id_TrabajoOrdenes);
             fecha  = itemView.findViewById(R.id.id_FechaListado);
             precinto  = itemView.findViewById(R.id.id_PrecintoListado);
+            txtpre = itemView.findViewById(R.id.txtFechaListado5);
         }
     }
 
@@ -83,7 +86,7 @@ public class OrdenesAdapter extends RecyclerView.Adapter<OrdenesAdapter.ordensrc
     }
 
     @Override
-    public void onBindViewHolder(ordensrcViewHolder viewHolder, final int position) {
+    public void onBindViewHolder(ordensrcViewHolder viewHolder, @SuppressLint("RecyclerView") final int position) {
 
         viewHolder.noOrden.setText("No. de Orden");
         viewHolder.nombre.setText(Array.nombresrc.get(position));
@@ -123,6 +126,16 @@ public class OrdenesAdapter extends RecyclerView.Adapter<OrdenesAdapter.ordensrc
             viewHolder.tapordenes.setText(Array.tapsrc.get(position));
         }
 
+        /*if(request.PermPlaca == false){
+            //viewHolder.txtpre.setVisibility(View.GONE);
+            //viewHolder.precinto.setVisibility(View.GONE);
+            viewHolder.txtpre.setVisibility(View.GONE);
+        }else{
+            viewHolder.txtpre.setVisibility(View.VISIBLE);
+            viewHolder.precinto.setVisibility(View.VISIBLE);
+
+        }*/
+
         viewHolder.control.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -134,7 +147,11 @@ public class OrdenesAdapter extends RecyclerView.Adapter<OrdenesAdapter.ordensrc
                 Util.editor.putInt("clvOrden", Integer.valueOf(ordensrc.get(position)));
                 Util.editor.commit();
 
+                if(Array.trabajosrc.get(position).contains("CAMDO")){
+                    request.Cambio = 1;
+                }
 
+                request.NombreGeneral = Array.nombresrc.get(position);
                 request.getDeepCons(mContext);
                 request.getValidaFirma(mContext);
 

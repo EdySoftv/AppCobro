@@ -68,8 +68,8 @@ public class Inicio extends AppCompatActivity
         if (!isOnline()) {
             dialogInicio.dismiss();
             EstatusInternet(getApplicationContext());
-           // Toast.makeText(getApplicationContext(), "No cuenta con conexión a Internet", Toast.LENGTH_LONG).show();
-           // finish();
+            Toast.makeText(getApplicationContext(), "No cuenta con conexión a Internet", Toast.LENGTH_LONG).show();
+            finish();
 
         }else{
             try{
@@ -81,12 +81,12 @@ public class Inicio extends AppCompatActivity
                 jsonObjectDirecta1.put("obj",jsonObjectDirecta);
                 request.getPermisosDirecta(getApplicationContext(),jsonObjectDirecta1);
             }catch (Exception e){}
-            /*try{
+            try{
                 JSONObject jsonObject = new JSONObject();
                 jsonObject.put("clv_tecnico", Util.getClvTec(Util.preferences));
                 request.getProximaCita(getApplicationContext(),jsonObject,view,dialogInicio,this);
                 request.getOrdenes(getApplicationContext(),jsonObject,view,dialogInicio,this);
-            }catch (Exception x){dialogInicio.dismiss();}*/
+            }catch (Exception x){dialogInicio.dismiss();}
             request.getReviews(Inicio.this,dialogInicio,view,false,this);
         }
 
@@ -97,6 +97,7 @@ public class Inicio extends AppCompatActivity
         nombreTec = barra1.findViewById(R.id.tv_NombreTecnico);
         nombreTec.setText(Util.getNombreTecnicoPreference(Util.preferences));
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        navigationView.getMenu().setGroupVisible(R.id.Cobro,Request.PermCobro);
         navigationView.setNavigationItemSelectedListener(this);
 
 
@@ -223,13 +224,19 @@ public void EstatusInternet (Context ctx){
             intent1.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(intent1);
             finish();
-    } else if (id == R.id.MenuCoordenadasTAP) {
+        } else if (id == R.id.MenuCoordenadasTAP) {
             Intent intent1 = new Intent(Inicio.this, NAPTAP.class);
             intent1.putExtra("dato", "TAP");
             intent1.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(intent1);
             finish();
-    }
+        }else if (id == R.id.Saldo) {
+            Intent intent1 = new Intent(Inicio.this, Saldo.class);
+            intent1.putExtra("dato", "TAP");
+            intent1.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(intent1);
+            finish();
+        }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);

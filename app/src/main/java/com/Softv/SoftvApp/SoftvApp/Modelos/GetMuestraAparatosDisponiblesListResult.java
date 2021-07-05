@@ -10,6 +10,9 @@ public class GetMuestraAparatosDisponiblesListResult {
     @SerializedName("Descripcion")
     @Expose
     private String descripcion;
+    @SerializedName("Letra")
+    @Expose
+    private String Letra;
 
 
     public Integer getClv_Aparato() {
@@ -22,5 +25,13 @@ public class GetMuestraAparatosDisponiblesListResult {
 
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
+    }
+
+    public String getLetra() {
+        return Letra;
+    }
+
+    public void setLetra(String letra) {
+        Letra = letra;
     }
 }

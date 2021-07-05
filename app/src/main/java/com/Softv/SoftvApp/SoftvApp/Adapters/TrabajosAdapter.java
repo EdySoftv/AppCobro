@@ -12,6 +12,7 @@ import android.widget.BaseAdapter;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.Softv.SoftvApp.SoftvApp.Activitys.CambioAparato;
 import com.Softv.SoftvApp.SoftvApp.Listas.Array;
@@ -45,10 +46,11 @@ public class TrabajosAdapter extends BaseAdapter {
     public static boolean stat, validarCoordenadas=false;
     public static int ClaveTrabajo;
     public static int ftth=0;
-    public static  boolean retiro = false, ISDIG=false;
+    public static  boolean retiro = false, ISDIG=false, ASIG=false;
     public static String descr;
-    public static boolean rapg =false,validarFotografia=false;
+    public static boolean rapg =false;
     public static ProgressDialog dialogTrabajos;
+    private Request request=new Request();
     BarraCargar barraCargar = new BarraCargar();
 
 
@@ -106,6 +108,19 @@ try{
         String palabra = holder.trabajo.getText().toString();
         String[] caracteres = palabra.split(" ");
 
+        if(caracteres[0].equals("DESCO")||
+                caracteres[0].equals("DPAQU")||
+                caracteres[0].equals("DPAQT")||
+                caracteres[0].equals("DESTD")||
+                caracteres[0].equals("DESFIS")||
+                caracteres[0].equals("DESCB")||
+                caracteres[0].equals("RSTVA")||
+                caracteres[0].equals("RSNET")||
+                caracteres[0].equals("RSDIG")||
+                caracteres[0].equals("RECON")){
+            request.Desc = true;
+        }
+
         if (caracteres[0].equals("RAPAG")){
             recibixnew.clear();
             retiro = true;
@@ -113,7 +128,6 @@ try{
             holder.recibi.setVisibility(View.VISIBLE);
             holder.recibitext.setVisibility(View.VISIBLE);
             rapg=false;
-
         }
 
 //        if (caracteres[0].equals("RETLI")){
@@ -163,6 +177,7 @@ try{
 
             @Override
             public void onClick(View v) {
+                request.Cambio = 0;
                 isnet=0;
                 ISDIG=false;
                 ClaveTrabajo = Array.clavex.get(position);
@@ -172,21 +187,27 @@ try{
                 Log.d("caracteres0",caracteres[0]);
                 Log.d("caracteres1",caracteres[1]);
                 Request request = new Request();
+
                 //Instalacion
-                if (caracteres[0].equals("ISTVA")) {
+                //Instalacion
+                //ISTVA - Instalación de Servicio de TV
+                if (caracteres[0].equals("ISTVA") || caracteres[0].equals("ASTVA")) {
                     validarCoordenadas=true;
                     retiro = false;
                     dialogTrabajos.show();
+                    if(caracteres[0].equals("ASTVA"))ASIG = true;
                     try{
                         JSONObject jsonObject = new JSONObject();
                         jsonObject.put("clv_orden",  Util.getClvOrden(Util.preferences));
                         request.PreguntaMedios(Cmcontext,jsonObject);
                     }catch (Exception e){}
                 }
-                if (caracteres[0].equals("ISNET")) {
+                //ISNET - Instalación de Servicio de Internet
+                if (caracteres[0].equals("ISNET") || caracteres[0].equals("ASNET")) {
                     validarCoordenadas=true;
                     retiro = false;
                     dialogTrabajos.show();
+                    if(caracteres[0].equals("ASNET"))ASIG = true;
                     try{
                         JSONObject jsonObject = new JSONObject();
                         jsonObject.put("clv_orden",  Util.getClvOrden(Util.preferences));
@@ -194,17 +215,20 @@ try{
                     }catch (Exception e){}
                     isnet=1;
                 }
-                if (caracteres[0].equals("ISDIG")) {
+                //ISDIG - Instalación de Servicio Digital
+                if (caracteres[0].equals("ISDIG") || caracteres[0].equals("ASDIG")) {
                     validarCoordenadas=true;
                     retiro = false;
                     ISDIG=true;
                     dialogTrabajos.show();
+                    if(caracteres[0].equals("ASDIG"))ASIG = true;
                     try{
                         JSONObject jsonObject = new JSONObject();
                         jsonObject.put("clv_orden",  Util.getClvOrden(Util.preferences));
                         request.PreguntaMedios(Cmcontext,jsonObject);
                     }catch (Exception e){}
                 }
+                //CTCTV - Cambio Tecnologia Tv
                 if (caracteres[0].equals("CTCTV")) {
                     validarCoordenadas=true;
                     retiro = false;
@@ -215,6 +239,7 @@ try{
                         request.PreguntaMedios(Cmcontext,jsonObject);
                     }catch (Exception e){}
                 }
+                //CTCIN - Cambio Tecnologia Internet
                 if (caracteres[0].equals("CTCIN")) {
                     validarCoordenadas=true;
                     retiro = false;
@@ -225,6 +250,7 @@ try{
                         request.PreguntaMedios(Cmcontext,jsonObject);
                     }catch (Exception e){}
                 }
+                //CTCDG - Cambio de Tecnología de Servicio Digital
                 if (caracteres[0].equals("CTCDG")) {
                     validarCoordenadas=true;
                     retiro = false;
@@ -235,6 +261,7 @@ try{
                         request.PreguntaMedios(Cmcontext,jsonObject);
                     }catch (Exception e){}
                 }
+                //RSTVA - Reinstalacion de servicio de TV
                 if (caracteres[0].equals("RSTVA")) {
                     validarCoordenadas=true;
                     retiro = false;
@@ -245,6 +272,7 @@ try{
                         request.PreguntaMedios(Cmcontext,jsonObject);
                     }catch (Exception e){}
                 }
+                //RSNET - Reinstalacion de servicio de Internet
                 if (caracteres[0].equals("RSNET")) {
                     validarCoordenadas=true;
                     retiro = false;
@@ -255,6 +283,7 @@ try{
                         request.PreguntaMedios(Cmcontext,jsonObject);
                     }catch (Exception e){}
                 }
+                //RSDIG - Reinstalacion de servicio de Tv Digital
                 if (caracteres[0].equals("RSDIG")) {
                     validarCoordenadas=true;
                     retiro = false;
@@ -268,6 +297,7 @@ try{
 
 
                 //Cambio Aparato
+                //CAPAG - Cambio de aparato
                 if (caracteres[0].equals("CAPAG")) {
                     validarCoordenadas=false;
                     retiro = false;
@@ -277,6 +307,7 @@ try{
                     intento.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                     Cmcontext.startActivity(intento);
                 }
+                //CAPAT - Cambio de Tipo de Aparato
                 if (caracteres[0].equals("CAPAT")) {
                     validarCoordenadas=false;
                     retiro = false;
@@ -288,6 +319,7 @@ try{
                 }
 
                 //Cambio Domicilio
+                //CAMDO - Traslado Externo de Servicio
                 if (caracteres[0].equals("CAMDO")) {
                     validarCoordenadas=true;
                     retiro = false;
@@ -296,11 +328,21 @@ try{
                 }
 
                 //Extenciones Adicionales
+                //CANEX - Cancelación De Extensión
                 if (caracteres[0].equals("CONEX")) {
-                    validarCoordenadas=false;
+                    validarCoordenadas = false;
                     retiro = false;
                     dialogTrabajos.show();
-                    request.getExtencionesAdicionales(Cmcontext);
+                    if (request.PermCableCentro == true){
+                        //Toast.makeText(Cmcontext, "Cambio", Toast.LENGTH_LONG).show();
+                    try {
+                        JSONObject jsonObject = new JSONObject();
+                        jsonObject.put("clv_orden", Util.getClvOrden(Util.preferences));
+                        request.PreguntaMedios(Cmcontext, jsonObject);
+                    } catch (Exception e) {
+                    }
+                }else
+                        request.getExtencionesAdicionales(Cmcontext);
                 }
 
             }

@@ -54,7 +54,7 @@ public class MainActivity extends AppCompatActivity implements ActionBar.TabList
     private Boolean cambio = false;
     public  int positionTab;
     ConstraintLayout layoutAnimado;
-    public static TextView NombreTec, Contrato, Status, Nombre, Direccion, InfoServicios,TelyCel,Entrecalles,referenciastxt,referencias;
+    public static TextView NombreTec, Contrato, Status, Nombre, Direccion, InfoServicios,TelyCel,Entrecalles,referenciastxt,referencias, placaInf, txtdireccion, txtentreca;
     public static String Estatus;
     public static boolean DescargaAgregar=false;
     int ValidaRegreso=0,ValidaHora=0;
@@ -73,6 +73,7 @@ public class MainActivity extends AppCompatActivity implements ActionBar.TabList
         //NombreTec= findViewById(R.id.tecniconame);
         Contrato= findViewById(R.id.contrato);
         Status= findViewById(R.id.status);
+        placaInf = findViewById(R.id.PlacaInf);
         Nombre= findViewById(R.id.infonombre);
         Direccion= findViewById(R.id.infodireccion);
         InfoServicios= findViewById(R.id.infoservicios);
@@ -80,6 +81,20 @@ public class MainActivity extends AppCompatActivity implements ActionBar.TabList
         Entrecalles=findViewById(R.id.entrecalles);
         referenciastxt=findViewById(R.id.referenciastxt);
         referencias=findViewById(R.id.referencias);
+        Nombre.setText(request.NombreGeneral);
+
+        txtdireccion = findViewById(R.id.wre);
+        txtentreca = findViewById(R.id.entrecallestxt);
+
+        if(request.PermCableCentro == true){
+            txtdireccion.setText("Colonia");
+            txtentreca.setVisibility(View.GONE);
+            Entrecalles.setVisibility(View.GONE);
+        }else{
+            txtdireccion.setText("Dirección:");
+            txtentreca.setVisibility(View.GONE);
+            Entrecalles.setVisibility(View.GONE);
+        }
         setTitle("No. de Orden: " +  Util.getClvOrden(Util.preferences));
 
         ejecutada = 0;
@@ -97,6 +112,8 @@ public class MainActivity extends AppCompatActivity implements ActionBar.TabList
        // NombreTec.setText(nombre_tecnico);
         Contrato.setText(request.contraroMA);
         Status.setText(request.statusMA);
+        placaInf.setText(request.PlacaMA);
+
 //        NombreTec.setText(Util.getNombreTecnicoPreference(Util.preferences));
         //* Boton de informacion
         info.setOnClickListener(new View.OnClickListener() {

@@ -31,6 +31,9 @@ public class children {
         @SerializedName("Type")
         @Expose
         public String Type;
+        @SerializedName("Venta")
+        @Expose
+        public Integer Venta;
 
     public void setClv_Aparato(Integer clv_Aparato) {
         Clv_Aparato = clv_Aparato;
@@ -93,6 +96,14 @@ public class children {
 
     public Integer getBaseRemoteIp() {
         return baseRemoteIp;
+    }
+
+    public Integer getVenta() {
+        return Venta;
+    }
+
+    public void setVenta(Integer venta) {
+        Venta = venta;
     }
 }
 

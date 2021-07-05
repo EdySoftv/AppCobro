@@ -167,6 +167,9 @@ public class GetQuejasListResult {
     @SerializedName("clv_llamada")
     @Expose
     private Object clvLlamada;
+    @SerializedName("Placa")
+    @Expose
+    public String Placa;
 
     public Long getClvTrabajo() {
         return clvTrabajo;
@@ -242,5 +245,9 @@ public class GetQuejasListResult {
 
     public int getClvTipSer() {
         return clvTipSer;
+    }
+
+    public String getPlaca() {
+        return Placa;
     }
 }

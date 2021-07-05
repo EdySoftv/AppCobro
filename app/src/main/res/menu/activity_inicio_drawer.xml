@@ -7,21 +7,15 @@
         <item
             android:id="@+id/Inicio"
             android:icon="@drawable/ic_home_black_24dp"
-            android:title="Inicio"
-
-            />
+            android:title="Inicio" />
         <item
             android:id="@+id/Ordenes_menu"
             android:icon="@drawable/ordenes"
-            android:title="Órdenes" />
+            android:title="Órdenes"/>
         <item
             android:id="@+id/Reportes"
             android:icon="@drawable/reportes"
-            android:title="Reportes" />
-        <item
-            android:id="@+id/Configuraciones"
-            android:icon="@drawable/ic_menu_manage"
-            android:title="Configuraciones" />
+            android:title="Reportes"/>
         <item android:title="Área Técnica" >
             <menu>
                 <item android:id="@+id/MenuCoordenadasNAP"
@@ -36,5 +30,29 @@
         </item>
     </group>
 
+    <group android:checkableBehavior="single"
+        android:id="@+id/Sesion">
+        <item android:title="Sesión">
+            <menu>
+                <item
+                    android:id="@+id/Configuraciones"
+                    android:icon="@drawable/ic_menu_manage"
+                    android:title="Configuraciones"/>
+            </menu>
+        </item>
+    </group>
+
+    <group
+        android:checkableBehavior="single"
+        android:id="@+id/Cobro">
+        <item android:title="Cobro">
+            <menu>
+                <item
+                    android:id="@+id/Saldo"
+                    android:icon="@drawable/ic_menu_send"
+                    android:title="Saldo" />
+            </menu>
+        </item>
+    </group>
 
 </menu>

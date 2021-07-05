@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="DatosCliente" type="id" />
+    <item name="ListaDeServicios" type="id" />
+    <item name="ListaDeDetalles" type="id" />
+    <item name="Pagos" type="id" />
+    <item name="DetalleSaldoTitu" type="id" />
+    <item name="txtConceptoT" type="id" />
+    <item name="txtImporteT" type="id" />
+</resources>

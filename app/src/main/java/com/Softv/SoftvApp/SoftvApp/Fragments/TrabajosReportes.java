@@ -3,6 +3,8 @@ package com.Softv.SoftvApp.SoftvApp.Fragments;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,6 +27,8 @@ public class TrabajosReportes extends Fragment implements View.OnClickListener {
     public static  EditText proble;
     private Request request = new Request();
     public static int Clv_Sol=-1,posSolucionRepo=0;
+    private TextView car1;
+    private EditText cadena;
 
 
     public TrabajosReportes() {
@@ -45,6 +49,9 @@ public class TrabajosReportes extends Fragment implements View.OnClickListener {
         proble=view.findViewById(R.id.problema);
         solucion = view.findViewById(R.id.tiposol);
 
+        car1=(TextView) view.findViewById(R.id.textView38);
+        cadena=(EditText) view.findViewById(R.id.problema);
+
         solucion.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -57,6 +64,25 @@ public class TrabajosReportes extends Fragment implements View.OnClickListener {
 
             }
         });
+
+        cadena.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                car1.setText(String.valueOf(cadena.length()));
+                //Toast.makeText(getApplicationContext(), "No cuenta con conexión a Internet", Toast.LENGTH_LONG).show();
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
+
         clasific= view.findViewById(R.id.Sp1);
         prioridad= view.findViewById(R.id.Sp2);
         desc= view.findViewById(R.id.observa);

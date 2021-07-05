@@ -19,6 +19,7 @@ import android.widget.Toast;
 
 import com.Softv.SoftvApp.SoftvApp.Adapters.ArbolAdapter;
 import com.Softv.SoftvApp.SoftvApp.Adapters.EliminarAparatosAdapter;
+import com.Softv.SoftvApp.SoftvApp.Adapters.TrabajosAdapter;
 import com.Softv.SoftvApp.SoftvApp.Listas.Array;
 import com.Softv.SoftvApp.SoftvApp.Modelos.DeepConsModel;
 import com.Softv.SoftvApp.SoftvApp.Modelos.GetMuestraArbolServiciosAparatosPorinstalarListResult;
@@ -37,6 +38,8 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import static com.Softv.SoftvApp.SoftvApp.Listas.Array.OnuValla;
+
 public class ReporteAsignacion extends AppCompatActivity {
 
     Request request = new Request();
@@ -47,6 +50,8 @@ public class ReporteAsignacion extends AppCompatActivity {
     int posicionSpinnerSelect;
     public static ProgressDialog dialogReporteAsignacion;
     public static boolean guardarAparatosProgresBar=false;
+
+    BarraCargar barraCargar = new BarraCargar();
 
 
     public static ArbolAdapter adapterReporte;
@@ -76,7 +81,7 @@ public class ReporteAsignacion extends AppCompatActivity {
         });
         setTitle(ArbolAdapter.nombreToolBar);
         //
-
+        Request.titul=ArbolAdapter.nombreToolBar;
         if(guardarAparatos.isEnabled()==false){
             guardarAparatos.setTextColor(Color.GRAY);
             if(DeepConsModel.STATUS.equals("E")){
@@ -97,6 +102,11 @@ public class ReporteAsignacion extends AppCompatActivity {
 
         //Barra de cargando
         dialogReporteAsignacion = new BarraCargar().showDialog(this);
+
+        if(request.PermCableCentro == true){
+            request.VentaRenta(getApplicationContext(), Util.getClvOrden(Util.preferences));
+            //Toast.makeText(getApplicationContext(), request.VENTA + " APARATOS EN VENTA, " + request.RENTA + " APARATOS EN RENTA", Toast.LENGTH_LONG).show();
+        }
 
         //Arbol
         Iterator<List<GetMuestraArbolServiciosAparatosPorinstalarListResult>> itData = Array.dataArbSer.iterator();
@@ -189,6 +199,10 @@ public class ReporteAsignacion extends AppCompatActivity {
             } catch (Exception e) {
             }
         }
+
+
+
+
         //Seleccionar medio en el spinner
         spinerMedio.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -248,7 +262,14 @@ public class ReporteAsignacion extends AppCompatActivity {
         guardarAparatos.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                GuardarAparatos(getApplicationContext());
+                String x = (String) getTitle();
+                if(TrabajosAdapter.ISDIG==true){
+                    GuardarAparatosDIG(getApplicationContext(), x);
+                }else if (request.PermVallarta == true && AsignarAparato.bandera == 1){
+                    GuardarAparatosVallarta(getApplicationContext(), x);
+                }else{
+                    GuardarAparatos(getApplicationContext());
+                }
                 finish();
             }
         });
@@ -342,6 +363,7 @@ public class ReporteAsignacion extends AppCompatActivity {
                     jsonObject4.put("Nombre", dat.get(c).children.get(b).Nombre);
                     jsonObject4.put("Tipo", dat.get(c).children.get(b).Tipo);
                     jsonObject4.put("Type", dat.get(c).children.get(b).Type);
+                    jsonObject4.put("Venta", dat.get(c).children.get(b).getVenta());
                     jsonArray3.put(jsonObject4);
                 }
                 jsonObject3.put("children", jsonArray3);
@@ -362,6 +384,244 @@ public class ReporteAsignacion extends AppCompatActivity {
             jsonObject1.put("obj",jsonObject);
             jsonObject1.put("Lst",jsonArray2);
             request.getAceptatAsignacino(context,jsonObject1);
+        }catch (Exception e){}
+        /*ServiciosAInstalar.Asignacion.setAdapter(ServiciosAInstalar.adapter);*/
+        adapterReporte = new ArbolAdapter(dat,context);
+        ServiciosAInstalar.Asignacion.setAdapter(adapterReporte);
+        ServiciosAInstalar.Asignacion.refreshDrawableState();
+        guardarAparatosProgresBar=true;
+
+    }
+
+    public void GuardarAparatosD(final Context context){
+        dialogReporteAsignacion.show();
+        Request request = new Request();
+        JSONObject jsonObject3;
+        JSONArray jsonArray3;
+        JSONObject jsonObject4 ;
+        JSONArray jsonArray2 = new JSONArray();
+        for (int a = 0; a < Array.dataArbSer.get(0).size(); a++) {
+            Array.dataArbSer.get(0).get(a).setClv_orden( Util.getClvOrden(Util.preferences));
+        }
+        Iterator<List<GetMuestraArbolServiciosAparatosPorinstalarListResult>> itData = Array.dataArbSer.iterator();
+        List<GetMuestraArbolServiciosAparatosPorinstalarListResult> dat = (List<GetMuestraArbolServiciosAparatosPorinstalarListResult>) itData.next();
+        for (int c = 0; c < dat.size(); c++) {
+            jsonObject3 = new JSONObject();
+            jsonArray3 = new JSONArray();
+            try {
+                jsonObject3.put("BaseIdUser", dat.get(c).BaseIdUser);
+                jsonObject3.put("BaseRepoteIp", JSONObject.NULL);
+                jsonObject3.put("Clv_TipSer", dat.get(c).Clv_TipSer);
+                jsonObject3.put("Clv_UnicaNet", dat.get(c).Clv_UnicaNet);
+                jsonObject3.put("Contrato", JSONObject.NULL);
+                jsonObject3.put("Detalle", dat.get(c).Detalle);
+                jsonObject3.put("Expanded", dat.get(c).Expanded);
+                jsonObject3.put("IdMedio", dat.get(c).IdMedio);
+                jsonObject3.put("Nombre", dat.get(c).Nombre);
+                jsonObject3.put("Tipo", dat.get(c).Tipo);
+                jsonObject3.put("Type", dat.get(c).Type);
+                int hijo = dat.get(c).children.size();
+                /*String titu = getTitle().toString();
+                if(!dat.get(c).Nombre.contains(titu))
+                    hijo--;*/
+                    //Toast.makeText(context, "H", Toast.LENGTH_LONG);
+                for (int b = 0; b < hijo; b++) {
+                    jsonObject4 = new JSONObject();
+                    jsonObject4.put("BaseIdUser", dat.get(c).children.get(b).baseIdUser);
+                    jsonObject4.put("BaseRemoteIp", JSONObject.NULL);
+                    jsonObject4.put("Clv_Aparato", dat.get(c).children.get(b).Clv_Aparato);
+                    //jsonObject4.put("Clv_UnicaNet", JSONObject.NULL);
+                    jsonObject4.put("ContratoNet", dat.get(c).children.get(b).ContratoNet);
+                    jsonObject4.put("Detalle", dat.get(c).children.get(b).Detalle);
+                    jsonObject4.put("Nombre", dat.get(c).children.get(b).Nombre);
+                    jsonObject4.put("Tipo", dat.get(c).children.get(b).Tipo);
+                    jsonObject4.put("Type", dat.get(c).children.get(b).Type);
+                    jsonArray3.put(jsonObject4);
+                }
+                jsonObject3.put("children", jsonArray3);
+                jsonObject3.put("clv_orden", dat.get(c).clv_orden);
+                jsonArray2.put(c, jsonObject3);
+
+            } catch (JSONException e) {
+                e.printStackTrace();
+                Toast.makeText(context, "Error", Toast.LENGTH_LONG);
+                dialogReporteAsignacion.dismiss();
+            }
+        }
+
+        JSONObject jsonObject = new JSONObject();
+        JSONObject jsonObject1 = new JSONObject();
+        try {
+            jsonObject.put("id", 0);
+            jsonObject1.put("obj",jsonObject);
+            jsonObject1.put("Lst",jsonArray2);
+            request.getAceptatAsignacino(context,jsonObject1);
+        }catch (Exception e){}
+        /*ServiciosAInstalar.Asignacion.setAdapter(ServiciosAInstalar.adapter);*/
+        adapterReporte = new ArbolAdapter(dat,context);
+        ServiciosAInstalar.Asignacion.setAdapter(adapterReporte);
+        ServiciosAInstalar.Asignacion.refreshDrawableState();
+        guardarAparatosProgresBar=true;
+
+    }
+
+    public void GuardarAparatosDIG(final Context context, String Nombre){
+        dialogReporteAsignacion.show();
+        Request request = new Request();
+        JSONObject jsonObject3;
+        JSONArray jsonArray3;
+        JSONObject jsonObject4 ;
+        JSONArray jsonArray2 = new JSONArray();
+        for (int a = 0; a < Array.dataArbSer.get(0).size(); a++) {
+            Array.dataArbSer.get(0).get(a).setClv_orden( Util.getClvOrden(Util.preferences));
+        }
+        Iterator<List<GetMuestraArbolServiciosAparatosPorinstalarListResult>> itData = Array.dataArbSer.iterator();
+        List<GetMuestraArbolServiciosAparatosPorinstalarListResult> dat = (List<GetMuestraArbolServiciosAparatosPorinstalarListResult>) itData.next();
+        for (int c = 0; c < dat.size(); c++) {
+            jsonObject3 = new JSONObject();
+            jsonArray3 = new JSONArray();
+            try {
+                jsonObject3.put("BaseIdUser", dat.get(c).BaseIdUser);
+                jsonObject3.put("BaseRepoteIp", JSONObject.NULL);
+                jsonObject3.put("Clv_TipSer", dat.get(c).Clv_TipSer);
+                jsonObject3.put("Clv_UnicaNet", dat.get(c).Clv_UnicaNet);
+                jsonObject3.put("Contrato", JSONObject.NULL);
+                jsonObject3.put("Detalle", dat.get(c).Detalle);
+                jsonObject3.put("Expanded", dat.get(c).Expanded);
+                jsonObject3.put("IdMedio", dat.get(c).IdMedio);
+                jsonObject3.put("Nombre", dat.get(c).Nombre);
+                jsonObject3.put("Tipo", dat.get(c).Tipo);
+                jsonObject3.put("Type", dat.get(c).Type);
+                int hijo = dat.get(c).children.size();
+                //if(Nombre==dat.get(c).Nombre)hijo++;
+                for (int b = 0; b < hijo; b++) {
+                    jsonObject4 = new JSONObject();
+                    jsonObject4.put("BaseIdUser", dat.get(c).children.get(b).baseIdUser);
+                    jsonObject4.put("BaseRemoteIp", JSONObject.NULL);
+                    jsonObject4.put("Clv_Aparato", dat.get(c).children.get(b).Clv_Aparato);
+                    //jsonObject4.put("Clv_UnicaNet", JSONObject.NULL);
+                    jsonObject4.put("ContratoNet", dat.get(c).children.get(b).ContratoNet);
+                    jsonObject4.put("Detalle", dat.get(c).children.get(b).Detalle);
+                    jsonObject4.put("Nombre", dat.get(c).children.get(b).Nombre);
+                    jsonObject4.put("Tipo", dat.get(c).children.get(b).Tipo);
+                    jsonObject4.put("Type", dat.get(c).children.get(b).Type);
+                    jsonArray3.put(jsonObject4);
+                }
+                jsonObject3.put("children", jsonArray3);
+                jsonObject3.put("clv_orden", dat.get(c).clv_orden);
+                jsonArray2.put(c, jsonObject3);
+
+            } catch (JSONException e) {
+                e.printStackTrace();
+                Toast.makeText(context, "Error", Toast.LENGTH_LONG);
+                dialogReporteAsignacion.dismiss();
+            }
+        }
+
+        JSONObject jsonObject = new JSONObject();
+        JSONObject jsonObject1 = new JSONObject();
+        try {
+            jsonObject.put("id", 0);
+            jsonObject1.put("obj",jsonObject);
+            jsonObject1.put("Lst",jsonArray2);
+            request.getAceptatAsignacino(context,jsonObject1);
+        }catch (Exception e){}
+        /*ServiciosAInstalar.Asignacion.setAdapter(ServiciosAInstalar.adapter);*/
+        adapterReporte = new ArbolAdapter(dat,context);
+        ServiciosAInstalar.Asignacion.setAdapter(adapterReporte);
+        ServiciosAInstalar.Asignacion.refreshDrawableState();
+        guardarAparatosProgresBar=true;
+
+    }
+
+    public void GuardarAparatosVallarta(final Context context, String Nombre){
+        dialogReporteAsignacion.show();
+        Request request = new Request();
+        JSONObject jsonObject3;
+        JSONArray jsonArray3;
+        JSONObject jsonObject4 ;
+        JSONArray jsonArray2 = new JSONArray();
+        for (int a = 0; a < Array.dataArbSer.get(0).size(); a++) {
+            Array.dataArbSer.get(0).get(a).setClv_orden( Util.getClvOrden(Util.preferences));
+        }
+        Iterator<List<GetMuestraArbolServiciosAparatosPorinstalarListResult>> itData = Array.dataArbSer.iterator();
+        List<GetMuestraArbolServiciosAparatosPorinstalarListResult> dat = (List<GetMuestraArbolServiciosAparatosPorinstalarListResult>) itData.next();
+
+        for (int c = 0; c < dat.size(); c++) {
+            jsonObject3 = new JSONObject();
+            jsonArray3 = new JSONArray();
+            try {
+                jsonObject3.put("BaseIdUser", dat.get(c).BaseIdUser);
+                jsonObject3.put("BaseRepoteIp", JSONObject.NULL);
+                jsonObject3.put("Clv_TipSer", dat.get(c).Clv_TipSer);
+                jsonObject3.put("Clv_UnicaNet", dat.get(c).Clv_UnicaNet);
+                jsonObject3.put("Contrato", JSONObject.NULL);
+                jsonObject3.put("Detalle", dat.get(c).Detalle);
+                jsonObject3.put("Expanded", dat.get(c).Expanded);
+                jsonObject3.put("IdMedio", dat.get(c).IdMedio);
+                jsonObject3.put("Nombre", dat.get(c).Nombre);
+                jsonObject3.put("Tipo", dat.get(c).Tipo);
+                jsonObject3.put("Type", dat.get(c).Type);
+                int hijo = dat.get(c).children.size();
+                int x=0, lugar=0, aux=0;
+                if(dat.get(c).Nombre.indexOf("MB") != -1 || dat.get(c).Nombre.indexOf("Mb") != -1 || dat.get(c).Nombre.indexOf("mb") != -1)
+                    x=1;
+                if(dat.get(c).Nombre.equals(Nombre)){
+                    for(int i=0;i<OnuValla.size();i++){
+                        if(OnuValla.get(i).getOnu().equals(AsignarAparato.onu))
+                            if(x==1)
+                                if(OnuValla.get(i).getInt() == 1){
+                                    Toast.makeText(context, "Onu ya usada en otro servicio de internet", Toast.LENGTH_LONG);
+
+                                }else{ lugar = i; aux=1;}
+                            else
+                                if(OnuValla.get(i).getTel() == 1){
+                                    Toast.makeText(context, "Onu ya usada en otro servicio de television", Toast.LENGTH_LONG);
+
+                                }else{ lugar = i; aux=1;}
+                    }
+                }
+
+                if(aux != 0){
+                    aux=0;
+                    if(x==1) OnuValla.get(lugar).setInt(1);
+                    else OnuValla.get(lugar).setTel(1);
+                    for (int b = 0; b < hijo; b++) {
+                        if(dat.get(c).Nombre.equals(Nombre) && dat.get(c).children.get(b).Nombre.equals(AsignarAparato.onu) && AsignarAparato.bandera==1){
+                            jsonObject4 = new JSONObject();
+                            jsonObject4.put("BaseIdUser", dat.get(c).children.get(b).baseIdUser);
+                            jsonObject4.put("BaseRemoteIp", JSONObject.NULL);
+                            jsonObject4.put("Clv_Aparato", dat.get(c).children.get(b).Clv_Aparato);
+                            //jsonObject4.put("Clv_UnicaNet", JSONObject.NULL);
+                            jsonObject4.put("ContratoNet", dat.get(c).children.get(b).ContratoNet);
+                            jsonObject4.put("Detalle", dat.get(c).children.get(b).Detalle);
+                            jsonObject4.put("Nombre", dat.get(c).children.get(b).Nombre);
+                            jsonObject4.put("Tipo", dat.get(c).children.get(b).Tipo);
+                            jsonObject4.put("Type", dat.get(c).children.get(b).Type);
+                            jsonArray3.put(jsonObject4);
+                        }
+                    }
+                }
+
+                jsonObject3.put("children", jsonArray3);
+                jsonObject3.put("clv_orden", dat.get(c).clv_orden);
+                jsonArray2.put(c, jsonObject3);
+
+            } catch (JSONException e) {
+                e.printStackTrace();
+                Toast.makeText(context, "Error", Toast.LENGTH_LONG);
+                dialogReporteAsignacion.dismiss();
+            }
+        }
+
+        JSONObject jsonObject = new JSONObject();
+        JSONObject jsonObject1 = new JSONObject();
+        try {
+            jsonObject.put("id", 0);
+            jsonObject1.put("obj",jsonObject);
+            jsonObject1.put("Lst",jsonArray2);
+            request.getAceptatAsignacino(context,jsonObject1);
+            request.getArbSer(context);
         }catch (Exception e){}
         /*ServiciosAInstalar.Asignacion.setAdapter(ServiciosAInstalar.adapter);*/
         adapterReporte = new ArbolAdapter(dat,context);

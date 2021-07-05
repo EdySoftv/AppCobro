@@ -53,7 +53,7 @@ public class HorasOrdenes extends Fragment implements View.OnClickListener, Loca
     public static int ejecutada = 0, visita = 0, visita1 = 0;
     public static  String observacionesTecnico;
     private View contenedorObservacionesTecnico;
-    public static TextView cordLat, cordLong;
+    public static TextView cordLat, cordLong, Anterior, Nuevo;
     public static TextView Obs;
     private Request request = new Request();
     private RadioButton btn1, bt2;
@@ -62,7 +62,7 @@ public class HorasOrdenes extends Fragment implements View.OnClickListener, Loca
     public String fechaActualVisita;
     public static ProgressDialog dialogVisitaOrd;
     public String valorObsTec = null;
-    private ConstraintLayout todo;
+    private ConstraintLayout todo, CambioDom;
     public static LocationManager locationManager;
     public static boolean isCoordenadas = false;
     double latitude;
@@ -135,6 +135,23 @@ public class HorasOrdenes extends Fragment implements View.OnClickListener, Loca
         btn1.setOnClickListener(this);
         ejecVisita.setOnClickListener(this);
         comprobarGPSActivo();
+
+        CambioDom = view.findViewById(R.id.DatosDelCambio);
+        Anterior = view.findViewById(R.id.txtAnteriorCambio);
+        Nuevo = view.findViewById(R.id.txtNuevoCambio);
+        if(request.Cambio == 1){
+            CambioDom.setVisibility(View.VISIBLE);
+            try{
+                JSONObject jsonObject = new JSONObject();
+                jsonObject.put("Clv_Orden", DeepConsModel.Clv_Orden);
+                request.DatosCambio(Anterior, Nuevo, jsonObject, getContext());
+            }catch (Exception x){
+                Toast toast2 = Toast.makeText(getContext(), "Error al obtener la clave orden", Toast.LENGTH_SHORT);
+                toast2.show();
+            }
+
+        }
+
         ejecVisita.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -150,7 +167,6 @@ public class HorasOrdenes extends Fragment implements View.OnClickListener, Loca
         return view;
 
     }
-
 
     public void onClick(View view) {
         if (btn1.isChecked() == true) {

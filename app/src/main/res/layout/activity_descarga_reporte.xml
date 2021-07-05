@@ -5,14 +5,13 @@
     android:layout_height="wrap_content"
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
+
     >
 
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="100dp"
-        >
-
+        android:layout_marginTop="100dp">
         <android.support.constraint.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -26,7 +25,7 @@
                 android:id="@+id/constrain_descargaMaterialesR"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="16dp"
                 android:visibility="visible"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -92,8 +91,7 @@
                 android:id="@+id/constrain_ExtencionesR"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:visibility="gone"
+                android:layout_marginTop="16dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="1.0"
                 app:layout_constraintStart_toStartOf="parent"
@@ -104,6 +102,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="4dp"
+
                     android:layout_marginTop="8dp"
                     android:layout_marginEnd="8dp"
                     android:text="@string/seleccionExt"
@@ -133,7 +132,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:visibility="gone"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
@@ -174,7 +172,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textSize="20dp"
-                android:visibility="invisible"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
@@ -182,10 +179,10 @@
 
                 <TextView
                     android:id="@+id/textView13"
-                    android:layout_width="70dp"
+                    android:layout_width="75dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="40dp"
-                    android:layout_marginTop="8dp"
+                    android:layout_marginStart="50dp"
+                    android:layout_marginTop="16dp"
                     android:text="@string/inicio"
                     android:textSize="20dp"
                     android:textStyle="bold"
@@ -196,8 +193,8 @@
                     android:id="@+id/textView14"
                     android:layout_width="50dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginEnd="25dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="50dp"
                     android:text="@string/fin"
                     android:textSize="20dp"
                     android:textStyle="bold"
@@ -209,12 +206,10 @@
                     android:layout_width="75dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginBottom="8dp"
                     android:text="@string/interior"
                     android:textSize="20dp"
                     android:textStyle="bold"
-                    app:layout_constraintBottom_toTopOf="@+id/InicialEDMR"
+                    app:layout_constraintBottom_toBottomOf="@+id/InicialIDMR"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="@+id/InicialIDMR" />
 
@@ -233,7 +228,7 @@
 
                 <EditText
                     android:id="@+id/InicialIDMR"
-                    android:layout_width="75dp"
+                    android:layout_width="100dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="20dp"
                     android:inputType="number"
@@ -244,7 +239,7 @@
 
                 <EditText
                     android:id="@+id/FinalIDMR"
-                    android:layout_width="75dp"
+                    android:layout_width="100dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="20dp"
                     android:inputType="number"
@@ -255,7 +250,7 @@
 
                 <EditText
                     android:id="@+id/InicialEDMR"
-                    android:layout_width="75dp"
+                    android:layout_width="100dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
                     android:layout_marginBottom="8dp"
@@ -268,11 +263,13 @@
 
                 <EditText
                     android:id="@+id/FinalEDMR"
-                    android:layout_width="75dp"
+                    android:layout_width="100dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
+                    android:layout_marginBottom="8dp"
                     android:inputType="number"
                     android:textSize="20dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="@+id/textView14"
                     app:layout_constraintStart_toStartOf="@+id/textView14"
                     app:layout_constraintTop_toBottomOf="@+id/FinalIDMR" />
@@ -293,21 +290,20 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/constrain_MetrajeR" />
             <!---->
-
             <HorizontalScrollView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
-                android:layout_marginBottom="8dp"
-                app:layout_constraintBottom_toBottomOf="parent"
+                android:layout_marginEnd="8dp"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/agregarMaterialR">
-
                 <android.support.v7.widget.RecyclerView
                     android:id="@+id/eliminarMaterialesListR"
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    android:visibility="gone" />
             </HorizontalScrollView>
         </android.support.constraint.ConstraintLayout>
     </ScrollView>

@@ -99,6 +99,7 @@ public class QuejasAdapter extends RecyclerView.Adapter<QuejasAdapter.QuejaViewH
                 Util.editor = Util.preferences.edit();
                 Util.editor.putInt("clvQueja", Integer.valueOf(Array.Queja.get(position)));
                 Util.editor.commit();
+                request.NombreGeneral = Array.nombreQ.get(position);
                 contratoReport=String.valueOf(Array.contratoQ.get(position));
                 statusQueja = String.valueOf(Array.statusQ.get(position));
                 mContext.startActivity(intento1);

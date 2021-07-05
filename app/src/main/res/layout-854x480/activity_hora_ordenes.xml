@@ -7,324 +7,388 @@
     >
 
     <!-- TODO: Update blank fragment layout -->
-<ScrollView
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_marginTop="90dp">
-
-    <android.support.constraint.ConstraintLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:paddingBottom="8dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        android:layout_height="wrap_content"
+        android:layout_marginTop="90dp">
 
-        <RadioGroup
-            android:id="@+id/radioGroup"
-            android:layout_width="253dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginEnd="8dp"
-            android:orientation="horizontal"
+        <android.support.constraint.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingBottom="8dp"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
-            <RadioButton
-                android:id="@+id/rb_Visita"
-                android:layout_width="130dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:onClick="onRadioButtonClicked"
-                android:text="@string/visita"
-                android:textSize="20dp" />
-
-            <RadioButton
-                android:id="@+id/rb_Ejecutada"
-                android:layout_width="130dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:onClick="onRadioButtonClicked"
-                android:text="@string/ejecutar"
-                android:textSize="20dp" />
-        </RadioGroup>
-
-<!--        <android.support.constraint.ConstraintLayout
-            android:id="@+id/constrain_Visita"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:visibility="invisible"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/constrain_Ejecutada">
-
-           <TextView
-                android:id="@+id/textView10"
-                android:layout_width="wrap_content"
+            <RadioGroup
+                android:id="@+id/radioGroup"
+                android:layout_width="253dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
-                android:layout_marginLeft="8dp"
-                android:layout_marginTop="8dp"
-                android:text="@string/primerVisita"
-                android:textSize="@dimen/mediano"
-                android:textStyle="bold"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <TextView
-                android:id="@+id/textView9"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
-                android:text="@string/segundaVisita"
-                android:textSize="@dimen/mediano"
-                android:textStyle="bold"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView10" />
-
-            <TextView
-                android:id="@+id/tv_PrimerVisita"
-                android:layout_width="150dp"
-                android:layout_height="23dp"
-                android:layout_marginEnd="16dp"
-                android:hint="@string/formatoFecha"
-                android:textSize="@dimen/mediano"
-                app:layout_constraintBottom_toBottomOf="@+id/textView10"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/textView10"
-                app:layout_constraintVertical_bias="0.0" />
-
-            <TextView
-                android:id="@+id/tv_SegundaVisita"
-                android:layout_width="150dp"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="24dp"
-                android:layout_marginRight="24dp"
-                android:enabled="false"
-                android:hint="@string/formatoFecha"
-                android:textSize="@dimen/mediano"
-                app:layout_constraintBottom_toBottomOf="@+id/textView9"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/textView9" />
-
-
-        </android.support.constraint.ConstraintLayout>-->
-
-        <!--<android.support.constraint.ConstraintLayout
-            android:id="@+id/constrain_Ejecutada"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:visibility="visible"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/radioGroup">
-
-            <TextView
-                android:id="@+id/ejecucion"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginLeft="8dp"
-                android:layout_marginTop="8dp"
-                android:text="@string/ejecucion"
-                android:textSize="@dimen/grande"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                android:visibility="gone"
-                />
-            <TextView
-                android:id="@+id/tv_Ejecucion"
-                android:layout_width="150dp"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="24dp"
-                android:layout_marginRight="24dp"
-                android:hint="@string/formatoFecha"
-                android:textSize="@dimen/grande"
-                app:layout_constraintBottom_toBottomOf="@+id/ejecucion"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/ejecucion"
-                android:visibility="gone"
-
-                />
-
-
-        </android.support.constraint.ConstraintLayout>-->
-
-        <android.support.constraint.ConstraintLayout
-            android:id="@+id/todo"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/radioGroup">
-
-
-            <TextView
-                android:id="@+id/textView19"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="28dp"
                 android:layout_marginEnd="8dp"
-                android:text="@string/observacionesPrevias"
-                android:textSize="23dp"
-                android:textStyle="bold"
+                android:orientation="horizontal"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent">
 
-            <TextView
-                android:id="@+id/tv_Observaciones"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="8dp"
-                android:textSize="@dimen/grande"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView19" />
+                <RadioButton
+                    android:id="@+id/rb_Visita"
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:onClick="onRadioButtonClicked"
+                    android:text="@string/visita"
+                    android:textSize="20dp" />
+
+                <RadioButton
+                    android:id="@+id/rb_Ejecutada"
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:onClick="onRadioButtonClicked"
+                    android:text="@string/ejecutar"
+                    android:textSize="20dp" />
+            </RadioGroup>
+
+            <!--          <android.support.constraint.ConstraintLayout
+              android:id="@+id/constrain_Visita"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:layout_marginTop="8dp"
+              android:visibility="invisible"
+              app:layout_constraintEnd_toEndOf="parent"
+              app:layout_constraintStart_toStartOf="parent"
+              app:layout_constraintTop_toBottomOf="@+id/radioGroup">
+
+             <TextView
+                  android:id="@+id/textView10"
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:layout_marginStart="8dp"
+                  android:layout_marginLeft="8dp"
+                  android:layout_marginTop="8dp"
+                  android:text="@string/primerVisita"
+                  android:textSize="22sp"
+                  android:textStyle="bold"
+                  app:layout_constraintStart_toStartOf="parent"
+                  app:layout_constraintTop_toTopOf="parent" />
+
+              <TextView
+                  android:id="@+id/textView9"
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:layout_marginStart="8dp"
+                  android:layout_marginTop="8dp"
+                  android:text="@string/segundaVisita"
+                  android:textSize="22sp"
+                  android:textStyle="bold"
+                  app:layout_constraintStart_toStartOf="parent"
+                  app:layout_constraintTop_toBottomOf="@+id/textView10" />
+
+              <TextView
+                  android:id="@+id/tv_PrimerVisita"
+                  android:layout_width="150dp"
+                  android:layout_height="wrap_content"
+                  android:layout_marginEnd="24dp"
+                  android:layout_marginRight="24dp"
+                  android:hint="@string/formatoFecha"
+                  android:textSize="20sp"
+                  app:layout_constraintBottom_toBottomOf="@+id/textView10"
+                  app:layout_constraintEnd_toEndOf="parent"
+                  app:layout_constraintTop_toTopOf="@+id/textView10" />
+
+              <TextView
+                  android:id="@+id/tv_SegundaVisita"
+                  android:layout_width="150dp"
+                  android:layout_height="wrap_content"
+                  android:layout_marginEnd="24dp"
+                  android:layout_marginRight="24dp"
+                  android:enabled="false"
+                  android:hint="@string/formatoFecha"
+                  android:textSize="20sp"
+                  app:layout_constraintBottom_toBottomOf="@+id/textView9"
+                  app:layout_constraintEnd_toEndOf="parent"
+                  app:layout_constraintTop_toTopOf="@+id/textView9" />
+
+
+          </android.support.constraint.ConstraintLayout>-->
+
+
+            <!--          <android.support.constraint.ConstraintLayout
+              android:id="@+id/constrain_Ejecutada"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:layout_marginTop="8dp"
+              android:visibility="visible"
+              app:layout_constraintEnd_toEndOf="parent"
+              app:layout_constraintStart_toStartOf="parent"
+              app:layout_constraintTop_toBottomOf="@+id/radioGroup">
+
+              <TextView
+                  android:id="@+id/ejecucion"
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:layout_marginStart="8dp"
+                  android:layout_marginLeft="8dp"
+                  android:layout_marginTop="8dp"
+                  android:text="@string/ejecucion"
+                  android:textSize="@dimen/grande"
+                  app:layout_constraintStart_toStartOf="parent"
+                  app:layout_constraintTop_toTopOf="parent"
+                  android:visibility="gone"
+                  />
+              <TextView
+                  android:id="@+id/tv_Ejecucion"
+                  android:layout_width="150dp"
+                  android:layout_height="wrap_content"
+                  android:layout_marginEnd="24dp"
+                  android:layout_marginRight="24dp"
+                  android:hint="@string/formatoFecha"
+                  android:textSize="@dimen/grande"
+                  app:layout_constraintBottom_toBottomOf="@+id/ejecucion"
+                  app:layout_constraintEnd_toEndOf="parent"
+                  app:layout_constraintTop_toTopOf="@+id/ejecucion"
+                  android:visibility="gone"
+
+                  />
+          </android.support.constraint.ConstraintLayout>-->
+
 
             <android.support.constraint.ConstraintLayout
-                android:id="@+id/contraintObservacionesTecnico"
-                android:layout_width="match_parent"
+                android:id="@+id/todo"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:layout_marginBottom="8dp"
-                android:visibility="gone"
-                app:layout_constraintBottom_toTopOf="@+id/textView21"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tv_Observaciones"
-                app:layout_constraintVertical_bias="0.441">
+                app:layout_constraintTop_toBottomOf="@+id/radioGroup">
+
 
                 <TextView
-                    android:id="@+id/textob"
+                    android:id="@+id/textView19"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
-                    android:layout_marginTop="6dp"
+                    android:layout_marginTop="24dp"
                     android:layout_marginEnd="8dp"
-                    android:text="@string/observacionesTecnico"
-                    android:textSize="23dp"
+                    android:text="@string/observacionesPrevias"
+                    android:textSize="@dimen/xl"
                     android:textStyle="bold"
                     app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
-                <EditText
-                    android:id="@+id/observaciones_Tecnico"
-                    android:layout_width="0dp"
+                <TextView
+                    android:id="@+id/tv_Observaciones"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
                     android:layout_marginTop="8dp"
-                    android:background="@drawable/contorno"
-                    android:inputType="text"
-                    android:textSize="20dp"
+                    android:layout_marginEnd="8dp"
+                    android:textSize="@dimen/grande"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/textob" />
+                    app:layout_constraintTop_toBottomOf="@+id/textView19" />
+
+                <android.support.constraint.ConstraintLayout
+                    android:id="@+id/contraintObservacionesTecnico"
+                    android:layout_width="397dp"
+                    android:layout_height="128dp"
+                    android:layout_marginTop="8dp"
+                    android:visibility="gone"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_Observaciones">
+
+                    <TextView
+                        android:id="@+id/textob"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginTop="12dp"
+                        android:layout_marginEnd="8dp"
+                        android:text="@string/observacionesTecnico"
+                        android:textSize="@dimen/xl"
+                        android:textStyle="bold"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <EditText
+                        android:id="@+id/observaciones_Tecnico"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="7dp"
+                        android:layout_marginTop="12dp"
+                        android:layout_marginEnd="7dp"
+                        android:background="@drawable/contorno"
+                        android:inputType="text"
+                        android:textSize="20dp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/textob" />
+
+                </android.support.constraint.ConstraintLayout>
+
+                <TextView
+                    android:id="@+id/textView21"
+                    android:layout_width="176dp"
+                    android:layout_height="33dp"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="32dp"
+                    android:layout_marginEnd="8dp"
+                    android:text="@string/coordenadas"
+                    android:textSize="@dimen/xl"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/contraintObservacionesTecnico" />
+                <ImageView
+                    android:layout_width="43dp"
+                    android:layout_height="40dp"
+                    android:layout_marginStart="12dp"
+                    android:background="@drawable/localizacion"
+                    app:layout_constraintBottom_toBottomOf="@+id/textView21"
+                    app:layout_constraintStart_toEndOf="@+id/textView21"
+                    app:layout_constraintTop_toTopOf="@+id/textView21"
+                    app:layout_constraintVertical_bias="0.0" />
+                <TextView
+                    android:id="@+id/textView22"
+                    android:layout_width="125dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="8dp"
+                    android:text="@string/latitud"
+                    android:textSize="@dimen/grande"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textView21" />
+
+                <TextView
+                    android:id="@+id/textView23"
+                    android:layout_width="125dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="8dp"
+                    android:text="@string/longitud"
+                    android:textSize="@dimen/grande"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_Latitud" />
+
+                <TextView
+                    android:id="@+id/tv_Latitud"
+                    android:layout_width="200dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginRight="16dp"
+                    android:text="---"
+                    android:textSize="@dimen/grande"
+                    app:layout_constraintBottom_toBottomOf="@+id/textView22"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/textView22" />
+
+                <TextView
+                    android:id="@+id/tv_Longitud"
+                    android:layout_width="200dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginRight="16dp"
+                    android:text="---"
+                    android:textSize="@dimen/grande"
+                    app:layout_constraintBottom_toBottomOf="@+id/textView23"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/textView23" />
+
+                <Button
+                    android:id="@+id/ejecVisita"
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="8dp"
+                    android:background="@drawable/boton"
+                    android:backgroundTint="@color/colorPrimary"
+                    android:enabled="true"
+                    android:text="@string/guardar"
+                    android:textColor="#fff"
+                    android:visibility="gone"
+                    app:layout_constraintEnd_toEndOf="@+id/tv_Longitud"
+                    app:layout_constraintHorizontal_bias="0.522"
+                    app:layout_constraintStart_toStartOf="@+id/textView23"
+                    app:layout_constraintTop_toBottomOf="@+id/textView23" />
+
+                <android.support.constraint.ConstraintLayout
+                    android:id="@+id/DatosDelCambio"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="15dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginEnd="15dp"
+                    android:layout_marginBottom="20dp"
+                    android:visibility="gone"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textView23">
+
+                    <TextView
+                        android:id="@+id/DatosCambio"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Datos del cambio"
+                        android:textSize="23dp"
+                        android:textStyle="bold"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/AnteriorCambio"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:text="Anterior"
+                        android:textSize="20dp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/DatosCambio" />
+
+                    <TextView
+                        android:id="@+id/txtAnteriorCambio"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="5dp"
+                        android:layout_marginTop="5dp"
+                        android:text="TextView"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/AnteriorCambio" />
+
+                    <TextView
+                        android:id="@+id/NuevoCambio"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:text="Nuevo"
+                        android:textSize="20dp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/txtAnteriorCambio" />
+
+                    <TextView
+                        android:id="@+id/txtNuevoCambio"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="5dp"
+                        android:layout_marginTop="5dp"
+                        android:text="TextView"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/NuevoCambio" />
+
+                </android.support.constraint.ConstraintLayout>
 
             </android.support.constraint.ConstraintLayout>
 
-            <TextView
-                android:id="@+id/textView21"
-                android:layout_width="142dp"
-                android:layout_height="31dp"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
-                android:text="@string/coordenadas"
-                android:textSize="23dp"
-                android:textStyle="bold"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/contraintObservacionesTecnico" />
-
-            <ImageView
-                android:layout_width="43dp"
-                android:layout_height="40dp"
-                android:layout_marginStart="12dp"
-                android:background="@drawable/localizacion"
-                app:layout_constraintBottom_toBottomOf="@+id/textView21"
-                app:layout_constraintStart_toEndOf="@+id/textView21"
-                app:layout_constraintTop_toTopOf="@+id/textView21"
-                app:layout_constraintVertical_bias="0.0" />
-
-            <TextView
-                android:id="@+id/textView22"
-                android:layout_width="125dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
-                android:text="@string/latitud"
-                android:textSize="23dp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView21" />
-
-            <TextView
-                android:id="@+id/textView23"
-                android:layout_width="125dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:text="@string/longitud"
-                android:textSize="23dp"
-                app:layout_constraintStart_toStartOf="@+id/textView22"
-                app:layout_constraintTop_toBottomOf="@+id/tv_Latitud" />
-
-            <TextView
-                android:id="@+id/tv_Latitud"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginEnd="16dp"
-                android:text="---"
-                android:textSize="20dp"
-                app:layout_constraintBottom_toBottomOf="@+id/textView22"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/textView22"
-                app:layout_constraintTop_toTopOf="@+id/textView22" />
-
-            <TextView
-                android:id="@+id/tv_Longitud"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginEnd="16dp"
-                android:text="---"
-                android:textSize="20dp"
-                app:layout_constraintBottom_toBottomOf="@+id/textView23"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/textView23"
-                app:layout_constraintTop_toTopOf="@+id/textView23" />
-
-            <Button
-                android:id="@+id/ejecVisita"
-                android:layout_width="100dp"
-                android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="16dp"
-                android:layout_marginEnd="8dp"
-                android:background="@drawable/boton"
-                android:backgroundTint="@color/colorPrimary"
-                android:enabled="true"
-                android:text="@string/guardar"
-                android:textColor="#fff"
-                android:visibility="gone"
-                app:layout_constraintEnd_toEndOf="@+id/tv_Longitud"
-                app:layout_constraintHorizontal_bias="0.522"
-                app:layout_constraintStart_toStartOf="@+id/textView23"
-                app:layout_constraintTop_toBottomOf="@+id/textView23" />
-
         </android.support.constraint.ConstraintLayout>
-    </android.support.constraint.ConstraintLayout>
-</ScrollView>
+    </ScrollView>
 </RelativeLayout>

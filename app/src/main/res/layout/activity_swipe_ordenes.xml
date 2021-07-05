@@ -25,30 +25,30 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <!--<TextView
-            android:id="@+id/qwe"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentTop="true"
-            android:layout_marginStart="30dp"
-            android:layout_marginTop="8dp"
-            android:text="@string/tecnicoDos"
-            android:textColor="#000"
-            app:layout_constraintStart_toEndOf="@+id/info"
-            app:layout_constraintTop_toTopOf="parent" />
+        <!-- <TextView
+             android:id="@+id/qwe"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:layout_alignParentStart="true"
+             android:layout_alignParentTop="true"
+             android:layout_marginStart="30dp"
+             android:layout_marginTop="8dp"
+             android:text="@string/tecnicoDos"
+             android:textColor="#000"
+             app:layout_constraintStart_toEndOf="@+id/info"
+             app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
-            android:id="@+id/tecniconame"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="32dp"
-            android:layout_marginEnd="8dp"
-            android:text="-&#45;&#45;"
-            app:layout_constraintBottom_toBottomOf="@+id/qwe"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/zaw"
-            app:layout_constraintTop_toTopOf="@+id/qwe" />-->
+         <TextView
+             android:id="@+id/tecniconame"
+             android:layout_width="0dp"
+             android:layout_height="wrap_content"
+             android:layout_marginStart="32dp"
+             android:layout_marginEnd="8dp"
+             android:text="-&#45;&#45;"
+             app:layout_constraintBottom_toBottomOf="@+id/qwe"
+             app:layout_constraintEnd_toEndOf="parent"
+             app:layout_constraintStart_toEndOf="@+id/zaw"
+             app:layout_constraintTop_toTopOf="@+id/qwe" />-->
 
         <Button
             android:id="@+id/info"
@@ -56,32 +56,29 @@
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="16dp"
+            android:layout_marginStart="25dp"
             android:background="@drawable/boton"
             android:backgroundTint="@color/colorPrimary"
-            android:textColor="#fff"
             android:text="@string/datos_Cliente"
-            android:textSize="7dp"
+            android:textColor="#fff"
+            android:textSize="10dp"
             android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/zaw"
-            android:layout_width="100dp"
+            android:layout_width="75dp"
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="8dp"
-            android:textAlignment="textEnd"
+            android:layout_marginStart="25dp"
+            android:layout_marginTop="5dp"
             android:text="@string/contratoDos"
+            android:textAlignment="textEnd"
             android:textColor="#000"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.44"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/info"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
@@ -100,19 +97,16 @@
 
         <TextView
             android:id="@+id/txtqwe"
-            android:layout_width="100dp"
+            android:layout_width="75dp"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="16dp"
-            android:textAlignment="textEnd"
-            android:layout_marginEnd="8dp"
+            android:layout_marginTop="5dp"
             android:text="@string/estatusDos"
+            android:textAlignment="textEnd"
             android:textColor="#000"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.44"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/contrato" />
+            app:layout_constraintEnd_toEndOf="@+id/zaw"
+            app:layout_constraintStart_toStartOf="@+id/zaw"
+            app:layout_constraintTop_toBottomOf="@+id/zaw" />
 
         <TextView
             android:id="@+id/status"
@@ -120,13 +114,40 @@
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="16dp"
             android:layout_marginEnd="8dp"
             android:hint="---"
             app:layout_constraintBottom_toBottomOf="@+id/txtqwe"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/zaw"
-            app:layout_constraintTop_toBottomOf="@+id/contrato" />
+            app:layout_constraintTop_toTopOf="@+id/txtqwe" />
+
+        <TextView
+            android:id="@+id/txtPlaca"
+            android:layout_width="75dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
+            android:text="@string/placa"
+            android:textAlignment="textEnd"
+            android:textColor="#000"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/txtqwe"
+            app:layout_constraintStart_toStartOf="@+id/txtqwe"
+            app:layout_constraintTop_toBottomOf="@+id/txtqwe" />
+
+        <TextView
+            android:id="@+id/PlacaInf"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:hint="---"
+            app:layout_constraintBottom_toBottomOf="@+id/txtPlaca"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/txtPlaca"
+            app:layout_constraintTop_toTopOf="@+id/txtPlaca" />
     </android.support.constraint.ConstraintLayout>
 
     <ScrollView
@@ -285,7 +306,6 @@
                 app:layout_constraintEnd_toEndOf="@+id/asd"
                 app:layout_constraintStart_toStartOf="@+id/asd"
                 app:layout_constraintTop_toBottomOf="@+id/referenciastxt" />
-
             <TextView
                 android:id="@+id/qqqqq"
                 android:layout_width="wrap_content"

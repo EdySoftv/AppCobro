@@ -150,6 +150,7 @@ public class NAPTAP extends AppCompatActivity
         toggle.syncState();
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        navigationView.getMenu().setGroupVisible(R.id.Cobro,Request.PermCobro);
         navigationView.setNavigationItemSelectedListener(this);
 
 
@@ -228,6 +229,12 @@ public class NAPTAP extends AppCompatActivity
                 startActivity(intent1);
                 finish();
             }
+        }else if (id == R.id.Saldo) {
+            Intent intent1 = new Intent(NAPTAP.this, Saldo.class);
+            intent1.putExtra("dato", "TAP");
+            intent1.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(intent1);
+            finish();
         }
 
         drawer.closeDrawer(GravityCompat.START);

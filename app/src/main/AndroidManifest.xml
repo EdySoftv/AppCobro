@@ -7,7 +7,7 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.CAMERA" tools:node="remove" />
     <application
         android:allowBackup="true"
@@ -51,6 +51,10 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name="com.Softv.SoftvApp.SoftvApp.Activitys.NAPTAP"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name="com.Softv.SoftvApp.SoftvApp.Activitys.Saldo"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
@@ -98,6 +102,16 @@
             android:name="com.Softv.SoftvApp.SoftvApp.Activitys.TecnicosSecundarios"
             android:screenOrientation="portrait"
             />
+        <activity
+            android:name="com.Softv.SoftvApp.SoftvApp.Activitys.ServiciosSaldo"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar"
+            /><activity
+            android:name="com.Softv.SoftvApp.SoftvApp.Activitys.PDF"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar"
+        />
+
         <activity
             android:name="com.Softv.SoftvApp.SoftvApp.sampledata.SplashActivity"
             android:theme="@style/SplashScreen">

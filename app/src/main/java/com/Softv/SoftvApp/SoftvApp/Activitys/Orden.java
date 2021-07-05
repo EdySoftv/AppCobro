@@ -4,8 +4,12 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.constraint.ConstraintLayout;
+import android.support.constraint.ConstraintSet;
+import android.support.constraint.Guideline;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.transition.TransitionManager;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -41,10 +45,11 @@ public class Orden extends AppCompatActivity implements NavigationView.OnNavigat
     public static boolean statusBusquedaOrden = false, statusBusquedaContrato = false, statusBusquedaPresinto = false;
     private EditText ordsearch,contsearch,presearch;
     NavigationView barra;
-    TextView nombreTec;
+    TextView nombreTec, textpre;
     public static ProgressDialog dialogOrdenes;
     BarraCargar barraCargar = new BarraCargar();
-   private Request rqs=new Request();
+    private Request rqs=new Request();
+    private ConstraintLayout ord, contr, pla;
 
     @Override
     protected void onCreate(Bundle onSaveInstanceState) {
@@ -54,11 +59,31 @@ public class Orden extends AppCompatActivity implements NavigationView.OnNavigat
         setSupportActionBar(toolbar);
         ordenes=findViewById(R.id.listorden);
         ordenb=findViewById(R.id.borden);
-        contratob=findViewById(R.id.bcontrato);
         precintob=findViewById(R.id.bprecinto);
         ordsearch=findViewById(R.id.ordsearch);
         contsearch=findViewById(R.id.contsearch);
+
+        ord = findViewById(R.id.NumOrden);
+        contr = findViewById(R.id.Nombre);
+        pla = findViewById(R.id.Placa);
+
+        //precinto
+        contratob=findViewById(R.id.bcontrato);
         presearch=findViewById(R.id.presearch);
+        textpre=findViewById(R.id.textView64);
+
+        if(request.PermPlaca == false){
+            pla.setVisibility(View.GONE);
+
+            ConstraintLayout.LayoutParams lp = (ConstraintLayout.LayoutParams) ord.getLayoutParams();
+            lp.matchConstraintPercentWidth = (float) 0.5;
+            ord.setLayoutParams(lp);
+
+            lp = (ConstraintLayout.LayoutParams) contr.getLayoutParams();
+            lp.matchConstraintPercentWidth = (float) 0.5;
+            contr.setLayoutParams(lp);
+        }
+
         barra = findViewById(R.id.nav_view);
         View barra1 = barra.getHeaderView(0);
         nombreTec=barra1.findViewById(R.id.tv_NombreTecnico);
@@ -189,6 +214,7 @@ public class Orden extends AppCompatActivity implements NavigationView.OnNavigat
         drawer.addDrawerListener(toggle);
         toggle.syncState();
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        navigationView.getMenu().setGroupVisible(R.id.Cobro,Request.PermCobro);
         navigationView.setNavigationItemSelectedListener(this);
         setTitle("Ordenes");
 
@@ -200,7 +226,7 @@ public class Orden extends AppCompatActivity implements NavigationView.OnNavigat
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
-            Intent intento1=new Intent(Orden.this,Inicio.class);
+            Intent intento1=new Intent(Orden.this,Saldo.class);
             intento1.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(intento1);
         }
@@ -241,13 +267,19 @@ public class Orden extends AppCompatActivity implements NavigationView.OnNavigat
         intent1.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent1);
         finish();
-    } else if (id == R.id.MenuCoordenadasTAP) {
+        } else if (id == R.id.MenuCoordenadasTAP) {
         Intent intent1 = new Intent(Orden.this, NAPTAP.class);
         intent1.putExtra("dato", "TAP");
         intent1.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent1);
         finish();
-    }
+        }else if (id == R.id.Saldo) {
+            Intent intent1 = new Intent(Orden.this, Saldo.class);
+            intent1.putExtra("dato", "TAP");
+            intent1.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(intent1);
+            finish();
+        }
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;

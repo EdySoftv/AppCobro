@@ -22,11 +22,10 @@
             app:layout_constraintTop_toTopOf="parent">
 
             <android.support.constraint.ConstraintLayout
-                android:id="@+id/constrain_descargaMaterialesR"
+                android:id="@+id/constrain_descargaMateriales"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:visibility="visible"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
@@ -45,7 +44,7 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <Spinner
-                    android:id="@+id/descripcionArticuloDescR"
+                    android:id="@+id/descripcionArticuloDesc"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
@@ -69,10 +68,10 @@
                     android:textStyle="bold"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/descripcionArticuloDescR" />
+                    app:layout_constraintTop_toBottomOf="@+id/descripcionArticuloDesc" />
 
                 <Spinner
-                    android:id="@+id/clasificacionMatDescR"
+                    android:id="@+id/clasificacionMatDesc"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
@@ -88,15 +87,14 @@
             </android.support.constraint.ConstraintLayout>
 
             <android.support.constraint.ConstraintLayout
-                android:id="@+id/constrain_ExtencionesR"
+                android:id="@+id/constrain_Extenciones"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:visibility="gone"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="1.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/constrain_descargaMaterialesR">
+                app:layout_constraintTop_toBottomOf="@+id/constrain_descargaMateriales">
 
                 <TextView
                     android:id="@+id/textView11"
@@ -114,7 +112,7 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <Spinner
-                    android:id="@+id/extencionesDescargaR"
+                    android:id="@+id/extencionesDescarga"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
@@ -128,19 +126,18 @@
             </android.support.constraint.ConstraintLayout>
 
             <android.support.constraint.ConstraintLayout
-                android:id="@+id/constrain_CantidadR"
+                android:id="@+id/constrain_Cantidad"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:visibility="gone"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/constrain_ExtencionesR">
+                app:layout_constraintTop_toBottomOf="@+id/constrain_Extenciones">
 
                 <TextView
                     android:id="@+id/textView12"
-                    android:layout_width="0dp"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
                     android:layout_marginTop="8dp"
@@ -153,8 +150,8 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <EditText
-                    android:id="@+id/piezaMDR"
-                    android:layout_width="0dp"
+                    android:id="@+id/piezaMD"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
                     android:layout_marginTop="8dp"
@@ -169,30 +166,29 @@
             </android.support.constraint.ConstraintLayout>
 
             <android.support.constraint.ConstraintLayout
-                android:id="@+id/constrain_MetrajeR"
+                android:id="@+id/constrain_Metraje"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textSize="20dp"
-                android:visibility="invisible"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/constrain_ExtencionesR">
+                app:layout_constraintTop_toBottomOf="@+id/constrain_Cantidad">
 
                 <TextView
-                    android:id="@+id/textView13"
+                    android:id="@+id/textViewInicioTitulo"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="50dp"
+                    android:layout_marginStart="120dp"
                     android:layout_marginTop="8dp"
                     android:text="@string/inicio"
                     android:textSize="20dp"
                     android:textStyle="bold"
-                    app:layout_constraintStart_toEndOf="@+id/textView15"
+                    app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
-                    android:id="@+id/textView14"
+                    android:id="@+id/textViewFinTitulo"
                     android:layout_width="50dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
@@ -211,12 +207,12 @@
                     android:text="@string/interior"
                     android:textSize="20dp"
                     android:textStyle="bold"
-                    app:layout_constraintBottom_toBottomOf="@+id/InicialIDMR"
+                    app:layout_constraintBottom_toBottomOf="@+id/InicialIDM"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="@+id/InicialIDMR" />
+                    app:layout_constraintTop_toTopOf="@+id/InicialIDM" />
 
                 <TextView
-                    android:id="@+id/textViewExternoR"
+                    android:id="@+id/textView16"
                     android:layout_width="75dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
@@ -224,34 +220,34 @@
                     android:text="@string/exterior"
                     android:textSize="20dp"
                     android:textStyle="bold"
-                    app:layout_constraintBottom_toBottomOf="@+id/InicialEDMR"
+                    app:layout_constraintBottom_toBottomOf="@+id/InicialEDM"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="@+id/InicialEDMR" />
+                    app:layout_constraintTop_toTopOf="@+id/InicialEDM" />
 
                 <EditText
-                    android:id="@+id/InicialIDMR"
+                    android:id="@+id/InicialIDM"
                     android:layout_width="100dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="20dp"
                     android:inputType="number"
                     android:textSize="20dp"
-                    app:layout_constraintEnd_toEndOf="@+id/textView13"
-                    app:layout_constraintStart_toStartOf="@+id/textView13"
-                    app:layout_constraintTop_toBottomOf="@+id/textView13" />
+                    app:layout_constraintEnd_toEndOf="@+id/textViewInicioTitulo"
+                    app:layout_constraintStart_toStartOf="@+id/textViewInicioTitulo"
+                    app:layout_constraintTop_toBottomOf="@+id/textViewInicioTitulo" />
 
                 <EditText
-                    android:id="@+id/FinalIDMR"
+                    android:id="@+id/FinalIDM"
                     android:layout_width="100dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="20dp"
                     android:inputType="number"
                     android:textSize="20dp"
-                    app:layout_constraintEnd_toEndOf="@+id/textView14"
-                    app:layout_constraintStart_toStartOf="@+id/textView14"
-                    app:layout_constraintTop_toBottomOf="@+id/textView14" />
+                    app:layout_constraintEnd_toEndOf="@+id/textViewFinTitulo"
+                    app:layout_constraintStart_toStartOf="@+id/textViewFinTitulo"
+                    app:layout_constraintTop_toBottomOf="@+id/textViewFinTitulo" />
 
                 <EditText
-                    android:id="@+id/InicialEDMR"
+                    android:id="@+id/InicialEDM"
                     android:layout_width="100dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
@@ -259,12 +255,12 @@
                     android:inputType="number"
                     android:textSize="20dp"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="@+id/textView13"
-                    app:layout_constraintStart_toStartOf="@+id/textView13"
-                    app:layout_constraintTop_toBottomOf="@+id/InicialIDMR" />
+                    app:layout_constraintEnd_toEndOf="@+id/textViewInicioTitulo"
+                    app:layout_constraintStart_toStartOf="@+id/textViewInicioTitulo"
+                    app:layout_constraintTop_toBottomOf="@+id/InicialIDM" />
 
                 <EditText
-                    android:id="@+id/FinalEDMR"
+                    android:id="@+id/FinalEDM"
                     android:layout_width="100dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
@@ -272,26 +268,68 @@
                     android:inputType="number"
                     android:textSize="20dp"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="@+id/textView14"
-                    app:layout_constraintStart_toStartOf="@+id/textView14"
-                    app:layout_constraintTop_toBottomOf="@+id/FinalIDMR" />
+                    app:layout_constraintEnd_toEndOf="@+id/textViewFinTitulo"
+                    app:layout_constraintStart_toStartOf="@+id/textViewFinTitulo"
+                    app:layout_constraintTop_toBottomOf="@+id/FinalIDM" />
             </android.support.constraint.ConstraintLayout>
 
+            <android.support.constraint.ConstraintLayout
+                android:id="@+id/constrain_PlacaB"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="20dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/constrain_Metraje">
+
+                <TextView
+                    android:id="@+id/TvPla"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="8dp"
+                    android:text="@string/placa"
+                    android:textSize="20dp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:visibility="gone" />
+
+                <EditText
+                    android:id="@+id/EdPla"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginBottom="8dp"
+                    android:digits="0123456789-,qQwWeErRtTzZuUiIoOpPaAsSdDfFgGhHjJkKlLyYxXcCvVbBnNmM"
+                    android:textSize="20dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/TvPla"
+                    tools:ignore="MissingConstraints"
+                    tools:visibility="gone" />
+            </android.support.constraint.ConstraintLayout>
+            <!---->
             <Button
-                android:id="@+id/agregarMaterialR"
+                android:id="@+id/agregarMaterial"
                 android:layout_width="88dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="100dp"
                 android:layout_marginEnd="8dp"
-                android:textColor="#fff"
                 android:background="@drawable/boton"
                 android:backgroundTint="@color/colorPrimary"
                 android:text="@string/agregar"
+                android:textColor="#fff"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/constrain_MetrajeR" />
-            <!---->
+                app:layout_constraintTop_toBottomOf="@+id/constrain_PlacaB"
+                tools:ignore="MissingConstraints" />
+
             <HorizontalScrollView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -300,12 +338,11 @@
                 android:layout_marginEnd="8dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/agregarMaterialR">
+                app:layout_constraintTop_toBottomOf="@+id/agregarMaterial">
                 <android.support.v7.widget.RecyclerView
-                    android:id="@+id/eliminarMaterialesListR"
+                    android:id="@+id/eliminarMaterialesList"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:visibility="gone"
                     />
             </HorizontalScrollView>
         </android.support.constraint.ConstraintLayout>
