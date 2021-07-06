@@ -61,7 +61,7 @@ public class PDF extends AppCompatActivity {
 
                 rqs.GetTicketResult = Constants.URL_REPORTES;
                 rqs.CLV_FACTURA=0;
-                Intent intent1 = new Intent(PDF.this, Saldo.class);
+                Intent intent1 = new Intent(PDF.this, Inicio.class);
                 intent1.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 PDF.this.startActivity(intent1);
             }

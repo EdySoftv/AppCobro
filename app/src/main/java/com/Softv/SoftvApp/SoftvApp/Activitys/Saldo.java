@@ -73,7 +73,6 @@ public class Saldo extends AppCompatActivity implements NavigationView.OnNavigat
             EstatusInternet(getApplicationContext());
             // Toast.makeText(getApplicationContext(), "No cuenta con conexión a Internet", Toast.LENGTH_LONG).show();
             // finish();
-
         }
         else{
             try{
@@ -241,7 +240,7 @@ public class Saldo extends AppCompatActivity implements NavigationView.OnNavigat
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
-            Intent intento1=new Intent(Saldo.this,Saldo.class);
+            Intent intento1=new Intent(Saldo.this,Inicio.class);
             intento1.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(intento1);
         }

@@ -5,8 +5,8 @@ public class Constants {
 
     //public static final String URL="http://192.168.0.4:1160/";
 
-    //public static final String URL="http://915009d10274.sn.mynetname.net:1560/"; // Fresnill
-    public static final String URL="http://177.229.197.2:5600/"; //
+    public static final String URL="http://915009d10274.sn.mynetname.net:1160/"; // Fresnill
+    //public static final String URL="http://177.229.197.2:5600/"; //
 
     public static final String NEW_URL = URL + "SoftvWCFService.svc/";
     public static final String URL_GET_USER = "Usuario/LogOn";

@@ -10,7 +10,6 @@ import android.util.Log;
 
 import com.Softv.SoftvApp.SoftvApp.Activitys.Inicio;
 import com.Softv.SoftvApp.SoftvApp.Activitys.Login;
-import com.Softv.SoftvApp.SoftvApp.Activitys.Saldo;
 import com.Softv.SoftvApp.SoftvApp.Request.Request;
 
 public class SplashActivity extends AppCompatActivity {

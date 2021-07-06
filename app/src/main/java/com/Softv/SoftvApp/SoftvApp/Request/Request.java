@@ -310,7 +310,7 @@ public class Request extends AppCompatActivity {
                         new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-                                Intent intento = new Intent(context, Saldo.class);
+                                Intent intento = new Intent(context, Inicio.class);
                                 intento.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                                 context.startActivity(intento);
                             }
@@ -414,7 +414,7 @@ public class Request extends AppCompatActivity {
                         }
 
                         if(Login==true){
-                            Intent intento = new Intent(context, Saldo.class);
+                            Intent intento = new Intent(context, Inicio.class);
                             intento.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                             context.startActivity(intento);
                             dialogLogin.dismiss();
@@ -4920,7 +4920,7 @@ try{
                 if (response.code() == 200) {
 
                     Toast.makeText(context,"Se han guardado correctamente las coordenadas",Toast.LENGTH_SHORT).show();
-                    Intent intento = new Intent(context, Saldo.class);
+                    Intent intento = new Intent(context, Inicio.class);
                     intento.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                     context.startActivity(intento);
 
@@ -4944,7 +4944,7 @@ try{
                 if (response.code() == 200) {
 
                     Toast.makeText(context,"Se han guardado correctamente las coordenadas",Toast.LENGTH_SHORT).show();
-                    Intent intento = new Intent(context, Saldo.class);
+                    Intent intento = new Intent(context, Inicio.class);
                     intento.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                     context.startActivity(intento);
 

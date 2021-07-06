@@ -226,7 +226,7 @@ public class Orden extends AppCompatActivity implements NavigationView.OnNavigat
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
-            Intent intento1=new Intent(Orden.this,Saldo.class);
+            Intent intento1=new Intent(Orden.this,Inicio.class);
             intento1.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(intento1);
         }
