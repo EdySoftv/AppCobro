@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.Softv.SoftvApp.SoftvApp">
+    package="com.Softv.SoftvApp.SoftvCobro">
 
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
@@ -20,7 +20,7 @@
         android:usesCleartextTraffic="true"
         >
         <service
-            android:name="com.Softv.SoftvApp.SoftvApp.MyFireBaseMessagingService"
+            android:name="com.Softv.SoftvApp.SoftvCobro.MyFireBaseMessagingService"
             android:enabled="true"
             android:exported="true">
             <intent-filter>
@@ -30,90 +30,31 @@
         </service>
 
         <activity
-            android:name="com.Softv.SoftvApp.SoftvApp.Dibujo.Firma"
-            android:screenOrientation="landscape" />
-        <activity
-            android:name="com.Softv.SoftvApp.SoftvApp.Activitys.Inicio"
-            android:configChanges="orientation|keyboardHidden|screenSize|screenLayout"
-            android:label="Inicio"
+            android:name="com.Softv.SoftvApp.SoftvCobro.Activitys.Saldo"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name="com.Softv.SoftvApp.SoftvApp.Activitys.Orden"
-            android:configChanges="orientation|keyboardHidden|screenSize|screenLayout"
-            android:label="@string/title_activity_orden"
-            android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity
-            android:name="com.Softv.SoftvApp.SoftvApp.Activitys.Reportes"
-            android:label="@string/title_activity_reportes"
-            android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity
-            android:name="com.Softv.SoftvApp.SoftvApp.Activitys.NAPTAP"
-            android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity
-            android:name="com.Softv.SoftvApp.SoftvApp.Activitys.Saldo"
-            android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity
-            android:name="com.Softv.SoftvApp.SoftvApp.Activitys.Configuracion"
+            android:name="com.Softv.SoftvApp.SoftvCobro.Activitys.Configuracion"
             android:configChanges="orientation|keyboardHidden|screenSize|screenLayout"
             android:label="@string/title_activity_configuracion"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name="com.Softv.SoftvApp.SoftvApp.Activitys.MainActivity"
-            android:configChanges="screenSize|orientation|keyboardHidden|screenLayout"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name="com.Softv.SoftvApp.SoftvApp.Activitys.ServiciosAInstalar"
+            android:name="com.Softv.SoftvApp.SoftvCobro.Activitys.Login"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name="com.Softv.SoftvApp.SoftvApp.Activitys.AsignarAparato"
-            android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity
-            android:name="com.Softv.SoftvApp.SoftvApp.Activitys.ExtensionesAdi"
-            android:screenOrientation="portrait"
-             />
-        <activity
-            android:name="com.Softv.SoftvApp.SoftvApp.Activitys.MainReportes"
-            android:configChanges="screenSize|orientation"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name="com.Softv.SoftvApp.SoftvApp.Activitys.Login"
-            android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity
-            android:name="com.Softv.SoftvApp.SoftvApp.Activitys.CambioDom"
-            android:configChanges="screenSize|orientation"
-            />
-        <activity
-            android:name="com.Softv.SoftvApp.SoftvApp.Activitys.CambioAparato"
-            android:screenOrientation="portrait"
-            />
-        <activity android:name="com.Softv.SoftvApp.SoftvApp.Activitys.ReporteAsignacion"
-            android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBar"/>
-        <activity
-            android:name="com.Softv.SoftvApp.SoftvApp.Activitys.TecnicosSecundarios"
-            android:screenOrientation="portrait"
-            />
-        <activity
-            android:name="com.Softv.SoftvApp.SoftvApp.Activitys.ServiciosSaldo"
+            android:name="com.Softv.SoftvApp.SoftvCobro.Activitys.ServiciosSaldo"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar"
             /><activity
-            android:name="com.Softv.SoftvApp.SoftvApp.Activitys.PDF"
+            android:name="com.Softv.SoftvApp.SoftvCobro.Activitys.PDF"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar"
         />
 
         <activity
-            android:name="com.Softv.SoftvApp.SoftvApp.sampledata.SplashActivity"
+            android:name="com.Softv.SoftvApp.SoftvCobro.sampledata.SplashActivity"
             android:theme="@style/SplashScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -122,7 +63,7 @@
             </intent-filter>
         </activity>
 
-        <service android:name="com.Softv.SoftvApp.SoftvApp.Notificaciones.InstanceIdService">
+        <service android:name="com.Softv.SoftvApp.SoftvCobro.Notificaciones.InstanceIdService">
             <intent-filter>
                 <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
             </intent-filter>

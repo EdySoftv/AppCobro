@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".Dibujo.Firma">
 
-    <com.Softv.SoftvApp.SoftvApp.Dibujo.Dibujar
+    <com.Softv.SoftvApp.SoftvCobro.Dibujo.Dibujar
         android:id="@+id/FirmaLayout"
         android:layout_width="0dp"
         android:layout_height="0dp"

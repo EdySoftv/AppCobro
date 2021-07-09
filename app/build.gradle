@@ -4,7 +4,7 @@ apply plugin: 'com.google.gms.google-services'
 android {
     compileSdkVersion 28
     defaultConfig {
-        applicationId "com.Softv.SoftvApp.SoftvApp"
+        applicationId "com.Softv.SoftvApp.SoftvCobro"
         minSdkVersion 21
         targetSdkVersion 28
         versionCode 3
@@ -74,5 +74,6 @@ dependencies {
     apply plugin: 'com.google.gms.google-services'
     implementation 'com.android.support:recyclerview-v7:+'
     implementation 'com.google.code.gson:gson:2.8.2'
+    implementation 'com.github.barteksc:android-pdf-viewer:2.8.2'
     // com.google.gms.googleservices.GoogleServicesPlugin.config.disableVersionCheck = true
 }
