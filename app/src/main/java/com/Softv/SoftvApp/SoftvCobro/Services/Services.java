@@ -185,21 +185,25 @@ public class Services {
             jsonObject.put("ContratoCom", text);
             jsonObject.put("Nombre", "");
             jsonObject.put("Telefono", "");
+            jsonObject.put("Empleado", Util.getUsuarioPreference(Util.preferences));
             jsonObject.put("Op", i);
         }else if(i == 2){
             jsonObject.put("ContratoCom", "");
             jsonObject.put("Nombre", text);
             jsonObject.put("Telefono", "");
+            jsonObject.put("Empleado", Util.getUsuarioPreference(Util.preferences));
             jsonObject.put("Op", i);
         }else if(i == 3){
             jsonObject.put("ContratoCom", "");
             jsonObject.put("Nombre", "");
             jsonObject.put("Telefono", text);
+            jsonObject.put("Empleado", Util.getUsuarioPreference(Util.preferences));
             jsonObject.put("Op", i);
         }else{
             jsonObject.put("ContratoCom", "");
             jsonObject.put("Nombre", "");
             jsonObject.put("Telefono", "");
+            jsonObject.put("Empleado", Util.getUsuarioPreference(Util.preferences));
             jsonObject.put("Op", 0);
         }
         MediaType JSON = MediaType.parse("application/json; charset=utf-8");

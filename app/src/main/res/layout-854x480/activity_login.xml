@@ -30,7 +30,7 @@
             android:layout_width="280dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="44dp"
+            android:layout_marginTop="30dp"
             android:hint="@string/usuario"
             android:inputType="text"
             android:textAlignment="center"
@@ -84,18 +84,29 @@
             android:text="@string/login"
             android:textColor="@color/colorPrimaryDark"
             android:textSize="@dimen/grande"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@+id/contrasenia"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="@+id/contrasenia"
             app:layout_constraintTop_toBottomOf="@+id/contrasenia" />
+
         <TextView
+            android:id="@+id/textView69"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/Version"
+            android:text="@string/Edicion"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@+id/btnLogin"
             app:layout_constraintStart_toStartOf="@+id/btnLogin"
             app:layout_constraintTop_toBottomOf="@+id/btnLogin" />
+
+        <TextView
+            android:id="@+id/textView68"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/Version"
+            app:layout_constraintEnd_toEndOf="@+id/textView69"
+            app:layout_constraintStart_toStartOf="@+id/textView69"
+            app:layout_constraintTop_toBottomOf="@+id/textView69" />
 
 
     </android.support.constraint.ConstraintLayout>

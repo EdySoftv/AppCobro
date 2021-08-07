@@ -188,6 +188,6 @@
     <string name="ventarenta">Venta / Renta</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-
-    <string name="Version">Edición de Cobro Versión: 1.8.1.29062021</string>
+    <string name="Edicion">Edición de Cobro</string>
+    <string name="Version">Versión: 1.2.07082021</string>
 </resources>

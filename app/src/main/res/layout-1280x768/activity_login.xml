@@ -91,13 +91,26 @@
             app:layout_constraintStart_toStartOf="@+id/contrasenia"
             app:layout_constraintTop_toBottomOf="@+id/contrasenia"
             app:layout_constraintVertical_bias="1.0" />
+
         <TextView
+            android:id="@+id/textView71"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/Version"
+            android:layout_marginBottom="20dp"
+            android:text="@string/Edicion"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@+id/btnLogin"
             app:layout_constraintStart_toStartOf="@+id/btnLogin"
             app:layout_constraintTop_toBottomOf="@+id/btnLogin" />
+
+        <TextView
+            android:id="@+id/textView70"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/Version"
+            app:layout_constraintEnd_toEndOf="@+id/textView71"
+            app:layout_constraintStart_toStartOf="@+id/textView71"
+            app:layout_constraintTop_toBottomOf="@+id/textView71" />
 
 
     </android.support.constraint.ConstraintLayout>

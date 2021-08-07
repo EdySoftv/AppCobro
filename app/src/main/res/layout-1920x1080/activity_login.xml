@@ -77,7 +77,6 @@
             app:layout_constraintTop_toTopOf="@+id/contrasenia" />
 
 
-
         <Button
             android:id="@+id/btnLogin"
             android:layout_width="0dp"
@@ -88,15 +87,27 @@
             android:text="@string/login"
             android:textColor="@color/colorPrimaryDark"
             android:textSize="@dimen/grande"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@+id/contrasenia"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="@+id/contrasenia"
             app:layout_constraintTop_toBottomOf="@+id/contrasenia" />
+
         <TextView
+            android:id="@+id/textView66"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/Version"
+            app:layout_constraintEnd_toEndOf="@+id/textView67"
+            app:layout_constraintStart_toStartOf="@+id/textView67"
+            app:layout_constraintTop_toBottomOf="@+id/textView67" />
+
+        <TextView
+            android:id="@+id/textView67"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
+            android:text="@string/Edicion"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@+id/btnLogin"
             app:layout_constraintStart_toStartOf="@+id/btnLogin"
             app:layout_constraintTop_toBottomOf="@+id/btnLogin" />

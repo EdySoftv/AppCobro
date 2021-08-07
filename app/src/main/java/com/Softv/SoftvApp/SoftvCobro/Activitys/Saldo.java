@@ -1,12 +1,16 @@
 package com.Softv.SoftvApp.SoftvCobro.Activitys;
 
+import android.app.DownloadManager;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
+import android.os.Environment;
 import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.GridLayoutManager;
@@ -32,6 +36,12 @@ import com.Softv.SoftvApp.SoftvCobro.sampledata.BarraCargar;
 import com.Softv.SoftvApp.SoftvCobro.sampledata.Util;
 
 import org.json.JSONObject;
+
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
 
 public class Saldo extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     private Request request = new Request();
@@ -60,7 +70,7 @@ public class Saldo extends AppCompatActivity implements NavigationView.OnNavigat
         if (!isOnline()) {
             dialog.dismiss();
             EstatusInternet(getApplicationContext());
-            // Toast.makeText(getApplicationContext(), "No cuenta con conexión a Internet", Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(), "No cuenta con conexión a Internet", Toast.LENGTH_LONG).show();
             // finish();
 
         }
@@ -113,6 +123,8 @@ public class Saldo extends AppCompatActivity implements NavigationView.OnNavigat
         clientList.setLayoutManager(layoutManager);
 
         VaciarYOcultar(0);
+
+        //Prueba();
 
         //Anterior//
         ant.setOnClickListener(new View.OnClickListener() {
@@ -224,6 +236,9 @@ public class Saldo extends AppCompatActivity implements NavigationView.OnNavigat
 
 
     }
+
+
+
     @Override
     public void onBackPressed() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

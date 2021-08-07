@@ -11,6 +11,8 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.support.annotation.NonNull;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
@@ -46,6 +48,7 @@ public class PDF extends AppCompatActivity {
         pdfView = findViewById(R.id.idPDFView);
         Guardar =  findViewById(R.id.GuardaTicket);
         new RetrivePDFfromUrl().execute(pdfurl);
+        verificarYPedirPermisosDeAlmacenamiento();
         Guardar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -61,6 +64,19 @@ public class PDF extends AppCompatActivity {
                 PDF.this.startActivity(intent1);
             }
         });
+    }
+
+    private void verificarYPedirPermisosDeAlmacenamiento() {
+        int estadoDePermiso = ContextCompat.checkSelfPermission(PDF.this, Manifest.permission.WRITE_EXTERNAL_STORAGE);
+        if (estadoDePermiso == PackageManager.PERMISSION_GRANTED) {
+            // En caso de que haya dado permisos ponemos la bandera en true
+            // y llamar al método
+            Toast.makeText(PDF.this, "El permiso para el almacenamiento está concedido", Toast.LENGTH_SHORT).show();
+        } else {
+            // Si no, entonces pedimos permisos. Ahora mira onRequestPermissionsResult
+            ActivityCompat.requestPermissions(PDF.this,
+                    new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},2);
+        }
     }
 
     // create an async task class for loading pdf file from URL.
@@ -112,12 +128,14 @@ public class PDF extends AppCompatActivity {
 
     private void startDowloadong() {
         String url = rqs.GetTicketResult;
+        String date = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
 
         DownloadManager.Request request = new DownloadManager.Request(Uri.parse(url));
 
         request.setAllowedNetworkTypes(DownloadManager.Request.NETWORK_WIFI | DownloadManager.Request.NETWORK_MOBILE);
-        request.setTitle("Descargando");
+        request.setTitle(rqs.ContratoCompuestoSaldo+"_"+date+".pdf");
         request.setDescription("Descargando archivo... ");
+        request.setMimeType("application/pdf");
 
         request.allowScanningByMediaScanner();
         request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED);

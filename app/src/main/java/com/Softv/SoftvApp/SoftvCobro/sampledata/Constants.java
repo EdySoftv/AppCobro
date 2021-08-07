@@ -5,8 +5,8 @@ public class Constants {
 
     //public static final String URL="http://192.168.0.4:1160/";
 
-    public static final String URL="http://915009d10274.sn.mynetname.net:1160/"; // Fresnill
-    //public static final String URL="http://201.131.236.2:5700/"; // Fresnillo
+    //public static final String URL="http://915009d10274.sn.mynetname.net:1160/";
+    public static final String URL="http://45.5.94.66:9600/"; //Eii
 
     public static final String NEW_URL = URL + "SoftvWCFService.svc/";
     public static final String URL_GET_USER = "Usuario/LogOn";
@@ -28,7 +28,7 @@ public class Constants {
     public static final String URL_DIR = "AplicacionMovil/DireccionesCAMDO";
     public static final String URL_GT_TK = "CrearTicketTable/GetTicket";
     public static final String URL_VEN_REN = "AplicacionMovil/VentaRenta";
-    public static final String FORMATO = "$0.00";    
+    public static final String FORMATO = "$0.00";
     public static final String URL_REPORTES = URL + "Reportes/";
 
 }

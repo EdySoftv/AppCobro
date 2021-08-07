@@ -135,7 +135,7 @@ public class Request extends AppCompatActivity {
         usurio.setEnabled(true);
         contraseña.setEnabled(true);
         entrar.setEnabled(true);*/
-        dialogInicio.dismiss();
+        //dialogInicio.dismiss();
 
         try {
             Util.preferences.edit().clear().commit();
