@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="20dp"
+    android:elevation="80dp">
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/disenio_recyclerview"
+        android:paddingLeft="8dp"
+        android:paddingRight="8dp">
+
+        <TextView
+            android:id="@+id/contrto"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="15dp"
+            android:text="@string/contratoDos"
+            android:textAlignment="center"
+            android:textColor="@android:color/background_dark"
+            android:textSize="16dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/noOrden"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="5dp"
+            android:text="@string/nombre"
+            android:textColor="@android:color/background_dark"
+            android:textSize="16dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/ContratoCompuesto" />
+
+        <TextView
+            android:id="@+id/ContratoCompuesto"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="15dp"
+            android:text="6892-1"
+            android:textAlignment="center"
+            android:textSize="14dp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@+id/contrto"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/contrto"
+            app:layout_constraintTop_toTopOf="@+id/contrto" />
+
+        <TextView
+            android:id="@+id/Nombre"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:layout_marginEnd="15dp"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:text="SHELLY VERANIA ECHEGARAY GUTIERRREZ"
+            android:textAlignment="center"
+            android:textSize="16dp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@+id/noOrden"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.50"
+            app:layout_constraintStart_toEndOf="@+id/noOrden"
+            app:layout_constraintTop_toTopOf="@+id/noOrden"
+            app:layout_constraintVertical_bias="1.0" />
+
+        <TextView
+            android:id="@+id/txt"
+            android:layout_width="65dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:layout_marginEnd="8dp"
+            android:text="@string/telefonoDos"
+            android:textSize="14dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/noOrden"
+            app:layout_constraintTop_toBottomOf="@+id/noOrden" />
+
+        <TextView
+            android:id="@+id/Telefono"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:layout_marginEnd="15dp"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:text="73900250"
+            android:textSize="14dp"
+            app:layout_constraintBottom_toBottomOf="@+id/txt"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toEndOf="@+id/txt"
+            app:layout_constraintTop_toTopOf="@+id/txt"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <TextView
+            android:id="@+id/Calle_Numero"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:layout_marginEnd="15dp"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:text="AV. CIPRIANO BARACE #170"
+            android:textSize="14dp"
+            app:layout_constraintBottom_toBottomOf="@+id/txtFechaListado"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/txtFechaListado"
+            app:layout_constraintTop_toTopOf="@+id/txtFechaListado" />
+
+        <TextView
+            android:id="@+id/txtFechaListado"
+            android:layout_width="65dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:text="@string/direccion"
+            android:textSize="14dp"
+            app:layout_constraintStart_toStartOf="@+id/txt"
+            app:layout_constraintTop_toBottomOf="@+id/txt" />
+
+        <TextView
+            android:id="@+id/txtFechaListado5"
+            android:layout_width="65dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:text="@string/colonia"
+            android:textSize="14dp"
+            app:layout_constraintStart_toStartOf="@+id/txtFechaListado"
+            app:layout_constraintTop_toBottomOf="@+id/txtFechaListado" />
+
+        <TextView
+            android:id="@+id/Colonia"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:layout_marginEnd="15dp"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:text="CENTRAL"
+            android:textSize="14dp"
+            app:layout_constraintBottom_toBottomOf="@+id/txtFechaListado5"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/txtFechaListado5"
+            app:layout_constraintTop_toTopOf="@+id/txtFechaListado5" />
+
+        <TextView
+            android:id="@+id/txtPlacaListado5"
+            android:layout_width="65dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="15dp"
+            android:text="@string/placa"
+            android:textSize="14dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/txtFechaListado5"
+            app:layout_constraintTop_toBottomOf="@+id/txtFechaListado5" />
+
+        <TextView
+            android:id="@+id/Placa"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:layout_marginEnd="15dp"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:text="123-456-789"
+            android:textSize="14dp"
+            app:layout_constraintBottom_toBottomOf="@+id/txtPlacaListado5"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/txtPlacaListado5"
+            app:layout_constraintTop_toTopOf="@+id/txtPlacaListado5" />
+
+    </android.support.constraint.ConstraintLayout>
+</android.support.v7.widget.CardView>
