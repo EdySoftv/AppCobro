@@ -3,6 +3,7 @@ package com.Softv.SoftvApp.SoftvCobro.Activitys;
 import android.Manifest;
 import android.app.DownloadManager;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
@@ -13,6 +14,7 @@ import android.os.Environment;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
@@ -22,6 +24,9 @@ import com.Softv.SoftvApp.SoftvCobro.R;
 import com.Softv.SoftvApp.SoftvCobro.Request.Request;
 import com.Softv.SoftvApp.SoftvCobro.sampledata.Constants;
 import com.github.barteksc.pdfviewer.PDFView;
+
+import org.json.JSONObject;
+
 import java.io.BufferedInputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -156,6 +161,38 @@ public class PDF extends AppCompatActivity {
                 }
             }
         }
+    }
+
+    @Override
+    public void onBackPressed() {
+        Mensaje();
+    }
+
+    private void Mensaje(){
+        new AlertDialog.Builder(this)
+                .setTitle("ATENCIÓN")
+                .setMessage("¿Desea salir sin guardar el ticket?\nNo podrá buscar el ticket de nuevo")
+                .setPositiveButton("Aceptar",
+                        new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                rqs.GetTicketResult = Constants.URL_REPORTES;
+                                rqs.CLV_FACTURA=0;
+                                Intent intent1 = new Intent(PDF.this, Saldo.class);
+                                intent1.putExtra("dato", "TAP");
+                                intent1.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                                startActivity(intent1);
+                                finish();
+                            }
+                        })
+                .setNegativeButton("Cancelar",
+                        new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                rqs.GetTicketResult = Constants.URL_REPORTES;
+                                rqs.CLV_FACTURA=0;
+                            }
+                        }).show();
     }
 
 }

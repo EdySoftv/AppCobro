@@ -35,6 +35,10 @@ public class DatosClientesSaldoList {
     @Expose
     private String Contrato;
 
+    @SerializedName("Placa")
+    @Expose
+    private String Placa;
+
     public String getContratoCompuesto() {
         return ContratoCompuesto;
     }
@@ -89,5 +93,13 @@ public class DatosClientesSaldoList {
 
     public void setContrato(String contrato) {
         Contrato = contrato;
+    }
+
+    public String getPlaca() {
+        return Placa;
+    }
+
+    public void setPlaca(String placa) {
+        Placa = placa;
     }
 }

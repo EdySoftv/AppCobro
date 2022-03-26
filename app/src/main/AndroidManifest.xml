@@ -48,11 +48,21 @@
             android:name="com.Softv.SoftvApp.SoftvCobro.Activitys.ServiciosSaldo"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar"
-            /><activity
+            />
+        <activity
+            android:name="com.Softv.SoftvApp.SoftvCobro.Activitys.Pagos"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar"
+            />
+        <activity
             android:name="com.Softv.SoftvApp.SoftvCobro.Activitys.PDF"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar"
         />
+        <activity
+            android:name="com.Softv.SoftvApp.SoftvCobro.Activitys.ServiciosAInstalar"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar"/>
 
         <activity
             android:name="com.Softv.SoftvApp.SoftvCobro.sampledata.SplashActivity"

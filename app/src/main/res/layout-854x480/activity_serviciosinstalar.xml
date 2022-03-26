@@ -8,11 +8,6 @@
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-        <include
-            android:id="@+id/includeServicios"
-            layout="@layout/toolbar"
-            android:textSize="@dimen/mediano"
-            ></include>
 
         <TextView
             android:id="@+id/textView4"
@@ -20,127 +15,205 @@
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
             android:layout_marginStart="8dp"
+            android:layout_marginTop="50dp"
             android:layout_marginEnd="8dp"
             android:text="@string/serviciosInstalar"
             android:textAlignment="center"
             android:textSize="@dimen/titulos"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/includeServicios" />
+            app:layout_constraintTop_toTopOf="parent" /><!-- Titulo -->
 
         <android.support.constraint.ConstraintLayout
-            android:id="@+id/constraintLayout5"
-            android:layout_width="wrap_content"
+            android:id="@+id/ListaDeDetalles"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:textAlignment="center"
-            android:visibility="gone"
+            android:layout_marginTop="20dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView4">
+            app:layout_constraintTop_toBottomOf="@+id/textView4"
+            tools:visibility="visible">
 
             <TextView
-                android:id="@+id/textView5"
-                android:layout_width="0dp"
+                android:id="@+id/DetalleSaldoTitu"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true"
-                android:layout_marginStart="8dp"
-                android:layout_marginEnd="8dp"
-                android:text="¿Se van a instalar todos los servicios por el mismo medio?"
-                android:textSize="@dimen/mediano"
+                android:background="#485AC9"
+                android:gravity="center"
+                android:text="@string/detalle"
+                android:textColor="#ffff"
+                android:textSize="15dp"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <CheckBox
-                android:id="@+id/todosMediosSi"
-                android:layout_width="50dp"
+            <TextView
+                android:id="@+id/txtConceptoT"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="50dp"
-                android:layout_marginTop="8dp"
-                android:text="Si"
-                android:textSize="20dp"
+                android:layout_marginTop="5dp"
+                android:background="@drawable/titulo_tabla"
+                android:text="@string/concepto"
+                android:textAlignment="center"
+                android:textSize="12sp"
+                app:layout_constraintEnd_toStartOf="@+id/txtImporteT"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView5" />
-
-            <CheckBox
-                android:id="@+id/todosMediosNo"
-                android:layout_width="60dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="70dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="100dp"
-                android:text="No"
-                android:textSize="20dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/todosMediosSi"
-                app:layout_constraintTop_toBottomOf="@+id/textView5" />
+                app:layout_constraintTop_toBottomOf="@+id/DetalleSaldoTitu" />
 
             <TextView
-                android:id="@+id/textView26"
-                android:layout_width="0dp"
+                android:id="@+id/txtImporteT"
+                android:layout_width="100dp"
                 android:layout_height="wrap_content"
-                android:layout_alignParentTop="true"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="8dp"
-                android:text="@string/medio"
-                android:textSize="@dimen/mediano"
+                android:background="@drawable/titulo_tabla"
+                android:text="@string/importe"
+                android:textAlignment="center"
+                android:textSize="12sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/txtConceptoT"
+                app:layout_constraintTop_toTopOf="@+id/txtConceptoT" />
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/listaDetalles"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:background="#ffff"
+                android:visibility="visible"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/todosMediosSi" />
+                app:layout_constraintTop_toBottomOf="@+id/txtConceptoT" />
 
-            <Spinner
-                android:id="@+id/spinnerMedio"
+        </android.support.constraint.ConstraintLayout><!-- Detalles -->
+
+        <android.support.constraint.ConstraintLayout
+            android:id="@+id/Pagos"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/ListaDeDetalles">
+
+            <TextView
+                android:id="@+id/pago"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#90AE9C"
+                android:gravity="center"
+                android:text="@string/pago"
+                android:textColor="#FFFF"
+                android:textSize="25dp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <android.support.constraint.ConstraintLayout
+                android:id="@+id/totales"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:layout_constraintTop_toBottomOf="@+id/pago">
+
+                <TextView
+                    android:id="@+id/saldodia"
+                    android:layout_width="130dp"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_marginTop="10dp"
+                    android:text="@string/saldodia"
+                    android:textAlignment="center"
+                    android:textSize="15dp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/saldo"
+                    android:layout_width="130dp"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/saldodia"
+                    android:layout_alignStart="@+id/saldodia"
+                    android:layout_alignEnd="@+id/saldodia"
+                    android:text="$000.00"
+                    android:textAlignment="center"
+                    android:textSize="24sp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="@+id/saldodia"
+                    app:layout_constraintStart_toStartOf="@+id/saldodia"
+                    app:layout_constraintTop_toBottomOf="@+id/saldodia" />
+
+                <TextView
+                    android:id="@+id/saldoabonar"
+                    android:layout_width="130dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:text="Saldo a abonar"
+                    android:textAlignment="center"
+                    android:textSize="15dp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="@+id/saldo"
+                    app:layout_constraintStart_toStartOf="@+id/saldo"
+                    app:layout_constraintTop_toBottomOf="@+id/saldo" />
+
+                <EditText
+                    android:id="@+id/editTextNumberDecimal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:ems="7"
+                    android:hint="000.00"
+                    android:inputType="numberDecimal"
+                    android:textSize="24sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/saldoabonar" />
+
+                <TextView
+                    android:id="@+id/textView74"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="$"
+                    android:textSize="24sp"
+                    app:layout_constraintBottom_toBottomOf="@+id/editTextNumberDecimal"
+                    app:layout_constraintEnd_toStartOf="@+id/editTextNumberDecimal"
+                    app:layout_constraintTop_toTopOf="@+id/editTextNumberDecimal" />
+            </android.support.constraint.ConstraintLayout>
+
+
+            <android.support.constraint.ConstraintLayout
+                android:id="@+id/Botones"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_alignParentTop="true"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="8dp"
-                android:layout_marginBottom="8dp"
-                android:background="@drawable/disenio_spinner"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="50dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView26" />
+                app:layout_constraintTop_toBottomOf="@+id/totales">
 
-        </android.support.constraint.ConstraintLayout>
+                <Button
+                    android:id="@+id/cerrar"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentBottom="false"
+                    android:layout_marginStart="40dp"
+                    android:layout_marginEnd="40dp"
+                    android:drawableLeft="@drawable/salir"
+                    android:text="@string/abonar"
+                    android:textSize="20dp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/Asignacion"
-            android:layout_width="match_parent"
-            android:layout_height="350dp"
-            android:layout_below="@+id/textView4"
-            android:layout_marginTop="8dp"
-            android:orientation="horizontal"
-            app:layoutManager="android.support.v7.widget.GridLayoutManager"
-            app:spanCount="2"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/constraintLayout5" />
+
+            </android.support.constraint.ConstraintLayout><!-- Boton -->
 
 
-        <Button
-            android:id="@+id/aceptarAsignacion"
-            android:layout_width="@dimen/botonGrandeL"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/Asignacion"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="8dp"
-            android:background="@drawable/boton"
-            android:backgroundTint="@color/colorPrimary"
-            android:enabled="false"
-            android:text="@string/aceptar"
-            android:textColor="#fff"
-            android:textSize="@dimen/mediano"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/Asignacion" />
-
+        </android.support.constraint.ConstraintLayout><!-- Pago -->
 
     </android.support.constraint.ConstraintLayout>
 </ScrollView>

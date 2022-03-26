@@ -179,6 +179,37 @@ public class Services {
         return retrofit.create(Service.class);
     }
 
+    public Service getHistorialDePagosHechos(final Context context, String contrato) {
+        //POST Body JsonArray
+        JSONObject jsonObject = new JSONObject();
+        try {
+            jsonObject.put("ClvUsuario", contrato);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        MediaType JSON = MediaType.parse("application/json; charset=utf-8");
+        final RequestBody body = RequestBody.create(JSON, String.valueOf(jsonObject));
+        final OkHttpClient client = new OkHttpClient.Builder().addInterceptor(new Interceptor() {
+
+            @Override
+            public okhttp3.Response intercept(Interceptor.Chain chain) throws IOException {
+                //Modificacion del Header
+                Request newRequest = chain.request().newBuilder()
+                        .addHeader("Authorization", getToken(context))
+                        .addHeader("Content-Type", "application/json")
+                        .post(body).build();
+                return chain.proceed(newRequest);
+            }
+        }).connectTimeout(15, TimeUnit.MINUTES)
+                .readTimeout(15, TimeUnit.MINUTES)
+                .writeTimeout(15, TimeUnit.MINUTES)
+                .build();
+        Retrofit retrofit = new Retrofit.Builder().baseUrl(Constants.NEW_URL)
+                .client(client).addConverterFactory(GsonConverterFactory.create())
+                .build();
+        return retrofit.create(Service.class);
+    }
+
     public Service getListClientesSaldoService(final Context applicationContext, int i, String text) throws JSONException {
         JSONObject jsonObject = new JSONObject();
         if(i == 1){

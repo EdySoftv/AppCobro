@@ -1,19 +1,20 @@
 package com.Softv.SoftvApp.SoftvCobro.Listas;
 
 import com.Softv.SoftvApp.SoftvCobro.Modelos.ModelDetallesList;
+import com.Softv.SoftvApp.SoftvCobro.Modelos.ModelHistorialDePagoList;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
 
 
-public class DetallesList {
+public class HistorialDePagoList {
 
-    @SerializedName("GetClienteCobroClienteSessionResult")
+    @SerializedName("GetHistorialDePagoResult")
     @Expose
-    private List<ModelDetallesList> ListadoDetallesAgendadas = null;
+    private List<ModelHistorialDePagoList> ListadoDePagos = null;
 
-    public List<ModelDetallesList> GetClienteCobroClienteSessionResult() {
-        return ListadoDetallesAgendadas;
+    public List<ModelHistorialDePagoList> GetHistorialDePagoResult() {
+        return ListadoDePagos;
     }
 }

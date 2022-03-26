@@ -5,8 +5,11 @@ public class Constants {
 
     //public static final String URL="http://192.168.0.4:1160/";
 
-    //public static final String URL="http://915009d10274.sn.mynetname.net:1160/";
-    public static final String URL="http://45.5.94.66:9600/"; //Eii
+    //public static final String URL="http://915009d10274.sn.mynetname.net:5600/";
+    //public static final String URL="http://45.5.94.66:9600/"; //Eii
+    public static final String URL="http://201.131.236.2:5600/"; //Fresnillo
+    //public static final String URL="http://915009d10274.sn.mynetname.net:2660/"; //Garden
+    //public static final String URL="http://915009d10274.sn.mynetname.net:4760/"; //Cable Exito
 
     public static final String NEW_URL = URL + "SoftvWCFService.svc/";
     public static final String URL_GET_USER = "Usuario/LogOn";
@@ -25,10 +28,20 @@ public class Constants {
     public static final String URL_CL_DT = "AplicacionMovil/ClienteCobroClienteSaldo";
     public static final String URL_CL_DTS = "AplicacionMovil/ClienteCobroClienteSaldoSession";
     public static final String URL_GR_PG = "AplicacionMovil/GuardaPagoMOVIL";
+    public static final String URL_GR_BN = "AplicacionMovil/GuardaAbonoMOVIL";
+    public static final String URL_HI_PA = "AplicacionMovil/HistorialDePago";
     public static final String URL_DIR = "AplicacionMovil/DireccionesCAMDO";
     public static final String URL_GT_TK = "CrearTicketTable/GetTicket";
     public static final String URL_VEN_REN = "AplicacionMovil/VentaRenta";
     public static final String FORMATO = "$0.00";
     public static final String URL_REPORTES = URL + "Reportes/";
+
+    public static final String URL_OVT = "AplicacionMovil/ObtieneVendedorTecnico";
+    public static final String URL_DSVA = "AplicacionMovil/DameServicioVentasAPP";
+    public static final String URL_MV = "AplicacionMovil/MuestraVendedores";
+    public static final String URL_USYF = "AplicacionMovil/UltimoSerieYFolio";
+    public static final String URL_FDR = "AplicacionMovil/FolioDisponibleRecu";
+    public static final String URL_FD = "AplicacionMovil/FolioDisponible";
+    public static final String URL_FDI = "AplicacionMovil/FolioDisponibleInt";
 
 }

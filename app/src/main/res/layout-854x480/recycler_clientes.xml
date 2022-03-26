@@ -146,12 +146,36 @@
             android:layout_width="65dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
-            android:layout_marginBottom="15dp"
             android:text="@string/colonia"
             android:textSize="14dp"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="@+id/txtFechaListado"
             app:layout_constraintTop_toBottomOf="@+id/txtFechaListado" />
+        <TextView
+            android:id="@+id/txtPlacaListado5"
+            android:layout_width="65dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="15dp"
+            android:text="@string/placa"
+            android:textSize="14dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/txtFechaListado5"
+            app:layout_constraintTop_toBottomOf="@+id/txtFechaListado5" />
+
+        <TextView
+            android:id="@+id/Placa"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:layout_marginEnd="15dp"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:text="123-456-789"
+            android:textSize="14dp"
+            app:layout_constraintBottom_toBottomOf="@+id/txtPlacaListado5"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/txtPlacaListado5"
+            app:layout_constraintTop_toTopOf="@+id/txtPlacaListado5" />
 
     </android.support.constraint.ConstraintLayout>
 </android.support.v7.widget.CardView>

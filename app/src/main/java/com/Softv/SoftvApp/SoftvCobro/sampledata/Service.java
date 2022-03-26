@@ -2,10 +2,13 @@ package com.Softv.SoftvApp.SoftvCobro.sampledata;
 
 
 import com.Softv.SoftvApp.SoftvCobro.Listas.DetallesList;
+import com.Softv.SoftvApp.SoftvCobro.Listas.HistorialDePagoList;
 import com.Softv.SoftvApp.SoftvCobro.Listas.JSONPERMISOSDIRECTA;
 import com.Softv.SoftvApp.SoftvCobro.Listas.JSONResponseTecnico;
+import com.Softv.SoftvApp.SoftvCobro.Listas.JSONVendedores;
 import com.Softv.SoftvApp.SoftvCobro.Listas.ListaClientesSaldos;
 import com.Softv.SoftvApp.SoftvCobro.Listas.ServiciosList;
+import com.Softv.SoftvApp.SoftvCobro.Listas.UltimoSerieYFolio;
 import com.google.gson.JsonObject;
 
 import retrofit2.Call;
@@ -35,8 +38,14 @@ public interface Service {
     @POST(Constants.URL_CL_DTS)
     Call<DetallesList> getDataDetallesSaldosSession();
 
+    @POST(Constants.URL_HI_PA)
+    Call<HistorialDePagoList> getHistorialDePago();
+
     @POST(Constants.URL_GR_PG)
     Call<JsonObject> GuardarPago();
+
+    @POST(Constants.URL_GR_BN)
+    Call<JsonObject> GuardarAbono();
 
     @POST(Constants.URL_GT_TK)
     Call<JsonObject> GetTicketNombre();
@@ -46,5 +55,26 @@ public interface Service {
 
     @POST(Constants.URL_DIR)
     Call<JsonObject> GetDireccionesCAMDO();
+
+    @POST(Constants.URL_OVT)
+    Call<JsonObject> VendedorTecnico();
+
+    @POST(Constants.URL_DSVA)
+    Call<JsonObject> ServicioVentas();
+
+    @POST(Constants.URL_MV)
+    Call<JSONVendedores> Vendedores();
+
+    @POST(Constants.URL_USYF)
+    Call<UltimoSerieYFolio> SerieYFolio();
+
+    @POST(Constants.URL_FDR)
+    Call<JsonObject> FolioDisponibleR();
+
+    @POST(Constants.URL_FD)
+    Call<JsonObject> FolioDisponible();
+
+    @POST(Constants.URL_FDI)
+    Call<JsonObject> FolioDisponibleI();
 }
 

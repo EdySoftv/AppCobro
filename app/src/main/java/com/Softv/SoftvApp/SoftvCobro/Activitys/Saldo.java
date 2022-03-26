@@ -267,6 +267,10 @@ public class Saldo extends AppCompatActivity implements NavigationView.OnNavigat
             intent1.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(intent1);
             finish();
+        }else if (id == R.id.Pagos) {
+            Intent intent1 = new Intent(Saldo.this, Pagos.class);
+            intent1.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(intent1);
         }
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
@@ -319,7 +323,7 @@ public class Saldo extends AppCompatActivity implements NavigationView.OnNavigat
             Plac.setVisibility(View.GONE);
             Nomb.setVisibility(View.GONE);
             txt_ant.setText("Nombre");
-            txt_pre.setText("Placa");
+            txt_pre.setText("Marquilla");
         }else if(Variable == 1){
             Cont.setVisibility(View.GONE);
             Plac.setVisibility(View.VISIBLE);
@@ -331,7 +335,7 @@ public class Saldo extends AppCompatActivity implements NavigationView.OnNavigat
             Plac.setVisibility(View.GONE);
             Nomb.setVisibility(View.VISIBLE);
             txt_ant.setText("Placa");
-            txt_pre.setText("Contrato");
+            txt_pre.setText("Marquilla");
         }
 
         contsearch.setText("");

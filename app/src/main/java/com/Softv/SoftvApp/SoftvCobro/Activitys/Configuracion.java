@@ -83,6 +83,7 @@ public class Configuracion extends AppCompatActivity
             dialogoSalida();
         }
     }
+
     public void dialogoSalida() {
         new AlertDialog.Builder(this)
                 .setTitle("SALIR")
@@ -101,7 +102,6 @@ public class Configuracion extends AppCompatActivity
                             }
                         }).show();
     }
-
 
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
@@ -122,6 +122,10 @@ public class Configuracion extends AppCompatActivity
             intent1.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(intent1);
             finish();
+        }else if (id == R.id.Pagos) {
+            Intent intent1 = new Intent(Configuracion.this, Pagos.class);
+            intent1.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(intent1);
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

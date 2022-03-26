@@ -9,6 +9,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Build;
 import android.support.annotation.RequiresApi;
+import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
@@ -32,11 +33,17 @@ import com.Softv.SoftvApp.SoftvCobro.Activitys.ServiciosSaldo;
 
 import com.Softv.SoftvApp.SoftvCobro.Adapters.ClientesAdapter;
 import com.Softv.SoftvApp.SoftvCobro.Listas.Array;
+import com.Softv.SoftvApp.SoftvCobro.Listas.HistorialDePagoList;
 import com.Softv.SoftvApp.SoftvCobro.Listas.JSONPERMISOSDIRECTA;
 import com.Softv.SoftvApp.SoftvCobro.Listas.JSONResponseTecnico;
+import com.Softv.SoftvApp.SoftvCobro.Listas.JSONVendedores;
+import com.Softv.SoftvApp.SoftvCobro.Listas.UltimoSerieYFolio;
 import com.Softv.SoftvApp.SoftvCobro.Modelos.ModelDetallesList;
+import com.Softv.SoftvApp.SoftvCobro.Modelos.ModelHistorialDePagoList;
 import com.Softv.SoftvApp.SoftvCobro.Modelos.ModelServiciosList;
+import com.Softv.SoftvApp.SoftvCobro.Modelos.MuestraVendedoresResult;
 import com.Softv.SoftvApp.SoftvCobro.Modelos.Muestra_TecnicosDescargaMaterialResult;
+import com.Softv.SoftvApp.SoftvCobro.Modelos.UltimoSerieYFolioUnica;
 import com.Softv.SoftvApp.SoftvCobro.Modelos.UserModel;
 
 import com.Softv.SoftvApp.SoftvCobro.Listas.DetallesList;
@@ -63,7 +70,9 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.text.DecimalFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
@@ -80,28 +89,27 @@ public class Request extends AppCompatActivity {
     public static boolean NAP=false,TAP=false,NAPCAMDO=false,TAPCAMDO=false,Placa=false,Desc=false, SeGuarda = false;
     Services services = new Services();
     Array array = new Array();
-    public static String reintentarComando, contraroMA, obsMA, statusMA,PlacaMA, extencionesE, Obs,ObsR, msgComando = "",problemaReal;
+    public static String reintentarComando, contraroMA, obsMA, obsAg, statusMA,PlacaMA, extencionesE, Obs,ObsR, msgComando = "",problemaReal;
     public static boolean isnet, firma,MACWAM,validaExisteFirmaBool;
-    public static boolean PermPlaca = false, PermVamra = false, PermBolivia = false, PermVallarta = false, PermCobro=true, PermCableCentro=false;
+    public static boolean PermCobro=true;
+    public static boolean PermEii = false;
+    public static boolean PermMarquilla = true, PermBarrio = true;
     public static String VENTA, RENTA;
     public static Long abc;
     public static int clvP, tecC, nExtenciones = 0,clvProblemarepo,ContratoReal,ClvUsuario,NoBitacora,ClvTipSerReportes, Cambio;
     public int reintentaB;
     public static String stringValidaTrabajos;
     public static ArrayAdapter adapterTecSec, adapterTecSecR, adapterNap,adapterTap,adapterColonia,adapterTAPNAPCAMDO;
-    public static boolean pieza = false, rapagejecutar = false, extencionesMat = false,escable = false, validanodo=false;
-   public static int validFirma;
+    public static boolean pieza = false, rapagejecutar = false, extencionesMat = false,escable = false, ValidarPoste=false;
+    public static int validFirma;
     public static String ciudadcmdo, localidadcmdo, coloniacmdo, callecmdo, numerocmdo, numeroicmdo, telefonocmdo, callencmdo, callescmdo, calleecmdo, calleocmdo, casacmdo,referenciascmd,entrecallescmd;
     public static String ejecutarStatus,reporteStatus,clasProblema;
     public static String reporteVisita1,reporteVisita2,reporteVisita3,reporteHora1,reporteHora2,reporteHora3, titul;
-    public static String ContratoCompuestoSaldo,NombreSaldo,TelefonoSaldo,Calle_NumeroSaldo,ColoniaSaldo,ContratoSaldo, FechaCosultaSaldo, TotalSaldo;
+    public static String ContratoCompuestoSaldo,NombreSaldo,TelefonoSaldo,Calle_NumeroSaldo,ColoniaSaldo,ContratoSaldo, FechaCosultaSaldo, TotalSaldo, PlacaSaldo;
     public static  String GetTicketResult = Constants.URL_REPORTES, NombreGeneral;
     public static float Monto;
-    public static Integer Session = 0, CLV_FACTURA = 0 ;
-    String a = "Seleccione técnico secundario";
-    String f = "Seleccione tipo de solución";
-    public static String datos[], datosTap[],datosNap[];
-    public static boolean requierePregunta=false;
+    public static Integer Session = 0, CLV_FACTURA = 0, ServicioVentas = 0, Vendedor = 0;
+    private ProgressDialog dialogcarga;
 
     //Metodo por si existe un error en el login o inicio de sesion
     public void ErrorLogin(final Context context,ProgressDialog dialogLogin, View view) {
@@ -257,6 +265,11 @@ public class Request extends AppCompatActivity {
                             Util.editor.putInt("clvTec", Integer.parseInt(data.get(0).clv_tecnico));
                             Util.editor.putString("nombre_Tecnico", data.get(0).getNombre_tec());
                             Util.editor.commit();
+
+                            if(data.get(0).getNombre_tec().equals("error") && Integer.parseInt(data.get(0).clv_tecnico) == 101){
+                                Toast.makeText(context, "Este usuario no puede usar esta aplicación", Toast.LENGTH_LONG).show();
+                                float Error = 0/0;
+                            }
                         }
 
                         if(Login==true){
@@ -275,7 +288,7 @@ public class Request extends AppCompatActivity {
                     }catch (Exception e){
                         if(Login==true){
                             ErrorLogin(context,dialogLogin,view);
-                            Toast.makeText(context, "Error al conseguir clave técnico", Toast.LENGTH_LONG).show();
+                            Toast.makeText(context, "Error al conseguir clave de caja", Toast.LENGTH_LONG).show();
                         }else{
                             ErrorInicioNoCoincide(context,dialogLogin,view);
                         }
@@ -285,7 +298,7 @@ public class Request extends AppCompatActivity {
                 } else {
                     if(Login==true){
                         ErrorLogin(context,dialogLogin,view);
-                        Toast.makeText(context, "Error al conseguir clave técnico", Toast.LENGTH_LONG).show();
+                        Toast.makeText(context, "Error al conseguir clave de caja", Toast.LENGTH_LONG).show();
                     }else{
                         ErrorInicioNoCoincide(context,dialogLogin,view);
                     }
@@ -296,7 +309,7 @@ public class Request extends AppCompatActivity {
             public void onFailure(Call<JSONResponseTecnico> call, Throwable t) {
                 if(Login==true){
                     ErrorLogin(context,dialogLogin,view);
-                    Toast.makeText(context, "Error al conseguir clave técnico", Toast.LENGTH_LONG).show();
+                    Toast.makeText(context, "Error al conseguir clave de caja", Toast.LENGTH_LONG).show();
                 }else{
                     ErrorInicioNoCoincide(context,dialogLogin,view);
                 }
@@ -364,6 +377,7 @@ public class Request extends AppCompatActivity {
                         Array.CalleNumeroList.clear();
                         Array.ColoniaList.clear();
                         Array.ContratoList.clear();
+                        Array.PlacaList.clear();
                         for (int i = 0; i < dat.size(); i++){
                             Array.ContratoCompuestoList.add(String.valueOf(dat.get(i).getContratoCompuesto()));
                             Array.NombreList.add(String.valueOf(dat.get(i).getNombre()));
@@ -371,6 +385,7 @@ public class Request extends AppCompatActivity {
                             Array.CalleNumeroList.add(String.valueOf(dat.get(i).getCalle()) + " #" + String.valueOf(dat.get(i).getNumero()));
                             Array.ColoniaList.add(String.valueOf(dat.get(i).getColonia()));
                             Array.ContratoList.add(String.valueOf(dat.get(i).getContrato()));
+                            Array.PlacaList.add(String.valueOf(dat.get(i).getPlaca()));
                         }
                         if (Array.ContratoCompuestoList.size() == 0 && i==1){
                             ErrorMensaje(applicationContext,"Contrato no encontrada ");
@@ -384,7 +399,7 @@ public class Request extends AppCompatActivity {
                         }
 
                     }
-                    Saldo.adaptercl = new ClientesAdapter(applicationContext, Array.ContratoCompuestoList, Array.NombreList, Array.TelefonoList, Array.CalleNumeroList, Array.ColoniaList, Array.ContratoList);
+                    Saldo.adaptercl = new ClientesAdapter(applicationContext, Array.ContratoCompuestoList, Array.NombreList, Array.TelefonoList, Array.CalleNumeroList, Array.ColoniaList, Array.ContratoList, Array.PlacaList);
                     Saldo.clientList.setAdapter(Saldo.adaptercl);
                 } else {
                     ErrorMensaje(applicationContext,"Error al conseguir lista de clientes "+response.message());
@@ -491,12 +506,13 @@ public class Request extends AppCompatActivity {
         });
     }
 
-    public void GuardarPago(final Context context, final JSONObject jsonObject){
+    public void GuardarPago(final Context context, final JSONObject jsonObject, final ProgressDialog dialogInicio){
         Call<JsonObject> call = services.RequestPost(context,jsonObject).GuardarPago();
         call.enqueue(new Callback<JsonObject>() {
             @Override
             public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
                 if (response.code() == 200) {
+                    //dialogInicio.dismiss();
                     try {
                         JSONObject jsonObject1 = new JSONObject(new Gson().toJson(response.body()));
                         if(jsonObject1.getInt("GuardaPagoMOVILResult")!=0){
@@ -505,7 +521,7 @@ public class Request extends AppCompatActivity {
                             try{
                                 JSONObject jsonObject = new JSONObject();
                                 jsonObject.put("Clv_Factura", CLV_FACTURA);
-                                GetTicketNom(context, jsonObject);
+                                GetTicketNom(context, jsonObject,dialogInicio);
                             }catch (Exception x){
                                 Toast toast2 = Toast.makeText(context, "Error al recibir la factura", Toast.LENGTH_SHORT);
                                 toast2.show();
@@ -515,11 +531,13 @@ public class Request extends AppCompatActivity {
                             Toast toast1 = Toast.makeText(context, "Pago NO registrado", Toast.LENGTH_SHORT);toast1.show();
                         }
                     } catch (JSONException e) {
+                        dialogInicio.dismiss();
                         ErrorMensaje(context,"Error al recibir la respuesta "+response.message());
                     }
 
                 }else{
-                    ErrorMensaje(context,"Error al conseguir el código registro "+response.message());
+                    dialogInicio.dismiss();
+                    ErrorMensaje(context,"Error al guardar el pago, verifique los datos del pago "+response.message());
                 }
             }
 
@@ -530,14 +548,59 @@ public class Request extends AppCompatActivity {
         });
     }
 
+    public void GuardarAbono(final Context context, JSONObject jsonObject, final ProgressDialog dialogInicio, final float porAbonar) {
+        Call<JsonObject> call = services.RequestPost(context,jsonObject).GuardarAbono();
+        call.enqueue(new Callback<JsonObject>() {
+            @Override
+            public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
+                if (response.code() == 200) {
+                    try {
+                        JSONObject jsonObject1 = new JSONObject(new Gson().toJson(response.body()));
+                        if(jsonObject1.getInt("GuardaAbonoMOVILResult")!=0){
+                            //Toast toast1 = Toast.makeText(context, "Session actualizada", Toast.LENGTH_SHORT);toast1.show();
+                            try{
+                                JSONObject jsonObject = new JSONObject();
+                                jsonObject.put("Clv_Session", Integer.valueOf(Session));
+                                jsonObject.put("Contrato", Integer.valueOf(ContratoSaldo));
+                                jsonObject.put("ClvUsuario", Util.getUsuarioPreference(Util.preferences));
+                                jsonObject.put("Saldo", porAbonar);
+                                jsonObject.put("Tipo", "C");
+                                jsonObject.put("Serie_V", "");
+                                jsonObject.put("Folio_V", 0);
+                                jsonObject.put("Clv_Vendedor", 0);
+                                jsonObject.put("Folio_VInt", 0);
+                                GuardarPago(context, jsonObject,dialogInicio);
+                                //dialogoGuardar(ctx);
+                            }catch (Exception x){
+                                Toast toast2 = Toast.makeText(context, "Error al registrar el pago", Toast.LENGTH_SHORT);
+                                toast2.show();
+                            }
+                        }else{
+                            Toast toast1 = Toast.makeText(context, "Session NO actualizada", Toast.LENGTH_SHORT);toast1.show();
+                        }
+                    } catch (JSONException e) {
+                        ErrorMensaje(context,"Error al recibir la respuesta "+response.message());
+                    }
 
+                }else{
+                    ErrorMensaje(context,"Error en la petición "+response.message());
+                }
+            }
 
-    public void GetTicketNom(final Context context, final JSONObject jsonObject) {
+            @Override
+            public void onFailure(Call<JsonObject> call, Throwable t) {
+                ErrorMensaje(context,"Error "+t.getMessage());
+            }
+        });
+    }
+
+    public void GetTicketNom(final Context context, final JSONObject jsonObject, final ProgressDialog dialogInicio) {
         Call<JsonObject> call = services.RequestPost(context,jsonObject).GetTicketNombre();
         call.enqueue(new Callback<JsonObject>() {
             @Override
             public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
                 if (response.code() == 200) {
+                    dialogInicio.dismiss();
                     GetTicketResult = Constants.URL_REPORTES;
                     try {
                         JSONObject jsonObject1 = new JSONObject(new Gson().toJson(response.body()));
@@ -560,6 +623,384 @@ public class Request extends AppCompatActivity {
             @Override
             public void onFailure(Call<JsonObject> call, Throwable t) {
                 ErrorMensaje(context,"Error "+t.getMessage());
+            }
+        });
+    }
+
+    public void getHistorialDePagos(final Context context, final String Contrato, final ProgressDialog dialog, final TextView fecha, final TextView total) {
+        Service service = null;
+        service = services.getHistorialDePagosHechos(context, Contrato);
+        Call<HistorialDePagoList> call = service.getHistorialDePago();
+        call.enqueue(new Callback<HistorialDePagoList>() {
+            @Override
+            public void onResponse(Call<HistorialDePagoList> call, Response<HistorialDePagoList> response) {
+                if (response.code() == 200) {
+                    Monto = 0;
+                    HistorialDePagoList jsonResponse = response.body();
+                    array.DataHistorial = new ArrayList<List<ModelHistorialDePagoList>>(asList(jsonResponse.GetHistorialDePagoResult()));
+                    Iterator<List<ModelHistorialDePagoList>> itData = array.DataHistorial.iterator();
+                    while (itData.hasNext()){
+                        List<ModelHistorialDePagoList> dat = (List<ModelHistorialDePagoList>) itData.next();
+                        Array.ContratoHistorial.clear();
+                        Array.HoraConsultaHistorial.clear();
+                        Array.MontoHistorial.clear();
+
+                        for (int i = 0; i < dat.size(); i++){
+                            Array.ContratoHistorial.add(String.valueOf(dat.get(i).getContrato()));
+                            Array.HoraConsultaHistorial.add(String.valueOf(dat.get(i).getHoraConsulta()));
+                            Array.MontoHistorial.add(dat.get(i).getMonto());
+                            Monto = Monto + dat.get(i).getMonto();
+                        }
+                    }
+                    DecimalFormat formato = new DecimalFormat(Constants.FORMATO);
+                    total.setText(formato.format(Monto));
+                    Calendar c = Calendar.getInstance();
+                    SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                    String formattedDate = df.format(c.getTime());
+                    fecha.setText(formattedDate);
+                    dialog.dismiss();
+                }else {
+                    ErrorMensaje(context,"Error al conseguir lista de servicios "+response.message());
+                    dialog.dismiss();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<HistorialDePagoList> call, Throwable t) {
+
+            }
+
+        });
+    }
+
+    public void ValidarVendedor(final ProgressDialog dialogcarga, final Context applicationContext, final ConstraintLayout serieYFolio, final TextView textViewVendedor, final TextView textViewSerie, final TextView textViewFolioTv, final TextView textViewFolioInternet, final Spinner spinnerVendedor, final Spinner spinnerSerie, final Spinner spinnerFolioTv, final Spinner spinnerFolioInternet, final int Clv_Tecnico, final int Session, final Integer Contrato, final String Serie, final int Clave) {
+        JSONObject jsonObject = new JSONObject();
+        try{
+            jsonObject.put("Clv_Tecnico", Clv_Tecnico);
+        }catch (Exception x){
+        }
+        Call<JsonObject> call = services.RequestPost(applicationContext, jsonObject).VendedorTecnico();
+        call.enqueue(new Callback<JsonObject>() {
+            @Override
+            public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
+                if (response.code() == 200) {
+                    int lugar=0;
+                    try {
+                        JSONObject jsonObject = new JSONObject(new Gson().toJson(response.body()));
+                        int respuesta = jsonObject.getInt("ObtieneVendedorTecnicoResult");
+                        Vendedor = respuesta;
+                        if(respuesta > 0){
+                            serieYFolio.setVisibility(View.VISIBLE);
+                            ServicioVentas(dialogcarga, applicationContext, textViewVendedor, textViewSerie, textViewFolioTv, textViewFolioInternet, spinnerVendedor, spinnerSerie, spinnerFolioTv, spinnerFolioInternet, Clv_Tecnico, Session, Contrato, Serie, Clave);
+                        }else{
+                            serieYFolio.setVisibility(View.GONE);
+                            dialogcarga.dismiss();
+                        }
+                        //dialogcarga.dismiss();
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                } else {
+                    ErrorMensaje(applicationContext,"Error al conseguir "+response.message());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<JsonObject> call, Throwable t) {
+                ErrorMensaje(applicationContext,"Error "+t.getMessage());
+            }
+        });
+    }
+
+    private void ServicioVentas(final ProgressDialog dialogcarga, final Context applicationContext, final TextView textViewVendedor, final TextView textViewSerie, final TextView textViewFolioTv, final TextView textViewFolioInternet, final Spinner spinnerVendedor, final Spinner spinnerSerie, final Spinner spinnerFolioTv, final Spinner spinnerFolioInternet, final int Clv_Tecnico, final int Session, final Integer Contrato, final String Serie, final int Clave) {
+        JSONObject jsonObject = new JSONObject();
+        try{
+            jsonObject.put("clv_session", Session);
+        }catch (Exception x){
+        }
+        Call<JsonObject> call = services.RequestPost(applicationContext, jsonObject).ServicioVentas();
+        call.enqueue(new Callback<JsonObject>() {
+            @Override
+            public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
+                if (response.code() == 200) {
+                    int lugar=0;
+                    try {
+                        JSONObject jsonObject = new JSONObject(new Gson().toJson(response.body()));
+                        int respuesta = jsonObject.getInt("DameServicioVentasAPPResult");
+
+                        if(respuesta == 1){
+                            //Vendedor
+                            textViewVendedor.setVisibility(View.VISIBLE);
+                            spinnerVendedor.setVisibility(View.VISIBLE);
+                            //Serie
+                            textViewSerie.setVisibility(View.VISIBLE);
+                            spinnerSerie.setVisibility(View.VISIBLE);
+                            //Folio TV / Recuperacion
+                            textViewFolioTv.setText("Folio Tv: ");
+                            textViewFolioTv.setVisibility(View.VISIBLE);
+                            spinnerFolioTv.setVisibility(View.VISIBLE);
+                            //Folio Internet
+                            textViewFolioInternet.setVisibility(View.GONE);
+                            spinnerFolioInternet.setVisibility(View.GONE);
+                        }
+                        else if(respuesta == 2){
+                            //Vendedor
+                            textViewVendedor.setVisibility(View.VISIBLE);
+                            spinnerVendedor.setVisibility(View.VISIBLE);
+                            //Serie
+                            textViewSerie.setVisibility(View.VISIBLE);
+                            spinnerSerie.setVisibility(View.VISIBLE);
+                            //Folio TV / Recuperacion
+                            textViewFolioTv.setText("Folio Tv: ");
+                            textViewFolioTv.setVisibility(View.GONE);
+                            spinnerFolioTv.setVisibility(View.GONE);
+                            //Folio Internet
+                            textViewFolioInternet.setVisibility(View.VISIBLE);
+                            spinnerFolioInternet.setVisibility(View.VISIBLE);
+                        }
+                        else if(respuesta == 12){
+                            //Vendedor
+                            textViewVendedor.setVisibility(View.VISIBLE);
+                            spinnerVendedor.setVisibility(View.VISIBLE);
+                            //Serie
+                            textViewSerie.setVisibility(View.VISIBLE);
+                            spinnerSerie.setVisibility(View.VISIBLE);
+                            //Folio TV / Recuperacion
+                            textViewFolioTv.setText("Folio Tv: ");
+                            textViewFolioTv.setVisibility(View.VISIBLE);
+                            spinnerFolioTv.setVisibility(View.VISIBLE);
+                            //Folio Internet
+                            textViewFolioInternet.setVisibility(View.VISIBLE);
+                            spinnerFolioInternet.setVisibility(View.VISIBLE);
+                        }
+                        else if(respuesta == 25){
+                            //Vendedor
+                            textViewVendedor.setVisibility(View.VISIBLE);
+                            spinnerVendedor.setVisibility(View.VISIBLE);
+                            //Serie
+                            textViewSerie.setVisibility(View.VISIBLE);
+                            spinnerSerie.setVisibility(View.VISIBLE);
+                            //Folio TV / Recuperacion
+                            textViewFolioTv.setText("Folio Recuperador: ");
+                            textViewFolioTv.setVisibility(View.VISIBLE);
+                            spinnerFolioTv.setVisibility(View.VISIBLE);
+                            //Folio Internet
+                            textViewFolioInternet.setVisibility(View.GONE);
+                            spinnerFolioInternet.setVisibility(View.GONE);
+                        }
+                        else{
+                            //Vendedor
+                            textViewVendedor.setVisibility(View.VISIBLE);
+                            spinnerVendedor.setVisibility(View.VISIBLE);
+                            //Serie
+                            textViewSerie.setVisibility(View.VISIBLE);
+                            spinnerSerie.setVisibility(View.VISIBLE);
+                            //Folio TV / Recuperacion
+                            textViewFolioTv.setText("Folio Recuperador: ");
+                            textViewFolioTv.setVisibility(View.VISIBLE);
+                            spinnerFolioTv.setVisibility(View.VISIBLE);
+                            //Folio Internet
+                            textViewFolioInternet.setVisibility(View.VISIBLE);
+                            spinnerFolioInternet.setVisibility(View.VISIBLE);
+                        }
+
+                        ServicioVentas = respuesta;
+
+                        MuestraVendedores(applicationContext, spinnerVendedor, Clave, Contrato,spinnerSerie,spinnerFolioTv,spinnerFolioInternet);
+
+                        dialogcarga.dismiss();
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                } else {
+                    ErrorMensaje(applicationContext,"Error al conseguir "+response.message());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<JsonObject> call, Throwable t) {
+                ErrorMensaje(applicationContext,"Error "+t.getMessage());
+            }
+        });
+    }
+
+    private void MuestraVendedores(final Context applicationContext, final Spinner spinnerVendedor, int clave, Integer contrato, final Spinner spinnerSerie, final Spinner spinnerFolioTv, final Spinner spinnerFolioInternet) {
+        JSONObject jsonObject = new JSONObject();
+        try{
+            jsonObject.put("ClvUsuario", clave);
+            jsonObject.put("CONTRATO", contrato);
+        }catch (Exception x){
+        }
+        Call<JSONVendedores> call = services.RequestPost(applicationContext, jsonObject).Vendedores();
+        call.enqueue(new Callback<JSONVendedores>() {
+            @Override
+            public void onResponse(Call<JSONVendedores> call, Response<JSONVendedores> response) {
+                if (response.code() == 200) {
+                    JSONVendedores jsonResponse = response.body();
+                    Array.dataVendedores = new ArrayList<List<MuestraVendedoresResult>>(asList(jsonResponse.MuestraVendedoresResult()));
+                    Iterator<List<MuestraVendedoresResult>> itData = Array.dataVendedores.iterator();
+                    Array.vendedoresLista.clear();
+                    Array.vendedoresLista.add("<Seleccionar>");
+                    while (itData.hasNext()){
+                        List<MuestraVendedoresResult> dat = (List<MuestraVendedoresResult>) itData.next();
+                        for (int i = 0; i < dat.size(); i++) {
+                            Array.vendedoresLista.add(dat.get(i).getNombre());
+                        }
+                    }
+                    spinnerVendedor.setAdapter(new ArrayAdapter<String>(applicationContext, android.R.layout.simple_spinner_dropdown_item, Array.vendedoresLista));
+                    spinnerVendedor.setSelection(0);
+                } else {
+                    ErrorMensaje(applicationContext,"Error al conseguir "+response.message());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<JSONVendedores> call, Throwable throwable) {
+                ErrorMensaje(applicationContext,"Error al conseguir "+throwable.getMessage());
+            }
+        });
+    }
+
+    public void UltimoSerieYFolio(final ProgressDialog dialogInicio,final  Context applicationContext,final  JSONObject jsonObject,final  Spinner spinnerSerie,final  Spinner spinnerFolioTv,final  Spinner spinnerFolioInternet) {
+        Call<UltimoSerieYFolio> call = services.RequestPost(applicationContext, jsonObject).SerieYFolio();
+        call.enqueue(new Callback<UltimoSerieYFolio>() {
+            @Override
+            public void onResponse(Call<UltimoSerieYFolio> call, Response<UltimoSerieYFolio> response) {
+                if (response.code() == 200) {
+                    UltimoSerieYFolio jsonResponse = response.body();
+                    Array.dataUltimoSerieYFolio = new ArrayList<List<UltimoSerieYFolioUnica>>(asList(jsonResponse.UltimoSerieYFolioUnicaResult()));
+                    Iterator<List<UltimoSerieYFolioUnica>> itData = Array.dataUltimoSerieYFolio.iterator();
+                    Array.UltimoSerieYFolioLista.clear();
+                    Array.UltimoSerieYFolioLista.add("<Seleccionar>");
+                    while (itData.hasNext()){
+                        List<UltimoSerieYFolioUnica> dat = (List<UltimoSerieYFolioUnica>) itData.next();
+                        for (int i = 0; i < dat.size(); i++) {
+                            Array.UltimoSerieYFolioLista.add(dat.get(i).getSerie());
+                        }
+                    }
+                    spinnerSerie.setAdapter(new ArrayAdapter<String>(applicationContext, android.R.layout.simple_spinner_dropdown_item, Array.UltimoSerieYFolioLista));
+                    spinnerSerie.setSelection(0);
+                    dialogInicio.dismiss();
+                    //Folio_Disponible(dialogInicio, applicationContext);
+
+                } else {
+                    ErrorMensaje(applicationContext,"Error al conseguir "+response.message());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<UltimoSerieYFolio> call, Throwable throwable) {
+                ErrorMensaje(applicationContext,"Error al conseguir "+throwable.getMessage());
+            }
+        });
+    }
+
+    public void Folio_DisponibleRecu(final ProgressDialog dialogInicio, final  Context applicationContext, final  JSONObject jsonObject1, final  Spinner spinnerFolioTv, final  Spinner spinnerFolioInternet) {
+        Call<JsonObject> call = services.RequestPost(applicationContext, jsonObject1).FolioDisponibleR();
+        call.enqueue(new Callback<JsonObject>() {
+            @Override
+            public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
+                if (response.code() == 200) {
+                    try {
+                        JSONObject jsonObject = new JSONObject(new Gson().toJson(response.body()));
+                        Array.dataFolioDisponibleRecu = jsonObject.getJSONArray("FolioDisponibleRecuResult");
+
+                        Array.FolioDisponibleRecuLista.clear();
+                        Array.FolioDisponibleRecuLista.add("<Seleccionar>");
+
+                        for (int i = 0; i < Array.dataFolioDisponibleRecu.length(); i++){
+                            Array.FolioDisponibleRecuLista.add(String.valueOf(Array.dataFolioDisponibleRecu.get(i)));
+                        }
+
+                        spinnerFolioTv.setAdapter(new ArrayAdapter<String>(applicationContext, android.R.layout.simple_spinner_dropdown_item, Array.FolioDisponibleRecuLista));
+                        spinnerFolioTv.setSelection(0);
+                        Folio_DisponibleInt(dialogInicio, applicationContext, jsonObject1, spinnerFolioInternet);
+                        //dialogInicio.dismiss();
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                } else{
+                    ErrorMensaje(applicationContext,"Error al conseguir "+response.message());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<JsonObject> call, Throwable throwable) {
+                ErrorMensaje(applicationContext,"Error al conseguir "+throwable.getMessage());
+            }
+        });
+    }
+
+    public void Folio_Disponible(final ProgressDialog dialogInicio, final  Context applicationContext, final  JSONObject jsonObject1, final  Spinner spinnerFolioTv, final  Spinner spinnerFolioInternet) {
+        Call<JsonObject> call = services.RequestPost(applicationContext, jsonObject1).FolioDisponible();
+        call.enqueue(new Callback<JsonObject>() {
+            @Override
+            public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
+                if (response.code() == 200) {
+                    try {
+                        JSONObject jsonObject = new JSONObject(new Gson().toJson(response.body()));
+                        Array.dataFolioDisponible = jsonObject.getJSONArray("FolioDisponibleResult");
+
+                        Array.FolioDisponibleLista.clear();
+                        Array.FolioDisponibleLista.add("<Seleccionar>");
+
+                        for (int i = 0; i < Array.dataFolioDisponible.length(); i++){
+                            Array.FolioDisponibleLista.add(String.valueOf(Array.dataFolioDisponible.get(i)));
+                        }
+
+                        spinnerFolioTv.setAdapter(new ArrayAdapter<String>(applicationContext, android.R.layout.simple_spinner_dropdown_item, Array.FolioDisponibleLista));
+                        spinnerFolioTv.setSelection(0);
+                        Folio_DisponibleInt(dialogInicio, applicationContext, jsonObject1, spinnerFolioInternet);
+                        //dialogInicio.dismiss();
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                } else{
+                    ErrorMensaje(applicationContext,"Error al conseguir "+response.message());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<JsonObject> call, Throwable throwable) {
+                ErrorMensaje(applicationContext,"Error al conseguir "+throwable.getMessage());
+            }
+        });
+    }
+
+    public void Folio_DisponibleInt(final ProgressDialog dialogInicio, final  Context applicationContext, final  JSONObject jsonObject, final  Spinner spinnerFolioInternet) {
+        Call<JsonObject> call = services.RequestPost(applicationContext, jsonObject).FolioDisponibleI();
+        call.enqueue(new Callback<JsonObject>() {
+            @Override
+            public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
+                if (response.code() == 200) {
+                    try {
+                        JSONObject jsonObject = new JSONObject(new Gson().toJson(response.body()));
+                        Array.dataFolioDisponibleInt = jsonObject.getJSONArray("FolioDisponibleIntResult");
+
+                        Array.FolioDisponibleIntLista.clear();
+                        Array.FolioDisponibleIntLista.add("<Seleccionar>");
+
+                        for (int i = 0; i < Array.dataFolioDisponibleInt.length(); i++){
+                            Array.FolioDisponibleIntLista.add(String.valueOf(Array.dataFolioDisponibleInt.get(i)));
+                        }
+
+                        spinnerFolioInternet.setAdapter(new ArrayAdapter<String>(applicationContext, android.R.layout.simple_spinner_dropdown_item, Array.FolioDisponibleIntLista));
+                        spinnerFolioInternet.setSelection(0);
+                        //Folio_DisponibleInt(dialogInicio, applicationContext, jsonObject, spinnerFolioInternet);
+                        dialogInicio.dismiss();
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                } else{
+                    ErrorMensaje(applicationContext,"Error al conseguir "+response.message());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<JsonObject> call, Throwable throwable) {
+                ErrorMensaje(applicationContext,"Error al conseguir "+throwable.getMessage());
             }
         });
     }

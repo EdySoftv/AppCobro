@@ -27,11 +27,12 @@ public class ClientesAdapter extends RecyclerView.Adapter<ClientesAdapter.ListCl
     public static ArrayList<String>Calle_Numero;
     public static ArrayList<String>Colonia;
     public static ArrayList<String>Contrato;
+    public static ArrayList<String>Placa;
     private Request request=new Request();
 
 
     public static  class ListClientViewHolder extends  RecyclerView.ViewHolder{
-        private TextView ContratoCompuesto,Nombre,Telefono,Calle_Numero,Colonia;
+        private TextView ContratoCompuesto,Nombre,Telefono,Calle_Numero,Colonia,Placa;
         public ListClientViewHolder( View v) {
             super(v);
             ContratoCompuesto=(TextView)itemView.findViewById(R.id.ContratoCompuesto);
@@ -39,16 +40,18 @@ public class ClientesAdapter extends RecyclerView.Adapter<ClientesAdapter.ListCl
             Telefono=(TextView)itemView.findViewById(R.id.Telefono);
             Calle_Numero=(TextView)itemView.findViewById(R.id.Calle_Numero);
             Colonia=(TextView)itemView.findViewById(R.id.Colonia);
+            Placa=(TextView)itemView.findViewById(R.id.Placa);
         }
     }
 
-    public ClientesAdapter(Context mContext, ArrayList<String> ContratoCompuesto, ArrayList<String> Nombre, ArrayList<String> Telefono, ArrayList<String> Calle_Numero, ArrayList<String> Colonia, ArrayList<String> Contrato){
+    public ClientesAdapter(Context mContext, ArrayList<String> ContratoCompuesto, ArrayList<String> Nombre, ArrayList<String> Telefono, ArrayList<String> Calle_Numero, ArrayList<String> Colonia, ArrayList<String> Contrato, ArrayList<String> Placa){
         this.ContratoCompuesto=ContratoCompuesto;
         this.Nombre=Nombre;
         this.Telefono=Telefono;
         this.Calle_Numero=Calle_Numero;
         this.Colonia=Colonia;
         this.Contrato=Contrato;
+        this.Placa=Placa;
         this.mContext=mContext;
     }
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -75,6 +78,7 @@ public class ClientesAdapter extends RecyclerView.Adapter<ClientesAdapter.ListCl
         viewHolder.Telefono.setText(Array.TelefonoList.get(position));
         viewHolder.Calle_Numero.setText(Array.CalleNumeroList.get(position));
         viewHolder.Colonia.setText(Array.ColoniaList.get(position));
+        viewHolder.Placa.setText(Array.PlacaList.get(position));
 
         viewHolder.ContratoCompuesto.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -86,6 +90,8 @@ public class ClientesAdapter extends RecyclerView.Adapter<ClientesAdapter.ListCl
                     request.Calle_NumeroSaldo=Array.CalleNumeroList.get(position);
                     request.ColoniaSaldo=Array.ColoniaList.get(position);
                     request.ContratoSaldo=Array.ContratoList.get(position);
+                    request.ContratoSaldo=Array.ContratoList.get(position);
+                    request.PlacaSaldo=Array.PlacaList.get(position);
                     request.getServiciosSaldos(mContext, Array.ContratoList.get(position));
                 }catch (Exception x){
                     Toast toast1 = Toast.makeText(mContext.getApplicationContext(), "Error al conseguir los servicios", Toast.LENGTH_SHORT);toast1.show();
@@ -103,6 +109,7 @@ public class ClientesAdapter extends RecyclerView.Adapter<ClientesAdapter.ListCl
                     request.Calle_NumeroSaldo=Array.CalleNumeroList.get(position);
                     request.ColoniaSaldo=Array.ColoniaList.get(position);
                     request.ContratoSaldo=Array.ContratoList.get(position);
+                    request.PlacaSaldo=Array.PlacaList.get(position);
                     request.getServiciosSaldos(mContext, Array.ContratoList.get(position));
                 }catch (Exception x){
                     Toast toast1 = Toast.makeText(mContext.getApplicationContext(), "Error al conseguir los servicios", Toast.LENGTH_SHORT);toast1.show();
@@ -120,6 +127,7 @@ public class ClientesAdapter extends RecyclerView.Adapter<ClientesAdapter.ListCl
                     request.Calle_NumeroSaldo=Array.CalleNumeroList.get(position);
                     request.ColoniaSaldo=Array.ColoniaList.get(position);
                     request.ContratoSaldo=Array.ContratoList.get(position);
+                    request.PlacaSaldo=Array.PlacaList.get(position);
                     request.getServiciosSaldos(mContext, Array.ContratoList.get(position));
                 }catch (Exception x){
                     Toast toast1 = Toast.makeText(mContext.getApplicationContext(), "Error al conseguir los servicios", Toast.LENGTH_SHORT);toast1.show();
@@ -137,6 +145,7 @@ public class ClientesAdapter extends RecyclerView.Adapter<ClientesAdapter.ListCl
                     request.Calle_NumeroSaldo=Array.CalleNumeroList.get(position);
                     request.ColoniaSaldo=Array.ColoniaList.get(position);
                     request.ContratoSaldo=Array.ContratoList.get(position);
+                    request.PlacaSaldo=Array.PlacaList.get(position);
                     request.getServiciosSaldos(mContext, Array.ContratoList.get(position));
                 }catch (Exception x){
                     Toast toast1 = Toast.makeText(mContext.getApplicationContext(), "Error al conseguir los servicios", Toast.LENGTH_SHORT);toast1.show();
@@ -154,6 +163,25 @@ public class ClientesAdapter extends RecyclerView.Adapter<ClientesAdapter.ListCl
                     request.Calle_NumeroSaldo=Array.CalleNumeroList.get(position);
                     request.ColoniaSaldo=Array.ColoniaList.get(position);
                     request.ContratoSaldo=Array.ContratoList.get(position);
+                    request.PlacaSaldo=Array.PlacaList.get(position);
+                    request.getServiciosSaldos(mContext, Array.ContratoList.get(position));
+                }catch (Exception x){
+                    Toast toast1 = Toast.makeText(mContext.getApplicationContext(), "Error al conseguir los servicios", Toast.LENGTH_SHORT);toast1.show();
+                }
+            }
+        });
+
+        viewHolder.Placa.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                try{
+                    request.ContratoCompuestoSaldo=Array.ContratoCompuestoList.get(position);
+                    request.NombreSaldo=Array.NombreList.get(position);
+                    request.TelefonoSaldo=Array.TelefonoList.get(position);
+                    request.Calle_NumeroSaldo=Array.CalleNumeroList.get(position);
+                    request.ColoniaSaldo=Array.ColoniaList.get(position);
+                    request.ContratoSaldo=Array.ContratoList.get(position);
+                    request.PlacaSaldo=Array.PlacaList.get(position);
                     request.getServiciosSaldos(mContext, Array.ContratoList.get(position));
                 }catch (Exception x){
                     Toast toast1 = Toast.makeText(mContext.getApplicationContext(), "Error al conseguir los servicios", Toast.LENGTH_SHORT);toast1.show();

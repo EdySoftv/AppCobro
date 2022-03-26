@@ -28,4 +28,17 @@
         </item>
     </group>
 
+    <group
+        android:checkableBehavior="single"
+        android:id="@+id/HisPag">
+        <item android:title="Historial de pago">
+            <menu>
+                <item
+                    android:id="@+id/Pagos"
+                    android:icon="@drawable/ordenes"
+                    android:title="Historial" />
+            </menu>
+        </item>
+    </group>
+
 </menu>
