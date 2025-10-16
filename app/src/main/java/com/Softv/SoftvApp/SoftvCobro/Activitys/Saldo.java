@@ -47,10 +47,10 @@ import java.net.URL;
 public class Saldo extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     private Request request = new Request();
     public static ClientesAdapter adaptercl;
-    private Button contratob,telefonob,nombreb, sig, ant;
+    private Button contratob,telefonob,nombreb, cedulab, sig, ant;
     public static RecyclerView clientList;
     public static boolean statusBusquedaContrato = false;
-    private EditText contsearch,nombresearch, unoapellido, dosapellido ,telefonosearch;
+    private EditText contsearch,nombresearch, unoapellido, dosapellido ,telefonosearch, cedulasearch;
     NavigationView barra;
     private TextView nombreTec, txt_ant, txt_pre;
     public static ProgressDialog dialog;
@@ -58,7 +58,7 @@ public class Saldo extends AppCompatActivity implements NavigationView.OnNavigat
     private Request rqs=new Request();
     private View view;
     private int VariableBusqueda = 0;
-    private ConstraintLayout Cont, Plac, Nomb;
+    private ConstraintLayout Cont, Plac, Nomb, Cedu;
 
     @Override
     protected void onCreate(Bundle onSaveInstanceState) {
@@ -123,6 +123,11 @@ public class Saldo extends AppCompatActivity implements NavigationView.OnNavigat
         LinearLayoutManager layoutManager = new LinearLayoutManager(Saldo.this);
         clientList.setLayoutManager(layoutManager);
 
+        //Cedula
+        Cedu = findViewById(R.id.Cedula);
+        cedulasearch = findViewById(R.id.cedulasearchsaldo);
+        cedulab = findViewById(R.id.bcedula);
+
         VaciarYOcultar(0);
 
         //Prueba();
@@ -132,11 +137,13 @@ public class Saldo extends AppCompatActivity implements NavigationView.OnNavigat
             @Override
             public void onClick(View v) {
                 if(VariableBusqueda == 0)
-                    VariableBusqueda = 2;
+                    VariableBusqueda = 3;
                 else if(VariableBusqueda == 1)
                     VariableBusqueda = 0;
                 else if(VariableBusqueda == 2)
                     VariableBusqueda = 1;
+                else if(VariableBusqueda == 3)
+                    VariableBusqueda = 2;
                 VaciarYOcultar(VariableBusqueda);
             }
         });
@@ -150,6 +157,8 @@ public class Saldo extends AppCompatActivity implements NavigationView.OnNavigat
                 else if(VariableBusqueda == 1)
                     VariableBusqueda = 2;
                 else if(VariableBusqueda == 2)
+                    VariableBusqueda = 3;
+                else if(VariableBusqueda == 3)
                     VariableBusqueda = 0;
                 VaciarYOcultar(VariableBusqueda);
             }
@@ -227,6 +236,25 @@ public class Saldo extends AppCompatActivity implements NavigationView.OnNavigat
             }
         });
 
+        //Busqueda de Cedula//
+        cedulab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.show();
+                if (cedulasearch.getText().toString().trim().equalsIgnoreCase("")){
+                    Toast toast1 = Toast.makeText(getApplicationContext(), "Campo de cédula vacío", Toast.LENGTH_SHORT);
+                    toast1.show();
+                } else {
+                    String cedula = cedulasearch.getText().toString();
+                    Log.d("API_RESPONSE SALDO", "Cédula a buscar: " + cedula);
+                    rqs.getListClientesSaldo(getApplicationContext(), 4, cedula); // ← 4 es el nuevo tipo de búsqueda
+                    RecyclerView.LayoutManager layoutManager = new GridLayoutManager(getApplicationContext(), 1);
+                    clientList.setLayoutManager(layoutManager);
+                    clientList.setAdapter(adaptercl);
+                }
+                dialog.dismiss();
+            }
+        });
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -320,33 +348,34 @@ public class Saldo extends AppCompatActivity implements NavigationView.OnNavigat
     }
 
     private void VaciarYOcultar(int Variable){
-        if(Variable == 0){
+        Cont.setVisibility(View.GONE);
+        Plac.setVisibility(View.GONE);
+        Nomb.setVisibility(View.GONE);
+        Cedu.setVisibility(View.GONE);
+        if(Variable == 0){//Contrato
             Cont.setVisibility(View.VISIBLE);
-            Plac.setVisibility(View.GONE);
-            Nomb.setVisibility(View.GONE);
             txt_ant.setText("Nombre");
             txt_pre.setText("Marquilla");
-        }else if(Variable == 1){
-            Cont.setVisibility(View.GONE);
+        }else if(Variable == 1){//Marquilla
             Plac.setVisibility(View.VISIBLE);
-            Nomb.setVisibility(View.GONE);
             txt_ant.setText("Contrato");
             txt_pre.setText("Nombre");
-        }else if(Variable == 2){
-            Cont.setVisibility(View.GONE);
-            Plac.setVisibility(View.GONE);
+        }else if(Variable == 2){//Nombre
             Nomb.setVisibility(View.VISIBLE);
-            txt_ant.setText("Placa");
-            txt_pre.setText("Marquilla");
+            txt_ant.setText("Marquilla");
+            txt_pre.setText("Cedula");
+        }else if(Variable == 3){//Cedula
+            Cedu.setVisibility(View.VISIBLE);
+            txt_ant.setText("Nombre");
+            txt_pre.setText("Contrato");
         }
 
         contsearch.setText("");
-
         nombresearch.setText("");
         unoapellido.setText("");
         dosapellido.setText("");
-
         telefonosearch.setText("");
+        cedulasearch.setText("");
     }
 
 }
