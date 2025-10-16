@@ -4,13 +4,26 @@ public class Constants {
     //////////NUEVA IP PUBLICA 187.190.125.85
 
     //public static final String URL="http://192.168.0.4:1160/";
-
+    //public static  final String URL="http://127.0.0.1:8080/";//LOCAL
+    //public static  final String URL="http://915009d10274.sn.mynetname.net:2260/";//Cucuta
+    //public static final String URL="http://186.96.50.182:4760/"; //Cable Exito
+    //public static final String URL="http://915009d10274.sn.mynetname.net:420/"; //Cable Exito
+    //public static final String URL="http://915009d10274.sn.mynetname.net:1230/"; //Cucuta
     //public static final String URL="http://915009d10274.sn.mynetname.net:5600/";
     //public static final String URL="http://45.5.94.66:9600/"; //Eii
-    public static final String URL="http://201.131.236.2:5600/"; //Fresnillo
+    //public static final String URL="http://201.131.236.2:5600/"; //Fresnillo
+    //public static final String URL = "http://192.168.0.11:9100/";
     //public static final String URL="http://915009d10274.sn.mynetname.net:2660/"; //Garden
     //public static final String URL="http://915009d10274.sn.mynetname.net:4760/"; //Cable Exito
-
+    //public static final String URL="http://177.74.204.254:5788/"; //ALPAVISION SERVIDOR PRUEBAS
+    //public static final String URL="http://189.206.35.69:2660/"; //GARDENTECH NUBE PRDO
+    //public static final String URL="http://189.206.35.69:4760/"; //CABLEEXITO BARRANQUILLA NUBE PROD
+    //public static final String URL="http://915009d10274.sn.mynetname.net:2460/"; //CABLEEXITO CUCUTA NUBE PROD
+    //public static  final String URL="http://915009d10274.sn.mynetname.net:2460/";//CableCentro PRuebas 245
+    //public static final String URL="http://190.115.203.244:5600/";//CableCentro PROD
+    //public static final String URL="http://189.206.35.69:4760/"; //Cable Exito SERVIDOR DE LA NUBE
+    //public static final String URL="http://915009d10274.sn.mynetname.net:520/"; //Cable Exito TEMPORAL
+    public static final String URL="http://189.206.35.69:2660/";
     public static final String NEW_URL = URL + "SoftvWCFService.svc/";
     public static final String URL_GET_USER = "Usuario/LogOn";
     public static final String URL_GET_TECNICO = "AplicacionMovil/Get_ClvCajero";

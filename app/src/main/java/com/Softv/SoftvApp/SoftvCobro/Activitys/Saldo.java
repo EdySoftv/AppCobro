@@ -16,6 +16,7 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -163,6 +164,7 @@ public class Saldo extends AppCompatActivity implements NavigationView.OnNavigat
                     Toast toast1 = Toast.makeText(getApplicationContext(), "Campo de orden vacío", Toast.LENGTH_SHORT);toast1.show();
                 }else{
                     String contrato = contsearch.getText().toString();
+                    Log.d("API_RESPONSE SALDO", "Contrato a buscar: " + contrato);
                     rqs.getListClientesSaldo(getApplicationContext(), 1, contrato);
                     RecyclerView.LayoutManager layoutManager = new GridLayoutManager(getApplicationContext(), 1);
                     clientList.setLayoutManager(layoutManager);

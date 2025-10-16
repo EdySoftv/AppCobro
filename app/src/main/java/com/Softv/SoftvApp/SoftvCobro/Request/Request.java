@@ -69,6 +69,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.IOException;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -353,7 +354,7 @@ public class Request extends AppCompatActivity {
             }
         });
     }
-
+/*
     public void getListClientesSaldo(final Context applicationContext, final int i, String text) {
         Service service = null;
         try {
@@ -411,7 +412,77 @@ public class Request extends AppCompatActivity {
                 ErrorMensaje(applicationContext,"Error "+t.getMessage());
             }
         });
+    }*/
+public void getListClientesSaldo(final Context applicationContext, final int i, String text) {
+    Service service = null;
+    try {
+        service = services.getListClientesSaldoService(applicationContext, i, text);
+    } catch (JSONException e) {
+        Log.e("API_ERROR", "Error al crear JSON: " + e.getMessage());
+        e.printStackTrace();
     }
+
+    if (service == null) {
+        Log.e("API_ERROR", "No se pudo crear el servicio");
+        return;
+    }
+
+    Call<ListaClientesSaldos> call = service.getDataListClSal();
+    call.enqueue(new Callback<ListaClientesSaldos>() {
+        @Override
+        public void onResponse(Call<ListaClientesSaldos> call, Response<ListaClientesSaldos> response) {
+            Log.d("API_RESPONSE", "Código de respuesta: " + response.code());
+            if (response.code() == 200){
+                ListaClientesSaldos jsonResponse = response.body();
+                Array.DataClientes = new ArrayList<List<DatosClientesSaldoList>>(asList(jsonResponse.DatosClientesSaldoListResult()));
+                Iterator<List<DatosClientesSaldoList>> itData = Array.DataClientes.iterator();
+                while (itData.hasNext()) {
+                    List<DatosClientesSaldoList> dat = (List<DatosClientesSaldoList>) itData.next();
+                    Array.ContratoCompuestoList.clear();
+                    Array.NombreList.clear();
+                    Array.TelefonoList.clear();
+                    Array.CalleNumeroList.clear();
+                    Array.ColoniaList.clear();
+                    Array.ContratoList.clear();
+                    Array.PlacaList.clear();
+                    for (int i = 0; i < dat.size(); i++){
+                        Array.ContratoCompuestoList.add(String.valueOf(dat.get(i).getContratoCompuesto()));
+                        Array.NombreList.add(String.valueOf(dat.get(i).getNombre()));
+                        Array.TelefonoList.add(String.valueOf(dat.get(i).getTelefono()));
+                        Array.CalleNumeroList.add(String.valueOf(dat.get(i).getCalle()) + " #" + String.valueOf(dat.get(i).getNumero()));
+                        Array.ColoniaList.add(String.valueOf(dat.get(i).getColonia()));
+                        Array.ContratoList.add(String.valueOf(dat.get(i).getContrato()));
+                        Array.PlacaList.add(String.valueOf(dat.get(i).getPlaca()));
+                    }
+                    if (Array.ContratoCompuestoList.size() == 0 && i==1){
+                        ErrorMensaje(applicationContext,"Contrato no encontrado ");
+                    }else if (Array.NombreList.size() == 0 && i==2){
+                        ErrorMensaje(applicationContext,"Nombre no encontrado ");
+                    }else if (Array.NombreList.size() == 0 && i==3){
+                        ErrorMensaje(applicationContext,"Placa no encontrada ");
+                    }
+                }
+                Saldo.adaptercl = new ClientesAdapter(applicationContext, Array.ContratoCompuestoList, Array.NombreList, Array.TelefonoList, Array.CalleNumeroList, Array.ColoniaList, Array.ContratoList, Array.PlacaList);
+                Saldo.clientList.setAdapter(Saldo.adaptercl);
+            } else {
+                Log.e("API_ERROR", "Error en la respuesta. Código: " + response.code());
+                Log.e("API_ERROR", "Mensaje: " + response.message());
+                try {
+                    Log.e("API_ERROR", "Cuerpo del error: " + response.errorBody().string());
+                } catch (IOException e) {
+                    Log.e("API_ERROR", "No se pudo leer el cuerpo del error");
+                }
+                ErrorMensaje(applicationContext,"Error al conseguir lista de clientes. Código: " + response.code());
+            }
+        }
+
+        @Override
+        public void onFailure(Call<ListaClientesSaldos> call, Throwable t) {
+            Log.e("API_FAILURE", "La llamada falló: " + t.getMessage());
+            ErrorMensaje(applicationContext,"Error de conexión: " + t.getMessage());
+        }
+    });
+}
 
     public void getServiciosSaldos(final Context context, final String ContratoSaldo) {
         Service service = null;

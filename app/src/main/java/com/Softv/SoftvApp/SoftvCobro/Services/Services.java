@@ -3,6 +3,7 @@ package com.Softv.SoftvApp.SoftvCobro.Services;
 
 import android.content.Context;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.Softv.SoftvApp.SoftvCobro.sampledata.Constants;
 import com.Softv.SoftvApp.SoftvCobro.sampledata.Service;
@@ -212,45 +213,41 @@ public class Services {
 
     public Service getListClientesSaldoService(final Context applicationContext, int i, String text) throws JSONException {
         JSONObject jsonObject = new JSONObject();
+        jsonObject.put("Empleado", Util.getUsuarioPreference(Util.preferences));
         if(i == 1){
             jsonObject.put("ContratoCom", text);
             jsonObject.put("Nombre", "");
             jsonObject.put("Telefono", "");
-            jsonObject.put("Empleado", Util.getUsuarioPreference(Util.preferences));
-            jsonObject.put("Op", i);
         }else if(i == 2){
             jsonObject.put("ContratoCom", "");
             jsonObject.put("Nombre", text);
             jsonObject.put("Telefono", "");
-            jsonObject.put("Empleado", Util.getUsuarioPreference(Util.preferences));
-            jsonObject.put("Op", i);
         }else if(i == 3){
             jsonObject.put("ContratoCom", "");
             jsonObject.put("Nombre", "");
             jsonObject.put("Telefono", text);
-            jsonObject.put("Empleado", Util.getUsuarioPreference(Util.preferences));
-            jsonObject.put("Op", i);
         }else{
             jsonObject.put("ContratoCom", "");
             jsonObject.put("Nombre", "");
             jsonObject.put("Telefono", "");
-            jsonObject.put("Empleado", Util.getUsuarioPreference(Util.preferences));
-            jsonObject.put("Op", 0);
         }
+        jsonObject.put("Op", i);
+
+        Log.d("API_REQUEST", "JSON a enviar: " + jsonObject.toString());
+
         MediaType JSON = MediaType.parse("application/json; charset=utf-8");
-        final RequestBody body = RequestBody.create(JSON, String.valueOf(jsonObject));
+        final RequestBody body = RequestBody.create(JSON, jsonObject.toString());
         final OkHttpClient client = new OkHttpClient.Builder().addInterceptor(new Interceptor() {
 
-            @Override
-            public okhttp3.Response intercept(Interceptor.Chain chain) throws IOException {
-                //Modificacion del Header
-                Request newRequest = chain.request().newBuilder()
-                        .addHeader("Authorization", getToken(applicationContext))
-                        .addHeader("Content-Type", "application/json")
-                        .post(body).build();
-                return chain.proceed(newRequest);
-            }
-        }).connectTimeout(15, TimeUnit.MINUTES)
+                    @Override
+                    public okhttp3.Response intercept(Interceptor.Chain chain) throws IOException {
+                        Request newRequest = chain.request().newBuilder()
+                                .addHeader("Authorization", getToken(applicationContext))
+                                .addHeader("Content-Type", "application/json")
+                                .post(body).build();
+                        return chain.proceed(newRequest);
+                    }
+                }).connectTimeout(15, TimeUnit.MINUTES)
                 .readTimeout(15, TimeUnit.MINUTES)
                 .writeTimeout(15, TimeUnit.MINUTES)
                 .build();
