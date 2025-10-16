@@ -218,18 +218,27 @@ public class Services {
             jsonObject.put("ContratoCom", text);
             jsonObject.put("Nombre", "");
             jsonObject.put("Telefono", "");
+            jsonObject.put("Cedula", null);
         }else if(i == 2){
             jsonObject.put("ContratoCom", "");
             jsonObject.put("Nombre", text);
             jsonObject.put("Telefono", "");
+            jsonObject.put("Cedula", null);
         }else if(i == 3){
             jsonObject.put("ContratoCom", "");
             jsonObject.put("Nombre", "");
             jsonObject.put("Telefono", text);
+            jsonObject.put("Cedula", null);
+        }else if(i == 4){
+            jsonObject.put("ContratoCom", "");
+            jsonObject.put("Nombre", "");
+            jsonObject.put("Telefono", "");
+            jsonObject.put("Cedula", text);
         }else{
             jsonObject.put("ContratoCom", "");
             jsonObject.put("Nombre", "");
             jsonObject.put("Telefono", "");
+            jsonObject.put("Cedula", null);
         }
         jsonObject.put("Op", i);
 
