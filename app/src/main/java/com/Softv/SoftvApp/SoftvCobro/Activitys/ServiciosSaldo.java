@@ -11,6 +11,7 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -177,7 +178,8 @@ public class ServiciosSaldo extends AppCompatActivity {
                     SpinnerFolioInternet.setSelection(0);
                     JSONObject jsonObject = new JSONObject();
                     //constrain_Clasificacion_spinner.getSelectedItemPosition()
-                    Serie_V_json = SpinnerSerie.toString();
+                    //Serie_V_json = SpinnerSerie.toString();
+                    Serie_V_json = Array.dataUltimoSerieYFolio.get(0).get(position-1).getSerie();
                     try{
                         jsonObject.put("CLV_VENDEDOR", Array.dataVendedores.get(0).get(SpinnerVendedor.getSelectedItemPosition()-1).getClv_Vendedor());
                         jsonObject.put("SERIE", Array.dataUltimoSerieYFolio.get(0).get(position-1).getSerie());

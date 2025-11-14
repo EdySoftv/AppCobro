@@ -24,7 +24,7 @@ public class Constants {
     //public static final String URL="http://189.206.35.69:4760/"; //Cable Exito SERVIDOR DE LA NUBE
     //public static final String URL="http://915009d10274.sn.mynetname.net:520/"; //Cable Exito TEMPORAL
     //public static final String URL="http://189.206.35.69:2660/";
-    public static final String URL="http://189.206.35.69:2660/"; //ROYALNET
+    public static final String URL="http://915009d10274.sn.mynetname.net:1070/"; //CLIK
     public static final String NEW_URL = URL + "SoftvWCFService.svc/";
     public static final String URL_GET_USER = "Usuario/LogOn";
     public static final String URL_GET_TECNICO = "AplicacionMovil/Get_ClvCajero";
