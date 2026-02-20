@@ -70,7 +70,7 @@ public class ServiciosSaldo extends AppCompatActivity {
         detalleSaldo = findViewById(R.id.detallesaldo);
         cerrarSesion =  findViewById(R.id.cerrar);
         abono = findViewById(R.id.adelantar);
-
+        abono.setVisibility(View.GONE);
         servicios =  findViewById(R.id.ListaDeServicios);
         detalles =  findViewById(R.id.ListaDeDetalles);
         servicios.setVisibility(View.VISIBLE);
