@@ -354,7 +354,7 @@ public class Saldo extends AppCompatActivity implements NavigationView.OnNavigat
         Cedu.setVisibility(View.GONE);
         if(Variable == 0){//Contrato
             Cont.setVisibility(View.VISIBLE);
-            txt_ant.setText("Nombre");
+            txt_ant.setText("Identificacion");
             txt_pre.setText("Placa");
         }else if(Variable == 1){//Placa
             Plac.setVisibility(View.VISIBLE);

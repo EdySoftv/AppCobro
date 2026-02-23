@@ -75,6 +75,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 
@@ -729,6 +730,20 @@ public void getListClientesSaldo(final Context applicationContext, final int i, 
                     SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
                     String formattedDate = df.format(c.getTime());
                     fecha.setText(formattedDate);
+
+                    String hoy = new SimpleDateFormat("dd/MM/yyyy").format(new Date());
+
+                    String ultima = "";
+                    if (!Array.HoraConsultaHistorial.isEmpty()) {
+                        ultima = Array.HoraConsultaHistorial.get(0);
+
+                        if (ultima != null && ultima.length() >= 10) {
+                            ultima = ultima.substring(0, 10);
+                        }
+                    }
+
+                    fecha.setText("Hoy: " + hoy + "\nÚltimo pago: " + ultima);
+
                     dialog.dismiss();
                 }else {
                     ErrorMensaje(context,"Error al conseguir lista de servicios "+response.message());

@@ -105,7 +105,15 @@ public class ServiciosSaldo extends AppCompatActivity {
         Telefono.setText(rqs.TelefonoSaldo);
         Calle_Numero_Colonia.setText(rqs.Calle_NumeroSaldo + " " + rqs.ColoniaSaldo );
         Placa.setText(rqs.PlacaSaldo);
-        FechaConsulta.setText(rqs.FechaCosultaSaldo);
+        Log.d("FECHAN", rqs.FechaCosultaSaldo);
+        String fecha = rqs.FechaCosultaSaldo;
+
+        if (fecha != null && fecha.length() >= 10) {
+            fecha = fecha.substring(0, 10);
+        }
+
+        FechaConsulta.setText(fecha);
+        //FechaConsulta.setText(rqs.FechaCosultaSaldo);
         Total.setText(rqs.TotalSaldo);
         //Contrato.setText(rqs.ContratoSaldo);
         //ContratoCompuestoSaldo,NombreSaldo,TelefonoSaldo,Calle_NumeroSaldo,ColoniaSaldo,ContratoSaldo
