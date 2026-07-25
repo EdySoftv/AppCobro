@@ -580,6 +580,7 @@ public void getListClientesSaldo(final Context applicationContext, final int i, 
 
     public void GuardarPago(final Context context, final JSONObject jsonObject, final ProgressDialog dialogInicio){
         Call<JsonObject> call = services.RequestPost(context,jsonObject).GuardarPago();
+        Log.i("PAGO",jsonObject.toString());
         call.enqueue(new Callback<JsonObject>() {
             @Override
             public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
@@ -609,6 +610,16 @@ public void getListClientesSaldo(final Context applicationContext, final int i, 
 
                 }else{
                     dialogInicio.dismiss();
+                    String errorMsg = "Error desconocido";
+
+                    try {
+                        if (response.errorBody() != null) {
+                            errorMsg = response.errorBody().string();
+                        }
+                    } catch (Exception e) {
+                        errorMsg = e.getMessage();
+                    }
+                    Log.e("ErrorAlGuardar",errorMsg);
                     ErrorMensaje(context,"Error al guardar el pago, verifique los datos del pago "+response.message());
                 }
             }
@@ -667,16 +678,51 @@ public void getListClientesSaldo(final Context applicationContext, final int i, 
     }
 
     public void GetTicketNom(final Context context, final JSONObject jsonObject, final ProgressDialog dialogInicio) {
-        Call<JsonObject> call = services.RequestPost(context,jsonObject).GetTicketNombre();
+        Call<JsonObject> call = services.RequestPost(context, jsonObject).GetTicketNombre();
         call.enqueue(new Callback<JsonObject>() {
             @Override
             public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
+
+                // ✅ LOG COMPLETO DE LA RESPUESTA
+                Log.d("TICKET_DEBUG", "=== RESPUESTA DEL SERVIDOR ===");
+                Log.d("TICKET_DEBUG", "Código HTTP: " + response.code());
+                Log.d("TICKET_DEBUG", "Mensaje HTTP: " + response.message());
+                Log.d("TICKET_DEBUG", "URL llamada: " + call.request().url());
+
+                // ✅ LOG DEL BODY (éxito o error)
+                if (response.isSuccessful() && response.body() != null) {
+                    Log.d("TICKET_DEBUG", "Body (éxito): " + response.body().toString());
+                }
+
+                // ✅ CAPTURA EL ERROR BODY (esto es clave cuando no es 200)
+                if (!response.isSuccessful()) {
+                    try {
+                        String errorBody = response.errorBody() != null
+                                ? response.errorBody().string()
+                                : "errorBody vacío";
+                        Log.e("TICKET_ERROR", "Error Body: " + errorBody);
+                    } catch (IOException e) {
+                        Log.e("TICKET_ERROR", "No se pudo leer errorBody: " + e.getMessage());
+                    }
+                }
+
                 if (response.code() == 200) {
                     dialogInicio.dismiss();
                     GetTicketResult = Constants.URL_REPORTES;
                     try {
                         JSONObject jsonObject1 = new JSONObject(new Gson().toJson(response.body()));
+                        Log.d("TICKET_DEBUG", "JSON parseado: " + jsonObject1.toString());
+
+                        // Verifica si el campo existe antes de obtenerlo
+                        if (!jsonObject1.has("GetTicketResult")) {
+                            Log.e("TICKET_ERROR", "Campo 'GetTicketResult' NO existe en la respuesta");
+                            Log.e("TICKET_ERROR", "Campos disponibles: " + jsonObject1.keys().toString());
+                            ErrorMensaje(context, "Campo GetTicketResult no encontrado");
+                            return;
+                        }
+
                         String x = jsonObject1.getString("GetTicketResult");
+                        Log.d("TICKET_DEBUG", "GetTicketResult valor: " + x);
                         GetTicketResult = GetTicketResult + x;
 
                         Intent intent1 = new Intent(context, PDF.class);
@@ -684,17 +730,22 @@ public void getListClientesSaldo(final Context applicationContext, final int i, 
                         context.startActivity(intent1);
 
                     } catch (JSONException e) {
-                        ErrorMensaje(context,"Error al recibir la respuesta GetTicketNom"+response.message());
+                        Log.e("TICKET_ERROR", "JSONException: " + e.getMessage(), e);
+                        ErrorMensaje(context, "Error al parsear JSON: " + e.getMessage());
                     }
 
-                }else{
-                    ErrorMensaje(context,"Error al conseguir el ticket "+response.message());
+                } else {
+                    Log.e("TICKET_ERROR", "Código inesperado: " + response.code());
+                    ErrorMensaje(context, "Error al conseguir el ticket. Código: "
+                            + response.code() + " | " + response.message());
                 }
             }
 
             @Override
             public void onFailure(Call<JsonObject> call, Throwable t) {
-                ErrorMensaje(context,"Error "+t.getMessage());
+                Log.e("TICKET_ERROR", "onFailure — tipo: " + t.getClass().getSimpleName());
+                Log.e("TICKET_ERROR", "onFailure — mensaje: " + t.getMessage(), t);
+                ErrorMensaje(context, "Error de conexión: " + t.getMessage());
             }
         });
     }
